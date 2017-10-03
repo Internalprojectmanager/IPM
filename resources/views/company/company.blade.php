@@ -1,7 +1,19 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Robin
- * Date: 3-10-2017
- * Time: 15:31
- */
+@extends('layout.app')
+
+@section('title')
+    Company
+@endsection
+
+@section('content')
+
+    @foreach($companys as $company)
+        <p>
+            {{$company->name}}
+            <a href="#">Edit</a>
+            <a href="#">Delete</a>
+        </p>
+    @endforeach
+
+    <a href="{{route('addcompany')}}">Add company</a>
+
+@endsection

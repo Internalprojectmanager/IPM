@@ -17,10 +17,14 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('home');
-});
+})->name('home');
 
 Auth::routes();
-
+Route::group(['prefix' => 'company'], function (){
+    Route::get('/overview', 'CompanyController@overviewCompany')->name('overviewcompany');
+    Route::get('/add', 'CompanyController@addCompany')->name('addcompany');
+    Route::post('/add', 'CompanyController@storeCompany')->name('storecompany');
+});
 
 
 
