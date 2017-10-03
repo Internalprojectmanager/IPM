@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -23,5 +24,6 @@
     </div>
 
 <!-- Javascript -->
+<script src="{{asset('js/app.js')}}"/>
 </body>
 </html>
