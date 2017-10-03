@@ -24,6 +24,7 @@ Route::group(['prefix' => 'company'], function (){
     Route::get('/overview', 'CompanyController@overviewCompany')->name('overviewcompany');
     Route::get('/add', 'CompanyController@addCompany')->name('addcompany');
     Route::post('/add', 'CompanyController@storeCompany')->name('storecompany');
+    Route::get('/delete', 'CompanyController@deleteCompany')->name('deletecompany');
 });
 
 

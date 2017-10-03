@@ -34,4 +34,11 @@ class CompanyController extends Controller
 
         return view('company.company', compact('companys'));
     }
+
+    public function deleteCompany($id)
+    {
+
+
+        return view('company.company');
+    }
 }

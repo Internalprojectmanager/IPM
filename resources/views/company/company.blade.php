@@ -10,7 +10,7 @@
         <p>
             {{$company->name}}
             <a href="#">Edit</a>
-            <a href="#">Delete</a>
+            <a href="{{route('deletecompany')}}">Delete</a>
         </p>
     @endforeach
 
