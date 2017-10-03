@@ -9,7 +9,7 @@
         IPM Itsavirus
     </div>
     <div class="m-b-md">
-        Login om deze tool te kunnen gebruiken
+        U bent ingelogd
     </div>
 
 @endsection
