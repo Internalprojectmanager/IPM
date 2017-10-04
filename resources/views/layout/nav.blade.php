@@ -4,6 +4,7 @@
             @auth
                 <a href="{{ url('/home') }}">Home</a>
                 <a href="{{ route('overviewcompany') }}">Company</a>
+                <a href="{{route('overviewproject')}}">Project</a>
                 @else
 
                     <a href="{{ route('login') }}">Login</a>

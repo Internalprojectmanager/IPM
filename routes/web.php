@@ -30,6 +30,12 @@ Route::group(['prefix' => 'company'], function (){
     Route::get('/delete/{name}', 'CompanyController@deleteCompany')->name('deletecompany');
 });
 
+Route::group(['prefix' => 'project'], function (){
+   Route::get('/overview', 'ProjectController@overviewProject')->name('overviewproject');
+   Route::get('/add', 'ProjectController@addProject')->name('addproject');
+   Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
+});
+
 
 
 //Route::group(['prefix' => ''], function () {
