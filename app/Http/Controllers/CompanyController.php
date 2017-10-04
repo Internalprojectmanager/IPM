@@ -35,10 +35,11 @@ class CompanyController extends Controller
         return view('company.company', compact('companys'));
     }
 
-    public function deleteCompany($id)
+    public function deleteCompany($name)
     {
+        $company = Company::where('name', $name);
+        $company->delete();
 
-
-        return view('company.company');
+        return redirect()->route('overviewcompany');
     }
 }
