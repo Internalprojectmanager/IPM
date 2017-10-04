@@ -11,7 +11,10 @@
         <h3>Company</h3>
         <div class="form-group">
             <label for="company_name">Company name:</label>
-            <input type="text" name="company_name" id="company_name">
+            <input type="text" class="form-control" name="company_name" id="company_name">
+            <br><br>
+            <label for="description">Description:</label>
+            <textarea rows="4" cols="50" name="description" class="form-control" id="description"></textarea>
         </div>
         <button type="submit">Submit</button>
     </form>
