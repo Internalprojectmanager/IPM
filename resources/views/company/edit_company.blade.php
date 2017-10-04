@@ -7,7 +7,7 @@
 @section('content')
 
     @foreach($companys as $company)
-    <form action="{{route('updatecompany')}}" method="post">
+    <form action="{{route('updatecompany', $company->name)}}" method="post">
         {{ csrf_field() }}
         <h3>Company</h3>
         <div class="form-group">
