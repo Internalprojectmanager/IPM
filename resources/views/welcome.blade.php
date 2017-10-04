@@ -5,11 +5,14 @@
 @endsection
 
 @section('content')
+    <div>
+        <img src="{{asset('img/iav_logo.jpg')}}" width="150" height="auto" />
+    </div>
     <div class="title m-b-md">
-        IPM Itsavirus
+        IPM ITSAVIRUS<hr>
     </div>
     <div class="m-b-md">
-        Login om deze tool te kunnen gebruiken
+        IPM is alleen toegankelijk voor geautoriseerde gebruikers
     </div>
 
 @endsection
