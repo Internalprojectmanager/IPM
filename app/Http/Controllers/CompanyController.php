@@ -43,6 +43,25 @@ class CompanyController extends Controller
         return view('company.details_company', compact('companys'));
     }
 
+    public function editCompany($name)
+    {
+        $companys = Company::all()->where('name', $name);
+
+        return view('company.edit_company', compact('companys'));
+    }
+
+    public function updateCompany($name, Request $request)
+    {
+        $company = Company::all()->where('name', $name);
+        $company->id =strtoupper(substr($request->company_name,0 ,5));
+        $company->name = $request->company_name;
+        $company->description = $request->description;
+
+        $company->save();
+
+        return redirect()->route('overviewcompany');
+    }
+
     public function deleteCompany($name)
     {
         $company = Company::where('name', $name);
