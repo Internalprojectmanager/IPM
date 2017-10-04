@@ -36,6 +36,13 @@ class CompanyController extends Controller
         return view('company.company', compact('companys'));
     }
 
+    public function detailsCompany($name)
+    {
+        $companys = Company::all()->where('name', $name);
+
+        return view('company.details_company', compact('companys'));
+    }
+
     public function deleteCompany($name)
     {
         $company = Company::where('name', $name);

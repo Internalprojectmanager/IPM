@@ -9,6 +9,7 @@
     @foreach($companys as $company)
         <p>
             {{$company->name}}
+            <a href="{{route('companydetails', $company->name)}}">Details</a>
             <a href="#">Edit</a>
             <a href="{{route('deletecompany', $company->name)}}">Delete</a>
         </p>
