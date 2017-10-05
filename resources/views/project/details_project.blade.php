@@ -6,19 +6,17 @@
 
 @section('content')
 
-    @foreach($projects as $project)
+
         <p>
             Project:
-            {{$project->name}}
+            {{$projects->name}}
             <br>
-            @foreach($companys as $company)
                 Company:
-                {{$company->name}}
-            @endforeach
+                {{$companys->name}}
             <br>
             Description:
-            {{$project->description}}
+            {{$projects->description}}
         </p>
-    @endforeach
+
 
 @endsection
