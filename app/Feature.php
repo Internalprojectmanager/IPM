@@ -8,6 +8,10 @@ class Feature extends Model
 {
     protected $table = "feature";
 
+    protected $fillable = [
+        'id','name', 'description', 'status', 'release_id'
+    ];
+
     public function requirements(){
         return $this->hasMany('App\Requirement', "feature_id", "id");
     }
