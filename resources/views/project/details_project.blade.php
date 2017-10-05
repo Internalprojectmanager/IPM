@@ -6,7 +6,6 @@
 
 @section('content')
 
-
         <p>
             Project:
             {{$projects->name}}
@@ -16,7 +15,8 @@
             <br>
             Description:
             {{$projects->description}}
+            <br><br>
+            <a href="{{route('addrelease', $projects->name)}}">Add release</a>
         </p>
-
 
 @endsection

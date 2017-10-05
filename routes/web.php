@@ -40,4 +40,9 @@ Route::group(['prefix' => 'project'], function (){
    Route::get('/delete/{name}', 'ProjectController@deleteProject')->name('deleteproject');
 });
 
+Route::group(['prefix' => 'release'], function (){
+   Route::get('/add', 'ReleaseController@addRelease')->name('addrelease');
+   Route::post('/add', 'ReleaseController@storeRelease')->name('storerelease');
+});
+
 //Route::group(['prefix' => ''], function () {
