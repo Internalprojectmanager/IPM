@@ -34,6 +34,9 @@ Route::group(['prefix' => 'project'], function (){
    Route::get('/overview', 'ProjectController@overviewProject')->name('overviewproject');
    Route::get('/add', 'ProjectController@addProject')->name('addproject');
    Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
+   Route::get('/edit/{name}', 'ProjectController@editProject')->name('editproject');
+   Route::post('/edit/{name}', 'ProjectController@updateProject')->name('updateproject');
+   Route::get('/delete/{name}', 'ProjectController@deleteProject')->name('deleteproject');
 });
 
 //Route::group(['prefix' => ''], function () {

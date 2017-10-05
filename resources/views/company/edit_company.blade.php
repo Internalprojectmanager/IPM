@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Add company
+    Edit company
 @endsection
 
 @section('content')

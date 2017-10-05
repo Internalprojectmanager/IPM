@@ -32,9 +32,39 @@ class ProjectController extends Controller
         return redirect()->route('overviewproject');
     }
 
-    public function overviewProject(){
+    public function overviewProject()
+    {
         $projects = Project::all();
 
         return view('project.project', compact('projects'));
+    }
+
+    public function editProject($name)
+    {
+        $projects = Project::all()->where('name', $name);
+        $companys = Company::all();
+
+        return view('project.edit_project', compact('projects', 'companys'));
+    }
+
+    public function updateProject($name, Request $request)
+    {
+        $project = Project::all()->where('name', $name)->first();
+        $project->id =strtoupper(substr($request->project_name,0 ,5));
+        $project->name = $request->project_name;
+        $project->company_id = strtoupper(substr($request->company,0 ,5));
+        $project->description = $request->description;
+
+        $project->save();
+
+        return redirect()->route('overviewproject');
+    }
+
+    public function deleteProject($name)
+    {
+        $project = Project::where('name', $name);
+        $project->delete();
+
+        return redirect()->route('overviewproject');
     }
 }
