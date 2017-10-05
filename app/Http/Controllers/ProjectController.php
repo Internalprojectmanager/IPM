@@ -12,13 +12,6 @@ use App\Project;
 
 class ProjectController extends Controller
 {
-    public function overviewProject()
-    {
-        $projects = Project::all();
-
-        return view('project.project', compact('projects'));
-    }
-
     public function addProject()
     {
         $companys = Company::all();
@@ -37,5 +30,10 @@ class ProjectController extends Controller
         $project->save();
 
         return redirect()->route('overviewproject');
+    }
+    public function projectOverwiew(){
+        $projects = Project::with('company')->get();
+
+        return view('project.overview_projects', compact('projects'));
     }
 }

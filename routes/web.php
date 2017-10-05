@@ -36,6 +36,7 @@ Route::group(['prefix' => 'project'], function (){
    Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
 });
 
-
-
+Route::group(['prefix' => 'project'], function () {
+    Route::get('/', 'ProjectController@projectOverwiew')->name('projectoverview');
+});
 //Route::group(['prefix' => ''], function () {

@@ -12,7 +12,7 @@ class Project extends Model
         return $this->hasMany('App\Release', "project_id", "id");
     }
 
-    public function companies(){
-        return $this->belongsTo('App\Company', "id", 'company_id');
+    public function company(){
+        return $this->belongsTo('App\Company', 'company_id', 'id');
     }
 }

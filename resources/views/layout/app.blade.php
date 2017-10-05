@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- jQuery library -->
@@ -28,6 +30,6 @@
 
 <!-- Javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script src="{{asset('js/app.js')}}"/>
 </body>
 </html>
