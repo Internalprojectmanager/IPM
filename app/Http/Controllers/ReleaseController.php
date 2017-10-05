@@ -27,7 +27,7 @@ class ReleaseController extends Controller
         $release->project_id = strtoupper(substr($request->project,0 ,5));
         $release->name = $request->release_name;
         $release->description = $request->description;
-        $release->versie = $request->version;
+        $release->version = $request->version;
         $release->author = $request->author;
         $release->specificationtype = $request->specification;
 

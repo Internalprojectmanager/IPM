@@ -9,7 +9,7 @@
     @foreach($companys as $company)
         <p>
             {{$company->name}}
-            <a class="btn btn-success" onclick="showCompany();"><span class="glyphicon glyphicon-search"></span></a>
+            <a class="btn btn-success" href="{{route('companydetails', $company->name, $company->description)}}"><span class="glyphicon glyphicon-edit"></span></a>
             <a class="btn btn-warning" href="{{route('editcompany', $company->name, $company->description)}}"><span class="glyphicon glyphicon-edit"></span></a>
 
             <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="{{route('deletecompany', $company->name)}}"><span class="glyphicon glyphicon-trash"></span></a>
