@@ -6,6 +6,16 @@
 
 @section('content')
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     @foreach($projects as $project)
         <form action="{{route('updateproject', $project->name)}}" method="post">
             {{ csrf_field() }}

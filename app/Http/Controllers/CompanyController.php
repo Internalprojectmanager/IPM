@@ -18,6 +18,9 @@ class CompanyController extends Controller
 
     public function storeCompany(Request $request)
     {
+        $request->validate([
+           'company_name' => 'required|unique:company,name'
+        ]);
 
         $company = new Company();
         $company->id =strtoupper(substr($request->company_name,0 ,5));
@@ -52,6 +55,10 @@ class CompanyController extends Controller
 
     public function updateCompany($name, Request $request)
     {
+        $request->validate([
+            'company_name' => 'required|unique:company,name'
+        ]);
+
         $company = Company::all()->where('name', $name)->first();
         $company->id =strtoupper(substr($request->company_name,0 ,5));
         $company->name = $request->company_name;

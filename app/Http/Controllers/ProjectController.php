@@ -21,6 +21,10 @@ class ProjectController extends Controller
 
     public function storeProject(Request $request)
     {
+        $request->validate([
+            'project_name' => 'required|unique:project,name'
+        ]);
+
         $project = new Project();
         $project->id = strtoupper(substr($request->project_name,0 ,5));
         $project->name = $request->project_name;
@@ -57,6 +61,10 @@ class ProjectController extends Controller
 
     public function updateProject($name, Request $request)
     {
+        $request->validate([
+            'project_name' => 'required|unique:project,name'
+        ]);
+
         $project = Project::all()->where('name', $name)->first();
         $project->id =strtoupper(substr($request->project_name,0 ,5));
         $project->name = $request->project_name;
