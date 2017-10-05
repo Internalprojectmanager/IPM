@@ -13,9 +13,9 @@
             <label for="project_name">Project name:</label>
             <input type="text" class="form-control" name="project_name" id="project_name">
             <br>
-            <select>
+            <select name="company" id="company" >
                 @foreach($companys as $company)
-                    <option name="company" id="company" value="{{$company->name}}">{{$company->name}}</option>
+                    <option value="{{$company->name}}">{{$company->name}}</option>
                 @endforeach
             </select>
             <br><br>

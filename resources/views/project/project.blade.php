@@ -11,7 +11,7 @@
             {{$project->name}}
             <a href="#">Details</a>
             <a href="#">Edit</a>
-            <a href="#">Delete</a>
+            <a href="{{route('deleteproject', $project->name)}}">Delete</a>
         </p>
     @endforeach
 

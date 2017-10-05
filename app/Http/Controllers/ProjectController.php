@@ -19,21 +19,22 @@ class ProjectController extends Controller
         return view('project.add_project', compact('companys'));
     }
 
-    public function storeProject($company, Request $request)
+    public function storeProject(Request $request)
     {
         $project = new Project();
-        $project->id =strtoupper(substr($request->project_name,0 ,5));
+        $project->id = strtoupper(substr($request->project_name,0 ,5));
         $project->name = $request->project_name;
-        $project->company_id = Company::all()->where('name', $company);
+        $project->company_id = strtoupper(substr($request->company,0 ,5));
         $project->description = $request->description;
 
         $project->save();
 
         return redirect()->route('overviewproject');
     }
-    public function projectOverwiew(){
-        $projects = Project::with('company')->get();
 
-        return view('project.overview_projects', compact('projects'));
+    public function overviewProject(){
+        $projects = Project::all();
+
+        return view('project.project', compact('projects'));
     }
 }
