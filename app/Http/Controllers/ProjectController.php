@@ -39,6 +39,14 @@ class ProjectController extends Controller
         return view('project.project', compact('projects'));
     }
 
+    public function detailsProject($name, $company_id)
+    {
+        $projects = Project::all()->where('name', $name);
+        $companys = Company::all()->where('id', $company_id);
+
+        return view('project.details_project', compact('projects', 'companys'));
+    }
+
     public function editProject($name)
     {
         $projects = Project::all()->where('name', $name);

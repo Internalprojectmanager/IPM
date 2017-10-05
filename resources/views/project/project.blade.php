@@ -9,8 +9,8 @@
     @foreach($projects as $project)
         <p>
             {{$project->name}}
-            <a href="#">Details</a>
-            <a href="{{route('editproject', $project->name, $project->company_id,$project->description)}}">Edit</a>
+            <a href="/project/details/{{$project->name}}/{{$project->company_id}}">Details</a>
+            <a href="{{route('editproject', $project->name)}}">Edit</a>
             <a href="{{route('deleteproject', $project->name)}}">Delete</a>
         </p>
     @endforeach

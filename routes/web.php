@@ -32,6 +32,7 @@ Route::group(['prefix' => 'company'], function (){
 
 Route::group(['prefix' => 'project'], function (){
    Route::get('/overview', 'ProjectController@overviewProject')->name('overviewproject');
+   Route::get('/details/{name}/{id}', 'ProjectController@detailsProject')->name('projectdetails');
    Route::get('/add', 'ProjectController@addProject')->name('addproject');
    Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
    Route::get('/edit/{name}', 'ProjectController@editProject')->name('editproject');
