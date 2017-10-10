@@ -22,7 +22,7 @@ Route::get('/home', function () {
 Auth::routes();
 Route::group(['prefix' => 'company'], function (){
     Route::get('/overview', 'CompanyController@overviewCompany')->name('overviewcompany');
-    Route::get('/details/{name}', 'CompanyController@detailsCompany')->name('companydetails');
+    Route::get('/{name}/details', 'CompanyController@detailsCompany')->name('companydetails');
     Route::get('/add', 'CompanyController@addCompany')->name('addcompany');
     Route::post('/add', 'CompanyController@storeCompany')->name('storecompany');
     Route::get('/edit/{name}', 'CompanyController@editCompany')->name('editcompany');

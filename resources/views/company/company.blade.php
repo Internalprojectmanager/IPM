@@ -4,6 +4,8 @@
     Company
 @endsection
 
+@section('breadcrumbs', Breadcrumbs::render('company'))
+
 @section('content')
 
     @foreach($companys as $company)

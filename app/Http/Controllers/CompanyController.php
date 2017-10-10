@@ -41,8 +41,7 @@ class CompanyController extends Controller
 
     public function detailsCompany($name)
     {
-        $companys = Company::all()->where('name', $name);
-
+        $companys = Company::where('name', $name)->first();
         return view('company.details_company', compact('companys'));
     }
 

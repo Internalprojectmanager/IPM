@@ -67,6 +67,7 @@ class ReleaseController extends Controller
         $features = Feature::where('release_id', $release->id)->get();
         $requirements = Requirement::where('release_id', $release->id)->get();
 
-        return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements'));
+        return view('release.details_rcomposer require davejamesmiller/laravel-breadcrumbs
+elease', compact('release', 'project', 'features', 'company', 'requirements'));
     }
 }
