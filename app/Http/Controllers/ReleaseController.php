@@ -25,22 +25,26 @@ class ReleaseController extends Controller
     public function storeRelease(Request $request)
     {
         $release_name = strtoupper(substr($request->release_name,0 ,5));
+        $project_name = strtoupper(substr($request->project,0 ,5));
         $company_id = strtoupper(substr($request->company_id,0 ,5));
-        $releasecount = Release::where('id', 'like', $release_name.'%')->count();
-        $release_id = NULL;
-        if($release_id == NULL && $releasecount == 0){
-            $release_id = $release_name;
-        }else{
-            $release_id = $release_name.$releasecount;
-        }
-        $release_id = strtoupper(substr($release_id,0 ,6));
-
+        $releasecount = Release::where('id', 'like', $project_name.$release_name.'%')->count();
+        $version = Release::where('id', 'like', $project_name.$release_name.'%')->orderBy('version', 'desc')->first();
         $release = new Release();
-        $release->id = strtoupper(substr($request->project,0 ,5)).$release_id;
+        $versioncount = $releasecount;
+        if($releasecount >= 0){
+            $releasecount++;
+        }
+
+        $release->id = strtoupper(substr($request->project,0 ,5)).$release_name.$releasecount;
         $release->project_id = strtoupper(substr($request->company_id,0 ,5)).strtoupper(substr($request->project,0 ,5));
         $release->name = $request->release_name;
         $release->description = $request->description;
-        $release->version = $request->version;
+
+        if($version->version >= $request->version){
+            $release->version = $version->version + 0.01;
+        }else{
+            $release->version = $request->version;
+        }
         $release->author = $request->author;
         $release->specificationtype = $request->specification;
 
