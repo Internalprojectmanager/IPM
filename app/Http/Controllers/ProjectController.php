@@ -27,7 +27,7 @@ class ProjectController extends Controller
         ]);
 
         $project = new Project();
-        $project->id = strtoupper(substr($request->project_name,0 ,5));
+        $project->id = strtoupper(substr($request->company,0 ,5)).strtoupper(substr($request->project_name,0 ,5));
         $project->name = $request->project_name;
         $project->company_id = strtoupper(substr($request->company,0 ,5));
         $project->description = $request->description;
@@ -49,7 +49,7 @@ class ProjectController extends Controller
     {
         $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
         $companys = Company::where('id', $company_id)->first();
-        $releases = Release::all();
+        $releases = Release::where('project_id', $projects->id)->get();
 
         return view('project.details_project', compact('projects', 'companys', 'releases'));
     }

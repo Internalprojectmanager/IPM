@@ -15,7 +15,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{route('storerelease')}}" method="post">
+    <form action="{{route('storerelease', ['name' => $projects->name, 'company_id' => $projects->company_id] )}}" method="post">
         {{ csrf_field() }}
         <h3>Release</h3>
         <div class="form-group">

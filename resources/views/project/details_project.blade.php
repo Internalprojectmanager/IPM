@@ -16,9 +16,10 @@
             Description:
             {{$projects->description}}
             <br><br>
+            Releases:
             @foreach($releases as $release)
                 <p>
-                    <a href="#">{{$release->name}} {{$release->version}}</a>
+                    <a href="">{{$release->version}} {{$release->name}} </a>
                 </p>
             @endforeach
             <br><br>

@@ -8,6 +8,8 @@ class Release extends Model
 {
     protected $table = "release";
 
+    public $incrementing = false;
+
     protected $fillable = [
         'id','name', 'description', 'versie', 'specificationtype', 'project_id'
     ];
