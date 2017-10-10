@@ -48,13 +48,12 @@ Route::group(['prefix' => '{company_id}'], function () {
 
             Route::group(['prefix' => 'release'], function (){
                 Route::get('/add', 'ReleaseController@addRelease')->name('addrelease');
+            });
 
+            Route::group(['prefix' => '{release_name}'], function (){
+                Route::get('/feature', 'FeatureController@add')->name('addfeature');
+                Route::post('/feature/store', 'FeatureController@store')->name('storefeature');
             });
         });
     });
 });
-
-
-
-
-//Route::group(['prefix' => ''], function () {
