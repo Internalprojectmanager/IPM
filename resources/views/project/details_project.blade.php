@@ -16,6 +16,12 @@
             Description:
             {{$projects->description}}
             <br><br>
+            @foreach($releases as $release)
+                <p>
+                    <a href="#">{{$release->name}} {{$release->version}}</a>
+                </p>
+            @endforeach
+            <br><br>
             <a href="{{route('addrelease', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">Add release</a>
         </p>
 
