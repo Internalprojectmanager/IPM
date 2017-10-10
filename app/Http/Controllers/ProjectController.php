@@ -9,6 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Company;
 use App\Project;
+use App\Release;
 
 class ProjectController extends Controller
 {
@@ -48,9 +49,9 @@ class ProjectController extends Controller
     {
         $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
         $companys = Company::where('id', $company_id)->first();
+        $releases = Release::all();
 
-
-        return view('project.details_project', compact('projects', 'companys'));
+        return view('project.details_project', compact('projects', 'companys', 'releases'));
     }
 
     public function editProject($company_id, $name)

@@ -15,12 +15,12 @@
             </ul>
         </div>
     @endif
-
     <form action="{{route('storerelease')}}" method="post">
         {{ csrf_field() }}
         <h3>Release</h3>
         <div class="form-group">
             <input type="hidden" id="project" name="project" value="{{$projects->name}}">
+            <input type="hidden" id="company_id" name="company_id" value="{{$companys->name}}">
             <label for="release_name">Release name:</label>
             <input type="text" class="form-control" name="release_name" id="release_name">
             <br>
