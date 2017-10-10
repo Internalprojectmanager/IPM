@@ -41,7 +41,7 @@ Route::group(['prefix' => 'project'], function (){
 });
 
 Route::group(['prefix' => 'release'], function (){
-   Route::get('/add', 'ReleaseController@addRelease')->name('addrelease');
+   Route::get('/add/{name}/{company_id}', 'ReleaseController@addRelease')->name('addrelease');
    Route::post('/add', 'ReleaseController@storeRelease')->name('storerelease');
 });
 
