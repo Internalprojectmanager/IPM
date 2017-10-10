@@ -17,16 +17,10 @@
         </p>
     @endforeach
 
-        <a class="btn btn-primary btn-lg btn-block" href="{{route('addcompany', $company->name, $company->description)}}" type="button">
+        <a class="btn btn-primary btn-lg btn-block" href="{{route('addcompany', $company->name, $company->description)}}">
             <span class="glyphicon glyphicon-plus"></span>
         </a>
 
 </div>
 
 @endsection
-
-<script>
-    function showCompany() {
-        return alert("Company: {{$company->name}}\n\nDescription: {{$company->description}}");
-    }
-</script>

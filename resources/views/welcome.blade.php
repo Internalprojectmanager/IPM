@@ -12,7 +12,7 @@
         IPM ITSAVIRUS<hr>
     </div>
     <div class="m-b-md">
-        IPM is alleen beschikbaar voor geautoriseerde gebruikers
+        IPM is only available to authorized users
     </div>
 
 @endsection
