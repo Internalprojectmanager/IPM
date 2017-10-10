@@ -12,7 +12,7 @@
             {{$companys->name}}
             <br>
             Description:
-            {{$company->description}}
+            {{$companys->description}}
         </p>
 
 @endsection
