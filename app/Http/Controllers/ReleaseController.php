@@ -13,9 +13,9 @@ use App\Release;
 
 class ReleaseController extends Controller
 {
-    public function addRelease($name, $company_id)
+    public function addRelease($company_id,$name)
     {
-        $projects = Project::where('name', $name)->first();
+        $projects = Project::where(['name' => $name, 'company_id' => $company_id])->first();
         $companys = Company::where('id', $company_id)->first();
 
 
@@ -36,8 +36,8 @@ class ReleaseController extends Controller
         $release_id = strtoupper(substr($release_id,0 ,6));
 
         $release = new Release();
-        $release->id =$release_id;
-        $release->project_id = strtoupper(substr($request->project,0 ,5));
+        $release->id = strtoupper(substr($request->project,0 ,5)).$release_id;
+        $release->project_id = strtoupper(substr($request->company_id,0 ,5)).strtoupper(substr($request->project,0 ,5));
         $release->name = $request->release_name;
         $release->description = $request->description;
         $release->version = $request->version;

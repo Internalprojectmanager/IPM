@@ -8,6 +8,8 @@ class Requirement extends Model
 {
     protected $table = "requirement";
 
+    public $incrementing = false;
+
     protected $fillable = [
         'id','name', 'description', 'feature_id', 'status'
     ];

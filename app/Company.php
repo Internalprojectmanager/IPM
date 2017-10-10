@@ -8,6 +8,8 @@ class Company extends Model
 {
     protected $table = "company";
 
+    public $incrementing = false;
+
     protected $fillable = [
         'id','name', 'description'
     ];

@@ -27,7 +27,7 @@ class ProjectController extends Controller
         ]);
 
         $project = new Project();
-        $project->id = strtoupper(substr($request->project_name,0 ,5));
+        $project->id = strtoupper(substr($request->company,0 ,5)).strtoupper(substr($request->project_name,0 ,5));
         $project->name = $request->project_name;
         $project->company_id = strtoupper(substr($request->company,0 ,5));
         $project->description = $request->description;
@@ -39,35 +39,36 @@ class ProjectController extends Controller
 
     public function overviewProject()
     {
-        $projects = Project::all();
+        $projects = Project::with('Company')->get();
+
 
         return view('project.project', compact('projects'));
     }
 
-    public function detailsProject($name, $company_id)
+    public function detailsProject($company_id, $name)
     {
-        $projects = Project::where('name', $name)->first();
+        $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
         $companys = Company::where('id', $company_id)->first();
-        $releases = Release::all();
+        $releases = Release::where('project_id', $projects->id)->get();
 
         return view('project.details_project', compact('projects', 'companys', 'releases'));
     }
 
-    public function editProject($name)
+    public function editProject($company_id, $name)
     {
-        $projects = Project::all()->where('name', $name);
+        $projects = Project::where(['name' =>  $name, 'company_id' => $company_id])->first();
         $companys = Company::all();
 
         return view('project.edit_project', compact('projects', 'companys'));
     }
 
-    public function updateProject($name, Request $request)
+    public function updateProject($company_id, $name, Request $request)
     {
         $request->validate([
             'project_name' => 'required|unique:project,name'
         ]);
 
-        $project = Project::all()->where('name', $name)->first();
+        $project = Project::where(['name' => $name, 'company_id' => $company_id] )->first();
         $project->id =strtoupper(substr($request->project_name,0 ,5));
         $project->name = $request->project_name;
         $project->company_id = strtoupper(substr($request->company,0 ,5));
@@ -78,9 +79,9 @@ class ProjectController extends Controller
         return redirect()->route('overviewproject');
     }
 
-    public function deleteProject($name)
+    public function deleteProject($company_id, $name)
     {
-        $project = Project::where('name', $name);
+        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
         $project->delete();
 
         return redirect()->route('overviewproject');

@@ -8,6 +8,8 @@ class Project extends Model
 {
     protected $table = "project";
 
+    public $incrementing = false;
+
     protected $fillable = [
         'id','name', 'description', 'company_id'
     ];
@@ -17,6 +19,6 @@ class Project extends Model
     }
 
     public function company(){
-        return $this->belongsTo('App\Company', 'company_id', 'id');
+        return $this->belongsTo('App\Company');
     }
 }
