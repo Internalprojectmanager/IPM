@@ -16,7 +16,7 @@
             Description:
             {{$projects->description}}
             <br><br>
-            <a href="{{route('addrelease', $projects->name)}}">Add release</a>
+            <a href="{{route('addrelease', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">Add release</a>
         </p>
 
 @endsection
