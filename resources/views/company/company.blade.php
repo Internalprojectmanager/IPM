@@ -17,23 +17,9 @@
         </p>
     @endforeach
 
-    <div class="dropdown">
-        <button class="btn btn-primary btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="btn btn-primary btn-lg btn-block" href="{{route('addcompany', $company->name, $company->description)}}" type="button">
             <span class="glyphicon glyphicon-plus"></span>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <form action="{{route('storecompany')}}" method="post">
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Company name" required>
-                </div>
-                <div class="form-group">
-                    <textarea rows="4" cols="50" name="description" class="form-control" id="description" placeholder="Company description" required></textarea>
-                </div>
-                <button id="show_form" class="btn btn-primary" type="submit">Submit</button>
-            </form>
-        </div>
-    </div>
+        </a>
 
 </div>
 
