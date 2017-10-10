@@ -17,7 +17,7 @@
         </p>
     @endforeach
 
-        <a class="btn btn-primary btn-lg btn-block" href="{{route('addcompany', $company->name, $company->description)}}">
+        <a class="btn btn-primary btn-lg btn-block" href="{{route('addcompany')}}">
             <span class="glyphicon glyphicon-plus"></span>
         </a>
 

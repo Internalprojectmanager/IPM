@@ -19,7 +19,8 @@
             Releases:
             @foreach($releases as $release)
                 <p>
-                    <a href="">{{$release->version}} {{$release->name}} </a>
+                    <a href="{{route('showrelease', ['name' => $projects->name, 'company_id' => $projects->company_id,
+                     'release_name' => $release->name, 'version' => $release->version])}}">{{$release->version}} {{$release->name}} </a>
                 </p>
             @endforeach
             <br><br>

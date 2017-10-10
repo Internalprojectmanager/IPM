@@ -47,7 +47,9 @@ Route::group(['prefix' => '{company_id}'], function () {
             Route::get('/delete', 'ProjectController@deleteProject')->name('deleteproject');
             
             Route::group(['prefix' => '{release_name}'], function (){
+                Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');
                 Route::get('/feature', 'FeatureController@add')->name('addfeature');
+
                 Route::post('/feature/store', 'FeatureController@store')->name('storefeature');
             });
 

@@ -39,9 +39,7 @@ class ProjectController extends Controller
 
     public function overviewProject()
     {
-        $projects = Project::with('Company')->get();
-
-
+        $projects = Project::with('company')->get();
         return view('project.project', compact('projects'));
     }
 
