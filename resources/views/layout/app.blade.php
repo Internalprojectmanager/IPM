@@ -21,7 +21,7 @@
 </head>
 <body>
     @include('layout.nav')
-        <div class="content">
+        <div class="container content">
             @yield('content')
         </div>
 
