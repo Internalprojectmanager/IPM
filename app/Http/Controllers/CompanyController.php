@@ -47,7 +47,7 @@ class CompanyController extends Controller
 
     public function editCompany($name)
     {
-        $companys = Company::all()->where('name', $name);
+        $companys = Company::where('name', $name)->first();
 
         return view('company.edit_company', compact('companys'));
     }

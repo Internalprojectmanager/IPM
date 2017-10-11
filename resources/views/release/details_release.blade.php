@@ -4,6 +4,8 @@
     {{$project->name}} - {{$release->version}} {{$release->name}}
 @endsection
 
+@section('breadcrumbs', Breadcrumbs::render('showrelease', $project, $company, $release))
+
 @section('content')
     <div class="row">
         <div class="col-md-12">

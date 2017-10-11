@@ -54,7 +54,7 @@ class ProjectController extends Controller
 
     public function editProject($company_id, $name)
     {
-        $projects = Project::where(['name' =>  $name, 'company_id' => $company_id])->first();
+        $projects = Project::with('company')->where(['name' =>  $name, 'company_id' => $company_id])->first();
         $companys = Company::all();
 
         return view('project.edit_project', compact('projects', 'companys'));
