@@ -4,6 +4,8 @@
     Project details
 @endsection
 
+@section('breadcrumbs', Breadcrumbs::render('singleproject', $projects, $companys))
+
 @section('content')
 
         <p>

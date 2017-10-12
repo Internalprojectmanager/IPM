@@ -4,6 +4,8 @@
     Edit project
 @endsection
 
+@section('breadcrumbs', Breadcrumbs::render('editproject', $projects))
+
 @section('content')
 
     @if ($errors->any())

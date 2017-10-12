@@ -13,7 +13,6 @@ html, body {
 .flex-center {
     align-items: center;
     display: flex;
-    justify-content: center;
 }
 
 .position-ref {
@@ -28,6 +27,7 @@ html, body {
 
 .content {
     text-align: center;
+    width: 100%;
 }
 
 .title {

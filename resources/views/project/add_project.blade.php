@@ -4,6 +4,8 @@
     Add project
 @endsection
 
+@section('breadcrumbs', Breadcrumbs::render('addproject'))
+
 @section('content')
 
     @if ($errors->any())

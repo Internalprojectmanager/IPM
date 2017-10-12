@@ -4,6 +4,8 @@
     Project
 @endsection
 
+@section('breadcrumbs', Breadcrumbs::render('projects'))
+
 @section('content')
     <h1>Projects</h1>
     @foreach($projects as $project)

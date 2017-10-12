@@ -4,6 +4,8 @@
     Add release
 @endsection
 
+@section('breadcrumbs', Breadcrumbs::render('addrelease', $projects, $companys))
+
 @section('content')
 
     @if ($errors->any())

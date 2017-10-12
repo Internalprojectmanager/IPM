@@ -4,6 +4,8 @@
     Add company
 @endsection
 
+@section('breadcrumbs', Breadcrumbs::render('addcompany'))
+
 @section('content')
 
     @if ($errors->any())
