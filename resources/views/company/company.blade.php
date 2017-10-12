@@ -45,7 +45,7 @@
                     {{$company->name}}
                 </div>
                 <div class="col-md-6">
-                    <a class="btn btn-success" href="{{route('companydetails', $company->name, $company->description)}}"><span class="glyphicon glyphicon-search"></span></a>
+                    <a class="btn btn-success" href="{{route('companydetails', $company->name)}}"><span class="glyphicon glyphicon-search"></span></a>
                     <a class="btn btn-warning" onclick="document.getElementById('editCompany').style.display='block'"><span class="glyphicon glyphicon-edit"></span></a>
                     <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{route('deletecompany', $company->name)}}"><span class="glyphicon glyphicon-trash"></span></a>
                  </div>
