@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Feature;
+use App\Http\Requests\ReleaseValidator;
 use App\Requirement;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class ReleaseController extends Controller
         return view('release.add_release', compact('projects', 'companys'));
     }
 
-    public function storeRelease(Request $request)
+    public function storeRelease(ReleaseValidator $request)
     {
         $release_name = strtoupper(substr($request->release_name,0 ,5));
         $project_name = strtoupper(substr($request->project,0 ,5));

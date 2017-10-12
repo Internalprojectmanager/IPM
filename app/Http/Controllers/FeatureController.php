@@ -6,6 +6,7 @@ use App\Project;
 use App\Release;
 use Illuminate\Http\Request;
 use App\Feature;
+use Illuminate\Support\Facades\Auth;
 
 class FeatureController extends Controller
 {
@@ -18,17 +19,22 @@ class FeatureController extends Controller
     }
 
     public function store($company_id, $name, $release_name, Request $request){
-        $feature = new Feature();
+        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        $release = Release::where(['project_id' => $project->id, 'name' => $release_name])->first();
+        foreach($request->feature_name as $k => $value){
 
-        $feature->id = $request->feature_id;
-        $feature->release_id = $request->release_id;
-        $feature->name = $request->name;
-        $feature->description = $request->description;
-        $feature->status = $request->status;
-
-        $feature->save();
-
-        return redirect(route('releaseDetails', $request->release_id));
+            if($request->feature_name[$k] !== NULL){
+                $feature = new Feature();
+                $feature->release_id = $request->release_id[$k];
+                $feature->name = $request->feature_name[$k];
+                $feature->author = Auth::user()->first_name.' '.Auth::user()->last_name;
+                $feature->description = $request->description[$k];
+                $feature->status = $request->status[$k];
+                $feature->save();
+            }
+        }
+        return redirect(route('showrelease', ['name' => $project->name, 'company_id' => $project->company_id,
+            'release_name' => $release->name, 'version' => $release->version]));
     }
 
     public function update($id, Request $request){
