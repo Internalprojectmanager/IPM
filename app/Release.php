@@ -8,6 +8,12 @@ class Release extends Model
 {
     protected $table = "release";
 
+    public $incrementing = false;
+
+    protected $fillable = [
+        'id','name', 'description', 'versie', 'specificationtype', 'project_id'
+    ];
+
     public function features(){
         return $this->hasMany('App\Feature', "release_id", "id");
     }

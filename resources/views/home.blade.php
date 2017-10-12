@@ -6,10 +6,7 @@
 
 @section('content')
     <div class="title m-b-md">
-        IPM Itsavirus
-    </div>
-    <div class="m-b-md">
-        U bent ingelogd
+        Welcome {{ Auth::user()->first_name }}
     </div>
 
 @endsection
