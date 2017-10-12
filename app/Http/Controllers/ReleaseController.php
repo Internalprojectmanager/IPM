@@ -53,7 +53,7 @@ class ReleaseController extends Controller
         $release->specificationtype = $request->specification;
 
         $release->save();
-        return redirect()->route('showrelease',['name' => $request->project, 'company_id ' => $company_id, 'version' => $release->version, 'release_name' => $release_name]);
+        return redirect()->route('projectdetails',['name' => $request->project, 'company_id ' => $company_id]);
     }
 
     public function showRelease($company_id,$name,$release_name, $version){
@@ -64,6 +64,7 @@ class ReleaseController extends Controller
         $project = Project::where(['id' => $company_id.$name, 'company_id' => $company_id])->first();
         $company = Company::where('id' ,$company_id)->first();
         $release = Release::where([['project_id', $company_id.$name],['name', $release_name],['version', $version]])->first();
+
         $features = Feature::where('release_id', $release->id)->get();
         $requirements = Requirement::where('release_id', $release->id)->get();
 
