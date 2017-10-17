@@ -2,33 +2,18 @@ html, body {
     background-color: #fff;
     color: #000;
     font-family: 'Roboto', sans-serif;
-    height: 100vh;
     margin: 0;
+    text-align: center;
+}
+
+.navbar{
+    border-color:grey
 }
 
 .full-height {
     height: 100vh;
 }
 
-.flex-center {
-    align-items: center;
-    display: flex;
-}
-
-.position-ref {
-    position: relative;
-}
-
-.top-right {
-    position: absolute;
-    right: 10px;
-    top: 18px;
-}
-
-.content {
-    text-align: center;
-    width: 100%;
-}
 
 .title {
     font-size: 84px;
