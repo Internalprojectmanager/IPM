@@ -23,5 +23,9 @@ class DocumentController extends Controller
         $document->title = $request->document_title;
         $document->description = $request->description;
         $document->author = $request->author;
+
+        $document->save();
+
+        return redirect()->route('overviewproject');
     }
 }
