@@ -11,10 +11,11 @@
         <h3>Letter</h3>
         <div class="form-group">
             <input type="hidden" id="project" name="project" value="{{$projects->name}}">
-            <label for="release_name">Letter title:</label>
+            <input type="hidden" id="company_id" name="company_id" value="{{$companys->name}}">
+            <label for="letter_title">Letter title:</label>
             <input type="text" class="form-control" name="letter_title" id="letter_title">
             <br>
-            <label for="description">Letter content:</label>
+            <label for="letter_content">Letter content:</label>
             <textarea rows="4" cols="50" name="letter_content" class="form-control" id="letter_content"></textarea>
             <br>
             <label for="Author">Author:</label>

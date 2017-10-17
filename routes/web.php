@@ -35,13 +35,13 @@ Route::group(['prefix' => 'project'], function () {
     Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
 });
 Route::group(['prefix' => 'document'], function (){
-   Route::get('/add/{name}', 'DocumentController@addDocument')->name('adddocument');
-   Route::get('/add', 'DocumentController@storeDocument')->name('storedocument');
+   Route::get('/add/{name}/{company_id}', 'DocumentController@addDocument')->name('adddocument');
+   Route::post('/add', 'DocumentController@storeDocument')->name('storedocument');
 });
 
 Route::group(['prefix' => 'letter'], function (){
-    Route::get('/add/{name}', 'LetterController@addLetter')->name('addletter');
-    Route::get('/add', 'LetterController@storeLetter')->name('storeletter');
+    Route::get('/add/{name}/{company_id}', 'LetterController@addLetter')->name('addletter');
+    Route::post('/add', 'LetterController@storeLetter')->name('storeletter');
 });
 
 Route::post('/release/add', 'ReleaseController@storeRelease')->name('storerelease');
