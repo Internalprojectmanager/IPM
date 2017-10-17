@@ -14,7 +14,7 @@ class CreateTestrapportTable extends Migration
     public function up()
     {
         Schema::create('testrapport', function (Blueprint $table) {
-            $table->string('id', 50);
+            $table->increments('id');
             $table->string('project_id',50)->index();
             $table->string('title',100);
             $table->string('description',255);

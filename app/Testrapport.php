@@ -19,6 +19,6 @@ class Testrapport extends Model
     }
 
     public function projects(){
-        return $this->belongsTo('App\Project', "id", 'testrapport_id');
+        return $this->belongsTo('App\Project', "testrapport", 'id');
     }
 }
