@@ -29,6 +29,8 @@
             <a href="{{route('addrelease', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">Add release</a>
             <br>
             <a href="{{route('adddocument', $projects->name)}}">Add document</a>
+            <br>
+            <a href="{{route('addletter', $projects->name)}}">Add letter</a>
         </p>
 
 @endsection
