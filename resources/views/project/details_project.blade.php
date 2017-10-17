@@ -50,7 +50,8 @@
             <a href="{{route('adddocument', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">Add document</a>
             @foreach($documents as $document)
                 <p>
-                    <a href="#">{{$document->title}}</a>
+                    <a href="{{route('showdocument', ['name' => $projects->name, 'company_id' => $projects->company_id,
+                    'document_name' => $document->title, 'document_id' => $document->id])}}">{{$document->title}}</a>
                 </p>
             @endforeach
         </div>

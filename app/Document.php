@@ -8,8 +8,6 @@ class Document extends Model
 {
     protected $table = "document";
 
-    public $incrementing = false;
-
     protected $fillable = [
         'id','title', 'description', 'author', 'project_id'
     ];
@@ -19,6 +17,6 @@ class Document extends Model
     }
 
     public function projects(){
-        return $this->belongsTo('App\Project', "id", 'project_id');
+        return $this->belongsTo('App\Project', "project_id", 'id');
     }
 }

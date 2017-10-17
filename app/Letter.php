@@ -8,8 +8,6 @@ class Letter extends Model
 {
     protected $table = "letter";
 
-    public $incrementing = false;
-
     protected $fillable = [
         'id','title', 'content', 'author', 'contact_person', 'project_id'
     ];
@@ -19,6 +17,6 @@ class Letter extends Model
     }
 
     public function projects(){
-        return $this->belongsTo('App\Project', "id", 'project_id');
+        return $this->belongsTo('App\Project', "project_id", 'id');
     }
 }
