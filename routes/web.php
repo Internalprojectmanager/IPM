@@ -34,6 +34,10 @@ Route::group(['prefix' => 'project'], function () {
     Route::get('/add', 'ProjectController@addProject')->name('addproject');
     Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
 });
+Route::group(['prefix' => 'document'], function (){
+   Route::get('/add/{name}', 'DocumentController@addDocument')->name('adddocument');
+   Route::get('/add', 'DocumentController@storeDocument')->name('storedocument');
+});
 
 Route::post('/release/add', 'ReleaseController@storeRelease')->name('storerelease');
 

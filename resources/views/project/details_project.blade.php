@@ -27,6 +27,8 @@
             @endforeach
             <br><br>
             <a href="{{route('addrelease', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">Add release</a>
+            <br>
+            <a href="{{route('adddocument', $projects->name)}}">Add document</a>
         </p>
 
 @endsection
