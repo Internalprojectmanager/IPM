@@ -40,7 +40,8 @@
             <a href="{{route('addletter', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">Add letter</a>
             @foreach($letters as $letter)
                 <p>
-                    <a href="#">{{$letter->title}}</a>
+                    <a href="{{route('showletter', ['name' => $projects->name, 'company_id' => $projects->company_id,
+                    'letter_name' => $letter->title, 'letter_id' => $letter->id])}}">{{$letter->title}}</a>
                 </p>
             @endforeach
         </div>

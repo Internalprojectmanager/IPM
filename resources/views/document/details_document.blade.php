@@ -11,6 +11,9 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+                <b>Title:</b> {{$document->title}}<br>
+                <b>Author:</b>{{$document->author}}<br>
+                <b>Content:</b> <br> {{$document->description}}<br>
             </div>
         </div>
 @endsection

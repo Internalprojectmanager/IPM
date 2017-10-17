@@ -32,4 +32,10 @@ class LetterController extends Controller
 
         return redirect()->route('overviewproject');
     }
+
+    public function showLetter($company_id,$name, $document_id, $document_name){
+        $letter = Letter::with('projects.company')->where([['title', '=', $document_name], ['id', '=' , $document_id]])->first();
+
+        return view('letter.details_letter', compact('letter'));
+    }
 }

@@ -31,8 +31,10 @@ class DocumentController extends Controller
 
         return redirect()->route('overviewproject');
     }
-    public function showDocument($company_id,$name, $document_id, $document_name){
-        $document = Document::with('projects.company')->where([['title', '=', $document_name], ['id', '=' , $document_id]])->first();
+
+    public function showDocument($company_id,$name, $letter_id, $letter_name){
+        $document = Document::with('projects.company')->where([['title', '=', $letter_name], ['id', '=' , $letter_id]])->first();
+
         return view('document.details_document', compact('document'));
     }
 }
