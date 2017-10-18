@@ -21,7 +21,6 @@ class DocumentController extends Controller
 
     public function storeDocument(Request $request){
         $document = new Document();
-        $document->id = strtoupper(substr($request->document_title,0 ,5));
         $document->project_id = strtoupper(substr($request->company_id,0 ,5)).strtoupper(substr($request->project,0 ,5));
         $document->title = $request->document_title;
         $document->description = $request->description;

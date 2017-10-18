@@ -21,7 +21,6 @@ class LetterController extends Controller
 
     public function storeLetter(Request $request){
         $letter = new Letter();
-        $letter->id = strtoupper(substr($request->letter_title,0 ,5));
         $letter->project_id = strtoupper(substr($request->company_id,0 ,5)).strtoupper(substr($request->project,0 ,5));
         $letter->title = $request->letter_title;
         $letter->content = $request->letter_content;
