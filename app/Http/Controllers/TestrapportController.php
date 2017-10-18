@@ -33,27 +33,27 @@ class TestrapportController extends Controller
         return redirect()->route('overviewtestrapport');
     }
 
-    public function overviewCompany()
+    public function overviewTestrapport()
     {
-        $companys = Company::all();
+        $testrapports = Testrapport::all();
 
         return view('testrapport.testrapport', compact('testrapports'));
     }
 
-    public function detailsCompany($name)
+    public function detailsTestrapport($title)
     {
         $testrapports = Testrapport::where('title', $title)->first();
-        return view('testrapport.details_company', compact('testrapports'));
+        return view('testrapport.details_testrapport', compact('testrapports'));
     }
 
-    public function editTestrapport($name)
+    public function editTestrapport($title)
     {
         $testrapports = Testrapport::where('title', $title)->first();
 
         return view('testrapport.edit_testrapport', compact('testrapports'));
     }
 
-    public function updateCompany($name, Request $request)
+    public function updateTestrapport($title, Request $request)
     {
         $request->validate([
             'testrapport_title' => 'required|unique:testrapport,title'
@@ -64,12 +64,12 @@ class TestrapportController extends Controller
         $testrapport->title = $request->testrapport_title;
         $testrapport->description = $request->description;
 
-        $company->save();
+        $testrapport->save();
 
         return redirect()->route('overviewtestrapport');
     }
 
-    public function deleteTestrapport($name)
+    public function deleteTestrapport($title)
     {
         $testrapport = Testrapport::where('title', $title);
         $testrapport->delete();
