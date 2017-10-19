@@ -11,8 +11,8 @@
     </button>
     <br><br>
 
-    <!-- ADD COMPANY -->
-    <div id="addCompany" class="modal">
+    <!-- ADD TESTRAPPORT -->
+    <div id="addTestrapport" class="modal">
         <span onclick="document.getElementById('addTestrapport').style.display='none'" class="close" title="Close Modal">&times;</span>
         <form action="{{route('storetestrapport')}}" method="post" class="modal-content animate">
             {{ csrf_field() }}
