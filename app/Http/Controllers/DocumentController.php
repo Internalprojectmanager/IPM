@@ -36,4 +36,12 @@ class DocumentController extends Controller
 
         return view('document.details_document', compact('document'));
     }
+
+    public function editDocument($project_id,$document_id,$document_title){
+        $documents = Document::with('projects')->where(['project_id' =>  $project_id, 'id' => $document_id,
+            'title' => $document_title])->first();
+        $projects = Project::all();
+
+        return view('document.edit_document', compact('documents', 'projects'));
+    }
 }

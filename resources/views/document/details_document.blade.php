@@ -12,7 +12,10 @@
         <div class="row">
             <div class="col-md-12">
                 <b>Title:</b> {{$document->title}}<br>
-                <b>Author:</b>{{$document->author}}<br>
+                <b>Author:</b> {{$document->author}}<br>
+                <a href="{{route('editdocument', ['project_id' => $document->project_id, 'document_id' => $document->id,
+                'document_title' => $document->title])}}">Edit</a>
+                <a href="#">Delete</a><br>
                 <b>Content:</b> <br> {{$document->description}}<br>
             </div>
         </div>
