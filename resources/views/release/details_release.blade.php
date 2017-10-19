@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <b>Version:</b> {{$release->version}}<br>
                 <b>Author:</b> {{$release->author}}<br>
-                <a href="{{ route('testrapport', ['name' => $projects->name, 'company_id' => $projects->company_id, 'release_name' => $release->release_name])  }}">Testrapports</a>
+                <a href="">Test Reports</a><br>
                 <b>Description:</b><br> {{$release->description}}<br>
             </div>
         </div>

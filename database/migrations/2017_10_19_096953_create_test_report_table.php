@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTestrapportTable extends Migration
+class CreateTestReportTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateTestrapportTable extends Migration
      */
     public function up()
     {
-        Schema::create('testrapport', function (Blueprint $table) {
+        Schema::create('testreport', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('project_id',50)->index();
+            $table->string('release_id',50)->index();
             $table->string('title',100);
-            $table->string('description',255);
-            $table->string('author',100);
+            $table->text('description');
+            $table->double('version');
+            $table->string('author',50);
             $table->string('status',50);
 
             $table->primary('id');
@@ -33,6 +34,6 @@ class CreateTestrapportTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testrapport');
+        Schema::dropIfExists('testreport');
     }
 }
