@@ -45,8 +45,9 @@ class DocumentController extends Controller
         return view('document.edit_document', compact('documents', 'projects'));
     }
 
-    public function updateDocument($document_id, $project_id, Request $request){
-        $document = Document::where(['id' => $document_id, 'project_id' => $project_id])->first();
+    public function updateDocument($document_id, $project_id, $document_title, Request $request){
+        $document = Document::where(['id' => $document_id, 'project_id' => $project_id, 'title' => $document_title])->first();
+        $document->project_id = $request->project_id;
         $document->title = $request->document_title;
         $document->description = $request->description;
         $document->author = $request->author;

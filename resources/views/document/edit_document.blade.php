@@ -21,6 +21,7 @@
         <h3>Company</h3>
         <div class="form-group">
             <input type="hidden" name="document_id" value="{{$documents->id}}">
+            <input type="hidden" name="project_id" value="{{$documents->project_id}}">
             <label for="document_title">Document title:</label>
             <input type="text" class="form-control" name="document_title" id="document_title" value="{{$documents->title}}">
             <br><br>
