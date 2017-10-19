@@ -15,11 +15,12 @@
             </ul>
         </div>
     @endif
-    <form action="#" method="post">
+    <form action="{{route('updatedocument', ['project_id' => $documents->project_id, 'document_id' => $documents->id,
+                'document_title' => $documents->title])}}" method="post">
         {{ csrf_field() }}
         <h3>Company</h3>
         <div class="form-group">
-            <input type="hidden" name="title" value="{{$documents->title}}">
+            <input type="hidden" name="document_id" value="{{$documents->id}}">
             <label for="document_title">Document title:</label>
             <input type="text" class="form-control" name="document_title" id="document_title" value="{{$documents->title}}">
             <br><br>
