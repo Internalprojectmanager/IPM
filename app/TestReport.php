@@ -11,7 +11,7 @@ class TestReport extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id','title', 'description', 'version', 'author', 'project_id'
+        'id', 'title', 'description', 'version', 'author', 'status', 'release_id'
     ];
 
     public function release(){

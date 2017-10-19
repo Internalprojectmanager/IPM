@@ -49,6 +49,9 @@ Route::group(['prefix' => '{company_id}'], function () {
                 Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');
                 Route::get('/feature', 'FeatureController@add')->name('addfeature');
 
+                // TEST REPORT OVERVIEW
+                Route::get('/overview', 'TestReportController@overviewTestReport')->name('overviewtestreport');
+
                 Route::post('/feature/store', 'FeatureController@store')->name('storefeature');
             });
 
