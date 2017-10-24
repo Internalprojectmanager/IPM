@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TestReport extends Model
 {
-    protected $table = "release";
+    protected $table = "testreport";
 
     public $incrementing = false;
 
