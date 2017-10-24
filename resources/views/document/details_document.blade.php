@@ -15,7 +15,7 @@
                 <b>Author:</b> {{$document->author}}<br>
                 <a href="{{route('editdocument', ['project_id' => $document->project_id, 'document_id' => $document->id,
                 'document_title' => $document->title])}}">Edit</a>
-                <a href="#">Delete</a><br>
+                <a href="{{route('deletedocument', $document->id)}}">Delete</a><br>
                 <b>Content:</b> <br> {{$document->description}}<br>
             </div>
         </div>

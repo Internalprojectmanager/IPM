@@ -39,6 +39,7 @@ Route::group(['prefix' => 'document'], function (){
    Route::post('/add', 'DocumentController@storeDocument')->name('storedocument');
    Route::get('/edit/{project_id}/{document_id}/{document_title}', 'DocumentController@editDocument')->name('editdocument');
    Route::post('/edit/{project_id}/{document_id}/{document_title}', 'DocumentController@updateDocument')->name('updatedocument');
+   Route::get('/delete/{id}', 'DocumentController@deleteDocument')->name('deletedocument');
 });
 
 Route::group(['prefix' => 'letter'], function (){

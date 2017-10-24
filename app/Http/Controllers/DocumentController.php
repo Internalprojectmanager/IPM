@@ -55,4 +55,12 @@ class DocumentController extends Controller
 
         return redirect()->route('overviewproject');
     }
+
+    public function deleteDocument($id)
+    {
+        $document = Document::where('id', $id);
+        $document->delete();
+
+        return redirect()->route('overviewproject');
+    }
 }
