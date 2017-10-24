@@ -10,45 +10,51 @@
 
     <div class="row">
         <p>
-            Project:
-            {{$projects->name}}
-            <br>
-            Company:
-            {{$companys->name}}
-            <br>
-            Description:
-            {{$projects->description}}
-            <br><br>
+            <span class="header-3">{{$companys->name}} - {{$projects->name}}</span>
+            <p>
+                {{$projects->description}}
+            </p>
         </p>
     </div>
 
     <div class="row">
         <div class="col-md-4">
-            Releases:
+            <span class="header-3">Releases</span>
             <br>
-            <a href="{{route('addrelease', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">Add release</a>
+            <div class="row">
+                <a class="btn btn-primary" href="{{route('addrelease', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">
+                    <span class="glyphicon glyphicon-plus"></span> New release</a>
+            </div>
             @foreach($releases as $release)
-                <p>
+                <div class="row">
                     <a href="{{route('showrelease', ['name' => $projects->name, 'company_id' => $projects->company_id,
                      'release_name' => $release->name, 'version' => $release->version])}}">{{$release->version}} {{$release->name}} </a>
-                </p>
+                </div>
             @endforeach
         </div>
         <div class="col-md-4">
-            Letters:
+            <span class="header-3">Letters</span>
             <br>
-            <a href="{{route('addletter', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">Add letter</a>
+            <div class="row">
+                <a class="btn btn-primary" href="{{route('addletter', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">
+                    <span class="glyphicon glyphicon-plus"></span> New letter</a>
+            </div>
+
             @foreach($letters as $letter)
-                <p>
+                <div class="row">
                     <a href="{{route('showletter', ['name' => $projects->name, 'company_id' => $projects->company_id,
                     'letter_name' => $letter->title, 'letter_id' => $letter->id])}}">{{$letter->title}}</a>
-                </p>
+                </div>
             @endforeach
         </div>
         <div class="col-md-4">
-            Documents:
+            <span class="header-3">Documents</span>
             <br>
-            <a href="{{route('adddocument', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">Add document</a>
+            <div class="row">
+                <a class="btn btn-primary" href="{{route('adddocument', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">
+                    <span class="glyphicon glyphicon-plus"></span> Add document</a>
+
+            </div>
             @foreach($documents as $document)
                 <p>
                     <a href="{{route('showdocument', ['name' => $projects->name, 'company_id' => $projects->company_id,
