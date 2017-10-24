@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Company;
 use App\Project;
 use App\Release;
+use App\Document;
+use App\Letter;
 
 class ProjectController extends Controller
 {
@@ -40,6 +42,7 @@ class ProjectController extends Controller
     public function overviewProject()
     {
         $projects = Project::with('company')->get();
+
         return view('project.project', compact('projects'));
     }
 
@@ -48,8 +51,10 @@ class ProjectController extends Controller
         $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
         $companys = Company::where('id', $company_id)->first();
         $releases = Release::where('project_id', $projects->id)->get();
+        $documents = Document::where('project_id', $projects->id)->get();
+        $letters = Letter::where('project_id', $projects->id)->get();
 
-        return view('project.details_project', compact('projects', 'companys', 'releases'));
+        return view('project.details_project', compact('projects', 'companys', 'releases', 'documents', 'letters'));
     }
 
     public function editProject($company_id, $name)

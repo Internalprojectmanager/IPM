@@ -20,34 +20,47 @@
         </div>
         <div class="feature">
             <h2>Features</h2>
-            <?php $i = 1; ?>
+            <?php $i = 1; $k = 0; ?>
             @foreach($features as $f)
+                @if($k % 2 == 0)
+                    <div class="row">
+                @endif
+                        <div class="col-md-6 col-xs-12 col-lg-6 feature-block" id="{{$f->id}}">
+                        <span class="header-3">Feature {{$i}}: {{$f->name}}
+                            @if($f->status == "open")
+                                <span class="status_open status">{{$f->status}}</span>
+                            @elseif($f->status == "In Progress")
+                                <span class="status_progress status">{{$f->status}}</span>
+                            @elseif($f->status == "Testing")
+                                <span class="status_testing status">{{$f->status}}</span>
+                            @else
+                                <span class="status_closed status">{{$f->status}}</span>
+                            @endif
+                        </span>
+                        <br>
+                        @if($f->description)
+                        <b>Description:</b><br>
+                            {{$f->description}}
+                        @endif
 
-                <div class="row" id="{{$f->id}}">
-                    <div class="col-md-12">
-                        <h3>Feature {{$i}}: {{$f->name}}</h3>
-                        <b>Status:</b>
-                        <p>{{$f->status}}</p>
-                        <b>Description:</b>
-                        <p>{{$f->description}}</p>
-                    </div>
-                    <?php $i++;?>
-                    @foreach($requirements as $r)
+                        <?php $i++;$k++;?>
+                        @foreach($requirements as $r)
 
-                    @endforeach
-                </div>
+                        @endforeach
+                        </div>
+                    @if($k % 2 == 0)
+                       </div>
+                    @endif
             @endforeach
-
-
         </div>
 
+        <div class="row">
+            <button class="btn btn-primary" onclick="document.getElementById('addFeature').style.display='block'">
+                <span class="glyphicon glyphicon-plus"></span> Add Feature
+            </button>
+        </div>
 
-        <button class="btn btn-primary" onclick="document.getElementById('addFeature').style.display='block'">
-            <span class="glyphicon glyphicon-plus"></span> Add Feature
-        </button>
-        <br><br>
-
-        <!-- ADD COMPANY -->
+        <!-- ADD Feature -->
         <div id="addFeature" class="modal">
             <span onclick="document.getElementById('addFeature').style.display='none'" class="close"
                   title="Close Modal">&times;</span>
