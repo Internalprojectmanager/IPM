@@ -16,6 +16,12 @@ use App\Letter;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function addProject()
     {
         $companys = Company::all();
@@ -46,6 +52,9 @@ class ProjectController extends Controller
     public function overviewProject()
     {
         $projects = Project::with('company')->get();
+        if(!$projects){
+            abort(404);
+        }
 
         return view('project.project', compact('projects'));
     }
@@ -53,6 +62,9 @@ class ProjectController extends Controller
     public function detailsProject($company_id, $name)
     {
         $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
+        if(!$projects){
+            abort(404);
+        }
         $companys = Company::where('id', $company_id)->first();
         $releases = Release::where('project_id', $projects->id)->get();
         $documents = Document::where('project_id', $projects->id)->get();

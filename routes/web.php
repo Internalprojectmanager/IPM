@@ -16,7 +16,12 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return view('home');
+    if(\Illuminate\Support\Facades\Auth::guest()){
+        return redirect()->route('login');
+    }else{
+        return view('home');
+    }
+
 })->name('home');
 
 Auth::routes();

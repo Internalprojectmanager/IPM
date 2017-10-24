@@ -11,6 +11,11 @@ use App\Company;
 
 class CompanyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function addCompany()
     {
         return view('company.add_company');
@@ -42,12 +47,18 @@ class CompanyController extends Controller
     public function detailsCompany($name)
     {
         $companys = Company::where('name', $name)->first();
+        if(!$companys){
+            abort(404);
+        }
         return view('company.details_company', compact('companys'));
     }
 
     public function editCompany($name)
     {
         $companys = Company::where('name', $name)->first();
+        if(!$companys){
+            abort(404);
+        }
 
         return view('company.edit_company', compact('companys'));
     }

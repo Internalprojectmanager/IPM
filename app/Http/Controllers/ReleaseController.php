@@ -16,6 +16,11 @@ use App\Release;
 
 class ReleaseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function addRelease($company_id,$name)
     {
         $projects = Project::where(['name' => $name, 'company_id' => $company_id])->first();
@@ -66,6 +71,9 @@ class ReleaseController extends Controller
         $company = Company::where('id' ,$company_id)->first();
         $release = Release::where([['project_id', $company_id.$name],['name', $release_name],['version', $version]])->first();
 
+        if(!$release){
+            abort(404);
+        }
         $features = Feature::where('release_id', $release->id)->get();
         $requirements = Requirement::where('release_id', $release->id)->get();
 

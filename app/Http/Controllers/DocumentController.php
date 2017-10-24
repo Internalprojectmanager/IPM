@@ -12,6 +12,12 @@ use App\Company;
 
 class DocumentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function addDocument($name, $company_id){
         $projects = Project::where('name', $name)->first();
         $companys = Company::where('id', $company_id)->first();
@@ -33,13 +39,18 @@ class DocumentController extends Controller
 
     public function showDocument($company_id,$name, $letter_id, $letter_name){
         $document = Document::with('projects.company')->where([['title', '=', $letter_name], ['id', '=' , $letter_id]])->first();
-
+        if(!$document){
+            abort(404);
+        }
         return view('document.details_document', compact('document'));
     }
 
     public function editDocument($project_id,$document_id,$document_title){
         $documents = Document::with('projects')->where(['project_id' =>  $project_id, 'id' => $document_id,
             'title' => $document_title])->first();
+        if(!$documents){
+            abort(404);
+        }
         $projects = Project::all();
 
         return view('document.edit_document', compact('documents', 'projects'));
