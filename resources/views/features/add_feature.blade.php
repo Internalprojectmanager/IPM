@@ -30,13 +30,6 @@
                 <label for="description">Description:</label>
                 <textarea rows="4" cols="50" name="description" class="form-control" id="description"></textarea>
                 <br><br>
-                <label for="description">Description:</label>
-                <select name="status" class="form-control" id="status">
-                    <option value="open">Open</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Testing">Testing</option>
-                    <option value="Done">Done</option>
-                </select>
             </div>
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProjectValidator;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -22,21 +23,24 @@ class ProjectController extends Controller
         return view('project.add_project', compact('companys'));
     }
 
-    public function storeProject(Request $request)
+    public function storeProject(ProjectValidator $request)
     {
-        $request->validate([
-            'project_name' => 'required|unique:project,name'
-        ]);
+        $project_id = strtoupper(substr($request->company,0 ,5)).strtoupper(substr($request->project_name,0 ,5));
+        $findproject = Project::find($project_id);
+        if($findproject){
+            return redirect()->back()->withErrors('Project name is already being used for this client');
+        }else{
+            $project = new Project();
+            $project->id = $project_id;
+            $project->name = $request->project_name;
+            $project->company_id = strtoupper(substr($request->company,0 ,5));
+            $project->description = $request->description;
 
-        $project = new Project();
-        $project->id = strtoupper(substr($request->company,0 ,5)).strtoupper(substr($request->project_name,0 ,5));
-        $project->name = $request->project_name;
-        $project->company_id = strtoupper(substr($request->company,0 ,5));
-        $project->description = $request->description;
+            $project->save();
 
-        $project->save();
+            return redirect()->route('overviewproject');
+        }
 
-        return redirect()->route('overviewproject');
     }
 
     public function overviewProject()
@@ -72,7 +76,6 @@ class ProjectController extends Controller
         ]);
 
         $project = Project::where(['name' => $name, 'company_id' => $company_id] )->first();
-        $project->id =strtoupper(substr($request->project_name,0 ,5));
         $project->name = $request->project_name;
         $project->company_id = strtoupper(substr($request->company,0 ,5));
         $project->description = $request->description;

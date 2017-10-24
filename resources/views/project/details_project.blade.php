@@ -8,16 +8,14 @@
 
 @section('content')
 
-    <div class="row">
-        <p>
+    <div class="row center">
             <span class="header-3">{{$companys->name}} - {{$projects->name}}</span>
             <p>
                 {{$projects->description}}
             </p>
-        </p>
     </div>
 
-    <div class="row">
+    <div class="row center">
         <div class="col-md-4">
             <span class="header-3">Releases</span>
             <br>

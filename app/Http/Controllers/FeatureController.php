@@ -29,7 +29,7 @@ class FeatureController extends Controller
                 $feature->name = $request->feature_name[$k];
                 $feature->author = Auth::user()->first_name.' '.Auth::user()->last_name;
                 $feature->description = $request->description[$k];
-                $feature->status = $request->status[$k];
+                $feature->status = "Open";
                 $feature->save();
             }
         }

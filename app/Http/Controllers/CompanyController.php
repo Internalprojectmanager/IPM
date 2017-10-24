@@ -59,7 +59,6 @@ class CompanyController extends Controller
         ]);
 
         $company = Company::all()->where('name', $name)->first();
-        $company->id =strtoupper(substr($request->company_name,0 ,5));
         $company->name = $request->company_name;
         $company->description = $request->description;
 

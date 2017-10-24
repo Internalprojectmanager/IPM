@@ -8,26 +8,26 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
-            <h1>{{$company->name}} {{$project->name}}: {{$release->name}}</h1>
-        </div>
+
         <div class="row">
             <div class="col-md-12">
+                <h1>{{$company->name}} {{$project->name}}: {{$release->name}}</h1>
                 <b>Version:</b> {{$release->version}}<br>
                 <b>Author:</b> {{$release->author}}<br>
                 <b>Description:</b><br> {{$release->description}}<br>
             </div>
         </div>
-        <div class="feature">
+        <div class="feature row">
+            <div class="col-md-12">
             <h2>Features</h2>
             <?php $i = 1; $k = 0; ?>
             @foreach($features as $f)
                 @if($k % 2 == 0)
                     <div class="row">
-                @endif
+                        @endif
                         <div class="col-md-6 col-xs-12 col-lg-6 feature-block" id="{{$f->id}}">
                         <span class="header-3">Feature {{$i}}: {{$f->name}}
-                            @if($f->status == "open")
+                            @if($f->status == "Open")
                                 <span class="status_open status">{{$f->status}}</span>
                             @elseif($f->status == "In Progress")
                                 <span class="status_progress status">{{$f->status}}</span>
@@ -37,21 +37,21 @@
                                 <span class="status_closed status">{{$f->status}}</span>
                             @endif
                         </span>
-                        <br>
-                        @if($f->description)
-                        <b>Description:</b><br>
-                            {{$f->description}}
-                        @endif
+                            <br>
+                            @if($f->description)
+                                {{$f->description}}
+                            @endif
 
-                        <?php $i++;$k++;?>
-                        @foreach($requirements as $r)
+                            <?php $i++;$k++;?>
+                            @foreach($requirements as $r)
 
-                        @endforeach
+                            @endforeach
                         </div>
-                    @if($k % 2 == 0)
-                       </div>
-                    @endif
+                        @if($k % 2 == 0)
+                    </div>
+                @endif
             @endforeach
+            </div>
         </div>
 
         <div class="row">
@@ -59,6 +59,7 @@
                 <span class="glyphicon glyphicon-plus"></span> Add Feature
             </button>
         </div>
+    </div>
 
         <!-- ADD Feature -->
         <div id="addFeature" class="modal">
@@ -78,15 +79,9 @@
                         <input type="text" class="form-control" name="feature_name[]" id="feature_name">
                         <br><br>
                         <label for="description">Description:</label>
-                        <textarea rows="4" cols="50" name="description[]" class="form-control" id="description"></textarea>
+                        <textarea rows="4" cols="50" name="description[]" class="form-control"
+                                  id="description"></textarea>
                         <br><br>
-                        <label for="description">Status:</label>
-                        <select name="status[]" class="form-control" id="status">
-                            <option value="open">Open</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Testing">Testing</option>
-                            <option value="Done">Done</option>
-                        </select>
                     </div>
                 </div>
 
@@ -97,17 +92,16 @@
                 <button class="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
-        </div>
 
 
 
     <script>
         var i = 2;
 
-        function newFeature(){
+        function newFeature() {
 
             var div = document.createElement('div');
-            var featurename = "newfeature"+i;
+            var featurename = "newfeature" + i;
             div.setAttribute('id', featurename);
             var title = "<h3>New feature " + i + "</h3>";
             div.innerHTML += title
@@ -118,11 +112,12 @@
             i++;
 
         }
+
         // Get the modal
         var modal = document.getElementById('addFeature');
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
