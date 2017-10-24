@@ -17,7 +17,7 @@ extends('layout.app')
                         </div>
                         <div class="col-md-6">
                             <a class="btn btn-success" href="#"><span class="glyphicon glyphicon-search"></span></a>
-                            <a class="btn btn-warning" onclick="#"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a class="btn btn-warning" href="#"><span class="glyphicon glyphicon-edit"></span></a>
                             <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="#"><span class="glyphicon glyphicon-trash"></span></a>
                         </div>
                     </div>

@@ -35,6 +35,11 @@ Route::group(['prefix' => 'project'], function () {
     Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
 });
 
+// TEST REPORT OVERVIEW
+Route::group(['prefix' => 'testreport'], function () {
+    Route::get('/{release_id}/overview', 'TestReportController@overviewTestReport')->name('overviewtestreport');
+});
+
 Route::post('/release/overview', 'ReleaseController@overviewTestrapport')->name('storerelease');
 
 Route::group(['prefix' => '{company_id}'], function () {
@@ -48,9 +53,6 @@ Route::group(['prefix' => '{company_id}'], function () {
             Route::group(['prefix' => '{release_name}'], function (){
                 Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');
                 Route::get('/feature', 'FeatureController@add')->name('addfeature');
-
-                // TEST REPORT OVERVIEW
-                Route::get('/overview', 'TestReportController@overviewTestReport')->name('overviewtestreport');
 
                 Route::post('/feature/store', 'FeatureController@store')->name('storefeature');
             });

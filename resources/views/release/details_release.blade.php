@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <b>Version:</b> {{$release->version}}<br>
                 <b>Author:</b> {{$release->author}}<br>
-                <a href="">Test Reports</a><br>
+                <a href="{{route('overviewtestreport', $release->release_id)}}">Test Reports</a><br>
                 <b>Description:</b><br> {{$release->description}}<br>
             </div>
         </div>
