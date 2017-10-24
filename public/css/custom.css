@@ -90,3 +90,49 @@ html, body {
     from {transform: scale(0)}
     to {transform: scale(1)}
 }
+
+.feature-block{
+    padding: 2rem 2rem;
+}
+
+.header-1{
+    font-size: 36px;
+    margin-top: 22px;
+    margin-bottom: 11px;
+}
+
+.header-3{
+    font-size: 24px;
+    margin-top: 22px;
+    margin-bottom: 11px;
+}
+
+.status{
+    padding: 3px 7px;
+    border-radius: 80px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    display: inline-block;
+    color: #fff;
+    position: absolute;
+    top: 28px;
+}
+
+.status_progress{
+    background-color: #2ab27b;
+    border-color: #259d6d;
+}
+
+.status_open{
+    background-color: #cbb956;
+    border-color: #c5b143;
+}
+
+.status_testing{
+    background-color: #428BCA;
+}
+
+.status_closed{
+    background-color: grey;
+}
