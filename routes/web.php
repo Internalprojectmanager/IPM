@@ -47,6 +47,7 @@ Route::group(['prefix' => 'letter'], function (){
     Route::post('/add', 'LetterController@storeLetter')->name('storeletter');
     Route::get('/edit/{project_id}/{letter_id}/{letter_title}', 'LetterController@editLetter')->name('editletter');
     Route::post('/edit/{project_id}/{letter_id}/{letter_title}', 'LetterController@updateLetter')->name('updateletter');
+    Route::get('/delete/{id}', 'LetterController@deleteLetter')->name('deleteletter');
 });
 
 Route::post('/release/add', 'ReleaseController@storeRelease')->name('storerelease');

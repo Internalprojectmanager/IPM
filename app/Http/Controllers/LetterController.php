@@ -57,4 +57,12 @@ class LetterController extends Controller
 
         return redirect()->route('overviewproject');
     }
+
+    public function deleteLetter($id)
+    {
+        $letter = Letter::where('id', $id);
+        $letter->delete();
+
+        return redirect()->route('overviewproject');
+    }
 }
