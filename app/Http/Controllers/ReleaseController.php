@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Company;
 use App\Project;
 use App\Release;
+use DB;
 
 class ReleaseController extends Controller
 {
@@ -74,7 +75,10 @@ class ReleaseController extends Controller
         if(!$release){
             abort(404);
         }
-        $features = Feature::where('release_id', $release->id)->get();
+        $status_string = array('"Open"', '"In Progress"', '"Testing"', '"Closed"');
+        $status = array('Open', 'In Progress', 'Testing', 'Closed');
+        $ids_ordered = implode(",", $status_string);
+        $features = Feature::where('release_id', $release->id)->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
         $requirements = Requirement::where('release_id', $release->id)->get();
 
         return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements'));

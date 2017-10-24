@@ -20,36 +20,34 @@
         <div class="feature row">
             <div class="col-md-12">
             <h2>Features</h2>
-            <?php $i = 1; $k = 0; ?>
+            <?php $i = 1; $k = 0; $status = NULL; ?>
             @foreach($features as $f)
-                @if($k % 2 == 0)
+                @if($status !== $f->status)
+                    @if($i !== 1)
+                    </div>
+                    @endif
                     <div class="row">
-                        @endif
-                        <div class="col-md-6 col-xs-12 col-lg-6 feature-block" id="{{$f->id}}">
-                        <span class="header-3">Feature {{$i}}: {{$f->name}} </span>
-                            @if($f->status == "Open")
-                                <span class="status_open status">{{$f->status}}</span>
-                            @elseif($f->status == "In Progress")
-                                <span class="status_progress status">{{$f->status}}</span>
-                            @elseif($f->status == "Testing")
-                                <span class="status_testing status">{{$f->status}}</span>
-                            @else
-                                <span class="status_closed status">{{$f->status}}</span>
-                            @endif
-                            <br>
-                            @if($f->description)
+                        <div class="col-md-12">
+                            <span class="header-3 header-status status status_<?php echo substr($f->status,0 ,2); ?>">{{$f->status}}</span>
+                        </div>
+
+                @endif
+                <div class="col-md-12 col-xs-12 col-lg-6 feature-block" id="{{$f->id}}">
+                        <span class="header-3">{{$f->name}} </span>
+                        <span class="header-3 status status_<?php echo substr($f->status,0 ,2); ?>">{{$f->status}}</span>
+                        <br>
+                    @if($f->description)
                                 {{$f->description}}
                             @endif
 
-                            <?php $i++;$k++;?>
+
                             @foreach($requirements as $r)
 
                             @endforeach
                         </div>
-                        @if($k % 2 == 0)
-                    </div>
-                @endif
-            @endforeach
+                <?php $status = $f->status; ?><?php $i++;$k++;?>
+
+                @endforeach
             </div>
         </div>
 
