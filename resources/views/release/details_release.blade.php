@@ -26,7 +26,7 @@
                     <div class="row">
                         @endif
                         <div class="col-md-6 col-xs-12 col-lg-6 feature-block" id="{{$f->id}}">
-                        <span class="header-3">Feature {{$i}}: {{$f->name}}
+                        <span class="header-3">Feature {{$i}}: {{$f->name}} </span>
                             @if($f->status == "Open")
                                 <span class="status_open status">{{$f->status}}</span>
                             @elseif($f->status == "In Progress")
@@ -36,7 +36,6 @@
                             @else
                                 <span class="status_closed status">{{$f->status}}</span>
                             @endif
-                        </span>
                             <br>
                             @if($f->description)
                                 {{$f->description}}
