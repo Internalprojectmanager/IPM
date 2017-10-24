@@ -37,4 +37,24 @@ class LetterController extends Controller
 
         return view('letter.details_letter', compact('letter'));
     }
+
+    public function editLetter($project_id,$letter_id,$letter_title){
+        $letters = Letter::with('projects')->where(['project_id' =>  $project_id, 'id' => $letter_id,
+            'title' => $letter_title])->first();
+        $projects = Project::all();
+
+        return view('letter.edit_letter', compact('letters', 'projects'));
+    }
+
+    public function updateLetter($project_id, $letter_id, $letter_title, Request $request){
+        $letter = Letter::where(['id' => $letter_id, 'project_id' => $project_id, 'title' => $letter_title])->first();
+        $letter->title = $request->letter_title;
+        $letter->content = $request->content;
+        $letter->author = $request->author;
+        $letter->contact_person = $request->contact_person;
+
+        $letter->save();
+
+        return redirect()->route('overviewproject');
+    }
 }

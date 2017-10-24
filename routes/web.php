@@ -45,6 +45,8 @@ Route::group(['prefix' => 'document'], function (){
 Route::group(['prefix' => 'letter'], function (){
     Route::get('/add/{name}/{company_id}', 'LetterController@addLetter')->name('addletter');
     Route::post('/add', 'LetterController@storeLetter')->name('storeletter');
+    Route::get('/edit/{project_id}/{letter_id}/{letter_title}', 'LetterController@editLetter')->name('editletter');
+    Route::post('/edit/{project_id}/{letter_id}/{letter_title}', 'LetterController@updateLetter')->name('updateletter');
 });
 
 Route::post('/release/add', 'ReleaseController@storeRelease')->name('storerelease');
