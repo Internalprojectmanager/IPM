@@ -133,6 +133,12 @@ html, body {
     background-color: #cbb956;
     border-color: #c5b143;
 }
+.status_edit{
+    display: block;
+    color:black;
+    background-color: white;
+    border:2px solid black;
+}
 
 .status_Te{
     background-color: #428BCA;

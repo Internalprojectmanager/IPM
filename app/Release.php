@@ -19,6 +19,6 @@ class Release extends Model
     }
 
     public function projects(){
-        return $this->belongsTo('App\Project', "id", 'project_id');
+        return $this->belongsTo('App\Project', "project_id", 'id');
     }
 }

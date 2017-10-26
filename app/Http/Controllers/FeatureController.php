@@ -43,16 +43,23 @@ class FeatureController extends Controller
             'release_name' => $release->name, 'version' => $release->version]));
     }
 
-    public function update($id, Request $request){
-        $feature = Feature::where('id', $id)->first();
+    public function editFeature($company_id, $name, $release_name, $feature_id){
+        $feature = Feature::with('releases.projects.company')->where('id', $feature_id)->first();
+
+        return view('features.edit_feature', compact( 'feature','name', 'release_name', 'company_id'));
+    }
+
+    public function updateFeature($company_id, $name, $release_name, $feature_id, Request $request){
+        $feature = Feature::where('id', $feature_id)->first();
 
         $feature->status = $request->status;
         $feature->name = $request->name;
         $feature->description = $request->description;
-        $feature->release_id = $request->$request->release_id;
 
         $feature->save();
 
-        return redirect(route('releaseDetails', $request->release_id));
+        return redirect(route('showrelease', ['name' => $feature->releases->projects->name,
+            'company_id' => $feature->releases->projects->company_id, 'release_name' => $feature->releases->name,
+            'version' => $feature->releases->version]));
     }
 }
