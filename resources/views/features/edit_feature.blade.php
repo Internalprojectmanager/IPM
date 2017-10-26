@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Edit company
+    Edit {{$feature->releases->version}} {{$feature->releases->name}}: {{$feature->name}}
 @endsection
 
 @section('content')
