@@ -33,8 +33,8 @@ class DocumentController extends Controller
         return redirect()->route('overviewproject');
     }
 
-    public function showDocument($company_id,$name, $letter_id, $letter_name){
-        $document = Document::with('projects.company')->where([['title', '=', $letter_name], ['id', '=' , $letter_id]])->first();
+    public function showDocument($company_id,$name, $document_id, $document_name){
+        $document = Document::with('projects.company')->where([['title', '=', $document_name], ['id', '=' , $document_id]])->first();
         $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
 
         return view('document.details_document', compact('document', 'project'));
@@ -44,6 +44,7 @@ class DocumentController extends Controller
         $documents = Document::with('projects')->where(['project_id' =>  $project_id, 'id' => $document_id,
             'title' => $document_title])->first();
         $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+
         return view('document.edit_document', compact('documents', 'project'));
     }
 

@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Project;
 use App\Letter;
 use App\Company;
+use App\Document;
+use App\Release;
 
 class LetterController extends Controller
 {
@@ -32,21 +34,22 @@ class LetterController extends Controller
         return redirect()->route('overviewproject');
     }
 
-    public function showLetter($company_id,$name, $document_id, $document_name){
-        $letter = Letter::with('projects.company')->where([['title', '=', $document_name], ['id', '=' , $document_id]])->first();
+    public function showLetter($company_id,$name, $letter_id, $letter_name){
+        $letter = Letter::with('projects.company')->where([['title', '=', $letter_name], ['id', '=' , $letter_id]])->first();
+        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
 
-        return view('letter.details_letter', compact('letter'));
+        return view('letter.details_letter', compact('letter', 'project'));
     }
 
-    public function editLetter($project_id,$letter_id,$letter_title){
+    public function editLetter($company_id,$name,$project_id,$letter_id,$letter_title){
         $letters = Letter::with('projects')->where(['project_id' =>  $project_id, 'id' => $letter_id,
             'title' => $letter_title])->first();
-        $projects = Project::all();
+        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
 
-        return view('letter.edit_letter', compact('letters', 'projects'));
+        return view('letter.edit_letter', compact('letters', 'project'));
     }
 
-    public function updateLetter($project_id, $letter_id, $letter_title, Request $request){
+    public function updateLetter($company_id, $name, $project_id, $letter_id, $letter_title, Request $request){
         $letter = Letter::where(['id' => $letter_id, 'project_id' => $project_id, 'title' => $letter_title])->first();
         $letter->title = $request->letter_title;
         $letter->content = $request->content;
@@ -55,7 +58,13 @@ class LetterController extends Controller
 
         $letter->save();
 
-        return redirect()->route('overviewproject');
+        $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
+        $companys = Company::where('id', $company_id)->first();
+        $releases = Release::where('project_id', $projects->id)->get();
+        $documents = Document::where('project_id', $projects->id)->get();
+        $letters = Letter::where('project_id', $projects->id)->get();
+
+        return view('project.details_project', compact('projects', 'companys', 'releases', 'documents', 'letters'));
     }
 
     public function deleteLetter($id)
