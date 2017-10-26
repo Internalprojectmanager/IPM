@@ -16,7 +16,12 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return view('home');
+    if(\Illuminate\Support\Facades\Auth::guest()){
+        return redirect()->route('login');
+    }else{
+        return view('home');
+    }
+
 })->name('home');
 
 Auth::routes();
@@ -62,6 +67,8 @@ Route::group(['prefix' => '{company_id}'], function () {
             Route::group(['prefix' => '{release_name}'], function (){
                 Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');
                 Route::get('/feature', 'FeatureController@add')->name('addfeature');
+                Route::get('/feature/{feature_id}/edit', 'FeatureController@editFeature')->name('editFeature');
+                Route::post('/feature/{feature_id}/edit', 'FeatureController@updateFeature')->name('updateFeature');
 
                 Route::post('/feature/store', 'FeatureController@store')->name('storefeature');
             });

@@ -8,15 +8,31 @@
 
 @section('content')
     <h1>Projects</h1>
-    @foreach($projects as $project)
-        <p>
-            {{$project->company->name}} - {{$project->name}}
-            <a href="{{route('projectdetails', ['name' => $project->name, 'company_id' => $project->company_id])}}">Details</a>
-            <a href="{{route('editproject', ['name' => $project->name, 'company_id' => $project->company_id])}}">Edit</a>
-            <a href="{{route('deleteproject', ['name' => $project->name, 'company_id' => $project->company_id])}}">Delete</a>
-        </p>
-    @endforeach
 
-    <a href="{{route('addproject')}}">Add project</a>
+    <table class="table table-striped table-hover">
+        @foreach($projects as $project)
+            <tbody>
+            <tr>
+                <td>
+                    <div class="row">
+                        <div class="col-lg-9 col-md-8 col-xs-6">
+                            {{$project->company->name}} - {{$project->name}}
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6">
+                            <a class="btn btn-success" href="{{route('projectdetails', ['name' => $project->name, 'company_id' => $project->company_id])}}">
+                                <span class="glyphicon glyphicon-search"></span> Details</a>
+                            <a class="btn btn-warning" href="{{route('editproject', ['name' => $project->name, 'company_id' => $project->company_id])}}">
+                                <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                            <a class="btn btn-danger" href="{{route('deleteproject', ['name' => $project->name, 'company_id' => $project->company_id])}}">
+                                <span class="glyphicon glyphicon-trash"></span> Delete</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        @endforeach
+    </table>
+
+    <a class="btn btn-primary" href="{{route('addproject')}}">Add project</a>
 
 @endsection

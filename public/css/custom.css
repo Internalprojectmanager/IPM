@@ -3,7 +3,6 @@ html, body {
     color: #000;
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    text-align: center;
 }
 
 .navbar{
@@ -92,7 +91,8 @@ html, body {
 }
 
 .feature-block{
-    padding: 2rem 2rem;
+    padding: 0 2rem;
+    min-height: 110px;
 }
 
 .header-1{
@@ -115,24 +115,39 @@ html, body {
     font-weight: 400;
     display: inline-block;
     color: #fff;
-    position: absolute;
-    top: 28px;
+    vertical-align: super;
 }
 
-.status_progress{
+.header-status{
+    font-size: 24px;
+    padding: 5px 9px;
+    border-radius: 100px;
+}
+
+.status_In{
     background-color: #2ab27b;
     border-color: #259d6d;
 }
 
-.status_open{
+.status_Op{
     background-color: #cbb956;
     border-color: #c5b143;
 }
+.status_edit{
+    display: block;
+    color:black;
+    background-color: white;
+    border:2px solid black;
+}
 
-.status_testing{
+.status_Te{
     background-color: #428BCA;
 }
 
-.status_closed{
+.status_Cl{
     background-color: grey;
+}
+
+.center{
+    text-align: center;
 }

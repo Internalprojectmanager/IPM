@@ -13,9 +13,15 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Company;
 use App\Project;
 use App\Release;
+use DB;
 
 class ReleaseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function addRelease($company_id,$name)
     {
         $projects = Project::where(['name' => $name, 'company_id' => $company_id])->first();
@@ -66,7 +72,13 @@ class ReleaseController extends Controller
         $company = Company::where('id' ,$company_id)->first();
         $release = Release::where([['project_id', $company_id.$name],['name', $release_name],['version', $version]])->first();
 
-        $features = Feature::where('release_id', $release->id)->get();
+        if(!$release){
+            abort(404);
+        }
+        $status_string = array('"Open"', '"In Progress"', '"Testing"', '"Closed"');
+        $status = array('Open', 'In Progress', 'Testing', 'Closed');
+        $ids_ordered = implode(",", $status_string);
+        $features = Feature::where('release_id', $release->id)->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
         $requirements = Requirement::where('release_id', $release->id)->get();
 
         return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements'));

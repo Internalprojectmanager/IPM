@@ -12,6 +12,12 @@ use App\Company;
 
 class LetterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function addLetter($name, $company_id){
         $projects = Project::where('name', $name)->first();
         $companys = Company::where('id', $company_id)->first();
@@ -34,7 +40,9 @@ class LetterController extends Controller
 
     public function showLetter($company_id,$name, $document_id, $document_name){
         $letter = Letter::with('projects.company')->where([['title', '=', $document_name], ['id', '=' , $document_id]])->first();
-
+        if(!$letter){
+            abort(404);
+        }
         return view('letter.details_letter', compact('letter'));
     }
 }
