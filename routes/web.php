@@ -37,8 +37,6 @@ Route::group(['prefix' => 'project'], function () {
 Route::group(['prefix' => 'document'], function (){
    Route::get('/add/{name}/{company_id}', 'DocumentController@addDocument')->name('adddocument');
    Route::post('/add', 'DocumentController@storeDocument')->name('storedocument');
-   Route::get('/edit/{project_id}/{document_id}/{document_title}', 'DocumentController@editDocument')->name('editdocument');
-   Route::post('/edit/{project_id}/{document_id}/{document_title}', 'DocumentController@updateDocument')->name('updatedocument');
    Route::get('/delete/{id}', 'DocumentController@deleteDocument')->name('deletedocument');
 });
 
@@ -61,6 +59,8 @@ Route::group(['prefix' => '{company_id}'], function () {
             Route::post('/edit', 'ProjectController@updateProject')->name('updateproject');
             Route::get('/delete', 'ProjectController@deleteProject')->name('deleteproject');
             Route::get('/document/{document_id}/{document_name}', 'DocumentController@showDocument')->name('showdocument');
+            Route::get('/edit/{project_id}/{document_id}/{document_title}', 'DocumentController@editDocument')->name('editdocument');
+            Route::post('/edit/{project_id}/{document_id}/{document_title}', 'DocumentController@updateDocument')->name('updatedocument');
             Route::get('/letter/{letter_id}/{letter_name}', 'LetterController@showLetter')->name('showletter');
 
             Route::group(['prefix' => '{release_name}'], function (){

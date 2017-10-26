@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Project;
 use App\Document;
 use App\Company;
+use App\Release;
+use App\Letter;
 
 class DocumentController extends Controller
 {
@@ -33,19 +35,19 @@ class DocumentController extends Controller
 
     public function showDocument($company_id,$name, $letter_id, $letter_name){
         $document = Document::with('projects.company')->where([['title', '=', $letter_name], ['id', '=' , $letter_id]])->first();
+        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
 
-        return view('document.details_document', compact('document'));
+        return view('document.details_document', compact('document', 'project'));
     }
 
-    public function editDocument($project_id,$document_id,$document_title){
+    public function editDocument($company_id,$name,$project_id,$document_id,$document_title){
         $documents = Document::with('projects')->where(['project_id' =>  $project_id, 'id' => $document_id,
             'title' => $document_title])->first();
-        $projects = Project::all();
-
-        return view('document.edit_document', compact('documents', 'projects'));
+        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        return view('document.edit_document', compact('documents', 'project'));
     }
 
-    public function updateDocument($project_id, $document_id, $document_title, Request $request){
+    public function updateDocument($company_id, $name, $project_id, $document_id, $document_title, Request $request){
         $document = Document::where(['id' => $document_id, 'project_id' => $project_id, 'title' => $document_title])->first();
         $document->title = $request->document_title;
         $document->description = $request->description;
@@ -53,7 +55,13 @@ class DocumentController extends Controller
 
         $document->save();
 
-        return redirect()->route('overviewproject');
+        $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
+        $companys = Company::where('id', $company_id)->first();
+        $releases = Release::where('project_id', $projects->id)->get();
+        $documents = Document::where('project_id', $projects->id)->get();
+        $letters = Letter::where('project_id', $projects->id)->get();
+
+        return view('project.details_project', compact('projects', 'companys', 'releases', 'documents', 'letters'));
     }
 
     public function deleteDocument($id)
