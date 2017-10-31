@@ -12,10 +12,17 @@ use App\Release;
 
 class TestReportController extends Controller
 {
+    public function addTestReport($id)
+    {
+        $release = Release::where('id', $id)->first();
+
+
+        return view('testreport.add_testreport', compact('release'));
+    }
+
     public function storeTestReport(Request $request)
     {
         $testreport = new TestReport();
-        $testreport->id = $request->id
         $testreport->release_id = $request->release_id;
         $testreport->title = $request->title;
         $testreport->description = $request->description;
@@ -28,10 +35,10 @@ class TestReportController extends Controller
         return redirect()->route('overviewtestreport');
     }
 
-    public function overviewTestReport()
+    public function overviewTestReport($id)
     {
-        $testreports = TestReport::all();
+        $testreports = TestReport::where('id', $id);
 
-        return view('testreport.testreport', compact('testreports'));
+        return view('release.details_release', compact('testreports'));
     }
 }

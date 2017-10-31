@@ -37,7 +37,9 @@ Route::group(['prefix' => 'project'], function () {
 
 // TEST REPORT OVERVIEW
 Route::group(['prefix' => 'testreport'], function () {
-    Route::get('/{release_id}/overview', 'TestReportController@overviewTestReport')->name('overviewtestreport');
+    Route::get('/{id}/add', 'TestReportController@addTestReport')->name('addtestreport');
+    Route::post('/store', 'TestreportController@storeTestreport')->name('storetestreport');
+    Route::get('/overview', 'TestReportController@overviewTestReport')->name('overviewtestreport');
 });
 
 Route::post('/release/overview', 'ReleaseController@overviewTestrapport')->name('storerelease');
