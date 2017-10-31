@@ -41,29 +41,36 @@
                                         class="glyphicon glyphicon-edit"></span> Edit
                             </button>
                             <br>
+                            <label>Feature description:</label><br>
                             @if($f->description)
                                 {{$f->description}}
                             @endif
 
 
                             <div class="requirement-block">
+
                                 <?php $i = 0;?>
                                 @foreach($requirements as $r)
+                                    <div class="row requirement-row">
+                                    @if($t == 0)
+                                        No requirements added yet
+                                    @endif
                                     @if($f->feature_uuid == $r->feature_uuid)
 
-                                        <div class="row requirement-row">
+
                                             <div class="col-md-4">
-                                                Requirement:<br>
+                                                <label>Requirement:</label><br>
                                                 {{$r->name}}
                                             </div>
 
                                             <div class="col-md-4">
-                                                Requirement Defenition:<br>
+                                                <label>Requirement Defenition:</label><br>
                                                 {{$r->description}}
                                             </div>
-                                        </div>
+
                                         <?php $i++;?>
                                     @endif
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
