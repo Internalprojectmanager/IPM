@@ -11,7 +11,7 @@ class Feature extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id','name', 'description', 'status', 'release_id'
+        'id','feature_uuid','name', 'description', 'status', 'release_id', 'revision_log'
     ];
 
     public function requirements(){

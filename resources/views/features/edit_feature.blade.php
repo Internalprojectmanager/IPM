@@ -40,4 +40,26 @@
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 
+    <h3>Revisions of {{$feature->name}}</h3>
+    <table class="table">
+        <thead>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Author</th>
+            <th>Created at</th>
+        </thead>
+        <tbody>
+            @foreach($revisions as $r)
+                <tr>
+                    <td>{{$r->name}}</td>
+                    <td>{{$r->description}}</td>
+                    <td>{{$r->author}}</td>
+                    <td>{{$r->created_at}}</td>
+                </tr>
+            @endforeach
+
+        </tbody>
+
+    </table>
+
 @endsection
