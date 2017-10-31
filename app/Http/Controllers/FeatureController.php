@@ -47,7 +47,7 @@ class FeatureController extends Controller
 
     public function editFeature($company_id, $name, $release_name, $feature_id){
         $feature = Feature::with('releases.projects.company')->where('id', $feature_id)->first();
-        $revisions = Feature::where([['feature_uuid', $feature->feature_uuid], ['revision_log', '!=', NULL]])->orderby('revision_log', 'desc')->get();
+        $revisions = Feature::where([['feature_uuid', $feature->feature_uuid]])->orderby('created_at', 'desc')->get();
         return view('features.edit_feature', compact( 'feature','name', 'release_name', 'company_id', 'revisions'));
     }
 

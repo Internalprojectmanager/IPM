@@ -44,19 +44,21 @@
     <table class="table">
         <thead>
             <th>Title</th>
-            <th>Description</th>
             <th>Status</th>
-            <th>Author</th>
-            <th>Created at</th>
+            <th>Edited by</th>
+            <th>Date edited</th>
         </thead>
         <tbody>
             @foreach($revisions as $r)
                 <tr>
                     <td>{{$r->name}}</td>
-                    <td>{{$r->description}}</td>
                     <td><span class="status status_<?php echo substr($r->status,0 ,2); ?>">{{$r->status}}</span></td>
                     <td>{{$r->author}}</td>
-                    <td>{{$r->created_at}}</td>
+                    <td>{{$r->revision_log}}
+                        @if($r->revision_log == NULL)
+                        Current
+                        @endif
+                    </td>
                 </tr>
             @endforeach
 

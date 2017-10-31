@@ -15,7 +15,7 @@ class Release extends Model
     ];
 
     public function features(){
-        return $this->hasMany('App\Feature', "release_id", "id");
+        return $this->hasMany('App\Feature', "release_uuid", "release_uuid");
     }
 
     public function projects(){

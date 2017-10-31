@@ -29,9 +29,6 @@
             <label for="description">Description:</label>
             <textarea rows="4" cols="50" name="description" class="form-control" id="description"></textarea>
             <br>
-            <label for="version">Version number:</label>
-            <input type="text" class="form-control" id="version" name="version">
-            <br>
             <label for="author">Author:</label>
             <input type="text" class="form-control" id="author" name="author">
             <br>

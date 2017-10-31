@@ -14,6 +14,7 @@ use App\Company;
 use App\Project;
 use App\Release;
 use DB;
+use Webpatser\Uuid\Uuid;
 
 class ReleaseController extends Controller
 {
@@ -33,29 +34,20 @@ class ReleaseController extends Controller
 
     public function storeRelease(ReleaseValidator $request)
     {
-        $release_name = strtoupper(substr($request->release_name,0 ,5));
         $project_name = strtoupper(substr($request->project,0 ,5));
         $company_id = strtoupper(substr($request->company_id,0 ,5));
-        $releasecount = Release::where('id', 'like', $project_name.$release_name.'%')->count();
-        $version = Release::where('id', 'like', $project_name.$release_name.'%')->orderBy('version', 'desc')->first();
+        $releasecount = Release::where([['project_id', $company_id.''.$project_name],['revision_log', NULL]])->count();
+        $release_name = Release::select('name')->where([['project_id', $company_id.''.$project_name],['revision_log', NULL], ['version', 1]])->first();
         $release = new Release();
-        $versioncount = $releasecount;
         if($releasecount >= 0){
             $releasecount++;
         }
 
-        $release->id = strtoupper(substr($request->project,0 ,5)).$release_name.$releasecount;
+        $release->release_uuid = Uuid::generate(4);
         $release->project_id = strtoupper(substr($request->company_id,0 ,5)).strtoupper(substr($request->project,0 ,5));
         $release->name = $request->release_name;
         $release->description = $request->description;
-
-        if(isset($version->version)){
-            if($version->version >= $request->version) {
-                $release->version = $version->version + 0.01;
-            }
-        }else{
-            $release->version = $request->version;
-        }
+        $release->version = $releasecount;
         $release->author = $request->author;
         $release->specificationtype = $request->specification;
 
@@ -70,7 +62,7 @@ class ReleaseController extends Controller
 
         $project = Project::where(['id' => $company_id.$name, 'company_id' => $company_id])->first();
         $company = Company::where('id' ,$company_id)->first();
-        $release = Release::where([['project_id', $company_id.$name],['name', $release_name],['version', $version]])->first();
+        $release = Release::where([['project_id', $company_id.$name],['name', $release_name],['version', $version], ['revision_log', NULL]])->first();
 
         if(!$release){
             abort(404);
@@ -78,8 +70,8 @@ class ReleaseController extends Controller
         $status_string = array('"Open"', '"In Progress"', '"Testing"', '"Closed"');
         $status = array('Open', 'In Progress', 'Testing', 'Closed');
         $ids_ordered = implode(",", $status_string);
-        $features = Feature::where([['release_id', $release->id], ['revision_log', '=', NULL]])->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
-        $requirements = Requirement::where('release_id', $release->id)->get();
+        $features = Feature::where([['release_id', $release->release_uuid], ['revision_log', '=', NULL]])->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
+        $requirements = Requirement::where('release_id', $release->release_uuid)->get();
 
         return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements'));
     }
