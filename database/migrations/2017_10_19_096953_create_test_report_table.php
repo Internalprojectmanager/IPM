@@ -21,8 +21,6 @@ class CreateTestReportTable extends Migration
             $table->double('version');
             $table->string('author',50);
             $table->string('status',50);
-
-            $table->primary('id');
             $table->timestamps();
         });
     }

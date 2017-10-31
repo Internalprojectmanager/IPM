@@ -32,7 +32,8 @@ class TestReportController extends Controller
 
         $testreport->save();
 
-        return redirect()->route('overviewtestreport');
+        return redirect()->route('releaseoverview', ['name' => $projects->name, 'company_id' => $projects->company_id,
+            'release_name' => $release->name, 'version' => $release->version]);
     }
 
     public function overviewTestReport($id)
