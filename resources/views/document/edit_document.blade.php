@@ -16,9 +16,9 @@
         </div>
     @endif
     <form action="{{route('updatedocument', ['project_id' => $documents->project_id, 'document_id' => $documents->id,
-                'document_title' => $documents->title])}}" method="post">
+        'document_title' => $documents->title, 'name' => $project->name, 'company_id' => $project->company_id])}}" method="post">
         {{ csrf_field() }}
-        <h3>Company</h3>
+        <h3>Document</h3>
         <div class="form-group">
             <input type="hidden" name="document_id" value="{{$documents->id}}">
             <input type="hidden" name="project_id" value="{{$documents->project_id}}">

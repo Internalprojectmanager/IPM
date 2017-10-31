@@ -41,7 +41,7 @@
             @foreach($letters as $letter)
                 <div class="row">
                     <a href="{{route('showletter', ['name' => $projects->name, 'company_id' => $projects->company_id,
-                    'letter_name' => $letter->title, 'letter_id' => $letter->id])}}">{{$letter->title}}</a>
+                   'letter_title' => $letter->title, 'letter_id' => $letter->id])}}">{{$letter->title}}</a>
                 </div>
             @endforeach
         </div>
