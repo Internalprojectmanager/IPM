@@ -19,6 +19,6 @@ class Feature extends Model
     }
 
     public function releases(){
-        return $this->belongsTo('App\Release', "id", 'release_id');
+        return $this->belongsTo('App\Release', "release_id", 'id');
     }
 }

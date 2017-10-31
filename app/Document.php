@@ -4,18 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Release extends Model
+class Document extends Model
 {
-    protected $table = "release";
-
-    public $incrementing = false;
+    protected $table = "document";
 
     protected $fillable = [
-        'id','name', 'description', 'versie', 'specificationtype', 'project_id'
+        'id','title', 'description', 'author', 'project_id'
     ];
 
     public function features(){
-        return $this->hasMany('App\Feature', "release_id", "id");
+        return $this->hasMany('App\Feature', "document_id", "id");
     }
 
     public function projects(){

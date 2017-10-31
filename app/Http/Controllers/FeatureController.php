@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class FeatureController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function add($company_id, $name, $release_name){
         $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
         $release = Release::where(['project_id' => $project->id, 'name' => $release_name])->first();
@@ -29,7 +35,7 @@ class FeatureController extends Controller
                 $feature->name = $request->feature_name[$k];
                 $feature->author = Auth::user()->first_name.' '.Auth::user()->last_name;
                 $feature->description = $request->description[$k];
-                $feature->status = $request->status[$k];
+                $feature->status = "Open";
                 $feature->save();
             }
         }
@@ -37,16 +43,23 @@ class FeatureController extends Controller
             'release_name' => $release->name, 'version' => $release->version]));
     }
 
-    public function update($id, Request $request){
-        $feature = Feature::where('id', $id)->first();
+    public function editFeature($company_id, $name, $release_name, $feature_id){
+        $feature = Feature::with('releases.projects.company')->where('id', $feature_id)->first();
+
+        return view('features.edit_feature', compact( 'feature','name', 'release_name', 'company_id'));
+    }
+
+    public function updateFeature($company_id, $name, $release_name, $feature_id, Request $request){
+        $feature = Feature::where('id', $feature_id)->first();
 
         $feature->status = $request->status;
         $feature->name = $request->name;
         $feature->description = $request->description;
-        $feature->release_id = $request->$request->release_id;
 
         $feature->save();
 
-        return redirect(route('releaseDetails', $request->release_id));
+        return redirect(route('showrelease', ['name' => $feature->releases->projects->name,
+            'company_id' => $feature->releases->projects->company_id, 'release_name' => $feature->releases->name,
+            'version' => $feature->releases->version]));
     }
 }
