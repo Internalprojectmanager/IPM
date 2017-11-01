@@ -32,7 +32,7 @@ class TestReportController extends Controller
 
         $testreport->save();
 
-        return redirect()->route('home');
+        return redirect()->route('overviewproject');
     }
 
     public function detailsTestReport($id)
@@ -47,7 +47,7 @@ class TestReportController extends Controller
         $testreport = TestReport::where('id', $id);
         $testreport->delete();
 
-        return redirect()->route('home');
+        return redirect()->route('overviewproject');
     }
 
     public function updateTestReport($id, Request $request)
@@ -61,7 +61,7 @@ class TestReportController extends Controller
 
         $testreport->save();
 
-        return redirect()->route('home');
+        return redirect()->route('overviewproject');
     }
 
     public function editTestReport($id)
