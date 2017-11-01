@@ -81,8 +81,8 @@ class ReleaseController extends Controller
         $ids_ordered = implode(",", $status_string);
         $features = Feature::where('release_id', $release->id)->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
         $requirements = Requirement::where('release_id', $release->id)->get();
-        $testreports = TestReport::where('release_id', $release->id)->get();
+        $testreport = TestReport::where('release_id', $release->id)->get();
 
-        return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements', 'testreports'));
+        return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements', 'testreport'));
     }
 }

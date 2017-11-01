@@ -55,7 +55,10 @@ Route::group(['prefix' => 'letter'], function (){
 Route::group(['prefix' => 'testreport'], function () {
     Route::get('/{id}/add', 'TestReportController@addTestReport')->name('addtestreport');
     Route::post('/store', 'TestreportController@storeTestreport')->name('storetestreport');
-    Route::get('/overview', 'TestReportController@overviewTestReport')->name('overviewtestreport');
+    Route::get('/{id}/details', 'TestReportController@detailsTestReport')->name('detailstestreport');
+    Route::get('/{id}/delete', 'TestReportController@deleteTestReport')->name('deletetestreport');
+    Route::get('/{id}/edit', 'TestReportController@editTestReport')->name('edittestreport');
+    Route::post('/{id}/update', 'TestReportController@updateTestReport')->name('updatetestreport');
 });
 
 Route::post('/release/overview', 'ReleaseController@overviewTestrapport')->name('storerelease');
@@ -65,7 +68,7 @@ Route::group(['prefix' => '{company_id}'], function () {
         Route::group(['prefix' => '{name}'], function (){
             Route::get('/details', 'ProjectController@detailsProject')->name('projectdetails');
             Route::get('/edit', 'ProjectController@editProject')->name('editproject');
-            Route::post('/edit', 'ProjectController@updateProject')->name('updateproject');
+            Route::get('/edit', 'ProjectController@updateProject')->name('updateproject');
             Route::get('/delete', 'ProjectController@deleteProject')->name('deleteproject');
 
             Route::get('/document/{document_id}/{document_name}', 'DocumentController@showDocument')->name('showdocument');

@@ -32,14 +32,42 @@ class TestReportController extends Controller
 
         $testreport->save();
 
-        return redirect()->route('releaseoverview', ['name' => $projects->name, 'company_id' => $projects->company_id,
-            'release_name' => $release->name, 'version' => $release->version]);
+        return redirect()->route('home');
     }
 
-    public function overviewTestReport($id)
+    public function detailsTestReport($id)
     {
-        $testreports = TestReport::where('id', $id);
+        $testreport = TestReport::where('id', $id)->first();
 
-        return view('release.details_release', compact('testreports'));
+        return view('testreport.details_testreport', compact('testreport'));
+    }
+
+    public function deleteTestReport($id)
+    {
+        $testreport = TestReport::where('id', $id);
+        $testreport->delete();
+
+        return redirect()->route('home');
+    }
+
+    public function updateTestReport($id, Request $request)
+    {
+        $testreport = TestReport::all()->where('id', $id)->first();
+        $testreport->title = $request->title;
+        $testreport->description = $request->description;
+        $testreport->version = $request->version;
+        $testreport->author = $request->author;
+        $testreport->status = $request->status;
+
+        $testreport->save();
+
+        return redirect()->route('home');
+    }
+
+    public function editTestReport($id)
+    {
+        $testreport = TestReport::where('id', $id)->first();
+
+        return view('testreport.edit_testreport', compact('testreport'));
     }
 }
