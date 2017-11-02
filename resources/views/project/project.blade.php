@@ -21,8 +21,10 @@
                         <div class="col-lg-3 col-md-4 col-xs-6">
                             <a class="btn btn-success" href="{{route('projectdetails', ['name' => $project->name, 'company_id' => $project->company_id])}}">
                                 <span class="glyphicon glyphicon-search"></span> Details</a>
-                            <a class="btn btn-warning" href="{{route('editproject', ['name' => $project->name, 'company_id' => $project->company_id])}}">
-                                <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                            <?php //TODO @preston: Route does not work
+                            //<a class="btn btn-warning" href="{{route('editproject', ['name' => $project->name, 'company_id' => $project->company_id])}}">
+                            //    <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                            ?>
                             <a class="btn btn-danger" href="{{route('deleteproject', ['name' => $project->name, 'company_id' => $project->company_id])}}">
                                 <span class="glyphicon glyphicon-trash"></span> Delete</a>
                         </div>
