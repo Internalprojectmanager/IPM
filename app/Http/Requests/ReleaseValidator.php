@@ -25,7 +25,6 @@ class ReleaseValidator extends FormRequest
     {
         return [
             'release_name' => 'required|max:100',
-            'version' => 'required|numeric',
             'author' =>  'required|string|max:100',
             'specification' => 'required|string|max:100'
         ];
@@ -34,7 +33,6 @@ class ReleaseValidator extends FormRequest
     {
         return [
             'release_name.required' => 'A Name is required',
-            'version.required'  => 'A versionnumber is required',
             'author.required'  => 'A Author is required',
             'specification.required'  => 'A Specificationtype is required',
 

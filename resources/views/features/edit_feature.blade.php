@@ -40,4 +40,30 @@
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 
+    <h3>Revisions of {{$feature->name}}</h3>
+    <table class="table">
+        <thead>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Edited by</th>
+            <th>Date edited</th>
+        </thead>
+        <tbody>
+            @foreach($revisions as $r)
+                <tr>
+                    <td>{{$r->name}}</td>
+                    <td><span class="status status_<?php echo substr($r->status,0 ,2); ?>">{{$r->status}}</span></td>
+                    <td>{{$r->author}}</td>
+                    <td>{{$r->revision_log}}
+                        @if($r->revision_log == NULL)
+                        Current
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+
+        </tbody>
+
+    </table>
+
 @endsection
