@@ -21,6 +21,22 @@ class LetterController extends Controller
         $this->middleware('auth');
     }
 
+    function createRevision($letter){
+        $letter_revision = new LetterRevision();
+        $letter_revision->letter_id = $letter->letter_id;
+        $letter_revision->project_id = $letter->project_id;
+        $letter_revision->title = $letter->title;
+        $letter_revision->content = $letter->content;
+        $letter_revision->contact_person = $letter->contact_person;
+        $letter_revision->creator = $letter->author;
+        $letter_revision->original_created_at = $letter->created_at;
+        $saved = $letter_revision->save();
+
+        if(!$saved){
+            App:abort('500', 'Error');
+        }
+        return true;
+    }
 
     public function addLetter($name, $company_id){
         $projects = Project::where('name', $name)->first();
@@ -63,15 +79,7 @@ class LetterController extends Controller
     public function updateLetter($company_id, $name, $letter_id, Request $request){
         $letter = Letter::where('id' , $letter_id)->first();
 
-        $letter_revision = new LetterRevision();
-        $letter_revision->letter_id = $letter->letter_id;
-        $letter_revision->project_id = $letter->project_id;
-        $letter_revision->title = $letter->title;
-        $letter_revision->content = $letter->content;
-        $letter_revision->contact_person = $letter->contact_person;
-        $letter_revision->creator = $letter->author;
-        $letter_revision->original_created_at = $letter->created_at;
-        $letter_revision->save();
+        $this->createRevision($letter);
 
         $letter->title = $request->letter_title;
         $letter->content = $request->content;
@@ -91,15 +99,7 @@ class LetterController extends Controller
     public function deleteLetter($id)
     {
         $letter = Letter::where('id', $id)->first;
-        $letter_revision = new LetterRevision();
-        $letter_revision->letter_id = $letter->letter_id;
-        $letter_revision->project_id = $letter->project_id;
-        $letter_revision->title = $letter->title;
-        $letter_revision->content = $letter->content;
-        $letter_revision->contact_person = $letter->contact_person;
-        $letter_revision->creator = $letter->author;
-        $letter_revision->original_created_at = $letter->created_at;
-        $letter_revision->save();
+        $this->createRevision($letter);
         $letter->delete();
 
         return redirect()->route('overviewproject');

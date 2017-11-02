@@ -17,6 +17,24 @@ class FeatureController extends Controller
         $this->middleware('auth');
     }
 
+    function createRevision($feature){
+        $feature_revision = new FeatureRevision();
+        $feature_revision->feature_id = $feature->feature_uuid;
+        $feature_revision->release_id = $feature->release_id;
+        $feature_revision->name = $feature->name;
+        $feature_revision->description = $feature->description;
+        $feature_revision->status = $feature->status;
+        $feature_revision->deadline = $feature->deadline;
+        $feature_revision->creator = $feature->author;
+        $feature_revision->original_created_at = $feature->created_at;
+        $saved = $feature_revision->save();
+
+        if(!$saved){
+            App:abort('500', 'Error');
+        }
+        return true;
+    }
+
 
     public function add($company_id, $name, $release_name){
         $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
@@ -55,16 +73,7 @@ class FeatureController extends Controller
     public function updateFeature($company_id, $name, $release_name, $feature_id, Request $request){
         $feature = Feature::where('id', $feature_id)->first();
 
-        $feature_revision = new FeatureRevision();
-        $feature_revision->feature_id = $feature->feature_uuid;
-        $feature_revision->release_id = $feature->release_id;
-        $feature_revision->name = $feature->name;
-        $feature_revision->description = $feature->description;
-        $feature_revision->status = $feature->status;
-        $feature_revision->deadline = $feature->deadline;
-        $feature_revision->creator = $feature->author;
-        $feature_revision->original_created_at = $feature->created_at;
-        $feature_revision->save();
+        $this->createRevision($feature);
 
         $feature->status = $request->status;
 

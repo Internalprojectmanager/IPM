@@ -22,6 +22,21 @@ class DocumentController extends Controller
         $this->middleware('auth');
     }
 
+    function createRevision($document){
+        $document_revision = new DocumentRevision();
+        $document_revision->document_id = $document->document_id;
+        $document_revision->project_id = $document->project_id;
+        $document_revision->title = $document->title;
+        $document_revision->description = $document->description;
+        $document_revision->creator = $document->author;
+        $document_revision->original_created_at = $document->created_at;
+        $saved = $document_revision->save();
+
+        if(!$saved){
+            App:abort('500', 'Error');
+        }
+        return true;
+    }
 
     public function addDocument($name, $company_id){
         $projects = Project::where('name', $name)->first();
@@ -66,21 +81,12 @@ class DocumentController extends Controller
 
     public function updateDocument($company_id, $name, $project_id, $document_id, $document_title, Request $request){
         $document = Document::where(['id' => $document_id, 'project_id' => $project_id, 'title' => $document_title])->first();
-
-        $document_revision = new DocumentRevision();
-        $document_revision->document_id = $document->document_id;
-        $document_revision->project_id = $document->project_id;
-        $document_revision->title = $document->title;
-        $document_revision->description = $document->description;
-        $document_revision->creator = $document->author;
-        $document_revision->original_created_at = $document->created_at;
-        $document_revision->save();
+        $this->createRevision($document);
 
         $document->title = $request->document_title;
         $document->description = $request->description;
         $document->author = $request->author;
         $document->created_at = date('Y-m-d H:i:s');
-
         $document->save();
 
         $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
@@ -95,14 +101,7 @@ class DocumentController extends Controller
     public function deleteDocument($id)
     {
         $document = Document::where('id', $id)->first();
-        $document_revision = new DocumentRevision();
-        $document_revision->document_id = $document->document_id;
-        $document_revision->project_id = $document->project_id;
-        $document_revision->title = $document->title;
-        $document_revision->description = $document->description;
-        $document_revision->creator = $document->author;
-        $document_revision->original_created_at = $document->created_at;
-        $document_revision->save();
+        $this->createRevision($document);
         $document->delete();
 
         return redirect()->route('overviewproject');
