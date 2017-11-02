@@ -71,13 +71,13 @@ Route::group(['prefix' => '{company_id}'], function () {
             Route::get('/edit', 'ProjectController@updateProject')->name('updateproject');
             Route::get('/delete', 'ProjectController@deleteProject')->name('deleteproject');
 
-            Route::get('/document/{document_id}/{document_name}', 'DocumentController@showDocument')->name('showdocument');
-            Route::get('/edit/{project_id}/{document_id}/{document_title}', 'DocumentController@editDocument')->name('editdocument');
-            Route::post('/edit/{project_id}/{document_id}/{document_title}', 'DocumentController@updateDocument')->name('updatedocument');
+            Route::get('/document/{document_id}', 'DocumentController@showDocument')->name('showdocument');
+            Route::get('/edit/{document_id}', 'DocumentController@editDocument')->name('editdocument');
+            Route::post('/edit/{document_id}', 'DocumentController@updateDocument')->name('updatedocument');
 
-            Route::get('/letter/{letter_id}/{letter_title}', 'LetterController@showLetter')->name('showletter');
-            Route::get('/edit/{project_id}/{letter_id}/{letter_title}', 'LetterController@editLetter')->name('editletter');
-            Route::post('/edit/{project_id}/{letter_id}/{letter_title}', 'LetterController@updateLetter')->name('updateletter');
+            Route::get('/letter/{letter_id}', 'LetterController@showLetter')->name('showletter');
+            Route::get('/{letter_id}/edit', 'LetterController@editLetter')->name('editletter');
+            Route::post('/{letter_id}/edit', 'LetterController@updateLetter')->name('updateletter');
 
             Route::group(['prefix' => '{release_name}'], function (){
                 Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');

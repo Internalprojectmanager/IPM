@@ -27,6 +27,18 @@ class RevisionsIPMDatabase extends Migration
             $table->timestamp('revision_log')->after('updated_at')->nullable();
         });
 
+        Schema::table('document', function (Blueprint $table) {
+            $table->dropPrimary('id');
+            $table->uuid('document_id')->after('id');
+            $table->dropColumn('id');
+        });
+
+        Schema::table('letter', function (Blueprint $table) {
+            $table->dropPrimary('id');
+            $table->uuid('letter_id')->after('id');
+            $table->dropColumn('id');
+        });
+
     }
 
     /**

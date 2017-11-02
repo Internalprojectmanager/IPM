@@ -37,8 +37,8 @@ class ReleaseController extends Controller
     {
         $project_name = strtoupper(substr($request->project,0 ,5));
         $company_id = strtoupper(substr($request->company_id,0 ,5));
-        $releasecount = Release::where([['project_id', $company_id.''.$project_name],['revision_log', NULL]])->count();
-        $release_name = Release::select('name')->where([['project_id', $company_id.''.$project_name],['revision_log', NULL], ['version', 1]])->first();
+        $releasecount = Release::where([['project_id', $company_id.''.$project_name]])->count();
+        $release_name = Release::select('name')->where([['project_id', $company_id.''.$project_name], ['version', 1]])->first();
         $release = new Release();
         if($releasecount >= 0){
             $releasecount++;
@@ -63,7 +63,7 @@ class ReleaseController extends Controller
 
         $project = Project::where(['id' => $company_id.$name, 'company_id' => $company_id])->first();
         $company = Company::where('id' ,$company_id)->first();
-        $release = Release::where([['project_id', $company_id.$name],['name', $release_name],['version', $version], ['revision_log', NULL]])->first();
+        $release = Release::where([['project_id', $company_id.$name],['name', $release_name],['version', $version]])->first();
 
         if(!$release){
             abort(404);
@@ -72,7 +72,7 @@ class ReleaseController extends Controller
         $status = array('Open', 'In Progress', 'Testing', 'Closed');
         $ids_ordered = implode(",", $status_string);
         $testreport = TestReport::where('release_id', $release->release_id)->get();
-        $features = Feature::where([['release_id', $release->release_uuid], ['revision_log', '=', NULL]])->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
+        $features = Feature::where([['release_id', $release->release_uuid]])->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
         $requirements = Requirement::where('release_id', $release->release_uuid)->get();
 
         return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements', 'testreport'));

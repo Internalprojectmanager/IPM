@@ -66,7 +66,7 @@ class ProjectController extends Controller
             abort(404);
         }
         $companys = Company::where('id', $company_id)->first();
-        $releases = Release::where('project_id', $projects->id)->where('revision_log', NULL)->get();
+        $releases = Release::where('project_id', $projects->id)->get();
         $documents = Document::where('project_id', $projects->id)->get();
         $letters = Letter::where('project_id', $projects->id)->get();
 

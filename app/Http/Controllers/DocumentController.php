@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\DocumentRevision;
+use App\User;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -11,6 +13,7 @@ use App\Document;
 use App\Company;
 use App\Release;
 use App\Letter;
+use Webpatser\Uuid\Uuid;
 
 class DocumentController extends Controller
 {
@@ -29,6 +32,7 @@ class DocumentController extends Controller
 
     public function storeDocument(Request $request){
         $document = new Document();
+        $document->document_id = Uuid::generate(4);
         $document->project_id = strtoupper(substr($request->company_id,0 ,5)).strtoupper(substr($request->project,0 ,5));
         $document->title = $request->document_title;
         $document->description = $request->description;
@@ -62,9 +66,20 @@ class DocumentController extends Controller
 
     public function updateDocument($company_id, $name, $project_id, $document_id, $document_title, Request $request){
         $document = Document::where(['id' => $document_id, 'project_id' => $project_id, 'title' => $document_title])->first();
+
+        $document_revision = new DocumentRevision();
+        $document_revision->document_id = $document->document_id;
+        $document_revision->project_id = $document->project_id;
+        $document_revision->title = $document->title;
+        $document_revision->description = $document->description;
+        $document_revision->creator = $document->author;
+        $document_revision->original_created_at = $document->created_at;
+        $document_revision->save();
+
         $document->title = $request->document_title;
         $document->description = $request->description;
         $document->author = $request->author;
+        $document->created_at = date('Y-m-d H:i:s');
 
         $document->save();
 
@@ -79,7 +94,15 @@ class DocumentController extends Controller
 
     public function deleteDocument($id)
     {
-        $document = Document::where('id', $id);
+        $document = Document::where('id', $id)->first();
+        $document_revision = new DocumentRevision();
+        $document_revision->document_id = $document->document_id;
+        $document_revision->project_id = $document->project_id;
+        $document_revision->title = $document->title;
+        $document_revision->description = $document->description;
+        $document_revision->creator = $document->author;
+        $document_revision->original_created_at = $document->created_at;
+        $document_revision->save();
         $document->delete();
 
         return redirect()->route('overviewproject');

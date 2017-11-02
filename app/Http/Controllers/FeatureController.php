@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FeatureRevision;
 use App\Project;
 use App\Release;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class FeatureController extends Controller
 
             if($request->feature_name[$k] !== NULL){
                 $feature = new Feature();
-                $feature->release_id = $request->release_id[$k];
+                $feature->release_id = $release->release_uuid;
                 $feature->feature_uuid = Uuid::generate(4);
                 $feature->name = $request->feature_name[$k];
                 $feature->author = Auth::user()->first_name.' '.Auth::user()->last_name;
@@ -54,23 +55,27 @@ class FeatureController extends Controller
     public function updateFeature($company_id, $name, $release_name, $feature_id, Request $request){
         $feature = Feature::where('id', $feature_id)->first();
 
-        $features = new Feature();
-        $features->status = $request->status;
+        $feature_revision = new FeatureRevision();
+        $feature_revision->feature_id = $feature->feature_uuid;
+        $feature_revision->release_id = $feature->release_id;
+        $feature_revision->name = $feature->name;
+        $feature_revision->description = $feature->description;
+        $feature_revision->status = $feature->status;
+        $feature_revision->deadline = $feature->deadline;
+        $feature_revision->creator = $feature->author;
+        $feature_revision->original_created_at = $feature->created_at;
+        $feature_revision->save();
 
-        if(!empty($feature->feature_uuid) && $feature->feature_uuid !== ""){
-            $features->feature_uuid = $feature->feature_uuid;
+        $feature->status = $request->status;
 
-        }else{
-            $features->feature_uuid = Uuid::generate(4);
+        if(empty($feature->feature_uuid) || $feature->feature_uuid == "") {
+            $feature->feature_uuid = Uuid::generate(4);
         }
-        $features->release_id = $feature->release_id;
-        $features->author = Auth::user()->first_name.' '.Auth::user()->last_name;
-        $features->name = $request->feature_title;
-        $features->description = $request->description;
+        $feature->author = Auth::user()->first_name.' '.Auth::user()->last_name;
+        $feature->name = $request->feature_title;
+        $feature->description = $request->description;
 
-        $feature->revision_log = date("Y-m-d H:i:s");
         $feature->save();
-        $features->save();
 
         return redirect(route('showrelease', ['name' => $feature->releases->projects->name,
             'company_id' => $feature->releases->projects->company_id, 'release_name' => $feature->releases->name,
