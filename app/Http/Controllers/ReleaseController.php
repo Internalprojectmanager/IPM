@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Feature;
 use App\Http\Requests\ReleaseValidator;
 use App\Requirement;
+use App\TestReport;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -80,7 +81,8 @@ class ReleaseController extends Controller
         $ids_ordered = implode(",", $status_string);
         $features = Feature::where('release_id', $release->id)->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
         $requirements = Requirement::where('release_id', $release->id)->get();
+        $testreport = TestReport::where('release_id', $release->id)->get();
 
-        return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements'));
+        return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements', 'testreport'));
     }
 }

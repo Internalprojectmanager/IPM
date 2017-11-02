@@ -15,6 +15,21 @@
                 <b>Version:</b> {{$release->version}}<br>
                 <b>Author:</b> {{$release->author}}<br>
                 <b>Description:</b><br> {{$release->description}}<br>
+                <hr>
+                @foreach($testreport as $tr)
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{$tr->title}}
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn btn-success" href="{{route('detailstestreport', $tr->id)}}"><span class="glyphicon glyphicon-search"></span></a>
+                            <a class="btn btn-warning" href="{{route('edittestreport', $tr->id)}}"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{route('deletetestreport', $tr->id)}}"><span class="glyphicon glyphicon-trash"></span></a>
+                        </div>
+                    </div>
+                @endforeach
+                <a href="{{route('addtestreport', $release->id)}}">Add Test Reports</a><br>
+                <hr>
             </div>
         </div>
         <div class="feature row">
