@@ -1,5 +1,5 @@
 before_script:
-  - echo "Updating ipm"
+  - echo "Updating ipm.."
 stages:
   - deploy
 deploy to develop:
