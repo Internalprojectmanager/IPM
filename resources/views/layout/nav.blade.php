@@ -18,7 +18,9 @@
                     <li><a href="{{ url('/home') }}">Dashboard</a></li>
                     <li><a href="{{ route('overviewcompany')}}">Company</a></li>
                     <li><a href="{{route('overviewproject')}}">Project</a></li>
-                    @else
+
+                    <li><a href="#">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a></li>
+                @else
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                         @endauth
