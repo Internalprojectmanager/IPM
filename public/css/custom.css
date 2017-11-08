@@ -179,3 +179,7 @@ html, body {
 label{
     font-weight: bold;
 }
+
+.table-center td, .table-center th{
+    text-align: center;
+}

@@ -6,9 +6,8 @@ Breadcrumbs::register('home', function ($breadcrumbs) {
 
 //company
 
-Breadcrumbs::register('company', function ($breadcrumbs) {
-    $breadcrumbs->parent('home');
-    $breadcrumbs->push('Company', route('overviewcompany'));
+Breadcrumbs::register('client', function ($breadcrumbs) {
+    $breadcrumbs->push('Client Overview', route('overviewcompany'));
 });
 Breadcrumbs::register('addcompany', function ($breadcrumbs) {
     $breadcrumbs->parent('company');
@@ -16,13 +15,13 @@ Breadcrumbs::register('addcompany', function ($breadcrumbs) {
 });
 
 
-Breadcrumbs::register('singlecompany', function ($breadcrumbs, $companys) {
-    $breadcrumbs->parent('company');
+Breadcrumbs::register('singleclient', function ($breadcrumbs, $companys) {
+    $breadcrumbs->parent('client');
     $breadcrumbs->push($companys->name, route('companydetails', $companys->name));
 });
 
-Breadcrumbs::register('editcompany', function ($breadcrumbs, $companys) {
-    $breadcrumbs->parent('company');
+Breadcrumbs::register('editclient', function ($breadcrumbs, $companys) {
+    $breadcrumbs->parent('client');
     $breadcrumbs->push($companys->name, route('companydetails', $companys->name));
     $breadcrumbs->push('Edit', route('editcompany', $companys->name));
 });
@@ -30,19 +29,16 @@ Breadcrumbs::register('editcompany', function ($breadcrumbs, $companys) {
 //Projects
 
 Breadcrumbs::register('projects', function ($breadcrumbs) {
-    $breadcrumbs->parent('home');
-    $breadcrumbs->push('Projects', route('overviewproject'));
+    $breadcrumbs->push('Project Overview', route('overviewproject'));
 });
 
-Breadcrumbs::register('singleproject', function ($breadcrumbs, $projects, $companys) {
+Breadcrumbs::register('singleproject', function ($breadcrumbs, $projects) {
     $breadcrumbs->parent('projects');
-    $breadcrumbs->push($companys->name, route('companydetails', ['company_id' => $companys->name]));
     $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
 });
 
 Breadcrumbs::register('editproject', function ($breadcrumbs, $projects) {
     $breadcrumbs->parent('projects');
-    $breadcrumbs->push($projects->company->name, route('companydetails', ['company_id' => $projects->company->name]));
     $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
     $breadcrumbs->push('Edit', route('editproject', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
 });
@@ -54,17 +50,15 @@ Breadcrumbs::register('addproject', function ($breadcrumbs) {
 
 
 //Release
-Breadcrumbs::register('addrelease', function ($breadcrumbs, $projects, $companys) {
+Breadcrumbs::register('addrelease', function ($breadcrumbs, $projects) {
     $breadcrumbs->parent('projects');
-    $breadcrumbs->push($companys->name, route('companydetails', ['company_id' => $companys->name]));
     $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
     $breadcrumbs->push('New Release', route('addrelease', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
 });
 
-Breadcrumbs::register('showrelease', function ($breadcrumbs, $projects, $companys, $release) {
+Breadcrumbs::register('showrelease', function ($breadcrumbs, $projects, $release) {
     $breadcrumbs->parent('projects');
-    $breadcrumbs->push($companys->name, route('companydetails', ['company_id' => $companys->name]));
     $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
-    $breadcrumbs->push($release->version. " ". $release->name, route('showrelease', ['name'=> $projects->name, 'company_id' => $projects->company_id,
+    $breadcrumbs->push($release->name. " ".$release->version, route('showrelease', ['name'=> $projects->name, 'company_id' => $projects->company_id,
         'version' => $release->version, 'release_name' => $release->name]));
 });
