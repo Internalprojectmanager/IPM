@@ -11,7 +11,7 @@
         <a class="black" href="{{route('addproject')}}"> Add project <span class="icon-right glyphicon glyphicon-plus"></span></a>
     </button><h2>All projects ({{$projectcount}})</h2>
 
-    <table class="table table-striped table-hover table-center">
+    <table class="table table-hover table-center">
         <thead>
         <th></th>
         <th>Project + Client</th>
@@ -43,7 +43,5 @@
         @endforeach
         </tbody>
     </table>
-
-
 
 @endsection

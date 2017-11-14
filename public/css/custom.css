@@ -193,12 +193,8 @@ label{
     height:13px;
 }
 
-.breadcrumb>.active{
-    color:#535353;
-}
-.table{
-    border-collapse:separate;
-    border-spacing: 0 1em;
+.breadcrumb>.active {
+    color: #535353;
 }
 
 .table td:first-child{
@@ -257,6 +253,12 @@ label{
     border: 1px solid black;
     font-size: 15px;
     text-transform: uppercase;
+}
+
+.btn-second{
+    color: #fff;
+    background-color: #3097D1;
+    border-color: #2a88bd;
 }
 
 .icon-right{
