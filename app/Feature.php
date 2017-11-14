@@ -11,14 +11,14 @@ class Feature extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id','name', 'description', 'status', 'release_id'
+        'id','feature_uuid','name', 'description', 'status', 'release_id', 'revision_log'
     ];
 
     public function requirements(){
-        return $this->hasMany('App\Requirement', "feature_id", "id");
+        return $this->hasMany('App\Requirement', "feature_uuid", "feature_uuid");
     }
 
     public function releases(){
-        return $this->belongsTo('App\Release', "release_id", 'id');
+        return $this->belongsTo('App\Release', "release_id", 'release_uuid');
     }
 }

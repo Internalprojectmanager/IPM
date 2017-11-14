@@ -1,10 +1,10 @@
 @extends('layout.app')
 
 @section('title')
-    Add company
+    Edit client
 @endsection
 
-@section('breadcrumbs', Breadcrumbs::render('addcompany'))
+@section('breadcrumbs', Breadcrumbs::render('editclient', $clients))
 
 @section('content')
 
@@ -17,16 +17,16 @@
             </ul>
         </div>
     @endif
-
-    <form action="{{route('storecompany')}}" method="post">
+    <form action="{{route('updateclient', $clients->name)}}" method="post">
         {{ csrf_field() }}
         <h3>Company</h3>
         <div class="form-group">
-            <label for="company_name">Company name:</label>
-            <input type="text" class="form-control" name="company_name" id="company_name">
+            <input type="hidden" name="name" value="{{$clients->name}}">
+            <label for="client_name">Company name:</label>
+            <input type="text" class="form-control" name="client_name" id="client_name" value="{{$clients->name}}">
             <br><br>
             <label for="description">Description:</label>
-            <textarea rows="4" cols="50" name="description" class="form-control" id="description"></textarea>
+            <textarea rows="4" cols="50" name="description" class="form-control" id="description">{{$clients->description}}</textarea>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>

@@ -56,7 +56,9 @@ class ProjectController extends Controller
             abort(404);
         }
 
-        return view('project.project', compact('projects'));
+        $projectcount = $projects->count();
+
+        return view('project.project', compact('projects', 'projectcount'));
     }
 
     public function detailsProject($company_id, $name)

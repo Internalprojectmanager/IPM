@@ -18,71 +18,72 @@ class CompanyController extends Controller
 
     public function addCompany()
     {
-        return view('company.add_company');
+        return view('client.add_client');
     }
 
     public function storeCompany(Request $request)
     {
         $request->validate([
-           'company_name' => 'required|unique:company,name'
+           'client_name' => 'required|unique:client,name'
         ]);
 
-        $company = new Company();
-        $company->id =strtoupper(substr($request->company_name,0 ,5));
-        $company->name = $request->company_name;
-        $company->description = $request->description;
+        $client = new Company();
+        $client->id =strtoupper(substr($request->client_name,0 ,5));
+        $client->name = $request->client_name;
+        $client->description = $request->description;
 
-        $company->save();
+        $client->save();
 
-        return redirect()->route('overviewcompany');
+        return redirect()->route('overviewclient');
     }
 
     public function overviewCompany()
     {
-        $companys = Company::all();
+        $clients = Company::all();
+        $clientcount = $clients->count();
 
-        return view('company.company', compact('companys'));
+        return view('client.client', compact('clients', 'clientcount'));
     }
 
     public function detailsCompany($name)
     {
-        $companys = Company::where('name', $name)->first();
-        if(!$companys){
+        $clients = Company::where('name', $name)->first();
+        if(!$clients){
             abort(404);
         }
-        return view('company.details_company', compact('companys'));
+        return view('client.details_client', compact('clients'));
     }
 
     public function editCompany($name)
     {
-        $companys = Company::where('name', $name)->first();
-        if(!$companys){
+        $clients = Company::where('name', $name)->first();
+        if(!$clients){
             abort(404);
         }
 
-        return view('company.edit_company', compact('companys'));
+        return view('client.edit_client', compact('clients'));
     }
 
     public function updateCompany($name, Request $request)
     {
         $request->validate([
-            'company_name' => 'required|unique:company,name'
+            'client_name' => 'required|unique:client,name'
         ]);
 
-        $company = Company::all()->where('name', $name)->first();
-        $company->name = $request->company_name;
-        $company->description = $request->description;
+        $client = Company::all()->where('name', $name)->first();
+        $client->name = $request->client_name;
+        $client->description = $request->description;
 
-        $company->save();
+        $client->save();
 
-        return redirect()->route('overviewcompany');
+        return redirect()->route('overviewclient');
     }
 
     public function deleteCompany($name)
     {
-        $company = Company::where('name', $name);
-        $company->delete();
+        $client = Company::where('name', $name);
+        $client->delete();
 
-        return redirect()->route('overviewcompany');
+        return redirect()->route('overviewclient');
     }
 }

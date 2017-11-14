@@ -1,26 +1,26 @@
 @extends('layout.app')
 
 @section('title')
-    Company
+    Client
 @endsection
 
-@section('breadcrumbs', Breadcrumbs::render('company'))
+@section('breadcrumbs', Breadcrumbs::render('client'))
 
 @section('content')
 
     <button class="btn btn-primary" onclick="document.getElementById('addCompany').style.display='block'">
-        <span class="glyphicon glyphicon-plus"></span> Add company
+        <span class="glyphicon glyphicon-plus"></span> Add client
     </button>
-    <br><br>
+    <h2>All Clients ({{$clientcount}})</h2>
 
     <!-- ADD COMPANY -->
     <div id="addCompany" class="modal">
         <span onclick="document.getElementById('addCompany').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form action="{{route('storecompany')}}" method="post" class="modal-content animate">
+        <form action="{{route('storeclient')}}" method="post" class="modal-content animate">
             {{ csrf_field() }}
             <h3>Company</h3>
             <div class="form-group">
-                <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Company name" required>
+                <input type="text" class="form-control" name="client_name" id="client_name" placeholder="Company name" required>
                 <br><br>
                 <textarea rows="4" cols="50" name="description" class="form-control" id="description" placeholder="Company description"></textarea>
             </div>
@@ -35,21 +35,24 @@
         </form>
     </div>
 
-    <table class="table table-striped table-hover">
-        @foreach($companys as $company)
+    <table class="table table-striped table-hover table-center">
+        <thead>
+            <th>Client Name</th>
+            <th>Contact</th>
+            <th>Resent Case</th>
+            <th>Users</th>
+            <th></th>
+        </thead>
+        @foreach($clients as $client)
             <tbody>
             <tr>
+                <td>{{$client->name}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{$company->name}}
-                        </div>
-                        <div class="col-md-6">
-                            <a class="btn btn-success" href="{{route('companydetails', $company->name)}}"><span class="glyphicon glyphicon-search"></span></a>
-                            <a class="btn btn-warning" href="{{route('editcompany', ['name' => $company->name, 'company_id' => $company->company_id])}}"><span class="glyphicon glyphicon-edit"></span></a>
-                            <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{route('deletecompany', $company->name)}}"><span class="glyphicon glyphicon-trash"></span></a>
-                        </div>
-                    </div>
+                    <a class="btn btn-warning" href="{{route('editclient', ['name' => $client->name, 'client_id' => $client->client_id])}}"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{route('deleteclient', $client->name)}}"><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
             </tbody>

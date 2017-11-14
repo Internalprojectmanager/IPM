@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ReleaseValidator extends FormRequest
+class FeatureRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +24,14 @@ class ReleaseValidator extends FormRequest
     public function rules()
     {
         return [
-            'release_name' => 'required|max:100',
-            'author' =>  'required|string|max:100',
-            'specification' => 'required|string|max:100'
+            'feature_title' => 'required'
         ];
     }
+
     public function messages()
     {
         return [
-            'release_name.required' => 'A Name is required',
-            'author.required'  => 'A Author is required',
-            'specification.required'  => 'A Specificationtype is required',
-
+            'feature_title.required' => 'A Feature name is required',
         ];
     }
 }

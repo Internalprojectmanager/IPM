@@ -20,7 +20,7 @@
         <h3>Test Report</h3>
         <div class="form-group">
 
-            <input type="hidden" id="release_id" name="release_id" value="{{$release->id}}">
+            <input type="hidden" id="release_id" name="release_id" value="{{$release->release_uuid}}">
 
             <label for="title">Title:</label>
             <input type="text" class="form-control" id="title" name="title">

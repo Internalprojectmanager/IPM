@@ -35,46 +35,73 @@
         <div class="feature row">
             <div class="col-md-12">
                 <h2>Features</h2>
-                <?php $i = 1; $k = 0; $status = NULL; ?>
                 @foreach($features as $f)
-                    @if($status !== $f->status)
-                        @if($i !== 1)
-            </div>
-            @endif
-            <div class="row">
-                <div class="col-md-12">
-                    <span class="header-3 header-status status status_<?php echo substr($f->status, 0, 2); ?>">{{$f->status}}</span>
-                </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 col-lg-12 feature-block" id="{{$f->id}}">
+                            <span class="header-3">{{$f->name}} </span>
+                            <?php $t = 0; $c = 0;?>
+                            @foreach($requirements as $r)
+                                @if($f->feature_uuid == $r->feature_uuid)
+                                    @if($r->status == "Closed")
+                                        <?php $c++;?>
+                                    @endif
+                                    <?php $t++;?>
+                                @endif
+                            @endforeach
+                            <span class="header-3">
+                                @if($c == 0 && $t == 0) @elseif($t !== 0) ({{$c}}/{{$t}}) @endif</span>
+                            <button onclick="location.href='{{route('editFeature', ['name' => $project->name, 'company_id' => $project->company_id,
+                                 'release_name' => $release->name, 'feature_id' => $f->id])}}'"
+                                    class="status status_edit"><span
+                                        class="glyphicon glyphicon-edit"></span> Edit
+                            </button>
+                            <br>
+                            <label>Feature description:</label><br>
+                            @if($f->description)
+                                {{$f->description}}
+                            @endif
 
-                @endif
-                <div class="col-md-12 col-xs-12 col-lg-6 feature-block" id="{{$f->id}}">
-                    <span class="header-3">{{$f->name}} </span>
-                    <span class="header-3 status status_<?php echo substr($f->status, 0, 2); ?>">{{$f->status}}</span>
-                    <br>
-                    @if($f->description)
-                        {{$f->description}}
-                    @endif
 
-                    <button onclick="location.href='{{route('editFeature', ['name' => $project->name, 'company_id' => $project->company_id,
-                         'release_name' => $release->name, 'feature_id' => $f->id])}}'" class="status status_edit"><span
-                                class="glyphicon glyphicon-edit"></span> Edit
-                    </button>
+                            <div class="requirement-block">
 
-                    @foreach($requirements as $r)
+                                <?php $i = 0;?>
+                                @foreach($requirements as $r)
+                                    <div class="row requirement-row">
+                                    @if($t == 0)
+                                        No requirements added yet
+                                    @endif
+                                    @if($f->feature_uuid == $r->feature_uuid)
 
-                    @endforeach
-                </div>
-                <?php $status = $f->status; ?><?php $i++;$k++;?>
+
+                                            <div class="col-md-4">
+                                                <label>Requirement:</label><br>
+                                                {{$r->name}}
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label>Requirement Defenition:</label><br>
+                                                {{$r->description}}
+                                            </div>
+
+                                        <?php $i++;?>
+                                    @endif
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
 
                 @endforeach
             </div>
+            <div class="feature-block row">
+                <button class="btn btn-primary" onclick="document.getElementById('addFeature').style.display='block'">
+                    <span class="glyphicon glyphicon-plus"></span> Add Feature
+                </button>
+            </div>
         </div>
+    </div>
 
-        <div class="row">
-            <button class="btn btn-primary" onclick="document.getElementById('addFeature').style.display='block'">
-                <span class="glyphicon glyphicon-plus"></span> Add Feature
-            </button>
-        </div>
+
     </div>
 
     <!-- ADD Feature -->

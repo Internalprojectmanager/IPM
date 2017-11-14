@@ -19,7 +19,8 @@ class ReleaseTableSeeder extends Seeder
         \DB::table('release')->insert(array (
             0 => 
             array (
-                'id' => 'WEBSITEST1',
+                'id' => 1,
+                'release_uuid' => Uuid::generate(4),
                 'project_id' => 'ITSAVWEBSI',
                 'name' => 'Specs',
                 'description' => 'test',

@@ -4,15 +4,15 @@
     Company details
 @endsection
 
-@section('breadcrumbs', Breadcrumbs::render('singlecompany', $companys))
+@section('breadcrumbs', Breadcrumbs::render('singleclient', $clients))
 
 @section('content')
         <p>
             Company:
-            {{$companys->name}}
+            {{$clients->name}}
             <br>
             Description:
-            {{$companys->description}}
+            {{$clients->description}}
         </p>
 
 @endsection
