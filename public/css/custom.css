@@ -60,6 +60,10 @@ html, body {
     font-size: 14px;line-height: 30px;
 }
 
+#sidebar_object a:hover {
+    text-decoration: none;
+}
+
 
 #sidebar_object:hover {
     border-left: 10px solid #fff;
