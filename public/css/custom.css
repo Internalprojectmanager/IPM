@@ -5,7 +5,6 @@ html, body {
     margin: 0;
 }
 
-<<<<<<< HEAD
 /* SIDEBAR */
 #sidebar {
     position: fixed;
@@ -77,12 +76,6 @@ html, body {
 
 
 /* TIJDELIJK: The Modal (background) */
-=======
-/* Sidebar */
-
-/* TIJDELIJK!!!
-The Modal (background) */
->>>>>>> 86a92b2361736d42f3abc85367d8f747c43abb91
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */

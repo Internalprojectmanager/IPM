@@ -1,5 +1,4 @@
 <!-- Sidebar -->
-<<<<<<< HEAD
 <nav id="sidebar">
 
     <div id="logo_iav">
@@ -113,66 +112,37 @@
 
 </nav>
 
-
 <nav id="navbar_top">
-
-        <ul id="user">
-=======
-<nav id="sidebar" style="
-    position: fixed;
-    text-align: center;
-    width: 110px;
-    height: 100%;
-    background-color: #000;
-    color: #fff;">
-    TEST
-</nav>
-
-<nav class="navbar navbar-default navbar-static-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ url('/home') }}">IPM-Tool</a>
-        </div>
-
-        <ul class="nav navbar-nav navbar-right">
->>>>>>> 86a92b2361736d42f3abc85367d8f747c43abb91
-            @if (Route::has('login'))
-                @auth
-                    <a href="#" id="username">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
-                    <a href="">
-                        <svg id="dropdown_arrow" width="13px" height="9px" viewBox="0 0 13 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
-                            <title>Dropdown arrow</title>
-                            <desc>Created with Sketch.</desc>
-                            <defs></defs>
-                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g id="Project-Overview" transform="translate(-1221.000000, -31.000000)">
-                                    <g id="Top-menu" transform="translate(110.000000, 0.000000)">
-                                        <g id="User-Top" transform="translate(989.196850, 23.000000)">
-                                            <g id="Dropdown-arrow" transform="translate(116.719048, 0.000000)">
-                                                <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="7.3922064 8.84 11.9711845 13.42 16.5501625 8.84 17.9567767 10.25 11.9711845 16.25 5.98559223 10.25"></polygon>
-                                                <polygon id="Shape" points="0 0 23.9423689 0 23.9423689 24 0 24"></polygon>
-                                            </g>
+    <ul id="user">
+        @if (Route::has('login'))
+            @auth
+                <a href="#" id="username">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
+                <a href="">
+                    <svg id="dropdown_arrow" width="13px" height="9px" viewBox="0 0 13 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+                        <title>Dropdown arrow</title>
+                        <desc>Created with Sketch.</desc>
+                        <defs></defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Project-Overview" transform="translate(-1221.000000, -31.000000)">
+                                <g id="Top-menu" transform="translate(110.000000, 0.000000)">
+                                    <g id="User-Top" transform="translate(989.196850, 23.000000)">
+                                        <g id="Dropdown-arrow" transform="translate(116.719048, 0.000000)">
+                                            <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="7.3922064 8.84 11.9711845 13.42 16.5501625 8.84 17.9567767 10.25 11.9711845 16.25 5.98559223 10.25"></polygon>
+                                            <polygon id="Shape" points="0 0 23.9423689 0 23.9423689 24 0 24"></polygon>
                                         </g>
                                     </g>
                                 </g>
                             </g>
-                        </svg>
-                    </a>
-                @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a class="nav-link" href="{{ route('register') }}">Register</a>
-                @endauth
-            @endif
-        </ul>
+                        </g>
+                    </svg>
+                </a>
+            @else
+                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('register') }}">Register</a>
+            @endauth
+        @endif
+    </ul>
 </nav>
 
 

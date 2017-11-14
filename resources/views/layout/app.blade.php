@@ -15,13 +15,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<<<<<<< HEAD
     <link href="{{asset('css/app.css', config('app.secure'))}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/custom.css', config('app.secure'))}}" rel="stylesheet" type="text/css">
-=======
-    <link href="{{secure_asset('css/app.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css">
->>>>>>> 86a92b2361736d42f3abc85367d8f747c43abb91
 
 
 
