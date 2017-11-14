@@ -34,14 +34,7 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<<<<<<< HEAD
-<script src="{{asset('js/app.js', config('app.secure'))}}"></script>
-<script src="{{asset('js/custom.js', config('app.secure'))}}"></script>
-</body>
-</html>
-=======
 
 <!-- Javascript -->
 <script src="{{secure_asset('js/app.js')}}"></script>
 <script src="{{secure_asset('js/custom.js')}}"></script>
->>>>>>> 86a92b2361736d42f3abc85367d8f747c43abb91
