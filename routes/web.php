@@ -68,7 +68,7 @@ Route::group(['prefix' => '{company_id}'], function () {
         Route::group(['prefix' => '{name}'], function (){
             Route::get('/details', 'ProjectController@detailsProject')->name('projectdetails');
             Route::get('/edit', 'ProjectController@editProject')->name('editproject');
-            Route::get('/edit', 'ProjectController@updateProject')->name('updateproject');
+            Route::post('/edit', 'ProjectController@updateProject')->name('updateproject');
             Route::get('/delete', 'ProjectController@deleteProject')->name('deleteproject');
 
             Route::get('/document/{document_id}/{document_name}', 'DocumentController@showDocument')->name('showdocument');
