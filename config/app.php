@@ -125,6 +125,10 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+    'secure' => env('APP_SECURE', true),
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
