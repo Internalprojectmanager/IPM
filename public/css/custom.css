@@ -5,34 +5,73 @@ html, body {
     margin: 0;
 }
 
-.navbar{
-    border-color:grey
+/* SIDEBAR */
+#sidebar {
+    position: fixed;
+    height: 100%;
+    width: 110px;
+    color: #fff;
+    background-color: #000000;
+    z-index: 1;
 }
 
-.full-height {
-    height: 100vh;
+#logo_iav {
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+#navbar_top {
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    color: #fff;
+    background-color: #333333;
+    font-size: 16px;
+    line-height: 19px;
+    box-shadow: 0 -1px 0 0 rgba(49,61,79,0.5);
+}
+
+#user a {
+    color: #fff;
+}
+
+#user {
+    float: right;
+    padding-top: 26px;
+    padding-right: 30px;
+    padding-bottom: 25px;
+    margin-left: 110px;
+}
+
+#dropdown_arrow {
+    margin-left: 10px;
+}
+
+#sidebar_object {
+    text-align: center;
+    padding-top: 25px;
+    width: 100%;
+    height: 91px;
+}
+
+#sidebar_object a {
+    color: #fff;
+    font-size: 14px;line-height: 30px;
 }
 
 
-.title {
-    font-size: 84px;
+#sidebar_object:hover {
+    border-left: 10px solid #fff;
 }
 
-.links > a {
-    color: #636b6f;
-    padding: 0 25px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .1rem;
-    text-decoration: none;
-    text-transform: uppercase;
+.active {
+    border-left: 10px solid #fff;
 }
 
-.m-b-md {
-    margin-bottom: 30px;
-}
 
-/* The Modal (background) */
+
+/* TIJDELIJK: The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
