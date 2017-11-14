@@ -1,5 +1,11 @@
 <!-- Sidebar -->
-<nav id="sidebar">
+<nav id="sidebar" style="
+    position: fixed;
+    text-align: center;
+    width: 110px;
+    height: 100%;
+    background-color: #000;
+    color: #fff;">
     TEST
 </nav>
 

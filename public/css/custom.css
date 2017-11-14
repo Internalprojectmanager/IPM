@@ -6,20 +6,8 @@ html, body {
 }
 
 /* Sidebar */
-#sidebar {
-    position: fixed;
-    text-align: center;
-    width: 110px;
-    height: 100%;
-    background-color: #000;
-    color: #fff;
-}
-
-
-
 
 /* TIJDELIJK!!!
-
 The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
