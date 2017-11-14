@@ -1,4 +1,5 @@
 <!-- Sidebar -->
+<<<<<<< HEAD
 <nav id="sidebar">
 
     <div id="logo_iav">
@@ -116,6 +117,33 @@
 <nav id="navbar_top">
 
         <ul id="user">
+=======
+<nav id="sidebar" style="
+    position: fixed;
+    text-align: center;
+    width: 110px;
+    height: 100%;
+    background-color: #000;
+    color: #fff;">
+    TEST
+</nav>
+
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url('/home') }}">IPM-Tool</a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+>>>>>>> 86a92b2361736d42f3abc85367d8f747c43abb91
             @if (Route::has('login'))
                 @auth
                     <a href="#" id="username">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
