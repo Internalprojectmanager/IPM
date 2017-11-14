@@ -36,5 +36,5 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- Javascript -->
-<script src="{{secure_asset('js/app.js')}}"></script>
-<script src="{{secure_asset('js/custom.js')}}"></script>
+<script src="{{asset('js/app.js', config('app.secure'))}}"></script>
+<script src="{{asset('js/custom.js', config('app.secure'))}}"></script>
