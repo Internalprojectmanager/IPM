@@ -5,34 +5,22 @@ html, body {
     margin: 0;
 }
 
-.navbar{
-    border-color:grey
+/* Sidebar */
+#sidebar {
+    position: fixed;
+    text-align: center;
+    width: 110px;
+    height: 100%;
+    background-color: #000;
+    color: #fff;
 }
 
-.full-height {
-    height: 100vh;
-}
 
 
-.title {
-    font-size: 84px;
-}
 
-.links > a {
-    color: #636b6f;
-    padding: 0 25px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .1rem;
-    text-decoration: none;
-    text-transform: uppercase;
-}
+/* TIJDELIJK!!!
 
-.m-b-md {
-    margin-bottom: 30px;
-}
-
-/* The Modal (background) */
+The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */

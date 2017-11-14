@@ -1,3 +1,8 @@
+<!-- Sidebar -->
+<nav id="sidebar">
+    TEST
+</nav>
+
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->

@@ -16,7 +16,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="{{secure_asset('css/app.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{secure_asset('css/custom.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css">
 
 
 
@@ -28,11 +28,13 @@
     @yield('content')
 </div>
 
-<!-- Javascript -->
+</body>
+</html>
+
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Javascript -->
 <script src="{{secure_asset('js/app.js')}}"></script>
 <script src="{{secure_asset('js/custom.js')}}"></script>
-</body>
-</html>
