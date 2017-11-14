@@ -7,36 +7,41 @@
 @section('breadcrumbs', Breadcrumbs::render('projects'))
 
 @section('content')
-    <a class="btn btn-primary" href="{{route('addproject')}}"><span class="glyphicon glyphicon-plus"></span> Add project</a>
-    <h2>All projects ({{$projectcount}})</h2>
+    <button class="btn-primary">
+        <a class="black" href="{{route('addproject')}}"> Add project <span class="icon-right glyphicon glyphicon-plus"></span></a>
+    </button><h2>All projects ({{$projectcount}})</h2>
 
     <table class="table table-striped table-hover table-center">
         <thead>
-        <th>Name Project<br>
-            Name Client</th>
-        <th>Deadline</th>
-        <th>Status</th>
-        <th>Users</th>
         <th></th>
+        <th>Project + Client</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Deadline</th>
+        <th>Users</th>
         </thead>
+        <tbody>
         @foreach($projects as $project)
-            <tbody>
+
             <tr>
-                <td>{{$project->name}} <br> {{$project->company->name}}</td>
+                <td style="background-color: {{$project->company->color}};"></td>
+                <td><span class="tabletitle">{{$project->name}} </span> <br> <span class="tablesubtitle">{{$project->company->name}}</span></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td>
                     <a class="btn btn-success" href="{{route('projectdetails', ['name' => $project->name, 'company_id' => $project->company_id])}}">
-                        <span class="glyphicon glyphicon-search"></span> Details</a>
+                        <span class="glyphicon glyphicon-search"></span></a>
                     <a class="btn btn-warning" href="{{route('updateproject', ['name' => $project->name, 'company_id' => $project->company_id])}}">
-                        <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                        <span class="glyphicon glyphicon-edit"></span></a>
                     <a class="btn btn-danger" href="{{route('deleteproject', ['name' => $project->name, 'company_id' => $project->company_id])}}">
-                        <span class="glyphicon glyphicon-trash"></span> Delete</a>
+                        <span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
-            </tbody>
+
         @endforeach
+        </tbody>
     </table>
 
 

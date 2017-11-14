@@ -1,5 +1,5 @@
 html, body {
-    background-color: #fff;
+    background-color: #f2f2f2;
     color: #000;
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -182,4 +182,89 @@ label{
 
 .table-center td, .table-center th{
     text-align: center;
+}
+
+.breadcrumb{
+    background: none;
+    color: #535353;
+    padding: 8px 0;
+    line-height: 13px;
+    font-size: 11px;
+    height:13px;
+}
+
+.breadcrumb>.active{
+    color:#535353;
+}
+.table{
+    border-collapse:separate;
+    border-spacing: 0 1em;
+}
+
+.table td:first-child{
+    height: 78px;
+    width: 10px;
+}
+
+.table>tbody>tr>td{
+    border-top:1px solid #CECECE;
+    border-bottom:1px solid #CECECE;
+    vertical-align: middle;
+}
+
+.table td:first-child{
+    border-left: 1px solid #CECECE;
+}
+
+.table td:last-child{
+    border-right: 1px solid #CECECE;
+}
+
+
+.tabletitle{
+    height: 19px;
+    width: 44px;
+    color: #000000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.tablesubtitle{
+    height: 14px;
+    width: 93px;
+    color: #898989;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    line-height: 14px;
+}
+.table>tbody{
+    background-color: white;
+}
+
+.table>tbody>tr{
+    background-color: white;
+}
+.table>thead>tr>th{
+    border-bottom: none;
+}
+
+.btn-primary, .btn-primary:hover{
+    background-color: #F5A623;
+    height: 45px;
+    width: 160px;
+    color:black;
+    border: 1px solid black;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.icon-right{
+    float:right;
+    vertical-align: middle;
+    top:4px;
+}
+
+.black{
+    color: black;
 }
