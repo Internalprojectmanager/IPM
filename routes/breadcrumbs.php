@@ -4,26 +4,26 @@ Breadcrumbs::register('home', function ($breadcrumbs) {
     $breadcrumbs->push('Home', route('home'));
 });
 
-//company
+//client
 
 Breadcrumbs::register('client', function ($breadcrumbs) {
-    $breadcrumbs->push('Client Overview', route('overviewcompany'));
+    $breadcrumbs->push('Client Overview', route('overviewclient'));
 });
-Breadcrumbs::register('addcompany', function ($breadcrumbs) {
-    $breadcrumbs->parent('company');
-    $breadcrumbs->push('New Company', route('addcompany'));
-});
-
-
-Breadcrumbs::register('singleclient', function ($breadcrumbs, $companys) {
+Breadcrumbs::register('addclient', function ($breadcrumbs) {
     $breadcrumbs->parent('client');
-    $breadcrumbs->push($companys->name, route('companydetails', $companys->name));
+    $breadcrumbs->push('New Company', route('addclient'));
 });
 
-Breadcrumbs::register('editclient', function ($breadcrumbs, $companys) {
+
+Breadcrumbs::register('singleclient', function ($breadcrumbs, $clients) {
     $breadcrumbs->parent('client');
-    $breadcrumbs->push($companys->name, route('companydetails', $companys->name));
-    $breadcrumbs->push('Edit', route('editcompany', $companys->name));
+    $breadcrumbs->push($clients->name, route('clientdetails', $clients->name));
+});
+
+Breadcrumbs::register('editclient', function ($breadcrumbs, $clients) {
+    $breadcrumbs->parent('client');
+    $breadcrumbs->push($clients->name, route('clientdetails', $clients->name));
+    $breadcrumbs->push('Edit', route('editclient', $clients->name));
 });
 
 //Projects
@@ -34,13 +34,13 @@ Breadcrumbs::register('projects', function ($breadcrumbs) {
 
 Breadcrumbs::register('singleproject', function ($breadcrumbs, $projects) {
     $breadcrumbs->parent('projects');
-    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
+    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'client_id' => $projects->client_id]));
 });
 
 Breadcrumbs::register('editproject', function ($breadcrumbs, $projects) {
     $breadcrumbs->parent('projects');
-    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
-    $breadcrumbs->push('Edit', route('editproject', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
+    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'client_id' => $projects->client_id]));
+    $breadcrumbs->push('Edit', route('editproject', ['name'=> $projects->name, 'client_id' => $projects->client_id]));
 });
 
 Breadcrumbs::register('addproject', function ($breadcrumbs) {
@@ -52,13 +52,13 @@ Breadcrumbs::register('addproject', function ($breadcrumbs) {
 //Release
 Breadcrumbs::register('addrelease', function ($breadcrumbs, $projects) {
     $breadcrumbs->parent('projects');
-    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
-    $breadcrumbs->push('New Release', route('addrelease', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
+    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'client_id' => $projects->client_id]));
+    $breadcrumbs->push('New Release', route('addrelease', ['name'=> $projects->name, 'client_id' => $projects->client_id]));
 });
 
 Breadcrumbs::register('showrelease', function ($breadcrumbs, $projects, $release) {
     $breadcrumbs->parent('projects');
-    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'company_id' => $projects->company_id]));
-    $breadcrumbs->push($release->name. " ".$release->version, route('showrelease', ['name'=> $projects->name, 'company_id' => $projects->company_id,
+    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'client_id' => $projects->client_id]));
+    $breadcrumbs->push($release->name. " ".$release->version, route('showrelease', ['name'=> $projects->name, 'client_id' => $projects->client_id,
         'version' => $release->version, 'release_name' => $release->name]));
 });

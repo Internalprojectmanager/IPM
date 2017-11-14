@@ -1,3 +1,4 @@
+
 @extends('layout.app')
 
 @section('title')
@@ -5,9 +6,7 @@
 @endsection
 
 @section('breadcrumbs', Breadcrumbs::render('client'))
-
 @section('content')
-
     <button class="btn btn-primary" onclick="document.getElementById('addCompany').style.display='block'">
         <span class="glyphicon glyphicon-plus"></span> Add client
     </button>
@@ -37,11 +36,11 @@
 
     <table class="table table-striped table-hover table-center">
         <thead>
-            <th>Client Name</th>
-            <th>Contact</th>
-            <th>Resent Case</th>
-            <th>Users</th>
-            <th></th>
+        <th>Client Name</th>
+        <th>Contact</th>
+        <th>Resent Case</th>
+        <th>Users</th>
+        <th></th>
         </thead>
         @foreach($clients as $client)
             <tbody>
