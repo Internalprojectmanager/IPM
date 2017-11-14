@@ -5,6 +5,11 @@ html, body {
     margin: 0;
 }
 
+.container {
+    padding-left: 110px;
+    padding-top: 100px;
+}
+
 /* SIDEBAR */
 #sidebar {
     position: fixed;
