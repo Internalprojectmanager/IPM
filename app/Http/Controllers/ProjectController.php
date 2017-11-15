@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectValidator;
+use Faker\Provider\DateTime;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -16,9 +17,69 @@ use App\Letter;
 
 class ProjectController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function calcDeadline($data){
+        $today = date('Y/m/d H:i');
+        foreach ($data as $d){
+            if($d->deadline !== NULL){
+                $negative = NULL;
+                $diff = strtotime($d->deadline) - strtotime($today);
+                if($diff < 0){
+                    $negative = "-";
+                    $diff = strtotime($today) - strtotime($d->deadline);
+                }
+                echo $d->name. ": ".$diff. "<br>";
+                $years = floor($diff / (365*60*60*24));
+                $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+                $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
+
+                echo $years ."Y, ". $months . "M, ". $days. "D <br>";
+
+                if($negative == NULL && $years > 0){
+                    if($years == 1){
+                        $d->daysleft = $years. " year left";
+                    }else{
+                        $d->daysleft = $years. " year left";
+                    }
+                }
+                else if($negative == NULL && $years < 1 && $months > 0){
+                    if($months == 1){
+                        $d->daysleft = $months. " month left";
+                    }else{
+                        $d->daysleft = $months. " months left";
+                    }
+                }
+                else if($negative == NULL && $months < 1 && $years < 1 && $days > 5){
+                    $d->daysleft = $days. " days left";
+                }
+                else{
+                    if($negative == NULL && $days > 1){
+                        $d->daysleft = "<span style='color:red;'>".$days. " days left</span>";
+                    }else if ($negative == NULL && $days == 1){
+                        $d->daysleft = "<span style='color:red;'>".$days. " day left</span>";
+                    }else{
+                        if($years > 0){
+                            $d->daysleft = "<span style='color:red;'>".$years. " Years Overdue</span>";
+                        }elseif($years < 0 && $months > 0){
+                            $d->daysleft = "<span style='color:red;'>".$months. " Months Overdue</span>";
+                        }else if($days == 0 && $months == 0 && $years == 0) {
+                            $d->daysleft = "<span style='color:red;'>Deadline is Today</span>";
+                        }else{
+                            $d->daysleft = "<span style='color:red;'>".$days. " days Overdue</span>";
+                        }
+                    }
+                }
+            }
+        }
+
+        return $data;
+
     }
 
 
@@ -53,6 +114,9 @@ class ProjectController extends Controller
     {
         $projects = Project::with('company')
         ->orderByRaw("FIELD(status , 'Draft', 'In Progress', 'Canceled', 'Paused') ASC")->paginate(20);
+
+        $projects = $this->calcDeadline($projects);
+
         if(!$projects){
             abort(404);
         }
