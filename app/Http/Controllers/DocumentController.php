@@ -68,9 +68,8 @@ class DocumentController extends Controller
         return view('document.details_document', compact('document', 'project'));
     }
 
-    public function editDocument($company_id,$name,$project_id,$document_id,$document_title){
-        $documents = Document::with('projects')->where(['project_id' =>  $project_id, 'id' => $document_id,
-            'title' => $document_title])->first();
+    public function editDocument($company_id,$name,$project_id,$document_id){
+        $documents = Document::with('projects')->where(['project_id' =>  $project_id, 'id' => $document_id])->first();
         if(!$documents){
             abort(404);
         }

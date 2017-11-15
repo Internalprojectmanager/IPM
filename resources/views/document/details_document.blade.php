@@ -14,7 +14,7 @@
                 <b>Title:</b> {{$document->title}}<br>
                 <b>Author:</b> {{$document->author}}<br>
                 <a class="btn btn-warning" href="{{route('editdocument', ['project_id' => $document->project_id, 'document_id' => $document->id,
-                'document_title' => $document->title, 'name' => $project->name, 'company_id' => $project->company_id])}}">
+                'name' => $project->name, 'company_id' => $project->company_id])}}">
                     <span class="glyphicon glyphicon-edit"></span></a>
                 <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')"
                    href="{{route('deletedocument', $document->id)}}"><span class="glyphicon glyphicon-trash"></span></a><br>
