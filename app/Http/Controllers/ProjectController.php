@@ -105,6 +105,7 @@ class ProjectController extends Controller
 
     public function overviewProject()
     {
+        $projectcount = Project::all()->count();
         $projects = Project::with('company')
         ->orderByRaw("FIELD(status , 'Draft', 'In Progress', 'Canceled', 'Paused') ASC")->paginate(8);
 
@@ -112,8 +113,6 @@ class ProjectController extends Controller
         if(!$projects){
             abort(404);
         }
-
-        $projectcount = $projects->count();
 
         return view('project.project', compact('projects', 'projectcount'));
     }
