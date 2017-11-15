@@ -23,8 +23,10 @@ class CompanyController extends Controller
 
     public function storeCompany(Request $request)
     {
+
+
         $request->validate([
-           'client_name' => 'required|unique:client,name'
+           'client_name' => 'required|unique:company,name'
         ]);
 
         $client = new Company();

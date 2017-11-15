@@ -33,6 +33,14 @@ class CompanyTableSeeder extends Seeder
                 'created_at' => '2017-10-12 15:12:44',
                 'updated_at' => '2017-10-12 15:12:44',
             ),
+            2 => 
+            array (
+                'id' => 'STARS',
+                'name' => 'Stars & Stories',
+                'description' => NULL,
+                'created_at' => '2017-11-15 10:49:31',
+                'updated_at' => '2017-11-15 10:49:31',
+            ),
         ));
         
         

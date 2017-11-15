@@ -14,17 +14,61 @@ class ProjectTableSeeder extends Seeder
     {
         
 
-        \DB::table('Project')->delete();
+        \DB::table('project')->delete();
         
-        \DB::table('Project')->insert(array (
+        \DB::table('project')->insert(array (
             0 => 
+            array (
+                'id' => 'FIETSTEST',
+                'company_id' => 'FIETS',
+                'name' => 'MyFietsenwinkel',
+                'description' => 'Een nieuwe dashboard voor MyFietsenwinkel…',
+                'status' => 'In Progress',
+                'created_at' => '2017-11-15 10:07:56',
+                'updated_at' => '2017-11-15 10:45:36',
+            ),
+            1 => 
+            array (
+                'id' => 'ITSAVIPM',
+                'company_id' => 'ITSAV',
+                'name' => 'IPM',
+                'description' => 'Project management tool voor itsavirus…',
+                'status' => 'Canceled',
+                'created_at' => '2017-11-15 10:51:20',
+                'updated_at' => '2017-11-15 10:51:20',
+            ),
+            2 => 
             array (
                 'id' => 'ITSAVWEBSI',
                 'company_id' => 'ITSAV',
                 'name' => 'Website',
-                'description' => NULL,
+                'description' => 'Webiste voor Itsavirus...
+',
+                'status' => 'Paused',
                 'created_at' => '2017-10-24 13:38:29',
                 'updated_at' => '2017-10-24 13:38:29',
+            ),
+            3 => 
+            array (
+                'id' => 'STARSMUSK',
+                'company_id' => 'STARS',
+                'name' => 'MUSK',
+                'description' => 'Een nieuwe dashboard
+voor Review Club…',
+                'status' => 'Draft',
+                'created_at' => '2017-11-15 10:50:05',
+                'updated_at' => '2017-11-15 10:54:38',
+            ),
+            4 => 
+            array (
+                'id' => 'STARSWILTT',
+                'company_id' => 'STARS',
+                'name' => 'WILTT',
+                'description' => 'WILTT is een bedrijf waar je 
+sex speel…',
+                'status' => 'Paused',
+                'created_at' => '2017-11-15 10:50:30',
+                'updated_at' => '2017-11-15 10:50:30',
             ),
         ));
         

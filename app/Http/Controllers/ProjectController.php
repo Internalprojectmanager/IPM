@@ -51,7 +51,8 @@ class ProjectController extends Controller
 
     public function overviewProject()
     {
-        $projects = Project::with('company')->paginate(20);
+        $projects = Project::with('company')
+        ->orderByRaw("FIELD(status , 'Draft', 'In Progress', 'Canceled', 'Paused') ASC")->paginate(20);
         if(!$projects){
             abort(404);
         }
@@ -85,10 +86,6 @@ class ProjectController extends Controller
 
     public function updateProject($company_id, $name, Request $request)
     {
-        $request->validate([
-            'project_name' => 'required|unique:project,name'
-        ]);
-
         $project = Project::where(['name' => $name, 'company_id' => $company_id] )->first();
         $project->name = $request->project_name;
         $project->company_id = strtoupper(substr($request->company,0 ,5));

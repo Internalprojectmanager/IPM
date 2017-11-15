@@ -14,9 +14,9 @@ class ReleaseTableSeeder extends Seeder
     {
         
 
-        \DB::table('Release')->delete();
+        \DB::table('release')->delete();
         
-        \DB::table('Release')->insert(array (
+        \DB::table('release')->insert(array (
             0 => 
             array (
                 'release_uuid' => '20e2a83f-8b08-43a8-80bd-082141058168',
