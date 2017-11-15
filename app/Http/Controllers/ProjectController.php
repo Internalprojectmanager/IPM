@@ -52,7 +52,9 @@ class ProjectController extends Controller
     public function overviewProject()
     {
         $projects = Project::with('company')
-        ->orderByRaw("FIELD(status , 'Draft', 'In Progress', 'Canceled', 'Paused') ASC")->paginate(20);
+        ->orderByRaw("FIELD(status , 'Draft', 'In Progress', 'Canceled', 'Paused') ASC")->paginate(8);
+
+        $projects = $this->calcDeadline($projects);
         if(!$projects){
             abort(404);
         }
