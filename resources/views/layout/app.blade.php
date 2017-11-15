@@ -24,7 +24,9 @@
 <body>
 @include('layout.nav')
 <div class="container">
-    @yield('breadcrumbs')
+    <div class="row">
+        @yield('breadcrumbs')
+    </div>
     @yield('content')
 </div>
 
