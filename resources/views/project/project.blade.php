@@ -36,7 +36,7 @@
                     <td><span class="tabletitle"><a href="{{route('projectdetails', ['name' => $project->name, 'company_id' => $project->company_id])}}">{{$project->name}}</a></span> <br> <span class="tablesubtitle">@if(isset($project->company)){{$project->company->name}}@endif</span></td>
                     <td class="table-description">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}...</td>
                     <td>{{$project->status}}</td>
-                    <td>@if(isset($project->deadline)){{date('d F Y H:i', strtotime($project->deadline))}} <br>
+                    <td>@if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>
                             <?php echo $project->daysleft;?>
                         @else -  @endif</td>
                     <td></td>

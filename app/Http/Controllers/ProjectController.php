@@ -33,13 +33,9 @@ class ProjectController extends Controller
                     $negative = "-";
                     $diff = strtotime($today) - strtotime($d->deadline);
                 }
-                echo $d->name. ": ".$diff. "<br>";
                 $years = floor($diff / (365*60*60*24));
                 $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
                 $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
-
-
-                echo $years ."Y, ". $months . "M, ". $days. "D <br>";
 
                 if($negative == NULL && $years > 0){
                     if($years == 1){
@@ -55,24 +51,21 @@ class ProjectController extends Controller
                         $d->daysleft = $months. " months left";
                     }
                 }
-                else if($negative == NULL && $months < 1 && $years < 1 && $days > 5){
+                else if($negative == NULL && $months < 1 && $years < 1 && $days > 3){
                     $d->daysleft = $days. " days left";
                 }
                 else{
                     if($negative == NULL && $days > 1){
-                        $d->daysleft = "<span style='color:red;'>".$days. " days left</span>";
+                        $d->daysleft = "<span style='color:#FC1907;'>".$days. " days left</span>";
                     }else if ($negative == NULL && $days == 1){
-                        $d->daysleft = "<span style='color:red;'>".$days. " day left</span>";
+                        $d->daysleft = "<span style='color:#FC1907;'>".$days. " day left</span>";
                     }else{
-                        if($years > 0){
-                            $d->daysleft = "<span style='color:red;'>".$years. " Years Overdue</span>";
-                        }elseif($years < 0 && $months > 0){
-                            $d->daysleft = "<span style='color:red;'>".$months. " Months Overdue</span>";
-                        }else if($days == 0 && $months == 0 && $years == 0) {
-                            $d->daysleft = "<span style='color:red;'>Deadline is Today</span>";
+                        if($days == 0 && $months == 0 and $years == 0){
+                            $d->daysleft = "<span style='color:#FC1907;'>Deadline Today</span>";
                         }else{
-                            $d->daysleft = "<span style='color:red;'>".$days. " days Overdue</span>";
+                            $d->daysleft = "<span style='color:#FC1907;'>Overdue</span>";
                         }
+
                     }
                 }
             }
