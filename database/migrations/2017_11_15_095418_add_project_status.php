@@ -13,10 +13,10 @@ class AddProjectStatus extends Migration
      */
     public function up()
     {
-        /**Schema::table('company', function (Blueprint $table) {
+        Schema::table('company', function (Blueprint $table) {
             $table->dropColumn('color');
         });
-**/
+
         Schema::table('project', function (Blueprint $table) {
             $table->enum('status', ['Draft','In Progress','Canceled','Paused'])->default('Draft')->after('description');
         });

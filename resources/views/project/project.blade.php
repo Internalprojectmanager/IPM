@@ -8,9 +8,10 @@
 
 @section('content')
     <div class="row">
+        <a class="black" href="{{route('addproject')}}">
         <button class="btn-primary">
-            <a class="black" href="{{route('addproject')}}"> Add project <span class="icon-right glyphicon glyphicon-plus"></span></a>
-        </button>
+             Add project <span class="icon-right glyphicon glyphicon-plus"></span>
+        </button></a>
 
     </div>
 
@@ -30,28 +31,18 @@
             </thead>
             <tbody>
             @foreach($projects as $project)
-
                 <tr>
                     <td class="status-@if(!isset($project->status))draft @elseif($project->status == "In Progress")in @else{{$project->status}} @endif"></td>
-                    <td><span class="tabletitle">{{$project->name}} </span> <br> <span class="tablesubtitle">@if(isset($project->company)){{$project->company->name}}@endif</span></td>
-                    <td>{{$project->description}}</td>
+                    <td><span class="tabletitle"><a href="{{route('projectdetails', ['name' => $project->name, 'company_id' => $project->company_id])}}">{{$project->name}}</a></span> <br> <span class="tablesubtitle">@if(isset($project->company)){{$project->company->name}}@endif</span></td>
+                    <td class="table-description">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}...</td>
                     <td>{{$project->status}}</td>
+                    <td>@if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>
+                            <?php echo $project->daysleft;?>
+                        @else -  @endif</td>
                     <td></td>
-                    <td></td>
-                    <td>
-                        <a class="btn btn-success" href="{{route('projectdetails', ['name' => $project->name, 'company_id' => $project->company_id])}}">
-                            <span class="glyphicon glyphicon-search"></span></a>
-                        <a class="btn btn-warning" href="{{route('updateproject', ['name' => $project->name, 'company_id' => $project->company_id])}}">
-                            <span class="glyphicon glyphicon-edit"></span></a>
-                        <a class="btn btn-danger" href="{{route('deleteproject', ['name' => $project->name, 'company_id' => $project->company_id])}}">
-                            <span class="glyphicon glyphicon-trash"></span></a>
-                    </td>
                 </tr>
-
             @endforeach
             </tbody>
         </table>
     </div>
-
-
 @endsection

@@ -151,9 +151,19 @@ html, body {
 label{
     font-weight: bold;
 }
+.table-description{
+    width: 300px;
+    text-align: left;
+    height: 78px;
+}
 
-.table-center td, .table-center th{
-    text-align: center;
+
+.table>tbody>tr>td, .table>thead>tr>th{
+    padding-left: 35px;
+}
+
+.table>tbody>tr>td:first-child, .table>thead>tr>th:first-child{
+    padding-left: 0px;
 }
 
 .breadcrumb{
@@ -168,6 +178,7 @@ label{
 .breadcrumb>.active {
     color: #535353;
 }
+
 
 .table td:first-child{
     height: 78px;
