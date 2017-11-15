@@ -6,7 +6,8 @@ html, body {
 }
 
 .container {
-    padding: 100px 30px 30px 140px;
+    padding: 100px 60px 30px 170px;
+    width: 100%;
 }
 
 /* SIDEBAR */
@@ -343,4 +344,8 @@ label{
     line-height: 16px;
     color:#898989;
 
+}
+
+.breadcrumb .active{
+    border-left: none;
 }
