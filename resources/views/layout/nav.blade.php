@@ -117,36 +117,43 @@
 </nav>
 
 <nav id="navbar_top">
-    <ul id="user">
+    <div id="user">
         @if (Route::has('login'))
             @auth
-                <a href="#" id="username">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
-                <a href="">
-                    <svg id="dropdown_arrow" width="13px" height="9px" viewBox="0 0 13 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
-                        <title>Dropdown arrow</title>
-                        <desc>Created with Sketch.</desc>
-                        <defs></defs>
-                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g id="Project-Overview" transform="translate(-1221.000000, -31.000000)">
-                                <g id="Top-menu" transform="translate(110.000000, 0.000000)">
-                                    <g id="User-Top" transform="translate(989.196850, 23.000000)">
-                                        <g id="Dropdown-arrow" transform="translate(116.719048, 0.000000)">
-                                            <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="7.3922064 8.84 11.9711845 13.42 16.5501625 8.84 17.9567767 10.25 11.9711845 16.25 5.98559223 10.25"></polygon>
-                                            <polygon id="Shape" points="0 0 23.9423689 0 23.9423689 24 0 24"></polygon>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                        <svg id="dropdown_arrow" width="13px" height="9px" viewBox="0 0 13 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+                            <title>Dropdown arrow</title>
+                            <desc>Created with Sketch.</desc>
+                            <defs></defs>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Project-Overview" transform="translate(-1221.000000, -31.000000)">
+                                    <g id="Top-menu" transform="translate(110.000000, 0.000000)">
+                                        <g id="User-Top" transform="translate(989.196850, 23.000000)">
+                                            <g id="Dropdown-arrow" transform="translate(116.719048, 0.000000)">
+                                                <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="7.3922064 8.84 11.9711845 13.42 16.5501625 8.84 17.9567767 10.25 11.9711845 16.25 5.98559223 10.25"></polygon>
+                                                <polygon id="Shape" points="0 0 23.9423689 0 23.9423689 24 0 24"></polygon>
+                                            </g>
                                         </g>
                                     </g>
                                 </g>
                             </g>
-                        </g>
-                    </svg>
-                </a>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">LINK 1</a></li>
+                        <li><a href="#">LINK 2</a></li>
+                        <li><a href="#">LINK 3</a></li>
+                    </ul>
+                </div>
             @else
                     <a href="{{ route('login') }}">Login</a>
                     <a href="{{ route('register') }}">Register</a>
             @endauth
         @endif
-    </ul>
+    </div>
 </nav>
 
 <!-- JavaScript -->
