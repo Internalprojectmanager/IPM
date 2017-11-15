@@ -25,7 +25,7 @@
         </svg>
     </div>
 
-<a href="#" id="sidebar_link">
+<a href="{{route('overviewproject')}}" id="sidebar_link">
     <div class="active" id="sidebar_object">
             <svg width="32px" height="30px" viewBox="0 0 32 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
@@ -66,7 +66,7 @@
     </div>
 </a>
 
-<a href="#" id="sidebar_link">
+<a href="{{route('overviewclient')}}" id="sidebar_link">
     <div class="" id="sidebar_object">
         <svg width="32px" height="31px" viewBox="0 0 32 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
