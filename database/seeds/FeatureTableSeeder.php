@@ -14,9 +14,9 @@ class FeatureTableSeeder extends Seeder
     {
         
 
-        \DB::table('Feature')->delete();
+        \DB::table('feature')->delete();
         
-        \DB::table('Feature')->insert(array (
+        \DB::table('feature')->insert(array (
             0 => 
             array (
                 'id' => 23,
