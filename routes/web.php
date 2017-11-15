@@ -12,15 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('overviewproject'));
 });
 
 Route::get('/home', function () {
-    if(\Illuminate\Support\Facades\Auth::guest()){
-        return redirect()->route('login');
-    }else{
-        return view('home');
-    }
+    return redirect(route('overviewproject'));
 
 })->name('home');
 
