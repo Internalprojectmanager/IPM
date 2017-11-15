@@ -51,7 +51,7 @@ class ProjectController extends Controller
 
     public function overviewProject()
     {
-        $projects = Project::with('company')->get();
+        $projects = Project::with('company')->paginate(20);
         if(!$projects){
             abort(404);
         }

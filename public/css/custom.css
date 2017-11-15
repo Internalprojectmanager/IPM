@@ -143,28 +143,19 @@ html, body {
     border-radius: 100px;
 }
 
-.status_In{
-    background-color: #2ab27b;
-    border-color: #259d6d;
+.status-Draft{
+    background-color: #417505;
 }
 
-.status_Op{
-    background-color: #cbb956;
-    border-color: #c5b143;
+.status-in{
+    background-color: #5D99CA;
 }
-.status_edit{
-    display: block;
-    color:black;
-    background-color: white;
-    border:2px solid black;
+.status-Canceled{
+    background-color: #FF3300;
 }
 
-.status_Te{
-    background-color: #428BCA;
-}
-
-.status_Cl{
-    background-color: grey;
+.status-Paused{
+    background-color: #9B9B9B;
 }
 
 .center{
@@ -204,16 +195,19 @@ label{
 
 .table>tbody>tr>td{
     border-top:1px solid #CECECE;
-    border-bottom:1px solid #CECECE;
+
     vertical-align: middle;
 }
 
-.table td:first-child{
-    border-left: 1px solid #CECECE;
+.table>tbody>tr{
+    border-bottom:2px solid #CECECE;
 }
-
 .table td:last-child{
     border-right: 1px solid #CECECE;
+}
+
+.table tr:last-child{
+    border-bottom: 1px solid #CECECE;
 }
 
 
@@ -243,6 +237,8 @@ label{
 }
 .table>thead>tr>th{
     border-bottom: none;
+    color:#898989;
+    font-weight: 400;
 }
 
 .btn-primary, .btn-primary:hover{
@@ -269,4 +265,26 @@ label{
 
 .black{
     color: black;
+}
+
+.block-white{
+    height: 70px;
+    margin-top: 38px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: 1px solid #CECECE;
+    padding: 2rem 2rem;
+    vertical-align: middle;
+}
+
+.block-white-title{
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.block-white-subtitle{
+    font-size: 14px;
+    line-height: 16px;
+    color:#898989;
+
 }
