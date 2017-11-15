@@ -44,6 +44,9 @@
             @endforeach
             </tbody>
         </table>
-        {{ $projects->links() }}
+        <div class="center">
+            {{ $projects->links() }}
+        </div>
+
     </div>
 @endsection

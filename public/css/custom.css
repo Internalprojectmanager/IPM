@@ -175,8 +175,12 @@ label{
     height:13px;
 }
 
-.breadcrumb>.active {
+.breadcrumb>.active{
     color: #535353;
+}
+
+.breadcrumb a{
+    color: #CECECE;
 }
 
 
@@ -281,6 +285,6 @@ label{
 
 }
 
-.breadcrumb .active{
+.breadcrumb .active, .pagination .active{
     border-left: none;
 }

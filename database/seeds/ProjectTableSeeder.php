@@ -19,6 +19,18 @@ class ProjectTableSeeder extends Seeder
         \DB::table('project')->insert(array (
             0 => 
             array (
+                'id' => 'FIETSGECKO',
+                'company_id' => 'FIETS',
+                'name' => 'Geckoboard CC Sales',
+                'description' => NULL,
+                'status' => 'Draft',
+                'deadline' => NULL,
+                'users' => NULL,
+                'created_at' => '2017-11-15 16:04:52',
+                'updated_at' => '2017-11-15 16:04:52',
+            ),
+            1 => 
+            array (
                 'id' => 'FIETSTEST',
                 'company_id' => 'FIETS',
                 'name' => 'MyFietsenwinkel',
@@ -29,7 +41,7 @@ class ProjectTableSeeder extends Seeder
                 'created_at' => '2017-11-15 10:07:56',
                 'updated_at' => '2017-11-15 10:45:36',
             ),
-            1 => 
+            2 => 
             array (
                 'id' => 'ITSAVIPM',
                 'company_id' => 'ITSAV',
@@ -41,7 +53,43 @@ class ProjectTableSeeder extends Seeder
                 'created_at' => '2017-11-15 10:51:20',
                 'updated_at' => '2017-11-15 10:51:20',
             ),
-            2 => 
+            3 => 
+            array (
+                'id' => 'ITSAVNIJNT',
+                'company_id' => 'STARS',
+                'name' => 'Nijntje',
+                'description' => NULL,
+                'status' => 'Draft',
+                'deadline' => NULL,
+                'users' => NULL,
+                'created_at' => '2017-11-15 16:04:27',
+                'updated_at' => '2017-11-15 16:04:27',
+            ),
+            4 => 
+            array (
+                'id' => 'ITSAVSHELL',
+                'company_id' => 'ITSAV',
+                'name' => 'Shell',
+                'description' => NULL,
+                'status' => 'Draft',
+                'deadline' => NULL,
+                'users' => NULL,
+                'created_at' => '2017-11-15 16:04:34',
+                'updated_at' => '2017-11-15 16:04:34',
+            ),
+            5 => 
+            array (
+                'id' => 'ITSAVTHE P',
+                'company_id' => 'ITSAV',
+                'name' => 'The Prestonator',
+                'description' => NULL,
+                'status' => 'Draft',
+                'deadline' => NULL,
+                'users' => NULL,
+                'created_at' => '2017-11-15 16:04:43',
+                'updated_at' => '2017-11-15 16:04:43',
+            ),
+            6 => 
             array (
                 'id' => 'ITSAVWEBSI',
                 'company_id' => 'ITSAV',
@@ -54,7 +102,7 @@ class ProjectTableSeeder extends Seeder
                 'created_at' => '2017-10-24 13:38:29',
                 'updated_at' => '2017-10-24 13:38:29',
             ),
-            3 => 
+            7 => 
             array (
                 'id' => 'STARSMUSK',
                 'company_id' => 'STARS',
@@ -67,7 +115,7 @@ voor Review Club…',
                 'created_at' => '2017-11-15 10:50:05',
                 'updated_at' => '2017-11-15 10:54:38',
             ),
-            4 => 
+            8 => 
             array (
                 'id' => 'STARSWILTT',
                 'company_id' => 'STARS',
