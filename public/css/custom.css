@@ -6,8 +6,7 @@ html, body {
 }
 
 .container {
-    padding-left: 110px;
-    padding-top: 100px;
+    padding: 100px 30px 30px 140px;
 }
 
 /* SIDEBAR */
@@ -41,6 +40,10 @@ html, body {
     color: #fff;
 }
 
+#user a:hover {
+    text-decoration: none;
+}
+
 #user {
     float: right;
     padding-top: 26px;
@@ -60,12 +63,12 @@ html, body {
     height: 91px;
 }
 
-#sidebar_object a {
+#sidebar_link {
     color: #fff;
     font-size: 14px;line-height: 30px;
 }
 
-#sidebar_object a:hover {
+#sidebar_link:hover {
     text-decoration: none;
 }
 
@@ -76,6 +79,11 @@ html, body {
 
 .active {
     border-left: 10px solid #fff;
+}
+
+#link_name {
+    width: 100%;
+    margin-top: -15px;
 }
 
 

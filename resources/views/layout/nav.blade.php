@@ -2,7 +2,7 @@
 <nav id="sidebar">
 
     <div id="logo_iav">
-        <svg width="40px" height="46px" viewBox="0 0 40 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <svg <svg id="svg_building" width="40px" height="46px" viewBox="0 0 40 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
             <title>Logo-IAV-no_border</title>
             <desc>Created with Sketch.</desc>
@@ -25,8 +25,8 @@
         </svg>
     </div>
 
+<a href="#" id="sidebar_link">
     <div class="active" id="sidebar_object">
-        <a href="#">
             <svg width="32px" height="30px" viewBox="0 0 32 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
                 <title>Work</title>
@@ -59,45 +59,46 @@
                         </g>
                     </g>
                 </g>
-            </svg><br>
-            PROJECTS
-        </a>
+            </svg>
+            <div id="link_name">
+                PROJECTS
+            </div>
     </div>
+</a>
 
+<a href="#" id="sidebar_link">
     <div class="" id="sidebar_object">
-        <a href="#">
-            <svg width="32px" height="31px" viewBox="0 0 32 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
-                <title>building</title>
-                <desc>Created with Sketch.</desc>
-                <defs>
-                    <filter x="-6.4%" y="-0.4%" width="112.7%" height="101.2%" filterUnits="objectBoundingBox" id="filter-1">
-                        <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-                        <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-                        <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
-                        <feMerge>
-                            <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
-                            <feMergeNode in="SourceGraphic"></feMergeNode>
-                        </feMerge>
-                    </filter>
-                </defs>
-                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <g id="Project-Overview" transform="translate(-39.000000, -178.000000)" fill-rule="nonzero" fill="#FFFFFF">
-                        <g id="Breadcrumb">
-                            <g id="Left-Side-menu">
-                                <g filter="url(#filter-1)" id="Clients">
-                                    <g transform="translate(0.000000, 161.000000)">
-                                        <g transform="translate(0.000000, 19.426966)" id="building">
-                                            <g transform="translate(43.000000, 0.000000)">
-                                                <path d="M13,22 L1,22 C0.4,22 0,21.6333333 0,21.0833333 L0,0.916666667 C0,0.366666667 0.4,0 1,0 L13,0 C13.6,0 14,0.366666667 14,0.916666667 L14,21.0833333 C14,21.6333333 13.6,22 13,22 Z M2,20.1666667 L12,20.1666667 L12,1.83333333 L2,1.83333333 L2,20.1666667 Z" id="Shape"></path>
-                                                <path d="M23,21 L13,21 C12.4,21 12,20.6444444 12,20.1111111 L12,5.88888889 C12,5.35555556 12.4,5 13,5 L23,5 C23.6,5 24,5.35555556 24,5.88888889 L24,20.1111111 C24,20.6444444 23.6,21 23,21 Z M14,19.2222222 L22,19.2222222 L22,6.77777778 L14,6.77777778 L14,19.2222222 Z" id="Shape"></path>
-                                                <path d="M5,15 C4.4,15 4,14.6333333 4,14.0833333 L4,4.91666667 C4,4.36666667 4.4,4 5,4 C5.6,4 6,4.36666667 6,4.91666667 L6,14.0833333 C6,14.6333333 5.6,15 5,15 Z" id="Shape"></path>
-                                                <path d="M9,15 C8.4,15 8,14.6333333 8,14.0833333 L8,4.91666667 C8,4.36666667 8.4,4 9,4 C9.6,4 10,4.36666667 10,4.91666667 L10,14.0833333 C10,14.6333333 9.6,15 9,15 Z" id="Shape"></path>
-                                                <path d="M20,21 L16,21 C15.4,21 15,20.6666667 15,20.1666667 L15,16.8333333 C15,16.3333333 15.4,16 16,16 L20,16 C20.6,16 21,16.3333333 21,16.8333333 L21,20.1666667 C21,20.6666667 20.6,21 20,21 Z M17,19.3333333 L19,19.3333333 L19,17.6666667 L17,17.6666667 L17,19.3333333 Z" id="Shape"></path>
-                                                <path d="M9,21 L5,21 C4.4,21 4,20.6666667 4,20.1666667 L4,16.8333333 C4,16.3333333 4.4,16 5,16 L9,16 C9.6,16 10,16.3333333 10,16.8333333 L10,20.1666667 C10,20.6666667 9.6,21 9,21 Z M6,19.3333333 L8,19.3333333 L8,17.6666667 L6,17.6666667 L6,19.3333333 Z" id="Shape"></path>
-                                                <path d="M20,15 L16,15 C15.4,15 15,14.6 15,14 C15,13.4 15.4,13 16,13 L20,13 C20.6,13 21,13.4 21,14 C21,14.6 20.6,15 20,15 Z" id="Shape"></path>
-                                                <path d="M20,11 L16,11 C15.4,11 15,10.6 15,10 C15,9.4 15.4,9 16,9 L20,9 C20.6,9 21,9.4 21,10 C21,10.6 20.6,11 20,11 Z" id="Shape"></path>
-                                            </g>
+        <svg width="32px" height="31px" viewBox="0 0 32 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+            <title>building</title>
+            <desc>Created with Sketch.</desc>
+            <defs>
+                <filter x="-6.4%" y="-0.4%" width="112.7%" height="101.2%" filterUnits="objectBoundingBox" id="filter-1">
+                    <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+            </defs>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Project-Overview" transform="translate(-39.000000, -178.000000)" fill-rule="nonzero" fill="#FFFFFF">
+                    <g id="Breadcrumb">
+                        <g id="Left-Side-menu">
+                            <g filter="url(#filter-1)" id="Clients">
+                                <g transform="translate(0.000000, 161.000000)">
+                                    <g transform="translate(0.000000, 19.426966)" id="building">
+                                        <g transform="translate(43.000000, 0.000000)">
+                                            <path d="M13,22 L1,22 C0.4,22 0,21.6333333 0,21.0833333 L0,0.916666667 C0,0.366666667 0.4,0 1,0 L13,0 C13.6,0 14,0.366666667 14,0.916666667 L14,21.0833333 C14,21.6333333 13.6,22 13,22 Z M2,20.1666667 L12,20.1666667 L12,1.83333333 L2,1.83333333 L2,20.1666667 Z" id="Shape"></path>
+                                            <path d="M23,21 L13,21 C12.4,21 12,20.6444444 12,20.1111111 L12,5.88888889 C12,5.35555556 12.4,5 13,5 L23,5 C23.6,5 24,5.35555556 24,5.88888889 L24,20.1111111 C24,20.6444444 23.6,21 23,21 Z M14,19.2222222 L22,19.2222222 L22,6.77777778 L14,6.77777778 L14,19.2222222 Z" id="Shape"></path>
+                                            <path d="M5,15 C4.4,15 4,14.6333333 4,14.0833333 L4,4.91666667 C4,4.36666667 4.4,4 5,4 C5.6,4 6,4.36666667 6,4.91666667 L6,14.0833333 C6,14.6333333 5.6,15 5,15 Z" id="Shape"></path>
+                                            <path d="M9,15 C8.4,15 8,14.6333333 8,14.0833333 L8,4.91666667 C8,4.36666667 8.4,4 9,4 C9.6,4 10,4.36666667 10,4.91666667 L10,14.0833333 C10,14.6333333 9.6,15 9,15 Z" id="Shape"></path>
+                                            <path d="M20,21 L16,21 C15.4,21 15,20.6666667 15,20.1666667 L15,16.8333333 C15,16.3333333 15.4,16 16,16 L20,16 C20.6,16 21,16.3333333 21,16.8333333 L21,20.1666667 C21,20.6666667 20.6,21 20,21 Z M17,19.3333333 L19,19.3333333 L19,17.6666667 L17,17.6666667 L17,19.3333333 Z" id="Shape"></path>
+                                            <path d="M9,21 L5,21 C4.4,21 4,20.6666667 4,20.1666667 L4,16.8333333 C4,16.3333333 4.4,16 5,16 L9,16 C9.6,16 10,16.3333333 10,16.8333333 L10,20.1666667 C10,20.6666667 9.6,21 9,21 Z M6,19.3333333 L8,19.3333333 L8,17.6666667 L6,17.6666667 L6,19.3333333 Z" id="Shape"></path>
+                                            <path d="M20,15 L16,15 C15.4,15 15,14.6 15,14 C15,13.4 15.4,13 16,13 L20,13 C20.6,13 21,13.4 21,14 C21,14.6 20.6,15 20,15 Z" id="Shape"></path>
+                                            <path d="M20,11 L16,11 C15.4,11 15,10.6 15,10 C15,9.4 15.4,9 16,9 L20,9 C20.6,9 21,9.4 21,10 C21,10.6 20.6,11 20,11 Z" id="Shape"></path>
                                         </g>
                                     </g>
                                 </g>
@@ -105,10 +106,13 @@
                         </g>
                     </g>
                 </g>
-            </svg><br>
+            </g>
+        </svg>
+        <div id="link_name">
             CLIENTS
-        </a>
+        </div>
     </div>
+</a>
 
 </nav>
 
