@@ -26,7 +26,7 @@
     </div>
 
 <a href="{{route('overviewproject')}}" id="sidebar_link">
-    <div class="active" id="sidebar_object">
+    <div class="<?php $sUrl = $_SERVER['REQUEST_URI']; $sUrl = substr($sUrl, 1, 7); if ($sUrl == 'project') {echo 'active';} ?>" id="sidebar_object">
             <svg width="32px" height="30px" viewBox="0 0 32 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
                 <title>Work</title>
@@ -67,7 +67,7 @@
 </a>
 
 <a href="{{route('overviewclient')}}" id="sidebar_link">
-    <div class="" id="sidebar_object">
+    <div class="<?php $sUrl = $_SERVER['REQUEST_URI']; $sUrl = substr($sUrl, 1, 6); if ($sUrl == 'client') {echo 'active';} ?>" id="sidebar_object">
         <svg width="32px" height="31px" viewBox="0 0 32 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
             <title>building</title>
@@ -148,8 +148,6 @@
         @endif
     </ul>
 </nav>
-
-
 
 <!-- JavaScript -->
 <script>

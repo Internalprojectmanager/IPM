@@ -6,10 +6,17 @@
 
 @section('breadcrumbs', Breadcrumbs::render('client'))
 @section('content')
-    <button class="btn-primary" onclick="document.getElementById('addCompany').style.display='block'">
-         Add client <span class="icon-right glyphicon glyphicon-plus"></span>
-    </button>
-    <h2>All Clients ({{$clientcount}})</h2>
+    <div class="row">
+        <a class="black" href="{{route('addclient')}}">
+            <button class="btn-primary">
+                Add Client <span class="icon-right glyphicon glyphicon-plus"></span>
+            </button></a>
+
+    </div>
+
+    <div class="row block-white">
+        <span class="block-white-title">All clients</span> <span class="block-white-subtitle"> | {{$clientcount}} Clients</span>
+    </div>
 
     <!-- ADD COMPANY -->
     <div id="addCompany" class="modal">
@@ -37,36 +44,38 @@
         </form>
     </div>
 
-    <table class="table client-table table-center">
-        <thead>
-        <th></th>
-        <th>Client Name</th>
-        <th>Contact</th>
-        <th>Resent Case</th>
-        <th>Users</th>
-        <th></th>
-        </thead>
-        <tbody>
-        @foreach($clients as $client)
-            <tr>
-                <td style="background-color: {{$client->color}};"></td>
-                <td>{{$client->name}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <a class="btn btn-warning"
-                       href="{{route('editclient', ['name' => $client->name, 'client_id' => $client->client_id])}}"><span
-                                class="glyphicon glyphicon-edit"></span></a>
-                    <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')"
-                       href="{{route('deleteclient', $client->name)}}"><span
-                                class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
+    <div class="row">
+        <table class="table client-table table-center">
+            <thead>
+            <th></th>
+            <th>Client Name</th>
+            <th>Contact</th>
+            <th>Resent Case</th>
+            <th>Users</th>
+            </thead>
+            <tbody>
+            @foreach($clients as $client)
+                <tr>
+                    <td style="border-left: 1px solid #CECECE;"></td>
+                    <td>{{$client->name}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a class="btn btn-warning"
+                           href="{{route('editclient', ['name' => $client->name, 'client_id' => $client->client_id])}}"><span
+                                    class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')"
+                           href="{{route('deleteclient', $client->name)}}"><span
+                                    class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
             @endforeach
-        </tbody>
+            </tbody>
 
-    </table>
+        </table>
+    </div>
+
 
 @endsection
 
