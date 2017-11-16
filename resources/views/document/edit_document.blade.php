@@ -15,8 +15,8 @@
             </ul>
         </div>
     @endif
-    <form action="{{route('updatedocument', ['project_id' => $documents->project_id, 'document_id' => $documents->id,
-        'document_title' => $documents->title, 'name' => $project->name, 'company_id' => $project->company_id])}}" method="post">
+    <form action="{{route('updatedocument', ['document_id' => $documents->id,
+        'name' => $project->name, 'company_id' => $project->company_id])}}" method="post">
         {{ csrf_field() }}
         <h3>Document</h3>
         <div class="form-group">

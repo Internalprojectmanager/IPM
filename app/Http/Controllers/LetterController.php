@@ -78,7 +78,6 @@ class LetterController extends Controller
 
     public function updateLetter($company_id, $name, $letter_id, Request $request){
         $letter = Letter::where('id' , $letter_id)->first();
-
         $this->createRevision($letter);
 
         $letter->title = $request->letter_title;

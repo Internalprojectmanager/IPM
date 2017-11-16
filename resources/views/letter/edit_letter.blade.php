@@ -15,8 +15,8 @@
             </ul>
         </div>
     @endif
-    <form action="{{route('updateletter', ['project_id' => $letters->project_id, 'letter_id' => $letters->id,
-        'letter_title' => $letters->title, 'name' => $project->name, 'company_id' => $project->company_id])}}" method="post">
+    <form action="{{route('updateletter', ['letter_id' => $letters->id,
+        'name' => $project->name, 'company_id' => $project->company_id])}}" method="post">
         {{ csrf_field() }}
         <h3>Letter</h3>
         <div class="form-group">
