@@ -288,3 +288,46 @@ label{
 .breadcrumb .active, .pagination .active{
     border-left: none;
 }
+
+/* SEARCH FIELD */
+.results tr[visible='false'],
+.no-result{
+    display:none;
+}
+
+.results tr[visible='true']{
+    display:table-row;
+}
+
+.counter{
+    font-size: 14px;
+    line-height: 16px;
+    color:#898989;
+    padding: 30px 12px 24px 0px;
+}
+
+.search {
+    background: #ffffff url("../svg/search.svg") no-repeat 169px center;
+    width: 200px;
+    height: 36px;
+    border: 1px solid #F2F2F2;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: right;
+}
+
+.search::placeholder {
+    height: 19px;
+    width: 43px;
+    opacity: 0.5;
+    color: #535353;
+    font-size: 14px;
+    line-height: 19px;
+}
+
+#count_projects_bar {
+    color: #333333;
+    font-weight: bolder;
+    padding: 12px;
+}
+/* END OF SEARCH FIELD */
