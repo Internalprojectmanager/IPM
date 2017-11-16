@@ -95,6 +95,7 @@ class ProjectController extends Controller
             $project->name = $request->project_name;
             $project->company_id = strtoupper(substr($request->company,0 ,5));
             $project->description = $request->description;
+            $project->deadline = $request->deadline;
 
             $project->save();
 
@@ -107,7 +108,7 @@ class ProjectController extends Controller
     {
         $projectcount = Project::all()->count();
         $projects = Project::with('company')
-        ->orderByRaw("FIELD(status , 'Draft', 'In Progress', 'Canceled', 'Paused') ASC")->paginate(8);
+        ->orderByRAW(' (CASE WHEN deadline IS NULL then 1 ELSE 0 END)')->orderBy('deadline')->paginate(8);
 
         $projects = $this->calcDeadline($projects);
         if(!$projects){
