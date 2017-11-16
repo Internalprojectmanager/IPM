@@ -16,11 +16,18 @@
     </div>
 
     <div class="row block-white">
-        <span class="block-white-title">All projects</span> <span class="block-white-subtitle"> | {{$projectcount}} Projects</span>
+        <span class="block-white-title">All projects</span>
+        <span class="block-white-subtitle">
+            <span id="count_projects_bar">|</span>
+            <span class="counter"></span>
+        </span>
+        <div class="form-group pull-right">
+            <input type="text" class="search" placeholder="Search">
+        </div>
     </div>
 
     <div class="row">
-        <table class="table table-hover table-center">
+        <table class="table table-hover table-center results">
             <thead>
             <th></th>
             <th>Project + Client</th>
