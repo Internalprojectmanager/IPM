@@ -68,19 +68,18 @@ class DocumentController extends Controller
         return view('document.details_document', compact('document', 'project'));
     }
 
-    public function editDocument($company_id,$name,$project_id,$document_id,$document_title){
-        $documents = Document::with('projects')->where(['project_id' =>  $project_id, 'id' => $document_id,
-            'title' => $document_title])->first();
+    public function editDocument($company_id, $name, $document_id){
+        $documents = Document::with('projects')->where('id', $document_id)->first();
+        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
         if(!$documents){
             abort(404);
         }
-        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
 
         return view('document.edit_document', compact('documents', 'project'));
     }
 
-    public function updateDocument($company_id, $name, $project_id, $document_id, $document_title, Request $request){
-        $document = Document::where(['id' => $document_id, 'project_id' => $project_id, 'title' => $document_title])->first();
+    public function updateDocument($company_id, $name, $document_id, Request $request){
+        $document = Document::where('id', $document_id)->first();
         $this->createRevision($document);
 
         $document->title = $request->document_title;
