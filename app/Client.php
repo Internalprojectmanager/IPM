@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Client extends Model
 {
-    protected $table = "company";
+    protected $table = "client";
 
     public $incrementing = false;
 
@@ -15,6 +15,6 @@ class Company extends Model
     ];
 
     public function projects(){
-        return $this->hasMany('App\Project', "company_id", "id");
+        return $this->hasMany('App\Project', "company_id", "id")->orderBy('deadline', 'desc');
     }
 }

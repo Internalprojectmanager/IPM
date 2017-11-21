@@ -10,7 +10,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Project;
 use App\Document;
-use App\Company;
+use App\Client;
 use App\Release;
 use App\Letter;
 use Webpatser\Uuid\Uuid;
@@ -40,7 +40,7 @@ class DocumentController extends Controller
 
     public function addDocument($name, $company_id){
         $projects = Project::where('name', $name)->first();
-        $companys = Company::where('id', $company_id)->first();
+        $companys = Client::where('id', $company_id)->first();
 
         return view('document.add_document', compact('projects', 'companys'));
     }
@@ -89,7 +89,7 @@ class DocumentController extends Controller
         $document->save();
 
         $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
-        $companys = Company::where('id', $company_id)->first();
+        $companys = Client::where('id', $company_id)->first();
         $releases = Release::where('project_id', $projects->id)->get();
         $documents = Document::where('project_id', $projects->id)->get();
         $letters = Letter::where('project_id', $projects->id)->get();

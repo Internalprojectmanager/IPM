@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Company;
+use App\Client;
 use App\Project;
 use App\Release;
 use App\Document;
@@ -78,7 +78,7 @@ class ProjectController extends Controller
 
     public function addProject()
     {
-        $companys = Company::all();
+        $companys = Client::all();
 
         return view('project.add_project', compact('companys'));
     }
@@ -124,7 +124,7 @@ class ProjectController extends Controller
         if(!$projects){
             abort(404);
         }
-        $companys = Company::where('id', $company_id)->first();
+        $companys = Client::where('id', $company_id)->first();
         $releases = Release::where('project_id', $projects->id)->get();
         $documents = Document::where('project_id', $projects->id)->get();
         $letters = Letter::where('project_id', $projects->id)->get();
@@ -135,7 +135,7 @@ class ProjectController extends Controller
     public function editProject($company_id, $name)
     {
         $projects = Project::with('company')->where(['name' =>  $name, 'company_id' => $company_id])->first();
-        $companys = Company::all();
+        $companys = Client::all();
 
         return view('project.edit_project', compact('projects', 'companys'));
     }

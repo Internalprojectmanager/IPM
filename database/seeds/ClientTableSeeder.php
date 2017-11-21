@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CompanyTableSeeder extends Seeder
+class ClientTableSeeder extends Seeder
 {
 
     /**
@@ -14,14 +14,18 @@ class CompanyTableSeeder extends Seeder
     {
         
 
-        \DB::table('company')->delete();
+        \DB::table('client')->delete();
         
-        \DB::table('company')->insert(array (
+        \DB::table('client')->insert(array (
             0 => 
             array (
                 'id' => 'FIETS',
                 'name' => 'Fietsenwinkel',
                 'description' => NULL,
+                'contactname' => 'Cecilia Lisa',
+                'contactnumber' => '(938) 536-4818',
+                'contactemail' => 'c.lisa@fietsenwinkel.nl',
+                'status' => 'Prospect',
                 'created_at' => '2017-10-24 13:51:50',
                 'updated_at' => '2017-10-24 13:51:50',
             ),
@@ -30,6 +34,10 @@ class CompanyTableSeeder extends Seeder
                 'id' => 'ITSAV',
                 'name' => 'Itsavirus',
                 'description' => NULL,
+                'contactname' => 'Jochem Verheul',
+                'contactnumber' => '+31 20 7371594',
+                'contactemail' => 'jverheul@itsavirus.com',
+                'status' => 'Lead',
                 'created_at' => '2017-10-12 15:12:44',
                 'updated_at' => '2017-10-12 15:12:44',
             ),
@@ -38,6 +46,10 @@ class CompanyTableSeeder extends Seeder
                 'id' => 'STARS',
                 'name' => 'Stars & Stories',
                 'description' => NULL,
+                'contactname' => 'Ludovicus Steinarr',
+                'contactnumber' => '(280) 597-0150',
+                'contactemail' => 'l.steinarr@starsenstories.nl',
+                'status' => 'Client',
                 'created_at' => '2017-11-15 10:49:31',
                 'updated_at' => '2017-11-15 10:49:31',
             ),

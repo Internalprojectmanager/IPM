@@ -9,7 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Project;
 use App\Letter;
-use App\Company;
+use App\Client;
 use App\Document;
 use App\Release;
 use Webpatser\Uuid\Uuid;
@@ -40,7 +40,7 @@ class LetterController extends Controller
 
     public function addLetter($name, $company_id){
         $projects = Project::where('name', $name)->first();
-        $companys = Company::where('id', $company_id)->first();
+        $companys = Client::where('id', $company_id)->first();
 
         return view('letter.add_letter', compact('projects', 'companys'));
     }
@@ -87,7 +87,7 @@ class LetterController extends Controller
         $letter->save();
 
         $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
-        $companys = Company::where('id', $company_id)->first();
+        $companys = Client::where('id', $company_id)->first();
         $releases = Release::where('project_id', $projects->id)->get();
         $documents = Document::where('project_id', $projects->id)->get();
         $letters = Letter::where('project_id', $projects->id)->get();
