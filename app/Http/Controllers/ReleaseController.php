@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Company;
+use App\Client;
 use App\Project;
 use App\Release;
 use DB;
@@ -27,7 +27,7 @@ class ReleaseController extends Controller
     public function addRelease($company_id,$name)
     {
         $projects = Project::where(['name' => $name, 'company_id' => $company_id])->first();
-        $companys = Company::where('id', $company_id)->first();
+        $companys = Client::where('id', $company_id)->first();
 
 
         return view('release.add_release', compact('projects', 'companys'));
@@ -62,7 +62,7 @@ class ReleaseController extends Controller
 
 
         $project = Project::where(['id' => $company_id.$name, 'company_id' => $company_id])->first();
-        $company = Company::where('id' ,$company_id)->first();
+        $company = Client::where('id' ,$company_id)->first();
         $release = Release::where([['project_id', $company_id.$name],['name', $release_name],['version', $version]])->first();
 
         if(!$release){

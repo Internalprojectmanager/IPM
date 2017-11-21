@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Company;
+use App\Client;
 
 class CompanyController extends Controller
 {
@@ -23,13 +23,7 @@ class CompanyController extends Controller
 
     public function storeCompany(Request $request)
     {
-
-
-        $request->validate([
-           'client_name' => 'required|unique:company,name'
-        ]);
-
-        $client = new Company();
+        $client = new Client();
         $client->id =strtoupper(substr($request->client_name,0 ,5));
         $client->name = $request->client_name;
         $client->description = $request->description;
@@ -41,7 +35,7 @@ class CompanyController extends Controller
 
     public function overviewCompany()
     {
-        $clients = Company::all();
+        $clients = Client::all();
         $clientcount = $clients->count();
 
         return view('client.client', compact('clients', 'clientcount'));
@@ -49,7 +43,7 @@ class CompanyController extends Controller
 
     public function detailsCompany($name)
     {
-        $clients = Company::where('name', $name)->first();
+        $clients = Client::where('name', $name)->first();
         if(!$clients){
             abort(404);
         }
@@ -58,7 +52,7 @@ class CompanyController extends Controller
 
     public function editCompany($name)
     {
-        $clients = Company::where('name', $name)->first();
+        $clients = Client::where('name', $name)->first();
         if(!$clients){
             abort(404);
         }
@@ -72,7 +66,7 @@ class CompanyController extends Controller
             'client_name' => 'required|unique:client,name'
         ]);
 
-        $client = Company::all()->where('name', $name)->first();
+        $client = Client::all()->where('name', $name)->first();
         $client->name = $request->client_name;
         $client->description = $request->description;
 
@@ -83,7 +77,7 @@ class CompanyController extends Controller
 
     public function deleteCompany($name)
     {
-        $client = Company::where('name', $name);
+        $client = Client::where('name', $name);
         $client->delete();
 
         return redirect()->route('overviewclient');

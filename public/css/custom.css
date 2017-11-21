@@ -124,18 +124,18 @@ html, body {
     border-radius: 100px;
 }
 
-.status-Draft{
+.status-Draft, .status-Client{
     background-color: #417505;
 }
 
-.status-in{
+.status-in, .status-Lead{
     background-color: #5D99CA;
 }
-.status-Canceled{
+.status-Canceled, .status-Prospect{
     background-color: #FF3300;
 }
 
-.status-Paused{
+.status-Paused, .status-no-partner{
     background-color: #9B9B9B;
 }
 
@@ -230,6 +230,7 @@ label{
 
 .table>tbody>tr{
     background-color: white;
+    height:80px;
 }
 .table>thead>tr>th{
     border-bottom: none;
@@ -237,12 +238,13 @@ label{
     font-weight: 400;
 }
 
-.btn-primary, .btn-primary:hover{
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus{
     background-color: #F5A623;
     height: 45px;
     width: 160px;
     color:black;
-    border: 1px solid black;
+    border:none;
+    border-radius: 0px;
     font-size: 15px;
     text-transform: uppercase;
 }
@@ -331,3 +333,19 @@ label{
     padding: 12px;
 }
 /* END OF SEARCH FIELD */
+
+.recent-projects{
+    vertical-align: middle;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.recent-projects:first-child{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.recent-projects a{
+    text-decoration: underline;
+    color: black;
+}
