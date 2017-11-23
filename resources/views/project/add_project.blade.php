@@ -35,10 +35,9 @@
             <label for="project_name">Project Status:</label>
             <br>
             <select name="status">
-                <option value="Draft">Draft</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Canceled">Canceled</option>
-                <option value="Paused">Paused</option>
+                @foreach($status as $s)
+                    <option value="{{$s->id}}">{{$s->name}}</option>
+                @endforeach
             </select>
             <br><br>
             <label for="project_name">Deadline:</label>
