@@ -46,8 +46,9 @@ class LetterController extends Controller
     }
 
     public function storeLetter(Request $request){
+        $project = Project::where('id', $request->project_id)->first();
         $letter = new Letter();
-        $letter->project_id = strtoupper(substr($request->company_id,0 ,5)).strtoupper(substr($request->project,0 ,5));
+        $letter->project_id = $request->project_id;
         $letter->letter_id = Uuid::generate(4);
         $letter->title = $request->letter_title;
         $letter->content = $request->letter_content;
@@ -56,7 +57,7 @@ class LetterController extends Controller
 
         $letter->save();
 
-        return redirect()->route('overviewproject');
+        return redirect()->route('projectdetails',['name' => $project->name, 'company_id ' => $project->company_id]);
     }
 
     public function showLetter($company_id,$name, $letter_id){
@@ -97,10 +98,12 @@ class LetterController extends Controller
 
     public function deleteLetter($id)
     {
-        $letter = Letter::where('id', $id)->first;
+        $letter = Letter::where('id', $id)->first();
+        $project = Project::where('id', $letter->project_id)->first();
         $this->createRevision($letter);
         $letter->delete();
 
-        return redirect()->route('overviewproject');
+        return redirect()->route('projectdetails',['name' => $project->name, 'company_id ' => $project->company_id]);
+
     }
 }

@@ -27,7 +27,7 @@ class FeatureController extends Controller
         $feature_revision->description = $feature->description;
         $feature_revision->status = $feature->status;
         $feature_revision->deadline = $feature->deadline;
-        $feature_revision->creator = $feature->author;
+        $feature_revision->creator_id = $feature->author;
         $feature_revision->original_created_at = $feature->created_at;
         $saved = $feature_revision->save();
 

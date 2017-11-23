@@ -85,13 +85,11 @@ class ProjectController extends Controller
 
     public function storeProject(ProjectValidator $request)
     {
-        $project_id = strtoupper(substr($request->company,0 ,5)).strtoupper(substr($request->project_name,0 ,5));
-        $findproject = Project::find($project_id);
+        $findproject = Project::where([['name', $request->project_name],['company_id', $request->company]])->first();
         if($findproject){
             return redirect()->back()->withErrors('Project name is already being used for this client');
         }else{
             $project = new Project();
-            $project->id = $project_id;
             $project->name = $request->project_name;
             $project->company_id = strtoupper(substr($request->company,0 ,5));
             $project->description = $request->description;
@@ -143,8 +141,35 @@ class ProjectController extends Controller
     public function updateProject($company_id, $name, Request $request)
     {
         $project = Project::where(['name' => $name, 'company_id' => $company_id] )->first();
+        $project_id = $project->company_id.''.strtoupper(substr($project->name,0 ,5));
+        $new_project_id = strtoupper(substr($request->company,0 ,5)).strtoupper(substr($request->project_name,0 ,5));
+        $release = Release::select('project_id')->where('project_id', $project->id)->get();
+        $letter = Letter::select('project_id')->where('project_id', $project->id)->get();
+        $document = Document::select('project_id')->where('project_id', $project->id)->get();
+
+        if($release->count() > 0){
+            foreach($release as $r){
+                $r->fill(['project_id' => $new_project_id]);
+            }
+        }
+
+        if($letter->count() > 0){
+            foreach($letter as $l){
+                $l->project_id = $new_project_id;
+                $l->save();
+            }
+        }
+
+        if($document->count() > 0){
+            foreach($document as $d){
+                $d->project_id = $new_project_id;
+                $d->save();
+            }
+        }
+
         $project->name = $request->project_name;
         $project->company_id = strtoupper(substr($request->company,0 ,5));
+        $project->id = $new_project_id;
         $project->description = $request->description;
 
         $project->save();

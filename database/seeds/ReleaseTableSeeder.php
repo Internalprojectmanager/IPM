@@ -21,7 +21,7 @@ class ReleaseTableSeeder extends Seeder
             array (
                 'release_uuid' => '20e2a83f-8b08-43a8-80bd-082141058168',
                 'id' => 1,
-                'project_id' => 'ITSAVWEBSI',
+                'project_id' => 7,
                 'name' => 'Specs',
                 'description' => 'test',
                 'version' => 1.0,

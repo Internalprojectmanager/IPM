@@ -19,7 +19,7 @@ class ClientTableSeeder extends Seeder
         \DB::table('client')->insert(array (
             0 => 
             array (
-                'id' => 'FIETS',
+                'id' => 1,
                 'name' => 'Fietsenwinkel',
                 'description' => NULL,
                 'contactname' => 'Cecilia Lisa',
@@ -31,7 +31,7 @@ class ClientTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 'ITSAV',
+                'id' => 2,
                 'name' => 'Itsavirus',
                 'description' => NULL,
                 'contactname' => 'Jochem Verheul',
@@ -43,7 +43,7 @@ class ClientTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 'STARS',
+                'id' => 3,
                 'name' => 'Stars & Stories',
                 'description' => NULL,
                 'contactname' => 'Ludovicus Steinarr',

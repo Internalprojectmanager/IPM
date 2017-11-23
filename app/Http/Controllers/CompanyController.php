@@ -24,7 +24,6 @@ class CompanyController extends Controller
     public function storeCompany(Request $request)
     {
         $client = new Client();
-        $client->id =strtoupper(substr($request->client_name,0 ,5));
         $client->name = $request->client_name;
         $client->description = $request->description;
 

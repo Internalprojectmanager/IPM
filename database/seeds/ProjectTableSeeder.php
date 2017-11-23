@@ -19,8 +19,8 @@ class ProjectTableSeeder extends Seeder
         \DB::table('project')->insert(array (
             0 => 
             array (
-                'id' => 'FIETSGECKO',
-                'company_id' => 'FIETS',
+                'id' => 1,
+                'company_id' => 1,
                 'name' => 'Geckoboard CC Sales',
                 'description' => NULL,
                 'status' => 'Draft',
@@ -31,8 +31,8 @@ class ProjectTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 'FIETSTEST',
-                'company_id' => 'FIETS',
+                'id' => 2,
+                'company_id' => 1,
                 'name' => 'MyFietsenwinkel',
                 'description' => 'Een nieuwe dashboard voor MyFietsenwinkel om bij te houden wat alle medewerkers doen binnen het bedrijf',
                 'status' => 'In Progress',
@@ -43,8 +43,8 @@ class ProjectTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 'ITSAVIPM',
-                'company_id' => 'ITSAV',
+                'id' => 3,
+                'company_id' => 2,
                 'name' => 'IPM',
                 'description' => 'Project management tool voor itsavirus',
                 'status' => 'Canceled',
@@ -55,8 +55,8 @@ class ProjectTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'id' => 'ITSAVNIJNT',
-                'company_id' => 'STARS',
+                'id' => 4,
+                'company_id' => 3,
                 'name' => 'Nijntje',
                 'description' => NULL,
                 'status' => 'Draft',
@@ -67,8 +67,8 @@ class ProjectTableSeeder extends Seeder
             ),
             4 => 
             array (
-                'id' => 'ITSAVSHELL',
-                'company_id' => 'ITSAV',
+                'id' => 5,
+                'company_id' => 2,
                 'name' => 'Shell',
                 'description' => NULL,
                 'status' => 'Draft',
@@ -79,8 +79,8 @@ class ProjectTableSeeder extends Seeder
             ),
             5 => 
             array (
-                'id' => 'ITSAVTHE P',
-                'company_id' => 'ITSAV',
+                'id' => 6,
+                'company_id' => 2,
                 'name' => 'The Prestonator',
                 'description' => NULL,
                 'status' => 'Draft',
@@ -91,8 +91,8 @@ class ProjectTableSeeder extends Seeder
             ),
             6 => 
             array (
-                'id' => 'ITSAVWEBSI',
-                'company_id' => 'ITSAV',
+                'id' => 7,
+                'company_id' => 2,
                 'name' => 'Website',
                 'description' => 'Webiste voor Itsavirus',
                 'status' => 'Paused',
@@ -103,8 +103,8 @@ class ProjectTableSeeder extends Seeder
             ),
             7 => 
             array (
-                'id' => 'STARSMUSK',
-                'company_id' => 'STARS',
+                'id' => 8,
+                'company_id' => 3,
                 'name' => 'MUSK',
                 'description' => 'Een nieuwe dashboard
 voor Review Club',
@@ -116,8 +116,8 @@ voor Review Club',
             ),
             8 => 
             array (
-                'id' => 'STARSWILTT',
-                'company_id' => 'STARS',
+                'id' => 9,
+                'company_id' => 3,
                 'name' => 'WILTT',
                 'description' => 'WILTT is een bedrijf waar je 
 sex speel',
