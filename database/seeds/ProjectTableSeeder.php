@@ -14,9 +14,9 @@ class ProjectTableSeeder extends Seeder
     {
         
 
-        \DB::table('Project')->delete();
+        \DB::table('project')->delete();
         
-        \DB::table('Project')->insert(array (
+        \DB::table('project')->insert(array (
             0 => 
             array (
                 'id' => 1,
