@@ -48,7 +48,7 @@ class ProjectController extends Controller
                 $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
 
                 if(strtotime($d->updated_at) < strtotime($d->deadline) && $d->pstatus->name == 'Completed'){
-                    $d->daysleft = "<span class='tablesubtitle'>Completed on time</span>";
+                    $d->daysleft = "<span class='tablesubtitle'>Completed on ". gmdate('d-m-Y', strtotime($d->updated_at)) . "</span>";
                 }else if(strtotime($d->updated_at) > strtotime($d->deadline) && $d->pstatus->name == 'Completed'){
                     $d->daysleft = "<span class='tablesubtitle'>Completed with $days days Overdue</span>";
                 }else {
