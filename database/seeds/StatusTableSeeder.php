@@ -54,7 +54,7 @@ class StatusTableSeeder extends Seeder
                     'id' => 6,
                     'name' => 'Completed',
                     'type' => 'Progress',
-                    'color' => ''
+                    'color' => '#9B9B9B'
                 ),
 
             6 =>
