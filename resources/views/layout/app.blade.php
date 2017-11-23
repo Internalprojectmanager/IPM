@@ -33,6 +33,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- Javascript -->
+<script src="{{asset('js/tinymce/jquery.tinymce.min.js', config('app.secure'))}}"></script>
+<script>tinymce.init({ selector:'textarea' });</script>
+
 <script src="{{asset('js/custom.js', config('app.secure'))}}"></script>
 
 </body>
