@@ -21,4 +21,8 @@ class Project extends Model
     public function company(){
         return $this->belongsTo('App\Client');
     }
+
+    public function pstatus(){
+        return $this->hasOne('App\Status', "id", 'status');
+    }
 }

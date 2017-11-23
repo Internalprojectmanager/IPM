@@ -17,4 +17,8 @@ class Client extends Model
     public function projects(){
         return $this->hasMany('App\Project', "company_id", "id")->orderBy('deadline', 'desc');
     }
+
+    public function cstatus(){
+        return $this->hasOne('App\Status', "id", "status");
+    }
 }

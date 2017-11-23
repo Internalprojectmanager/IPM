@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectValidator;
+use App\Status;
 use Faker\Provider\DateTime;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
@@ -26,9 +27,14 @@ class ProjectController extends Controller
     public function calcDeadline($data){
         $today = date('Y/m/d H:i');
         foreach ($data as $d){
-            if($d->deadline !== NULL){
+            if($d->deadline !== NULL && $d->pstatus->name !== 'Paused' && $d->pstatus->name  !== 'Cancelled'){
                 $negative = NULL;
-                $diff = strtotime($d->deadline) - strtotime($today);
+                if($d->pstatus->name  == 'completed'){
+                    $diff = strtotime($d->deadline) - strtotime($d->updated_at);
+                }else{
+                    $diff = strtotime($d->deadline) - strtotime($today);
+                }
+
                 if($diff < 0){
                     $negative = "-";
                     $diff = strtotime($today) - strtotime($d->deadline);
@@ -36,6 +42,12 @@ class ProjectController extends Controller
                 $years = floor($diff / (365*60*60*24));
                 $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
                 $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
+                if($d->updated_at < $d->deadline && $d->status == 'Completed'){
+                    $d->daysleft = "<span style='color:#FC1907;'>Completed on time</span>";
+                }else if($d->updated_at > $d->deadline && $d->status == 'Completed'){
+                    $d->daysleft = "<span style='color:#FC1907;'>Completed with $days overtime</span>";
+                }
 
                 if($negative == NULL && $years > 0){
                     if($years == 1){
@@ -68,6 +80,9 @@ class ProjectController extends Controller
 
                     }
                 }
+            }else{
+                if($d->pstatus->name == "Cancelled")
+                    $d->daysleft = "<span class='tablesubtitle'>Cancelled on ". gmdate('d-m-Y', strtotime($d->updated_at)). "</span>";
             }
         }
 
@@ -79,8 +94,9 @@ class ProjectController extends Controller
     public function addProject()
     {
         $companys = Client::all();
+        $status = Status::where('type', 'progress')->get();
 
-        return view('project.add_project', compact('companys'));
+        return view('project.add_project', compact('companys', 'status'));
     }
 
     public function storeProject(ProjectValidator $request)
@@ -92,6 +108,7 @@ class ProjectController extends Controller
             $project = new Project();
             $project->name = $request->project_name;
             $project->company_id = strtoupper(substr($request->company,0 ,5));
+            $project->status = $request->status;
             $project->description = $request->description;
             $project->deadline = $request->deadline;
 
@@ -105,13 +122,9 @@ class ProjectController extends Controller
     public function overviewProject()
     {
         $projectcount = Project::all()->count();
-        $projects = Project::with('company')
+        $projects = Project::with('company', 'pstatus')
         ->orderByRAW(' (CASE WHEN deadline IS NULL then 1 ELSE 0 END)')->orderBy('deadline')->paginate(8);
-
         $projects = $this->calcDeadline($projects);
-        if(!$projects){
-            abort(404);
-        }
 
         return view('project.project', compact('projects', 'projectcount'));
     }

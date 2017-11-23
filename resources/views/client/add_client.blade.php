@@ -27,6 +27,29 @@
             <br><br>
             <label for="description">Description:</label>
             <textarea rows="4" cols="50" name="description" class="form-control" id="description"></textarea>
+            <br><br>
+
+            <label for="contact_name">Contact Name:</label>
+            <input type="text" class="form-control" name="contact_name" id="contact_name">
+            <br><br>
+
+            <label for="contact_number">Contact Phonenumber:</label>
+            <input type="text" class="form-control" name="contact_number" id="contact_number">
+            <br><br>
+
+            <label for="contact_number">Contact Email:</label>
+            <input type="text" class="form-control" name="contact_mail" id="contact_number">
+            <br><br>
+
+
+            <label for="client_status">Client Status:</label>
+            <br>
+            <select name="status">
+                @foreach($status as $s)
+                    <option value="{{$s->id}}">{{$s->name}}</option>
+                @endforeach
+            </select>
+            <br><br>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
