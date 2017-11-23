@@ -28,7 +28,7 @@
                 <br>
                 <select name="company" id="company" >
                     @foreach($companys as $company)
-                        <option value="{{$company->name}}">{{$company->name}}</option>
+                        <option value="{{$company->id}}">{{$company->name}}</option>
                     @endforeach
                 </select>
                 <br><br>

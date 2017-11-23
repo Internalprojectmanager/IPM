@@ -64,7 +64,7 @@
                         <span class="tablesubtitle"> {{$client->contactnumber}}<br>
                         {{$client->contactemail}}</span>
                     </td>
-                    <td>{{$client->status}}</td>
+                    <td style="width: 180px;">{{$client->status}}</td>
                     <td>{{$client->projects->count()}} Projects</td>
                     <td>
                         <?php $i = 0 ;?>

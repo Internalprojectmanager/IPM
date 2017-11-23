@@ -21,8 +21,8 @@
         {{ csrf_field() }}
         <h3>Release</h3>
         <div class="form-group">
-            <input type="hidden" id="project" name="project" value="{{$projects->name}}">
-            <input type="hidden" id="company_id" name="company_id" value="{{$companys->name}}">
+            <input type="hidden" id="project" name="project_id" value="{{$projects->id}}">
+            <input type="hidden" id="company_id" name="company_id" value="{{$companys->id}}">
             <label for="release_name">Release name:</label>
             <input type="text" class="form-control" name="release_name" id="release_name">
             <br>

@@ -10,7 +10,7 @@
         {{ csrf_field() }}
         <h3>Document</h3>
         <div class="form-group">
-            <input type="hidden" id="project" name="project" value="{{$projects->name}}">
+            <input type="hidden" id="project" name="project_id" value="{{$projects->id}}">
             <input type="hidden" id="company_id" name="company_id" value="{{$companys->name}}">
             <label for="document_title">Document title:</label>
             <input type="text" class="form-control" name="document_title" id="document_title">

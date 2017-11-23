@@ -10,8 +10,8 @@
         {{ csrf_field() }}
         <h3>Letter</h3>
         <div class="form-group">
-            <input type="hidden" id="project" name="project" value="{{$projects->name}}">
-            <input type="hidden" id="company_id" name="company_id" value="{{$companys->name}}">
+            <input type="hidden" id="project" name="project_id" value="{{$projects->id}}">
+            <input type="hidden" id="company_id" name="company_id" value="{{$companys->id}}">
             <label for="letter_title">Letter title:</label>
             <input type="text" class="form-control" name="letter_title" id="letter_title">
             <br>

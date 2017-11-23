@@ -45,20 +45,22 @@ class DocumentController extends Controller
         return view('document.add_document', compact('projects', 'companys'));
     }
 
-    public function storeDocument(Request $request){
+    public function storeDocument(Request $request)
+    {
         $document = new Document();
         $document->document_id = Uuid::generate(4);
-        $document->project_id = strtoupper(substr($request->company_id,0 ,5)).strtoupper(substr($request->project,0 ,5));
+        $document->project_id = $request->project_id;
         $document->title = $request->document_title;
         $document->description = $request->description;
         $document->author = $request->author;
-
         $document->save();
 
-        return redirect()->route('overviewproject');
+        $project = Project::where('id', $request->project_id)->first();
+
+        return redirect()->route('projectdetails', ['name' => $project->name, 'company_id ' => $project->company_id]);
     }
 
-    public function showDocument($company_id, $name, $document_id){
+        public function showDocument($company_id, $name, $document_id){
         $document = Document::with('projects.company')->where('id',$document_id)->first();
         $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
         if(!$document){

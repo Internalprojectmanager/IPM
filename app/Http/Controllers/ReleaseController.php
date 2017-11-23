@@ -35,17 +35,15 @@ class ReleaseController extends Controller
 
     public function storeRelease(ReleaseValidator $request)
     {
-        $project_name = strtoupper(substr($request->project,0 ,5));
-        $company_id = strtoupper(substr($request->company_id,0 ,5));
-        $releasecount = Release::where([['project_id', $company_id.''.$project_name]])->count();
-        $release_name = Release::select('name')->where([['project_id', $company_id.''.$project_name], ['version', 1]])->first();
+        $project = Project::where('id', $request->project_id)->first();
+        $releasecount = Release::where([['project_id', $request->project_id]])->count();
         $release = new Release();
         if($releasecount >= 0){
             $releasecount++;
         }
 
         $release->release_uuid = Uuid::generate(4);
-        $release->project_id = strtoupper(substr($request->company_id,0 ,5)).strtoupper(substr($request->project,0 ,5));
+        $release->project_id = $request->project_id;
         $release->name = $request->release_name;
         $release->description = $request->description;
         $release->version = $releasecount;
@@ -53,17 +51,13 @@ class ReleaseController extends Controller
         $release->specificationtype = $request->specification;
 
         $release->save();
-        return redirect()->route('projectdetails',['name' => $request->project, 'company_id ' => $company_id]);
+        return redirect()->route('projectdetails',['name' => $project->name, 'company_id ' => $project->company_id]);
     }
 
     public function showRelease($company_id,$name,$release_name, $version){
-        $name = strtoupper(substr($name,0 ,5));
-        $company_id = strtoupper(substr($company_id,0 ,5));
-
-
-        $project = Project::where(['id' => $company_id.$name, 'company_id' => $company_id])->first();
+        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
         $company = Client::where('id' ,$company_id)->first();
-        $release = Release::where([['project_id', $company_id.$name],['name', $release_name],['version', $version]])->first();
+        $release = Release::where([['project_id', $project->id],['name', $release_name],['version', $version]])->first();
 
         if(!$release){
             abort(404);
