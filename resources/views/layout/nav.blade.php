@@ -2,7 +2,7 @@
 <nav id="sidebar">
 
     <div id="logo_iav">
-        <svg <svg id="svg_building" width="40px" height="46px" viewBox="0 0 40 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <a href="{{route('home')}}"><svg id="svg_building" width="40px" height="46px" viewBox="0 0 40 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
             <title>Logo-IAV-no_border</title>
             <desc>Created with Sketch.</desc>
@@ -23,6 +23,7 @@
                 </g>
             </g>
         </svg>
+        </a>
     </div>
 
 <a href="{{route('overviewproject')}}" id="sidebar_link">
