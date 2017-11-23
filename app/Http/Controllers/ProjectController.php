@@ -29,7 +29,7 @@ class ProjectController extends Controller
         foreach ($data as $d){
             if($d->deadline !== NULL && $d->pstatus->name !== 'Paused' && $d->pstatus->name  !== 'Cancelled'){
                 $negative = NULL;
-                if($d->pstatus->name  == 'completed'){
+                if($d->pstatus->name  == 'Completed'){
                     $diff = strtotime($d->deadline) - strtotime($d->updated_at);
                 }else{
                     $diff = strtotime($d->deadline) - strtotime($today);
@@ -37,47 +37,48 @@ class ProjectController extends Controller
 
                 if($diff < 0){
                     $negative = "-";
-                    $diff = strtotime($today) - strtotime($d->deadline);
+                    if($d->pstatus->name  == 'Completed'){
+                        $diff = strtotime($d->updated_at) - strtotime($d->deadline);
+                    }else{
+                        $diff = strtotime($today) - strtotime($d->deadline);
+                    }
                 }
                 $years = floor($diff / (365*60*60*24));
                 $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
                 $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
 
-                if($d->updated_at < $d->deadline && $d->status == 'Completed'){
-                    $d->daysleft = "<span style='color:#FC1907;'>Completed on time</span>";
-                }else if($d->updated_at > $d->deadline && $d->status == 'Completed'){
-                    $d->daysleft = "<span style='color:#FC1907;'>Completed with $days overtime</span>";
-                }
-
-                if($negative == NULL && $years > 0){
-                    if($years == 1){
-                        $d->daysleft = $years. " year left";
-                    }else{
-                        $d->daysleft = $years. " year left";
-                    }
-                }
-                else if($negative == NULL && $years < 1 && $months > 0){
-                    if($months == 1){
-                        $d->daysleft = $months. " month left";
-                    }else{
-                        $d->daysleft = $months. " months left";
-                    }
-                }
-                else if($negative == NULL && $months < 1 && $years < 1 && $days > 3){
-                    $d->daysleft = $days. " days left";
-                }
-                else{
-                    if($negative == NULL && $days > 1){
-                        $d->daysleft = "<span style='color:#FC1907;'>".$days. " days left</span>";
-                    }else if ($negative == NULL && $days == 1){
-                        $d->daysleft = "<span style='color:#FC1907;'>".$days. " day left</span>";
-                    }else{
-                        if($days == 0 && $months == 0 and $years == 0){
-                            $d->daysleft = "<span style='color:#FC1907;'>Deadline Today</span>";
-                        }else{
-                            $d->daysleft = "<span style='color:#FC1907;'>Overdue</span>";
+                if(strtotime($d->updated_at) < strtotime($d->deadline) && $d->pstatus->name == 'Completed'){
+                    $d->daysleft = "<span class='tablesubtitle'>Completed on time</span>";
+                }else if(strtotime($d->updated_at) > strtotime($d->deadline) && $d->pstatus->name == 'Completed'){
+                    $d->daysleft = "<span class='tablesubtitle'>Completed with $days days Overdue</span>";
+                }else {
+                    if ($negative == NULL && $years > 0) {
+                        if ($years == 1) {
+                            $d->daysleft = $years . " year left";
+                        } else {
+                            $d->daysleft = $years . " year left";
                         }
+                    } else if ($negative == NULL && $years < 1 && $months > 0) {
+                        if ($months == 1) {
+                            $d->daysleft = $months . " month left";
+                        } else {
+                            $d->daysleft = $months . " months left";
+                        }
+                    } else if ($negative == NULL && $months < 1 && $years < 1 && $days > 3) {
+                        $d->daysleft = $days . " days left";
+                    } else {
+                        if ($negative == NULL && $days > 1) {
+                            $d->daysleft = "<span style='color:#FC1907;'>" . $days . " days left</span>";
+                        } else if ($negative == NULL && $days == 1) {
+                            $d->daysleft = "<span style='color:#FC1907;'>" . $days . " day left</span>";
+                        } else {
+                            if ($days == 0 && $months == 0 and $years == 0) {
+                                $d->daysleft = "<span style='color:#FC1907;'>Deadline Today</span>";
+                            } else {
+                                $d->daysleft = "<span style='color:#FC1907;'>Overdue</span>";
+                            }
 
+                        }
                     }
                 }
             }else{
