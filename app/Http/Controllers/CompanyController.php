@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Status;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -19,8 +18,7 @@ class CompanyController extends Controller
 
     public function addCompany()
     {
-        $status = Status::where('type', 'Client')->get();
-        return view('client.add_client', compact('status'));
+        return view('client.add_client');
     }
 
     public function storeCompany(Request $request)
@@ -28,10 +26,7 @@ class CompanyController extends Controller
         $client = new Client();
         $client->name = $request->client_name;
         $client->description = $request->description;
-        $client->status = $request->status;
-        $client->contactname = $request->contact_name;
-        $client->contactnumber = $request->contact_number;
-        $client->contactemail = $request->contact_mail;
+
         $client->save();
 
         return redirect()->route('overviewclient');

@@ -57,14 +57,14 @@
             <tbody>
             @foreach($clients as $client)
                 <tr>
-                    <td style="border-left: 1px solid #CECECE; background-color: {{$client->cstatus->color}};"></td>
+                    <td style="border-left: 1px solid #CECECE;" class="status-@if(!isset($client->status))Client @elseif($client->status == "No Partners Anymore")no-partner @else{{$client->status}} @endif"></td>
                     <td>{{$client->name}}</td>
                     <td>
                         <span class="tabletitle">{{$client->contactname}}</span> <br>
                         <span class="tablesubtitle"> {{$client->contactnumber}}<br>
                         {{$client->contactemail}}</span>
                     </td>
-                    <td style="width: 180px;">{{$client->cstatus->name}}</td>
+                    <td style="width: 180px;">{{$client->status}}</td>
                     <td>{{$client->projects->count()}} Projects</td>
                     <td>
                         <?php $i = 0 ;?>
