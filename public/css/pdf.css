@@ -1,0 +1,80 @@
+@page { margin: 100px 25px; }
+header { position: fixed; top: -60px; left: 0px; right: 0px; height: 50px; }
+footer { position: fixed; bottom: -60px; left: 0px; right: 0px; height: 50px; }
+p { page-break-after: always; }
+p:last-child { page-break-after: never; }
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+hr {
+    color: rgba(151,151,151,0.23);
+}
+
+/* FRONTPAGE */
+.logo-frontpage {
+    position: fixed;
+    height: 22%;
+    width: 26%;
+    top: 171px;
+    right: 0px;
+}
+
+.h1_frontpage {
+    position: fixed;
+    height: 82px;
+    width: 288px;
+    top: 198px;
+    left: 50px;
+    color: #000000;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    line-height: 41px;
+}
+
+.h2_frontpage {
+    position: fixed;
+    top: 275px;
+    left: 50px;
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    margin-top: 5px;
+}
+
+.h3_frontpage {
+    position: fixed;
+    height: 10px;
+    width: 60px;
+    top: 314px;
+    left: 50px;
+    color: rgba(0,0,0,0.6);
+    font-size: 8px;
+    font-weight: 300;
+    line-height: 10px;
+}
+
+.project-info-frontpage {
+    position: fixed;
+    right: 44px;
+    bottom: 107px;
+    left: 44px;
+}
+
+.project-info-left {
+    color: rgba(0,0,0,0.6);
+    font-size: 10px;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.project-info-left {
+    color: rgba(0,0,0,0.6);
+    font-size: 10px;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+/* END OF FRONTPAGE */

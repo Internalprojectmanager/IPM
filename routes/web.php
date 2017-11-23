@@ -20,7 +20,10 @@ Route::get('/home', function () {
 
 })->name('home');
 
+Route::get('pdf', 'PDFController@pdf')->name('createpdf');
+
 Auth::routes();
+
 Route::group(['prefix' => 'client'], function (){
     Route::get('/overview', 'CompanyController@overviewCompany')->name('overviewclient');
     Route::get('/{name}/details', 'CompanyController@detailsCompany')->name('clientdetails');
