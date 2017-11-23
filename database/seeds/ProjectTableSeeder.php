@@ -14,20 +14,20 @@ class ProjectTableSeeder extends Seeder
     {
         
 
-        \DB::table('project')->delete();
+        \DB::table('Project')->delete();
         
-        \DB::table('project')->insert(array (
+        \DB::table('Project')->insert(array (
             0 => 
             array (
                 'id' => 1,
                 'company_id' => 1,
                 'name' => 'Geckoboard CC Sales',
                 'description' => NULL,
-                'status' => 'Draft',
                 'deadline' => NULL,
                 'users' => NULL,
                 'created_at' => '2017-11-15 16:04:52',
                 'updated_at' => '2017-11-15 16:04:52',
+                'status' => 1,
             ),
             1 => 
             array (
@@ -35,11 +35,11 @@ class ProjectTableSeeder extends Seeder
                 'company_id' => 1,
                 'name' => 'MyFietsenwinkel',
                 'description' => 'Een nieuwe dashboard voor MyFietsenwinkel om bij te houden wat alle medewerkers doen binnen het bedrijf',
-                'status' => 'In Progress',
                 'deadline' => '2017-12-31 00:00:00',
                 'users' => NULL,
                 'created_at' => '2017-11-15 10:07:56',
                 'updated_at' => '2017-11-15 10:45:36',
+                'status' => 2,
             ),
             2 => 
             array (
@@ -47,11 +47,11 @@ class ProjectTableSeeder extends Seeder
                 'company_id' => 2,
                 'name' => 'IPM',
                 'description' => 'Project management tool voor itsavirus',
-                'status' => 'Canceled',
                 'deadline' => '2017-11-20 00:00:00',
                 'users' => NULL,
                 'created_at' => '2017-11-15 10:51:20',
                 'updated_at' => '2017-11-15 10:51:20',
+                'status' => 4,
             ),
             3 => 
             array (
@@ -59,11 +59,11 @@ class ProjectTableSeeder extends Seeder
                 'company_id' => 3,
                 'name' => 'Nijntje',
                 'description' => NULL,
-                'status' => 'Draft',
                 'deadline' => '2017-11-23 16:04:27',
                 'users' => NULL,
                 'created_at' => '2017-11-15 16:04:27',
                 'updated_at' => '2017-11-15 16:04:27',
+                'status' => 1,
             ),
             4 => 
             array (
@@ -71,11 +71,11 @@ class ProjectTableSeeder extends Seeder
                 'company_id' => 2,
                 'name' => 'Shell',
                 'description' => NULL,
-                'status' => 'Draft',
                 'deadline' => NULL,
                 'users' => NULL,
                 'created_at' => '2017-11-15 16:04:34',
                 'updated_at' => '2017-11-15 16:04:34',
+                'status' => 1,
             ),
             5 => 
             array (
@@ -83,11 +83,11 @@ class ProjectTableSeeder extends Seeder
                 'company_id' => 2,
                 'name' => 'The Prestonator',
                 'description' => NULL,
-                'status' => 'Draft',
                 'deadline' => NULL,
                 'users' => NULL,
                 'created_at' => '2017-11-15 16:04:43',
                 'updated_at' => '2017-11-15 16:04:43',
+                'status' => 1,
             ),
             6 => 
             array (
@@ -95,11 +95,11 @@ class ProjectTableSeeder extends Seeder
                 'company_id' => 2,
                 'name' => 'Website',
                 'description' => 'Webiste voor Itsavirus',
-                'status' => 'Paused',
                 'deadline' => '2017-11-15 00:00:00',
                 'users' => NULL,
                 'created_at' => '2017-10-24 13:38:29',
                 'updated_at' => '2017-10-24 13:38:29',
+                'status' => 3,
             ),
             7 => 
             array (
@@ -108,11 +108,11 @@ class ProjectTableSeeder extends Seeder
                 'name' => 'MUSK',
                 'description' => 'Een nieuwe dashboard
 voor Review Club',
-                'status' => 'Draft',
                 'deadline' => '2016-11-11 00:00:00',
                 'users' => NULL,
                 'created_at' => '2017-11-15 10:50:05',
                 'updated_at' => '2017-11-15 10:54:38',
+                'status' => 1,
             ),
             8 => 
             array (
@@ -121,11 +121,35 @@ voor Review Club',
                 'name' => 'WILTT',
                 'description' => 'WILTT is een bedrijf waar je 
 sex speel',
-                'status' => 'Paused',
                 'deadline' => '2018-12-12 00:00:00',
                 'users' => NULL,
                 'created_at' => '2017-11-15 10:50:30',
                 'updated_at' => '2017-11-15 10:50:30',
+                'status' => 3,
+            ),
+            9 => 
+            array (
+                'id' => 10,
+                'company_id' => 1,
+                'name' => 'Ticketer',
+                'description' => NULL,
+                'deadline' => NULL,
+                'users' => NULL,
+                'created_at' => '2017-11-23 11:37:16',
+                'updated_at' => '2017-11-23 11:37:16',
+                'status' => 3,
+            ),
+            10 => 
+            array (
+                'id' => 11,
+                'company_id' => 4,
+                'name' => 'Mobiel Bankieren',
+                'description' => 'Nieuwe versie van mobiel bankieren',
+                'deadline' => '2017-12-31 00:00:00',
+                'users' => NULL,
+                'created_at' => '2017-11-23 11:56:17',
+                'updated_at' => '2017-11-23 11:56:17',
+                'status' => 2,
             ),
         ));
         
