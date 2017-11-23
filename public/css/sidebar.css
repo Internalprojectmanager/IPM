@@ -26,7 +26,7 @@
     z-index:998;
 }
 
-#user a {
+#username {
     color: #fff;
 }
 
@@ -40,6 +40,12 @@
     padding-right: 30px;
     padding-bottom: 25px;
     margin-left: 110px;
+}
+
+.dropdown-menu>li>a {
+    color: #535353;
+    font-size: 14px;
+    line-height: 19px;
 }
 
 #dropdown_arrow {

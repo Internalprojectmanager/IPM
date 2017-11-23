@@ -116,12 +116,13 @@
 
 </nav>
 
+
 <nav id="navbar_top">
+
     <div id="user">
         @if (Route::has('login'))
             @auth
-                <div class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <a id="username" href="#" class="dropdown-toggle" data-toggle="dropdown">
                         {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                         <svg id="dropdown_arrow" width="13px" height="9px" viewBox="0 0 13 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
@@ -142,10 +143,18 @@
                             </g>
                         </svg>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">LINK 1</a></li>
-                        <li><a href="#">LINK 2</a></li>
-                        <li><a href="#">LINK 3</a></li>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li>
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
                     </ul>
                 </div>
             @else
@@ -155,12 +164,3 @@
         @endif
     </div>
 </nav>
-
-<!-- JavaScript -->
-<script>
-    $(".sidebar_object").on("click", function() {
-        $(".sidebar_object").removeClass("active");
-        $(this).addClass("active");
-    });
-
-</script>
