@@ -150,7 +150,7 @@ class ProjectController extends Controller
             }elseif(!isset($status->id) && isset($client->id)){
                 $projects = Project::search($search)->where('company_id', $client->id)->paginate(8);
             } else{
-                $projects = Project::search($search)->paginate();
+                $projects = Project::search($search)->paginate(8);
             }
 
             $projects = $this->calcDeadline($projects);
