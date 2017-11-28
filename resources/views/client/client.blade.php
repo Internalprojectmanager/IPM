@@ -22,7 +22,7 @@
             <span class="contenttype">Clients</span>
         </span>
 
-        @if(config('APP_SECURE') == TRUE)
+        @if(config('app.secure') == TRUE)
             <form action="{{secure_url('/client/overview')}}" class="pull-right searchform">
         @else
             <form action="{{url('/client/overview')}}" class="pull-right searchform">

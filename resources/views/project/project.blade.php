@@ -22,7 +22,7 @@
             <span class="counter">{{$projectcount}}</span>
             <span class="contenttype">Projects</span>
         </span>
-        @if(config('APP_SECURE') == TRUE)
+        @if(config('app.secure') == TRUE)
             <form action="{{secure_url('/project/overview')}}" class="pull-right searchform">
         @else
             <form action="{{url('/project/overview')}}" class="pull-right searchform">
