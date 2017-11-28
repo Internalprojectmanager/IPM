@@ -310,10 +310,11 @@ label{
 
 .search {
     background: #ffffff url("../svg/search.svg") no-repeat 169px center;
+    background-size: 20px 20px;
     width: 200px;
     height: 36px;
     border: 1px solid #F2F2F2;
-    padding-right: 15px;
+    padding-right: 30px;
     padding-left: 15px;
     float: right;
 }
@@ -325,6 +326,19 @@ label{
     color: #535353;
     font-size: 14px;
     line-height: 19px;
+}
+
+.client, .status {
+        background: #ffffff  url("../svg/dropdown.svg")  no-repeat 150px center;
+    background-size: 20px 20px;
+    width: 180px;
+    height: 36px;
+    border: 1px solid #F2F2F2;
+    padding-right: 30px;
+    padding-left: 15px;
+    float: right;
+    margin-right: 25px;
+    -webkit-appearance:none
 }
 
 #count_projects_bar {

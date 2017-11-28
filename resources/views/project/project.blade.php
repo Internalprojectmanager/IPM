@@ -21,8 +21,26 @@
             <span id="count_projects_bar">|</span>
             <span class="counter">{{$projectcount}} Projects</span>
         </span>
+
         <div class="form-group pull-right">
             <input type="text" class="search" placeholder="Search">
+        </div>
+
+        <div class="form-group pull-right">
+            <select type="text" class="client">
+                <option disabled="">Client</option>
+                @foreach($clients as $c)
+                    <option value="{{$c->name}}">{{$c->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group pull-right">
+            <select type="text" class="client">
+                <option disabled="">Status</option>
+                @foreach($status as $s)
+                    <option value="{{$s->name}}">{{$s->name}}</option>
+                @endforeach
+            </select>
         </div>
     </div>
 

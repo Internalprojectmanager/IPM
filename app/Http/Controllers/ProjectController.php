@@ -126,8 +126,10 @@ class ProjectController extends Controller
         $projects = Project::with('company', 'pstatus')
         ->orderByRAW(' (CASE WHEN deadline IS NULL then 1 ELSE 0 END)')->orderBy('deadline')->paginate(8);
         $projects = $this->calcDeadline($projects);
+        $clients = Client::select('name')->get();
+        $status = Status::where('type', 'Progress')->select('name')->get();
 
-        return view('project.project', compact('projects', 'projectcount'));
+        return view('project.project', compact('projects', 'projectcount','clients', 'status'));
     }
 
     public function detailsProject($company_id, $name)
