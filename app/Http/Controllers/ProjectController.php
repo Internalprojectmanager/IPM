@@ -138,7 +138,7 @@ class ProjectController extends Controller
             $client = $request->data[1]['value'];
             $status = $request->data[2]['value'];
             if(!empty($status)) {
-                $status = Status::search($status)->first();
+                $status = Status::where('name', $status)->first();
             }if(!empty($client)) {
                 $client = Client::search($client)->first();
             }

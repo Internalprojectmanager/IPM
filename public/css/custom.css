@@ -344,6 +344,7 @@ label{
     -webkit-appearance:none;
     color: #535353;
     font-size: 14px;
+    border-radius: 0px;
 }
 
 .dropdown-search option{
