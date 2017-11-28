@@ -7,6 +7,12 @@
         <div class="panel panel-default">
           <div class="panel-heading">Login</div>
           <div class="panel-body">
+            @if(config('app.secure') == TRUE)
+              <form class="form-horizontal" role="form" method="POST" action="{{ secure_url('/login') }}">
+                @else
+                  <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                    @endif
+
             <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
               {{ csrf_field() }}
 
@@ -54,7 +60,11 @@
                     Login
                   </button>
 
-                  <a class="btn btn-link" href="{{ route('password.request') }}">
+                    @if(config('app.secure') == TRUE)
+                        <a class="btn btn-link" href="{{ secure_url('/password/reset') }}">
+                    @else
+                        <a class="btn btn-link" href="{{ url('/password/reset') }}">
+                    @endif
                     Forgot Your Password?
                   </a>
                 </div>

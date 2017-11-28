@@ -25,10 +25,10 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['prefix' => 'password'], function () {
-    Route::get('/reset', 'Auth\ResetPasswordController@showLinkRequestForm')->name('password.request');
+    Route::get('/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
     Route::post('/reset', 'Auth\ResetPasswordController@reset');
-    Route::post('/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 });
 
 Route::group(['prefix' => 'client'], function (){

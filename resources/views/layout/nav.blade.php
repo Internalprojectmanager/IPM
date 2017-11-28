@@ -146,13 +146,16 @@
                     </a>
                     <ul class="dropdown-menu pull-right" role="menu">
                         <li>
-                            <a href="{{ route('logout') }}"
+                            <a style="cursor: pointer"
                                onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @if(config('app.secure') == TRUE)
+                                <form id="logout-form" action="{{secure_url('/logout')}}" method="POST" style="display: none;">
+                            @else
+                                <form id="logout-form" action="{{url('/logout')}}" method="POST" style="display: none;">
+                            @endif
                                 {{ csrf_field() }}
                             </form>
                         </li>
