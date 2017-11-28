@@ -26,7 +26,7 @@ $('.search').bind('keyup change', function (e) {
         success: function (result) {
             $('.bigtable').remove();
             $('.container').append(result);
-            var jobCount = $('table tbody tr').length;
+            var jobCount = $('#new-count').text();
             var type = $('.contenttype').text();
             switch(type){
                 case 'Projects':
@@ -48,6 +48,7 @@ $('.search').bind('keyup change', function (e) {
                 $('.contenttype').text(type+'s');
             }
             $('.counter').text(jobCount);
+            $('#new-count').remove();
         },
     });
     window.history.pushState("", "", url);

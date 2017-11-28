@@ -43,4 +43,5 @@
     </table>
 
     {{ $clients->links() }}
+    <span style='display: none;' id="new-count">{{$clientcount}}</span>
 </div>

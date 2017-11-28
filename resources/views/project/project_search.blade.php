@@ -26,5 +26,5 @@
     <div class="center">
         {{ $projects->links() }}
     </div>
-
+    <span style='display: none;' id="new-count">{{$projectcount}}</span>
 </div>

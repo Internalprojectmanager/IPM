@@ -15,6 +15,7 @@ use App\Project;
 use App\Release;
 use App\Document;
 use App\Letter;
+use Psy\Command\ListCommand\PropertyEnumerator;
 
 class ProjectController extends Controller
 {
@@ -145,16 +146,20 @@ class ProjectController extends Controller
 
             if(isset($status->id) && isset($client->id)){
                 $projects = Project::search($search)->where('status', $status->id)->where('company_id', $client->id)->paginate(8);
+                $projectcount = Project::search($search)->where('status', $status->id)->where('company_id', $client->id)->get();
             }elseif(isset($status->id) && !isset($client->id)){
                 $projects = Project::search($search)->where('status', $status->id)->paginate(8);
+                $projectcount = Project::search($search)->where('status', $status->id)->get();
             }elseif(!isset($status->id) && isset($client->id)){
                 $projects = Project::search($search)->where('company_id', $client->id)->paginate(8);
-            } else{
+                $projectcount = Project::search($search)->where('company_id', $client->id)->get();
+            }else{
+                $projectcount = Project::search($search)->get();
                 $projects = Project::search($search)->paginate(8);
-            }
 
+            }
             $projects = $this->calcDeadline($projects);
-            $projectcount = $projects->count();
+            $projectcount = $projectcount->count();
             $status = Status::where('type', 'Progress')->get();
             return view('project.project_search', compact('projects','projectcount', 'status'));
 
