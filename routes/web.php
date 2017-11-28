@@ -33,6 +33,7 @@ Route::group(['prefix' => 'password'], function () {
 
 Route::group(['prefix' => 'client'], function (){
     Route::get('/overview', 'CompanyController@overviewCompany')->name('overviewclient');
+    Route::post('/overview', 'CompanyController@searchCompany')->name('searchCompany');
     Route::get('/{name}/details', 'CompanyController@detailsCompany')->name('clientdetails');
     Route::get('/add', 'CompanyController@addCompany')->name('addclient');
     Route::post('/add', 'CompanyController@storeCompany')->name('storeclient');
@@ -42,6 +43,7 @@ Route::group(['prefix' => 'client'], function (){
 });
 Route::group(['prefix' => 'project'], function () {
     Route::get('/overview', 'ProjectController@overviewProject')->name('overviewproject');
+    Route::post('/overview', 'ProjectController@searchProject')->name('searchproject');
     Route::get('/add', 'ProjectController@addProject')->name('addproject');
     Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
 });

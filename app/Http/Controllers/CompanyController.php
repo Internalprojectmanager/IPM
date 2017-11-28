@@ -39,10 +39,28 @@ class CompanyController extends Controller
 
     public function overviewCompany()
     {
-        $clients = Client::all();
+        $clients = Client::paginate(8);
         $clientcount = $clients->count();
+        $status = Status::where('type', 'Client')->get();
 
-        return view('client.client', compact('clients', 'clientcount'));
+        return view('client.client', compact('clients', 'clientcount', 'status'));
+    }
+
+    public function searchCompany(Request $request){
+
+        $search = $request->data[1]['value'];
+        $status = $request->data[2]['value'];
+        if(!empty($status)) {
+            $status = Status::search($status)->first();
+            $clients = Client::search($search)->where('status', $status->id)->paginate();
+        }else{
+            $clients = Client::search($search)->paginate();
+        }
+
+        $clientcount = $clients->count();
+        $status = Status::where('type', 'Client')->get();
+        return view('client.client_search', compact('clients', 'clientcount', 'status'));
+
     }
 
     public function detailsCompany($name)

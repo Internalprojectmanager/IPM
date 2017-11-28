@@ -132,6 +132,34 @@ class ProjectController extends Controller
         return view('project.project', compact('projects', 'projectcount','clients', 'status'));
     }
 
+    public function searchProject(Request $request){
+            $search = $request->data[0]['value'];
+            $client = $request->data[1]['value'];
+            $status = $request->data[2]['value'];
+            if(!empty($status)) {
+                $status = Status::search($status)->first();
+            }if(!empty($client)) {
+                $client = Client::search($client)->first();
+            }
+
+
+            if(isset($status->id) && isset($client->id)){
+                $projects = Project::search($search)->where('status', $status->id)->where('company_id', $client->id)->paginate(8);
+            }elseif(isset($status->id) && !isset($client->id)){
+                $projects = Project::search($search)->where('status', $status->id)->paginate(8);
+            }elseif(!isset($status->id) && isset($client->id)){
+                $projects = Project::search($search)->where('company_id', $client->id)->paginate(8);
+            } else{
+                $projects = Project::search($search)->paginate();
+            }
+
+            $projects = $this->calcDeadline($projects);
+            $projectcount = $projects->count();
+            $status = Status::where('type', 'Progress')->get();
+            return view('project.project_search', compact('projects','projectcount', 'status'));
+
+        }
+
     public function detailsProject($company_id, $name)
     {
         $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
