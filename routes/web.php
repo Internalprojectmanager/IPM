@@ -20,8 +20,6 @@ Route::get('/home', function () {
 
 })->name('home');
 
-Route::get('pdf', 'PDFController@pdf')->name('createpdf');
-
 Auth::routes();
 
 Route::group(['prefix' => 'client'], function (){
@@ -80,6 +78,9 @@ Route::group(['prefix' => '{client_id}'], function () {
 
             Route::group(['prefix' => '{release_name}'], function (){
                 Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');
+
+                Route::get('/{version}/pdf', 'PDFController@createPDF')->name('createpdf');
+
                 Route::get('/feature', 'FeatureController@add')->name('addfeature');
                 Route::get('/feature/{feature_id}/edit', 'FeatureController@editFeature')->name('editFeature');
                 Route::post('/feature/{feature_id}/edit', 'FeatureController@updateFeature')->name('updateFeature');

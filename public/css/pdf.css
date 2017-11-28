@@ -12,8 +12,50 @@ hr {
     color: rgba(151,151,151,0.23);
 }
 
-/* FRONTPAGE */
-.logo-frontpage {
+p {
+    position: absolute;
+    margin: 50px 50px 50px 50px;
+}
+
+.logo-footer {
+    position: absolute;
+    height: 17px;
+    width: 85px;
+    left: 44px;
+}
+
+.h1 {
+    color: #000000;
+    font-size: 44px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    line-height: 41px;
+}
+
+.h2 {
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 16px;
+}
+
+footer .pagenum:before {
+    content: counter(page);
+}
+
+.page-nr {
+    position: absolute;
+    right: 67px;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+/* PAGE 1 */
+.logo-p1 {
     position: fixed;
     height: 22%;
     width: 26%;
@@ -21,60 +63,130 @@ hr {
     right: 0px;
 }
 
-.h1_frontpage {
+.h1-p1 {
     position: fixed;
     height: 82px;
     width: 288px;
     top: 198px;
     left: 50px;
     color: #000000;
-    font-size: 36px;
+    font-size: 42px;
     font-weight: bold;
     letter-spacing: 2px;
     line-height: 41px;
 }
 
-.h2_frontpage {
+.h2-p1 {
     position: fixed;
+    text-transform: uppercase;
     top: 275px;
     left: 50px;
     color: rgba(0,0,0,0.6);
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 1px;
     line-height: 24px;
     margin-top: 5px;
 }
 
-.h3_frontpage {
+.h3-p1 {
     position: fixed;
-    height: 10px;
-    width: 60px;
-    top: 314px;
+    top: 320px;
     left: 50px;
     color: rgba(0,0,0,0.6);
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 300;
     line-height: 10px;
 }
 
-.project-info-frontpage {
+.project-info-p1 {
+    position: absolute;
+    bottom: -58px;
+}
+
+.project-info-left {
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.project-info-right {
+    position: absolute;
+    right: 28px;
+    color: #000000;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 18px;
+    text-align: right;
+}
+/* END OF PAGE 1 */
+
+/* PAGE 3 */
+.content-p3 {
+    margin-top: 89px;
+}
+
+.content-title {
+    position: relative;
+    width: 100%;
+    right: 69px;
+    margin-left: 19px;
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.content-subtitle {
+    margin-left: 39px;
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.content-pagenum {
     position: fixed;
-    right: 44px;
-    bottom: 107px;
-    left: 44px;
+    text-align: right;
+    color: #000000;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: -18px;
+}
+/* END OF PAGE 3 */
+
+/* PAGE 4 */
+.table-p4 {
+
 }
 
-.project-info-left {
-    color: rgba(0,0,0,0.6);
-    font-size: 10px;
+.project-description {
+    color: #000000;
+    font-size: 12px;
     letter-spacing: 1px;
     line-height: 13px;
 }
 
-.project-info-left {
-    color: rgba(0,0,0,0.6);
-    font-size: 10px;
+.bold-text-p4 {
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
     letter-spacing: 1px;
     line-height: 13px;
 }
-/* END OF FRONTPAGE */
+
+.responsibility-p4 {
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.company-p4 {
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    font-style: italic;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+/* END OF PAGE 4 */
