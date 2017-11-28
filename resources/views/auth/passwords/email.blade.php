@@ -12,8 +12,11 @@
                 {{ session('status') }}
               </div>
             @endif
-
-            <form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
+            @if(config('app.secure') == TRUE)
+                <form class="form-horizontal" role="form" method="POST" action="{{ secure_url('/password/email') }}">
+            @else
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
+            @endif
               {{ csrf_field() }}
 
               <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

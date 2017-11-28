@@ -13,8 +13,11 @@
                 {{ session('status') }}
               </div>
             @endif
-
-            <form class="form-horizontal" role="form" method="POST" action="{{ route('password.request') }}">
+            @if(config('app.secure') == TRUE)
+              <form class="form-horizontal" role="form" method="POST" action="{{ secure_url('/password/reset') }}">
+            @else
+              <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/request') }}">
+            @endif
               {{ csrf_field() }}
 
               <input type="hidden" name="token" value="{{ $token }}">
