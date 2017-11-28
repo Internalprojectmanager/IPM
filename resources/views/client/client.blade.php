@@ -15,7 +15,33 @@
     </div>
 
     <div class="row block-white">
-        <span class="block-white-title">All clients</span> <span class="block-white-subtitle"> | {{$clientcount}} Clients</span>
+        <span class="block-white-title">All clients</span>
+        <span class="block-white-subtitle">
+            <span id="count_projects_bar">|</span>
+            <span class="counter">{{$clientcount}}</span>
+            <span class="contenttype">Clients</span>
+        </span>
+
+        @if(config('APP_SECURE') == TRUE)
+            <form action="{{secure_url('/client/overview')}}" class="pull-right searchform">
+        @else
+            <form action="{{url('/client/overview')}}" class="pull-right searchform">
+        @endif
+            {{ csrf_field() }}
+            <div class="form-group pull-right">
+                <input type="text" name="search" class="search searchfield" placeholder="Search">
+            </div>
+
+            <div class="form-group pull-right">
+                <select name="status" class="search dropdown-search">
+                    <option value="" selected>Status</option>
+                    @foreach($status as $s)
+                        <option value="{{$s->name}}">{{$s->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </form>
+
     </div>
 
     <!-- ADD COMPANY -->
@@ -44,7 +70,7 @@
         </form>
     </div>
 
-    <div class="row">
+    <div class="row bigtable">
         <table class="table client-table table-center">
             <thead>
             <th></th>
@@ -87,6 +113,8 @@
             </tbody>
 
         </table>
+
+        {{ $clients->links() }}
     </div>
 
 

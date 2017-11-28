@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Status extends Model
 {
     protected $table = "status";
+
+    use Searchable;
 
     protected $fillable = [
         'id', 'name', 'type', 'color'

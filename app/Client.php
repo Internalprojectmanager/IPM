@@ -3,12 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Client extends Model
 {
     protected $table = "client";
 
-    public $incrementing = false;
+    use Searchable;
 
     protected $fillable = [
         'id','name', 'description'

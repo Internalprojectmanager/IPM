@@ -19,32 +19,38 @@
         <span class="block-white-title">All projects</span>
         <span class="block-white-subtitle">
             <span id="count_projects_bar">|</span>
-            <span class="counter">{{$projectcount}} Projects</span>
+            <span class="counter">{{$projectcount}}</span>
+            <span class="contenttype">Projects</span>
         </span>
+        @if(config('APP_SECURE') == TRUE)
+            <form action="{{secure_url('/project/overview')}}" class="pull-right searchform">
+        @else
+            <form action="{{url('/project/overview')}}" class="pull-right searchform">
+        @endif
+            <div class="form-group pull-right">
+                <input type="text" name="search" class="search searchfield" placeholder="Search">
+            </div>
 
-        <div class="form-group pull-right">
-            <input type="text" class="search" placeholder="Search">
-        </div>
-
-        <div class="form-group pull-right">
-            <select type="text" class="client">
-                <option disabled="">Client</option>
-                @foreach($clients as $c)
-                    <option value="{{$c->name}}">{{$c->name}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group pull-right">
-            <select type="text" class="client">
-                <option disabled="">Status</option>
-                @foreach($status as $s)
-                    <option value="{{$s->name}}">{{$s->name}}</option>
-                @endforeach
-            </select>
-        </div>
+            <div class="form-group pull-right">
+                <select name='client' type="text" class="search dropdown-search">
+                    <option selected value="">Client</option>
+                    @foreach($clients as $c)
+                        <option value="{{$c->name}}">{{$c->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group pull-right">
+                <select name='status' type="text" class="search dropdown-search">
+                    <option  selected value="">Status</option>
+                    @foreach($status as $s)
+                        <option value="{{$s->name}}">{{$s->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </form>
     </div>
 
-    <div class="row">
+    <div class="row bigtable">
         <table class="table table-hover table-center results">
             <thead>
             <th></th>
