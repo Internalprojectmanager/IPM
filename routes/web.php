@@ -19,8 +19,18 @@ Route::get('/home', function () {
     return redirect(route('overviewproject'));
 
 })->name('home');
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'Auth\LoginController@login');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Auth::routes();
+Route::group(['prefix' => 'password'], function () {
+    Route::get('/reset', 'Auth\ResetPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('/reset', 'Auth\ResetPasswordController@reset');
+    Route::post('/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+});
+
 Route::group(['prefix' => 'client'], function (){
     Route::get('/overview', 'CompanyController@overviewCompany')->name('overviewclient');
     Route::get('/{name}/details', 'CompanyController@detailsCompany')->name('clientdetails');
