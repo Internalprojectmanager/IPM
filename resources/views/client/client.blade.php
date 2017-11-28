@@ -35,7 +35,6 @@
             <div class="form-group pull-right">
                 <select name="status" class="search dropdown-search">
                     <option value="" selected>Status</option>
-                    <option value="">All</option>
                     @foreach($status as $s)
                         <option value="{{$s->name}}">{{$s->name}}</option>
                     @endforeach
