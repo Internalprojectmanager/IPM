@@ -16,13 +16,11 @@ use App\Project;
 use App\Release;
 use DB;
 use Webpatser\Uuid\Uuid;
-
 use PDF;
 
 class PDFController extends Controller
 {
-
-    public function createPDF($company_id,$name,$release_name,$version){
+    public function createPDF($company_id,$name,$release_name, $version){
         $name = strtoupper(substr($name,0 ,5));
         $company_id = strtoupper(substr($company_id,0 ,5));
 
@@ -38,9 +36,10 @@ class PDFController extends Controller
         $status = array('Open', 'In Progress', 'Testing', 'Closed');
         $ids_ordered = implode(",", $status_string);
         $testreport = TestReport::where('release_id', $release->release_id)->get();
-        $features = Feature::where([['release_id', $release->release_id]])->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
-        $requirements = Requirement::where('release_id', $release->release_id)->get();
+        $features = Feature::where([['release_id', $release->release_uuid]])->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
+        $requirements = Requirement::where('release_id', $release->release_uuid)->get();
+
         $pdf = PDF::loadView('release.pdf', compact('release', 'project', 'features', 'company', 'requirements', 'testreport'));
-        return $pdf->stream('Project.pdf');
+        return $pdf->stream('Release.pdf');
     }
 }

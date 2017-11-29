@@ -2,21 +2,22 @@
 <html lang="en">
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <link href="{{asset('css/pdf.css', config('app.secure'))}}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 
-    <main>
-        <!-- PAGE 1 -->
-        <p id="p1">
-            <img class="logo-p1" src="{{asset('img/logo-iav-circles.png')}}">
-            <span class="h1-p1">PROJECT SPECIFICATION</span>
-            <span class="h2-p1">{{$project->name}} {{$release->name}} {{$release->version}}</span>
-            <span class="h3-p1"><?php echo date("d - m - Y"); ?></span>
+<main>
+    <!-- PAGE 1 -->
+    <p id="p1">
+        <img class="logo-p1" src="{{asset('img/logo-iav-circles.png')}}">
+        <span class="h1-p1">PROJECT SPECIFICATION</span>
+        <span class="h2-p1">{{$project->name}} {{$release->name}} {{$release->version}}</span>
+        <span class="h3-p1"><?php echo date("d - m - Y"); ?></span>
 
-            <span class="project-info-p1">
+        <span class="project-info-p1">
                 <span class="project-info-left">PROJECT NAME</span>
                 <span class="project-info-right">{{$project->name}}</span>
                 <hr>
@@ -30,60 +31,76 @@
                 <span class="project-info-right">{{$release->author}}</span>
                 <hr>
             </span>
-            <footer>
-                <img class="logo-footer" src="{{asset('img/logo-iav.png', config('app.secure'))}}">
-            </footer>
-        </p>
-        <!-- END OF PAGE 1 -->
+        <footer>
+            <img class="logo-footer" src="{{asset('img/logo-iav.png', config('app.secure'))}}">
+        </footer>
+    </p>
+    <!-- END OF PAGE 1 -->
 
-        <!-- PAGE 2 -->
-        <p id="p2">
-            <br><br><br><br><br>
-            <span class="h1">THE FUTURE IS</span>
-            <br>
-            <span class="h1">SIMPLE</span>
-        </p>
-        <!-- END OF PAGE 2 -->
+    <!-- PAGE 2 -->
+    <p id="p2">
+        <br><br><br><br><br>
+        <span class="h1">THE FUTURE IS</span>
+        <br>
+        <span class="h1">SIMPLE</span>
+    </p>
+    <!-- END OF PAGE 2 -->
 
-        <!-- PAGE 3 -->
-        <p id="p3">
+    <!-- PAGE 3 -->
+    <p id="p3">
+    <script type="text/php">
+        $GLOBALS['chapters'] = array();
+        $GLOBALS['backside'] = $pdf->open_object();
+    </script>
+        <span class="toc">
             <span class="h1">CONTENTS</span>
             <br><br><br><br><br>
             <span class="content-p3">
-                <span class="content-title">PROJECT DESCRIPTION
-                    <span class="content-pagenum">04</span>
+                    <span class="content-title">PROJECT DESCRIPTION
+                        <span class="content-pagenum">%%CH1%%</span>
+                    </span>
+                    <hr>
+                    <span class="content-title">PROJECT ROLES & RESPONSIBILITIES
+                        <span class="content-pagenum">%%CH2%%</span>
+                    </span>
+                    <hr>
+                    <span class="content-title">FEATURES
+                        <span class="content-pagenum">%%CH3%%</span>
+                    </span>
+                    <hr>
+                    <span class="content-subtitle">1.0 RE-DESIGN WEBSITE
+                        <span class="content-pagenum"></span>
+                    </span>
+                    <hr>
+                    <span class="content-subtitle">FUNCTIONAL REQUIREMENTS
+                        <span class="content-pagenum"></span>
+                    </span>
+                    <hr>
                 </span>
-                <hr>
-                <span class="content-title">PROJECT ROLES & RESPONSIBILITIES
-                    <span class="content-pagenum">05</span>
-                </span>
-                <hr>
-                <span class="content-title">FEATURES
-                    <span class="content-pagenum">06</span>
-                </span>
-                <hr>
-                <span class="content-subtitle">1.0 RE-DESIGN WEBSITE
-                    <span class="content-pagenum">07</span>
-                </span>
-                <hr>
-                <span class="content-subtitle">FUNCTIONAL REQUIREMENTS
-                    <span class="content-pagenum">08</span>
-                </span>
-                <hr>
-            </span>
-        </p>
-        <!-- END OF PAGE 3 -->
+        </span>
+            <script type="text/php">
+                $pdf->close_object();
+            </script>
+    </p>
+    <!-- END OF PAGE 3 -->
 
-        <!-- PAGE 4 -->
-        <p id="p4">
-            <span class="h1">PROJECT<br>DESCRIPTION</span>
-            <br><br><br>
-            <span class="h2" style="margin-bottom: 600px;">PROJECT DESCRIPTION</span><br>
-            <span class="project-description">
+    <!-- PAGE 4 -->
+    <p id="p4">
+        <span class="h1" id="project-description">PROJECT<br>DESCRIPTION</span>
+        <script type="text/php">
+            $GLOBALS['chapters']['1'] = $pdf->get_page_number();
+        </script>
+        <br><br><br>
+        <span class="h2" style="margin-bottom: 600px;">PROJECT DESCRIPTION</span><br>
+        <span class="project-description">
                 {{ $project->description }}
             </span>
-            <br><br><br><br>
-            <span class="h2">PROJECT ROLES & RESPONSIBILITIES</span><br><br><br>
+        <br><br><br><br>
+        <span class="h2">PROJECT ROLES & RESPONSIBILITIES</span>
+        <script type="text/php">
+            $GLOBALS['chapters']['2'] = $pdf->get_page_number();
+        </script>
+        <br><br><br>
 
         <span>
             <table class="table-p4">
@@ -167,23 +184,25 @@
                 </tbody>
             </table>
         </span>
+    </p>
+    <!-- END OF PAGE 4 -->
 
-        </p>
-        <!-- END OF PAGE 4 -->
-
-        <!-- PAGE 5 -->
+    <!-- PAGE 5 -->
+    @foreach($features as $f)
         <p>
-            <span class="h2">FEATURE 1.0</span>
+            <span class="h2">FEATURE {{ $f->id }}.0</span>
+            <script type="text/php">
+                $GLOBALS['chapters']['3'] = $pdf->get_page_number();
+            </script>
             <span>
                 <table class="table-p5">
                     <tbody>
                         <tr class="project-description">
                             <td width="35%">
-                                Re-Design Website
+                                {{ $f->name }}
                             </td>
                             <td width="65%">
-                                De homepage wordt een landingspagina waarbij je een introductie krijgt van het Effect Ai project. Hier moet de bezoeker en duidelijke indruk krijgen van het project. In de header zal een duidelijke indruk krijgen van het project. In de header zal een duidelijke slogan en logo getoond worden,
-                                vervolgens zullen er in 6 tot 8 blokken informatie, nieuws, updates, contact worden getoond. Nieuws en update blokken zullen doorverwijzen naar een content pagina.
+                                {{ $f->description }}
                             </td>
                         </tr>
                     </tbody>
@@ -203,20 +222,63 @@
                                 Hier moet een introtekst komen met een korte uitleg over Effect Ai plus een button om door te klikken onder de header komen 6 tot 8 blokken deze linken naar updates en nieuws. Er kunnen ook blokken tussen zitten met een creatieve interactie.
                             </td>
                         </tr>
+
+                        <tr>
+                            <td><br></td>
+                            <td><br></td>
+                        </tr>
+
+                        <tr class="project-description">
+                            <td width="35%">
+                                <strong>FR-1.2</strong>
+                                Content blokken
+                            </td>
+                            <td width="65%">
+                                Hier moet een introtekst komen met een korte uitleg over Effect Ai plus een button om door te klikken onder de header komen 6 tot 8 blokken deze linken naar updates en nieuws. Er kunnen ook blokken tussen zitten met een creatieve interactie.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><br></td>
+                            <td><br></td>
+                        </tr>
+
+                         <tr class="project-description">
+                            <td width="35%">
+                                <strong>FR-1.3</strong>
+                                Footer
+                            </td>
+                            <td width="65%">
+                                Hier moet een introtekst komen met een korte uitleg over Effect Ai plus een button om door te klikken onder de header komen 6 tot 8 blokken deze linken naar updates en nieuws. Er kunnen ook blokken tussen zitten met een creatieve interactie.
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </span>
         </p>
-        <!-- END OF PAGE 5 -->
+@endforeach
+<!-- END OF PAGE 5 -->
 
-    </main>
+</main>
 
-    <footer>
-        <img class="logo-footer" src="{{asset('img/logo-iav.png', config('app.secure'))}}">
-        <div class="page-nr">
-            <span class="pagenum"></span>
-        </div>
-    </footer>
+<footer>
+    <img class="logo-footer" src="{{asset('img/logo-iav.png', config('app.secure'))}}">
+    <div class="page-nr">
+        <span class="pagenum"></span>
+    </div>
+</footer>
+
+<script type="text/php">
+	foreach ($GLOBALS['chapters'] as $chapter => $page) {
+		$pdf->get_cpdf()->objects[$GLOBALS['backside']]['c'] = str_replace( '%%CH'.$chapter.'%%' , $page , $pdf->get_cpdf()->objects[$GLOBALS['backside']]['c'] );
+	}
+	$pdf->page_script('
+		if ($PAGE_NUM==1 ) {
+			$pdf->add_object($GLOBALS["backside"],"add");
+			$pdf->stop_object($GLOBALS["backside"]);
+		}
+	');
+</script>
 
 </body>
 </html>

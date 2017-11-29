@@ -4,17 +4,13 @@ footer { position: fixed; bottom: -60px; left: 0px; right: 0px; height: 50px; }
 p { page-break-after: always; }
 p:last-child { page-break-after: never; }
 
-body {
-    font-family: 'Roboto', sans-serif;
-}
-
 hr {
     color: rgba(151,151,151,0.23);
 }
 
 p {
-    position: absolute;
-    margin: 50px 50px 50px 50px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .logo-footer {
@@ -186,7 +182,3 @@ footer .pagenum:before {
     line-height: 13px;
 }
 /* END OF PAGE 4 */
-
-/* PAGE 5 */
-
-/* END OF PAGE 5 */

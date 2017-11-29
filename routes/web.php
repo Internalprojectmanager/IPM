@@ -78,7 +78,6 @@ Route::group(['prefix' => '{client_id}'], function () {
 
             Route::group(['prefix' => '{release_name}'], function (){
                 Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');
-
                 Route::get('/{version}/pdf', 'PDFController@createPDF')->name('createpdf');
 
                 Route::get('/feature', 'FeatureController@add')->name('addfeature');
