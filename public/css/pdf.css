@@ -100,7 +100,7 @@ footer .pagenum:before {
 
 .project-info-p1 {
     position: absolute;
-    bottom: -58px;
+    bottom: 0px;
 }
 
 .project-info-left {
@@ -156,10 +156,6 @@ footer .pagenum:before {
 /* END OF PAGE 3 */
 
 /* PAGE 4 */
-.table-p4 {
-
-}
-
 .project-description {
     color: #000000;
     font-size: 12px;
@@ -190,3 +186,7 @@ footer .pagenum:before {
     line-height: 13px;
 }
 /* END OF PAGE 4 */
+
+/* PAGE 5 */
+
+/* END OF PAGE 5 */
