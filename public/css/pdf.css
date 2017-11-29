@@ -4,6 +4,10 @@ footer { position: fixed; bottom: -60px; left: 0px; right: 0px; height: 50px; }
 p { page-break-after: always; }
 p:last-child { page-break-after: never; }
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 hr {
     color: rgba(151,151,151,0.23);
 }
@@ -148,6 +152,14 @@ footer .pagenum:before {
     font-size: 12px;
     letter-spacing: 1px;
     line-height: -18px;
+}
+
+#disable-font {
+    font-family: initial;
+}
+
+#content-title-font {
+    font-family: 'Roboto', sans-serif;
 }
 /* END OF PAGE 3 */
 

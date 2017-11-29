@@ -9,7 +9,12 @@
 
 <body>
 
+<script type="text/php">
+    $GLOBALS['chapters'] = array();
+</script>
+
 <main>
+
     <!-- PAGE 1 -->
     <p id="p1">
         <img class="logo-p1" src="{{asset('img/logo-iav-circles.png')}}">
@@ -49,39 +54,41 @@
     <!-- PAGE 3 -->
     <p id="p3">
     <script type="text/php">
-        $GLOBALS['chapters'] = array();
-        $GLOBALS['backside'] = $pdf->open_object();
+    $GLOBALS['backside'] = $pdf->open_object();
     </script>
-        <span class="toc">
-            <span class="h1">CONTENTS</span>
-            <br><br><br><br><br>
-            <span class="content-p3">
-                    <span class="content-title">PROJECT DESCRIPTION
-                        <span class="content-pagenum">%%CH1%%</span>
-                    </span>
-                    <hr>
-                    <span class="content-title">PROJECT ROLES & RESPONSIBILITIES
-                        <span class="content-pagenum">%%CH2%%</span>
-                    </span>
-                    <hr>
-                    <span class="content-title">FEATURES
-                        <span class="content-pagenum">%%CH3%%</span>
-                    </span>
-                    <hr>
-                    <span class="content-subtitle">1.0 RE-DESIGN WEBSITE
-                        <span class="content-pagenum"></span>
-                    </span>
-                    <hr>
-                    <span class="content-subtitle">FUNCTIONAL REQUIREMENTS
-                        <span class="content-pagenum"></span>
-                    </span>
-                    <hr>
+        <span class="h1">CONTENTS</span>
+        <br><br><br><br><br>
+        <span class="content-p3">
+                <span class="content-title" id="disable-font">
+                    <span id="content-title-font">PROJECT DESCRIPTION</span>
+                    <span class="content-pagenum" id="disable-font">%%CH1%%</span>
                 </span>
-        </span>
-            <script type="text/php">
-                $pdf->close_object();
-            </script>
+                <hr>
+                <span class="content-title" id="disable-font">
+                    <span id="content-title-font">PROJECT ROLES & RESPONSIBILITIES</span>
+                    <span class="content-pagenum" id="disable-font">%%CH2%%</span>
+                </span>
+                <hr>
+                <span class="content-title" id="disable-font">
+                    <span id="content-title-font">FEATURES</span>
+                    <span class="content-pagenum" id="disable-font">%%CH3%%</span>
+                </span>
+                <hr>
+                <span class="content-subtitle" id="disable-font">
+                    <span id="content-title-font">1.0 RE-DESIGN WEBSITE</span>
+                    <span class="content-pagenum" id="disable-font"></span>
+                </span>
+                <hr>
+                <span class="content-subtitle" id="disable-font">
+                    <span id="content-title-font">FUNCTIONAL REQUIREMENTS</span>
+                    <span class="content-pagenum" id="disable-font"></span>
+                </span>
+                <hr>
+            </span>
     </p>
+    <script type="text/php">
+            $pdf->close_object();
+    </script>
     <!-- END OF PAGE 3 -->
 
     <!-- PAGE 4 -->
@@ -193,6 +200,7 @@
             <span class="h2">FEATURE {{ $f->id }}.0</span>
             <script type="text/php">
                 $GLOBALS['chapters']['3'] = $pdf->get_page_number();
+
             </script>
             <span>
                 <table class="table-p5">
@@ -278,6 +286,7 @@
 			$pdf->stop_object($GLOBALS["backside"]);
 		}
 	');
+
 </script>
 
 </body>
