@@ -9,7 +9,7 @@
 @section('content')
 
     <div class="row center">
-        <div class="header-3">
+        <div class="header-3" id="project-details">
             <span class="project-title" id="project-name">Project Name</span>
             <span class="project-detail" id="name-project">{{$projects->name}}</span>
 
@@ -195,12 +195,30 @@
             <span class="glyphicon glyphicon-plus" id="release-plus"></span>
         </a>
 
-        @foreach($releases as $release)
+        <div class="block-white" id="release-block">
             <div class="row">
-                <a href="{{route('showrelease', ['name' => $projects->name, 'company_id' => $projects->company_id,
-                     'release_name' => $release->name, 'version' => $release->version])}}">{{$release->version}} {{$release->name}} </a>
+                <table class="table table-hover table-center results" id="release-overview">
+                    <thead>
+                    <th>Version+Name</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Deadline</th>
+                    <th>Assigned To</th>
+                    </thead>
+                    <tbody>
+                    @foreach($releases as $release)
+                        <tr>
+                            <td><span class="tabletitle"><a href="{{route('showrelease', ['name' => $projects->name, 'company_id' => $projects->company_id,
+                        'release_name' => $release->name, 'version' => $release->version])}}">{{$release->version}} {{$release->name}} </a></span>
+                                <br> <span
+                                        class="tablesubtitle">@if(isset($release->version)){{$release->name}}@endif</span>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
-        @endforeach
+        </div>
 
         <div class="col-md-4">
             <div class="row">

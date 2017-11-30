@@ -102,9 +102,6 @@ html, body {
 }
 
 .header-3{
-    left: 140px;
-    top: 143px;
-    right: 30px;
     height: 293px;
     background-color: #FFFFFF;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
@@ -353,6 +350,12 @@ label{
 }
 
 /* Project details */
+#project-details{
+    left: 140px;
+    top: 143px;
+    right: 30px;
+}
+
 .project-title{
     color: #898989;
     font-size: 14px;
@@ -585,3 +588,18 @@ label{
     top: 14px;
 }
 
+/* release table */
+#release-block{
+    position: absolute;
+    height: auto;
+    margin-top: 137px;
+    left: 155px;
+    right: 30px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
+}
+
+#release-overview{
+    top: 537px;
+    left: 155px;
+}
