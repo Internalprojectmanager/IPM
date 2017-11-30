@@ -20,13 +20,26 @@
 
 </head>
 <body>
-@include('layout.nav')
-<div class="container">
-    <div class="row">
-        @yield('breadcrumbs')
+@if(Route::currentRouteName() == 'login')
+    <nav id="navbar_top"></nav>
+    <div class="container_login">
+        <div class="row">
+            @yield('content')
+        </div>
     </div>
-    @yield('content')
-</div>
+
+
+
+@else
+    @include('layout.nav')
+    <div class="container">
+        <div class="row">
+            @yield('breadcrumbs')
+        </div>
+        @yield('content')
+    </div>
+@endif
+
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

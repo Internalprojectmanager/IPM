@@ -12,6 +12,10 @@ html, body {
     padding: 100px 60px 30px 170px;
     width: 100%;
 }
+.container_login {
+    padding: 100px 30px 30px 30px;
+    width: 100%;
+}
 
 /* TIJDELIJK: The Modal (background) */
 .modal {
@@ -249,6 +253,18 @@ label{
     text-transform: uppercase;
 }
 
+.btn-noback, .btn-noback:hover, .btn-noback:active, .btn-noback:focus{
+    background: none;
+    height: 45px;
+    width: 160px;
+    border: 1px solid #5D99CA;
+    color:black;
+    border-radius: 0px;
+    font-size: 15px;
+    line-height: 18px;
+    text-transform: uppercase;
+}
+
 .btn-second{
     color: #fff;
     background-color: #3097D1;
@@ -373,4 +389,36 @@ label{
 .recent-projects a{
     text-decoration: underline;
     color: black;
+}
+
+.supertitle{
+    font-size: 72px;
+    line-height: 85px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.undertitle{
+    margin-top: 20px;
+}
+.form-control-login, .form-control-login:hover, .form-control-login:focus{
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid #9B9B9B;
+    height: 36px;
+    border-radius: 0px;
+    box-shadow: none;
+}
+.form-group{
+    margin-top: 20px;
+}
+
+.btn-link{
+    margin-top: 20px;
+    font-weight: bold;
+    color:#535353;
+}
+
+.margin-top-50{
+    margin-top: 50px;
 }
