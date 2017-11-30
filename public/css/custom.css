@@ -589,17 +589,19 @@ label{
 }
 
 /* release table */
-#release-block{
+#release-overview{
     position: absolute;
-    height: auto;
-    margin-top: 137px;
-    left: 155px;
-    right: 30px;
-    background-color: #FFFFFF;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
+    top: 537px;
+    left: 185px;
+    width: 81.89%;
 }
 
-#release-overview{
-    top: 537px;
+#release-white{
+    position: absolute;
+    height: 140px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
+    top: 573px;
     left: 155px;
+    right: 45px;
 }

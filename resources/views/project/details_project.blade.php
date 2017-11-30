@@ -195,31 +195,36 @@
             <span class="glyphicon glyphicon-plus" id="release-plus"></span>
         </a>
 
-        <div class="block-white" id="release-block">
-            <div class="row">
-                <table class="table table-hover table-center results" id="release-overview">
-                    <thead>
-                    <th>Version+Name</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Deadline</th>
-                    <th>Assigned To</th>
-                    </thead>
+        <div class="row">
+            <table class="table table-hover table-center results" id="release-overview">
+                <thead>
+                <th>Version+Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Deadline</th>
+                <th>Assigned To</th>
+                </thead>
+                <div id="release-white">
                     <tbody>
                     @foreach($releases as $release)
                         <tr>
                             <td><span class="tabletitle"><a href="{{route('showrelease', ['name' => $projects->name, 'company_id' => $projects->company_id,
-                        'release_name' => $release->name, 'version' => $release->version])}}">{{$release->version}} {{$release->name}} </a></span>
-                                <br> <span
-                                        class="tablesubtitle">@if(isset($release->version)){{$release->name}}@endif</span>
+                        'release_name' => $release->name, 'version' => $release->version])}}">{{$release->version}}
+                                        - {{$release->name}} </a></span>
                             </td>
+                            <td class="table-description">{{implode(' ', array_slice(str_word_count($release->description, 2), 0, 10))}}
+                                ...
+                            </td>
+                            <td></td>
+                            <td>{{$release->deadline}}</td>
+                            <td></td>
                         </tr>
                     @endforeach
                     </tbody>
-                </table>
-            </div>
+                </div>
+            </table>
         </div>
-
+    <!--
         <div class="col-md-4">
             <div class="row">
                 <a class="btn btn-primary"
@@ -228,25 +233,26 @@
             </div>
 
             @foreach($letters as $letter)
-                <div class="row">
-                    <a href="{{route('showletter', ['name' => $projects->name, 'company_id' => $projects->company_id, 'letter_id' => $letter->id])}}">{{$letter->title}}</a>
+        <div class="row">
+            <a href="{{route('showletter', ['name' => $projects->name, 'company_id' => $projects->company_id, 'letter_id' => $letter->id])}}">{{$letter->title}}</a>
                 </div>
             @endforeach
-        </div>
-        <div class="col-md-4">
-            <div class="row">
-                <a class="btn btn-primary"
-                   href="{{route('adddocument', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <a class="btn btn-primary"
+                       href="{{route('adddocument', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">
                     <span class="glyphicon glyphicon-plus"></span> Add document</a>
 
             </div>
             @foreach($documents as $document)
-                <p>
-                    <a href="{{route('showdocument', ['name' => $projects->name, 'company_id' => $projects->company_id,
+        <p>
+            <a href="{{route('showdocument', ['name' => $projects->name, 'company_id' => $projects->company_id,
                     'document_name' => $document->title, 'document_id' => $document->id])}}">{{$document->title}}</a>
                 </p>
             @endforeach
-        </div>
+            </div>
+-->
     </div>
 
 @endsection
