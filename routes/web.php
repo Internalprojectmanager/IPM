@@ -30,7 +30,6 @@ Route::group(['prefix' => 'password'], function () {
     Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 });
-
 Route::group(['prefix' => 'client'], function (){
     Route::get('/overview', 'CompanyController@overviewCompany')->name('overviewclient');
     Route::post('/overview', 'CompanyController@searchCompany')->name('searchCompany');
@@ -71,8 +70,8 @@ Route::group(['prefix' => 'testreport'], function () {
 
 Route::post('/release/overview', 'ReleaseController@overviewTestrapport')->name('storerelease');
 
-Route::group(['prefix' => '{client_id}'], function () {
-    Route::group(['prefix' => 'project'], function (){
+Route::group(['prefix' => 'project'], function (){
+    Route::group(['prefix' => '{client_id}'], function () {
         Route::group(['prefix' => '{name}'], function (){
             Route::get('/details', 'ProjectController@detailsProject')->name('projectdetails');
             Route::get('/edit', 'ProjectController@editProject')->name('editproject');
@@ -89,6 +88,8 @@ Route::group(['prefix' => '{client_id}'], function () {
 
             Route::group(['prefix' => '{release_name}'], function (){
                 Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');
+                Route::get('/{version}/pdf', 'PDFController@createPDF')->name('createpdf');
+
                 Route::get('/feature', 'FeatureController@add')->name('addfeature');
                 Route::get('/feature/{feature_id}/edit', 'FeatureController@editFeature')->name('editFeature');
                 Route::post('/feature/{feature_id}/edit', 'FeatureController@updateFeature')->name('updateFeature');

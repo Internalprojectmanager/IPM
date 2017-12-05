@@ -29,6 +29,8 @@
                     </div>
                 @endforeach
                 <a href="{{route('addtestreport', $release->id)}}">Add Test Reports</a><br>
+                <a href="{{route('createpdf', ['name' => $project->name, 'company_id' => $project->company_id,
+                     'release_name' => $release->name, 'version' => $release->version])}}">Create PDF</a><br>
                 <hr>
             </div>
         </div>

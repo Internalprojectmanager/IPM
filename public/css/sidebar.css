@@ -8,12 +8,39 @@
     z-index: 999;
 }
 
-#logo_iav {
-    text-align: center;
-    margin-top: 12px;
-    margin-bottom: 12px;
+#sidebar a {
+    color: #fff;
+    font-size: 14px;
+    line-height: 30px;
 }
 
+.sidebar_link {
+    color: #fff;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.sidebar_link:hover {
+    text-decoration: none;
+}
+
+.sidebar_object {
+    text-align: center;
+    padding-top: 25px;
+    width: 100%;
+    height: 91px;
+}
+
+
+.sidebar_object:hover {
+    border-left: 10px solid #fff;
+}
+
+.active {
+    border-left: 10px solid #fff;
+}
+
+/* TOP NAVBAR */
 #navbar_top {
     position: fixed;
     width: 100%;
@@ -50,33 +77,4 @@
 
 #dropdown_arrow {
     margin-left: 10px;
-}
-
-#sidebar_object {
-    text-align: center;
-    padding-top: 25px;
-    width: 100%;
-    height: 91px;
-}
-
-#sidebar_link {
-    color: #fff;
-    font-size: 14px;line-height: 30px;
-}
-
-#sidebar_link:hover {
-    text-decoration: none;
-}
-
-
-#sidebar_object:hover {
-    border-left: 10px solid #fff;
-}
-
-.active {
-    border-left: 10px solid #fff;
-}
-
-#link_name {
-    width: 100%;
 }

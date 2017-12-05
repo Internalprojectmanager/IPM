@@ -96,7 +96,7 @@
                         <?php $i = 0 ;?>
                         @foreach ($client->projects as $p)
                             @if($i < 2)
-                                    <div class="col-md-6 recent-projects"><a href="/{{$client->id}}/project/{{$p->name}}/details">{{$p->name}}</a></div>
+                                    <div class="col-md-6 recent-projects"><a href="{{route('projectdetails', ['client_id' => $client->id, 'name' => $p->name])}}">{{$p->name}}</a></div>
                             @endif
                             <?php $i++;?>
                         @endforeach</td>

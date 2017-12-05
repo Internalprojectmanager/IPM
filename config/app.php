@@ -182,6 +182,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
         Yab\MySQLScout\Providers\MySQLScoutServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -231,6 +232,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
 
     ],
 
