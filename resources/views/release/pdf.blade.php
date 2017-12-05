@@ -11,11 +11,6 @@
 
 <main>
 
-    <script type="text/php">
-        $GLOBALS['chapters'] = array();
-        $GLOBALS['backside'] = $pdf->open_object();
-    </script>
-
     <!-- PAGE 1 -->
     <p id="p1">
         <img class="logo-p1" src="{{asset('img/logo-iav-circles.png')}}">
@@ -54,6 +49,10 @@
 
     <!-- PAGE 3 -->
     <p id="p3">
+        <script type="text/php">
+            $GLOBALS['chapters'] = array();
+            $GLOBALS['backside'] = $pdf->open_object();
+        </script>
         <span class="h1">CONTENTS</span>
         <br><br><br><br><br>
         <span class="content-p3">
@@ -94,7 +93,6 @@
         <span class="h1" id="project-description">PROJECT<br>DESCRIPTION</span>
         <script type="text/php">
 	        $GLOBALS['chapters']['1'] = $pdf->get_page_number();
-
         </script>
         <br><br><br>
         <span class="h2" style="margin-bottom: 600px;">PROJECT DESCRIPTION</span><br>
@@ -105,7 +103,6 @@
         <span class="h2">PROJECT ROLES & RESPONSIBILITIES</span>
         <script type="text/php">
 	        $GLOBALS['chapters']['2'] = $pdf->get_page_number();
-
         </script>
         <br><br><br>
 
@@ -198,7 +195,6 @@
     <?php $featureID = 0; ?>
     <script type="text/php">
         $GLOBALS['chapters']['3'] = $pdf->get_page_number();
-
     </script>
     @foreach($features as $f)
         <p>
@@ -288,12 +284,11 @@
 		$pdf->get_cpdf()->objects[$GLOBALS['backside']]['c'] = str_replace( '%%CH'.$chapter.'%%' , $page , $pdf->get_cpdf()->objects[$GLOBALS['backside']]['c'] );
 	}
 	$pdf->page_script('
-		if ($PAGE_NUM==1 ) {
+		if ($PAGE_NUM==3 ) {
 			$pdf->add_object($GLOBALS["backside"],"add");
 			$pdf->stop_object($GLOBALS["backside"]);
 		}
 	');
-
 </script>
 
 </body>

@@ -1,6 +1,6 @@
 @page { margin: 100px 25px; }
 header { position: fixed; top: -60px; left: 0px; right: 0px; height: 50px; }
-footer { position: fixed; bottom: -60px; left: 0px; right: 0px; height: 50px; }
+footer { position: fixed; bottom: -100px; left: 0px; right: 0px; height: 50px; }
 p { page-break-after: always; }
 p:last-child { page-break-after: never; }
 
@@ -148,6 +148,7 @@ footer .pagenum:before {
 .content-pagenum {
     position: fixed;
     text-align: right;
+    margin-right: -64px;
     color: #000000;
     font-size: 12px;
     letter-spacing: 1px;
@@ -160,6 +161,7 @@ footer .pagenum:before {
 
 #content-title-font {
     font-family: 'Roboto', sans-serif;
+    margin-right: 168px;
 }
 /* END OF PAGE 3 */
 
