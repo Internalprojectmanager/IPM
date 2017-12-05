@@ -242,8 +242,7 @@ label{
     font-weight: 400;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus{
-    background-color: #F5A623;
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-danger{
     height: 45px;
     width: 160px;
     color:black;
@@ -252,6 +251,17 @@ label{
     font-size: 15px;
     text-transform: uppercase;
 }
+
+.btn-danger, btn-danger:hover, btn-danger:focus, btn-danger:active{
+    background-color: #D35847;
+    color:white;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus{
+    background-color: #F5A623;
+    color:black;
+}
+
 
 .btn-noback, .btn-noback:hover, .btn-noback:active, .btn-noback:focus{
     background: none;
@@ -413,6 +423,7 @@ label{
     border-radius: 0px;
     box-shadow: none;
 }
+
 .form-group{
     margin-top: 20px;
 }
@@ -425,4 +436,13 @@ label{
 
 .margin-top-50{
     margin-top: 50px;
+}
+
+.form-forgot-field{
+    width: 300px;
+    float: left;
+}
+
+.form-forgot-field button{
+    margin-top: 20px;
 }
