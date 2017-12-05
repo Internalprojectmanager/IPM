@@ -19,6 +19,8 @@ Route::get('/home', function () {
     return redirect(route('overviewproject'));
 
 })->name('home');
+
+Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');

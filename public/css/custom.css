@@ -241,8 +241,11 @@ label{
     color:#898989;
     font-weight: 400;
 }
+.form-forgot-field button{
+    margin-top: 20px;
+}
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-danger{
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-danger, .btn-save{
     height: 45px;
     width: 160px;
     color:black;
@@ -262,8 +265,32 @@ label{
     color:black;
 }
 
+.btn-save, .btn-save:hover, .btn-save:focus, .btn-save:active:focus {
+    color:white;
+    background: rgba(107,175,28,0.8) url("../svg/Save icon.svg") no-repeat 10px center;
+    width: 97px;
+    text-align: right;
+    padding-right: 18px;
+    text-transform: none;
+    font-weight: normal;
+    box-shadow: none ;
+    outline: 0;
+}
 
-.btn-noback, .btn-noback:hover, .btn-noback:active, .btn-noback:focus{
+.btn-cancel, .btn-cancel:hover, .btn-cancel:focus, .btn-cancel:active:focus {
+    border: none;
+    text-align: right;
+    width: 90px;
+    color: #C74237;
+    background: #f2f2f2 url("../svg/Cancel icon.svg") no-repeat 15px center;
+    font-size: 15px;
+    margin-top: 25px !important;
+    box-shadow: none;
+    outline: 0;
+}
+
+
+.btn-noback, .btn-noback:hover, .btn-noback:active:focus, .btn-noback:target{
     background: none;
     height: 45px;
     width: 160px;
@@ -273,12 +300,16 @@ label{
     font-size: 15px;
     line-height: 18px;
     text-transform: uppercase;
+    box-shadow: none;
+    outline: 0;
 }
 
-.btn-second{
+.btn-second, .btn-second:active:focus {
     color: #fff;
     background-color: #3097D1;
     border-color: #2a88bd;
+    box-shadow: none;
+    outline: 0;
 }
 
 .icon-right{
@@ -441,8 +472,4 @@ label{
 .form-forgot-field{
     width: 300px;
     float: left;
-}
-
-.form-forgot-field button{
-    margin-top: 20px;
 }
