@@ -133,7 +133,8 @@
             </svg>
             <span class="project-detail" id="link-t">-</span>
 
-            <button class="blue-button" id="button-files">
+            <button href="{{route('showdocument', ['name' => $projects->name, 'company_id' => $projects->company_id,
+                    'document_name' => $documents->title, 'document_id' => $documents->id])}}" class="blue-button" id="button-files">
                 <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
