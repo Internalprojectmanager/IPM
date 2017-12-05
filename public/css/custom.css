@@ -303,6 +303,10 @@ label{
 
 }
 
+.block-white .form-group{
+    margin-top: 0;
+}
+
 .breadcrumb .active, .pagination .active{
     border-left: none;
 }
