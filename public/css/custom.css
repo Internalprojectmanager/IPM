@@ -102,7 +102,6 @@ html, body {
 }
 
 .header-3{
-    height: 293px;
     background-color: #FFFFFF;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
 }
@@ -354,6 +353,7 @@ label{
     left: 140px;
     top: 143px;
     right: 30px;
+    height: 209px;
 }
 
 .project-title{
@@ -384,12 +384,14 @@ label{
     position: absolute;
     left: 170px;
     top: 233px;
+    display: none;
 }
 
 #description-project{
     position: absolute;
     left: 182px;
     top: 254px;
+    display: none;
 }
 
 #project-code{
@@ -420,42 +422,49 @@ label{
     position: absolute;
     left: 45%;
     top: 233px;
+    display: none;
 }
 
 #user-icon{
     position: absolute;
     left: 46.18%;
     top: 261.5px;
+    display: none;
 }
 
 #contact-name{
     position: absolute;
     left: 47.87%;
     top: 259px;
+    display: none;
 }
 
 #phone-icon{
     position: absolute;
     left: 46.18%;
     top: 286px;
+    display: none;
 }
 
 #contact-phone{
     position: absolute;
     left: 47.87%;
     top: 283px;
+    display: none;
 }
 
 #email-icon{
     position: absolute;
     left: 46.18%;
     top: 309px;
+    display: none;
 }
 
 #contact-email{
     position: absolute;
     left: 47.87%;
     top: 307px;
+    display: none;
 }
 
 #link{
@@ -506,7 +515,7 @@ label{
     width: 85px;
     position: absolute;
     right: 360px;
-    top: 361px;
+    top: 277px;
 }
 
 #paperclip-icon{
@@ -526,7 +535,7 @@ label{
     width: 111px;
     position: absolute;
     right: 224px;
-    top: 361px;
+    top: 277px;
 }
 
 #people-icon{
@@ -546,7 +555,7 @@ label{
     width: 139px;
     position: absolute;
     right: 60px;
-    top: 361px;
+    top: 277px;
 }
 
 #pdf-icon{
@@ -611,4 +620,23 @@ label{
     top: 573px;
     left: 155px;
     right: 45px;
+}
+
+.black-button{
+    height: 15px;
+    width: 50px;
+    background-color: #000000;
+    border: none;
+}
+
+#black-button-down{
+    position: absolute;
+    top: 332px;
+    left: 52.2%;
+}
+
+#arrow{
+    margin: 3px;
+    height: 9px;
+    width: 15px;
 }
