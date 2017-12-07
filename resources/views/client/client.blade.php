@@ -7,11 +7,9 @@
 @section('breadcrumbs', Breadcrumbs::render('client'))
 @section('content')
     <div class="row">
-        <a class="black" href="{{route('addclient')}}">
-            <button class="btn-primary">
-                Add Client <span class="icon-right glyphicon glyphicon-plus"></span>
-            </button></a>
-
+        <button class="btn-primary black" id="myBtn">
+            Add Client <span class="icon-right glyphicon glyphicon-plus"></span>
+        </button>
     </div>
 
     <div class="row block-white">
@@ -44,31 +42,92 @@
 
     </div>
 
-    <!-- ADD COMPANY -->
-    <div id="addCompany" class="modal">
-        <span onclick="document.getElementById('addCompany').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form action="{{route('storeclient')}}" method="post" class="modal-content animate">
-            {{ csrf_field() }}
-            <h3>Company</h3>
-            <div class="form-group">
-                <input type="text" class="form-control" name="client_name" id="client_name" placeholder="Company name"
-                       required>
-                <br><br>
-                <textarea rows="4" cols="50" name="description" class="form-control" id="description"
-                          placeholder="Company description"></textarea>
+    <!-- ADD CLIENT MODAL -->
+    <div id="addClientModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <span>Add Client</span>
             </div>
-            <div class="row">
-                <div class="col-md-6">
+            <div class="modal-body">
+                <form action="{{route('storeclient')}}" method="post">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label class="form-label-modal">Client Name<span class="required">*</span></label>
+                        <input type="text" class="form-control input-text-modal" name="client_name" id="client_name">
+                        <br><br>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label-modal">Client Description</label>
+                        <textarea rows="4" cols="50" name="description" class="form-control" id="description"></textarea>
+                        <br><br>
+                    </div>
+                        <!--
+                        <label for="description">Description:</label>
+                        <textarea rows="4" cols="50" name="description" class="form-control" id="description"></textarea>
+                        <br><br>
+
+                        <label for="contact_name">Contact Name:</label>
+                        <input type="text" class="form-control" name="contact_name" id="contact_name">
+                        <br><br>
+
+                        <label for="contact_number">Contact Phonenumber:</label>
+                        <input type="text" class="form-control" name="contact_number" id="contact_number">
+                        <br><br>
+
+                        <label for="contact_number">Contact Email:</label>
+                        <input type="text" class="form-control" name="contact_mail" id="contact_number">
+                        <br><br>
+
+
+                        <label for="client_status">Client Status:</label>
+                        <br>
+                        <select name="status">
+                            @foreach($status as $s)
+                                <option value="{{$s->id}}">{{$s->name}}</option>
+                            @endforeach
+                        </select>
+                        <br><br>
+                    </div>
                     <button class="btn btn-primary" type="submit">Submit</button>
-                </div>
-                <div class="col-md-6">
-                    <button class="btn btn-danger" onclick="document.getElementById('addCompany').style.display='none'">
-                        Cancel
-                    </button>
-                </div>
+                </form>-->
             </div>
-        </form>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+
     </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('addClientModal');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
     <div class="row bigtable">
         <table class="table client-table table-center">
