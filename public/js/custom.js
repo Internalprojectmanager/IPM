@@ -67,5 +67,33 @@ function projectDetailsDown() {
     document.getElementById("email-icon").classList.toggle("show");
     document.getElementById("contact-email").classList.toggle("show");
 
-    document.getElementById("project-details").style.height = '209px';
+    document.getElementById("black-button-up").classList.toggle("show");
+    document.getElementById("black-button-down").style.visibility = 'hidden';
+
+    document.getElementById('project-details').style.height = '292px';
+
+    document.getElementById('button-files').style.top = '361px';
+    document.getElementById('button-people').style.top = '361px';
+    document.getElementById('button-pdf').style.top = '361px';
+}
+
+function projectDetailsUp() {
+    document.getElementById("project-description").classList.toggle("show");
+    document.getElementById("description-project").classList.toggle("show");
+    document.getElementById("contact-person").classList.toggle("show");
+    document.getElementById("user-icon").classList.toggle("show");
+    document.getElementById("contact-name").classList.toggle("show");
+    document.getElementById("phone-icon").classList.toggle("show");
+    document.getElementById("contact-phone").classList.toggle("show");
+    document.getElementById("email-icon").classList.toggle("show");
+    document.getElementById("contact-email").classList.toggle("show");
+
+    document.getElementById("black-button-up").classList.toggle("show");
+    document.getElementById("black-button-down").style.visibility = 'visible';
+
+    document.getElementById('project-details').style.height = '209px';
+
+    document.getElementById('button-files').style.top = '277px';
+    document.getElementById('button-people').style.top = '277px';
+    document.getElementById('button-pdf').style.top = '277px';
 }
