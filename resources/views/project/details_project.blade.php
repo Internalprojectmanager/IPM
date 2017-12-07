@@ -133,37 +133,7 @@
             </svg>
             <span class="project-detail" id="link-t">-</span>
 
-            <button onclick="projectDetailsDown()" class="black-button" id="black-button-down">
-                <svg id="arrow" width="16px" height="9px" viewBox="0 0 16 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
-                    <title>More info Down icon</title>
-                    <desc>Created with Sketch.</desc>
-                    <defs></defs>
-                    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="MoreButton/Down1" transform="translate(-17.000000, -3.000000)" fill-rule="nonzero" fill="#FFFFFF">
-                            <g id="More...">
-                                <path d="M17.9098728,3.46027277 C18.4736882,2.86995684 19.2586329,2.8236316 19.9478842,3.46027277 L25.0015316,8.41972068 L30.055179,3.46027277 C30.7444303,2.8236316 31.5306682,2.86995684 32.0906041,3.46027277 C32.6544194,4.04926511 32.6182111,5.044596 32.0906041,5.59785173 C31.5655834,6.15110746 26.0192441,11.5566013 26.0192441,11.5566013 C25.7386296,11.8517592 25.3700806,12 25.0015316,12 C24.6329826,12 24.2644336,11.8517592 23.9812328,11.5566013 C23.9812328,11.5566013 18.4374798,6.15110746 17.9098728,5.59785173 C17.3809727,5.044596 17.3460575,4.04926511 17.9098728,3.46027277 Z" id="More-info-Down-icon"></path>
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-            </button>
-
-            <button onclick="projectDetailsUp()" class="black-button" id="black-button-up">
-                <svg id="arrow" width="15px" height="9px" viewBox="0 0 15 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
-                    <title>More info SVG</title>
-                    <desc>Created with Sketch.</desc>
-                    <defs></defs>
-                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="Style-Guide" transform="translate(-856.000000, -3136.000000)" fill-rule="nonzero" fill="#FFFFFF">
-                            <g id="Group-10" transform="translate(823.000000, 3100.000000)">
-                                <path d="M33.4098728,36.4602728 C33.9736882,35.8699568 34.7586329,35.8236316 35.4478842,36.4602728 L40.5015316,41.4197207 L45.555179,36.4602728 C46.2444303,35.8236316 47.0306682,35.8699568 47.5906041,36.4602728 C48.1544194,37.0492651 48.1182111,38.044596 47.5906041,38.5978517 C47.0655834,39.1511075 41.5192441,44.5566013 41.5192441,44.5566013 C41.2386296,44.8517592 40.8700806,45 40.5015316,45 C40.1329826,45 39.7644336,44.8517592 39.4812328,44.5566013 C39.4812328,44.5566013 33.9374798,39.1511075 33.4098728,38.5978517 C32.8809727,38.044596 32.8460575,37.0492651 33.4098728,36.4602728 Z" id="More-info-SVG" transform="translate(40.500000, 40.500000) rotate(-180.000000) translate(-40.500000, -40.500000) "></path>
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-            </button>
+            <button onclick="projectDetailsDown()" class="black-button" id="black-button-down"></button>
 
             <button onclick="location.href='{{route('adddocument', ['name' => $projects->name, 'company_id' => $projects->company_id])}}'"
                     class="blue-button" id="button-files">
@@ -257,35 +227,6 @@
                 </div>
             </table>
         </div>
-    <!--
-        <div class="col-md-4">
-            <div class="row">
-                <a class="btn btn-primary"
-                   href="{{route('addletter', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">
-                    <span class="glyphicon glyphicon-plus"></span> New letter</a>
-            </div>
-
-            @foreach($letters as $letter)
-        <div class="row">
-            <a href="{{route('showletter', ['name' => $projects->name, 'company_id' => $projects->company_id, 'letter_id' => $letter->id])}}">{{$letter->title}}</a>
-                </div>
-            @endforeach
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <a class="btn btn-primary"
-                       href="{{route('adddocument', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">
-                    <span class="glyphicon glyphicon-plus"></span> Add document</a>
-
-            </div>
-            @foreach($documents as $document)
-        <p>
-            <a href="{{route('showdocument', ['name' => $projects->name, 'company_id' => $projects->company_id,
-                    'document_name' => $document->title, 'document_id' => $document->id])}}">{{$document->title}}</a>
-                </p>
-            @endforeach
-            </div>
--->
     </div>
 
 @endsection

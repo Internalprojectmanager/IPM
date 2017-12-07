@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="9px" viewBox="0 0 16 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>More info Down icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="MoreButton/Down1" transform="translate(-17.000000, -3.000000)" fill-rule="nonzero" fill="#FFFFFF">
+            <g id="More...">
+                <path d="M17.9098728,3.46027277 C18.4736882,2.86995684 19.2586329,2.8236316 19.9478842,3.46027277 L25.0015316,8.41972068 L30.055179,3.46027277 C30.7444303,2.8236316 31.5306682,2.86995684 32.0906041,3.46027277 C32.6544194,4.04926511 32.6182111,5.044596 32.0906041,5.59785173 C31.5655834,6.15110746 26.0192441,11.5566013 26.0192441,11.5566013 C25.7386296,11.8517592 25.3700806,12 25.0015316,12 C24.6329826,12 24.2644336,11.8517592 23.9812328,11.5566013 C23.9812328,11.5566013 18.4374798,6.15110746 17.9098728,5.59785173 C17.3809727,5.044596 17.3460575,4.04926511 17.9098728,3.46027277 Z" id="More-info-Down-icon"></path>
+            </g>
+        </g>
+    </g>
+</svg>

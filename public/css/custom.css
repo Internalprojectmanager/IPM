@@ -354,6 +354,7 @@ label{
     top: 143px;
     right: 30px;
     height: 209px;
+    transition: all 0.5s linear;
 }
 
 .project-title{
@@ -620,6 +621,7 @@ label{
     margin-top: 137px;
     left: 155px;
     right: 45px;
+    padding: 30px;
 }
 
 .black-button{
@@ -630,7 +632,15 @@ label{
     display: block;
 }
 
+.black-button-up{
+    background: #000000 url('../svg/More info up.svg') no-repeat center !important;
+    position: absolute !important;
+    top: 415px !important;
+    left: 52.2%;
+}
+
 #black-button-down{
+    background: #000000 url('../svg/More info Down icon.svg') no-repeat center;
     position: absolute;
     top: 332px;
     left: 52.2%;
@@ -642,9 +652,6 @@ label{
     width: 15px;
 }
 
-#black-button-up{
-    position: absolute;
-    top: 415px;
-    left: 52.2%;
-    display: none;
+.black-button-up, #black-button-down, #button-files, #button-people, #button-pdf{
+    transition: all 0.5s linear;
 }
