@@ -21,6 +21,7 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
+Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');

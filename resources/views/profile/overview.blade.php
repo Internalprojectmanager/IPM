@@ -7,6 +7,9 @@
                 <div class="col-md-12 center">
                     <span class="supertitle">Settings</span>
                     <p class="undertitle">Personal Information</p>
+                    @if(session('status'))
+                        <div class="success center">{{session('status')}}</div>
+                    @endif
                 </div>
             </div>
 
@@ -52,8 +55,8 @@
 
                         @if ($errors->has('email'))
                             <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -61,7 +64,7 @@
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label for="password" class="col-md-5 control-label">Password</label>
                     <div class="form-forgot-field">
-                        <input id="password" type="password" class="form-control form-control-login" name="password" placeholder="" required>
+                        <input id="password" type="password" class="form-control form-control-login" name="password" placeholder="">
                         @if ($errors->has('password'))
                             <span class="help-block">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -72,15 +75,15 @@
                     <div class="form-group{{ $errors->has('password_confirm') ? ' has-error' : '' }}">
                         <label for="password_confirm" class="col-md-5 control-label">Confirm Password</label>
                         <div class="form-forgot-field">
-                            <input id="password" type="password" class="form-control form-control-login" name="password_confirm" placeholder="" required>
+                            <input id="password" type="password" class="form-control form-control-login" name="password_confirm" placeholder="">
                             @if ($errors->has('password_confirm'))
                                 <span class="help-block">
-                        <strong>{{ $errors->first('password_confirm') }}</strong>
+                        <strong>{{ $errors->first('') }}</strong>
                     </span>
                             @endif
-                            <button class="pull-left btn btn-cancel">
+                            <a href="{{route('home')}}" class="pull-left btn btn-cancel">
                                 Cancel
-                            </button>
+                            </a>
                             <button type="submit" class="btn btn-save pull-right">
                                 Save
                             </button>

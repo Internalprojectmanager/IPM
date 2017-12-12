@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileValidator;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,23 +16,24 @@ class ProfileController extends Controller
         return view('profile.overview', compact('profile'));
     }
 
-    public function updateProfile(Request $request){
+    public function updateProfile(ProfileValidator $request){
         $profile = Auth::user();
+
 
         $profile->first_name = $request->first_name;
         $profile->last_name = $request->last_name;
 
 
-        if(!$request->email == ''){
+        if(!$request->email == '' && !$request->email == ''){
             $profile->email = $request->email;
         }
 
-        if( !$request->password == ''){
+        if( !$request->password == '' && !$request->password == NULL){
             $profile->password = bcrypt($request->password);
         }
-        Flash::message('Your account has been updated!');
+
         $profile->save();
-        return redirect('/profile');
+        return redirect('/profile')->with('status', 'Profile updated!');
 
     }
 }
