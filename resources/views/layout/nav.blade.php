@@ -127,7 +127,7 @@
                                     <g id="Top-menu" transform="translate(110.000000, 0.000000)">
                                         <g id="User-Top" transform="translate(989.196850, 23.000000)">
                                             <g id="Dropdown-arrow" transform="translate(116.719048, 0.000000)">
-                                                <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="7.3922064 8.84 11.9711845 13.42 16.5501625 8.84 17.9567767 10.25 11.9711845 16.25 5.98559223 10.25"></polygon>
+                                                <polygon id="Shape" class="dropdown-arrow-icon" fill="#FFFFFF" fill-rule="nonzero" points="7.3922064 8.84 11.9711845 13.42 16.5501625 8.84 17.9567767 10.25 11.9711845 16.25 5.98559223 10.25"></polygon>
                                                 <polygon id="Shape" points="0 0 23.9423689 0 23.9423689 24 0 24"></polygon>
                                             </g>
                                         </g>
@@ -137,10 +137,12 @@
                         </svg>
                     </a>
                     <ul class="dropdown-menu pull-right" role="menu">
+                        <li><a href="{{route('profile')}}"><i class="glyphicon settings-icon"></i> Settings</a></li>
                         <li>
                             <a style="cursor: pointer"
                                onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
+                                <i class="glyphicon logout-icon"></i>
                                 Logout
                             </a>
                             @if(config('app.secure') == TRUE)
@@ -151,6 +153,7 @@
                                 {{ csrf_field() }}
                             </form>
                         </li>
+
                     </ul>
                 </div>
             @else

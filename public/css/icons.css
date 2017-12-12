@@ -1,0 +1,22 @@
+.settings-icon{
+    background: url("../svg/Settings icon.svg") no-repeat 0px center;
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+    margin-left: -2px;
+    top:5px;
+}
+
+.logout-icon{
+    background: url("../svg/logout icon.svg") no-repeat 0px center;
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+    top:5px;
+}
+
+.error-icon{
+    background: url("../svg/Error icon.svg") no-repeat 0px center;
+    width: 20px;
+    height: 20px;
+}
