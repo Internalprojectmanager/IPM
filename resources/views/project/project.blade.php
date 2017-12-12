@@ -55,11 +55,11 @@
             <thead>
             <tr>
             <th></th>
-            <th>@sortablelink('column', 'Project + Client')</th>
-            <th>@sortablelink('column', 'Description')</th>
-            <th>@sortablelink('column', 'Status')</th>
-            <th>@sortablelink('column', 'Deadline')</th>
-            <th>@sortablelink('column', 'Users')</th>
+            <th>@sortablelink('name', 'Project + Client')</th>
+            <th>@sortablelink('description', 'Description')</th>
+            <th>@sortablelink('status', 'Status')</th>
+            <th>@sortablelink('deadline', 'Deadline')</th>
+            <th>@sortablelink('users', 'Users')</th>
             </thead>
             </tr>
             <tbody>
