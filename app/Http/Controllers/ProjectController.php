@@ -156,7 +156,6 @@ class ProjectController extends Controller
             }else{
                 $projectcount = Project::search($search)->get();
                 $projects = Project::search($search)->paginate(8);
-
             }
             $projects = $this->calcDeadline($projects);
             $projectcount = $projectcount->count();

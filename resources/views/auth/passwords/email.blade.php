@@ -26,6 +26,12 @@
 
              {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+
+                    @if ($errors->has('email'))
+                        <span class="help-block center">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                    @endif
                     <label for="email" class="col-md-5 control-label">E-Mail Address*</label>
                     <div class="form-forgot-field">
                         <input id="email" type="email" class="form-control form-control-login form-control-forgot" name="email" value="{{ old('email') }}" required>
@@ -34,13 +40,6 @@
                         </button>
                     </div>
                 </div>
-
-                        @if ($errors->has('email'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
-                    </div>
                 </div>
             </form>
         </div>
