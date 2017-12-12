@@ -70,7 +70,17 @@
                     <td>@if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>
                             <?php echo $project->daysleft;?>
                         @else -  @endif</td>
-                    <td></td>
+                    <td style="max-width: 250px;">
+                        <?php $i = 0;?>
+                        @foreach($project->assignee as $as)
+                                @if($i <= 2)
+                                    <span class="assignee">{{$as->users->first_name}} {{$as->users->last_name}}</span>
+                                @else
+                                    <span class="more">and More...</span>
+                                @endif
+                                <?php $i++;?>
+                        @endforeach
+                    </td>
                 </tr>
             @endforeach
             </tbody>

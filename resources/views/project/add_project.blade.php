@@ -45,6 +45,13 @@
             <br>
             <label for="description">Description:</label>
             <textarea rows="4" cols="50" name="description" class="form-control" id="description"></textarea>
+
+            <label for="assignee">Assignee</label>
+            <select name="assignee[]" multiple>
+                @foreach($user as $u)
+                    <option value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}}</option>
+                @endforeach
+            </select>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>

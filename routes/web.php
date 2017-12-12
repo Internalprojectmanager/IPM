@@ -19,6 +19,9 @@ Route::get('/home', function () {
     return redirect(route('overviewproject'));
 
 })->name('home');
+
+Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
+Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
@@ -26,7 +29,7 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['prefix' => 'password'], function () {
     Route::get('/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-    Route::post('/reset', 'Auth\ResetPasswordController@reset');
+    Route::post('/request', 'Auth\ResetPasswordController@reset');
     Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 });
