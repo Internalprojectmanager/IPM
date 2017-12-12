@@ -602,26 +602,9 @@ label{
 #release-overview{
     position: absolute;
     margin-top: 101px;
-    left: 185px;
-    width: 81.89%;
-}
-
-tbody:before {
-    content: "-";
-    display: block;
-    line-height: 30px;
-    color: transparent;
-}
-
-#release-white{
-    position: absolute;
-    min-height: 140px;
-    background-color: #FFFFFF;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
-    margin-top: 137px;
     left: 155px;
-    right: 45px;
-    padding: 30px;
+    right: 30px;
+    width: 89.5%;
 }
 
 .black-button{

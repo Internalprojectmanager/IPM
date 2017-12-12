@@ -207,7 +207,6 @@
                 <th>Deadline</th>
                 <th>Assigned To</th>
                 </thead>
-                <div id="release-white">
                     <tbody>
                     @foreach($releases as $release)
                         <tr>
@@ -224,7 +223,6 @@
                         </tr>
                     @endforeach
                     </tbody>
-                </div>
             </table>
         </div>
     </div>
