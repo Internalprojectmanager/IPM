@@ -23,26 +23,32 @@
 
                     <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                         <label for="first_name" class="col-md-5 control-label">Name</label>
-                        <div class="form-forgot-field">
-                            <input id="first_name" type="text" class="form-control form-control-login" name="first_name" value="{{ $profile->first_name }}" placeholder="" required autofocus>
+                        <div class="form-settings-field">
+                            <input id="first_name" type="text" class="form-control form-settings-field" name="first_name" value="{{ $profile->first_name }}" placeholder="" autofocus>
 
                             @if ($errors->has('first_name'))
+                                <i class="error-icon"></i>
                                 <span class="help-block">
-                        <strong>{{ $errors->first('first_name') }}</strong>
-                    </span>
+                                    <strong>{{ $errors->first('first_name') }}</strong>
+                                </span>
+                            @else
+                                <i class="check-icon"></i>
                             @endif
                         </div>
                     </div>
 
                     <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                         <label for="last_name" class="col-md-5 control-label">Surname</label>
-                        <div class="form-forgot-field">
-                            <input id="last_name" type="text" class="form-control form-control-login" name="last_name" value="{{ $profile->last_name }}" placeholder="" required>
+                        <div class="form-settings-field">
+                            <input id="last_name" type="text" class="form-control form-settings-field" name="last_name" value="{{ $profile->last_name }}" placeholder="" >
 
                             @if ($errors->has('last_name'))
+                                <i class="error-icon"></i>
                                 <span class="help-block">
-                        <strong>{{ $errors->first('last_name') }}</strong>
-                    </span>
+                                    <strong>{{ $errors->first('last_name') }}</strong>
+                                </span>
+                            @else
+                                <i class="check-icon"></i>
                             @endif
                         </div>
                     </div>
@@ -50,36 +56,45 @@
 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="col-md-5 control-label">Email</label>
-                    <div class="form-forgot-field">
-                        <input id="email" type="text" class="form-control form-control-login" name="email" value="{{ $profile->email }}" placeholder="" required>
+                    <div class="form-settings-field">
+                        <input id="email" type="text" class="form-control form-settings-field" name="email" value="{{ $profile->email }}" placeholder="">
 
                         @if ($errors->has('email'))
+                            <i class="error-icon"></i>
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>
                             </span>
+                        @else
+                            <i class="check-icon"></i>
                         @endif
                     </div>
                 </div>
 
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label for="password" class="col-md-5 control-label">Password</label>
-                    <div class="form-forgot-field">
-                        <input id="password" type="password" class="form-control form-control-login" name="password" placeholder="">
+                    <div class="form-settings-field">
+                        <input id="password" type="password" class="form-control form-settings-field" name="password" placeholder="">
                         @if ($errors->has('password'))
+                            <i class="error-icon"></i>
                             <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @else
+                            <i class="check-icon"></i>
                         @endif
                     </div>
                 </div>
                     <div class="form-group{{ $errors->has('password_confirm') ? ' has-error' : '' }}">
                         <label for="password_confirm" class="col-md-5 control-label">Confirm Password</label>
-                        <div class="form-forgot-field">
-                            <input id="password" type="password" class="form-control form-control-login" name="password_confirm" placeholder="">
+                        <div class="form-settings-field">
+                            <input id="password" type="password" class="form-control form-settings-field" name="password_confirm" placeholder="">
                             @if ($errors->has('password_confirm'))
+                                <i class="error-icon"></i>
                                 <span class="help-block">
-                        <strong>{{ $errors->first('') }}</strong>
-                    </span>
+                                    <strong>{{ $errors->first('password_confirm') }}</strong>
+                                </span>
+                            @else
+                                <i class="check-icon"></i>
                             @endif
                             <a href="{{route('home')}}" class="pull-left btn btn-cancel">
                                 Cancel
@@ -91,7 +106,6 @@
                     </div>
                 <div class="form-group margin-top-50">
                     <div class="col-md-12 center">
-
                     </div>
                 </div>
 

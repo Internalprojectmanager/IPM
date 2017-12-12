@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileValidator extends FormRequest
 {
@@ -24,7 +25,7 @@ class ProfileValidator extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|unique:users|max:100',
+            'email' => 'required|email|max:100|unique:users,email,'. Auth::id(),
             'password' => 'present|max:50',
             'password_confirm' => 'present|confirmed:password',
             'first_name' => 'required| min:2',

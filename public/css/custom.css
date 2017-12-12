@@ -470,33 +470,30 @@ label{
     margin-top: 50px;
 }
 
-.form-forgot-field{
-    width: 300px;
+.form-forgot-field, .form-settings-field{
     float: left;
+}
+
+.form-settings-field, .form-settings-field:hover, .form-settings-field:focus{
+    width: 350px;
+    float: left;
+}
+
+.form-settings-field .btn-save{
+    margin-top: 20px;
+    margin-right: 70px;
+}
+
+.form-settings-field input, .form-settings-field input:hover , .form-settings-field input:focus{
+    width: 280px;
+    margin: 0 auto;
+    border: 1px solid #9B9B9B;
+    height: 36px;
+    border-radius: 0px;
+    box-shadow: none;
 }
 
 .success{
     color: rgba(107,175,28,0.8);
-}
-.open>.dropdown-menu{
-    top: 5px;
-    height: 140px;
-    padding-top: 60px;
-    z-index: -130;
-    right: 11px;
-    border-radius: 0px;
-}
-
-.open >.dropdown-menu a{
-    line-height: 30px;
-}
-
-.open > #username{
-    color: black;
-}
-
-.open > #username .dropdown-arrow-icon{
-    fill: rgb(0, 0, 0);
-    fill-rule: nonzero;
 }
 
