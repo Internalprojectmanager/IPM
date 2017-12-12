@@ -606,11 +606,11 @@ label{
     width: 81.89%;
 }
 
-#release-overview tbody:before {
-    line-height:30px;
-    content:"-";
-    color:transparent; /* to hide text */
-    display:block;
+tbody:before {
+    content: "-";
+    display: block;
+    line-height: 30px;
+    color: transparent;
 }
 
 #release-white{
