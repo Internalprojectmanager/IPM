@@ -171,7 +171,8 @@ return [
         /*
          * Package Service Providers...
          */
-
+        App\Providers\RouteServiceProvider::class,
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
         /*
          * Application Service Providers...
          */

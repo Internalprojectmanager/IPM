@@ -53,13 +53,15 @@
     <div class="row bigtable">
         <table class="table table-hover table-center results">
             <thead>
+            <tr>
             <th></th>
-            <th>Project + Client</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th>Deadline</th>
-            <th>Users</th>
+            <th>@sortablelink('column', 'Project + Client')</th>
+            <th>@sortablelink('column', 'Description')</th>
+            <th>@sortablelink('column', 'Status')</th>
+            <th>@sortablelink('column', 'Deadline')</th>
+            <th>@sortablelink('column', 'Users')</th>
             </thead>
+            </tr>
             <tbody>
             @foreach($projects as $project)
                 <tr>

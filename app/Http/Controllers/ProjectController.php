@@ -167,7 +167,7 @@ class ProjectController extends Controller
 
     public function detailsProject($company_id, $name)
     {
-        $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
+        $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first()->sortable();
         if(!$projects){
             abort(404);
         }
