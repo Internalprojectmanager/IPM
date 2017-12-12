@@ -40,13 +40,15 @@
 }
 
 /* The Close Button */
-.close {
+.modal-close {
+    position: relative;
     float: right;
+    top: 3.5px;
 }
 
-.close:hover,
-.close:focus {
-    color: #000;
+.modal-close:hover,
+.modal-close:focus {
+    color: #fff;
     text-decoration: none;
     cursor: pointer;
 }
@@ -58,19 +60,26 @@
     line-height: 18px;
     padding: 6px 16px 6px 16px;
     background-color: #000;
+    z-index: 99;
 }
 
 .modal-body {padding: 30px}
 
 .modal-footer {
-    padding: 30px 30px;
+    padding: 0px 30px 30px 30px;
 }
 
 .required {color: #C74237;}
 
+.modal-body > .form-group {
+    margin: 0px;
+    padding-bottom: 20px;
+}
+
 .form-label-modal {
     color: #898989;
     font-size: 14px;
+    font-weight: 100;
     line-height: 16px;
 }
 
@@ -81,3 +90,105 @@
 }
 
 .form-group {margin-top:0px;}
+
+.modal-dropdown-search {
+    background: #ffffff  url("../svg/dropdown.svg")  no-repeat 99% center;
+    background-size: 20px 20px;
+    width: 96%;
+    margin-left: 30px;
+    height: 36px;
+    border: 1px solid #9B9B9B;
+    padding-right: 30px;
+    padding-left: 15px;
+    float: right;
+    margin-right: 25px;
+    -webkit-appearance:none;
+    color: #535353;
+    font-size: 14px;
+    border-radius: 0px;
+}
+
+.modal-dropdown-search option{
+    color: #535353;
+    font-size: 14px;
+}
+
+.add-more-info {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: center;
+}
+
+/*
+ CSS for the main interaction
+*/
+.tabset > input[type="radio"] {
+    position: absolute;
+    left: -200vw;
+}
+
+.tabset .tab-panel {
+    display: none;
+}
+
+.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+    display: block;
+}
+
+/*
+ Styling
+*/
+.tabset > label {
+    position: relative;
+    display: inline-block;
+    padding: 8px 20px;
+    border-bottom: 0;
+    cursor: pointer;
+    font-weight: 600;
+    margin: 0px;
+}
+
+.tabset > label:hover,
+.tabset > input:focus + label {
+    color: #000000;
+}
+
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
+.tabset > input:checked + label::after {
+    background: #000000;
+}
+
+.tabset > input + label {
+    background-color: #5D99CA;
+    color: #000;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 100;
+    border: 1px solid #9B9B9B;
+}
+
+.tabset > input:checked + label {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #9B9B9B;
+    border-bottom: none;
+}
+
+.tab-panel {
+    padding: 30px 0;
+}
+
+.tab-hr {
+    position: relative;
+    margin: 0;
+    left: 17%;
+    width: 82.8%;
+}
