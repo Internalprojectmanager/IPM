@@ -53,3 +53,30 @@ $('.search').bind('keyup change', function (e) {
     });
     window.history.pushState("", "", url);
 });
+
+function projectDetailsDown() {
+    document.getElementById("project-description").classList.toggle("show");
+    document.getElementById("description-project").classList.toggle("show");
+    document.getElementById("contact-person").classList.toggle("show");
+    document.getElementById("user-icon").classList.toggle("show");
+    document.getElementById("contact-name").classList.toggle("show");
+    document.getElementById("phone-icon").classList.toggle("show");
+    document.getElementById("contact-phone").classList.toggle("show");
+    document.getElementById("email-icon").classList.toggle("show");
+    document.getElementById("contact-email").classList.toggle("show");
+
+
+    if(document.getElementById('project-details').style.height == '292px'){
+        document.getElementById("black-button-down").classList.remove('black-button-up');
+        document.getElementById('project-details').style.height = '209px';
+        document.getElementById('button-files').style.top = '277px';
+        document.getElementById('button-people').style.top = '277px';
+        document.getElementById('button-pdf').style.top = '277px';
+    }else{
+        document.getElementById("black-button-down").classList.add('black-button-up');
+        document.getElementById('project-details').style.height = '292px';
+        document.getElementById('button-files').style.top = '361px';
+        document.getElementById('button-people').style.top = '361px';
+        document.getElementById('button-pdf').style.top = '361px';
+    }
+}

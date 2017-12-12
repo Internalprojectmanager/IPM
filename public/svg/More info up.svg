@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="9px" viewBox="0 0 15 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>More info SVG</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Style-Guide" transform="translate(-856.000000, -3136.000000)" fill-rule="nonzero" fill="#FFFFFF">
+            <g id="Group-10" transform="translate(823.000000, 3100.000000)">
+                <path d="M33.4098728,36.4602728 C33.9736882,35.8699568 34.7586329,35.8236316 35.4478842,36.4602728 L40.5015316,41.4197207 L45.555179,36.4602728 C46.2444303,35.8236316 47.0306682,35.8699568 47.5906041,36.4602728 C48.1544194,37.0492651 48.1182111,38.044596 47.5906041,38.5978517 C47.0655834,39.1511075 41.5192441,44.5566013 41.5192441,44.5566013 C41.2386296,44.8517592 40.8700806,45 40.5015316,45 C40.1329826,45 39.7644336,44.8517592 39.4812328,44.5566013 C39.4812328,44.5566013 33.9374798,39.1511075 33.4098728,38.5978517 C32.8809727,38.044596 32.8460575,37.0492651 33.4098728,36.4602728 Z" id="More-info-SVG" transform="translate(40.500000, 40.500000) rotate(-180.000000) translate(-40.500000, -40.500000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -107,9 +107,8 @@ html, body {
 }
 
 .header-3{
-    font-size: 24px;
-    margin-top: 22px;
-    margin-bottom: 11px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
 }
 
 .status{
@@ -509,6 +508,298 @@ td > .assignee:before{
 td > .assignee:first-child:before{
     content: '';
 }
-.more{
-    color:#898989;
+.more {
+    color: #898989;
+}
+
+
+/* Project details */
+#project-details{
+    left: 140px;
+    top: 143px;
+    right: 30px;
+    height: 209px;
+    transition: all 0.5s linear;
+}
+
+.project-title{
+    color: #898989;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.project-detail{
+    color: #000000;
+    font-size: 14px;
+    line-height: 19px;
+}
+
+#project-name{
+    position: absolute;
+    left: 170px;
+    top: 173px;
+}
+
+#name-project{
+    position: absolute;
+    left: 185px;
+    top: 194px;
+}
+
+#project-description{
+    position: absolute;
+    left: 170px;
+    top: 233px;
+    display: none;
+}
+
+#description-project{
+    position: absolute;
+    left: 182px;
+    top: 254px;
+    display: none;
+}
+
+#project-code{
+    position: absolute;
+    left: 34.17%;
+    top: 173px;
+}
+
+#code-project{
+    position: absolute;
+    left: 35.35%;
+    top: 194px;
+}
+
+#client-name{
+    position: absolute;
+    left: 55.12%;
+    top: 173px;
+}
+
+#name-client{
+    position: absolute;
+    left: 56.03%;
+    top: 194px;
+}
+
+#contact-person{
+    position: absolute;
+    left: 55.12%;
+    top: 233px;
+    display: none;
+}
+
+#user-icon{
+    position: absolute;
+    left: 56.26%;
+    top: 261.5px;
+    display: none;
+}
+
+#contact-name{
+    position: absolute;
+    left: 57.95%;
+    top: 259px;
+    display: none;
+}
+
+#phone-icon{
+    position: absolute;
+    left: 56.26%;
+    top: 286px;
+    display: none;
+}
+
+#contact-phone{
+    position: absolute;
+    left: 57.95%;
+    top: 283px;
+    display: none;
+}
+
+#email-icon{
+    position: absolute;
+    left: 56.26%;
+    top: 309px;
+    display: none;
+}
+
+#contact-email{
+    position: absolute;
+    left: 57.95%;
+    top: 307px;
+    display: none;
+}
+
+#link{
+    position: absolute;
+    right: 21.81%;
+    top: 173px;
+}
+
+#world-icon{
+    position: absolute;
+    right: 21.57%;
+    top: 202px;
+}
+
+#link-world{
+    position: absolute;
+    right: 20.71%;
+    top: 199px;
+}
+
+#t-icon{
+    position: absolute;
+    right: 21.73%;
+    top: 226px;
+}
+
+#link-t{
+    position: absolute;
+    right: 20.71%;
+    top: 223px;
+}
+/* buttons */
+.blue-button{
+    height: 45px;
+    background-color: #5D99CA;
+    border: none;
+}
+
+.button-content{
+    height: 18px;
+    color: #FFFFFF;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+/* files button */
+#button-files{
+    width: 85px;
+    position: absolute;
+    right: 360px;
+    top: 277px;
+}
+
+#paperclip-icon{
+    position: absolute;
+    left: 15px;
+    top: 13px;
+}
+
+#files-button{
+    position: absolute;
+    left: 38px;
+    top: 14px;
+}
+
+/* people button */
+#button-people{
+    width: 111px;
+    position: absolute;
+    right: 224px;
+    top: 277px;
+}
+
+#people-icon{
+    position: absolute;
+    left: 15px;
+    top: 16px;
+}
+
+#people-button{
+    position: absolute;
+    left: 50px;
+    top: 14px;
+}
+
+/* pdf button */
+#button-pdf{
+    width: 139px;
+    position: absolute;
+    right: 60px;
+    top: 277px;
+}
+
+#pdf-icon{
+    position: absolute;
+    left: 15px;
+    top: 13px;
+}
+
+#pdf-button{
+    position: absolute;
+    left: 49px;
+    top: 14px;
+}
+
+/* release overview */
+.yellow-button{
+    height: 18px;
+    width: 95px;
+    color: #000000;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+#addrelease{
+    position: absolute;
+    left: 155px;
+    margin-top: 30px;
+}
+
+#release-button{
+    position: absolute;
+    left: 15px;
+    top: 14px;
+}
+
+#release-plus{
+    position: absolute;
+    left: 130px;
+    top: 15px;
+}
+
+/* release table */
+#release-overview{
+    position: absolute;
+    margin-top: 101px;
+    left: 155px;
+    right: 30px;
+    width: 85%;
+}
+
+.black-button{
+    height: 15px;
+    width: 50px;
+    background-color: #000000;
+    border: none;
+    display: block;
+}
+
+.black-button-up{
+    background: #000000 url('../svg/More info up.svg') no-repeat center !important;
+    position: absolute !important;
+    top: 415px !important;
+    left: 52.2%;
+}
+
+#black-button-down{
+    background: #000000 url('../svg/More info Down icon.svg') no-repeat center;
+    position: absolute;
+    top: 332px;
+    left: 52.2%;
+}
+
+#arrow{
+    margin: 3px;
+    height: 9px;
+    width: 15px;
+}
+
+.black-button-up, #black-button-down, #button-files, #button-people, #button-pdf{
+    transition: all 0.5s linear;
 }
