@@ -497,3 +497,18 @@ label{
     color: rgba(107,175,28,0.8);
 }
 
+td >.assignee{
+    color:#898989;
+    text-transform: capitalize;
+}
+
+td > .assignee:before{
+    content: ', ';
+}
+
+td > .assignee:first-child:before{
+    content: '';
+}
+.more{
+    color:#898989;
+}
