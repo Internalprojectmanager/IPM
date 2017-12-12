@@ -19,26 +19,24 @@
                   {{ csrf_field() }}
 
                   <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                      <div class="col-md-12">
-                          <input id="email" type="text" class="form-control form-control-login" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
-
+                      <div class="col-md-12 center">
                           @if ($errors->has('email'))
                               <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
+                                <strong>{{ $errors->first('email') }}</strong>
+                              </span>
                           @endif
+                          <input id="email" type="text" class="form-control form-control-login" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
                       </div>
                   </div>
 
                   <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                      <div class="col-md-12">
-                          <input id="password" type="password" class="form-control form-control-login" name="password" placeholder="Password" required>
-
+                      <div class="col-md-12 center">
                           @if ($errors->has('password'))
                               <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
                           @endif
+                          <input id="password" type="password" class="form-control form-control-login" name="password" placeholder="Password" required>
                       </div>
                   </div>
                   <div class="form-group margin-top-50">

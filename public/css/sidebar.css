@@ -55,10 +55,12 @@
 
 #username {
     color: #fff;
+    text-transform: none;
 }
 
-#user a:hover {
+#user a:hover, #user a:focus {
     text-decoration: none;
+    text-transform: none;
 }
 
 #user {
@@ -67,6 +69,7 @@
     padding-right: 30px;
     padding-bottom: 25px;
     margin-left: 110px;
+    text-transform: none;
 }
 
 .dropdown-menu>li>a {
@@ -77,4 +80,26 @@
 
 #dropdown_arrow {
     margin-left: 10px;
+}
+
+.open>.dropdown-menu{
+    top: 5px;
+    height: 140px;
+    padding-top: 60px;
+    z-index: -130;
+    right: 11px;
+    border-radius: 0px;
+}
+
+.open >.dropdown-menu a{
+    line-height: 30px;
+}
+
+.open > #username{
+    color: black;
+}
+
+.open > #username .dropdown-arrow-icon{
+    fill: rgb(0, 0, 0);
+    fill-rule: nonzero;
 }
