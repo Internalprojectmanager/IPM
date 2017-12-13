@@ -53,6 +53,12 @@
     cursor: pointer;
 }
 
+.modal-cancel:hover,
+.modal-cancel:focus {
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .modal-header {
     height: 30px;
     color: #FFFFFF;
@@ -189,6 +195,6 @@
 .tab-hr {
     position: relative;
     margin: 0;
-    left: 17%;
+    left: 247px;
     width: 82.8%;
 }

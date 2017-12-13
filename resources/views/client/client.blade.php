@@ -127,8 +127,23 @@
                         </label>
                         <hr class="tab-hr">
 
+                        <section id="Links" class="tab-panel">
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-text-modal" name="link-url" id="link-url" placeholder="http://">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-text-modal" name="link-title" id="link-title" placeholder="Link Title">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <a href="#" style="color:#000; margin-left:15px;"><u>+ Add more Links</u></a>
+                            </div>
+                        </section>
+
                         <div class="tab-panels">
-                            <section id="Links" class="tab-panel">
+                            <section id="Contact_person" class="tab-panel">
                                 <div class="form-group">
                                     <label class="form-label-modal">Contact</label>
                                     <div class="row" style="margin-bottom: 10px;">
@@ -159,11 +174,6 @@
                                         <a href="#" style="color:#000; margin-left:15px;"><u>+ Add more Contacts</u></a>
                                     </div>
                             </section>
-                            <section id="Contact_person" class="tab-panel">
-                                <h2>Contact Person</h2>
-                                <p><strong>Overall Impression:</strong>  An elegant, malty German amber lager with a balanced, complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are characteristic.</p>
-                                <p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).</p>
-                            </section>
                         </div>
 
                     </div>
@@ -171,7 +181,7 @@
             </div>
             <div class="modal-footer row" style="border:none;">
                 <div class="col-md-6" align="left">
-                    <a href="#" style="color:#C74237;">
+                    <a class="modal-cancel" style="color:#C74237;">
                         <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
                             <title>Tabs cross icon</title>
@@ -188,10 +198,10 @@
                     </a>
                 </div>
                 <div class="col-md-6" align="right">
-                    <button class="btn-primary black" id="myBtn">
-                        Add Client <span class="icon-right glyphicon glyphicon-plus"></span>
+                    <button class="btn btn-primary" type="submit">
+                        Add Client <span class="icon-right glyphicon glyphicon-plus">
                     </button>
-                </div>
+                </div>g
             </div>
         </div>
 
@@ -248,15 +258,3 @@
 
 
 @endsection
-
-<script>
-    // Get the modal
-    var modal = document.getElementById('addCompany');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
