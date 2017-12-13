@@ -131,15 +131,17 @@
                             <section id="Links" class="tab-panel">
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-md-6">
+                                        <label class="form-label-modal">Link</label>
                                         <input type="text" class="form-control input-text-modal" name="link-url" id="link-url" placeholder="http://">
                                     </div>
                                     <div class="col-md-6">
+                                        <label class="form-label-modal">Title</label>
                                         <input type="text" class="form-control input-text-modal" name="link-title" id="link-title" placeholder="Link Title">
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <button onclick="add_more_links()" style="color:#000; margin-left:15px;"><u>+ Add more Links</u></span>
+                                    <a href="#" class="add_more"><u>+ Add more Links</u></a>
                                 </div>
                             </section>
 
@@ -171,7 +173,7 @@
                                     </div>
 
                                     <div class="row">
-                                        <a href="#" style="color:#000; margin-left:15px;"><u>+ Add more Contacts</u></a>
+                                        <a href="#" class="add_more"><u>+ Add more Contacts</u></a>
                                     </div>
 
                                 </div>

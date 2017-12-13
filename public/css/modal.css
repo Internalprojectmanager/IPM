@@ -43,7 +43,6 @@
 .modal-close {
     position: relative;
     float: right;
-    top: 3.5px;
 }
 
 .modal-close:hover,
@@ -197,4 +196,9 @@
     margin: 0;
     left: 247px;
     width: 82.8%;
+}
+
+.add_more {
+    color:#000;
+    margin-left:15px;
 }
