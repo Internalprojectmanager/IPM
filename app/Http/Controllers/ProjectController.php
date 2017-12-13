@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignee;
 use App\Http\Requests\ProjectValidator;
 use App\Status;
 use Faker\Provider\DateTime;
@@ -15,6 +16,7 @@ use App\Project;
 use App\Release;
 use App\Document;
 use App\Letter;
+use App\User;
 use Psy\Command\ListCommand\PropertyEnumerator;
 
 class ProjectController extends Controller
@@ -97,8 +99,9 @@ class ProjectController extends Controller
     {
         $companys = Client::all();
         $status = Status::where('type', 'progress')->get();
+        $user = User::all();
 
-        return view('project.add_project', compact('companys', 'status'));
+        return view('project.add_project', compact('companys', 'status', 'user'));
     }
 
     public function storeProject(ProjectValidator $request)
@@ -113,8 +116,19 @@ class ProjectController extends Controller
             $project->status = $request->status;
             $project->description = $request->description;
             $project->deadline = $request->deadline;
-
             $project->save();
+
+            $findproject = Project::where([['name', $request->project_name],['company_id', $request->company]])->first();
+            if(!empty($request->assignee)){
+                foreach ($request->assignee as $a){
+                    $assingee = new Assignee();
+                    $assingee->userid = $a;
+                    $assingee->uuid = $findproject->id;
+                    $assingee->save();
+                }
+            }
+
+
 
             return redirect()->route('overviewproject');
         }
@@ -124,7 +138,7 @@ class ProjectController extends Controller
     public function overviewProject()
     {
         $projectcount = Project::all()->count();
-        $projects = Project::sortable()->with('company', 'pstatus')
+        $projects = Project::sortable()->with('company', 'pstatus', 'assignee.users')
         ->orderByRAW(' (CASE WHEN deadline IS NULL then 1 ELSE 0 END)')->orderBy('deadline')->paginate(8);
         $projects = $this->calcDeadline($projects);
         $clients = Client::select('name')->get();
@@ -156,7 +170,6 @@ class ProjectController extends Controller
             }else{
                 $projectcount = Project::search($search)->get();
                 $projects = Project::search($search)->paginate(8);
-
             }
             $projects = $this->calcDeadline($projects);
             $projectcount = $projectcount->count();

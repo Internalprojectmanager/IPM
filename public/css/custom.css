@@ -1,4 +1,5 @@
 @import 'sidebar.css';
+@import "icons.css";
 
 
 html, body {
@@ -106,9 +107,8 @@ html, body {
 }
 
 .header-3{
-    font-size: 24px;
-    margin-top: 22px;
-    margin-bottom: 11px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
 }
 
 .status{
@@ -241,9 +241,11 @@ label{
     color:#898989;
     font-weight: 400;
 }
+.form-forgot-field button{
+    margin-top: 20px;
+}
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus{
-    background-color: #F5A623;
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-danger, .btn-save{
     height: 45px;
     width: 160px;
     color:black;
@@ -253,7 +255,42 @@ label{
     text-transform: uppercase;
 }
 
-.btn-noback, .btn-noback:hover, .btn-noback:active, .btn-noback:focus{
+.btn-danger, btn-danger:hover, btn-danger:focus, btn-danger:active{
+    background-color: #D35847;
+    color:white;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus{
+    background-color: #F5A623;
+    color:black;
+}
+
+.btn-save, .btn-save:hover, .btn-save:focus, .btn-save:active:focus {
+    color:white;
+    background: rgba(107,175,28,0.8) url("../svg/Save icon.svg") no-repeat 10px center;
+    width: 97px;
+    text-align: right;
+    padding-right: 18px;
+    text-transform: none;
+    font-weight: normal;
+    box-shadow: none ;
+    outline: 0;
+}
+
+.btn-cancel, .btn-cancel:hover, .btn-cancel:focus, .btn-cancel:active:focus {
+    border: none;
+    text-align: right;
+    width: 90px;
+    color: #C74237;
+    background: #f2f2f2 url("../svg/Cancel icon.svg") no-repeat 15px center;
+    font-size: 15px;
+    margin-top: 25px !important;
+    box-shadow: none;
+    outline: 0;
+}
+
+
+.btn-noback, .btn-noback:hover, .btn-noback:active:focus, .btn-noback:target{
     background: none;
     height: 45px;
     width: 160px;
@@ -263,12 +300,16 @@ label{
     font-size: 15px;
     line-height: 18px;
     text-transform: uppercase;
+    box-shadow: none;
+    outline: 0;
 }
 
-.btn-second{
+.btn-second, .btn-second:active:focus {
     color: #fff;
     background-color: #3097D1;
     border-color: #2a88bd;
+    box-shadow: none;
+    outline: 0;
 }
 
 .icon-right{
@@ -413,6 +454,7 @@ label{
     border-radius: 0px;
     box-shadow: none;
 }
+
 .form-group{
     margin-top: 20px;
 }
@@ -425,4 +467,339 @@ label{
 
 .margin-top-50{
     margin-top: 50px;
+}
+
+.form-forgot-field, .form-settings-field{
+    float: left;
+}
+
+.form-settings-field, .form-settings-field:hover, .form-settings-field:focus{
+    width: 350px;
+    float: left;
+}
+
+.form-settings-field .btn-save{
+    margin-top: 20px;
+    margin-right: 70px;
+}
+
+.form-settings-field input, .form-settings-field input:hover , .form-settings-field input:focus{
+    width: 280px;
+    margin: 0 auto;
+    border: 1px solid #9B9B9B;
+    height: 36px;
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+.success{
+    color: rgba(107,175,28,0.8);
+}
+
+td >.assignee{
+    color:#898989;
+    text-transform: capitalize;
+}
+
+td > .assignee:before{
+    content: ', ';
+}
+
+td > .assignee:first-child:before{
+    content: '';
+}
+.more {
+    color: #898989;
+}
+
+
+/* Project details */
+#project-details{
+    left: 140px;
+    top: 143px;
+    right: 30px;
+    height: 209px;
+    transition: all 0.5s linear;
+}
+
+.project-title{
+    color: #898989;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.project-detail{
+    color: #000000;
+    font-size: 14px;
+    line-height: 19px;
+}
+
+#project-name{
+    position: absolute;
+    left: 170px;
+    top: 173px;
+}
+
+#name-project{
+    position: absolute;
+    left: 185px;
+    top: 194px;
+}
+
+#project-description{
+    position: absolute;
+    left: 170px;
+    top: 233px;
+    display: none;
+}
+
+#description-project{
+    position: absolute;
+    left: 182px;
+    top: 254px;
+    display: none;
+}
+
+#project-code{
+    position: absolute;
+    left: 34.17%;
+    top: 173px;
+}
+
+#code-project{
+    position: absolute;
+    left: 35.35%;
+    top: 194px;
+}
+
+#client-name{
+    position: absolute;
+    left: 55.12%;
+    top: 173px;
+}
+
+#name-client{
+    position: absolute;
+    left: 56.03%;
+    top: 194px;
+}
+
+#contact-person{
+    position: absolute;
+    left: 55.12%;
+    top: 233px;
+    display: none;
+}
+
+#user-icon{
+    position: absolute;
+    left: 56.26%;
+    top: 261.5px;
+    display: none;
+}
+
+#contact-name{
+    position: absolute;
+    left: 57.95%;
+    top: 259px;
+    display: none;
+}
+
+#phone-icon{
+    position: absolute;
+    left: 56.26%;
+    top: 286px;
+    display: none;
+}
+
+#contact-phone{
+    position: absolute;
+    left: 57.95%;
+    top: 283px;
+    display: none;
+}
+
+#email-icon{
+    position: absolute;
+    left: 56.26%;
+    top: 309px;
+    display: none;
+}
+
+#contact-email{
+    position: absolute;
+    left: 57.95%;
+    top: 307px;
+    display: none;
+}
+
+#link{
+    position: absolute;
+    right: 21.81%;
+    top: 173px;
+}
+
+#world-icon{
+    position: absolute;
+    right: 21.57%;
+    top: 202px;
+}
+
+#link-world{
+    position: absolute;
+    right: 20.71%;
+    top: 199px;
+}
+
+#t-icon{
+    position: absolute;
+    right: 21.73%;
+    top: 226px;
+}
+
+#link-t{
+    position: absolute;
+    right: 20.71%;
+    top: 223px;
+}
+/* buttons */
+.blue-button{
+    height: 45px;
+    background-color: #5D99CA;
+    border: none;
+}
+
+.button-content{
+    height: 18px;
+    color: #FFFFFF;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+/* files button */
+#button-files{
+    width: 85px;
+    position: absolute;
+    right: 360px;
+    top: 277px;
+}
+
+#paperclip-icon{
+    position: absolute;
+    left: 15px;
+    top: 13px;
+}
+
+#files-button{
+    position: absolute;
+    left: 38px;
+    top: 14px;
+}
+
+/* people button */
+#button-people{
+    width: 111px;
+    position: absolute;
+    right: 224px;
+    top: 277px;
+}
+
+#people-icon{
+    position: absolute;
+    left: 15px;
+    top: 16px;
+}
+
+#people-button{
+    position: absolute;
+    left: 50px;
+    top: 14px;
+}
+
+/* pdf button */
+#button-pdf{
+    width: 139px;
+    position: absolute;
+    right: 60px;
+    top: 277px;
+}
+
+#pdf-icon{
+    position: absolute;
+    left: 15px;
+    top: 13px;
+}
+
+#pdf-button{
+    position: absolute;
+    left: 49px;
+    top: 14px;
+}
+
+/* release overview */
+.yellow-button{
+    height: 18px;
+    width: 95px;
+    color: #000000;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+#addrelease{
+    position: absolute;
+    left: 155px;
+    margin-top: 30px;
+}
+
+#release-button{
+    position: absolute;
+    left: 15px;
+    top: 14px;
+}
+
+#release-plus{
+    position: absolute;
+    left: 130px;
+    top: 15px;
+}
+
+/* release table */
+#release-overview{
+    position: absolute;
+    margin-top: 101px;
+    left: 155px;
+    right: 30px;
+    width: 85%;
+}
+
+.black-button{
+    height: 15px;
+    width: 50px;
+    background-color: #000000;
+    border: none;
+    display: block;
+}
+
+.black-button-up{
+    background: #000000 url('../svg/More info up.svg') no-repeat center !important;
+    position: absolute !important;
+    top: 415px !important;
+    left: 52.2%;
+}
+
+#black-button-down{
+    background: #000000 url('../svg/More info Down icon.svg') no-repeat center;
+    position: absolute;
+    top: 332px;
+    left: 52.2%;
+}
+
+#arrow{
+    margin: 3px;
+    height: 9px;
+    width: 15px;
+}
+
+.black-button-up, #black-button-down, #button-files, #button-people, #button-pdf{
+    transition: all 0.5s linear;
 }

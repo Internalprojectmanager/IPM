@@ -29,4 +29,8 @@ class Project extends Model
     public function pstatus(){
         return $this->hasOne('App\Status', "id", 'status');
     }
+
+    public function assignee(){
+        return $this->hasMany('App\Assignee', "uuid", "id");
+    }
 }

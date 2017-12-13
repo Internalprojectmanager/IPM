@@ -20,7 +20,7 @@
 
 </head>
 <body>
-@if(Route::currentRouteName() == 'login')
+@if(Auth::guest())
     <nav id="navbar_top"></nav>
     <div class="container_login">
         <div class="row">
