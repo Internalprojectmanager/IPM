@@ -73,12 +73,14 @@
     <div class="row bigtable">
         <table class="table client-table table-center">
             <thead>
+            <tr>
             <th></th>
-            <th>Client Name</th>
-            <th>Contact</th>
-            <th>Status</th>
-            <th>Project Count</th>
-            <th>Last Two Projects</th>
+            <th>@sortablelink('name', 'Client Name')</th>
+            <th>@sortablelink('contact', 'Contact')</th>
+            <th>@sortablelink('status', 'Status')</th>
+            <th>@sortablelink('count', 'Project Count')</th>
+            <th>@sortablelink('projects', 'Last Two Projects')</th>
+            </tr>
             </thead>
             <tbody>
             @foreach($clients as $client)

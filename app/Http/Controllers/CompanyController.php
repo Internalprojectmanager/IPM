@@ -39,7 +39,7 @@ class CompanyController extends Controller
 
     public function overviewCompany()
     {
-        $clients = Client::paginate(8);
+        $clients = Client::sortable()->paginate(8);
         $clientcount = $clients->count();
         $status = Status::where('type', 'Client')->get();
 
