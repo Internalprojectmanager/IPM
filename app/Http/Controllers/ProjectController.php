@@ -152,12 +152,12 @@ class ProjectController extends Controller
 
     public function overviewProject()
     {
-        $projectcount = Project::all()->count();
+        $projectcount= Project::all()->count();
         $projects = Project::with('company', 'pstatus', 'assignee.users')
         ->orderByRAW(' (CASE WHEN deadline IS NULL then 1 ELSE 0 END)')->orderBy('deadline')->paginate(8);
         $projects = $this->calcDeadline($projects, 'project');
-        $clients = Client::select('name')->get();
-        $status = Status::where('type', 'Progress')->select('name')->get();
+        $clients = Client::select('name', 'id')->get();
+        $status = Status::where('type', 'Progress')->select('name', 'id')->get();
 
         return view('project.project', compact('projects', 'projectcount','clients', 'status'));
     }
@@ -166,28 +166,17 @@ class ProjectController extends Controller
             $search = $request->data[0]['value'];
             $client = $request->data[1]['value'];
             $status = $request->data[2]['value'];
-            if(!empty($status)) {
-                $status = Status::where('name', $status)->first();
-            }if(!empty($client)) {
-                $client = Client::search($client)->first();
-            }
 
-
-            if(isset($status->id) && isset($client->id)){
-                $projects = Project::search($search)->where('status', $status->id)->where('company_id', $client->id)->paginate(8);
-                $projectcount = Project::search($search)->where('status', $status->id)->where('company_id', $client->id)->get();
-            }elseif(isset($status->id) && !isset($client->id)){
-                $projects = Project::search($search)->where('status', $status->id)->paginate(8);
-                $projectcount = Project::search($search)->where('status', $status->id)->get();
-            }elseif(!isset($status->id) && isset($client->id)){
-                $projects = Project::search($search)->where('company_id', $client->id)->paginate(8);
-                $projectcount = Project::search($search)->where('company_id', $client->id)->get();
-            }else{
-                $projectcount = Project::search($search)->get();
-                $projects = Project::search($search)->paginate(8);
+            $projects = Project::search($search);
+            if(isset($status)){
+                $projects->where('status', $status);
             }
+            if(isset($client)){
+                $projects->where('company_id', $client);
+            }
+            $projectcount = $projects->get()->count();
+            $projects = $projects->paginate(8);
             $projects = $this->calcDeadline($projects, 'project');
-            $projectcount = $projectcount->count();
             $status = Status::where('type', 'Progress')->get();
             return view('project.project_search', compact('projects','projectcount', 'status'));
 

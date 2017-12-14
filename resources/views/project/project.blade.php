@@ -23,9 +23,9 @@
             <span class="contenttype">Projects</span>
         </span>
         @if(config('app.secure') == TRUE)
-            <form action="{{secure_url('/project/overview')}}" class="pull-right searchform">
+            <form method="get" action="{{secure_url('/project/overview')}}" class="pull-right searchform">
         @else
-            <form action="{{url('/project/overview')}}" class="pull-right searchform">
+            <form method="get" action="{{url('/project/overview')}}" class="pull-right searchform">
         @endif
             <div class="form-group pull-right">
                 <input type="text" name="search" class="search searchfield" placeholder="Search">
@@ -35,7 +35,7 @@
                 <select name='client' type="text" class="search dropdown-search">
                     <option selected value="">Client</option>
                     @foreach($clients as $c)
-                        <option value="{{$c->name}}">{{$c->name}}</option>
+                        <option value="{{$c->id}}">{{$c->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -43,7 +43,7 @@
                 <select name='status' type="text" class="search dropdown-search">
                     <option  selected value="">Status</option>
                     @foreach($status as $s)
-                        <option value="{{$s->name}}">{{$s->name}}</option>
+                        <option value="{{$s->id}}">{{$s->name}}</option>
                     @endforeach
                 </select>
             </div>

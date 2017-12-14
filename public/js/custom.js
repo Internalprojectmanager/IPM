@@ -13,11 +13,32 @@ $('.searchform').on('keyup keypress', function(e) {
     }
 });
 
+$('body').on('click', '.pagination a', function (e) {
+    e.preventDefault();
+
+    var url = $(this).attr('href');
+    getData(url);
+    window.history.pushState("", "", url);
+});
+
+function getData(url) {
+    var postData = $('.searchform').serializeArray();
+    var _token = document.getElementsByName("_token")[0].value;
+    $.ajax({
+        url: url,
+        type:'POST',
+        data: { data:postData, _token: _token}
+    }).done(function (data) {
+        $('.bigtable').remove();
+        $('.container').append(data);
+    }).fail(function () {
+    });
+}
+
 $('.search').bind('keyup change', function (e) {
     var postData = $('.searchform').serializeArray();
-    var _token = document.getElementsByName("_token")[0].value;;
+    var _token = document.getElementsByName("_token")[0].value;
     var url = $('.searchform').attr('action');
-    console.log(url);
     $.ajax({
         url: url,
         type: 'POST',
@@ -29,7 +50,7 @@ $('.search').bind('keyup change', function (e) {
             var jobCount = $('#new-count').text();
             var type = $('.contenttype').text();
             switch(type){
-                case 'Projects':
+                case 'Projects':s
                     type = 'Project';
                     break;
                 case 'Project':
