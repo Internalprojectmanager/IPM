@@ -13,10 +13,6 @@ class UpdatesV1Ipm extends Migration
      */
     public function up()
     {
-        Schema::table('project', function (Blueprint $table) {
-            $table->string('projectcode', 15)->after('company_id');
-        });
-
         Schema::table('release', function (Blueprint $table) {
             $table->integer('status')->nullable()->after('version');
             $table->integer('document_status')->nullable()->after('specificationtype');
