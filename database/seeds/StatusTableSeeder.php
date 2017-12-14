@@ -94,6 +94,27 @@ class StatusTableSeeder extends Seeder
                 'type' => 'Progress',
                 'color' => '#727AA0',
             ),
+            11 => 
+            array (
+                'id' => 12,
+                'name' => 'Developer',
+                'type' => 'Job',
+                'color' => NULL,
+            ),
+            12 => 
+            array (
+                'id' => 13,
+                'name' => 'Designer',
+                'type' => 'Job',
+                'color' => NULL,
+            ),
+            13 => 
+            array (
+                'id' => 14,
+                'name' => 'Project Manager',
+                'type' => 'Job',
+                'color' => NULL,
+            ),
         ));
         
         
