@@ -780,11 +780,7 @@ td > .assignee:first-child:before{
 
 /* release table */
 #release-overview{
-    position: absolute;
     margin-top: 101px;
-    left: 155px;
-    right: 30px;
-    width: 85%;
 }
 
 .black-button{

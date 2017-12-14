@@ -21,4 +21,8 @@ class Release extends Model
     public function projects(){
         return $this->belongsTo('App\Project', "project_id", 'id');
     }
+
+    public function rstatus(){
+        return $this->hasOne('App\Status', 'id', 'status');
+    }
 }
