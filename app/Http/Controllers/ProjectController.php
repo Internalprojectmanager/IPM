@@ -42,6 +42,7 @@ class ProjectController extends Controller
                     $status = $d->pstatus;
                     break;
             }
+
             if($d->deadline !== NULL && $status->name !== 'Paused' && $status->name  !== 'Cancelled'){
                 $negative = NULL;
                 if($status->name  == 'Completed'){
@@ -197,7 +198,7 @@ class ProjectController extends Controller
             abort(404);
         }
         $companys = Client::where('id', $company_id)->first();
-        $releases = Release::with('rstatus')->where('project_id', $projects->id)->get();
+        $releases = Release::with('rstatus')->where('project_id', $projects->id)->orderBy('version', 'desc')->get();
         $releases = $this->calcDeadline($releases, 'release');
         $documents = Document::where('project_id', $projects->id)->get();
         $letters = Letter::where('project_id', $projects->id)->get();

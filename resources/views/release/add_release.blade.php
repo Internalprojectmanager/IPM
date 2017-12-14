@@ -29,9 +29,23 @@
             <label for="description">Description:</label>
             <textarea rows="4" cols="50" name="description" class="form-control" id="description"></textarea>
             <br>
-            <label for="author">Author:</label>
-            <input type="text" class="form-control" id="author" name="author">
+            <label for="status">Release Status:</label>
+            <select name="status">
+                @foreach($status as $s)
+                    <option value="{{$s->id}}">{{$s->name}}</option>
+                @endforeach
+            </select>
             <br>
+            <label for="document_status">Document Status:</label>
+            <select name="document_status">
+                @foreach($status as $s)
+                    <option value="{{$s->id}}">{{$s->name}}</option>
+                @endforeach
+            </select>
+            <br>
+            <label for="deadline">Release Deadline:</label>
+            <input type="text" class="form-control" id="deadline" name="deadline" placeholder="YYYY/MM/DD">
+
             <label for="specification">Specification type:</label>
             <input type="text" class="form-control" id="specification" name="specification">
         </div>
