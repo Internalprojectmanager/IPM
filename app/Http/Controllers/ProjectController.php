@@ -64,9 +64,9 @@ class ProjectController extends Controller
                 $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
 
                 if(strtotime($d->updated_at) < strtotime($d->deadline) && $status->name == 'Completed'){
-                    $d->daysleft = "<span class='tablesubtitle'>Completed on ". gmdate('d-m-Y', strtotime($d->updated_at)) . "</span>";
+                    $d->daysleft = "<span class='tablesubtitle'>Completed: ". gmdate('d-m-Y', strtotime($d->updated_at)) . "</span>";
                 }else if(strtotime($d->updated_at) > strtotime($d->deadline) && $status->name == 'Completed'){
-                    $d->daysleft = "<span class='tablesubtitle'>Completed with $days days Overdue</span>";
+                    $d->daysleft = "<span class='tablesubtitle'>Completed: $days days Overdue</span>";
                 }else {
                     if ($negative == NULL && $years > 0) {
                         if ($years == 1) {
@@ -100,6 +100,8 @@ class ProjectController extends Controller
             }else{
                 if($status->name == "Cancelled")
                     $d->daysleft = "<span class='tablesubtitle'>Cancelled on ". gmdate('d-m-Y', strtotime($d->updated_at)). "</span>";
+                if($status->name == "Paused")
+                    $d->daysleft = "<span class='tablesubtitle'>Paused on ". gmdate('d-m-Y', strtotime($d->updated_at)). "</span>";
             }
         }
 
