@@ -13,12 +13,8 @@ class UpdatesV1Ipm extends Migration
      */
     public function up()
     {
-        Schema::table('assignee', function (Blueprint $table) {
-            $table->boolean('status')->nullable()->after('uuid');
-        });
-
         Schema::table('project', function (Blueprint $table) {
-            $table->string('projectcode', 15)->unique()->after('company_id');
+            $table->string('projectcode', 15)->after('company_id');
         });
 
         Schema::table('release', function (Blueprint $table) {

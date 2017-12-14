@@ -16,6 +16,10 @@ class UpdateAssigneTable extends Migration
         Schema::table('assignee', function (Blueprint $table) {
             $table->dropColumn('project_id');
         });
+
+        Schema::table('assignee', function (Blueprint $table) {
+            $table->boolean('status')->nullable()->after('uuid');
+        });
     }
 
     /**
