@@ -57,7 +57,7 @@
             <th></th>
             <th>@sortablelink('name', 'Project + Client')</th>
             <th>@sortablelink('description', 'Description')</th>
-            <th>@sortablelink('status', 'Status')</th>
+            <th>@sortablelink('pstatus.name', 'Status')</th>
             <th>@sortablelink('deadline', 'Deadline')</th>
             <th>@sortablelink('users', 'Users')</th>
             </thead>

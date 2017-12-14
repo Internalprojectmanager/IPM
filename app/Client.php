@@ -12,7 +12,9 @@ class Client extends Model
 
     use Sortable, Searchable;
 
-    public $sortable = ['name', 'contact', 'status', 'count', 'projects'];
+    public $sortable = ['name', 'contactname'];
+
+    protected $sortableAs = ['projects_count'];
 
     protected $fillable = [
         'id','name', 'description'

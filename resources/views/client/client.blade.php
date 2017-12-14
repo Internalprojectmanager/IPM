@@ -76,10 +76,10 @@
             <tr>
             <th></th>
             <th>@sortablelink('name', 'Client Name')</th>
-            <th>@sortablelink('contact', 'Contact')</th>
-            <th>@sortablelink('status', 'Status')</th>
-            <th>@sortablelink('count', 'Project Count')</th>
-            <th>@sortablelink('projects', 'Last Two Projects')</th>
+            <th>@sortablelink('contactname', 'Contact')</th>
+            <th>@sortablelink('cstatus.name', 'Status')</th>
+            <th>@sortablelink('projects_count')</th>
+            <th>Last Two Projects</th>
             </tr>
             </thead>
             <tbody>
@@ -93,7 +93,7 @@
                         {{$client->contactemail}}</span>
                     </td>
                     <td style="width: 180px;">{{$client->cstatus->name}}</td>
-                    <td>{{$client->projects->count()}} Projects</td>
+                    <td>{{$client->projects_count}} Projects</td>
                     <td>
                         <?php $i = 0 ;?>
                         @foreach ($client->projects as $p)
