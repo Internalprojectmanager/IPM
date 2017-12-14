@@ -70,6 +70,30 @@
                     </div>
                 </div>
 
+                    <div class="form-group{{ $errors->has('job_title') ? ' has-error' : '' }}">
+                        <label for="job_title" class="col-md-5 control-label">Job Title</label>
+                        <div class="form-settings-field">
+                            <select name="job_title" class="dropdown-settings">
+                                <option @if($profile->job_title == '' && $profile->job_title == NULL)selected="" @endif disabled>Select a Job Title</option>
+                                @foreach($status as $s)
+                                    @if($s->id === $profile->job_title)
+                                        <option selected="" value="{{$s->id}}">{{$s->name}}</option>
+                                    @else
+                                        <option value="{{$s->id}}">{{$s->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @if ($errors->has('job_title') || $profile->job_title == '' && $profile->job_title == NULL)
+                                <i class="error-icon"></i>
+                                <span class="help-block">
+                                <strong>{{ $errors->first('job_title') }}</strong>
+                            </span>
+                            @else
+                                <i class="check-icon"></i>
+                            @endif
+                        </div>
+                    </div>
+
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label for="password" class="col-md-5 control-label">Password</label>
                     <div class="form-settings-field">
