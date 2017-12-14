@@ -2,11 +2,11 @@
     <table class="table table-hover table-center results">
         <thead>
         <th></th>
-        <th>Project + Client</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Deadline</th>
-        <th>Users</th>
+        <th>@sortablelink('name', 'Project + Client')</th>
+        <th>@sortablelink('description', 'Description')</th>
+        <th>@sortablelink('pstatus.name', 'Status')</th>
+        <th>@sortablelink('deadline', 'Deadline')</th>
+        <th>@sortablelink('users', 'Users')</th>
         </thead>
         <tbody>
         @foreach($projects as $project)
