@@ -152,8 +152,8 @@ class ProjectController extends Controller
 
     public function overviewProject()
     {
-        $projectcount= Project::all()->count();
-        $projects = Project::with('company', 'pstatus', 'assignee.users')
+        $projectcount = Project::all()->count();
+        $projects = Project::sortable()->with('company', 'pstatus', 'assignee.users')
         ->orderByRAW(' (CASE WHEN deadline IS NULL then 1 ELSE 0 END)')->orderBy('deadline')->paginate(8);
         $projects = $this->calcDeadline($projects, 'project');
         $clients = Client::select('name', 'id')->get();

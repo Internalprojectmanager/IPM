@@ -4,12 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Kyslik\ColumnSortable\Sortable;
 
 class Client extends Model
 {
     protected $table = "client";
 
-    use Searchable;
+    use Sortable, Searchable;
+
+    public $sortable = ['name', 'contactname'];
+
+    protected $sortableAs = ['projects_count'];
 
     protected $fillable = [
         'id','name', 'description'

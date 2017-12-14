@@ -73,12 +73,14 @@
     <div class="row bigtable">
         <table class="table client-table table-center">
             <thead>
+            <tr>
             <th></th>
-            <th>Client Name</th>
-            <th>Contact</th>
-            <th>Status</th>
-            <th>Project Count</th>
+            <th>@sortablelink('name', 'Client Name')</th>
+            <th>@sortablelink('contactname', 'Contact')</th>
+            <th>@sortablelink('cstatus.name', 'Status')</th>
+            <th>@sortablelink('projects_count')</th>
             <th>Last Two Projects</th>
+            </tr>
             </thead>
             <tbody>
             @foreach($clients as $client)
@@ -91,7 +93,7 @@
                         {{$client->contactemail}}</span>
                     </td>
                     <td style="width: 180px;">{{$client->cstatus->name}}</td>
-                    <td>{{$client->projects->count()}} Projects</td>
+                    <td>{{$client->projects_count}} Projects</td>
                     <td>
                         <?php $i = 0 ;?>
                         @foreach ($client->projects as $p)
