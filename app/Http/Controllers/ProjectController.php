@@ -27,12 +27,24 @@ class ProjectController extends Controller
         $this->middleware('auth');
     }
 
-    public function calcDeadline($data){
+    public function calcDeadline($data, $type){
+
         $today = date('Y/m/d H:i');
         foreach ($data as $d){
-            if($d->deadline !== NULL && $d->pstatus->name !== 'Paused' && $d->pstatus->name  !== 'Cancelled'){
+            switch ($type){
+                case 'project':
+                    $status = $d->pstatus;
+                    break;
+                case 'release':
+                    $status = $d->rstatus;
+                    break;
+                default:
+                    $status = $d->pstatus;
+                    break;
+            }
+            if($d->deadline !== NULL && $status->name !== 'Paused' && $status->name  !== 'Cancelled'){
                 $negative = NULL;
-                if($d->pstatus->name  == 'Completed'){
+                if($status->name  == 'Completed'){
                     $diff = strtotime($d->deadline) - strtotime($d->updated_at);
                 }else{
                     $diff = strtotime($d->deadline) - strtotime($today);
@@ -40,7 +52,7 @@ class ProjectController extends Controller
 
                 if($diff < 0){
                     $negative = "-";
-                    if($d->pstatus->name  == 'Completed'){
+                    if($status->name  == 'Completed'){
                         $diff = strtotime($d->updated_at) - strtotime($d->deadline);
                     }else{
                         $diff = strtotime($today) - strtotime($d->deadline);
@@ -50,9 +62,9 @@ class ProjectController extends Controller
                 $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
                 $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
 
-                if(strtotime($d->updated_at) < strtotime($d->deadline) && $d->pstatus->name == 'Completed'){
+                if(strtotime($d->updated_at) < strtotime($d->deadline) && $status->name == 'Completed'){
                     $d->daysleft = "<span class='tablesubtitle'>Completed on ". gmdate('d-m-Y', strtotime($d->updated_at)) . "</span>";
-                }else if(strtotime($d->updated_at) > strtotime($d->deadline) && $d->pstatus->name == 'Completed'){
+                }else if(strtotime($d->updated_at) > strtotime($d->deadline) && $status->name == 'Completed'){
                     $d->daysleft = "<span class='tablesubtitle'>Completed with $days days Overdue</span>";
                 }else {
                     if ($negative == NULL && $years > 0) {
@@ -85,7 +97,7 @@ class ProjectController extends Controller
                     }
                 }
             }else{
-                if($d->pstatus->name == "Cancelled")
+                if($status->name == "Cancelled")
                     $d->daysleft = "<span class='tablesubtitle'>Cancelled on ". gmdate('d-m-Y', strtotime($d->updated_at)). "</span>";
             }
         }
@@ -140,7 +152,7 @@ class ProjectController extends Controller
         $projectcount = Project::all()->count();
         $projects = Project::with('company', 'pstatus', 'assignee.users')
         ->orderByRAW(' (CASE WHEN deadline IS NULL then 1 ELSE 0 END)')->orderBy('deadline')->paginate(8);
-        $projects = $this->calcDeadline($projects);
+        $projects = $this->calcDeadline($projects, 'project');
         $clients = Client::select('name')->get();
         $status = Status::where('type', 'Progress')->select('name')->get();
 
@@ -171,7 +183,7 @@ class ProjectController extends Controller
                 $projectcount = Project::search($search)->get();
                 $projects = Project::search($search)->paginate(8);
             }
-            $projects = $this->calcDeadline($projects);
+            $projects = $this->calcDeadline($projects, 'project');
             $projectcount = $projectcount->count();
             $status = Status::where('type', 'Progress')->get();
             return view('project.project_search', compact('projects','projectcount', 'status'));
@@ -180,12 +192,13 @@ class ProjectController extends Controller
 
     public function detailsProject($company_id, $name)
     {
-        $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
+        $projects = Project::with('pstatus')->where(['name' => $name, 'company_id' =>$company_id])->first();
         if(!$projects){
             abort(404);
         }
         $companys = Client::where('id', $company_id)->first();
-        $releases = Release::where('project_id', $projects->id)->get();
+        $releases = Release::with('rstatus')->where('project_id', $projects->id)->get();
+        $releases = $this->calcDeadline($releases, 'release');
         $documents = Document::where('project_id', $projects->id)->get();
         $letters = Letter::where('project_id', $projects->id)->get();
 

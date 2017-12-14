@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <div class="row center">
+    <div class="row">
         <div class="header-3" id="project-details">
             <span class="project-title" id="project-name">Project Name</span>
             <span class="project-detail" id="name-project">{{$projects->name}}</span>
@@ -17,7 +17,7 @@
             <span class="project-detail" id="description-project">{{$projects->description}}</span>
 
             <span class="project-title" id="project-code">Project Code</span>
-            <span class="project-detail" id="code-project">-</span>
+            <span class="project-detail" id="code-project">{{$projects->projectcode}}</span>
 
             <span class="project-title" id="client-name">Client</span>
             <span class="project-detail" id="name-client">{{$companys->name}}</span>
@@ -43,7 +43,7 @@
                     </g>
                 </g>
             </svg>
-            <span class="project-detail" id="contact-name">-</span>
+            <span class="project-detail" id="contact-name">{{$companys->contactname}}</span>
 
             <svg id="phone-icon" width="15px" height="15px" viewBox="0 0 15 15" version="1.1"
                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -65,7 +65,7 @@
                     </g>
                 </g>
             </svg>
-            <span class="project-detail" id="contact-phone">-</span>
+            <span class="project-detail" id="contact-phone">{{$companys->contactnumber}}</span>
 
             <svg id="email-icon" width="13px" height="14px" viewBox="0 0 13 14" version="1.1"
                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -87,7 +87,7 @@
                     </g>
                 </g>
             </svg>
-            <span class="project-detail" id="contact-email">-</span>
+            <span class="project-detail" id="contact-email">{{$companys->contactemail}}</span>
 
             <span class="project-title" id="link">Link</span>
             <svg id="world-icon" width="14px" height="14px" viewBox="0 0 14 14" version="1.1"
@@ -197,34 +197,35 @@
             <span class="yellow-button" id="release-button">Add Release</span>
             <span class="glyphicon glyphicon-plus" id="release-plus"></span>
         </a>
-
-        <div class="row">
-            <table class="table table-hover table-center results" id="release-overview">
-                <thead>
-                <th>Version+Name</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Deadline</th>
-                <th>Assigned To</th>
-                </thead>
-                    <tbody>
-                    @foreach($releases as $release)
-                        <tr>
-                            <td><span class="tabletitle"><a href="{{route('showrelease', ['name' => $projects->name, 'company_id' => $projects->company_id,
+    </div>
+    <div class="row">
+        <table class="table table-hover table-center results" id="release-overview">
+            <thead>
+            <th></th>
+            <th>Version+Name</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Deadline</th>
+            </thead>
+            <tbody>
+            @foreach($releases as $release)
+                <tr>
+                    <td style="background-color: {{$release->rstatus->color}};"></td>
+                    <td><span class="tabletitle"><a href="{{route('showrelease', ['name' => $projects->name, 'company_id' => $projects->company_id,
                         'release_name' => $release->name, 'version' => $release->version])}}">{{$release->version}}
-                                        - {{$release->name}} </a></span>
-                            </td>
-                            <td class="table-description">{{implode(' ', array_slice(str_word_count($release->description, 2), 0, 10))}}
-                                ...
-                            </td>
-                            <td></td>
-                            <td>{{$release->deadline}}</td>
-                            <td></td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-            </table>
-        </div>
+                                - {{$release->name}} </a></span>
+                    </td>
+                    <td class="table-description">{{implode(' ', array_slice(str_word_count($release->description, 2), 0, 10))}}
+                        ...
+                    </td>
+                    <td>{{$release->rstatus->name}}</td>
+                    <td>@if(isset($release->deadline)){{date('d F Y', strtotime($release->deadline))}} <br>
+                        <?php echo $release->daysleft;?>
+                        @else -  @endif</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
 
 @endsection

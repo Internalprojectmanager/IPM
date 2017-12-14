@@ -408,6 +408,21 @@ label{
     border-radius: 0px;
 }
 
+.dropdown-settings{
+    background: #ffffff url(../svg/dropdown.svg) no-repeat 250px center;
+    background-size: 20px 20px;
+    width: 280px;
+    height: 36px;
+    padding-right: 30px;
+    padding-left: 15px;
+    float: left;
+    -webkit-appearance: none;
+    color: #535353;
+    font-size: 14px;
+    border-radius: 0px;
+}
+
+
 .dropdown-search option{
     color: #535353;
     font-size: 14px;
@@ -765,11 +780,7 @@ td > .assignee:first-child:before{
 
 /* release table */
 #release-overview{
-    position: absolute;
     margin-top: 101px;
-    left: 155px;
-    right: 30px;
-    width: 85%;
 }
 
 .black-button{
