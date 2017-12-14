@@ -23,9 +23,9 @@
             <span class="contenttype">Projects</span>
         </span>
         @if(config('app.secure') == TRUE)
-            <form method="get" action="{{secure_url('/project/overview')}}" class="pull-right searchform">
+            <form method="post" action="{{secure_url('/project/overview')}}" class="pull-right searchform">
         @else
-            <form method="get" action="{{url('/project/overview')}}" class="pull-right searchform">
+            <form method="post" action="{{url('/project/overview')}}" class="pull-right searchform">
         @endif
             <div class="form-group pull-right">
                 <input type="text" name="search" class="search searchfield" placeholder="Search">

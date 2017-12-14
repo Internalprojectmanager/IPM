@@ -13,13 +13,14 @@ $('.searchform').on('keyup keypress', function(e) {
     }
 });
 
-$('body').on('click', '.pagination a', function (e) {
+$('body').on('click', '.pagination a, .results>thead>tr>th a', function (e) {
     e.preventDefault();
-
     var url = $(this).attr('href');
+    console.log(url);
     getData(url);
     window.history.pushState("", "", url);
 });
+
 
 function getData(url) {
     var postData = $('.searchform').serializeArray();
@@ -50,7 +51,7 @@ $('.search').bind('keyup change', function (e) {
             var jobCount = $('#new-count').text();
             var type = $('.contenttype').text();
             switch(type){
-                case 'Projects':s
+                case 'Projects':
                     type = 'Project';
                     break;
                 case 'Project':
