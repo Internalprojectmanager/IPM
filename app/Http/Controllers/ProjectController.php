@@ -152,8 +152,8 @@ class ProjectController extends Controller
 
     public function overviewProject()
     {
-        $projectcount = Project::all()->count();
-        $projects = Project::sortable()->with('company', 'pstatus', 'assignee.users')
+        $projectcount = Project::select('id')->get()->count();
+        $projects = Project::with('company', 'pstatus', 'assignee.users')
         ->orderByRAW(' (CASE WHEN deadline IS NULL then 1 ELSE 0 END)')->orderBy('deadline')->paginate(8);
         $projects = $this->calcDeadline($projects, 'project');
         $clients = Client::select('name', 'id')->get();
@@ -163,9 +163,13 @@ class ProjectController extends Controller
     }
 
     public function searchProject(Request $request){
-            $search = $request->data[0]['value'];
-            $client = $request->data[1]['value'];
-            $status = $request->data[2]['value'];
+            $pro = array();
+            $search = $request->search;
+            $client = $request->client;
+            $status = $request->status;
+            $sort = $request->sort;
+            $order = $request->order;
+            $page = $request->page;
 
             $projects = Project::search($search);
             if(isset($status)){
@@ -175,17 +179,19 @@ class ProjectController extends Controller
                 $projects->where('company_id', $client);
             }
             $projectcount = $projects->get()->count();
+
+            if($projectcount <= 8){
+                $page = 1;
+            }
             $projects = $projects->get();
 
             foreach ($projects as $p){
                 $pro[] = $p->id;
             }
-
-            $projects = Project::sortable()->whereIn('id', $pro)->paginate(8);
+            $projects = Project::with('pstatus')->sortable([$sort => $order])->whereIn('project.id', $pro)->paginate(8, ['*'], 'page', $page);
             $projects = $this->calcDeadline($projects, 'project');
             $status = Status::where('type', 'Progress')->get();
             return view('project.project_search', compact('projects','projectcount', 'status'));
-
         }
 
     public function detailsProject($company_id, $name)

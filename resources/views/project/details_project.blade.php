@@ -65,7 +65,7 @@
                     </g>
                 </g>
             </svg>
-            <span class="project-detail" id="contact-phone">{{$companys->contactnumber}}</span>
+            <span class="project-detail" id="contact-phone"><a href="tel:{{$companys->contactnumber}}">{{$companys->contactnumber}}</a></span>
 
             <svg id="email-icon" width="13px" height="14px" viewBox="0 0 13 14" version="1.1"
                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -87,7 +87,7 @@
                     </g>
                 </g>
             </svg>
-            <span class="project-detail" id="contact-email">{{$companys->contactemail}}</span>
+            <span class="project-detail" id="contact-email"><a href="mailto:{{$companys->contactemail}}">{{$companys->contactemail}}</a></span>
 
             <span class="project-title" id="link">Link</span>
             <svg id="world-icon" width="14px" height="14px" viewBox="0 0 14 14" version="1.1"

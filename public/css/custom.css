@@ -534,7 +534,7 @@ td > .assignee:first-child:before{
     top: 143px;
     right: 30px;
     height: 209px;
-    transition: all 0.5s linear;
+    transition: all 0.3s linear;
 }
 
 .project-title{
@@ -543,7 +543,7 @@ td > .assignee:first-child:before{
     line-height: 16px;
 }
 
-.project-detail{
+.project-detail a{
     color: #000000;
     font-size: 14px;
     line-height: 19px;
@@ -573,6 +573,7 @@ td > .assignee:first-child:before{
     left: 182px;
     top: 254px;
     display: none;
+    width:38%;
 }
 
 #project-code{
@@ -811,6 +812,6 @@ td > .assignee:first-child:before{
     width: 15px;
 }
 
-.black-button-up, #black-button-down, #button-files, #button-people, #button-pdf{
-    transition: all 0.5s linear;
+.black-button-up, #black-button-down, #button-files, #button-people, #button-pdf, .show{
+    transition: all 0.3s linear;
 }

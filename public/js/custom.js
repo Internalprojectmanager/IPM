@@ -16,34 +16,50 @@ $('.searchform').on('keyup keypress', function(e) {
 $('body').on('click', '.pagination a, .results>thead>tr>th a', function (e) {
     e.preventDefault();
     var url = $(this).attr('href');
-    console.log(url);
     getData(url);
-    window.history.pushState("", "", url);
 });
 
 
 function getData(url) {
-    var postData = $('.searchform').serializeArray();
-    var _token = document.getElementsByName("_token")[0].value;
-    $.ajax({
-        url: url,
-        type:'POST',
-        data: { data:postData, _token: _token}
-    }).done(function (data) {
-        $('.bigtable').remove();
-        $('.container').append(data);
-    }).fail(function () {
-    });
-}
+    var url = new URL(url);
 
-$('.search').bind('keyup change', function (e) {
-    var postData = $('.searchform').serializeArray();
+    var page = url.searchParams.get("page");
+    var sort = url.searchParams.get("sort");
+    var order = url.searchParams.get("order");
+
+    if(page !== null){
+        document.getElementById("page").value = page;
+    } else {
+        document.getElementById("page").value = "1";
+    }
+
+    if(sort !== null){
+        document.getElementById("sort").value = sort;
+    }
+
+    if(order !== null){
+        document.getElementById("order").value = order;
+    }
+
+    sort = document.getElementById("sort").value;
+    order = document.getElementById("order").value;
+    page = document.getElementById("page").value;
+
+    var search = "";
+    var client = "";
+    var status = "";
+
+    search = $('#searchfield').val();
+    client = $('#client').val();
+    status = $('#status').val();
+
     var _token = document.getElementsByName("_token")[0].value;
     var url = $('.searchform').attr('action');
     $.ajax({
         url: url,
         type: 'POST',
-        data: { data:postData, _token: _token},
+        headers: {'X-CSRF-TOKEN': _token},
+        data: { search:search, client:client, status:status, sort: sort, order:order, page:page},
 
         success: function (result) {
             $('.bigtable').remove();
@@ -73,7 +89,14 @@ $('.search').bind('keyup change', function (e) {
             $('#new-count').remove();
         },
     });
+    url = url+"?sort="+sort+"&order="+order+"&page="+page;
     window.history.pushState("", "", url);
+}
+
+$('.search').bind('keyup change', function (e) {
+    e.preventDefault();
+    var url = $('.searchform').attr('action');
+    getData(url);
 });
 
 function projectDetailsDown() {
