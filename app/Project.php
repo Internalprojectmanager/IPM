@@ -10,7 +10,7 @@ class Project extends Model
 {
     use Sortable, Searchable;
 
-    public $sortable = ['name', 'description', 'status', 'deadline', 'users'];
+    public $sortable = ['name', 'description', 'status', 'deadline', 'users', 'created_at'];
 
     protected $table = "project";
 

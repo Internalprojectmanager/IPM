@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use App\Status;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
@@ -79,17 +80,27 @@ class CompanyController extends Controller
         $clients = Client::with('cstatus')->sortable([$sort => $order])->withcount('projects')->whereIn('client.id', $clie)->paginate(8, ['*'], 'page', $page);
         $clientcount = $clients->count();
         $status = Status::where('type', 'Client')->get();
-        return view('client.client_search', compact('clients', 'clientcount', 'status'));
+        return view('client.client_table', compact('clients', 'clientcount', 'status'));
 
     }
 
     public function detailsCompany($name)
     {
-        $clients = Client::where('name', $name)->first();
-        if(!$clients){
-            abort(404);
-        }
-        return view('client.details_client', compact('clients'));
+            $clients = Client::with('cstatus', 'projects.assignee')->sortable('created_at', 'desc')->where('name', $name)->first();
+            $projects = Project::sortable()->where('company_id' , $clients->id)->paginate(8);
+            $projectcount = $projects->count();
+            return view('client.details_client', compact('clients', 'projects', 'projectcount'));
+    }
+
+    public function detailsSort($name , Request $request)
+    {
+        $sort = $request->sort;
+        $page = $request->page;
+        $order = $request->order;
+        $clients = Client::with('cstatus', 'projects.assignee')->where('name', $name)->first();
+        $projects = Project::sortable([$sort => $order])->where('company_id', $clients->id)->paginate(8);
+        $projectcount = $projects->count();
+        return view('project.project_table', compact('clients', 'projects', 'projectcount'));
     }
 
     public function editCompany($name)

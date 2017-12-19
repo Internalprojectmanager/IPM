@@ -23,6 +23,7 @@ $('body').on('click', '.pagination a, .results>thead>tr>th a', function (e) {
 function getData(url) {
     var url = new URL(url);
 
+    console.log(url);
     var page = url.searchParams.get("page");
     var sort = url.searchParams.get("sort");
     var order = url.searchParams.get("order");

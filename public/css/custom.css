@@ -819,3 +819,8 @@ td > .assignee:first-child:before{
 .results > thead > tr > th > a {
     color: #898989;
 }
+
+.under-details{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

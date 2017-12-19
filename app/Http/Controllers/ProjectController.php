@@ -191,7 +191,7 @@ class ProjectController extends Controller
             $projects = Project::with('pstatus')->sortable([$sort => $order])->whereIn('project.id', $pro)->paginate(8, ['*'], 'page', $page);
             $projects = $this->calcDeadline($projects, 'project');
             $status = Status::where('type', 'Progress')->get();
-            return view('project.project_search', compact('projects','projectcount', 'status'));
+            return view('project.project_table', compact('projects','projectcount', 'status'));
         }
 
     public function detailsProject($company_id, $name)
