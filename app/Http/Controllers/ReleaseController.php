@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Feature;
 use App\Http\Requests\ReleaseValidator;
 use App\Requirement;
+use App\Status;
 use App\TestReport;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -27,10 +29,11 @@ class ReleaseController extends Controller
     public function addRelease($company_id,$name)
     {
         $projects = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        $status = Status::where('type', 'Progress')->get();
         $companys = Client::where('id', $company_id)->first();
 
 
-        return view('release.add_release', compact('projects', 'companys'));
+        return view('release.add_release', compact('projects', 'companys', 'status'));
     }
 
     public function storeRelease(ReleaseValidator $request)
@@ -46,8 +49,11 @@ class ReleaseController extends Controller
         $release->project_id = $request->project_id;
         $release->name = $request->release_name;
         $release->description = $request->description;
+        $release->status = $request->status;
+        $release->document_status = $request->document_status;
         $release->version = $releasecount;
-        $release->author = $request->author;
+        $release->author = Auth::id();
+        $release->deadline = $request->deadline;
         $release->specificationtype = $request->specification;
 
         $release->save();

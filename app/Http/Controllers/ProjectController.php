@@ -42,6 +42,7 @@ class ProjectController extends Controller
                     $status = $d->pstatus;
                     break;
             }
+
             if($d->deadline !== NULL && $status->name !== 'Paused' && $status->name  !== 'Cancelled'){
                 $negative = NULL;
                 if($status->name  == 'Completed'){
@@ -63,9 +64,9 @@ class ProjectController extends Controller
                 $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
 
                 if(strtotime($d->updated_at) < strtotime($d->deadline) && $status->name == 'Completed'){
-                    $d->daysleft = "<span class='tablesubtitle'>Completed on ". gmdate('d-m-Y', strtotime($d->updated_at)) . "</span>";
+                    $d->daysleft = "<span class='tablesubtitle'>Completed: ". gmdate('d-m-Y', strtotime($d->updated_at)) . "</span>";
                 }else if(strtotime($d->updated_at) > strtotime($d->deadline) && $status->name == 'Completed'){
-                    $d->daysleft = "<span class='tablesubtitle'>Completed with $days days Overdue</span>";
+                    $d->daysleft = "<span class='tablesubtitle'>Completed: $days days Overdue</span>";
                 }else {
                     if ($negative == NULL && $years > 0) {
                         if ($years == 1) {
@@ -99,6 +100,8 @@ class ProjectController extends Controller
             }else{
                 if($status->name == "Cancelled")
                     $d->daysleft = "<span class='tablesubtitle'>Cancelled on ". gmdate('d-m-Y', strtotime($d->updated_at)). "</span>";
+                if($status->name == "Paused")
+                    $d->daysleft = "<span class='tablesubtitle'>Paused on ". gmdate('d-m-Y', strtotime($d->updated_at)). "</span>";
             }
         }
 
@@ -149,45 +152,46 @@ class ProjectController extends Controller
 
     public function overviewProject()
     {
-        $projectcount = Project::all()->count();
-        $projects = Project::sortable()->with('company', 'pstatus', 'assignee.users')
+        $projectcount = Project::select('id')->get()->count();
+        $projects = Project::with('company', 'pstatus', 'assignee.users')
         ->orderByRAW(' (CASE WHEN deadline IS NULL then 1 ELSE 0 END)')->orderBy('deadline')->paginate(8);
         $projects = $this->calcDeadline($projects, 'project');
-        $clients = Client::select('name')->get();
-        $status = Status::where('type', 'Progress')->select('name')->get();
+        $clients = Client::select('name', 'id')->get();
+        $status = Status::where('type', 'Progress')->select('name', 'id')->get();
 
         return view('project.project', compact('projects', 'projectcount','clients', 'status'));
     }
 
     public function searchProject(Request $request){
-            $search = $request->data[0]['value'];
-            $client = $request->data[1]['value'];
-            $status = $request->data[2]['value'];
-            if(!empty($status)) {
-                $status = Status::where('name', $status)->first();
-            }if(!empty($client)) {
-                $client = Client::search($client)->first();
-            }
+            $pro = array();
+            $search = $request->search;
+            $client = $request->client;
+            $status = $request->status;
+            $sort = $request->sort;
+            $order = $request->order;
+            $page = $request->page;
 
-
-            if(isset($status->id) && isset($client->id)){
-                $projects = Project::search($search)->where('status', $status->id)->where('company_id', $client->id)->paginate(8);
-                $projectcount = Project::search($search)->where('status', $status->id)->where('company_id', $client->id)->get();
-            }elseif(isset($status->id) && !isset($client->id)){
-                $projects = Project::search($search)->where('status', $status->id)->paginate(8);
-                $projectcount = Project::search($search)->where('status', $status->id)->get();
-            }elseif(!isset($status->id) && isset($client->id)){
-                $projects = Project::search($search)->where('company_id', $client->id)->paginate(8);
-                $projectcount = Project::search($search)->where('company_id', $client->id)->get();
-            }else{
-                $projectcount = Project::search($search)->get();
-                $projects = Project::search($search)->paginate(8);
+            $projects = Project::search($search);
+            if(isset($status)){
+                $projects->where('status', $status);
             }
+            if(isset($client)){
+                $projects->where('company_id', $client);
+            }
+            $projectcount = $projects->get()->count();
+
+            if($projectcount <= 8){
+                $page = 1;
+            }
+            $projects = $projects->get();
+
+            foreach ($projects as $p){
+                $pro[] = $p->id;
+            }
+            $projects = Project::with('pstatus')->sortable([$sort => $order])->whereIn('project.id', $pro)->paginate(8, ['*'], 'page', $page);
             $projects = $this->calcDeadline($projects, 'project');
-            $projectcount = $projectcount->count();
             $status = Status::where('type', 'Progress')->get();
             return view('project.project_search', compact('projects','projectcount', 'status'));
-
         }
 
     public function detailsProject($company_id, $name)
@@ -197,7 +201,7 @@ class ProjectController extends Controller
             abort(404);
         }
         $companys = Client::where('id', $company_id)->first();
-        $releases = Release::with('rstatus')->where('project_id', $projects->id)->get();
+        $releases = Release::with('rstatus')->where('project_id', $projects->id)->orderBy('version', 'desc')->get();
         $releases = $this->calcDeadline($releases, 'release');
         $documents = Document::where('project_id', $projects->id)->get();
         $letters = Letter::where('project_id', $projects->id)->get();

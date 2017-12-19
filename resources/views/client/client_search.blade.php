@@ -1,11 +1,11 @@
 <div class="row bigtable">
-    <table class="table client-table table-center">
+    <table class="table client-table table-center results">
         <thead>
         <th></th>
-        <th>Client Name</th>
-        <th>Contact</th>
-        <th>Status</th>
-        <th>Project Count</th>
+        <th>@sortablelink('name', 'Client Name')</th>
+        <th>@sortablelink('contactname', 'Contact')</th>
+        <th>@sortablelink('cstatus.name', 'Status')</th>
+        <th>@sortablelink('projects_count')</th>
         <th>Last Two Projects</th>
         </thead>
         <tbody>

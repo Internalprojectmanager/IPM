@@ -23,30 +23,34 @@
             <span class="contenttype">Projects</span>
         </span>
         @if(config('app.secure') == TRUE)
-            <form action="{{secure_url('/project/overview')}}" class="pull-right searchform">
+            <form method="get" action="{{secure_url('/project/overview')}}" class="pull-right searchform">
         @else
-            <form action="{{url('/project/overview')}}" class="pull-right searchform">
+            <form method="get" action="{{url('/project/overview')}}" class="pull-right searchform">
         @endif
             <div class="form-group pull-right">
-                <input type="text" name="search" class="search searchfield" placeholder="Search">
+                <input type="text" name="search" id="searchfield" class="search searchfield" placeholder="Search">
             </div>
 
             <div class="form-group pull-right">
-                <select name='client' type="text" class="search dropdown-search">
+                <select name='client' type="text" id="client" class="search dropdown-search">
                     <option selected value="">Client</option>
                     @foreach($clients as $c)
-                        <option value="{{$c->name}}">{{$c->name}}</option>
+                        <option value="{{$c->id}}">{{$c->name}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group pull-right">
-                <select name='status' type="text" class="search dropdown-search">
+                <select name='status' id="status" type="text" class="search dropdown-search">
                     <option  selected value="">Status</option>
                     @foreach($status as $s)
-                        <option value="{{$s->name}}">{{$s->name}}</option>
+                        <option value="{{$s->id}}">{{$s->name}}</option>
                     @endforeach
                 </select>
             </div>
+
+            <input type="hidden" id="sort" value="">
+            <input type="hidden" id="page" value="">
+            <input type="hidden" id="order" value="">
         </form>
     </div>
 
@@ -59,14 +63,14 @@
             <th>@sortablelink('description', 'Description')</th>
             <th>@sortablelink('pstatus.name', 'Status')</th>
             <th>@sortablelink('deadline', 'Deadline')</th>
-            <th>@sortablelink('users', 'Users')</th>
+            <th>Users</th>
             </thead>
             </tr>
             <tbody>
             @foreach($projects as $project)
                 <tr>
                     <td style="background-color: {{$project->pstatus->color}};"></td>
-                    <td><span class="tabletitle"><a href="{{route('projectdetails', ['name' => $project->name, 'company_id' => $project->company_id])}}">{{$project->name}}</a></span> <br> <span class="tablesubtitle">@if(isset($project->company)){{$project->company->name}}@endif</span></td>
+                    <td><span id="tabletitle"><a href="{{route('projectdetails', ['name' => $project->name, 'company_id' => $project->company_id])}}">{{$project->name}}</a></span> <br> <span class="tablesubtitle">@if(isset($project->company)){{$project->company->name}}@endif</span></td>
                     <td class="table-description">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}...</td>
                     <td>{{$project->pstatus->name}}</td>
                     <td>@if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>

@@ -29,17 +29,20 @@
         @endif
             {{ csrf_field() }}
             <div class="form-group pull-right">
-                <input type="text" name="search" class="search searchfield" placeholder="Search">
+                <input type="text" name="search" id="searchfield" class="search searchfield" placeholder="Search">
             </div>
 
             <div class="form-group pull-right">
-                <select name="status" class="search dropdown-search">
+                <select name="status" id="status" class="search dropdown-search">
                     <option value="" selected>Status</option>
                     @foreach($status as $s)
-                        <option value="{{$s->name}}">{{$s->name}}</option>
+                        <option value="{{$s->id}}">{{$s->name}}</option>
                     @endforeach
                 </select>
             </div>
+                <input type="hidden" id="sort" value="">
+                <input type="hidden" id="page" value="">
+                <input type="hidden" id="order" value="">
         </form>
 
     </div>
@@ -71,7 +74,7 @@
     </div>
 
     <div class="row bigtable">
-        <table class="table client-table table-center">
+        <table class="table client-table table-center results">
             <thead>
             <tr>
             <th></th>

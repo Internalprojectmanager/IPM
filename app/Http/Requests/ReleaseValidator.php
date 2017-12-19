@@ -25,7 +25,6 @@ class ReleaseValidator extends FormRequest
     {
         return [
             'release_name' => 'required|max:100',
-            'author' =>  'required|string|max:100',
             'specification' => 'required|string|max:100'
         ];
     }
