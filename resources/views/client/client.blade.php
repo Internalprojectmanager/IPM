@@ -44,7 +44,6 @@
 
     <!-- ADD CLIENT MODAL -->
     <div id="addClientModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
             <div class="modal-header">
@@ -204,10 +203,9 @@
                     <button class="btn btn-primary" type="submit">
                         Add Client <span class="icon-right glyphicon glyphicon-plus">
                     </button>
-                </div>g
+                </div>
             </div>
         </div>
-
     </div>
 
     <div class="row bigtable">
