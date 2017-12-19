@@ -47,16 +47,36 @@ class CompanyController extends Controller
     }
 
     public function searchCompany(Request $request){
+        $clie = array();
+        $search = $request->search;
+        $status = $request->status;
+        $sort = $request->sort;
+        $order = $request->order;
+        $page = $request->page;
 
-        $search = $request->data[1]['value'];
-        $status = $request->data[2]['value'];
-        if(!empty($status)) {
-            $status = Status::search($status)->first();
-            $clients = Client::search($search)->where('status', $status->id)->paginate();
-        }else{
-            $clients = Client::search($search)->paginate();
+        //dd($status);
+
+        if($sort == NULL){
+            $sort = "name";
+            $order = "asc";
         }
 
+        $clients = Client::search($search);
+        if(isset($status)){
+            $clients->where('status', $status);
+        }
+        $clientcount = $clients->get()->count();
+
+        if($clientcount <= 8){
+            $page = 1;
+        }
+        $clients = $clients->get();
+
+        foreach ($clients as $c){
+            $clie[] = $c->id;
+        }
+
+        $clients = Client::with('cstatus')->sortable([$sort => $order])->withcount('projects')->whereIn('client.id', $clie)->paginate(8, ['*'], 'page', $page);
         $clientcount = $clients->count();
         $status = Status::where('type', 'Client')->get();
         return view('client.client_search', compact('clients', 'clientcount', 'status'));

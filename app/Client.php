@@ -14,7 +14,7 @@ class Client extends Model
 
     public $sortable = ['name', 'contactname'];
 
-    protected $sortableAs = ['projects_count'];
+    protected $sortableAs = ['projects_count', 'cstatus_name'];
 
     protected $fillable = [
         'id','name', 'description'
