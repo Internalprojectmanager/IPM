@@ -812,6 +812,10 @@ td > .assignee:first-child:before{
     width: 15px;
 }
 
-.black-button-up, #black-button-down, #button-files, #button-people, #button-pdf, .show{
+.black-button-up, #black-button-down, #button-files, #button-people, #button-pdf, .show {
     transition: all 0.3s linear;
+}
+
+.results > thead > tr > th > a {
+    color: #898989;
 }
