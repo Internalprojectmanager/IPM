@@ -643,11 +643,12 @@ td > .assignee:first-child:before{
     margin-bottom: 30px;
 }
 
-#block-description{
-    margin-top: -65px;
+#block-description, .block-description{
+    margin-top: -4%;
 }
 
 #block-hidden{
+    transition: all 0.3s linear;
     display: none;
 }
 
