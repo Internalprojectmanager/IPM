@@ -209,7 +209,7 @@ label{
 
 .btn-save, .btn-save:hover, .btn-save:focus, .btn-save:active:focus {
     color:white;
-    background: rgba(107,175,28,0.8) url("../svg/Save icon.svg") no-repeat 10px center;
+    background: rgba(107,175,28,0.8) url("../svg/save.svg") no-repeat 10px center;
     width: 97px;
     text-align: right;
     padding-right: 18px;
@@ -224,7 +224,7 @@ label{
     text-align: right;
     width: 90px;
     color: #C74237;
-    background: #f2f2f2 url("../svg/Cancel icon.svg") no-repeat 15px center;
+    background: #f2f2f2 url("../svg/cancel.svg") no-repeat 15px center;
     font-size: 15px;
     margin-top: 25px !important;
     box-shadow: none;
@@ -351,7 +351,7 @@ label{
 }
 
 .dropdown-settings{
-    background: #ffffff url(../svg/dropdown.svg) no-repeat 250px center;
+    background: #ffffff url("../svg/dropdown.svg") no-repeat 250px center;
     background-size: 20px 20px;
     width: 280px;
     height: 36px;
@@ -476,6 +476,7 @@ td > .assignee:first-child:before{
     top: 143px;
     right: 30px;
     height: 209px;
+    padding:20px;
     transition: all 0.3s linear;
 }
 
@@ -485,141 +486,16 @@ td > .assignee:first-child:before{
     line-height: 16px;
 }
 
+.block-value{
+    padding-left: 15px;
+}
+
 .project-detail a{
     color: #000000;
     font-size: 14px;
     line-height: 19px;
 }
 
-#project-name{
-    position: absolute;
-    left: 170px;
-    top: 173px;
-}
-
-#name-project{
-    position: absolute;
-    left: 185px;
-    top: 194px;
-}
-
-#project-description{
-    position: absolute;
-    left: 170px;
-    top: 233px;
-    display: none;
-}
-
-#description-project{
-    position: absolute;
-    left: 182px;
-    top: 254px;
-    display: none;
-    width:38%;
-}
-
-#project-code{
-    position: absolute;
-    left: 34.17%;
-    top: 173px;
-}
-
-#code-project{
-    position: absolute;
-    left: 35.35%;
-    top: 194px;
-}
-
-#client-name{
-    position: absolute;
-    left: 55.12%;
-    top: 173px;
-}
-
-#name-client{
-    position: absolute;
-    left: 56.03%;
-    top: 194px;
-}
-
-#contact-person{
-    position: absolute;
-    left: 55.12%;
-    top: 233px;
-    display: none;
-}
-
-#user-icon{
-    position: absolute;
-    left: 56.26%;
-    top: 261.5px;
-    display: none;
-}
-
-#contact-name{
-    position: absolute;
-    left: 57.95%;
-    top: 259px;
-    display: none;
-}
-
-#phone-icon{
-    position: absolute;
-    left: 56.26%;
-    top: 286px;
-    display: none;
-}
-
-#contact-phone{
-    position: absolute;
-    left: 57.95%;
-    top: 283px;
-    display: none;
-}
-
-#email-icon{
-    position: absolute;
-    left: 56.26%;
-    top: 309px;
-    display: none;
-}
-
-#contact-email{
-    position: absolute;
-    left: 57.95%;
-    top: 307px;
-    display: none;
-}
-
-#link{
-    position: absolute;
-    right: 21.81%;
-    top: 173px;
-}
-
-#world-icon{
-    position: absolute;
-    right: 21.57%;
-    top: 202px;
-}
-
-#link-world{
-    position: absolute;
-    right: 20.71%;
-    top: 199px;
-}
-
-#t-icon{
-    position: absolute;
-    right: 21.73%;
-    top: 226px;
-}
-
-#link-t{
-    position: absolute;
-    right: 20.71%;
-    top: 223px;
-}
 /* buttons */
 .blue-button{
     height: 45px;
@@ -735,14 +611,14 @@ td > .assignee:first-child:before{
 }
 
 .black-button-up{
-    background: #000000 url('../svg/More info up.svg') no-repeat center !important;
+    background: #000000 url('../svg/more-info-up.svg') no-repeat center !important;
     position: absolute !important;
     top: 415px !important;
     left: 52.2%;
 }
 
 #black-button-down{
-    background: #000000 url('../svg/More info Down icon.svg') no-repeat center;
+    background: #000000 url('../svg/more-info-down.svg') no-repeat center;
     position: absolute;
     top: 332px;
     left: 52.2%;
@@ -765,4 +641,16 @@ td > .assignee:first-child:before{
 .under-details{
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+#block-description{
+    margin-top: -65px;
+}
+
+#block-hidden{
+    display: none;
+}
+
+.button-top{
+    padding-top: 22px;
 }
