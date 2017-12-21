@@ -19,4 +19,12 @@ class Document extends Model
     public function projects(){
         return $this->belongsTo('App\Project', "project_id", 'id');
     }
+
+    public function release(){
+        return $this->belongsTo('App\Release', "release_id", 'release_uuid');
+    }
+
+    public function dstatus(){
+        return $this->hasOne('App\Status', "id", 'status');
+    }
 }

@@ -52,7 +52,7 @@ Route::group(['prefix' => 'project'], function () {
 });
 Route::group(['prefix' => 'document'], function (){
    Route::get('/add/{name}/{client_id}', 'DocumentController@addDocument')->name('adddocument');
-   Route::post('/add', 'DocumentController@storeDocument')->name('storedocument');
+   Route::put('/add', 'DocumentController@storeDocument')->name('storedocument');
    Route::get('/delete/{id}', 'DocumentController@deleteDocument')->name('deletedocument');
 });
 
@@ -82,6 +82,7 @@ Route::group(['prefix' => 'project'], function (){
             Route::post('/edit', 'ProjectController@updateProject')->name('updateproject');
             Route::get('/delete', 'ProjectController@deleteProject')->name('deleteproject');
 
+            Route::get('/documents', 'DocumentController@overviewDocuments')->name('documentoverview');
             Route::get('/document/{document_id}', 'DocumentController@showDocument')->name('showdocument');
             Route::get('/edit/{document_id}', 'DocumentController@editDocument')->name('editdocument');
             Route::post('/edit/{document_id}', 'DocumentController@updateDocument')->name('updatedocument');
