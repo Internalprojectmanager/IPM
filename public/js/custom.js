@@ -23,6 +23,7 @@ $('body').on('click', '.pagination a, .results>thead>tr>th a', function (e) {
 function getData(url) {
     var url = new URL(url);
 
+    console.log(url);
     var page = url.searchParams.get("page");
     var sort = url.searchParams.get("sort");
     var order = url.searchParams.get("order");
@@ -131,28 +132,21 @@ window.onclick = function (event) {
     }
 
 function projectDetailsDown() {
-    document.getElementById("project-description").classList.toggle("show");
-    document.getElementById("description-project").classList.toggle("show");
-    document.getElementById("contact-person").classList.toggle("show");
-    document.getElementById("user-icon").classList.toggle("show");
-    document.getElementById("contact-name").classList.toggle("show");
-    document.getElementById("phone-icon").classList.toggle("show");
-    document.getElementById("contact-phone").classList.toggle("show");
-    document.getElementById("email-icon").classList.toggle("show");
-    document.getElementById("contact-email").classList.toggle("show");
-
-
-    if(document.getElementById('project-details').style.height == '292px'){
+    document.getElementById("block-hidden").classList.toggle("show");
+    if(document.getElementById('black-button-down').classList.contains('black-button-up')){
         document.getElementById("black-button-down").classList.remove('black-button-up');
         document.getElementById('project-details').style.height = '209px';
-        document.getElementById('button-files').style.top = '277px';
-        document.getElementById('button-people').style.top = '277px';
-        document.getElementById('button-pdf').style.top = '277px';
+        document.getElementById('block-show').style.height = '127px';
+        document.getElementById('project-details').style.paddingBottom = '0px';
+        document.getElementById('button-top').style.marginTop = '2px';
+        document.getElementById('no-buttons').classList.remove('pull-right');
+
     }else{
         document.getElementById("black-button-down").classList.add('black-button-up');
-        document.getElementById('project-details').style.height = '292px';
-        document.getElementById('button-files').style.top = '361px';
-        document.getElementById('button-people').style.top = '361px';
-        document.getElementById('button-pdf').style.top = '361px';
+        document.getElementById('project-details').style.height = 'auto';
+        document.getElementById('project-details').style.paddingBottom = '70px';
+        document.getElementById('block-show').style.height = 'auto';
+        document.getElementById('button-top').style.marginTop = '5px';
+        document.getElementById('no-buttons').classList.add('pull-right');
     }
 }
