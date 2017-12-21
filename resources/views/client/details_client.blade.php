@@ -40,7 +40,7 @@
             </div>
             <div class="row under-details block-description" id="block-hidden">
                 <div class="col-md-6 col-xs-12">
-                    <span class="project-title block-title">Project Description</span><br>
+                    <span class="project-title block-title">Client Description</span><br>
                     <span class="project-detail block-value">{{$clients->description}}</span>
                 </div>
 
