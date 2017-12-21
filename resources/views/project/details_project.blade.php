@@ -8,7 +8,8 @@
 
 @section('content')
 
-    <button class="edit-button" id="project-edit">
+    <button onclick="location.href='{{route('editproject', ['name' => $projects->name, 'company_id' => $projects->company_id])}}'"
+            class="edit-button" id="project-edit">
         <svg id="edit-logo" width="21px" height="20px" viewBox="0 0 21 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
             <title>Edit Icon</title>

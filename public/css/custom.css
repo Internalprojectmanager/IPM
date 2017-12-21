@@ -861,3 +861,37 @@ td > .assignee:first-child:before {
     top: 13px;
     left: 15px;
 }
+
+.edit-title{
+    color: #898989;
+    font-size: 14px;
+}
+
+#edit-project{
+    left: 140px;
+    top: 143px;
+    right: 30px;
+    height: 559px;
+    transition: all 0.3s linear;
+    padding: 30px;
+}
+
+#company{
+    height: 36px;
+    width: 100%;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
+
+.save-button{
+    height: 45px;
+    width: 97px;
+    background-color: rgba(107,175,28,0.8);
+    border: none;
+}
+
+#save-button{
+    position: relative;
+    top: 370px;
+    left: 87.46%;
+}
