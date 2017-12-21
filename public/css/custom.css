@@ -477,7 +477,6 @@ td > .assignee:first-child:before{
     right: 30px;
     height: 209px;
     padding:20px;
-    transition: all 0.3s linear;
 }
 
 .project-title{
@@ -510,65 +509,6 @@ td > .assignee:first-child:before{
     line-height: 18px;
 }
 
-/* files button */
-#button-files{
-    width: 85px;
-    position: absolute;
-    right: 360px;
-    top: 277px;
-}
-
-#paperclip-icon{
-    position: absolute;
-    left: 15px;
-    top: 13px;
-}
-
-#files-button{
-    position: absolute;
-    left: 38px;
-    top: 14px;
-}
-
-/* people button */
-#button-people{
-    width: 111px;
-    position: absolute;
-    right: 224px;
-    top: 277px;
-}
-
-#people-icon{
-    position: absolute;
-    left: 15px;
-    top: 16px;
-}
-
-#people-button{
-    position: absolute;
-    left: 50px;
-    top: 14px;
-}
-
-/* pdf button */
-#button-pdf{
-    width: 139px;
-    position: absolute;
-    right: 60px;
-    top: 277px;
-}
-
-#pdf-icon{
-    position: absolute;
-    left: 15px;
-    top: 13px;
-}
-
-#pdf-button{
-    position: absolute;
-    left: 49px;
-    top: 14px;
-}
 
 /* release overview */
 .yellow-button{
@@ -610,18 +550,17 @@ td > .assignee:first-child:before{
     display: block;
 }
 
-.black-button-up{
-    background: #000000 url('../svg/more-info-up.svg') no-repeat center !important;
-    position: absolute !important;
-    top: 415px !important;
-    left: 52.2%;
-}
-
 #black-button-down{
     background: #000000 url('../svg/more-info-down.svg') no-repeat center;
-    position: absolute;
-    top: 332px;
-    left: 52.2%;
+    position: relative;
+    margin: auto;
+
+}
+
+.black-button-up{
+    background: #000000 url('../svg/more-info-up.svg') no-repeat center !important;
+    top: 6px !important;
+    margin-top: 20px;
 }
 
 #arrow{
@@ -630,8 +569,7 @@ td > .assignee:first-child:before{
     width: 15px;
 }
 
-.black-button-up, #black-button-down, #button-files, #button-people, #button-pdf, .show {
-    transition: all 0.3s linear;
+.black-button-up, #black-button-down, #button-files, #button-people, #button-pdf, .show, .black-button {
 }
 
 .results > thead > tr > th > a {
@@ -648,10 +586,31 @@ td > .assignee:first-child:before{
 }
 
 #block-hidden{
-    transition: all 0.3s linear;
     display: none;
 }
 
-.button-top{
-    padding-top: 22px;
+#button-files, #button-people{
+    width: 100px;
+}
+
+#button-pdf{
+    width: 140px;
+}
+
+#button-top{
+    width: 100%;
+    margin-top: 2px;
+}
+
+#block-show{
+    height: 128px;
+}
+
+#pdf-icon, #people-icon, #paperclip-icon{
+    margin-right: 5px;
+}
+
+#no-buttons{
+    height: 45px;
+    width: 100%;
 }

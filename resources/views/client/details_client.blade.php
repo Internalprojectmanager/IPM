@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="col-md-2 col-xs-6">
-                    <span class="project-title block-title">Client Status</span> <br>
+                    <span class="project-title block-title">Status</span> <br>
                     <span class="project-detail block-value">{{$clients->cstatus->name}}</span>
                 </div>
 
@@ -26,6 +26,7 @@
                     <i class="user-icon block-icons"><span class="project-detail block-value" id="contact-name">{{$clients->contactname}}</span></i><br>
                     <i class="tel-icon block-icons"><span class="project-detail block-value" id="contact-phone"><a href="tel:{{$clients->contactnumber}}">{{$clients->contactnumber}}</a></span></i><br>
                     <i class="mail-icon block-icons"> <span class="project-detail block-value" id="contact-email"><a href="mailto:{{$clients->contactemail}}">{{$clients->contactemail}}</a></span></i>
+
                 </div>
 
                 <div class="col-md-3 col-xs-6">
@@ -33,27 +34,33 @@
                     <i class="user-icon block-icons"><span class="project-detail block-value" id="contact-name">{{$clients->contactname}}</span></i><br>
                     <i class="tel-icon block-icons"><span class="project-detail block-value" id="contact-phone"><a href="tel:{{$clients->contactnumber}}">{{$clients->contactnumber}}</a></span></i><br>
                     <i class="mail-icon block-icons"> <span class="project-detail block-value" id="contact-email"><a href="mailto:{{$clients->contactemail}}">{{$clients->contactemail}}</a></span></i>
+
                 </div>
 
-
             </div>
-            <div class="row under-details" id="block-hidden">
-                <div class="col-md-6 col-xs-12" id="block-description">
-                    <span class="project-title block-title">Client Description</span><br>
+            <div class="row under-details block-description" id="block-hidden">
+                <div class="col-md-6 col-xs-12">
+                    <span class="project-title block-title">Project Description</span><br>
                     <span class="project-detail block-value">{{$clients->description}}</span>
                 </div>
 
                 <div class="col-md-6 col-xs-12 pull-right">
                     <span class="project-title block-title" id="link">Link</span><br>
-                    <i class="word-icon block-icons"><span class="project-detail block-value" id="link-world">-</span></i><br>
-                    <i class="text-icon block-icons"><span class="project-detail block-value" id="link-t">-</span></i>
+                    <i class="word-icon block-value"><span class="project-detail block-value" id="link-world">-</span></i><br>
+                    <i class="text-icon block-value"><span class="project-detail block-value" id="link-t">-</span></i>
                 </div>
+
+
             </div>
-            <div class="row button-top">
+            <div class="row" id="no-buttons">
+
+            </div>
+
+            <div class="row col-md-12 col-xs-12" id="button-top">
                 <button onclick="projectDetailsDown()" class="black-button" id="black-button-down"></button>
             </div>
+
         </div>
-    </div>
     <div class="row under-details">
         <a class="black" href="{{route('addproject')}}">
             <button class="btn-primary">
