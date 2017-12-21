@@ -856,18 +856,18 @@ td > .assignee:first-child:before {
     top: 14px;
 }
 
-#edit-logo{
+#edit-logo {
     position: absolute;
     top: 13px;
     left: 15px;
 }
 
-.edit-title{
+.edit-title {
     color: #898989;
     font-size: 14px;
 }
 
-#edit-project{
+#edit-project {
     left: 140px;
     top: 143px;
     right: 30px;
@@ -876,22 +876,63 @@ td > .assignee:first-child:before {
     padding: 30px;
 }
 
-#company{
+#company {
     height: 36px;
     width: 100%;
     border: 1px solid #9B9B9B;
     background-color: #FFFFFF;
 }
 
-.save-button{
+.save-button {
     height: 45px;
     width: 97px;
-    background-color: rgba(107,175,28,0.8);
+    background-color: rgba(107, 175, 28, 0.8);
     border: none;
 }
 
-#save-button{
+#save-button {
     position: relative;
     top: 370px;
-    left: 87.46%;
+    left: 85.46%;
+}
+
+#description {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 200px;
+    max-height: 200px;
+}
+
+.or {
+    position: relative;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 19px;
+    top: 20px;
+    left: 50%;
+}
+
+#add_client {
+    position: absolute;
+    top: 149px;
+    left: 2%;
+}
+
+#new_client {
+    position: absolute;
+    top: 173px;
+    width: 96%;
+}
+
+#button-save {
+    position: absolute;
+    right: 15px;
+    top: 14px;
+}
+
+#save-logo{
+    position: absolute;
+    left: 15px;
+    top: 13px;
 }
