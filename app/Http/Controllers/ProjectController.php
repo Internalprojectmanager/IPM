@@ -253,7 +253,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return redirect()->route('overviewproject');
+        return redirect()->route('projectdetails', compact('company_id', 'name'));
     }
 
     public function deleteProject($company_id, $name)

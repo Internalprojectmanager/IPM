@@ -32,7 +32,7 @@
                     <input type="text" class="form-control" name="project_code" id="project_code"
                            value="{{$projects->projectcode}}">
 
-                    <a href="#" class="cancel">
+                    <a href="{{route('projectdetails', ['company-id' => $projects->company_id, 'name' => $projects->name])}}" class="cancel">
                         <svg width="11px" height="11px" viewBox="0 0 11 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
                             <title>Cancel icon</title>
