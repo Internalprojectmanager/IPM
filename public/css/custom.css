@@ -944,3 +944,34 @@ td > .assignee:first-child:before {
     position: absolute;
     margin-top: 60px;
 }
+
+.delete-button {
+    height: 45px;
+    width: 107px;
+    background-color: #F54949;
+    border: none;
+    margin-bottom: 10px;
+}
+
+#project-delete{
+    position: relative;
+    left: 92.8%;
+}
+
+.delete-content {
+    color: #FFFFFF;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+#delete-content{
+    position: absolute;
+    top: 14px;
+    right: 15px;
+}
+
+#delete-logo{
+    position: absolute;
+    top: 13px;
+    left: 15px;
+}
