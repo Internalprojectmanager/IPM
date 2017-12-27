@@ -8,7 +8,8 @@
 
 @section('content')
     <div class="row">
-
+<a href="{{route('editrelease', ['name' => $project->name, 'company_id' => $project->company_id,
+                        'release_name' => $release->name, 'version' => $release->version])}}">Edit Release</a>
         <div class="row">
             <div class="col-md-12">
                 <h1>{{$company->name}} {{$project->name}}: {{$release->name}}</h1>

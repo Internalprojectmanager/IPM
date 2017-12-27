@@ -77,4 +77,13 @@ class ReleaseController extends Controller
 
         return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements', 'testreport'));
     }
+
+    public function  editRelease($company_id, $name, $release_name, $version){
+        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        $company = Client::where('id' ,$company_id)->first();
+        $release = Release::where([['project_id', $project->id],['name', $release_name],['version', $version]])->first();
+        $status = Status::where('type', 'Progress')->get();
+
+        return view('release.edit_release', compact('project', 'company', 'release', 'status'));
+    }
 }

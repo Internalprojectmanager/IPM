@@ -975,3 +975,33 @@ td > .assignee:first-child:before {
     top: 13px;
     left: 15px;
 }
+
+#release_version{
+    height: 36px;
+    width: 100%;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
+
+#release_description{
+    min-height: 200px;
+    max-height: 200px;
+    min-width: 100%;
+    max-width: 100%;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
+
+#release_name{
+    height: 36px;
+    width: 100%;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
+
+#release_status{
+    height: 36px;
+    width: 100%;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
