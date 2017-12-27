@@ -1026,26 +1026,39 @@ td > .assignee:first-child:before {
 
 .release_specification {
     position: absolute;
-    top: 535px;
+    top: 591px;
+    left: 200px;
 }
 
-#release_spectype{
+#release_spectype {
     width: 200px;
 }
 
-#extra_content{
+#extra_content {
     min-height: 115px;
     max-height: 115px;
-    min-width: 100%;
-    max-width: 100%;
+    min-width: 150%;
+    max-width: 150% !important;
     border: 1px solid #9B9B9B;
     background-color: #FFFFFF;
 }
 
-#edit-release{
+#edit-release {
     padding: 30px;
     height: 812px;
     width: 100%;
     background-color: #FFFFFF;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+#cancel-release {
+    position: absolute;
+    top: 824px;
+    left: 200px;
+}
+
+#save-button-release {
+    position: absolute;
+    top: 880px;
+    right: 92px;
 }
