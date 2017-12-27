@@ -931,7 +931,7 @@ td > .assignee:first-child:before {
     top: 14px;
 }
 
-#save-logo{
+#save-logo {
     position: absolute;
     left: 15px;
     top: 13px;
@@ -953,7 +953,7 @@ td > .assignee:first-child:before {
     margin-bottom: 10px;
 }
 
-#project-delete{
+#project-delete {
     position: relative;
     left: 92.8%;
 }
@@ -964,26 +964,26 @@ td > .assignee:first-child:before {
     line-height: 18px;
 }
 
-#delete-content{
+#delete-content {
     position: absolute;
     top: 14px;
     right: 15px;
 }
 
-#delete-logo{
+#delete-logo {
     position: absolute;
     top: 13px;
     left: 15px;
 }
 
-#release_version{
+#release_version {
     height: 36px;
     width: 100%;
     border: 1px solid #9B9B9B;
     background-color: #FFFFFF;
 }
 
-#release_description{
+#release_description {
     min-height: 200px;
     max-height: 200px;
     min-width: 100%;
@@ -992,16 +992,60 @@ td > .assignee:first-child:before {
     background-color: #FFFFFF;
 }
 
-#release_name{
+#release_name {
     height: 36px;
     width: 100%;
     border: 1px solid #9B9B9B;
     background-color: #FFFFFF;
 }
 
-#release_status{
+#release_status {
     height: 36px;
     width: 100%;
     border: 1px solid #9B9B9B;
     background-color: #FFFFFF;
+}
+
+#release_specification {
+    position: absolute;
+    top: 535px;
+    left: 200px;
+    color: #000000;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+#line {
+    position: absolute;
+    top: 559px;
+    left: 200px;
+    height: 2px;
+    width: 81.89%;
+    background-color: #000000;
+}
+
+.release_specification {
+    position: absolute;
+    top: 535px;
+}
+
+#release_spectype{
+    width: 200px;
+}
+
+#extra_content{
+    min-height: 115px;
+    max-height: 115px;
+    min-width: 100%;
+    max-width: 100%;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
+
+#edit-release{
+    padding: 30px;
+    height: 812px;
+    width: 100%;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
 }

@@ -9,7 +9,7 @@
 @section('content')
 
     <div class="row">
-        <div class="header-3" id="edit-project">
+        <div class="header-3" id="edit-release">
             <form action="#" method="post">
                 {{ csrf_field() }}
                 <div class="form-group col-md-6">
@@ -39,6 +39,23 @@
                             <option value="{{$s->id}}">{{$s->name}}</option>
                         @endforeach
                     </select>
+                </div>
+
+                <span id="release_specification">Release specification</span>
+                <span id="line"></span>
+
+                <div class="release_specification">
+                    <div class="form-group col-md-6">
+                        <label class="edit-title" id="release_spectype" for="specification_type">Specification Type</label>
+
+
+                        <label class="edit-title" for="extra_content">Extra Content</label>
+                        <textarea rows="4" cols="50" name="extra_content" class="form-control"
+                                  id="extra_content">{{$release->extra_content}}</textarea>
+                    </div>
+                    <div class="form-group col-md-6">
+
+                    </div>
                 </div>
             </form>
         </div>
