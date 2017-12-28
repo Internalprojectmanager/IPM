@@ -92,6 +92,7 @@ Route::group(['prefix' => 'project'], function (){
             Route::group(['prefix' => '{release_name}'], function (){
                 Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');
                 Route::get('/edit/{version}', 'ReleaseController@editRelease')->name('editrelease');
+                Route::get('/update/{version}', 'ReleaseController@updateRelease')->name('updaterelease');
                 Route::get('/{version}/pdf', 'PDFController@createPDF')->name('createpdf');
 
                 Route::get('/feature', 'FeatureController@add')->name('addfeature');

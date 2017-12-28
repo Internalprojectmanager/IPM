@@ -86,4 +86,20 @@ class ReleaseController extends Controller
 
         return view('release.edit_release', compact('project', 'company', 'release', 'status'));
     }
+
+    public function updateRelease($company_id, $name, $release_id, $release_name, $version, Request $request){
+        $release = Release::where(['id' => $release_id, 'version' => $version])->first();
+        $company = Client::where('id', $company_id)->first();
+        $project = Project::where('name', $name)->first();
+
+        $release->name = $request->release_name;
+        $release->description = $request->release_description;
+        $release->version = $request->release_version;
+        $release->status = $request->release_status;
+        $release->extra_content = $request->extra_content;
+
+        $release->save();
+
+        return redirect()->route('projectdetails', compact('release', 'company', 'project'));
+    }
 }

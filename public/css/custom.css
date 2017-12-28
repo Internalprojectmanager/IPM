@@ -1062,3 +1062,9 @@ td > .assignee:first-child:before {
     top: 880px;
     right: 92px;
 }
+
+.document_status{
+    position: absolute;
+    top: 591px;
+    left: 830px;
+}
