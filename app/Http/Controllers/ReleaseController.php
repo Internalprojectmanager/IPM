@@ -87,8 +87,8 @@ class ReleaseController extends Controller
         return view('release.edit_release', compact('project', 'company', 'release', 'status'));
     }
 
-    public function updateRelease($company_id, $name, $release_id, $release_name, $version, Request $request){
-        $release = Release::where(['id' => $release_id, 'version' => $version])->first();
+    public function updateRelease($company_id, $name, $release_name, $version, Request $request){
+        $release = Release::where(['name' => $release_name, 'version' => $version])->first();
         $company = Client::where('id', $company_id)->first();
         $project = Project::where('name', $name)->first();
 
@@ -100,6 +100,6 @@ class ReleaseController extends Controller
 
         $release->save();
 
-        return redirect()->route('projectdetails', compact('release', 'company', 'project'));
+        return view('release.details_release', compact('release', 'company', 'project'));
     }
 }
