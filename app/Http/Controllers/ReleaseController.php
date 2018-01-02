@@ -92,6 +92,11 @@ class ReleaseController extends Controller
         $company = Client::where('id', $company_id)->first();
         $project = Project::where('name', $name)->first();
 
+        $status_string = array('"Open"', '"In Progress"', '"Testing"', '"Closed"');
+        $status = array('Open', 'In Progress', 'Testing', 'Closed');
+        $ids_ordered = implode(",", $status_string);
+        $features = Feature::where([['release_id', $release->release_uuid]])->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
+
         $release->name = $request->release_name;
         $release->description = $request->release_description;
         $release->version = $request->release_version;
@@ -100,6 +105,6 @@ class ReleaseController extends Controller
 
         $release->save();
 
-        return view('release.details_release', compact('release', 'company', 'project'));
+        return view('release.details_release', compact('release', 'company', 'project', 'features'));
     }
 }
