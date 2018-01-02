@@ -187,7 +187,7 @@ label{
     margin-top: 20px;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-danger, .btn-save{
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-danger, .btn-save,.btn-delete, .btn-edit{
     height: 45px;
     width: 160px;
     color:black;
@@ -207,9 +207,27 @@ label{
     color:black;
 }
 
+.btn-edit, .btn-edit:hover, .btn-edit:active, .btn-edit:focus{
+    background-color: #CECECE;
+    color:black;
+    width:100px;
+}
+
 .btn-save, .btn-save:hover, .btn-save:focus, .btn-save:active:focus {
     color:white;
     background: rgba(107,175,28,0.8) url("../svg/save.svg") no-repeat 10px center;
+    width: 97px;
+    text-align: right;
+    padding-right: 18px;
+    text-transform: none;
+    font-weight: normal;
+    box-shadow: none ;
+    outline: 0;
+}
+
+.btn-delete, .btn-delete:hover, .btn-delete:focus, .btn-delete:active:focus {
+    color:white;
+    background: #F54949 url("../svg/delete.svg") no-repeat 10px center;
     width: 97px;
     text-align: right;
     padding-right: 18px;
@@ -471,13 +489,26 @@ td > .assignee:first-child:before{
 
 
 /* Project details */
-#project-details{
+#project-details, #document-details{
     left: 140px;
     top: 143px;
     right: 30px;
     height: 209px;
     padding:20px;
 }
+
+#document-details{
+    height: auto;
+}
+
+.download{
+    border: 1px solid black;
+    width: 100%;
+    height: 50px;
+    padding: 14px 15px 14px 15px;
+    color: black;
+}
+
 
 .project-title{
     color: #898989;
@@ -613,4 +644,12 @@ td > .assignee:first-child:before{
 #no-buttons{
     height: 45px;
     width: 100%;
+}
+
+.edit-button{
+    margin-top: -45px;
+}
+
+.btn-a{
+    padding-top: 11px;
 }

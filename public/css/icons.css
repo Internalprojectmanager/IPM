@@ -62,6 +62,14 @@
     background: url("../svg/text.svg") no-repeat 0px center;
 }
 
+.cross-icon{
+    background: url("../svg/cross.svg") no-repeat 0px center;
+    background-size: 15px;
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+}
+
 
 
 

@@ -50,11 +50,6 @@ Route::group(['prefix' => 'project'], function () {
     Route::get('/add', 'ProjectController@addProject')->name('addproject');
     Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
 });
-Route::group(['prefix' => 'document'], function (){
-   Route::get('/add/{name}/{client_id}', 'DocumentController@addDocument')->name('adddocument');
-   Route::put('/add', 'DocumentController@storeDocument')->name('storedocument');
-   Route::get('/delete/{id}', 'DocumentController@deleteDocument')->name('deletedocument');
-});
 
 Route::group(['prefix' => 'letter'], function (){
     Route::get('/add/{name}/{client_id}', 'LetterController@addLetter')->name('addletter');
@@ -73,6 +68,7 @@ Route::group(['prefix' => 'testreport'], function () {
 });
 
 Route::post('/release/overview', 'ReleaseController@overviewTestrapport')->name('storerelease');
+Route::post('/file/delete/{document_id}', 'DocumentController@deleteFile')->name('deletefile');
 
 Route::group(['prefix' => 'project'], function (){
     Route::group(['prefix' => '{client_id}'], function () {
@@ -82,10 +78,17 @@ Route::group(['prefix' => 'project'], function (){
             Route::post('/edit', 'ProjectController@updateProject')->name('updateproject');
             Route::get('/delete', 'ProjectController@deleteProject')->name('deleteproject');
 
-            Route::get('/documents', 'DocumentController@overviewDocuments')->name('documentoverview');
-            Route::get('/document/{document_id}', 'DocumentController@showDocument')->name('showdocument');
-            Route::get('/edit/{document_id}', 'DocumentController@editDocument')->name('editdocument');
-            Route::post('/edit/{document_id}', 'DocumentController@updateDocument')->name('updatedocument');
+            Route::group(['prefix' => 'documents'], function () {
+                Route::get('/', 'DocumentController@overviewDocuments')->name('documentoverview');
+                Route::get('/add', 'DocumentController@addDocument')->name('adddocument');
+                Route::put('/add', 'DocumentController@storeDocument')->name('storedocument');
+                Route::get('/show/{document_id}', 'DocumentController@showDocument')->name('showdocument');
+                Route::get('/edit/{document_id}', 'DocumentController@editDocument')->name('editdocument');
+                Route::put('/edit/{document_id}', 'DocumentController@updateDocument')->name('updatedocument');
+                Route::get('/delete/{id}', 'DocumentController@deleteDocument')->name('deletedocument');
+                Route::get('/download/{id}', 'DocumentController@downloadFile')->name('downloadfile');
+
+            });
 
             Route::get('/letter/{letter_id}', 'LetterController@showLetter')->name('showletter');
             Route::get('/{letter_id}/edit', 'LetterController@editLetter')->name('editletter');

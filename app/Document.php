@@ -27,4 +27,8 @@ class Document extends Model
     public function dstatus(){
         return $this->hasOne('App\Status', "id", 'status');
     }
+
+    public function categories(){
+        return $this->hasOne('App\Status', "id", 'category');
+    }
 }

@@ -62,3 +62,18 @@ Breadcrumbs::register('showrelease', function ($breadcrumbs, $projects, $release
     $breadcrumbs->push($release->name. " ".$release->version, route('showrelease', ['name'=> $projects->name, 'client_id' => $projects->client_id,
         'version' => $release->version, 'release_name' => $release->name]));
 });
+
+
+//Documents
+Breadcrumbs::register('documents', function ($breadcrumbs, $project) {
+    $breadcrumbs->parent('projects');
+    $breadcrumbs->push($project->name, route('projectdetails', ['name'=> $project->name, 'client_id' => $project->company_id]));
+    $breadcrumbs->push('Document overview', route('documentoverview', ['name'=> $project->name, 'client_id' => $project->company_id]));
+});
+
+Breadcrumbs::register('detailsdocument', function ($breadcrumbs, $document) {
+    $breadcrumbs->parent('projects');
+    $breadcrumbs->push($document->projects->name, route('projectdetails', ['name'=> $document->projects->name, 'client_id' => $document->projects->company_id]));
+    $breadcrumbs->push('Document overview', route('documentoverview', ['name'=> $document->projects->name, 'client_id' => $document->projects->company_id]));
+    $breadcrumbs->push($document->title, route('showdocument', ['name'=> $document->projects->name, 'client_id' => $document->projects->company_id, $document->id]));
+});

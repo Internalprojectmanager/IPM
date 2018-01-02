@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Requests\DocumentValidator;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -41,27 +42,32 @@ class DocumentController extends Controller
         return true;
     }
 
-    public function addDocument($name, $company_id){
+    public function addDocument($company_id, $name){
         $projects = Project::where('name', $name)->first();
         $companys = Client::where('id', $company_id)->first();
         $release = Release::where('project_id', $projects->id)->get();
-        $status = Status::where('type', 'Progress')->get();
+        $status = Status::where('type', 'Progress')->orWhere('type', 'Document')->get();
 
         return view('document.add_document', compact('projects', 'companys', 'release', 'status'));
     }
 
-    public function storeDocument(Request $request)
+    public function storeDocument(DocumentValidator $request)
     {
-        Storage::makeDirectory("public/documents/".$request->project_id);
-        $path = $request->file('upload')->storeAs("public/documents/".$request->project_id , $request->document_title."-".$request->upload->getClientOriginalName());
         $document = new Document();
+        if($request->hasFile('upload')) {
+            Storage::makeDirectory("public/documents/" . $request->project_id);
+            $path = $request->file('upload')->storeAs("public/documents/" . $request->project_id, $request->document_title . "-" . $request->upload->getClientOriginalName());
+            $document->link = $path;
+            $document->filename = $request->upload->getClientOriginalName();
+        }
+
         $document->document_id = Uuid::generate(4);
         $document->project_id = $request->project_id;
         $document->release_id = $request->release_id;
         $document->title = $request->document_title;
         $document->description = $request->description;
         $document->author = Auth::id();
-        $document->link = $path;
+        $document->category = $request->category;
         $document->status = $request->status;
         $document->save();
 
@@ -76,7 +82,19 @@ class DocumentController extends Controller
             abort(404);
         }
 
+        //dd($document);
+
         return view('document.details_document', compact('document', 'project'));
+    }
+
+    public function downloadFile($company_id, $name, $document_id){
+        $document = Document::with('projects.company')->where('id',$document_id)->first();
+        if(!$document){
+            abort(404);
+        }
+
+
+        return response()->download('storage/documents/'. $document->project_id. '/' . $document->title.'-'.$document->filename, $document->filename);
     }
 
     public function overviewDocuments($company_id, $name){
@@ -91,40 +109,58 @@ class DocumentController extends Controller
 
 
     public function editDocument($company_id, $name, $document_id){
-        $documents = Document::with('projects')->where('id', $document_id)->first();
+        $document = Document::with('projects')->where('id', $document_id)->first();
         $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
-        if(!$documents){
+        $status = Status::where('type', 'Progress')->orWhere('type', 'Document')->get();
+        $release = Release::where('project_id', $project->id)->get();
+        if(!$document){
             abort(404);
         }
 
-        return view('document.edit_document', compact('documents', 'project'));
+        return view('document.edit_document', compact('document', 'project', 'status', 'release'));
     }
 
     public function updateDocument($company_id, $name, $document_id, Request $request){
         $document = Document::where('id', $document_id)->first();
         $this->createRevision($document);
 
+        if($request->hasFile('upload')){
+            $this->deleteFile($document_id);
+            $path = $request->file('upload')->storeAs("public/documents/".$document->project_id , $request->document_title."-".$request->upload->getClientOriginalName());
+            $document->link = $path;
+            $document->filename = $request->upload->getClientOriginalName();
+        }
+
         $document->title = $request->document_title;
         $document->description = $request->description;
-        $document->author = $request->author;
+        $document->author = Auth::id();
         $document->created_at = date('Y-m-d H:i:s');
+        $document->category = $request->category;
+        $document->status = $request->status;
+
         $document->save();
-
-        $projects = Project::where(['name' => $name, 'company_id' =>$company_id])->first();
-        $companys = Client::where('id', $company_id)->first();
-        $releases = Release::where('project_id', $projects->id)->get();
-        $documents = Document::where('project_id', $projects->id)->get();
-        $letters = Letter::where('project_id', $projects->id)->get();
-
-        return view('project.details_project', compact('projects', 'companys', 'releases', 'documents', 'letters'));
+        return redirect()->route('showdocument', ['name' => $name, 'company_id' => $company_id, 'document_id' => $document_id]);
     }
 
-    public function deleteDocument($id)
+    public function deleteFile($document_id)
     {
-        $document = Document::where('id', $id)->first();
+        $document = Document::where('id', $document_id)->first();
         $this->createRevision($document);
-        $document->delete();
+        $file = Storage::delete($document->link);
+        if($file == true){
+            $document->filename = NULL;
+            $document->link = NULL;
+            $document->save();
+        }
+        return redirect()->action('DocumentController@editDocument', [$document->projects->company_id,$document->projects->name, $document->id]);
+    }
 
-        return redirect()->route('overviewproject');
+    public function deletedocument($company_id, $name, $document_id)
+    {
+        $document = Document::where('id', $document_id)->first();
+        $this->createRevision($document);
+        $this->deleteFile($document_id);
+        $document->delete();
+        return redirect()->action('DocumentController@overviewDocuments', [$document->projects->company_id,$document->projects->name]);
     }
 }
