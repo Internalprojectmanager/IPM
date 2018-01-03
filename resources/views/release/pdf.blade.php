@@ -16,7 +16,8 @@
         <img class="logo-p1" src="{{asset('img/logo-iav-circles.png')}}">
         <span class="h1-p1">PROJECT SPECIFICATION</span>
         <span class="h2-p1">{{$project->name}} {{$release->name}} {{$release->version}}</span>
-        <span class="h3-p1"><?php echo date("d - m - Y"); ?></span>
+        <span class="h3-p1"><?php echo date("d - m - Y"); ?>
+        </span>
 
         <span class="project-info-p1">
                 <span class="project-info-left">PROJECT NAME</span>
@@ -52,6 +53,7 @@
         <script type="text/php">
             $GLOBALS['chapters'] = array();
             $GLOBALS['backside'] = $pdf->open_object();
+
         </script>
         <span class="h1">CONTENTS</span>
         <br><br><br><br><br>
@@ -71,19 +73,19 @@
                 <span class="content-pagenum" id="disable-font">%%CH3%%</span>
             </span>
             <hr>
-            <span class="content-subtitle" id="disable-font">
-                <span id="content-title-font">1.0 RE-DESIGN WEBSITE</span>
-                <span class="content-pagenum" id="disable-font"></span>
+            <?php $featureID = 0; $i = 4; ?>
+            @foreach($features as $f)
+                <span class="content-subtitle" id="disable-font">
+                <span id="content-title-font"><?php $featureID++; echo $featureID . '.0'; ?> {{ $f->name }}</span>
+                <span class="content-pagenum" id="disable-font">%%CH{{$i}}%%</span>
+                <?php $i++; ?>
             </span>
-            <hr>
-            <span class="content-subtitle" id="disable-font">
-                <span id="content-title-font">FUNCTIONAL REQUIREMENTS</span>
-                <span class="content-pagenum" id="disable-font"></span>
-            </span>
-            <hr>
+                <hr>
+            @endforeach
         </span>
         <script type="text/php">
             $pdf->close_object();
+
         </script>
     </p>
     <!-- END OF PAGE 3 -->
@@ -93,6 +95,7 @@
         <span class="h1" id="project-description">PROJECT<br>DESCRIPTION</span>
         <script type="text/php">
 	        $GLOBALS['chapters']['1'] = $pdf->get_page_number();
+
         </script>
         <br><br><br>
         <span class="h2" style="margin-bottom: 600px;">PROJECT DESCRIPTION</span><br>
@@ -103,6 +106,7 @@
         <span class="h2">PROJECT ROLES & RESPONSIBILITIES</span>
         <script type="text/php">
 	        $GLOBALS['chapters']['2'] = $pdf->get_page_number();
+
         </script>
         <br><br><br>
 
@@ -192,15 +196,19 @@
     <!-- END OF PAGE 4 -->
 
     <!-- PAGE 5 -->
-    <?php $featureID = 0; ?>
+    <?php $featureID = 0; $chap = 4; ?>
     <script type="text/php">
         $GLOBALS['chapters']['3'] = $pdf->get_page_number();
     </script>
     @foreach($features as $f)
         <p>
+            <script type="text/php">
+                $GLOBALS['chapters'][{{$chap}}] = $pdf->get_page_number();
+            </script>
             <span class="h2">
                 FEATURE
                 <?php
+                $chap++;
                 $featureID++;
                 echo $featureID . '.0';
                 ?>
@@ -224,45 +232,25 @@
             <span>
                 <table class="table-p5">
                     <tbody>
-                        <tr class="project-description">
-                            <td width="35%">
-                                <strong>FR-1.1</strong>
-                                Header
-                            </td>
-                            <td width="65%">
-                                Hier moet een introtekst komen met een korte uitleg over Effect Ai plus een button om door te klikken onder de header komen 6 tot 8 blokken deze linken naar updates en nieuws. Er kunnen ook blokken tussen zitten met een creatieve interactie.
-                            </td>
-                        </tr>
+                        @foreach($f->requirements as $r)
+                            <tr class="project-description">
+                                <td width="35%">
+                                    <strong>
+                                        FR-<?php $FRID = $featureID + 0.1; echo $FRID;  ?>
+                                    </strong>
+                                    {{ $r->name }}
+                                </td>
+                                <td width="65%">
+                                    {{ $r->description }}
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td><br></td>
-                            <td><br></td>
-                        </tr>
+                            <tr>
+                                <td><br></td>
+                                <td><br></td>
+                            </tr>
+                        @endforeach
 
-                        <tr class="project-description">
-                            <td width="35%">
-                                <strong>FR-1.2</strong>
-                                Content blokken
-                            </td>
-                            <td width="65%">
-                                Hier moet een introtekst komen met een korte uitleg over Effect Ai plus een button om door te klikken onder de header komen 6 tot 8 blokken deze linken naar updates en nieuws. Er kunnen ook blokken tussen zitten met een creatieve interactie.
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><br></td>
-                            <td><br></td>
-                        </tr>
-
-                         <tr class="project-description">
-                            <td width="35%">
-                                <strong>FR-1.3</strong>
-                                Footer
-                            </td>
-                            <td width="65%">
-                                Hier moet een introtekst komen met een korte uitleg over Effect Ai plus een button om door te klikken onder de header komen 6 tot 8 blokken deze linken naar updates en nieuws. Er kunnen ook blokken tussen zitten met een creatieve interactie.
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </span>
@@ -289,6 +277,7 @@
 			$pdf->stop_object($GLOBALS["backside"]);
 		}
 	');
+
 </script>
 
 </body>
