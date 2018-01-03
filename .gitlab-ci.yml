@@ -15,4 +15,5 @@ deploy to develop:
     - docker-compose $DC_PARAMS exec -T ipm git pull
     - docker-compose $DC_PARAMS exec -T ipm composer install
     - docker-compose $DC_PARAMS exec -T ipm php artisan migrate --seed
+    - docker-compose $DC_PARAMS exec -T ipm php artisan storage:link
   environment: develop
