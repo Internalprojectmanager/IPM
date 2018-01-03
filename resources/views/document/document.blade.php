@@ -30,10 +30,29 @@
                 @foreach($document as $doc)
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: {{$doc->dstatus->color}};"></td>
-                        <td>{{$doc->release->version}} - {{$doc->release->name}}</td>
+                        <td>
+                            @if(!empty($doc->release_id))
+                                {{$doc->release->version}} - {{$doc->release->name}}
+                            @else
+                                -
+                            @endif
+                        </td>
+
                         <td><a href="{{route('showdocument', ['company_id' => $project->company_id, 'name' => $project->name, 'document_id' => $doc->id])}}">{{$doc->title}}</a></td>
-                        <td style="width: 180px;">{{$doc->categories->name}}</td>
-                        <td>{{$doc->dstatus->name}}</td>
+                        <td style="width: 180px;">
+                            @if(!empty($doc->category))
+                                {{$doc->categories->name}}
+                            @else
+                                -
+                            @endif
+                        </td>
+                        <td>
+                            @if(!empty($doc->status))
+                                {{$doc->dstatus->name}}
+                            @else
+                                -
+                            @endif
+                        </td>
                     </tr>
             @endforeach
                 </tbody>

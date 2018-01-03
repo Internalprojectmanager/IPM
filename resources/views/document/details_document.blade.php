@@ -17,16 +17,28 @@
             <div class="row">
                 <div class="col-md-6">
                     <span class="project-title block-title">Release Name</span> <br>
+                    @if(!empty($document->release_id))
                     <span class="project-detail block-value">{{$document->release->name}}</span>
+                    @else
+                        <span class="project-detail block-value">-</span>
+                    @endif
                 </div>
 
                 <div class="col-md-3">
                     <span class="project-title block-title">Category</span> <br>
+                    @if(!empty($document->category))
                     <span class="project-detail block-value">{{$document->categories->name}}</span>
+                    @else
+                        <span class="project-detail block-value">-</span>
+                    @endif
                 </div>
                 <div class="col-md-3">
                     <span class="project-title block-title">Status</span> <br>
+                    @if(!empty($document->status))
                     <span class="project-detail block-value">{{$document->dstatus->name}}</span>
+                    @else
+                        <span class="project-detail block-value">-</span>
+                    @endif
                 </div>
             </div>
 
