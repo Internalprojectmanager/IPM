@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Feature;
 use App\Http\Requests\ReleaseValidator;
 use App\Requirement;
-use App\TestReport;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -14,6 +13,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Client;
 use App\Project;
 use App\Release;
+use App\Requirements;
 use DB;
 use Webpatser\Uuid\Uuid;
 use PDF;
@@ -32,11 +32,9 @@ class PDFController extends Controller
         $status_string = array('"Open"', '"In Progress"', '"Testing"', '"Closed"');
         $status = array('Open', 'In Progress', 'Testing', 'Closed');
         $ids_ordered = implode(",", $status_string);
-        $testreport = TestReport::where('release_id', $release->release_id)->get();
-        $features = Feature::where([['release_id', $release->release_uuid]])->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
-        $requirements = Requirement::where('release_id', $release->release_uuid)->get();
+        $features = Feature::with('requirements')->where([['release_id', $release->release_uuid]])->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
 
-        $pdf = PDF::loadView('release.pdf', compact('release', 'project', 'features', 'company', 'requirements', 'testreport'));
+        $pdf = PDF::loadView('release.pdf', compact('release', 'project', 'features', 'company', 'requirements'));
         return $pdf->stream('Release.pdf');
     }
 }

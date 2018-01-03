@@ -148,7 +148,7 @@ footer .pagenum:before {
 .content-pagenum {
     position: fixed;
     text-align: right;
-    margin-right: -64px;
+    margin-right: -80px;
     color: #000000;
     font-size: 12px;
     letter-spacing: 1px;
