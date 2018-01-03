@@ -51,21 +51,6 @@ Route::group(['prefix' => 'project'], function () {
     Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
 });
 
-Route::group(['prefix' => 'letter'], function (){
-    Route::get('/add/{name}/{client_id}', 'LetterController@addLetter')->name('addletter');
-    Route::post('/add', 'LetterController@storeLetter')->name('storeletter');
-    Route::get('/delete/{id}', 'LetterController@deleteLetter')->name('deleteletter');
-});
-
-// TEST REPORT OVERVIEW
-Route::group(['prefix' => 'testreport'], function () {
-    Route::get('/{id}/add', 'TestReportController@addTestReport')->name('addtestreport');
-    Route::post('/store', 'TestreportController@storeTestreport')->name('storetestreport');
-    Route::get('/{id}/details', 'TestReportController@detailsTestReport')->name('detailstestreport');
-    Route::get('/{id}/delete', 'TestReportController@deleteTestReport')->name('deletetestreport');
-    Route::get('/{id}/edit', 'TestReportController@editTestReport')->name('edittestreport');
-    Route::post('/{id}/update', 'TestReportController@updateTestReport')->name('updatetestreport');
-});
 
 Route::post('/release/overview', 'ReleaseController@overviewTestrapport')->name('storerelease');
 Route::post('/file/delete/{document_id}', 'DocumentController@deleteFile')->name('deletefile');
@@ -89,10 +74,6 @@ Route::group(['prefix' => 'project'], function (){
                 Route::get('/download/{id}', 'DocumentController@downloadFile')->name('downloadfile');
 
             });
-
-            Route::get('/letter/{letter_id}', 'LetterController@showLetter')->name('showletter');
-            Route::get('/{letter_id}/edit', 'LetterController@editLetter')->name('editletter');
-            Route::post('/{letter_id}/edit', 'LetterController@updateLetter')->name('updateletter');
 
             Route::group(['prefix' => '{release_name}'], function (){
                 Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');

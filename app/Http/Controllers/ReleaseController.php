@@ -6,7 +6,6 @@ use App\Feature;
 use App\Http\Requests\ReleaseValidator;
 use App\Requirement;
 use App\Status;
-use App\TestReport;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
@@ -71,10 +70,9 @@ class ReleaseController extends Controller
         $status_string = array('"Open"', '"In Progress"', '"Testing"', '"Closed"');
         $status = array('Open', 'In Progress', 'Testing', 'Closed');
         $ids_ordered = implode(",", $status_string);
-        $testreport = TestReport::where('release_id', $release->release_id)->get();
         $features = Feature::where([['release_id', $release->release_uuid]])->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
         $requirements = Requirement::where('release_id', $release->release_uuid)->get();
 
-        return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements', 'testreport'));
+        return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements'));
     }
 }
