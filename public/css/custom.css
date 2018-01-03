@@ -13,47 +13,114 @@ html, body {
     padding: 100px 60px 30px 170px;
     width: 100%;
 }
+
 .container_login {
     padding: 100px 30px 30px 30px;
     width: 100%;
 }
 
-.requirement-block{
+/* TIJDELIJK: The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5px auto; /* 15% from the top and centered */
+    padding: 25px;
+    border: 1px solid #888;
+    width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    /* Position it in the top right corner outside of the modal */
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+/* Close button on hover */
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+.requirement-block {
     margin-top: 10px;
-    padding:2rem 4rem ;
+    padding: 2rem 4rem;
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
 }
 
-.requirement-row{
+.requirement-row {
     border-bottom: 1px solid grey;
 }
 
-.requirement-row:last-child{
+.requirement-row:last-child {
     border-bottom: none;
 }
 
-.feature-block{
+.feature-block {
     padding: 2rem 4rem;
     min-height: 110px;
 }
 
-.feature-block:first-child{
+.feature-block:first-child {
     padding-top: 1rem;
 }
 
-.header-1{
+.header-1 {
     font-size: 36px;
     margin-top: 22px;
     margin-bottom: 11px;
 }
 
-.header-3{
+.header-3 {
     background-color: #FFFFFF;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.status{
+.status {
     padding: 3px 7px;
     border-radius: 80px;
     font-size: 12px;
@@ -64,96 +131,96 @@ html, body {
     vertical-align: super;
 }
 
-.header-status{
+.header-status {
     font-size: 24px;
     padding: 5px 9px;
     border-radius: 100px;
 }
 
-.status-Draft, .status-Client{
+.status-Draft, .status-Client {
     background-color: #417505;
 }
 
-.status-in, .status-Lead{
+.status-in, .status-Lead {
     background-color: #5D99CA;
 }
-.status-Canceled, .status-Prospect{
+
+.status-Canceled, .status-Prospect {
     background-color: #FF3300;
 }
 
-.status-Paused, .status-no-partner{
+.status-Paused, .status-no-partner {
     background-color: #9B9B9B;
 }
 
-.center{
+.center {
     text-align: center;
 }
 
-.feature{
+.feature {
     background-color: #f3f3f3;
     color: black;
 }
 
-label{
+label {
     font-weight: bold;
 }
-.table-description{
+
+.table-description {
     width: 300px;
     text-align: left;
     height: 78px;
 }
 
-
-.table>tbody>tr>td, .table>thead>tr>th{
+.table > tbody > tr > td, .table > thead > tr > th {
     padding-left: 35px;
 }
 
-.table>tbody>tr>td:first-child, .table>thead>tr>th:first-child{
+.table > tbody > tr > td:first-child, .table > thead > tr > th:first-child {
     padding-left: 0px;
 }
 
-.breadcrumb{
+.breadcrumb {
     background: none;
     color: #535353;
     padding: 8px 0;
     line-height: 13px;
     font-size: 11px;
-    height:13px;
+    height: 13px;
 }
 
-.breadcrumb>.active{
+.breadcrumb > .active {
     color: #535353;
 }
 
-.breadcrumb a{
+.breadcrumb a {
     color: #CECECE;
 }
 
-
-.table td:first-child{
+.table td:first-child {
     height: 78px;
     width: 10px;
 }
 
-.table>tbody>tr>td{
-    border-top:1px solid #CECECE;
+.table > tbody > tr > td {
+    border-top: 1px solid #CECECE;
 
     vertical-align: middle;
 }
 
-.table>tbody>tr{
-    border-bottom:2px solid #CECECE;
+.table > tbody > tr {
+    border-bottom: 2px solid #CECECE;
 }
-.table td:last-child{
+
+.table td:last-child {
     border-right: 1px solid #CECECE;
 }
 
-.table tr:last-child{
+.table tr:last-child {
     border-bottom: 1px solid #CECECE;
 }
 
-
-.tabletitle{
+.tabletitle {
     height: 19px;
     width: 44px;
     color: #000000;
@@ -162,7 +229,7 @@ label{
     line-height: 19px;
 }
 
-.tablesubtitle{
+.tablesubtitle {
     height: 14px;
     width: 93px;
     color: #898989;
@@ -170,41 +237,44 @@ label{
     font-size: 12px;
     line-height: 20px;
 }
-.table>tbody{
+
+.table > tbody {
     background-color: white;
 }
 
-.table>tbody>tr{
+.table > tbody > tr {
     background-color: white;
-    height:80px;
+    height: 80px;
 }
-.table>thead>tr>th{
+
+.table > thead > tr > th {
     border-bottom: none;
-    color:#898989;
+    color: #898989;
     font-weight: 400;
 }
-.form-forgot-field button{
+
+.form-forgot-field button {
     margin-top: 20px;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-danger, .btn-save{
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-danger, .btn-save {
     height: 45px;
     width: 160px;
-    color:black;
-    border:none;
+    color: black;
+    border: none;
     border-radius: 0px;
     font-size: 15px;
     text-transform: uppercase;
 }
 
-.btn-danger, btn-danger:hover, btn-danger:focus, btn-danger:active{
+.btn-danger, btn-danger:hover, btn-danger:focus, btn-danger:active {
     background-color: #D35847;
-    color:white;
+    color: white;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus{
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
     background-color: #F5A623;
-    color:black;
+    color: black;
 }
 
 .btn-save, .btn-save:hover, .btn-save:focus, .btn-save:active:focus {
@@ -215,7 +285,7 @@ label{
     padding-right: 18px;
     text-transform: none;
     font-weight: normal;
-    box-shadow: none ;
+    box-shadow: none;
     outline: 0;
 }
 
@@ -231,13 +301,12 @@ label{
     outline: 0;
 }
 
-
-.btn-noback, .btn-noback:hover, .btn-noback:active:focus, .btn-noback:target{
+.btn-noback, .btn-noback:hover, .btn-noback:active:focus, .btn-noback:target {
     background: none;
     height: 45px;
     width: 160px;
     border: 1px solid #5D99CA;
-    color:black;
+    color: black;
     border-radius: 0px;
     font-size: 15px;
     line-height: 18px;
@@ -254,17 +323,17 @@ label{
     outline: 0;
 }
 
-.icon-right{
-    float:right;
+.icon-right {
+    float: right;
     vertical-align: middle;
-    top:4px;
+    top: 4px;
 }
 
-.black{
+.black {
     color: black;
 }
 
-.block-white{
+.block-white {
     height: 70px;
     margin-top: 38px;
     margin-bottom: 20px;
@@ -274,43 +343,44 @@ label{
     vertical-align: middle;
 }
 
-.block-white-title{
+.block-white-title {
     font-size: 24px;
     line-height: 28px;
 }
 
-.block-white-subtitle{
+.block-white-subtitle {
     font-size: 14px;
     line-height: 16px;
-    color:#898989;
+    color: #898989;
 
 }
 
-.block-white .form-group{
+.block-white .form-group {
     margin-top: 0;
 }
 
-.breadcrumb .active, .pagination .active{
+.breadcrumb .active, .pagination .active {
     border-left: none;
 }
 
 /* SEARCH FIELD */
 .results tr[visible='false'],
-.no-result{
-    display:none;
+.no-result {
+    display: none;
 }
 
-.results tr[visible='true']{
-    display:table-row;
+.results tr[visible='true'] {
+    display: table-row;
 }
 
-.counter, .contenttype{
+.counter, .contenttype {
     font-size: 14px;
     line-height: 16px;
-    color:#898989;
+    color: #898989;
     padding: 30px 0px 24px 0px;
 }
-.contenttype{
+
+.contenttype {
     padding-right: 12px;
 }
 
@@ -335,7 +405,7 @@ label{
 }
 
 .dropdown-search {
-        background: #ffffff  url("../svg/dropdown.svg")  no-repeat 150px center;
+    background: #ffffff url("../svg/dropdown.svg") no-repeat 150px center;
     background-size: 20px 20px;
     width: 180px;
     height: 36px;
@@ -344,7 +414,7 @@ label{
     padding-left: 15px;
     float: right;
     margin-right: 25px;
-    -webkit-appearance:none;
+    -webkit-appearance: none;
     color: #535353;
     font-size: 14px;
     border-radius: 0px;
@@ -364,8 +434,7 @@ label{
     border-radius: 0px;
 }
 
-
-.dropdown-search option{
+.dropdown-search option {
     color: #535353;
     font-size: 14px;
 }
@@ -375,35 +444,37 @@ label{
     font-weight: bolder;
     padding: 12px;
 }
+
 /* END OF SEARCH FIELD */
 
-.recent-projects{
+.recent-projects {
     vertical-align: middle;
     font-size: 13px;
     line-height: 20px;
 }
 
-.recent-projects:first-child{
+.recent-projects:first-child {
     padding-left: 0;
     padding-right: 0;
 }
 
-.recent-projects a{
+.recent-projects a {
     text-decoration: underline;
     color: black;
 }
 
-.supertitle{
+.supertitle {
     font-size: 72px;
     line-height: 85px;
     text-align: center;
     font-weight: bold;
 }
 
-.undertitle{
+.undertitle {
     margin-top: 20px;
 }
-.form-control-login, .form-control-login:hover, .form-control-login:focus{
+
+.form-control-login, .form-control-login:hover, .form-control-login:focus {
     width: 300px;
     margin: 0 auto;
     border: 1px solid #9B9B9B;
@@ -412,35 +483,35 @@ label{
     box-shadow: none;
 }
 
-.form-group{
+.form-group {
     margin-top: 20px;
 }
 
-.btn-link{
+.btn-link {
     margin-top: 20px;
     font-weight: bold;
-    color:#535353;
+    color: #535353;
 }
 
-.margin-top-50{
+.margin-top-50 {
     margin-top: 50px;
 }
 
-.form-forgot-field, .form-settings-field{
+.form-forgot-field, .form-settings-field {
     float: left;
 }
 
-.form-settings-field, .form-settings-field:hover, .form-settings-field:focus{
+.form-settings-field, .form-settings-field:hover, .form-settings-field:focus {
     width: 350px;
     float: left;
 }
 
-.form-settings-field .btn-save{
+.form-settings-field .btn-save {
     margin-top: 20px;
     margin-right: 70px;
 }
 
-.form-settings-field input, .form-settings-field input:hover , .form-settings-field input:focus{
+.form-settings-field input, .form-settings-field input:hover, .form-settings-field input:focus {
     width: 280px;
     margin: 0 auto;
     border: 1px solid #9B9B9B;
@@ -449,29 +520,29 @@ label{
     box-shadow: none;
 }
 
-.success{
-    color: rgba(107,175,28,0.8);
+.success {
+    color: rgba(107, 175, 28, 0.8);
 }
 
-td >.assignee{
-    color:#898989;
+td > .assignee {
+    color: #898989;
     text-transform: capitalize;
 }
 
-td > .assignee:before{
+td > .assignee:before {
     content: ', ';
 }
 
-td > .assignee:first-child:before{
+td > .assignee:first-child:before {
     content: '';
 }
+
 .more {
     color: #898989;
 }
 
-
 /* Project details */
-#project-details{
+#project-details {
     left: 140px;
     top: 143px;
     right: 30px;
@@ -479,7 +550,7 @@ td > .assignee:first-child:before{
     padding:20px;
 }
 
-.project-title{
+.project-title {
     color: #898989;
     font-size: 14px;
     line-height: 16px;
@@ -489,29 +560,28 @@ td > .assignee:first-child:before{
     padding-left: 15px;
 }
 
-.project-detail a{
+.project-detail a {
     color: #000000;
     font-size: 14px;
     line-height: 19px;
 }
 
 /* buttons */
-.blue-button{
+.blue-button {
     height: 45px;
     background-color: #5D99CA;
     border: none;
 }
 
-.button-content{
+.button-content {
     height: 18px;
     color: #FFFFFF;
     font-size: 15px;
     line-height: 18px;
 }
 
-
 /* release overview */
-.yellow-button{
+.yellow-button {
     height: 18px;
     width: 95px;
     color: #000000;
@@ -519,30 +589,30 @@ td > .assignee:first-child:before{
     line-height: 18px;
 }
 
-#addrelease{
+#addrelease {
     position: absolute;
     left: 155px;
     margin-top: 30px;
 }
 
-#release-button{
+#release-button {
     position: absolute;
     left: 15px;
     top: 14px;
 }
 
-#release-plus{
+#release-plus {
     position: absolute;
     left: 130px;
     top: 15px;
 }
 
 /* release table */
-#release-overview{
+#release-overview {
     margin-top: 101px;
 }
 
-.black-button{
+.black-button {
     height: 15px;
     width: 50px;
     background-color: #000000;
@@ -557,13 +627,13 @@ td > .assignee:first-child:before{
 
 }
 
-.black-button-up{
+.black-button-up {
     background: #000000 url('../svg/more-info-up.svg') no-repeat center !important;
     top: 6px !important;
     margin-top: 20px;
 }
 
-#arrow{
+#arrow {
     margin: 3px;
     height: 9px;
     width: 15px;
@@ -610,7 +680,243 @@ td > .assignee:first-child:before{
     margin-right: 5px;
 }
 
-#no-buttons{
+#no-buttons {
     height: 45px;
     width: 100%;
+}
+
+.edit-button {
+    height: 45px;
+    width: 96px;
+    background-color: #9B9B9B;
+    border: none;
+}
+
+#project-edit {
+    position: absolute;
+    top: 88px;
+    right: 45px;
+}
+
+.edit-content {
+    color: #000000;
+}
+
+#edit-content {
+    position: absolute;
+    right: 21px;
+    top: 14px;
+}
+
+#edit-logo {
+    position: absolute;
+    top: 13px;
+    left: 15px;
+}
+
+.edit-title {
+    color: #898989;
+    font-size: 14px;
+}
+
+#edit-project {
+    left: 140px;
+    top: 143px;
+    right: 30px;
+    height: 559px;
+    transition: all 0.3s linear;
+    padding: 30px;
+}
+
+#company {
+    height: 36px;
+    width: 100%;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
+
+.save-button {
+    height: 45px;
+    width: 97px;
+    background-color: rgba(107, 175, 28, 0.8);
+    border: none;
+}
+
+#save-button {
+    position: relative;
+    top: 370px;
+    left: 85.46%;
+}
+
+#description {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 200px;
+    max-height: 200px;
+}
+
+.or {
+    position: relative;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 19px;
+    top: 20px;
+    left: 50%;
+}
+
+#add_client {
+    position: absolute;
+    top: 149px;
+    left: 2%;
+}
+
+#new_client {
+    position: absolute;
+    top: 173px;
+    width: 96%;
+}
+
+#button-save {
+    position: absolute;
+    right: 15px;
+    top: 14px;
+}
+
+#save-logo {
+    position: absolute;
+    left: 15px;
+    top: 13px;
+}
+
+.cancel {
+    color: #C74237;
+    font-size: 15px;
+    line-height: 18px;
+    position: absolute;
+    margin-top: 60px;
+}
+
+.delete-button {
+    height: 45px;
+    width: 107px;
+    background-color: #F54949;
+    border: none;
+    margin-bottom: 10px;
+}
+
+#project-delete {
+    position: relative;
+    left: 92.8%;
+}
+
+.delete-content {
+    color: #FFFFFF;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+#delete-content {
+    position: absolute;
+    top: 14px;
+    right: 15px;
+}
+
+#delete-logo {
+    position: absolute;
+    top: 13px;
+    left: 15px;
+}
+
+#release_version {
+    height: 36px;
+    width: 100%;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
+
+#release_description {
+    min-height: 200px;
+    max-height: 200px;
+    min-width: 100%;
+    max-width: 100%;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
+
+#release_name {
+    height: 36px;
+    width: 100%;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
+
+#release_status {
+    height: 36px;
+    width: 100%;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
+
+#release_specification {
+    position: absolute;
+    top: 535px;
+    left: 200px;
+    color: #000000;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+#line {
+    position: absolute;
+    top: 559px;
+    left: 200px;
+    height: 2px;
+    width: 81.89%;
+    background-color: #000000;
+}
+
+.release_specification {
+    position: absolute;
+    top: 591px;
+    left: 200px;
+}
+
+#release_spectype {
+    width: 200px;
+}
+
+#extra_content {
+    min-height: 115px;
+    max-height: 115px;
+    min-width: 150%;
+    max-width: 150% !important;
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+}
+
+#edit-release {
+    padding: 30px;
+    height: 812px;
+    width: 100%;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+#cancel-release {
+    position: absolute;
+    top: 824px;
+    left: 200px;
+}
+
+#save-button-release {
+    position: absolute;
+    top: 880px;
+    right: 92px;
+}
+
+.document_status{
+    position: absolute;
+    top: 591px;
+    left: 830px;
 }

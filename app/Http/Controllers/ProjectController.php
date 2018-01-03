@@ -248,12 +248,12 @@ class ProjectController extends Controller
 
         $project->name = $request->project_name;
         $project->company_id = strtoupper(substr($request->company,0 ,5));
-        $project->id = $new_project_id;
+        $project->projectcode = $request->project_code;
         $project->description = $request->description;
 
         $project->save();
 
-        return redirect()->route('overviewproject');
+        return redirect()->route('projectdetails', compact('company_id', 'name'));
     }
 
     public function deleteProject($company_id, $name)
