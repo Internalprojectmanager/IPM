@@ -115,6 +115,27 @@ class StatusTableSeeder extends Seeder
                 'type' => 'Job',
                 'color' => NULL,
             ),
+            14 => 
+            array (
+                'id' => 15,
+                'name' => 'Document',
+                'type' => 'Document',
+                'color' => NULL,
+            ),
+            15 => 
+            array (
+                'id' => 16,
+                'name' => 'Test Rapport',
+                'type' => 'Document',
+                'color' => NULL,
+            ),
+            16 => 
+            array (
+                'id' => 17,
+                'name' => 'Letter',
+                'type' => 'Document',
+                'color' => NULL,
+            ),
         ));
         
         
