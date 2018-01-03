@@ -15,7 +15,6 @@ use App\Client;
 use App\Project;
 use App\Release;
 use App\Document;
-use App\Letter;
 use App\User;
 use Psy\Command\ListCommand\PropertyEnumerator;
 
@@ -204,7 +203,6 @@ class ProjectController extends Controller
         $releases = Release::with('rstatus')->where('project_id', $projects->id)->orderBy('version', 'desc')->get();
         $releases = $this->calcDeadline($releases, 'release');
         $documents = Document::where('project_id', $projects->id)->get();
-        $letters = Letter::where('project_id', $projects->id)->get();
 
         return view('project.details_project', compact('projects', 'companys', 'releases', 'documents', 'letters'));
     }
@@ -223,7 +221,6 @@ class ProjectController extends Controller
         $project_id = $project->company_id.''.strtoupper(substr($project->name,0 ,5));
         $new_project_id = strtoupper(substr($request->company,0 ,5)).strtoupper(substr($request->project_name,0 ,5));
         $release = Release::select('project_id')->where('project_id', $project->id)->get();
-        $letter = Letter::select('project_id')->where('project_id', $project->id)->get();
         $document = Document::select('project_id')->where('project_id', $project->id)->get();
 
         if($release->count() > 0){

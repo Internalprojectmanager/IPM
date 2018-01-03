@@ -9,21 +9,8 @@
 @section('content')
 
     <button onclick="location.href='{{route('editproject', ['name' => $projects->name, 'company_id' => $projects->company_id])}}'"
-            class="edit-button" id="project-edit">
-        <svg id="edit-logo" width="21px" height="20px" viewBox="0 0 21 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
-            <title>Edit Icon</title>
-            <desc>Created with Sketch.</desc>
-            <defs></defs>
-            <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-                <g id="BUTTON/EDIT" transform="translate(-14.000000, -13.000000)" stroke="#000000">
-                    <g id="edit" transform="translate(15.000000, 13.000000)">
-                        <path d="M19,3.51851852 L15.4814815,0 L1.40740741,14.0740741 L0,19 L4.92592593,17.5925926 L19,3.51851852 Z M12.6666667,2.81481481 L16.1851852,6.33333333 L12.6666667,2.81481481 Z M1.40740741,14.0740741 L4.92592593,17.5925926 L1.40740741,14.0740741 Z" id="Edit-Icon"></path>
-                    </g>
-                </g>
-            </g>
-        </svg>
-        <span class="edit-content" id="edit-content">Edit</span>
+            class="btn-edit" id="project-edit">
+        <span class="glyphicon edit-icon"></span> Edit
     </button>
 
     <div class="row">
@@ -68,7 +55,7 @@
             </div>
             <div class="row pull-right">
                 <div class="col-md-3 col-xs-3">
-                    <button onclick="location.href='{{route('adddocument', ['name' => $projects->name, 'company_id' => $projects->company_id])}}'"
+                    <button onclick="location.href='{{route('documentoverview', ['name' => $projects->name, 'company_id' => $projects->company_id])}}'"
                             class="blue-button" id="button-files">
                         <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
