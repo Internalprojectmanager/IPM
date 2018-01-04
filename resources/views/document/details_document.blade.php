@@ -52,7 +52,7 @@
                     @if(!empty($document->filename))
                         <div class="download">
                             <span class="project-detail block-value">{{$document->filename}}</span>
-                            <a href="{{route('downloadfile',['name' => $project->name, 'company_id' => $project->company_id, 'document_id' => $document->id])}}"><span class="project-detail pull-right block-value black"><i class=""></i>Download</span></a>
+                            <a href="{{route('downloadfile',['name' => $project->name, 'company_id' => $project->company_id, 'document_id' => $document->id])}}"><span class="glyphicon download-icon pull-right"></span></a>
                             <span class="project-detail pull-right block-value">{{round(Storage::size($document->link) / 1000000, 2)}} MB</span>
                         </div>
                     @else

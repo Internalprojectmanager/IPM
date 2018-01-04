@@ -32,11 +32,16 @@ class FeatureController extends Controller
         $saved = $feature_revision->save();
 
         if (!$saved) {
-            App:
-            abort('500', 'Error');
+            App:abort('500', 'Error');
         }
         return true;
     }
+
+    public function showfeature($company_id, $name, $release_name, $feature_id){
+        $feature = Feature::with('requirements', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
+        return view('features.details_feature', compact('feature'));
+    }
+
 
 
     public function add($company_id, $name, $release_name)
