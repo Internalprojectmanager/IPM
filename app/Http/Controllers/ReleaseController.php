@@ -67,10 +67,11 @@ class ReleaseController extends Controller
         if(!$release){
             abort(404);
         }
-        $features = Feature::where([['release_id', $release->release_uuid]])->get();
-        $requirements = Requirement::where('release_id', $release->release_uuid)->get();
-
-        return view('release.details_release', compact('release', 'project', 'features', 'company', 'requirements'));
+        $features = Feature::with('requirements')->where([['release_id', $release->release_uuid],[ 'type', 'Feature']])->get();
+        $nfr = Feature::with('requirements')->where([['release_id', $release->release_uuid],[ 'type', 'NFR']])->get();
+        $techspecs = Feature::with('requirements')->where([['release_id', $release->release_uuid],[ 'type', 'TS']])->get();
+        $scope = Feature::with('requirements')->where([['release_id', $release->release_uuid],[ 'type', 'Scope']])->get();
+        return view('release.details_release', compact('release', 'project', 'features', 'company', 'nfr', 'scope', 'techspecs'));
     }
 
     public function  editRelease($company_id, $name, $release_name, $version){

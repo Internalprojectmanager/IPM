@@ -103,4 +103,150 @@
     </div>
 
 
+    <div class="feature-results">
+        <div class="row under-details">
+            <span class="block-white-title">All Features</span>
+            <span class="block-white-subtitle">
+                <span id="count_projects_bar">|</span>
+                <span class="counter">{{$features->count()}} Features</span>
+                <span id="count_projects_bar">|</span>
+                <span class="counter">{{$features->count()}}/{{$features->count()}} Done</span>
+            </span>
+        </div>
+        <div class="row feature-table">
+                <table class="table table-hover table-center results">
+                    <thead>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Task</th>
+                    <th>Assigned To</th>
+                    </thead>
+                    <tbody>
+                    @foreach($features as $f)
+                        <tr>
+                            <td style="border-left: 1px solid #CECECE; background-color: {{$f->fstatus->color}};"></td>
+                            <td><span class="tabletitle">{{$f->name}}</span>
+                            </td>
+                            <td>{{$f->fstatus->name}}</td>
+                            <td>1/{{$f->requirements->count()}} Done</td>
+                            <td></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+        </div>
+    </div>
+
+    <div id="nf-req"></div>
+    <div class="nonfunctional-results">
+        <div class="row under-details">
+            <span class="block-white-title">Non Functional Requirements</span>
+            <span class="block-white-subtitle">
+                <span id="count_projects_bar">|</span>
+                <span class="counter">{{$nfr->count()}} NFR</span>
+                <span id="count_projects_bar">|</span>
+                <span class="counter">{{$nfr->count()}}/{{$nfr->count()}} Done</span>
+                <a href="#nf-req" class="not-active"> <span  onclick="showNF();" id="nf-arrow" class="nf-arrow glyphicon arrow-right"></span></a>
+            </span>
+        </div>
+        <div id="nftable" class="row nfr-table">
+            <table class="table table-hover table-center results">
+                <thead>
+                <th></th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Category</th>
+                <th>Task</th>
+                <th>Assigned To</th>
+                </thead>
+                <tbody>
+                @foreach($nfr as $n)
+                    <tr>
+                        <td style="border-left: 1px solid #CECECE; background-color: {{$n->fstatus->color}};"></td>
+                        <td><span class="tabletitle">{{$n->name}}</span>
+                        </td>
+                        <td>{{$n->fstatus->name}}</td>
+                        <td></td>
+                        <td>1/{{$n->requirements->count()}} Done</td>
+                        <td></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="ts-specs"></div>
+    <div class="ts-results">
+        <div class="row under-details">
+            <span class="block-white-title">All Technical Specifications</span>
+            <span class="block-white-subtitle">
+                <span id="count_projects_bar">|</span>
+                <span class="counter">{{$techspecs->count()}} Technical Specifications</span>
+                <span id="count_projects_bar">|</span>
+                <span class="counter">{{$techspecs->count()}}/{{$techspecs->count()}} Done</span>
+                <a href="#ts-specs" class="not-active"> <span  onclick="showTS();" id="ts-arrow" class="ts-arrow glyphicon arrow-right"></span></a>
+            </span>
+        </div>
+        <div id="tstable" class="row ts-table">
+            <table class="table table-hover table-center results">
+                <thead>
+                <th></th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Category</th>
+                <th>Task</th>
+                <th>Assigned To</th>
+                </thead>
+                <tbody>
+                @foreach($techspecs as $t)
+                    <tr>
+                        <td style="border-left: 1px solid #CECECE; background-color: {{$t->fstatus->color}};"></td>
+                        <td><span class="tabletitle">{{$t->name}}</span>
+                        </td>
+                        <td>{{$t->fstatus->name}}</td>
+                        <td></td>
+                        <td>1/{{$t->requirements->count()}} Done</td>
+                        <td></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div id="scope"></div>
+    <div class="scope-results">
+        <div class="row under-details">
+            <span class="block-white-title">Out of scope</span>
+            <span class="block-white-subtitle">
+                <span id="count_projects_bar">|</span>
+                <span class="counter">{{$scope->count()}} Out of Scope</span>
+                <a href="#scope" class="not-active"> <span  onclick="showScope();" id="scope-arrow" class="scope-arrow glyphicon arrow-right"></span></a>
+            </span>
+        </div>
+        <div id="scopetable" class="row scope-table">
+            <table class="table table-hover table-center results">
+                <thead>
+                <th></th>
+                <th>Name</th>
+                <th></th>
+                </thead>
+                <tbody>
+                @foreach($scope as $s)
+                    <tr>
+                        <td style="border-left: 1px solid #CECECE; background-color: {{$s->fstatus->color}};"></td>
+                        <td><span class="tabletitle">{{$s->name}}</span></td>
+                        <td>{{$s->description}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
 @endsection

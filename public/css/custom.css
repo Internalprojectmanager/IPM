@@ -1,6 +1,7 @@
 @import 'sidebar.css';
 @import 'modal.css';
 @import "icons.css";
+@import "release.css";
 
 html, body {
     background-color: #f2f2f2;

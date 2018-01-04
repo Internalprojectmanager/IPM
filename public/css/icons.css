@@ -87,6 +87,21 @@
     margin-left: 10px;
 }
 
+.arrow-right{
+    background: #f2f2f2 url(../svg/dropdown.svg) no-repeat 0px center;
+    border:none;
+    background-color: #f2f2f2;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    width: 20px;
+    height: 20px;
+    top:5px;
+}
+.arrow-down{
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
 
 
 
