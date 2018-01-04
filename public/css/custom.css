@@ -640,10 +640,19 @@ td > .assignee:first-child:before {
 }
 
 /* release table */
-#release-overview {
+#release-overview, #requirement-overview {
     margin-top: 101px;
 }
 
+#requirement-overview td:first-child, #requirement-overview th:first-child{
+    padding-left: 35px;
+}
+
+
+#requirement-overview td:first-child{
+    border-left: 1px solid #CECECE;
+
+}
 .black-button {
     height: 15px;
     width: 50px;
@@ -959,4 +968,8 @@ td > .assignee:first-child:before {
 
 .btn-a{
     padding-top: 11px;
+}
+
+.requiremnt-assingee{
+    padding-left: 0;
 }

@@ -38,7 +38,7 @@ class FeatureController extends Controller
     }
 
     public function showfeature($company_id, $name, $release_name, $feature_id){
-        $feature = Feature::with('requirements', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
+        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
         return view('features.details_feature', compact('feature'));
     }
 

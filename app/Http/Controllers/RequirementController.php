@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignee;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -27,7 +28,7 @@ class RequirementController extends Controller
     public function storeRequirement($release_id, $feature_id, $company_id, $name, Request $request){
         $project = Project::where(['name' => $name, 'company_id' => $company_id ])->first();
         $release = Release::where(['project_id' => $project->id, 'name' => $release_id])->first();
-        foreach($request-> requirement_name as $r => $value){
+        foreach($request->requirement_name as $r => $value){
 
             if ($request->requirement_name[$r] !== NULL){
 
@@ -45,10 +46,22 @@ class RequirementController extends Controller
             'release_name' => $release->name, 'version' => $release->version]));
     }
 
+    public function saveStatus(Request $request,$company_id, $name,$release_id, $feature_id){
+        //dd($request);
+        foreach ($request->data as $key => $value){
+            $assignee = Assignee::where([['userid', $value['assignee']],['uuid', $value['uuid']]])->first();
+            $assignee->status = $value['checked'];
+            $assignee->save();
+        }
+
+        $requirement = Requirement::with('features.releases.projects', 'assignee')->where('feature_uuid', $feature_id)->first();
+        return view('requirement.requirement_table', compact('requirement'));
+    }
+
    public function overviewRequirement()
     {
         $requirements = Requirement::all();
-        return view('requirement.requirement', compact('requirements'));
+
     }
 
     public function detailsRequirement($requirement_name)

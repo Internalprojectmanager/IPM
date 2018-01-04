@@ -27,6 +27,40 @@ $('.deletefile').on( 'click', function (e) {
     deleteFile(url, pid, curl);
 });
 
+$('.assignee-check').bind('keyup change', function (e) {
+    var curl = window.location.href;
+    e.preventDefault();
+    var url = $(this).attr('href');
+    saveStatus(url, curl);
+});
+
+function saveStatus(url, curl){
+    var _token = document.getElementsByName("_token")[0].value;
+    var formData = new Array();
+
+    $("input:checkbox").each(function() {
+        var json = $(this).val();
+        if($(this.checked).length > 0){
+            var result = $.extend(JSON.parse(json), {"checked":1});
+        }else{
+            var result = $.extend(JSON.parse(json), {"checked":0});
+        }
+
+        formData.push(result);
+    });
+    console.log(formData);
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': _token},
+        data: {data: formData},
+        success: function (result) {
+            console.log(result);
+        }
+    });
+    window.history.pushState("", "", curl);
+}
 function deleteFile(url, pid, curl) {
     var _token = document.getElementsByName("_token")[0].value;
     console.log(url);
@@ -148,3 +182,5 @@ function projectDetailsDown() {
         document.getElementById('no-buttons').classList.add('pull-right');
     }
 }
+
+
