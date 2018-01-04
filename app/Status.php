@@ -25,4 +25,16 @@ class Status extends Model
     public function client(){
         return $this->belongsTo('App\Client', "status", 'id');
     }
+
+    public function requirements(){
+        return $this->belongsTo('App\Requirement', "id", 'status');
+    }
+
+    public function release(){
+        return $this->belongsTo('App\Release', "status", 'id');
+    }
+
+    public function feature(){
+        return $this->belongsTo('App\Feature', "status", 'id');
+    }
 }

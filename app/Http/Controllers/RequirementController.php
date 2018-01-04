@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Assignee;
+use App\Status;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -53,9 +54,31 @@ class RequirementController extends Controller
             $assignee->status = $value['checked'];
             $assignee->save();
         }
+        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->select('feature_uuid')->first();
+        $checkr = Requirement::with('features.releases.projects', 'assignees')->where('feature_uuid', $feature->feature_uuid)->get();
+        $progress = Status::where('type', 'Progress')->select('id', 'name')->get();
+        foreach ($checkr as $r){
+            $status = 0;
+            foreach ($r->assignees as $a)
+            if($a->status > 0 ){
+                $status++;
+            }
+            foreach ($progress as $s){
+                if($status == $r->assignees->count() && $s->name == "Completed"){
+                    $r->status = $s->id;
+                }elseif($status > 0 && $s->name == "In Progress"){
+                    $r->status = $s->id;
+                }elseif($s->name == "Draft"){
+                    $r->status= $s->id;
+                }
+            }
+            $r->save();
+        }
+        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
+        $requirementcount = Status::withCount('requirements')->where('name', 'Completed')->first();
+        $requirementcount = $requirementcount->requirements_count;
 
-        $requirement = Requirement::with('features.releases.projects', 'assignee')->where('feature_uuid', $feature_id)->first();
-        return view('requirement.requirement_table', compact('requirement'));
+        return view('requirement.requirement_table', compact('feature', 'requirementcount'));
     }
 
    public function overviewRequirement()

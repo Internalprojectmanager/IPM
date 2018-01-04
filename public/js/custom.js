@@ -19,6 +19,13 @@ $('body').on('click', '.pagination a, .results>thead>tr>th a', function (e) {
     getData(url);
 });
 
+$('body').on('change', '.assignee-check', function (e) {
+    var curl = window.location.href;
+    e.preventDefault();
+    var url = $(this).attr('href');
+    saveStatus(url, curl);
+});
+
 $('.deletefile').on( 'click', function (e) {
     var pid = $(this).parent().attr("id");
     var curl = window.location.href;
@@ -27,12 +34,7 @@ $('.deletefile').on( 'click', function (e) {
     deleteFile(url, pid, curl);
 });
 
-$('.assignee-check').bind('keyup change', function (e) {
-    var curl = window.location.href;
-    e.preventDefault();
-    var url = $(this).attr('href');
-    saveStatus(url, curl);
-});
+
 
 function saveStatus(url, curl){
     var _token = document.getElementsByName("_token")[0].value;
@@ -56,7 +58,8 @@ function saveStatus(url, curl){
         headers: {'X-CSRF-TOKEN': _token},
         data: {data: formData},
         success: function (result) {
-            console.log(result);
+            $('.requirement-results').remove();
+            $('.container').append(result);
         }
     });
     window.history.pushState("", "", curl);

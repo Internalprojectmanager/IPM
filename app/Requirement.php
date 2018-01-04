@@ -24,4 +24,8 @@ class Requirement extends Model
     public function assignees(){
         return $this->hasMany('App\Assignee', "uuid", "requirement_uuid");
     }
+
+    public function rstatus(){
+        return $this->hasOne('App\Status', "id", "status");
+    }
 }
