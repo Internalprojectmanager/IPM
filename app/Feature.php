@@ -21,4 +21,8 @@ class Feature extends Model
     public function releases(){
         return $this->belongsTo('App\Release', "release_id", 'release_uuid');
     }
+
+    public function fstatus(){
+        return $this->hasOne('App\Status', "id", "status");
+    }
 }

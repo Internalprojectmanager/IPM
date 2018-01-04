@@ -79,6 +79,13 @@
     top: 2px;
 }
 
+.download-icon{
+    background:  url("../svg/download.svg") no-repeat 0px center;
+    background-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+}
 
 
 

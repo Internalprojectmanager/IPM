@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function job_title(){
+    public function jobtitles(){
         return $this->hasOne('App\Status', 'id', 'job_title');
     }
 }

@@ -8,6 +8,7 @@ use App\Project;
 use App\Release;
 use Illuminate\Http\Request;
 use App\Feature;
+use App\Status;
 use Illuminate\Support\Facades\Auth;
 use Webpatser\Uuid\Uuid;
 
@@ -32,11 +33,18 @@ class FeatureController extends Controller
         $saved = $feature_revision->save();
 
         if (!$saved) {
-            App:
-            abort('500', 'Error');
+            App:abort('500', 'Error');
         }
         return true;
     }
+
+    public function showfeature($company_id, $name, $release_name, $feature_id){
+        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
+        $requirementcount = Status::withCount('requirements')->where('name', 'Completed')->first();
+        $requirementcount = $requirementcount->requirements_count;
+        return view('features.details_feature', compact('feature', 'requirementcount'));
+    }
+
 
 
     public function add($company_id, $name, $release_name)

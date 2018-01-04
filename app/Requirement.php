@@ -20,4 +20,12 @@ class Requirement extends Model
     public function releases(){
         return $this->belongsTo('App\Release', 'release_id', 'release_uuid');
     }
+
+    public function assignees(){
+        return $this->hasMany('App\Assignee', "uuid", "requirement_uuid");
+    }
+
+    public function rstatus(){
+        return $this->hasOne('App\Status', "id", "status");
+    }
 }

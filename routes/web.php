@@ -51,6 +51,10 @@ Route::group(['prefix' => 'project'], function () {
     Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
 });
 
+Route::group(['prefix' => 'requirement'], function () {
+
+});
+
 
 Route::post('/release/overview', 'ReleaseController@overviewTestrapport')->name('storerelease');
 Route::post('/file/delete/{document_id}', 'DocumentController@deleteFile')->name('deletefile');
@@ -74,19 +78,26 @@ Route::group(['prefix' => 'project'], function (){
                 Route::get('/download/{id}', 'DocumentController@downloadFile')->name('downloadfile');
 
             });
-
             Route::group(['prefix' => '{release_name}'], function (){
                 Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');
                 Route::get('/edit/{version}', 'ReleaseController@editRelease')->name('editrelease');
                 Route::post('/update/{version}', 'ReleaseController@updateRelease')->name('updaterelease');
                 Route::get('/{version}/pdf', 'PDFController@createPDF')->name('createpdf');
 
-                Route::get('/feature', 'FeatureController@add')->name('addfeature');
-                Route::get('/feature/{feature_id}/edit', 'FeatureController@editFeature')->name('editFeature');
-                Route::post('/feature/{feature_id}/edit', 'FeatureController@updateFeature')->name('updateFeature');
 
-                Route::post('/feature/store', 'FeatureController@store')->name('storefeature');
-            });
+                Route::group(['prefix' => 'feature'], function () {
+                    Route::get('/add', 'FeatureController@add')->name('addfeature');
+
+                    Route::get('/{feature_id}', 'FeatureController@showFeature')->name('showfeature');
+                    Route::post('/{feature_id}', 'RequirementController@saveStatus')->name('requirementsavestatus');
+                    Route::get('/{feature_id}/edit', 'FeatureController@editFeature')->name('editFeature');
+                    Route::post('/{feature_id}/edit', 'FeatureController@updateFeature')->name('updateFeature');
+
+                    Route::post('/store', 'FeatureController@store')->name('storefeature');
+                });
+
+                });
+
 
             Route::group(['prefix' => 'release'], function (){
                 Route::get('/add', 'ReleaseController@addRelease')->name('addrelease');
