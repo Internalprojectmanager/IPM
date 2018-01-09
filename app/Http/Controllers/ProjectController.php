@@ -210,24 +210,30 @@ class ProjectController extends Controller
     public function editProject($company_id, $name)
     {
         $projects = Project::with('company')->where(['name' =>  $name, 'company_id' => $company_id])->first();
+        $status = Status::where('type', 'Progress')->get();
         $companys = Client::all();
 
-        return view('project.edit_project', compact('projects', 'companys'));
+        return view('project.edit_project', compact('projects', 'companys', 'status'));
     }
 
-    public function updateProject($company_id, $name, Request $request)
+    public function updateProject($company_id, $name, ProjectValidator $request)
     {
         $project = Project::where(['name' => $name, 'company_id' => $company_id] )->first();
-        $project_id = $project->company_id.''.strtoupper(substr($project->name,0 ,5));
-        $new_project_id = strtoupper(substr($request->company,0 ,5)).strtoupper(substr($request->project_name,0 ,5));
         $release = Release::select('project_id')->where('project_id', $project->id)->get();
-        $document = Document::select('project_id')->where('project_id', $project->id)->get();
-
         $project->name = $request->project_name;
-        $project->company_id = strtoupper(substr($request->company,0 ,5));
+
+
+        if(!empty($request->new_client)){
+            $client = Client::firstOrCreate(['name' => $request->new_client]);
+            $client->name = $request->new_client;
+            $client->save();
+            $project->company_id = $client->id;
+        }else{
+            $project->company_id = $request->company;
+        }
+        $project->status = $request->status;
         $project->projectcode = $request->project_code;
         $project->description = $request->description;
-
         $project->save();
 
         $company_id = $project->company_id;

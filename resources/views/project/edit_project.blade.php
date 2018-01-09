@@ -73,11 +73,21 @@
                     </a>
                 </div>
                 <div class="form-group col-md-6">
+                    <label class="edit-title" for="company">Project Status</label>
+                    <br>
+                    <select name="status" id="company">
+                        @foreach($status as $s)
+                            <option @if($s->id == $projects->status) selected="" @endif value="{{$s->id}}">{{$s->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
                     <label class="edit-title" for="company">Select Client</label>
                     <br>
                     <select name="company" id="company">
                         @foreach($companys as $company)
-                            <option value="{{$company->id}}">{{$company->name}}</option>
+
+                            <option @if($company->id == $projects->company_id) selected="" @endif value="{{$company->id}}">{{$company->name}}</option>
                         @endforeach
                     </select>
 
@@ -86,6 +96,7 @@
                     <label class="edit-title" id="add_client" for="new_client">Enter the name of the new Client</label>
                     <input type="text" class="form-control" name="new_client" id="new_client"
                            placeholder="New Client Name">
+
 
                     <button class="save-button" id="save-button" type="submit">
                         <svg id="save-logo" width="19px" height="19px" viewBox="0 0 19 19" version="1.1"
