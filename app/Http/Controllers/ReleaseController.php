@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignee;
 use App\Feature;
 use App\Http\Requests\ReleaseValidator;
 use App\Requirement;
@@ -68,8 +69,7 @@ class ReleaseController extends Controller
         if(!$release){
             abort(404);
         }
-        $features = Feature::with('requirements.rstatus', 'requirements.assignees.users')->where([['release_id', $releaseuuid],[ 'type', 'Feature']])->get();
-        //dd($features);
+        $features = Feature::with('requirements.assignees.users')->where([['release_id', $releaseuuid],[ 'type', 'Feature']])->get();
         $nfr = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'NFR']])->get();
         $techspecs = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'TS']])->get();
         $scope = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'Scope']])->get();

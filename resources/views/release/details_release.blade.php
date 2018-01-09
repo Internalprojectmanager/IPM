@@ -132,18 +132,38 @@
                     @foreach($features as $f)
                         <tr>
                             <td style="border-left: 1px solid #CECECE; background-color: {{$f->fstatus->color}};"></td>
-                            <td><span class="tabletitle"><a href="{{route('showfeature',
+                            <td class="width25"><span class="tabletitle"><a href="{{route('showfeature',
                              ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $f->id])}}">{{$f->name}}</a></span>
                             </td>
-                            <td>{{$f->fstatus->name}}</td>
+                            <td class="width25">{{$f->fstatus->name}}</td>
                             @php $counter = 0; @endphp
                             @foreach($f->requirements as $r)
                                 @if($r->rstatus->name == 'Completed')
                                     @php $counter++;@endphp
                                 @endif
                             @endforeach
-                            <td>{{$counter}}/{{$f->requirements->count()}} Done</td>
-                            <td></td>
+                            <td class="width25percent">
+                            @if($f->requirements->count() > 0)
+                                {{$counter}}/{{$f->requirements->count()}} Done
+                            @else
+                                No tasks
+                            @endif
+                            </td>
+                            <td class="width25">
+                                <span class="assignee">
+                                    @php $i = 0; @endphp
+                                    @foreach($f->requirements as $fr)
+                                        @foreach($fr->assignees as $as)
+                                                @if($i < 3)
+                                                    {{$as->users->first_name}} {{$as->users->last_name}},
+                                                @else
+                                                    and More...
+                                                @endif
+                                                @php $i++;@endphp
+                                        @endforeach
+                                    @endforeach
+                                </span>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -184,20 +204,38 @@
                     <tr>
 
                         <td style="border-left: 1px solid #CECECE; background-color: {{$n->fstatus->color}};"></td>
-                        <td><span class="tabletitle"><a href="{{route('showfeature',
+                        <td class="width20"><span class="tabletitle"><a href="{{route('showfeature',
                          ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $n->id])}}">{{$n->name}}</a></span>
                         </td>
-                        <td>{{$n->fstatus->name}}</td>
-                        <td>{{$n->category}}</td>
-                        <td>@php $counter = 0;@endphp
+                        <td class="width20">{{$n->fstatus->name}}</td>
+                        <td class="width20">{{$n->category}}</td>
+                        <td class="width20">@php $counter = 0;@endphp
                             @foreach($f->requirements as $r)
                                 @if($r->rstatus->name == 'Completed')
                                     @php $counter++;@endphp
                                 @endif
                             @endforeach
-
-                            {{$counter}}/{{$n->requirements->count()}} Done</td>
-                            <td></td></a>
+                            @if($n->requirements->count() > 0)
+                            {{$counter}}/{{$n->requirements->count()}} Done
+                            @else
+                                No tasks
+                            @endif
+                            </td>
+                            <td class="width20">
+                                <span class="assignee">
+                                    @php $i = 0; @endphp
+                                    @foreach($n->requirements as $r)
+                                        @foreach($r->assignees as $as)
+                                            @if($i < 3)
+                                                {{$as->users->first_name}} {{$as->users->last_name}},
+                                            @else
+                                                and More...
+                                            @endif
+                                            @php $i++;@endphp
+                                        @endforeach
+                                    @endforeach
+                                </span>
+                            </td>
                     </tr></a>
                 @endforeach
                 </tbody>
@@ -237,18 +275,39 @@
                 @foreach($techspecs as $t)
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: {{$t->fstatus->color}};"></td>
-                        <td><span class="tabletitle">{{$t->name}}</span>
-                        </td>
-                        <td>{{$t->fstatus->name}}</td>
-                        <td>{{$t->category}}</td>
-                        <td>@php $counter = 0; @endphp
+                        <td class="width20"><span class="tabletitle">
+                                <a href="{{route('showfeature',
+                         ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $t->id])}}">{{$t->name}}</a>
+                            </span></td>
+                        <td class="width20">{{$t->fstatus->name}}</td>
+                        <td class="width20">{{$t->category}}</td>
+                        <td class="width20">@php $counter = 0; @endphp
                             @foreach($t->requirements as $tr)
                                 @if($tr->rstatus->name == 'Completed')
                                     @php $counter++;@endphp
                                 @endif
                             @endforeach
-                            {{$counter}}/{{$t->requirements->count()}} Done</td>
-                        <td></td>
+                            @if($t->requirements->count())
+                                {{$counter}}/{{$t->requirements->count()}} Done
+                            @else
+                                No tasks
+                            @endif
+                        </td>
+                        <td class="width20">
+                            <span class="assignee">
+                                @php $i = 0; @endphp
+                                @foreach($t->requirements as $r)
+                                    @foreach($r->assignees as $as)
+                                        @if($i < 3)
+                                            {{$as->users->first_name}} {{$as->users->last_name}},
+                                        @else
+                                            and More...
+                                        @endif
+                                        @php $i++;@endphp
+                                    @endforeach
+                                @endforeach
+                            </span>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
