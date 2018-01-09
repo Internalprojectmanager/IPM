@@ -223,26 +223,6 @@ class ProjectController extends Controller
         $release = Release::select('project_id')->where('project_id', $project->id)->get();
         $document = Document::select('project_id')->where('project_id', $project->id)->get();
 
-        if($release->count() > 0){
-            foreach($release as $r){
-                $r->fill(['project_id' => $new_project_id]);
-            }
-        }
-
-        if($letter->count() > 0){
-            foreach($letter as $l){
-                $l->project_id = $new_project_id;
-                $l->save();
-            }
-        }
-
-        if($document->count() > 0){
-            foreach($document as $d){
-                $d->project_id = $new_project_id;
-                $d->save();
-            }
-        }
-
         $project->name = $request->project_name;
         $project->company_id = strtoupper(substr($request->company,0 ,5));
         $project->projectcode = $request->project_code;
@@ -250,6 +230,8 @@ class ProjectController extends Controller
 
         $project->save();
 
+        $company_id = $project->company_id;
+        $name = $project->name;
         return redirect()->route('projectdetails', compact('company_id', 'name'));
     }
 
