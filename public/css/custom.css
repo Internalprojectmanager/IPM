@@ -1,6 +1,7 @@
 @import 'sidebar.css';
 @import 'modal.css';
 @import "icons.css";
+@import "release.css";
 
 html, body {
     background-color: #f2f2f2;
@@ -972,4 +973,12 @@ td > .assignee:first-child:before {
 
 .requiremnt-assingee{
     padding-left: 0;
+}
+
+.width25{
+    width: 25%;
+}
+
+.width20{
+    width: 20%;
 }

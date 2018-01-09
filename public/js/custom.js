@@ -186,4 +186,20 @@ function projectDetailsDown() {
     }
 }
 
+function showTS(){
+    document.getElementById('ts-arrow').classList.toggle('arrow-down');
+    document.getElementById('tstable').classList.toggle('display');
+
+}
+
+function showScope(){
+    document.getElementById('scope-arrow').classList.toggle('arrow-down');
+    document.getElementById('scopetable').classList.toggle('display');
+}
+
+function showNF(){
+    document.getElementById('nf-arrow').classList.toggle('arrow-down');
+    document.getElementById('nftable').classList.toggle('display');
+}
+
 

@@ -54,14 +54,18 @@ class RequirementController extends Controller
             $assignee->status = $value['checked'];
             $assignee->save();
         }
-        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->select('feature_uuid')->first();
+        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
         $checkr = Requirement::with('features.releases.projects', 'assignees')->where('feature_uuid', $feature->feature_uuid)->get();
         $progress = Status::where('type', 'Progress')->select('id', 'name')->get();
+        $completed = 0;
         foreach ($checkr as $r){
             $status = 0;
             foreach ($r->assignees as $a)
             if($a->status > 0 ){
                 $status++;
+            }
+            if($status == $r->assignees->count()){
+                $completed++;
             }
             foreach ($progress as $s){
                 if($status == $r->assignees->count() && $s->name == "Completed"){
@@ -74,6 +78,20 @@ class RequirementController extends Controller
             }
             $r->save();
         }
+
+        foreach ($progress as $s) {
+            if ($completed == $feature->requirements->count() && $s->name == "Completed") {
+                $feature->status = $s->id;
+            } else if ($completed > 0 && $s->name == "In Progress" && $completed < $feature->requirements->count() ){
+                $feature->status = $s->id;
+            } else if ($completed == 0 && $feature->requirements->count() > 0 && $s->name == "In Progress"){
+                $feature->status = $s->id;
+            } else if($completed == 0 && $s->name == "Draft") {
+                $feature->status = $s->id;
+            }
+        }
+        $feature->save();
+
         $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
         $requirementcount = Status::withCount('requirements')->where('name', 'Completed')->first();
         $requirementcount = $requirementcount->requirements_count;

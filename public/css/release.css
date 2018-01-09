@@ -1,0 +1,7 @@
+.row.ts-table, .row.scope-table, .row.nfr-table{
+    display: none;
+}
+
+.display{
+    display: block !important;
+}
