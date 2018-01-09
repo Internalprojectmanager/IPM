@@ -25,7 +25,7 @@
                         <td style="border-left: 1px solid #CECECE; background-color: {{$requirement->rstatus->color}};"></td>
                         <td><span class="tabletitle">{{$requirement->name}}</span>
                         </td>
-                        <td class="">{{$requirement->description}}
+                        <td class="">{!! $requirement->description !!}
                         </td>
                         <td>
                             @foreach($requirement->assignees as $assignee)

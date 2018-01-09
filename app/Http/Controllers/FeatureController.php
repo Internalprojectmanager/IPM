@@ -40,7 +40,10 @@ class FeatureController extends Controller
 
     public function showfeature($company_id, $name, $release_name, $feature_id){
         $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
-        $requirementcount = Status::withCount('requirements')->where('name', 'Completed')->first();
+        $featureid = $feature->feature_uuid;
+        $requirementcount = Status::withCount(['requirements' => function ($q) use ($featureid){
+            $q->where('feature_uuid', '=', $featureid);
+        }])->where('name', 'Completed')->first();
         $requirementcount = $requirementcount->requirements_count;
         return view('features.details_feature', compact('feature', 'requirementcount'));
     }

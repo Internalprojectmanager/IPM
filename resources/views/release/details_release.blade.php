@@ -7,7 +7,7 @@
 @section('breadcrumbs', Breadcrumbs::render('showrelease', $project, $company, $release))
 
 @section('content')
-    <div class="row">
+    <div class="row" onload="">
         <div class="header-3" id="project-details">
             <div class="row" id="block-show">
                 <div class="col-md-4 col-xs-6">
@@ -104,13 +104,19 @@
 
 
     <div class="feature-results">
+        @php $total = 0; @endphp
         <div class="row under-details">
             <span class="block-white-title">All Features</span>
             <span class="block-white-subtitle">
                 <span id="count_projects_bar">|</span>
                 <span class="counter">{{$features->count()}} Features</span>
                 <span id="count_projects_bar">|</span>
-                <span class="counter">{{$features->count()}}/{{$features->count()}} Done</span>
+                @foreach($features as $f)
+                    @if($f->fstatus->name == "Completed")
+                        @php $total++;@endphp
+                    @endif
+                @endforeach
+                <span id="featurecount" class="counter">{{$total}}/{{$features->count()}} Done</span>
             </span>
         </div>
         <div class="row feature-table">
@@ -126,10 +132,17 @@
                     @foreach($features as $f)
                         <tr>
                             <td style="border-left: 1px solid #CECECE; background-color: {{$f->fstatus->color}};"></td>
-                            <td><span class="tabletitle">{{$f->name}}</span>
+                            <td><span class="tabletitle"><a href="{{route('showfeature',
+                             ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $f->id])}}">{{$f->name}}</a></span>
                             </td>
                             <td>{{$f->fstatus->name}}</td>
-                            <td>1/{{$f->requirements->count()}} Done</td>
+                            @php $counter = 0; @endphp
+                            @foreach($f->requirements as $r)
+                                @if($r->rstatus->name == 'Completed')
+                                    @php $counter++;@endphp
+                                @endif
+                            @endforeach
+                            <td>{{$counter}}/{{$f->requirements->count()}} Done</td>
                             <td></td>
                         </tr>
                     @endforeach
@@ -139,6 +152,7 @@
     </div>
 
     <div id="nf-req"></div>
+    @php $total = 0;@endphp
     <div class="nonfunctional-results">
         <div class="row under-details">
             <span class="block-white-title">Non Functional Requirements</span>
@@ -146,7 +160,12 @@
                 <span id="count_projects_bar">|</span>
                 <span class="counter">{{$nfr->count()}} NFR</span>
                 <span id="count_projects_bar">|</span>
-                <span class="counter">{{$nfr->count()}}/{{$nfr->count()}} Done</span>
+                @foreach($nfr as $n)
+                    @if($n->fstatus->name == "Completed")
+                        @php $total++;@endphp
+                    @endif
+                @endforeach
+                <span class="counter">{{$total}}/{{$nfr->count()}} Done</span>
                 <a href="#nf-req" class="not-active"> <span  onclick="showNF();" id="nf-arrow" class="nf-arrow glyphicon arrow-right"></span></a>
             </span>
         </div>
@@ -163,14 +182,23 @@
                 <tbody>
                 @foreach($nfr as $n)
                     <tr>
+
                         <td style="border-left: 1px solid #CECECE; background-color: {{$n->fstatus->color}};"></td>
-                        <td><span class="tabletitle">{{$n->name}}</span>
+                        <td><span class="tabletitle"><a href="{{route('showfeature',
+                         ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $n->id])}}">{{$n->name}}</a></span>
                         </td>
                         <td>{{$n->fstatus->name}}</td>
-                        <td></td>
-                        <td>1/{{$n->requirements->count()}} Done</td>
-                        <td></td>
-                    </tr>
+                        <td>{{$n->category}}</td>
+                        <td>@php $counter = 0;@endphp
+                            @foreach($f->requirements as $r)
+                                @if($r->rstatus->name == 'Completed')
+                                    @php $counter++;@endphp
+                                @endif
+                            @endforeach
+
+                            {{$counter}}/{{$n->requirements->count()}} Done</td>
+                            <td></td></a>
+                    </tr></a>
                 @endforeach
                 </tbody>
             </table>
@@ -178,6 +206,7 @@
     </div>
 
     <div id="ts-specs"></div>
+    @php $total = 0; @endphp
     <div class="ts-results">
         <div class="row under-details">
             <span class="block-white-title">All Technical Specifications</span>
@@ -185,7 +214,12 @@
                 <span id="count_projects_bar">|</span>
                 <span class="counter">{{$techspecs->count()}} Technical Specifications</span>
                 <span id="count_projects_bar">|</span>
-                <span class="counter">{{$techspecs->count()}}/{{$techspecs->count()}} Done</span>
+                @foreach($techspecs as $ts)
+                    @if($ts->fstatus->name == "Completed")
+                        @php $total++;@endphp
+                    @endif
+                @endforeach
+                <span class="counter">{{$total}}/{{$techspecs->count()}} Done</span>
                 <a href="#ts-specs" class="not-active"> <span  onclick="showTS();" id="ts-arrow" class="ts-arrow glyphicon arrow-right"></span></a>
             </span>
         </div>
@@ -206,8 +240,14 @@
                         <td><span class="tabletitle">{{$t->name}}</span>
                         </td>
                         <td>{{$t->fstatus->name}}</td>
-                        <td></td>
-                        <td>1/{{$t->requirements->count()}} Done</td>
+                        <td>{{$t->category}}</td>
+                        <td>@php $counter = 0; @endphp
+                            @foreach($t->requirements as $tr)
+                                @if($tr->rstatus->name == 'Completed')
+                                    @php $counter++;@endphp
+                                @endif
+                            @endforeach
+                            {{$counter}}/{{$t->requirements->count()}} Done</td>
                         <td></td>
                     </tr>
                 @endforeach
@@ -237,7 +277,7 @@
                 <tbody>
                 @foreach($scope as $s)
                     <tr>
-                        <td style="border-left: 1px solid #CECECE; background-color: {{$s->fstatus->color}};"></td>
+                        <td style="border-left: 1px solid #CECECE; background-color: #CECECE;"></td>
                         <td><span class="tabletitle">{{$s->name}}</span></td>
                         <td>{{$s->description}}</td>
                     </tr>
@@ -247,6 +287,4 @@
 
         </div>
     </div>
-
-
 @endsection
