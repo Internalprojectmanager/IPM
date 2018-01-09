@@ -23,9 +23,9 @@
                 @foreach($feature->requirements as $requirement)
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: {{$requirement->rstatus->color}};"></td>
-                        <td><span class="tabletitle">{{$requirement->name}}</span></td>
+                        <td class="width20"><span class="tabletitle">{{$requirement->name}}</span></td>
                         <td class="">{!! $requirement->description !!}</td>
-                        <td>
+                        <td class="width25">
                             @foreach($requirement->assignees as $assignee)
                                 <div class="col-md-8 requiremnt-assingee">
                                     <span>{{$assignee->users->first_name}} {{$assignee->users->last_name}}</span>

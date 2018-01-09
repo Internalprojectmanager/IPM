@@ -337,7 +337,7 @@
                 @foreach($scope as $s)
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: #CECECE;"></td>
-                        <td><span class="tabletitle">{{$s->name}}</span></td>
+                        <td class="width25"><span class="tabletitle">{{$s->name}}</span></td>
                         <td>{{$s->description}}</td>
                     </tr>
                 @endforeach
