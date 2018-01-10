@@ -131,15 +131,17 @@
                     <td align="center" class="bold-text-p4">Project manager(s)</td>
                     <td>
                         @php $acounter = 1; @endphp
-                        @foreach($project->assignee as $a)
-                            @if($a->users->jobtitles->name == "Project Manager")
-                                @if($acounter <= 3)
-                                    <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
-                                        <span class="company-p4">Itsavirus</span></i><br>
+                        @if($project->assignee->count() > 0)
+                            @foreach($project->assignee as $a)
+                                @if($a->users->jobtitles->name == "Project Manager")
+                                    @if($acounter <= 3)
+                                        <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
+                                            <span class="company-p4">Itsavirus</span></i><br>
+                                    @endif
+                                    @php $acounter++; @endphp
                                 @endif
-                                @php $acounter++; @endphp
-                            @endif
-                        @endforeach
+                            @endforeach
+                        @endif
                     </td>
                     <td class="responsibility-p4">
                         Responsible for developing a definition of the
@@ -160,15 +162,17 @@
                     <td align="center" class="bold-text-p4">Designer(s)</td>
                     <td>
                         @php $acounter = 1; @endphp
-                        @foreach($project->assignee as $a)
-                            @if($a->users->jobtitles->name == "Designer")
-                                @if($acounter <= 3)
-                                    <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
-                                        <span class="company-p4">Itsavirus</span></i><br>
+                        @if($project->assignee->count() > 0)
+                            @foreach($project->assignee as $a)
+                                @if($a->users->jobtitles->name == "Designer")
+                                    @if($acounter <= 3)
+                                        <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
+                                            <span class="company-p4">Itsavirus</span></i><br>
+                                    @endif
+                                    @php $acounter++; @endphp
                                 @endif
-                                @php $acounter++; @endphp
-                            @endif
-                        @endforeach
+                            @endforeach
+                        @endif
                     </td>
                     <td class="responsibility-p4">
                         Staff who actively work on the design process
@@ -186,15 +190,17 @@
                     <td align="center" class="bold-text-p4">Developer(s)</td>
                     <td>
                         @php $acounter = 1; @endphp
-                        @foreach($project->assignee as $a)
-                            @if($a->users->jobtitles->name == "Developer")
-                                @if($acounter <= 3)
-                                    <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
-                                        <span class="company-p4">Itsavirus</span></i><br>
+                        @if($project->assignee->count() > 0)
+                            @foreach($project->assignee as $a)
+                                @if($a->users->jobtitles->name == "Developer")
+                                    @if($acounter <= 3)
+                                        <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
+                                            <span class="company-p4">Itsavirus</span></i><br>
+                                    @endif
+                                    @php $acounter++; @endphp
                                 @endif
-                                @php $acounter++; @endphp
-                            @endif
-                        @endforeach
+                            @endforeach
+                        @endif
                     </td>
                     <td class="responsibility-p4">
                         Staff who actively work on the developing process
