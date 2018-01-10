@@ -202,5 +202,3 @@ function showNF(){
     document.getElementById('nftable').classList.toggle('display');
 }
 
-
-

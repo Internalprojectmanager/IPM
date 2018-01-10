@@ -51,7 +51,6 @@
          aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <label>Add Client</label>
                 <span class="modal-close"  data-dismiss="modal">
                     <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">

@@ -82,6 +82,10 @@
                     </select>
                 </div>
                 <div class="form-group col-md-6">
+                    <label class="form-label-modal">Deadline:</label>
+                    <input type='text' class="form-control input-text-modal datepicker" placeholder="YYYY/MM/DD" name="deadline" value="@php echo  date("Y/m/d", strtotime($projects->deadline)); @endphp"/>
+                </div>
+                <div class="form-group col-md-6">
                     <label class="edit-title" for="company">Select Client</label>
                     <br>
                     <select name="company" id="company">
