@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="col-md-6 col-xs-3">
-                    <button class="blue-button" id="button-people">
+                    <button type="button" class="blue-button" id="button-people" data-toggle="modal" data-target="#addProjectModal">
                         <svg id="people-icon" width="20px" height="13px" viewBox="0 0 20 13" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
@@ -137,5 +137,5 @@
             </tbody>
         </table>
     </div>
-
+    @include('project.assignee')
 @endsection

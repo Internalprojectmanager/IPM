@@ -66,6 +66,7 @@ Route::group(['prefix' => 'project'], function (){
             Route::get('/edit', 'ProjectController@editProject')->name('editproject');
             Route::post('/edit', 'ProjectController@updateProject')->name('updateproject');
             Route::get('/delete', 'ProjectController@deleteProject')->name('deleteproject');
+            Route::post('/assigneeupdate', 'ProjectController@updateAssignees')->name('assigneeupdate');
 
             Route::group(['prefix' => 'documents'], function () {
                 Route::get('/', 'DocumentController@overviewDocuments')->name('documentoverview');

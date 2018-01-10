@@ -73,7 +73,7 @@
                         </select>
                     </div>
                 </div>
-            </form>
+
         </div>
         <div class="modal-footer row" style="border:none;">
             <div class="col-md-6" align="left">
@@ -84,6 +84,7 @@
                     Save Project <span class="icon-right glyphicon glyphicon-plus">
                 </button>
             </div>
+            </form>
         </div>
     </div>
 </div>
