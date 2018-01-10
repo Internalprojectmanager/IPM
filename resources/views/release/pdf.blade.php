@@ -31,7 +31,7 @@
                 <span class="project-info-right">{{$release->description}}</span>
                 <hr>
                 <span class="project-info-left">PREPARED BY</span>
-                <span class="project-info-right">{{$release->author}}</span>
+                <span class="project-info-right prepared">{{$release->user->first_name}} {{$release->user->last_name}}</span>
                 <hr>
             </span>
         <footer>

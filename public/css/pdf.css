@@ -199,4 +199,8 @@ footer .pagenum:before {
 .non-cursive{
     font-style: normal;
 }
+
+.prepared{
+    text-transform: capitalize;
+}
 /* END OF PAGE 4 */

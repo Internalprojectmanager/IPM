@@ -25,4 +25,9 @@ class Release extends Model
     public function rstatus(){
         return $this->hasOne('App\Status', 'id', 'status');
     }
+
+    public function user(){
+        return $this->hasOne('App\User', 'id', 'author');
+    }
+
 }
