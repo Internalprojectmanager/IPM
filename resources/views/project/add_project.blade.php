@@ -47,7 +47,7 @@
             <textarea rows="4" cols="50" name="description" class="form-control" id="description"></textarea>
 
             <label for="assignee">Assignee</label>
-            <select name="assignee[]" multiple>
+            <select name="assignee[]" multiple class="selectpicker">
                 @foreach($user as $u)
                     <option value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}}</option>
                 @endforeach

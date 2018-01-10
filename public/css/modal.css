@@ -1,32 +1,71 @@
-/* The Modal (background) */
+/* TIJDELIJK: The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    padding-top: 60px;
+    z-index: 2000;
 }
 
-/* Modal Content */
+/* Modal Content/Box */
 .modal-content {
-    position: relative;
     background-color: #fefefe;
-    margin: auto;
-    padding: 0;
+    margin: 5px auto; /* 15% from the top and centered */
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px ;
+    border-radius: 0px;
     border: 1px solid #888;
-    width: 70%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
+    width: 60%; /* Could be more or less, depending on screen size */
 }
+
+/* The Close Button */
+.close {
+    /* Position it in the top right corner outside of the modal */
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+/* Close button on hover */
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
@@ -192,10 +231,8 @@
 }
 
 .tab-hr {
-    position: relative;
     margin: 0;
-    left: 247px;
-    width: 82.8%;
+    width: 100%;
 }
 
 .add_more {
