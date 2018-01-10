@@ -66,7 +66,7 @@
             </div>
 
             <div class="row pull-right">
-                <div class="col-md-3 col-xs-3">
+                <div class="col-md-5 col-xs-6">
                     <button onclick="location.href='{{route('documentoverview', ['name' => $release->projects->name, 'company_id' => $release->projects->company_id])}}'"
                             class="blue-button" id="button-files">
                         <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
@@ -84,6 +84,25 @@
                             </g>
                         </svg>
                         <span class="button-content" id="files-button">Files</span>
+                    </button>
+                </div>
+                <div class="col-md-7 col-xs-6">
+                    <button onclick="location.href='{{route('createpdf', ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, 'version' => $release->version])}}'" class="blue-button" id="button-pdf">
+                        <svg id="pdf-icon" width="19px" height="19px" viewBox="0 0 19 19" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+                            <title>Pdf icon</title>
+                            <desc>Created with Sketch.</desc>
+                            <defs></defs>
+                            <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="BUTTON/Create-PDF" transform="translate(-15.000000, -13.000000)" fill-rule="nonzero"
+                                   fill="#FFFFFF">
+                                    <path d="M32.1,13 L20.7,13 C19.655,13 18.8,13.855 18.8,14.9 L18.8,26.3 C18.8,27.345 19.655,28.2 20.7,28.2 L32.1,28.2 C33.145,28.2 34,27.345 34,26.3 L34,14.9 C34,13.855 33.145,13 32.1,13 Z M24.025,20.125 C24.025,20.9135 23.3885,21.55 22.6,21.55 L21.65,21.55 L21.65,23.45 L20.225,23.45 L20.225,17.75 L22.6,17.75 C23.3885,17.75 24.025,18.3865 24.025,19.175 L24.025,20.125 Z M28.775,22.025 C28.775,22.8135 28.1385,23.45 27.35,23.45 L24.975,23.45 L24.975,17.75 L27.35,17.75 C28.1385,17.75 28.775,18.3865 28.775,19.175 L28.775,22.025 Z M32.575,19.175 L31.15,19.175 L31.15,20.125 L32.575,20.125 L32.575,21.55 L31.15,21.55 L31.15,23.45 L29.725,23.45 L29.725,17.75 L32.575,17.75 L32.575,19.175 Z M21.65,20.125 L22.6,20.125 L22.6,19.175 L21.65,19.175 L21.65,20.125 Z M16.9,16.8 L15,16.8 L15,30.1 C15,31.145 15.855,32 16.9,32 L30.2,32 L30.2,30.1 L16.9,30.1 L16.9,16.8 Z M26.4,22.025 L27.35,22.025 L27.35,19.175 L26.4,19.175 L26.4,22.025 Z"
+                                          id="Pdf-icon"></path>
+                                </g>
+                            </g>
+                        </svg>
+                        <span class="button-content" id="pdf-button">Create PDF</span>
                     </button>
                 </div>
             </div>
