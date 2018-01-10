@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignee;
 use App\Feature;
 use App\Http\Requests\ReleaseValidator;
 use App\Requirement;
@@ -22,19 +23,17 @@ class PDFController extends Controller
 {
     public function createPDF($company_id,$name,$release_name, $version){
 
-        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        $project = Project::with(['assignee.users.jobtitles','assignee' => function ($q){
+            $q->orderby('userid');
+        }])->where(['name' => $name, 'company_id' => $company_id])->first();
         $company = Client::where('id' ,$company_id)->first();
         $release = Release::where([['project_id', $project->id],['name', $release_name],['version', $version]])->first();
-
+        $release_id = $release->release_uuid;
         if(!$release){
             abort(404);
         }
-        $status_string = array('"Open"', '"In Progress"', '"Testing"', '"Closed"');
-        $status = array('Open', 'In Progress', 'Testing', 'Closed');
-        $ids_ordered = implode(",", $status_string);
-        $features = Feature::with('requirements')->where([['release_id', $release->release_uuid]])->whereIn('status', $status)->orderByRaw(DB::raw("FIELD(status, $ids_ordered)"))->get();
-
-        $pdf = PDF::loadView('release.pdf', compact('release', 'project', 'features', 'company', 'requirements'));
+        $features = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid], ['type', 'Feature']])->get();
+        $pdf = PDF::loadView('release.pdf', compact('release', 'project', 'features', 'company', 'requirements', 'assignees'));
         return $pdf->stream('Release.pdf');
     }
 }

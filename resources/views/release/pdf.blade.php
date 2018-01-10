@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <title>{{$project->name}} - {{$release->name}} {{number_format(floatval($release->version), 1)}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <link href="{{asset('css/pdf.css', config('app.secure'))}}" rel="stylesheet" type="text/css">
@@ -15,7 +16,7 @@
     <p id="p1">
         <img class="logo-p1" src="{{asset('img/logo-iav-circles.png')}}">
         <span class="h1-p1">PROJECT SPECIFICATION</span>
-        <span class="h2-p1">{{$project->name}} {{$release->name}} {{$release->version}}</span>
+        <span class="h2-p1">{{$project->name}} {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
         <span class="h3-p1"><?php echo date("d - m - Y"); ?>
         </span>
 
@@ -24,7 +25,7 @@
                 <span class="project-info-right">{{$project->name}}</span>
                 <hr>
                 <span class="project-info-left">RELEASE</span>
-                <span class="project-info-right">{{$release->version}}</span>
+                <span class="project-info-right">{{number_format(floatval($release->version), 1)}}</span>
                 <hr>
                 <span class="project-info-left">DESCRIPTION</span>
                 <span class="project-info-right">{{$release->description}}</span>
@@ -122,18 +123,23 @@
 
                 <tbody>
                 <tr>
-                    <th><br></th>
-                    <th><br></th>
-                    <th><br></th>
+                    <td><hr></td>
+                    <td><hr></td>
+                    <td><hr></td>
                 </tr>
-
                 <tr>
                     <td align="center" class="bold-text-p4">Project manager(s)</td>
                     <td>
-                        <span class="bold-text-p4">Jochem Verheul</span><br>
-                        <span class="company-p4">Itsavirus</span><br><br>
-                        <span class="bold-text-p4">Chris Dawe</span><br>
-                        <span class="company-p4">Itsavirus</span><br>
+                        @php $acounter = 1; @endphp
+                        @foreach($project->assignee as $a)
+                            @if($a->users->jobtitles->name == "Project Manager")
+                                @if($acounter <= 3)
+                                    <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
+                                        <span class="company-p4">Itsavirus</span></i><br>
+                                @endif
+                                @php $acounter++; @endphp
+                            @endif
+                        @endforeach
                     </td>
                     <td class="responsibility-p4">
                         Responsible for developing a definition of the
@@ -153,10 +159,16 @@
                 <tr>
                     <td align="center" class="bold-text-p4">Designer(s)</td>
                     <td>
-                        <span class="bold-text-p4">Nick Vogel</span><br>
-                        <span class="company-p4">Itsavirus</span><br><br>
-                        <span class="bold-text-p4">Erik Odijk</span><br>
-                        <span class="company-p4">Itsavirus</span><br>
+                        @php $acounter = 1; @endphp
+                        @foreach($project->assignee as $a)
+                            @if($a->users->jobtitles->name == "Designer")
+                                @if($acounter <= 3)
+                                    <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
+                                        <span class="company-p4">Itsavirus</span></i><br>
+                                @endif
+                                @php $acounter++; @endphp
+                            @endif
+                        @endforeach
                     </td>
                     <td class="responsibility-p4">
                         Staff who actively work on the design process
@@ -173,15 +185,22 @@
                 <tr>
                     <td align="center" class="bold-text-p4">Developer(s)</td>
                     <td>
-                        <span class="bold-text-p4">Laurens Verspeek</span><br>
-                        <span class="company-p4">Itsavirus</span><br><br>
-                        <span class="bold-text-p4">Noman Jabbar</span><br>
-                        <span class="company-p4">Itsavirus</span><br>
+                        @php $acounter = 1; @endphp
+                        @foreach($project->assignee as $a)
+                            @if($a->users->jobtitles->name == "Developer")
+                                @if($acounter <= 3)
+                                    <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
+                                        <span class="company-p4">Itsavirus</span></i><br>
+                                @endif
+                                @php $acounter++; @endphp
+                            @endif
+                        @endforeach
                     </td>
                     <td class="responsibility-p4">
-                        Staff who actively work on the develop process
+                        Staff who actively work on the developing process
                         of the project.
                     </td>
+
                 </tr>
 
                 <tr>
@@ -210,6 +229,7 @@
                 <?php
                 $chap++;
                 $featureID++;
+                $i = 0;
                 echo $featureID . '.0';
                 ?>
             </span>
@@ -232,11 +252,12 @@
             <span>
                 <table class="table-p5">
                     <tbody>
+                        <?php $reqnr = 1; ?>
                         @foreach($f->requirements as $r)
                             <tr class="project-description">
                                 <td width="35%">
                                     <strong>
-                                        FR-<?php $FRID = $featureID + 0.1; echo $FRID;  ?>
+                                        FR-<?php $FRID = $featureID. ".". $reqnr; echo $FRID; $reqnr++; ?><br>
                                     </strong>
                                     {{ $r->name }}
                                 </td>

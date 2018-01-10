@@ -195,4 +195,8 @@ footer .pagenum:before {
     letter-spacing: 1px;
     line-height: 13px;
 }
+
+.non-cursive{
+    font-style: normal;
+}
 /* END OF PAGE 4 */
