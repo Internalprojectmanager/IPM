@@ -206,7 +206,8 @@ class ProjectController extends Controller
         $documents = Document::where('project_id', $projects->id)->get();
         $user = User::all();
         $assignee = Assignee::with('users')->where('uuid', $projects->id)->get();
-        return view('project.details_project', compact('projects', 'companys', 'releases', 'documents', 'user', 'assignee'));
+        $status = Status::where('type','Progress')->get();
+        return view('project.details_project', compact('projects', 'companys', 'releases', 'documents', 'user', 'assignee', 'status'));
     }
 
     public function editProject($company_id, $name)

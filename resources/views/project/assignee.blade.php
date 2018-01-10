@@ -12,7 +12,7 @@
      aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
-            <label>Add Project</label>
+            <label>Assigned Users</label>
             <span class="modal-close"  data-dismiss="modal">
                     <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -35,9 +35,8 @@
         <div class="modal-body">
             <form action="{{route('assigneeupdate', ['name' => $projects->name, 'company_id' => $projects->company_id])}}" method="post">
                 {{ csrf_field() }}
-                <h3>Assigned Users</h3>
                 <div class="form-group">
-                    <label class="" for="assignee">Assignee</label>
+                    <label class="" for="assignee">Assignees</label>
                     <select name="assignee[]" multiple class="form-control selectpicker">
                         @foreach($user as $u)
                             @foreach($assignee as $a)

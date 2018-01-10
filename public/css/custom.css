@@ -576,11 +576,6 @@ td > .assignee:first-child:before {
     top: 15px;
 }
 
-/* release table */
-#release-overview, #requirement-overview {
-    margin-top: 101px;
-}
-
 #requirement-overview td:first-child, #requirement-overview th:first-child{
     padding-left: 35px;
 }

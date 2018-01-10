@@ -101,12 +101,11 @@
             </div>
 
         </div>
-
-        <a class="btn-primary" id="addrelease"
-           href="{{route('addrelease', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">
-            <span class="yellow-button" id="release-button">Add Release</span>
-            <span class="glyphicon glyphicon-plus" id="release-plus"></span>
-        </a>
+    </div>
+    <div class="row under-details">
+        <button type="button" class="btn btn-primary black" data-toggle="modal" data-target="#addReleaseModal">
+            Add Release <span class="icon-right glyphicon glyphicon-plus"></span>
+        </button>
     </div>
     <div class="row">
         <table class="table table-hover table-center results" id="release-overview">
@@ -138,4 +137,5 @@
         </table>
     </div>
     @include('project.assignee')
+    @include('release.add_release')
 @endsection
