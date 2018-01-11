@@ -68,7 +68,7 @@
                         <label class="form-label-modal">Assingees:</label>
                         <select class="form-control selectpicker" name="assignee[]" multiple>
                             @foreach($user as $u)
-                                <option value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}}</option>
+                                <option value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}} @if(isset($u->jobtitles))(<i>{{$u->jobtitles->name}}</i>)@endif</option>
                             @endforeach
                         </select>
                     </div>

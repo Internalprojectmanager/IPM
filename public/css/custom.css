@@ -913,3 +913,19 @@ td > .assignee:first-child:before {
 .width20{
     width: 20%;
 }
+
+.spacing-button{
+    margin: 10px 10px;
+}
+
+#nfr-add-button{
+    width: 330px;
+}
+
+#tspecs-add-button{
+    width: 300px;
+}
+
+#scope-add-button{
+    width: 200px;
+}

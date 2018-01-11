@@ -90,14 +90,13 @@ Route::group(['prefix' => 'project'], function (){
                     Route::get('/add', 'FeatureController@add')->name('addfeature');
 
                     Route::get('/{feature_id}', 'FeatureController@showFeature')->name('showfeature');
+                    Route::post('/store', 'FeatureController@store')->name('storefeature');
                     Route::post('/{feature_id}', 'RequirementController@saveStatus')->name('requirementsavestatus');
                     Route::get('/{feature_id}/edit', 'FeatureController@editFeature')->name('editFeature');
                     Route::post('/{feature_id}/edit', 'FeatureController@updateFeature')->name('updateFeature');
 
-                    Route::post('/store', 'FeatureController@store')->name('storefeature');
                 });
-
-                });
+            });
 
 
             Route::group(['prefix' => 'release'], function (){

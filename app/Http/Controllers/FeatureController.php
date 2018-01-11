@@ -61,6 +61,7 @@ class FeatureController extends Controller
 
     public function store($company_id, $name, $release_name, Request $request)
     {
+        dd($request);
         $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
         $release = Release::where(['project_id' => $project->id, 'name' => $release_name])->first();
         foreach ($request->feature_name as $k => $value) {

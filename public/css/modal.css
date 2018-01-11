@@ -168,7 +168,7 @@
 /*
  CSS for the main interaction
 */
-.tabset > input[type="radio"] {
+.tabset input[type="radio"] {
     position: absolute;
     left: -200vw;
 }
@@ -177,19 +177,23 @@
     display: none;
 }
 
-.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
-.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
-.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
-.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
-.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
-.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+.tabset  input:first-child:checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset  input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset  input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset  input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(6),
+.tabset  input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(7),
+.tabset  input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(8),
+.tabset  input:nth-child(13):checked ~ .tab-panels > .tab-panel:nth-child(9),
+.tabset  input:nth-child(15):checked ~ .tab-panels > .tab-panel:nth-child(10),
+.tabset  input:nth-child(17):checked ~ .tab-panels > .tab-panel:nth-child(11),
+.tabset  input:nth-child(19):checked ~ .tab-panels > .tab-panel:nth-child(12) {
     display: block;
 }
 
 /*
  Styling
 */
-.tabset > label {
+.tabset label {
     position: relative;
     display: inline-block;
     padding: 8px 20px;
@@ -199,18 +203,18 @@
     margin: 0px;
 }
 
-.tabset > label:hover,
-.tabset > input:focus + label {
+.tabset label:hover,
+.tabset input:focus + label {
     color: #000000;
 }
 
-.tabset > label:hover::after,
-.tabset > input:focus + label::after,
-.tabset > input:checked + label::after {
+.tabset label:hover::after,
+.tabset input:focus + label::after,
+.tabset input:checked + label::after {
     background: #000000;
 }
 
-.tabset > input + label {
+.tabset input + label {
     background-color: #5D99CA;
     color: #000;
     font-size: 14px;
@@ -219,7 +223,7 @@
     border: 1px solid #9B9B9B;
 }
 
-.tabset > input:checked + label {
+.tabset input:checked + label {
     background-color: #fff;
     color: #000;
     border: 1px solid #9B9B9B;

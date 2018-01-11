@@ -13,13 +13,13 @@ $('.searchform').on('keyup keypress', function(e) {
     }
 });
 
-$('body').on('click', '.pagination a, .results>thead>tr>th a', function (e) {
+$(document).on('click', '.pagination a, .results>thead>tr>th a', function (e) {
     e.preventDefault();
     var url = $(this).attr('href');
     getData(url);
 });
 
-$('body').on('change', '.assignee-check', function (e) {
+$(document).on('change', '.assignee-check', function (e) {
     var curl = window.location.href;
     e.preventDefault();
     var url = $(this).attr('href');
@@ -33,6 +33,46 @@ $('.deletefile').on( 'click', function (e) {
     var url = $(this).attr('href');
     deleteFile(url, pid, curl);
 });
+
+$('.tab').on('click', function(){
+
+    var currentCount = $(".fr-tabs", $("#featurereq")).length + 1;
+    if ($('input#newreq').is(':checked')) {
+        if(currentCount < 11){
+            var currentCountmin = $(".fr-tabs", $("#featurereq")).length;
+            console.log(currentCount);
+
+            var tablabel = "tablabel"+currentCount;
+            var tab = "tab"+currentCount;
+            var newlabel = $("<label>").text('Requirement'+currentCount).attr({id: 'tablabel'+currentCount, for: 'tab'+currentCount});
+            var newRadio = $(document.createElement('input'))
+                .attr({id: 'tab' + currentCount, class:"fr-tabs tab", name: "tabsetreq", type: "radio"});
+            newRadio.attr('aria-controls', 'req'+currentCount);
+            newRadio.insertAfter('#tablabel'+currentCountmin);
+            newlabel.insertAfter('#tab'+currentCount);
+
+
+            $("#req1").clone().appendTo("#featurereq .tab-panels").prop('id', "req" + currentCount).removeAttr('hidden');
+            var row = $('#req' + currentCount);
+            row.find("input[type='text']").val("");
+            $('.tab-panels select').clone().appendTo('#featurereq .tab-panels #req' + currentCount+' .assignee').attr("name", 'assignee['+currentCount+'][]');
+            row.find('.bootstrap-select').remove();
+            row.find("option").removeAttr('selected');
+            row.find(".assignee select").selectpicker();
+
+            $("#featurereq #tab" + currentCount).prop("checked", true);
+        }else{
+            $("#featurereq .tab-panels #req" + currentCount).css("display", "block");
+            $('#feature-full').removeClass('hidden');
+            setTimeout(function () {
+                $('#feature-full').attr('class', 'hidden');
+            }, 10000)
+            //$(alert).attr('class', 'hidden');
+
+        }
+    }
+});
+
 
 
 

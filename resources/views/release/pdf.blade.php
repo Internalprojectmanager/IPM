@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>{{$project->name}} - {{$release->name}} {{number_format(floatval($release->version), 1)}}</title>
+    <title>{{$project->company->name}} {{$project->name}} - {{$release->name}} {{number_format(floatval($release->version), 1)}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <link href="{{asset('css/pdf.css', config('app.secure'))}}" rel="stylesheet" type="text/css">
@@ -16,7 +16,7 @@
     <p id="p1">
         <img class="logo-p1" src="{{asset('img/logo-iav-circles.png')}}">
         <span class="h1-p1">PROJECT SPECIFICATION</span>
-        <span class="h2-p1">{{$project->name}} {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
+        <span class="h2-p1">{{$project->company->name}} {{$project->name}}  {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
         <span class="h3-p1"><?php echo date("d - m - Y"); ?>
         </span>
 

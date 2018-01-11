@@ -47,7 +47,7 @@
                                     @php $selected = "";@endphp
                                 @endif
                             @endforeach
-                                <option {{$selected}} value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}}</option>
+                                <option {{$selected}} value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}} @if(isset($u->jobtitles))(<i>{{$u->jobtitles->name}}</i>)@endif</option>
                         @endforeach
                     </select>
                 </div>

@@ -53,7 +53,7 @@
                 <div class="under-details">
                     <div class="col-md-3 col-xs-12">
                         <span class="project-title block-title">Document status</span><br>
-                        <span class="project-detail block-value">{{$release->document_status}}</span>
+                        <span class="project-detail block-value">{{$release->dstatus->name}}</span>
                     </div>
                 </div>
                 <div class="under-details">
@@ -112,15 +112,30 @@
             </div>
 
         </div>
-        <!-- ADD REQUIREMENT
-        <a class="btn-primary" id="addrelease"
-           href="addrequirement">
-            <span class="yellow-button" id="release-button">Add Release</span>
-            <span class="glyphicon glyphicon-plus" id="release-plus"></span>
-        </a>
-        -->
-    </div>
 
+    </div>
+    <div class="row under-details">
+        <div class="pull-left spacing-button">
+            <button type="button" class="btn btn-primary black" id="feature-add-button" data-toggle="modal" data-target="#addFeatureModal">
+                Add Feature <span class="icon-right glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+        <div class="pull-left spacing-button">
+            <button type="button" class="btn btn-primary black" id="nfr-add-button" data-toggle="modal" data-target="#addNFRModal">
+                Add Non Functional Requirement <span class="icon-right glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+        <div class="pull-left spacing-button">
+            <button type="button" class="btn btn-primary black" id="tspecs-add-button" data-toggle="modal" data-target="#addTspecsModal">
+                Add Technical Specification <span class="icon-right glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+        <div class="pull-left spacing-button">
+            <button type="button" class="btn btn-primary black" id="scope-add-button" data-toggle="modal" data-target="#addScopeModal">
+                Add Out of Scope <span class="icon-right glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+    </div>
 
     <div class="feature-results">
         @php $total = 0; @endphp
@@ -365,4 +380,6 @@
 
         </div>
     </div>
+
+    @include('features.add_feature')
 @endsection
