@@ -55,8 +55,10 @@ $('.tab').on('click', function(){
             $("#req1").clone().appendTo("#featurereq .tab-panels").prop('id', "req" + currentCount).removeAttr('hidden');
             var row = $('#req' + currentCount);
             row.find("input[type='text']").val("");
-            $('.tab-panels select').clone().appendTo('#featurereq .tab-panels #req' + currentCount+' .assignee').attr("name", 'assignee['+currentCount+'][]');
-            row.find('.bootstrap-select').remove();
+            $('#req1 select').clone().appendTo('#featurereq .tab-panels #req' + currentCount+' .assignee').attr("name", 'assignee['+currentCount+'][]');
+            row.find('.assignee div').remove();
+            row.find('textarea').attr('name', 'description['+currentCount+']');
+            row.find('input').attr('name', 'requirement_name['+currentCount+']');
             row.find("option").removeAttr('selected');
             row.find(".assignee select").selectpicker();
 

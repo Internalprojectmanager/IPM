@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description:</label>
-                        <textarea rows="4" cols="50" name="description" class="form-control input-text-modal" id="description"></textarea>
+                        <textarea rows="4" cols="50" name="feature_description" class="form-control input-text-modal" id="description"></textarea>
 
                     </div>
                 </div>
@@ -77,12 +77,12 @@
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-12">
                                     <label class="form-label-modal">Requirement Name</label>
-                                    <input type="text" class="form-control input-text-modal" name="requirement_name[]"
+                                    <input type="text" class="form-control input-text-modal" name="requirement_name[1]"
                                            id="" placeholder="">
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label-modal">Description:</label>
-                                    <textarea rows="4" cols="50" name="description[]" class="form-control input-text-modal" id="description"></textarea>
+                                    <textarea rows="4" cols="50" name="requirement_description[1]" class="form-control input-text-modal" id="description"></textarea>
 
                                 </div>
                                 <div class="col-md-12 assignee">
