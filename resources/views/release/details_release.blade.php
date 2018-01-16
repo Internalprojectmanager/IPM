@@ -126,7 +126,7 @@
             </button>
         </div>
         <div class="pull-left spacing-button">
-            <button type="button" class="btn btn-primary black" id="tspecs-add-button" data-toggle="modal" data-target="#addTspecsModal">
+            <button type="button" class="btn btn-primary black" id="tspecs-add-button" data-toggle="modal" data-target="#addTSModal">
                 Add Technical Specification <span class="icon-right glyphicon glyphicon-plus"></span>
             </button>
         </div>
@@ -185,15 +185,17 @@
                             </td>
                             <td class="width25">
                                 <span class="assignee">
-                                    @php $i = 0; @endphp
+                                    @php $i = 0; $unique = array(); @endphp
                                     @foreach($f->requirements as $fr)
                                         @foreach($fr->assignees as $as)
-                                                @if($i < 3)
+                                                @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
                                                     {{$as->users->first_name}} {{$as->users->last_name}},
+                                                    @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
+                                                    @php $i++;@endphp
                                                 @else
                                                     and More...
                                                 @endif
-                                                @php $i++;@endphp
+
                                         @endforeach
                                     @endforeach
                                 </span>
@@ -242,7 +244,7 @@
                          ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $n->id])}}">{{$n->name}}</a></span>
                         </td>
                         <td class="width20">{{$n->fstatus->name}}</td>
-                        <td class="width20">{{$n->category}}</td>
+                        <td class="width20">{{$n->fcategory->name}}</td>
                         <td class="width20">@php $counter = 0;@endphp
                             @foreach($f->requirements as $r)
                                 @if($r->rstatus->name == 'Completed')
@@ -257,15 +259,16 @@
                             </td>
                             <td class="width20">
                                 <span class="assignee">
-                                    @php $i = 0; @endphp
+                                    @php $i = 0; $unique = array(); @endphp
                                     @foreach($n->requirements as $r)
                                         @foreach($r->assignees as $as)
-                                            @if($i < 3)
+                                            @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
                                                 {{$as->users->first_name}} {{$as->users->last_name}},
+                                                @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
+                                                @php $i++;@endphp
                                             @else
                                                 and More...
                                             @endif
-                                            @php $i++;@endphp
                                         @endforeach
                                     @endforeach
                                 </span>
@@ -314,7 +317,7 @@
                          ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $t->id])}}">{{$t->name}}</a>
                             </span></td>
                         <td class="width20">{{$t->fstatus->name}}</td>
-                        <td class="width20">{{$t->category}}</td>
+                        <td class="width20">{{$t->fcategory->name}}</td>
                         <td class="width20">@php $counter = 0; @endphp
                             @foreach($t->requirements as $tr)
                                 @if($tr->rstatus->name == 'Completed')
@@ -329,15 +332,16 @@
                         </td>
                         <td class="width20">
                             <span class="assignee">
-                                @php $i = 0; @endphp
+                                @php $i = 0; $unique = array(); @endphp
                                 @foreach($t->requirements as $r)
                                     @foreach($r->assignees as $as)
-                                        @if($i < 3)
+                                        @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
                                             {{$as->users->first_name}} {{$as->users->last_name}},
+                                            @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
+                                            @php $i++;@endphp
                                         @else
                                             and More...
                                         @endif
-                                        @php $i++;@endphp
                                     @endforeach
                                 @endforeach
                             </span>
@@ -382,4 +386,7 @@
     </div>
 
     @include('features.add_feature')
+    @include('features.add_nfr')
+    @include('features.add_ts')
+    @include('features.add_scope')
 @endsection

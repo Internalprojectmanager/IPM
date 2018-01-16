@@ -177,14 +177,14 @@
     display: none;
 }
 
-.tabset  input:first-child:checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset  input:nth-child(1):checked ~ .tab-panels > .tab-panel:nth-child(3),
 .tabset  input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(4),
 .tabset  input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(5),
 .tabset  input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(6),
 .tabset  input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(7),
 .tabset  input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(8),
 .tabset  input:nth-child(13):checked ~ .tab-panels > .tab-panel:nth-child(9),
-.tabset  input:nth-child(15):checked ~ .tab-panels > .tab-panel:nth-child(10),
+.tabset input:nth-child(15):checked ~ .tab-panels > .tab-panel:nth-child(10),
 .tabset  input:nth-child(17):checked ~ .tab-panels > .tab-panel:nth-child(11),
 .tabset  input:nth-child(19):checked ~ .tab-panels > .tab-panel:nth-child(12) {
     display: block;

@@ -75,7 +75,10 @@ class ReleaseController extends Controller
         $nfr = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'NFR']])->get();
         $techspecs = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'TS']])->get();
         $scope = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'Scope']])->get();
-        return view('release.details_release', compact('release', 'project', 'features', 'company', 'nfr', 'scope', 'techspecs', 'featurecount', 'user'));
+
+        $status = Status::where('type', 'Progress')->get();
+        $category = Status::where('type', 'category')->get();
+        return view('release.details_release', compact('release', 'project', 'features', 'company', 'nfr', 'scope', 'techspecs', 'featurecount', 'user', 'status', 'category'));
     }
 
     public function  editRelease($company_id, $name, $release_name, $version){

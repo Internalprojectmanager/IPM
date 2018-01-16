@@ -74,13 +74,20 @@
             </div>
 
         </div>
-        <!-- ADD REQUIREMENT
-        <a class="btn-primary" id="addrelease"
-           href="addrequirement">
-            <span class="yellow-button" id="release-button">Add Release</span>
-            <span class="glyphicon glyphicon-plus" id="release-plus"></span>
-        </a>
-        -->
+        <div class="pull-left spacing-button">
+            <button type="button" class="btn btn-primary black" id="feature-add-button" data-toggle="modal" data-target="#editFeatureModal">
+                Edit<span class="icon-right glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
     </div>
-    @include('requirement.requirement_table')
+    @if($feature->type !== "Scope")
+        @include('requirement.requirement_table')
+    @endif
+    @if($feature->type == "Feature")
+        @include('features.edit_feature')
+    @elseif($feature->type == "NFR")
+        @include('features.edit_nfr')
+    @else
+        @include('features.edit_ts')
+    @endif
 @endsection

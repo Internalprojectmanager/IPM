@@ -1,9 +1,9 @@
-<div class="modal modal-lg" id="addFeatureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal modal-lg" id="addTSModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
-            <label>Add Feature</label>
-            <span class="modal-close" data-dismiss="modal">
+            <label>Add Technical Specifications (TS)</label>
+            <span class="modal-close"  data-dismiss="modal">
                     <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
@@ -33,22 +33,28 @@
                 </div>
             @endif
 
-            <form action="{{route('storefeature', ['name' => $project->name, 'company_id' => $project->company_id, 'release_name' => $release->name])}}"
-                  method="post">
+            <form action="{{route('storefeature', ['name' => $project->name, 'company_id' => $project->company_id, 'release_name' => $release->name])}}" method="post">
                 {{ csrf_field() }}
                 <input type="hidden" name="release_id" value="{{$release->id}}">
-                <input type="hidden" name="type" value="Feature">
+                <input type="hidden" name="type" value="TS">
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="featurename">Feature name:</label>
+                        <label for="featurename">Technical Specifications Name:</label>
                         <input type="text" class="form-control input-text-modal" name="feature_name" id="feature_name">
 
                     </div>
                     <div class="form-group">
-                        <label for="description">Description:</label>
-                        <textarea rows="4" cols="50" name="feature_description" class="form-control input-text-modal"
-                                  id="description"></textarea>
+                        <label for="description">Technical Specifications Description:</label>
+                        <textarea rows="4" cols="50" name="feature_description" class="form-control input-text-modal" id="description"></textarea>
 
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Category:</label>
+                        <select name="feature_category" class="form-control input-text-modal">
+                            @foreach($category as $c)
+                            <option value="{{$c->id}}">{{$c->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -59,34 +65,33 @@
                             @endforeach
                         </select>
                     </div>
+
                 </div>
 
-                <div id="featurereq" class="tabset" role="tablist">
+                <div id="tsreq" class="tabset" role="tablist">
                     <!-- Tab 1 -->
-                    <input type="radio" class="fr-tabs tab" name="fr-tabsetreq" id="fr-tab1" aria-controls="fr-req1"
-                           checked>
-                    <label id="fr-tablabel1" class="non-cursive" for="fr-tab1">Feature Requirement 1</label>
-                    <i id="more-fr"></i>
+                    <input type="radio" class="ts-tabs tab" name="ts-tabsetreq" id="ts-tab1" aria-controls="ts-req1" checked>
+                    <label id="ts-tablabel1" class="non-cursive" for="ts-tab1">TS Requirement 1</label>
+                    <i id="more-ts"></i>
                     <!-- Tab 2 -->
-                    <input type="radio" class="btn-primary tab" name="fr-tabsetreq" id="fr-newreq">
-                    <label for="fr-newreq" class="black">
+                    <input type="radio" class="btn-primary tab" name="ts-tabsetreq" id="ts-newreq">
+                    <label for="ts-newreq" class="black">
                         Add more Requirements <span class="icon-right glyphicon glyphicon-plus"></span>
                     </label>
                     <hr class="tab-hr">
 
                     <div class="tab-panels">
-                        <div class="hidden" id="fr-feature-full">
+                        <div class="hidden" id="ts-feature-full">
                             <div class="alert alert-danger">
                                 No more requirements can be added (Max of 10 reached)
                             </div>
                         </div>
                         <select class="form-control input-text-modal hidden" name="assignee[1][]" multiple>
                             @foreach($user as $u)
-                                <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))
-                                        (<i>{{$u->users->jobtitles->name}}</i>)@endif</option>
+                                <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))(<i>{{$u->users->jobtitles->name}}</i>)@endif</option>
                             @endforeach
                         </select>
-                        <section id="fr-req1" class="tab-panel">
+                        <section id="ts-req1" class="tab-panel">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-12">
                                     <label class="form-label-modal">Requirement Name</label>
@@ -95,17 +100,15 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label-modal">Description:</label>
-                                    <textarea rows="4" cols="50" name="requirement_description[1]"
-                                              class="form-control input-text-modal" id="description"></textarea>
+                                    <textarea rows="4" cols="50" name="requirement_description[1]" class="form-control input-text-modal" id="description"></textarea>
 
                                 </div>
+
                                 <div class="col-md-12 assignee">
                                     <label class="form-label-modal">Assingees:</label>
-                                    <select class="form-control input-text-modal selectpicker" name="assignee[1][]"
-                                            multiple>
+                                    <select class="form-control input-text-modal selectpicker" name="assignee[1][]" multiple>
                                         @foreach($user as $u)
-                                            <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))
-                                                    (<i>{{$u->users->jobtitles->name}}</i>)@endif</option>
+                                            <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))(<i>{{$u->users->jobtitles->name}}</i>)@endif</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -119,7 +122,7 @@
                     </div>
                     <div class="col-md-6" align="right">
                         <button class="btn btn-primary" type="submit">
-                            Save Feature <span class="icon-right glyphicon glyphicon-plus">
+                            Save <span class="icon-right glyphicon glyphicon-plus">
                         </button>
                     </div>
             </form>

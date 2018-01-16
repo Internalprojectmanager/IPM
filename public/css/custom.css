@@ -929,3 +929,8 @@ td > .assignee:first-child:before {
 #scope-add-button{
     width: 200px;
 }
+
+.remove_feature{
+    background: none;
+    border:none
+}

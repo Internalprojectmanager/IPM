@@ -24,14 +24,14 @@ class FeatureRequest extends FormRequest
     public function rules()
     {
         return [
-            'feature_title' => 'required'
+            'feature_name' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'feature_title.required' => 'A Feature name is required',
+            'feature_name.required' => 'A Feature name is required',
         ];
     }
 }
