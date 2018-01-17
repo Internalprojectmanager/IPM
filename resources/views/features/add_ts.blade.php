@@ -78,6 +78,7 @@
                     <label for="ts-newreq" class="black">
                         Add more Requirements <span class="icon-right glyphicon glyphicon-plus"></span>
                     </label>
+                    <span class="hidden" id="ts-removed">0</span>
                     <hr class="tab-hr">
 
                     <div class="tab-panels">

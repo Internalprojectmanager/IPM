@@ -191,11 +191,11 @@
                                                 @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
                                                     {{$as->users->first_name}} {{$as->users->last_name}},
                                                     @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
-                                                    @php $i++;@endphp
-                                                @else
+                                                @endif
+                                                @if($i == 3)
                                                     and More...
                                                 @endif
-
+                                                @php $i++;@endphp
                                         @endforeach
                                     @endforeach
                                 </span>
@@ -265,10 +265,11 @@
                                             @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
                                                 {{$as->users->first_name}} {{$as->users->last_name}},
                                                 @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
-                                                @php $i++;@endphp
-                                            @else
+                                            @endif
+                                            @if($i == 3)
                                                 and More...
                                             @endif
+                                            @php $i++;@endphp
                                         @endforeach
                                     @endforeach
                                 </span>
@@ -338,10 +339,12 @@
                                         @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
                                             {{$as->users->first_name}} {{$as->users->last_name}},
                                             @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
-                                            @php $i++;@endphp
-                                        @else
+
+                                        @endif
+                                        @if($i == 3)
                                             and More...
                                         @endif
+                                            @php $i++;@endphp
                                     @endforeach
                                 @endforeach
                             </span>

@@ -151,41 +151,46 @@ class FeatureController extends Controller
             }
             $feature->save();
 
-            $requirements = Requirement::with('assignees')->where('feature_uuid', $feature->feature_uuid)->get();
-            foreach ($requirements as $r) {
-                $req[] = $r->requirement_uuid;
+            $status = Status::where('name', 'draft')->select('id')->first();
+
+            //dd($request);
+            $requirement = Requirement::where('feature_uuid', $feature->feature_uuid)->get();
+            foreach ($requirement as $r){
+                if(!in_array($r->requirement_uuid, $request->requirement_uuid)){
+                    Requirement::where('id', $r->id)->delete();
+                }
             }
 
             foreach($request->requirement_name as $k => $v){
-                if(in_array($request->requirement_uuid[$k], $req)){
-                    $r = Requirement::with('assignees')->where('requirement_uuid', $request->requirement_uuid[$k])->first();
-                    $r->name = $request->requirement_name[$k];
-                    $r->description = $request->requirement_description[$k];
-                    $r->author = Auth::id();
-                    $assignees = array();
-                    foreach ($r->assignees as $ass) {
-                        $assignees[] = $ass->userid;
-                    }
+                if(!empty($request->requirement_uuid[$k])){
+                    $requirement = Requirement::where('requirement_uuid', $request->requirement_uuid[$k])->first();
+                    $requirement->name = $request->requirement_name[$k];
+                    $requirement->description = $request->requirement_description[$k];
+                    $requirement->author = Auth::id();
+                    //dd($requirement);
+                    $requirement->save();
+                    if(!empty($request->assignee[$k])){
+                        $assignee = Assignee::where('uuid', $requirement->requirement_uuid)->get();
+                        $assigneeusers  = array();
+                        foreach ($assignee as $a){
+                            if(!in_array($a->userid, $request->assignee[$k])){
+                                Assignee::where([['uuid', $requirement->requirement_uuid],['userid', $a->userid]])->delete();
+                            }else{
+                                $assigneeusers[] = $a->userid;
+                            }
+                        }
 
-                    Assignee::whereNotIn('userid', $request->assignee[$k])->where('uuid', $request->requirement_uuid[$k])->delete();
-
-
-                    foreach ($request->assignee[$k] as $as){
-                        if(!in_array($as, $assignees)){
-                            $new_assignee = new Assignee();
-                            $new_assignee->userid = $as;
-                            $new_assignee->uuid = $request->requirement_uuid[$k];
-                            $new_assignee->save();
+                        foreach ($request->assignee[$k] as $a){
+                            if(!in_array($a, $assigneeusers)){
+                                $assignee = new Assignee();
+                                $assignee->userid = $a;
+                                $assignee->uuid = $requirement->requirement_uuid;
+                                $assignee->save();
+                            }
                         }
                     }
-                    $r->save();
+
                 }else{
-                    foreach ($requirements as $r){
-                        if(!in_array($r->requirement_uuid, $request->requirement_uuid)){
-                            $r->delete();
-                            Assignee::where('uuid', $r->requirement_uuid)->delete();
-                        }
-                    }
                     if ($request->requirement_name[$k] !== NULL) {
                         $requirement = new Requirement;
                         $requirement->feature_uuid = $feature->feature_uuid;
@@ -198,7 +203,7 @@ class FeatureController extends Controller
                         $requirement->status = $status->id;
                         $requirement->author = Auth::id();
                         $requirement->save();
-                        if(!empty($request->assignee)){
+                        if(!empty($request->assignee[$k])){
                             foreach ($request->assignee[$k] as $as){
                                 $assignee = new Assignee();
                                 $assignee->userid = $as;

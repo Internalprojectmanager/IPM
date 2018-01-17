@@ -72,6 +72,7 @@
                     <label for="fr-newreq" class="black">
                         Add more Requirements <span class="icon-right glyphicon glyphicon-plus"></span>
                     </label>
+                    <span class="hidden" id="fr-removed">0</span>
                     <hr class="tab-hr">
 
                     <div class="tab-panels">

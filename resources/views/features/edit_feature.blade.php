@@ -2,7 +2,7 @@
      aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
-            <label>Add Feature</label>
+            <label>Edit Feature</label>
             <span class="modal-close" data-dismiss="modal">
                     <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -98,7 +98,7 @@
 
                         @php $i = 1; @endphp
                         @if($feature->requirements->count() == 0)
-                            <section id="fr-req{{$i}}" class="tab-panel {{$i}}">
+                            <section id="fr-req{{$i}}" class="tab-panel">
                                 <input type="hidden" name="requirement_uuid[{{$i}}]">
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-md-12">

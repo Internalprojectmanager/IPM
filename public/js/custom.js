@@ -45,7 +45,7 @@ $(document).on('click', '.remove_feature', function(){
             label = "Feature";
             break;
         case "nfrreq":
-            before = "nfr";
+            before = "nf";
             label = "NFR";
             break;
         case "tsreq":
@@ -56,7 +56,6 @@ $(document).on('click', '.remove_feature', function(){
             break;
     }
 
-
         $("#"+before+"-tablabel"+id).remove();
         $("#"+before+"-tablabel"+id).remove();
         $("#"+before+"-tab"+id).remove();
@@ -64,8 +63,6 @@ $(document).on('click', '.remove_feature', function(){
         var removed = parseInt($('#'+before+ '-removed').html()) + 1;
         $('#'+before+ '-removed').html(removed);
         $('input:radio[name=fr-tabsetreq]:nth(1)').attr('checked',true);
-
-
 });
 
 $('.tab').on('click', function(){
@@ -90,7 +87,6 @@ $('.tab').on('click', function(){
             break;
     }
     var removed = $('#'+before+ '-removed').html();
-    console.log(id);
     var hidden = $("."+before+"-tabs:hidden").prop('id');
     var currentCount = $("."+before+"-tabs", $("#"+ parent)).length + 1;
     var currentCountmin = currentCount - 1;
@@ -98,10 +94,8 @@ $('.tab').on('click', function(){
     if ($('input#'+before+'-newreq').is(':checked')) {
         if(currentCount < 11){
                 var lastreq = $("#"+parent+" .tab-panels").children().last().prop('id').slice(6);
-                console.log(lastreq);
                 currentCountRemoveed = currentCount + parseInt(removed);
                 var req1 =  $("#"+before+"-req1");
-
                 var newlabel = $("<label>").text(label+' Requirement '+currentCount).attr({id: before+"-tablabel"+currentCountRemoveed, for: before+"-tab"+currentCountRemoveed});
                 newlabel.append('<button class="remove_feature" id="'+currentCountRemoveed+'" type="button">×</button>').trigger('create');
                 var newRadio = $(document.createElement('input'))
@@ -114,9 +108,10 @@ $('.tab').on('click', function(){
                 req1.clone().appendTo("#"+parent+" .tab-panels").prop('id', before+"-req"+currentCountRemoveed).removeAttr('hidden');
                 var row = $('#'+ before+ '-req' + currentCountRemoveed);
                 row.find("input[type='text']").val("");
+                row.find("input[type='hidden']").remove();
                 $('#'+ before+'-req1 select').clone().appendTo('#'+parent+' .tab-panels #'+before+'-req' + currentCountRemoveed+' .assignee').attr("name", 'assignee['+currentCountRemoveed+'][]');
                 row.find('.assignee div').remove();
-                row.find('textarea').attr('name', 'description['+currentCountRemoveed+']').val('');
+                row.find('textarea').attr('name', 'requirement_description['+currentCountRemoveed+']').val('');
                 row.find('input').attr('name', 'requirement_name['+currentCountRemoveed+']');
                 row.find("option").removeAttr('selected');
                 row.find(".assignee select").selectpicker();
@@ -124,7 +119,6 @@ $('.tab').on('click', function(){
                 $("#"+parent+" #"+before+"-tab" + currentCountRemoveed).prop("checked", true);
                 $('input#'+before+'-newreq').prop("checked", false);
         }else{
-            $("#"+parent+" .tab-panels #"+before+"-req" + currentCount).css("display", "block");
             $('#'+before+'-feature-full').removeClass('hidden');
             $("#"+parent+" #"+before+"-tab" + currentCount).prop("checked", true);
             setTimeout(function () {
