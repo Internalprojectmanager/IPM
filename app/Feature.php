@@ -25,4 +25,8 @@ class Feature extends Model
     public function fstatus(){
         return $this->hasOne('App\Status', "id", "status");
     }
+
+    public function fcategory(){
+        return $this->hasOne('App\Status', "id", "category");
+    }
 }

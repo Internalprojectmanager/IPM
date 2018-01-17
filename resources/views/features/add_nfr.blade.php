@@ -1,9 +1,9 @@
-<div class="modal modal-lg" id="addFeatureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal modal-lg" id="addNFRModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
-            <label>Add Feature</label>
-            <span class="modal-close" data-dismiss="modal">
+            <label>Add Non Functional Requirements (NFR)</label>
+            <span class="modal-close"  data-dismiss="modal">
                     <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
@@ -33,22 +33,29 @@
                 </div>
             @endif
 
-            <form action="{{route('storefeature', ['name' => $project->name, 'company_id' => $project->company_id, 'release_name' => $release->name])}}"
-                  method="post">
+            <form action="{{route('storefeature', ['name' => $project->name, 'company_id' => $project->company_id, 'release_name' => $release->name])}}" method="post">
                 {{ csrf_field() }}
                 <input type="hidden" name="release_id" value="{{$release->id}}">
-                <input type="hidden" name="type" value="Feature">
+                <input type="hidden" name="type" value="NFR">
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="featurename">Feature name:</label>
+                        <label for="featurename">NFR name:</label>
                         <input type="text" class="form-control input-text-modal" name="feature_name" id="feature_name">
 
                     </div>
                     <div class="form-group">
-                        <label for="description">Description:</label>
-                        <textarea rows="4" cols="50" name="feature_description" class="form-control input-text-modal"
-                                  id="description"></textarea>
+                        <label for="description">NFR Description:</label>
+                        <textarea rows="4" cols="50" name="feature_description" class="form-control input-text-modal" id="description"></textarea>
 
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Category:</label>
+                        <select name="feature_category" class="form-control input-text-modal">
+                            @foreach($category as $c)
+                                <option value="{{$c->id}}">{{$c->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -61,33 +68,31 @@
                     </div>
                 </div>
 
-                <div id="featurereq" class="tabset" role="tablist">
+                <div id="nfreq" class="tabset" role="tablist">
                     <!-- Tab 1 -->
-                    <input type="radio" class="fr-tabs tab" name="fr-tabsetreq" id="fr-tab1" aria-controls="fr-req1"
-                           checked>
-                    <label id="fr-tablabel1" class="non-cursive" for="fr-tab1">Feature Requirement 1</label>
-                    <i id="more-fr"></i>
+                    <input type="radio" class="nf-tabs tab" name="nf-tabsetreq" id="nf-tab1" aria-controls="nf-req1" checked>
+                    <label id="nf-tablabel1" class="non-cursive" for="nf-tab1">NFR Requirement 1</label>
+                    <i id="more-nfr"></i>
                     <!-- Tab 2 -->
-                    <input type="radio" class="btn-primary tab" name="fr-tabsetreq" id="fr-newreq">
-                    <label for="fr-newreq" class="new-tab black">
+                    <input type="radio" class="btn-primary tab" name="nf-tabsetreq" id="nf-newreq">
+                    <label for="nf-newreq" class="black new-tab">
                         Add more Requirements <span class="icon-right glyphicon glyphicon-plus"></span>
                     </label>
-                    <span class="hidden" id="fr-removed">0</span>
+                    <span class="hidden" id="nf-removed">0</span>
                     <hr class="tab-hr">
 
                     <div class="tab-panels">
-                        <div class="hidden" id="fr-feature-full">
+                        <div class="hidden" id="nf-feature-full">
                             <div class="alert alert-danger">
                                 No more requirements can be added (Max of 10 reached)
                             </div>
                         </div>
                         <select class="form-control input-text-modal hidden" name="assignee[1][]" multiple>
                             @foreach($user as $u)
-                                <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))
-                                        (<i>{{$u->users->jobtitles->name}}</i>)@endif</option>
+                                <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))(<i>{{$u->users->jobtitles->name}}</i>)@endif</option>
                             @endforeach
                         </select>
-                        <section id="fr-req1" class="tab-panel">
+                        <section id="nf-req1" class="tab-panel">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-12">
                                     <label class="form-label-modal">Requirement Name</label>
@@ -96,33 +101,30 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label-modal">Description:</label>
-                                    <textarea rows="4" cols="50" name="requirement_description[1]"
-                                              class="form-control input-text-modal" id="description"></textarea>
+                                    <textarea rows="4" cols="50" name="requirement_description[1]" class="form-control input-text-modal" id="description"></textarea>
 
                                 </div>
                                 <div class="col-md-12 assignee">
                                     <label class="form-label-modal">Assingees:</label>
-                                    <select class="form-control input-text-modal selectpicker" name="assignee[1][]"
-                                            multiple>
+                                    <select class="form-control input-text-modal selectpicker" name="assignee[1][]" multiple>
                                         @foreach($user as $u)
-                                            <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))
-                                                    (<i>{{$u->users->jobtitles->name}}</i>)@endif</option>
+                                            <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))(<i>{{$u->users->jobtitles->name}}</i>)@endif</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                         </section>
                     </div>
-                </div>
-                <div class="modal-footer row" style="border:none;">
-                    <div class="col-md-6" align="left">
-                        <button type="button" class="btn-cancel" data-dismiss="modal">Close</button>
-                    </div>
-                    <div class="col-md-6" align="right">
-                        <button class="btn btn-primary" type="submit">
-                            Save Feature <span class="icon-right glyphicon glyphicon-plus">
-                        </button>
-                    </div>
+        </div>
+        <div class="modal-footer row" style="border:none;">
+            <div class="col-md-6" align="left">
+                <button type="button" class="btn-cancel" data-dismiss="modal">Close</button>
+            </div>
+            <div class="col-md-6" align="right">
+                <button class="btn btn-primary" type="submit">
+                    Save Feature <span class="icon-right glyphicon glyphicon-plus">
+                </button>
+            </div>
             </form>
         </div>
     </div>

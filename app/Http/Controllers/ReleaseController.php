@@ -7,6 +7,7 @@ use App\Feature;
 use App\Http\Requests\ReleaseValidator;
 use App\Requirement;
 use App\Status;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
@@ -65,6 +66,7 @@ class ReleaseController extends Controller
         $company = Client::where('id' ,$company_id)->first();
         $release = Release::where([['project_id', $project->id],['name', $release_name],['version', $version]])->first();
         $releaseuuid = $release->release_uuid;
+        $user = Assignee::where('uuid', $project->id)->get();
 
         if(!$release){
             abort(404);
@@ -73,7 +75,10 @@ class ReleaseController extends Controller
         $nfr = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'NFR']])->get();
         $techspecs = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'TS']])->get();
         $scope = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'Scope']])->get();
-        return view('release.details_release', compact('release', 'project', 'features', 'company', 'nfr', 'scope', 'techspecs', 'featurecount'));
+
+        $status = Status::where('type', 'Progress')->get();
+        $category = Status::where('type', 'category')->get();
+        return view('release.details_release', compact('release', 'project', 'features', 'company', 'nfr', 'scope', 'techspecs', 'featurecount', 'user', 'status', 'category'));
     }
 
     public function  editRelease($company_id, $name, $release_name, $version){

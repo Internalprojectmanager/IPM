@@ -82,7 +82,7 @@
     margin-left: 10px;
 }
 
-.open>.dropdown-menu{
+#navbar_top>.open>.dropdown-menu{
     top: 5px;
     height: 140px;
     padding-top: 60px;

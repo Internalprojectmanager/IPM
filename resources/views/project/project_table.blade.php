@@ -26,6 +26,7 @@
                             <span class="assignee">{{$as->users->first_name}} {{$as->users->last_name}}</span>
                         @else
                             <span class="more">and More...</span>
+                            @php break; @endphp
                         @endif
                         <?php $i++;?>
                     @endforeach

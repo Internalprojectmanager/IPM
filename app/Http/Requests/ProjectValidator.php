@@ -24,7 +24,8 @@ class ProjectValidator extends FormRequest
     public function rules()
     {
         return [
-            'project_name' => 'required'
+            'project_name' => 'required',
+            'deadline' => 'date_format:Y/m/d',
         ];
     }
 
@@ -32,6 +33,7 @@ class ProjectValidator extends FormRequest
     {
         return [
             'project_name.required' => 'A project name is required',
+            'deadline.date_format' => 'The date is not well formatted',
         ];
     }
 }

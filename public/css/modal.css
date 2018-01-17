@@ -1,32 +1,71 @@
-/* The Modal (background) */
+/* TIJDELIJK: The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    padding-top: 20px;
+    z-index: 2000;
 }
 
-/* Modal Content */
+/* Modal Content/Box */
 .modal-content {
-    position: relative;
     background-color: #fefefe;
-    margin: auto;
-    padding: 0;
+    margin: 5px auto; /* 15% from the top and centered */
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px ;
+    border-radius: 0px;
     border: 1px solid #888;
-    width: 70%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
+    width: 60%; /* Could be more or less, depending on screen size */
 }
+
+/* The Close Button */
+.close {
+    /* Position it in the top right corner outside of the modal */
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+/* Close button on hover */
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
@@ -129,7 +168,7 @@
 /*
  CSS for the main interaction
 */
-.tabset > input[type="radio"] {
+.tabset input[type="radio"] {
     position: absolute;
     left: -200vw;
 }
@@ -138,19 +177,23 @@
     display: none;
 }
 
-.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
-.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
-.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
-.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
-.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
-.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+.tabset  input:nth-child(1):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset  input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset  input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset  input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(6),
+.tabset  input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(7),
+.tabset  input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(8),
+.tabset  input:nth-child(13):checked ~ .tab-panels > .tab-panel:nth-child(9),
+.tabset  input:nth-child(15):checked ~ .tab-panels > .tab-panel:nth-child(10),
+.tabset  input:nth-child(17):checked ~ .tab-panels > .tab-panel:nth-child(11),
+.tabset  input:nth-child(19):checked ~ .tab-panels > .tab-panel:nth-child(12) {
     display: block;
 }
 
 /*
  Styling
 */
-.tabset > label {
+.tabset label {
     position: relative;
     display: inline-block;
     padding: 8px 20px;
@@ -160,18 +203,19 @@
     margin: 0px;
 }
 
-.tabset > label:hover,
-.tabset > input:focus + label {
+.tabset label:hover,
+.tabset input:focus + label {
     color: #000000;
 }
 
-.tabset > label:hover::after,
-.tabset > input:focus + label::after,
-.tabset > input:checked + label::after {
+
+.tabset label:hover::after,
+.tabset input:focus + label::after,
+.tabset input:checked + label::after {
     background: #000000;
 }
 
-.tabset > input + label {
+.tabset input + label {
     background-color: #5D99CA;
     color: #000;
     font-size: 14px;
@@ -180,7 +224,8 @@
     border: 1px solid #9B9B9B;
 }
 
-.tabset > input:checked + label {
+
+.tabset input:checked + label {
     background-color: #fff;
     color: #000;
     border: 1px solid #9B9B9B;
@@ -192,13 +237,19 @@
 }
 
 .tab-hr {
-    position: relative;
     margin: 0;
-    left: 247px;
-    width: 82.8%;
+    width: 100%;
 }
 
 .add_more {
     color:#000;
     margin-left:15px;
+}
+.new-tab{
+    background-color:  orange !important;
+}
+
+.new-tab > span{
+    top:0px;
+    left: 6px;
 }

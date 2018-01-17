@@ -4,7 +4,7 @@
     {{$project->name}} - {{$release->version}} {{$release->name}}
 @endsection
 
-@section('breadcrumbs', Breadcrumbs::render('showrelease', $project, $company, $release))
+@section('breadcrumbs', Breadcrumbs::render('showrelease', $project, $release))
 
 @section('content')
     <div class="row" onload="">
@@ -53,7 +53,7 @@
                 <div class="under-details">
                     <div class="col-md-3 col-xs-12">
                         <span class="project-title block-title">Document status</span><br>
-                        <span class="project-detail block-value">{{$release->document_status}}</span>
+                        <span class="project-detail block-value">{{$release->dstatus->name}}</span>
                     </div>
                 </div>
                 <div class="under-details">
@@ -112,15 +112,30 @@
             </div>
 
         </div>
-        <!-- ADD REQUIREMENT
-        <a class="btn-primary" id="addrelease"
-           href="addrequirement">
-            <span class="yellow-button" id="release-button">Add Release</span>
-            <span class="glyphicon glyphicon-plus" id="release-plus"></span>
-        </a>
-        -->
-    </div>
 
+    </div>
+    <div class="row under-details">
+        <div class="pull-left spacing-button">
+            <button type="button" class="btn btn-primary black" id="feature-add-button" data-toggle="modal" data-target="#addFeatureModal">
+                Add Feature <span class="icon-right glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+        <div class="pull-left spacing-button">
+            <button type="button" class="btn btn-primary black" id="nfr-add-button" data-toggle="modal" data-target="#addNFRModal">
+                Add Non Functional Requirement <span class="icon-right glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+        <div class="pull-left spacing-button">
+            <button type="button" class="btn btn-primary black" id="tspecs-add-button" data-toggle="modal" data-target="#addTSModal">
+                Add Technical Specification <span class="icon-right glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+        <div class="pull-left spacing-button">
+            <button type="button" class="btn btn-primary black" id="scope-add-button" data-toggle="modal" data-target="#addScopeModal">
+                Add Out of Scope <span class="icon-right glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+    </div>
 
     <div class="feature-results">
         @php $total = 0; @endphp
@@ -170,12 +185,14 @@
                             </td>
                             <td class="width25">
                                 <span class="assignee">
-                                    @php $i = 0; @endphp
+                                    @php $i = 0; $unique = array(); @endphp
                                     @foreach($f->requirements as $fr)
                                         @foreach($fr->assignees as $as)
-                                                @if($i < 3)
+                                                @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
                                                     {{$as->users->first_name}} {{$as->users->last_name}},
-                                                @else
+                                                    @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
+                                                @endif
+                                                @if($i == 3)
                                                     and More...
                                                 @endif
                                                 @php $i++;@endphp
@@ -227,7 +244,7 @@
                          ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $n->id])}}">{{$n->name}}</a></span>
                         </td>
                         <td class="width20">{{$n->fstatus->name}}</td>
-                        <td class="width20">{{$n->category}}</td>
+                        <td class="width20">{{$n->fcategory->name}}</td>
                         <td class="width20">@php $counter = 0;@endphp
                             @foreach($f->requirements as $r)
                                 @if($r->rstatus->name == 'Completed')
@@ -242,12 +259,14 @@
                             </td>
                             <td class="width20">
                                 <span class="assignee">
-                                    @php $i = 0; @endphp
+                                    @php $i = 0; $unique = array(); @endphp
                                     @foreach($n->requirements as $r)
                                         @foreach($r->assignees as $as)
-                                            @if($i < 3)
+                                            @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
                                                 {{$as->users->first_name}} {{$as->users->last_name}},
-                                            @else
+                                                @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
+                                            @endif
+                                            @if($i == 3)
                                                 and More...
                                             @endif
                                             @php $i++;@endphp
@@ -299,7 +318,7 @@
                          ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $t->id])}}">{{$t->name}}</a>
                             </span></td>
                         <td class="width20">{{$t->fstatus->name}}</td>
-                        <td class="width20">{{$t->category}}</td>
+                        <td class="width20">{{$t->fcategory->name}}</td>
                         <td class="width20">@php $counter = 0; @endphp
                             @foreach($t->requirements as $tr)
                                 @if($tr->rstatus->name == 'Completed')
@@ -314,15 +333,18 @@
                         </td>
                         <td class="width20">
                             <span class="assignee">
-                                @php $i = 0; @endphp
+                                @php $i = 0; $unique = array(); @endphp
                                 @foreach($t->requirements as $r)
                                     @foreach($r->assignees as $as)
-                                        @if($i < 3)
+                                        @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
                                             {{$as->users->first_name}} {{$as->users->last_name}},
-                                        @else
+                                            @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
+
+                                        @endif
+                                        @if($i == 3)
                                             and More...
                                         @endif
-                                        @php $i++;@endphp
+                                            @php $i++;@endphp
                                     @endforeach
                                 @endforeach
                             </span>
@@ -356,7 +378,8 @@
                 @foreach($scope as $s)
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: #CECECE;"></td>
-                        <td class="width25"><span class="tabletitle">{{$s->name}}</span></td>
+                        <td class="width25"><span class="tabletitle"><a href="{{route('showfeature',
+                         ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $s->id])}}">{{$s->name}}</a></span></td>
                         <td>{{$s->description}}</td>
                     </tr>
                 @endforeach
@@ -365,4 +388,9 @@
 
         </div>
     </div>
+
+    @include('features.add_feature')
+    @include('features.add_nfr')
+    @include('features.add_ts')
+    @include('features.add_scope')
 @endsection

@@ -66,6 +66,7 @@ Route::group(['prefix' => 'project'], function (){
             Route::get('/edit', 'ProjectController@editProject')->name('editproject');
             Route::post('/edit', 'ProjectController@updateProject')->name('updateproject');
             Route::get('/delete', 'ProjectController@deleteProject')->name('deleteproject');
+            Route::post('/assigneeupdate', 'ProjectController@updateAssignees')->name('assigneeupdate');
 
             Route::group(['prefix' => 'documents'], function () {
                 Route::get('/', 'DocumentController@overviewDocuments')->name('documentoverview');
@@ -89,14 +90,13 @@ Route::group(['prefix' => 'project'], function (){
                     Route::get('/add', 'FeatureController@add')->name('addfeature');
 
                     Route::get('/{feature_id}', 'FeatureController@showFeature')->name('showfeature');
+                    Route::post('/store', 'FeatureController@store')->name('storefeature');
                     Route::post('/{feature_id}', 'RequirementController@saveStatus')->name('requirementsavestatus');
                     Route::get('/{feature_id}/edit', 'FeatureController@editFeature')->name('editFeature');
                     Route::post('/{feature_id}/edit', 'FeatureController@updateFeature')->name('updateFeature');
 
-                    Route::post('/store', 'FeatureController@store')->name('storefeature');
                 });
-
-                });
+            });
 
 
             Route::group(['prefix' => 'release'], function (){

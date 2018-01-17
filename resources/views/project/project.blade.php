@@ -8,11 +8,9 @@
 
 @section('content')
     <div class="row">
-        <a class="black" href="{{route('addproject')}}">
-        <button class="btn-primary">
-             Add project <span class="icon-right glyphicon glyphicon-plus"></span>
-        </button></a>
-
+        <button type="button" class="btn btn-primary black" data-toggle="modal" data-target="#addProjectModal">
+            Add Project <span class="icon-right glyphicon glyphicon-plus"></span>
+        </button>
     </div>
 
     <div class="row block-white">
@@ -62,4 +60,5 @@
     </div>
 
     @include('project.project_table')
+    @include('project.add_project')
 @endsection

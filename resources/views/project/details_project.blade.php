@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="col-md-6 col-xs-3">
-                    <button class="blue-button" id="button-people">
+                    <button type="button" class="blue-button" id="button-people" data-toggle="modal" data-target="#addProjectModal">
                         <svg id="people-icon" width="20px" height="13px" viewBox="0 0 20 13" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
@@ -101,12 +101,11 @@
             </div>
 
         </div>
-
-        <a class="btn-primary" id="addrelease"
-           href="{{route('addrelease', ['name' => $projects->name, 'company_id' => $projects->company_id])}}">
-            <span class="yellow-button" id="release-button">Add Release</span>
-            <span class="glyphicon glyphicon-plus" id="release-plus"></span>
-        </a>
+    </div>
+    <div class="row under-details">
+        <button type="button" class="btn btn-primary black" data-toggle="modal" data-target="#addReleaseModal">
+            Add Release <span class="icon-right glyphicon glyphicon-plus"></span>
+        </button>
     </div>
     <div class="row">
         <table class="table table-hover table-center results" id="release-overview">
@@ -137,5 +136,6 @@
             </tbody>
         </table>
     </div>
-
+    @include('project.assignee')
+    @include('release.add_release')
 @endsection

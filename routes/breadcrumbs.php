@@ -52,14 +52,14 @@ Breadcrumbs::register('addproject', function ($breadcrumbs) {
 //Release
 Breadcrumbs::register('addrelease', function ($breadcrumbs, $projects) {
     $breadcrumbs->parent('projects');
-    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'client_id' => $projects->client_id]));
+    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'client_id' => $projects->company_id]));
     $breadcrumbs->push('New Release', route('addrelease', ['name'=> $projects->name, 'client_id' => $projects->client_id]));
 });
 
 Breadcrumbs::register('showrelease', function ($breadcrumbs, $projects, $release) {
     $breadcrumbs->parent('projects');
-    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'client_id' => $projects->client_id]));
-    $breadcrumbs->push($release->name. " ".$release->version, route('showrelease', ['name'=> $projects->name, 'client_id' => $projects->client_id,
+    $breadcrumbs->push($projects->name, route('projectdetails', ['name'=> $projects->name, 'client_id' => $projects->company_id]));
+    $breadcrumbs->push(number_format($release->version, 1)." ".$release->name, route('showrelease', ['name'=> $projects->name, 'client_id' => $projects->company_id,
         'version' => $release->version, 'release_name' => $release->name]));
 });
 
@@ -77,3 +77,14 @@ Breadcrumbs::register('detailsdocument', function ($breadcrumbs, $document) {
     $breadcrumbs->push('Document overview', route('documentoverview', ['name'=> $document->projects->name, 'client_id' => $document->projects->company_id]));
     $breadcrumbs->push($document->title, route('showdocument', ['name'=> $document->projects->name, 'client_id' => $document->projects->company_id, $document->id]));
 });
+
+//Feature
+Breadcrumbs::register('detailsfeature', function ($breadcrumbs, $feature) {
+    $breadcrumbs->parent('projects');
+    $breadcrumbs->push($feature->releases->projects->name, route('projectdetails', ['name'=> $feature->releases->projects->name, 'client_id' => $feature->releases->projects->company_id]));
+    $breadcrumbs->push(number_format($feature->releases->version, 1)." ".$feature->releases->name, route('showrelease', ['name'=> $feature->releases->projects->name, 'client_id' => $feature->releases->projects->company_id,
+        'version' => $feature->releases->version, 'release_name' => $feature->releases->name]));
+    $breadcrumbs->push($feature->name. " (".$feature->type.")", route('showfeature', ['name'=> $feature->releases->projects->name, 'client_id' => $feature->releases->projects->company_id,
+        'version' => $feature->releases->version, 'release_name' => $feature->releases->name, 'feature_id' => $feature->id]));
+});
+

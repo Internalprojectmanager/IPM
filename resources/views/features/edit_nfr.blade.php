@@ -2,7 +2,7 @@
      aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
-            <label>Edit Feature</label>
+            <label>Edit NFR</label>
             <span class="modal-close" data-dismiss="modal">
                     <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -39,7 +39,7 @@
                 <input type="hidden" name="type" value="{{$feature->type}}">
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="featurename">Feature name:</label>
+                        <label for="featurename">NFR name:</label>
                         <input type="text" class="form-control input-text-modal" name="feature_name" id="feature_name" value="{{$feature->name}}">
 
                     </div>
@@ -60,31 +60,31 @@
                     </div>
                 </div>
 
-                <div id="featurereq" class="tabset" role="tablist">
+                <div id="nfreq" class="tabset" role="tablist">
                     <!-- Tab 1 -->
 
                     @php $i = 1; @endphp
                     @if($feature->requirements->count() == 0)
-                    <input type="radio" class="fr-tabs tab" name="fr-tabsetreq" id="fr-tab{{$i}}" aria-controls="fr-req{{$i}}" @if($i == 1) @endif>
-                    <label id="fr-tablabel{{$i}}" class="non-cursive" for="fr-tab{{$i}}">Feature Requirement 1 <button class="remove_feature" id="{{$i}}" type="button">×</button></label>
+                    <input type="radio" class="nf-tabs tab" name="nf-tabsetreq" id="nf-tab{{$i}}" aria-controls="nf-req{{$i}}" @if($i == 1) @endif>
+                    <label id="nf-tablabel{{$i}}" class="non-cursive" for="nf-tab{{$i}}">NFR Requirement 1 <button class="remove_feature" id="{{$i}}" type="button">×</button></label>
                     @endif
 
                 @foreach($feature->requirements as $r)
-                    <input type="radio" class="fr-tabs tab" name="fr-tabsetreq" id="fr-tab{{$i}}" aria-controls="fr-req{{$i}}" @if($i == 1) @endif>
-                    <label id="fr-tablabel{{$i}}" class="non-cursive" for="fr-tab{{$i}}">{{$r->name}} <button class="remove_feature" id="{{$i}}" type="button">×</button></label>
+                    <input type="radio" class="nf-tabs tab" name="nf-tabsetreq" id="nf-tab{{$i}}" aria-controls="nf-req{{$i}}" @if($i == 1) @endif>
+                    <label id="nf-tablabel{{$i}}" class="non-cursive" for="nf-tab{{$i}}">{{$r->name}} <button class="remove_feature" id="{{$i}}" type="button">×</button></label>
                     @php $i++; @endphp
                     @endforeach
-                    <i id="more-fr"></i>
+                    <i id="more-nf"></i>
                     <!-- Tab 2 -->
-                    <input type="radio" class="btn-primary tab" name="fr-tabsetreq" id="fr-newreq">
-                    <label for="fr-newreq" class="black new-tab">
+                    <input type="radio" class="btn-primary tab" name="nf-tabsetreq" id="nf-newreq">
+                    <label for="nf-newreq" class="black new-tab">
                         Add more Requirements <span class="icon-right glyphicon glyphicon-plus"></span>
                     </label>
-                    <span class="hidden" id="fr-removed">0</span>
+                    <span class="hidden" id="nf-removed">0</span>
                     <hr class="tab-hr">
 
                     <div class="tab-panels">
-                        <div class="hidden" id="fr-feature-full">
+                        <div class="hidden" id="nf-feature-full">
                             <div class="alert alert-danger">
                                 No more requirements can be added (Max of 10 reached)
                             </div>
@@ -98,7 +98,7 @@
 
                         @php $i = 1; @endphp
                         @if($feature->requirements->count() == 0)
-                            <section id="fr-req{{$i}}" class="tab-panel">
+                            <section id="nf-req{{$i}}" class="tab-panel">
                                 <input type="hidden" name="requirement_uuid[{{$i}}]">
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-md-12">
@@ -126,7 +126,7 @@
                             </section>
                         @endif
                         @foreach($feature->requirements as $r)
-                        <section id="fr-req{{$i}}" class="tab-panel {{$i}}">
+                        <section id="nf-req{{$i}}" class="tab-panel {{$i}}">
                             <input type="hidden" name="requirement_uuid[{{$i}}]" value="{{$r->requirement_uuid}}">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-12">
@@ -168,7 +168,7 @@
                     </div>
                     <div class="col-md-6" align="right">
                         <button class="btn btn-primary" type="submit">
-                            Save Feature <span class="icon-right glyphicon glyphicon-plus">
+                            Save NFR <span class="icon-right glyphicon glyphicon-plus">
                         </button>
                     </div>
             </form>

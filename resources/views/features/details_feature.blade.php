@@ -4,21 +4,28 @@
     Project details
 @endsection
 
+@section('breadcrumbs', Breadcrumbs::render('detailsfeature', $feature))
 
 @section('content')
 
-    <!-- Edit FEATURE
-    <button onclick="location.href=''"
-            class="btn-edit" id="project-edit">
+    <button type="button" id="project-edit" data-toggle="modal" data-target="#editFeatureModal" class="btn-edit pull-right">
         <span class="glyphicon edit-icon"></span> Edit
     </button>
-    -->
-
     <div class="row">
         <div class="header-3" id="project-details">
             <div class="row" id="block-show">
                 <div class="col-md-4 col-xs-6">
-                    <span class="project-title block-title">Feature Name</span> <br>
+                    <span class="project-title block-title">
+                        @if($feature->type == "Feature")
+                            Feature
+                        @elseif($feature->type == "NFR")
+                            Non Functional Requirement
+                        @elseif($feature->type == "Scope")
+                            Out Of Scope
+                        @else
+                            Technical Specification
+                        @endif
+                        Name</span> <br>
                     <span class="project-detail block-value">{{$feature->name}}</span>
                 </div>
 
@@ -74,13 +81,17 @@
             </div>
 
         </div>
-        <!-- ADD REQUIREMENT
-        <a class="btn-primary" id="addrelease"
-           href="addrequirement">
-            <span class="yellow-button" id="release-button">Add Release</span>
-            <span class="glyphicon glyphicon-plus" id="release-plus"></span>
-        </a>
-        -->
     </div>
-    @include('requirement.requirement_table')
+    @if($feature->type !== "Scope")
+        @include('requirement.requirement_table')
+    @endif
+    @if($feature->type == "Feature")
+        @include('features.edit_feature')
+    @elseif($feature->type == "NFR")
+        @include('features.edit_nfr')
+    @elseif($feature->type == "Scope")
+        @include('features.edit_scope')
+    @else
+        @include('features.edit_ts')
+    @endif
 @endsection
