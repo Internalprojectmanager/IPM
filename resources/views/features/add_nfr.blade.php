@@ -70,18 +70,19 @@
 
                 <div id="nfreq" class="tabset" role="tablist">
                     <!-- Tab 1 -->
-                    <input type="radio" class="nfr-tabs tab" name="nfr-tabsetreq" id="nfr-tab1" aria-controls="nf-req1" checked>
-                    <label id="nfr-tablabel1" class="non-cursive" for="nfr-tab1">NFR Requirement 1</label>
+                    <input type="radio" class="nf-tabs tab" name="nf-tabsetreq" id="nf-tab1" aria-controls="nf-req1" checked>
+                    <label id="nf-tablabel1" class="non-cursive" for="nf-tab1">NFR Requirement 1</label>
                     <i id="more-nfr"></i>
                     <!-- Tab 2 -->
-                    <input type="radio" class="btn-primary tab" name="nfr-tabsetreq" id="nfr-newreq">
-                    <label for="nfr-newreq" class="black">
+                    <input type="radio" class="btn-primary tab" name="nf-tabsetreq" id="nf-newreq">
+                    <label for="nf-newreq" class="black new-tab">
                         Add more Requirements <span class="icon-right glyphicon glyphicon-plus"></span>
                     </label>
+                    <span class="hidden" id="nf-removed">0</span>
                     <hr class="tab-hr">
 
                     <div class="tab-panels">
-                        <div class="hidden" id="nfr-feature-full">
+                        <div class="hidden" id="nf-feature-full">
                             <div class="alert alert-danger">
                                 No more requirements can be added (Max of 10 reached)
                             </div>
@@ -91,7 +92,7 @@
                                 <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))(<i>{{$u->users->jobtitles->name}}</i>)@endif</option>
                             @endforeach
                         </select>
-                        <section id="nf-req1">
+                        <section id="nf-req1" class="tab-panel">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-12">
                                     <label class="form-label-modal">Requirement Name</label>

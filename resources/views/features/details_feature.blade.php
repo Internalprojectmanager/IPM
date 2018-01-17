@@ -7,13 +7,9 @@
 
 @section('content')
 
-    <!-- Edit FEATURE
-    <button onclick="location.href=''"
-            class="btn-edit" id="project-edit">
+    <button type="button" id="project-edit" data-toggle="modal" data-target="#editFeatureModal" class="btn-edit pull-right">
         <span class="glyphicon edit-icon"></span> Edit
     </button>
-    -->
-
     <div class="row">
         <div class="header-3" id="project-details">
             <div class="row" id="block-show">
@@ -74,11 +70,6 @@
             </div>
 
         </div>
-        <div class="pull-left spacing-button">
-            <button type="button" class="btn btn-primary black" id="feature-add-button" data-toggle="modal" data-target="#editFeatureModal">
-                Edit<span class="icon-right glyphicon glyphicon-plus"></span>
-            </button>
-        </div>
     </div>
     @if($feature->type !== "Scope")
         @include('requirement.requirement_table')
@@ -87,6 +78,8 @@
         @include('features.edit_feature')
     @elseif($feature->type == "NFR")
         @include('features.edit_nfr')
+    @elseif($feature->type == "Scope")
+        @include('features.edit_scope')
     @else
         @include('features.edit_ts')
     @endif

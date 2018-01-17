@@ -208,6 +208,7 @@
     color: #000000;
 }
 
+
 .tabset label:hover::after,
 .tabset input:focus + label::after,
 .tabset input:checked + label::after {
@@ -222,6 +223,7 @@
     font-weight: 100;
     border: 1px solid #9B9B9B;
 }
+
 
 .tabset input:checked + label {
     background-color: #fff;
@@ -242,4 +244,12 @@
 .add_more {
     color:#000;
     margin-left:15px;
+}
+.new-tab{
+    background-color:  orange !important;
+}
+
+.new-tab > span{
+    top:0px;
+    left: 6px;
 }

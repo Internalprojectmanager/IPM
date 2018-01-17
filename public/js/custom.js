@@ -44,7 +44,7 @@ $(document).on('click', '.remove_feature', function(){
             before = "fr";
             label = "Feature";
             break;
-        case "nfrreq":
+        case "nfreq":
             before = "nf";
             label = "NFR";
             break;
@@ -62,7 +62,7 @@ $(document).on('click', '.remove_feature', function(){
         $("#"+before+"-req"+id).remove();
         var removed = parseInt($('#'+before+ '-removed').html()) + 1;
         $('#'+before+ '-removed').html(removed);
-        $('input:radio[name=fr-tabsetreq]:nth(1)').attr('checked',true);
+        $('input:radio[name='+before+'-tabsetreq]:nth(1)').attr('checked',true);
 });
 
 $('.tab').on('click', function(){

@@ -133,7 +133,6 @@ class FeatureController extends Controller
         if ($request) {
 
             $this->createRevision($feature);
-
             $feature->name = $request->feature_name;
             $feature->description = $request->feature_description;
             if(!empty($request->category)){
@@ -152,8 +151,6 @@ class FeatureController extends Controller
             $feature->save();
 
             $status = Status::where('name', 'draft')->select('id')->first();
-
-            //dd($request);
             $requirement = Requirement::where('feature_uuid', $feature->feature_uuid)->get();
             foreach ($requirement as $r){
                 if(!in_array($r->requirement_uuid, $request->requirement_uuid)){
@@ -188,6 +185,8 @@ class FeatureController extends Controller
                                 $assignee->save();
                             }
                         }
+                    }else{
+                        Assignee::where('uuid', $requirement->requirement_uuid)->delete();
                     }
 
                 }else{

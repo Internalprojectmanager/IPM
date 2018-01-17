@@ -75,7 +75,7 @@
                     <i id="more-ts"></i>
                     <!-- Tab 2 -->
                     <input type="radio" class="btn-primary tab" name="ts-tabsetreq" id="ts-newreq">
-                    <label for="ts-newreq" class="black">
+                    <label for="ts-newreq" class="black new-tab">
                         Add more Requirements <span class="icon-right glyphicon glyphicon-plus"></span>
                     </label>
                     <span class="hidden" id="ts-removed">0</span>
