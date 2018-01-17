@@ -39,14 +39,14 @@
                     <label class="" for="assignee">Assignees</label>
                     <select name="assignee[]" multiple class="form-control selectpicker">
                         @foreach($user as $u)
+                            @php $selected = "";@endphp
                             @foreach($assignee as $a)
                                 @if($a->userid == $u->id)
                                     @php $selected = "selected=''";@endphp
                                     @php break; @endphp
-                                @else
-                                    @php $selected = "";@endphp
                                 @endif
                             @endforeach
+
                                 <option {{$selected}} value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}} @if(isset($u->jobtitles))(<i>{{$u->jobtitles->name}}</i>)@endif</option>
                         @endforeach
                     </select>
