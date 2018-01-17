@@ -24,13 +24,13 @@ class FeatureTableSeeder extends Seeder
                 'release_id' => '20e2a83f-8b08-43a8-80bd-082141058168',
                 'name' => 'Design choises',
                 'description' => 'Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.',
-                'status' => '2',
+                'status' => '6',
                 'type' => 'Feature',
                 'category' => NULL,
-                'deadline' => '2018-01-09 15:31:41',
-                'author' => 'test test',
+                'deadline' => '2018-01-17 15:37:57',
+                'author' => '1',
                 'created_at' => '2017-10-17 11:32:59',
-                'updated_at' => '2018-01-09 14:15:07',
+                'updated_at' => '2018-01-17 14:37:57',
             ),
             1 => 
             array (
@@ -56,11 +56,11 @@ class FeatureTableSeeder extends Seeder
                 'description' => 'Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.',
                 'status' => '1',
                 'type' => 'NFR',
-                'category' => 0,
-                'deadline' => '2018-01-09 15:31:43',
-                'author' => 'test test',
+                'category' => 15,
+                'deadline' => '2018-01-17 15:50:02',
+                'author' => '1',
                 'created_at' => '2017-10-17 11:32:59',
-                'updated_at' => '2017-10-17 11:32:59',
+                'updated_at' => '2018-01-17 14:50:02',
             ),
             3 => 
             array (
@@ -87,10 +87,10 @@ class FeatureTableSeeder extends Seeder
                 'status' => '1',
                 'type' => 'TS',
                 'category' => 16,
-                'deadline' => '2018-01-09 15:30:47',
-                'author' => 'test test',
+                'deadline' => '2018-01-17 15:51:46',
+                'author' => '1',
                 'created_at' => '2017-10-24 15:35:19',
-                'updated_at' => '2017-10-24 15:35:19',
+                'updated_at' => '2018-01-17 14:51:46',
             ),
             5 => 
             array (
