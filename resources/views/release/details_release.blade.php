@@ -4,7 +4,7 @@
     {{$project->name}} - {{$release->version}} {{$release->name}}
 @endsection
 
-@section('breadcrumbs', Breadcrumbs::render('showrelease', $project, $company, $release))
+@section('breadcrumbs', Breadcrumbs::render('showrelease', $project, $release))
 
 @section('content')
     <div class="row" onload="">
@@ -378,7 +378,8 @@
                 @foreach($scope as $s)
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: #CECECE;"></td>
-                        <td class="width25"><span class="tabletitle">{{$s->name}}</span></td>
+                        <td class="width25"><span class="tabletitle"><a href="{{route('showfeature',
+                         ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $s->id])}}">{{$s->name}}</a></span></td>
                         <td>{{$s->description}}</td>
                     </tr>
                 @endforeach

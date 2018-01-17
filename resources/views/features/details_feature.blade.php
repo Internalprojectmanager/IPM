@@ -4,6 +4,7 @@
     Project details
 @endsection
 
+@section('breadcrumbs', Breadcrumbs::render('detailsfeature', $feature))
 
 @section('content')
 
@@ -14,7 +15,17 @@
         <div class="header-3" id="project-details">
             <div class="row" id="block-show">
                 <div class="col-md-4 col-xs-6">
-                    <span class="project-title block-title">Feature Name</span> <br>
+                    <span class="project-title block-title">
+                        @if($feature->type == "Feature")
+                            Feature
+                        @elseif($feature->type == "NFR")
+                            Non Functional Requirement
+                        @elseif($feature->type == "Scope")
+                            Out Of Scope
+                        @else
+                            Technical Specification
+                        @endif
+                        Name</span> <br>
                     <span class="project-detail block-value">{{$feature->name}}</span>
                 </div>
 
