@@ -133,12 +133,14 @@
                         @php $acounter = 1; @endphp
                         @if($project->assignee->count() > 0)
                             @foreach($project->assignee as $a)
-                                @if($a->users->jobtitles->name == "Project Manager")
+                                @if(!empty($a->users->jobtitles))
+                                    @if($a->users->jobtitles->name == "Project Manager")
                                     @if($acounter <= 3)
                                         <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
                                             <span class="company-p4">Itsavirus</span></i><br>
                                     @endif
                                     @php $acounter++; @endphp
+                                    @endif
                                 @endif
                             @endforeach
                         @endif
@@ -164,12 +166,14 @@
                         @php $acounter = 1; @endphp
                         @if($project->assignee->count() > 0)
                             @foreach($project->assignee as $a)
-                                @if($a->users->jobtitles->name == "Designer")
-                                    @if($acounter <= 3)
-                                        <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
-                                            <span class="company-p4">Itsavirus</span></i><br>
+                                @if(!empty($a->users->jobtitles))
+                                    @if($a->users->jobtitles->name == "Designer")
+                                        @if($acounter <= 3)
+                                            <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
+                                                <span class="company-p4">Itsavirus</span></i><br>
+                                        @endif
+                                        @php $acounter++; @endphp
                                     @endif
-                                    @php $acounter++; @endphp
                                 @endif
                             @endforeach
                         @endif
@@ -192,12 +196,14 @@
                         @php $acounter = 1; @endphp
                         @if($project->assignee->count() > 0)
                             @foreach($project->assignee as $a)
-                                @if($a->users->jobtitles->name == "Developer")
-                                    @if($acounter <= 3)
-                                        <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
-                                            <span class="company-p4">Itsavirus</span></i><br>
+                                @if(!empty($a->users->jobtitles))
+                                    @if($a->users->jobtitles->name == "Developer")
+                                        @if($acounter <= 3)
+                                            <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
+                                                <span class="company-p4">Itsavirus</span></i><br>
+                                        @endif
+                                        @php $acounter++; @endphp
                                     @endif
-                                    @php $acounter++; @endphp
                                 @endif
                             @endforeach
                         @endif
