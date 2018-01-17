@@ -68,9 +68,9 @@
                     </div>
                 </div>
 
-                <div id="nfrreq" class="tabset" role="tablist">
+                <div id="nfreq" class="tabset" role="tablist">
                     <!-- Tab 1 -->
-                    <input type="radio" class="nfr-tabs tab" name="nfr-tabsetreq" id="nfr-tab1" aria-controls="nfr-req1" checked>
+                    <input type="radio" class="nfr-tabs tab" name="nfr-tabsetreq" id="nfr-tab1" aria-controls="nf-req1" checked>
                     <label id="nfr-tablabel1" class="non-cursive" for="nfr-tab1">NFR Requirement 1</label>
                     <i id="more-nfr"></i>
                     <!-- Tab 2 -->
@@ -91,7 +91,7 @@
                                 <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))(<i>{{$u->users->jobtitles->name}}</i>)@endif</option>
                             @endforeach
                         </select>
-                        <section id="nfr-req1" class="tab-panel">
+                        <section id="nf-req1">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-12">
                                     <label class="form-label-modal">Requirement Name</label>

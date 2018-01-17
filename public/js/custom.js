@@ -56,16 +56,14 @@ $(document).on('click', '.remove_feature', function(){
             break;
     }
 
-        $("#"+ parent+" #"+before+ "-req"+id+" input").val("");
-        $("#"+ parent+" #"+before+ "-req"+id+" textarea").val("");
-        $("#"+ parent+" #"+before+ "-req"+id+" option").removeAttr("selected");
-        $("#"+ parent+" #"+before+ "-req"+id+" select").selectpicker("refresh");
-        $("#"+before+"-tablabel"+id).empty();
-        $("#"+before+"-tablabel"+id).append(label+' Requirement '+ id +' <button class="remove_feature" id="'+id+'" type="button">×</button>');
-        $("#"+before+"-tablabel"+id).css('display', 'none');
-        $("#"+before+"-tab"+id).css('display', 'none');
-        $("#"+before+"-req"+id).css('display', 'none');
-        $("#"+parent+" #"+before+"-tab1").prop("checked", true);
+
+        $("#"+before+"-tablabel"+id).remove();
+        $("#"+before+"-tablabel"+id).remove();
+        $("#"+before+"-tab"+id).remove();
+        $("#"+before+"-req"+id).remove();
+        var removed = parseInt($('#'+before+ '-removed').html()) + 1;
+        $('#'+before+ '-removed').html(removed);
+        $('input:radio[name=fr-tabsetreq]:nth(1)').attr('checked',true);
 
 
 });
@@ -80,8 +78,8 @@ $('.tab').on('click', function(){
             before = "fr";
             label = "Feature";
             break;
-        case "nfrreq":
-            before = "nfr";
+        case "nfreq":
+            before = "nf";
             label = "NFR";
             break;
         case "tsreq":
@@ -91,46 +89,40 @@ $('.tab').on('click', function(){
         case "scope":
             break;
     }
-
+    var removed = $('#'+before+ '-removed').html();
+    console.log(id);
+    var hidden = $("."+before+"-tabs:hidden").prop('id');
     var currentCount = $("."+before+"-tabs", $("#"+ parent)).length + 1;
     var currentCountmin = currentCount - 1;
     var reqid = before+"-req"+currentCount;
     if ($('input#'+before+'-newreq').is(':checked')) {
         if(currentCount < 11){
-            if($("#"+before+"-req"+currentCount).length === 1){
-                console.log($("#"+reqid).length);
-                $("#"+before+"-tablabel"+id).css('display', 'block');
-                $("#"+before+"-tab"+id).css('display', 'block');
-                $("#"+parent+" #"+before+"-tab1").prop("checked", true);
-            }else{
-                console.log(currentCountmin);
-
-
+                var lastreq = $("#"+parent+" .tab-panels").children().last().prop('id').slice(6);
+                console.log(lastreq);
+                currentCountRemoveed = currentCount + parseInt(removed);
                 var req1 =  $("#"+before+"-req1");
 
-                var newlabel = $("<label>").text(label+' Requirement '+currentCount).attr({id: before+"-tablabel"+currentCount, for: before+"-tab"+currentCount});
-                newlabel.append('<button class="remove_feature" id="'+currentCount+'" type="button">×</button>').trigger('create');
+                var newlabel = $("<label>").text(label+' Requirement '+currentCount).attr({id: before+"-tablabel"+currentCountRemoveed, for: before+"-tab"+currentCountRemoveed});
+                newlabel.append('<button class="remove_feature" id="'+currentCountRemoveed+'" type="button">×</button>').trigger('create');
                 var newRadio = $(document.createElement('input'))
-                    .attr({id: before+'-tab' + currentCount, class:before+"-tabs tab", name: before+"-tabsetreq", type: "radio"});
-                newRadio.attr('aria-controls', reqid);
+                    .attr({id: before+'-tab' + currentCountRemoveed, class:before+"-tabs tab", name: before+"-tabsetreq", type: "radio"});
+                newRadio.attr('aria-controls', before+"-req"+currentCountRemoveed);
                 console.log(newRadio);
-                newRadio.insertAfter("#"+ before+"-tablabel"+currentCountmin);
-                newlabel.insertAfter("#"+ before+"-tab"+currentCount);
+                newRadio.insertAfter("#"+ before+"-tablabel"+lastreq);
+                newlabel.insertAfter(newRadio);
 
-
-                req1.clone().appendTo("#"+parent+" .tab-panels").prop('id', reqid).removeAttr('hidden');
-                var row = $('#'+ before+ '-req' + currentCount);
+                req1.clone().appendTo("#"+parent+" .tab-panels").prop('id', before+"-req"+currentCountRemoveed).removeAttr('hidden');
+                var row = $('#'+ before+ '-req' + currentCountRemoveed);
                 row.find("input[type='text']").val("");
-                $('#'+ before+'-req1 select').clone().appendTo('#'+parent+' .tab-panels #'+before+'-req' + currentCount+' .assignee').attr("name", 'assignee['+currentCount+'][]');
+                $('#'+ before+'-req1 select').clone().appendTo('#'+parent+' .tab-panels #'+before+'-req' + currentCountRemoveed+' .assignee').attr("name", 'assignee['+currentCountRemoveed+'][]');
                 row.find('.assignee div').remove();
-                row.find('textarea').attr('name', 'description['+currentCount+']').val('');
-                row.find('input').attr('name', 'requirement_name['+currentCount+']');
+                row.find('textarea').attr('name', 'description['+currentCountRemoveed+']').val('');
+                row.find('input').attr('name', 'requirement_name['+currentCountRemoveed+']');
                 row.find("option").removeAttr('selected');
                 row.find(".assignee select").selectpicker();
 
-                $("#"+parent+" #"+before+"-tab" + currentCount).prop("checked", true);
+                $("#"+parent+" #"+before+"-tab" + currentCountRemoveed).prop("checked", true);
                 $('input#'+before+'-newreq').prop("checked", false);
-            }
         }else{
             $("#"+parent+" .tab-panels #"+before+"-req" + currentCount).css("display", "block");
             $('#'+before+'-feature-full').removeClass('hidden');

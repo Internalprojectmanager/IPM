@@ -62,14 +62,15 @@
 
                 <div id="featurereq" class="tabset" role="tablist">
                     <!-- Tab 1 -->
+
                     @php $i = 1; @endphp
                     @if($feature->requirements->count() == 0)
-                    <input type="radio" class="fr-tabs tab" name="fr-tabsetreq" id="fr-tab{{$i}}" aria-controls="fr-req{{$i}}" @if($i == 1) checked @endif>
+                    <input type="radio" class="fr-tabs tab" name="fr-tabsetreq" id="fr-tab{{$i}}" aria-controls="fr-req{{$i}}" @if($i == 1) @endif>
                     <label id="fr-tablabel{{$i}}" class="non-cursive" for="fr-tab{{$i}}">Feature Requirement 1 <button class="remove_feature" id="{{$i}}" type="button">×</button></label>
                     @endif
 
                 @foreach($feature->requirements as $r)
-                    <input type="radio" class="fr-tabs tab" name="fr-tabsetreq" id="fr-tab{{$i}}" aria-controls="fr-req{{$i}}" @if($i == 1) checked @endif>
+                    <input type="radio" class="fr-tabs tab" name="fr-tabsetreq" id="fr-tab{{$i}}" aria-controls="fr-req{{$i}}" @if($i == 1) @endif>
                     <label id="fr-tablabel{{$i}}" class="non-cursive" for="fr-tab{{$i}}">{{$r->name}} <button class="remove_feature" id="{{$i}}" type="button">×</button></label>
                     @php $i++; @endphp
                     @endforeach
@@ -79,6 +80,7 @@
                     <label for="fr-newreq" class="black">
                         Add more Requirements <span class="icon-right glyphicon glyphicon-plus"></span>
                     </label>
+                    <span class="hidden" id="fr-removed">0</span>
                     <hr class="tab-hr">
 
                     <div class="tab-panels">
@@ -96,7 +98,7 @@
 
                         @php $i = 1; @endphp
                         @if($feature->requirements->count() == 0)
-                            <section id="fr-req{{$i}}" class="tab-panel">
+                            <section id="fr-req{{$i}}" class="tab-panel {{$i}}">
                                 <input type="hidden" name="requirement_uuid[{{$i}}]">
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-md-12">
@@ -124,7 +126,7 @@
                             </section>
                         @endif
                         @foreach($feature->requirements as $r)
-                        <section id="fr-req{{$i}}" class="tab-panel">
+                        <section id="fr-req{{$i}}" class="tab-panel {{$i}}">
                             <input type="hidden" name="requirement_uuid[{{$i}}]" value="{{$r->requirement_uuid}}">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-12">
