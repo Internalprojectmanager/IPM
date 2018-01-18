@@ -65,7 +65,8 @@ $(document).on('click', '.remove_feature', function(){
         $('input:radio[name='+before+'-tabsetreq]:nth(1)').attr('checked',true);
 });
 
-$('.tab').on('click', function(){
+$(document).on('click', '.tab', function(){
+    console.log('hi');
     var id = $(this).prop("id");
     var parent = $(this).closest("div").prop("id");
     var before = "";

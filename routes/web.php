@@ -40,8 +40,7 @@ Route::group(['prefix' => 'client'], function (){
     Route::post('/{name}/details', 'CompanyController@detailsSort')->name('clientsorting');
     Route::get('/add', 'CompanyController@addCompany')->name('addclient');
     Route::post('/add', 'CompanyController@storeCompany')->name('storeclient');
-    Route::get('/edit/{name}', 'CompanyController@editCompany')->name('editclient');
-    Route::post('/edit/{name}', 'CompanyController@updateCompany')->name('updateclient');
+    Route::post('{name}/edit/', 'CompanyController@updateCompany')->name('updateclients');
     Route::get('/delete/{name}', 'CompanyController@deleteCompany')->name('deleteclient');
 });
 Route::group(['prefix' => 'project'], function () {

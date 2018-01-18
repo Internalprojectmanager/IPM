@@ -28,14 +28,6 @@
                         @endif
                         <?php $i++;?>
                     @endforeach</td>
-            <!--<td>
-                        <a class="btn btn-warning"
-                           href="{{route('editclient', ['name' => $client->name, 'client_id' => $client->client_id])}}"><span
-                                    class="glyphicon glyphicon-edit"></span></a>
-                        <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')"
-                           href="{{route('deleteclient', $client->name)}}"><span
-                                    class="glyphicon glyphicon-trash"></span></a>
-                    </td>-->
             </tr>
         @endforeach
         </tbody>
