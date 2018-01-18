@@ -125,6 +125,7 @@ class ProjectController extends Controller
             }else{
                 $project->company_id = $request->company;
             }
+            $project->projectcode = mb_strtoupper($request->project_code);
             $project->status = $request->status;
             $project->description = $request->description;
             if(!empty($request->deadline)){

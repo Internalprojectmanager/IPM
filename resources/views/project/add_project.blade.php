@@ -56,12 +56,18 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label class="edit-title" for="project_code">Project Code</label>
+                        <input type="text" class="form-control input-text-modal" name="project_code" id="project_code"
+                               value="@if(old('project_code')){{old('project_code')}} @else P-@endif">
+                    </div>
+
+                    <div class="form-group">
                         <label class="form-label-modal">Deadline:</label>
                         <input type='text' class="form-control input-text-modal datepicker" name="deadline" placeholder="YYYY/MM/DD" value="{{old('deadline')}}"/>
                     </div>
                     <div class="form-group">
                         <label class="form-label-modal">Description:</label>
-                        <textarea rows="4" cols="50" name="description" class="form-control input-text-modal" id="description"></textarea>
+                        <textarea rows="4" cols="50" name="description" class="form-control input-text-modal" id="description">{{old('description')}}</textarea>
                     </div>
 
                     <div class="form-group">
