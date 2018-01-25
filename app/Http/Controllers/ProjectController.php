@@ -205,7 +205,7 @@ class ProjectController extends Controller
         $releases = Release::with('rstatus')->where('project_id', $projects->id)->orderBy('version', 'desc')->get();
         $releases = $this->calcDeadline($releases, 'release');
         $documents = Document::where('project_id', $projects->id)->get();
-        $user = User::all();
+        $user = User::orderby('job_title', 'desc')->orderby('last_name', 'asc')->get();
         $assignee = Assignee::with('users')->where('uuid', $projects->id)->get();
         $status = Status::where('type','Progress')->get();
         return view('project.details_project', compact('projects', 'companys', 'releases', 'documents', 'user', 'assignee', 'status'));

@@ -43,7 +43,7 @@
                         <br>
                         <label class="edit-title" id="" for="new_client">Enter the name of the new Client</label>
                         <input type="text" class="form-control form-control input-text-modal" name="new_client"
-                               placeholder="New Client Name">
+                               placeholder="New Client Name" value="{{old('new_client')}}">
                     </div>
 
                     <div class="form-group">

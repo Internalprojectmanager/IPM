@@ -25,10 +25,11 @@ class ProjectValidator extends FormRequest
     {
 
         return [
-            'project_name' => 'required|min:3',
+            'project_name' => 'required|min:3|max:200',
             'deadline' => 'nullable|date_format:Y/m/d',
             'status' => 'required',
-            'project_code' => 'required|min:3',
+            'project_code' => 'required|min:3|max:15',
+            'new_client' => 'present|nullable|min:3|max:100',
         ];
     }
 
