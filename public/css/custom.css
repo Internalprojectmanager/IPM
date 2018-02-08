@@ -371,9 +371,10 @@ label {
     float: right;
     margin-right: 25px;
     -webkit-appearance: none;
+    -moz-appearance: none;
     color: #535353;
     font-size: 14px;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .dropdown-settings{
