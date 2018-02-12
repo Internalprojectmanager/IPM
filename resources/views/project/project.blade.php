@@ -8,9 +8,9 @@
 
 @section('content')
     <div class="row">
-        <button type="button" class="btn btn-primary black" data-toggle="modal" data-target="#addProjectModal">
-            Add Project <span class="icon-right glyphicon glyphicon-plus"></span>
-        </button>
+        <a class="black btn btn-primary" href="#" data-toggle="modal" data-target="#addProjectModal">
+            Add Project <span class="glyphicon glyphicon-plus"></span>
+        </a>
     </div>
 
     <div class="row block-white">

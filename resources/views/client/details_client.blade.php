@@ -8,9 +8,9 @@
 
 @section('content')
 
-    <button type="button" class="btn-edit" id="project-edit" data-toggle="modal" data-target="#editClientModal">
+    <a href="#"  class="btn-edit" id="project-edit" data-toggle="modal" data-target="#editClientModal">
         <span class="glyphicon edit-icon"></span> Edit
-    </button>
+    </a>
 
     <div class="row">
         <div class="header-3" id="project-details">
@@ -58,10 +58,9 @@
 
         </div>
     <div class="row under-details">
-        <a class="black" href="{{route('addproject')}}">
-            <button class="btn-primary">
-                Add project <span class="icon-right glyphicon glyphicon-plus"></span>
-            </button></a>
+        <a class="black btn btn-primary" href="{{route('addproject')}}">
+                Add project <span class="glyphicon glyphicon-plus"></span>
+        </a>
         <form method="GET" action="{{route('clientsorting', ['name' =>  $clients->name])}}" class="pull-right searchform">
 
             <input type="hidden" id="sort" value="">

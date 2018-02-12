@@ -58,8 +58,8 @@
                 <button type="button" class="btn-cancel" data-dismiss="modal">Close</button>
             </div>
             <div class="col-md-6" align="right">
-                <button class="btn btn-primary" type="submit">
-                    Save Project <span class="icon-right glyphicon glyphicon-plus">
+                <button class="btn btn-primary button-primary" type="submit">
+                    Save Project <span class="glyphicon glyphicon-plus">
                 </button>
             </div>
             </form>

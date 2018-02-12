@@ -8,10 +8,9 @@
 
 @section('content')
 
-    <button onclick="location.href='{{route('editproject', ['name' => $projects->name, 'company_id' => $projects->company_id])}}'"
-            class="btn-edit" id="project-edit">
+    <a href="{{route('editproject', ['name' => $projects->name, 'company_id' => $projects->company_id])}}" class="btn-edit" id="project-edit">
         <span class="glyphicon edit-icon"></span> Edit
-    </button>
+    </a>
 
     <div class="row">
         <div class="header-3" id="project-details">
@@ -103,9 +102,9 @@
         </div>
     </div>
     <div class="row under-details">
-        <button type="button" class="btn btn-primary black" data-toggle="modal" data-target="#addReleaseModal">
-            Add Release <span class="icon-right glyphicon glyphicon-plus"></span>
-        </button>
+        <a class="black btn btn-primary" href="#" data-toggle="modal" data-target="#addReleaseModal">
+            Add Release <span class="glyphicon glyphicon-plus"></span>
+        </a>
     </div>
     <div class="row">
         <table class="table table-hover table-center results" id="release-overview">

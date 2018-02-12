@@ -195,13 +195,16 @@ label {
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-danger, .btn-save,.btn-delete, .btn-edit{
-    height: 45px;
-    width: 160px;
     color: black;
     border: none;
     border-radius: 0px;
     font-size: 15px;
     text-transform: uppercase;
+    padding:12px;
+}
+
+.button-primary{
+    height: 45px;
 }
 
 .btn-danger, btn-danger:hover, btn-danger:focus, btn-danger:active {

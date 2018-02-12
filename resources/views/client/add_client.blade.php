@@ -156,7 +156,7 @@
             </div>
             <div class="col-md-6" align="right">
                 <button class="btn btn-primary" type="submit">
-                    Add Client <span class="icon-right glyphicon glyphicon-plus">
+                    Add Client <span class="glyphicon glyphicon-plus">
                 </button>
             </div>
         </div>

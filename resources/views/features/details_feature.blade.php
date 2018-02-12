@@ -8,9 +8,9 @@
 
 @section('content')
 
-    <button type="button" id="project-edit" data-toggle="modal" data-target="#editFeatureModal" class="btn-edit pull-right">
+    <a href="#" id="project-edit" data-toggle="modal" data-target="#editFeatureModal" class="btn-edit pull-right">
         <span class="glyphicon edit-icon"></span> Edit
-    </button>
+    </a>
     <div class="row">
         <div class="header-3" id="project-details">
             <div class="row" id="block-show">

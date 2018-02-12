@@ -87,7 +87,7 @@
             </div>
             <div class="col-md-6" align="right">
                 <button class="btn btn-primary" type="submit">
-                    Save Project <span class="icon-right glyphicon glyphicon-plus">
+                    Save Project <span class="glyphicon glyphicon-plus"></span>
                 </button>
             </div>
             </form>
