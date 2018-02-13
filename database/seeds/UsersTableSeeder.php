@@ -85,10 +85,10 @@ class UsersTableSeeder extends Seeder
             5 => 
             array (
                 'id' => 6,
-                'first_name' => 'Preston',
-                'last_name' => 'Ziessen',
-                'email' => 'pziessen@itsavirus.com',
-                'job_title' => 12,
+                'first_name' => 'Erik',
+                'last_name' => 'Odijk',
+                'email' => 'eodijk@itsavirus.com',
+                'job_title' => 13,
                 'active' => 0,
                 'password' => '$2y$10$EGalUza1qqIa7gxvGC/GjO4ngzYZDSsP4bWKW2K/o8vx5D8HKIPsW',
                 'remember_token' => NULL,
@@ -98,9 +98,9 @@ class UsersTableSeeder extends Seeder
             6 => 
             array (
                 'id' => 7,
-                'first_name' => 'Robin',
-                'last_name' => 'Geerlings',
-                'email' => 'rgeerlings@itsavirus.com',
+                'first_name' => 'Ian',
+                'last_name' => 'Milliken',
+                'email' => 'imilliken@itsavirus.com',
                 'job_title' => 12,
                 'active' => 0,
                 'password' => '$2y$10$7DC4zz9FxKCPt0sihAmlnumTZvwgf4p3L4xuXXzG915sS61NHQYSy',
@@ -111,25 +111,12 @@ class UsersTableSeeder extends Seeder
             7 => 
             array (
                 'id' => 8,
-                'first_name' => 'Mike',
-                'last_name' => 'van der Berg',
-                'email' => 'mvanderberg@itsavirus.com',
+                'first_name' => 'Joey',
+                'last_name' => 'Ferwerda',
+                'email' => 'jferwerda@itsavirus.com',
                 'job_title' => 12,
                 'active' => 0,
                 'password' => '$2y$10$aGD78ZZHRcLPXoDkQvW5L.5fexTwtehb486O4gfvUF1otucdfTmCa',
-                'remember_token' => NULL,
-                'created_at' => '2017-10-12 15:12:37',
-                'updated_at' => '2017-10-12 15:12:37',
-            ),
-            8 => 
-            array (
-                'id' => 9,
-                'first_name' => 'Chris',
-                'last_name' => 'Dawe',
-                'email' => 'cdawe@itsavirus.com',
-                'job_title' => 14,
-                'active' => 0,
-                'password' => '$2y$10$817qlKrk69OyUSJTMQ.vP.uRvTAylpM3Ac7cIB6Waa/Lj1R6.nZSC',
                 'remember_token' => NULL,
                 'created_at' => '2017-10-12 15:12:37',
                 'updated_at' => '2017-10-12 15:12:37',

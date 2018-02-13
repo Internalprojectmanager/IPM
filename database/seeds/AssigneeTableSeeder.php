@@ -52,13 +52,6 @@ class AssigneeTableSeeder extends Seeder
                 'uuid' => '3',
                 'status' => NULL,
             ),
-            5 => 
-            array (
-                'id' => 6,
-                'userid' => 8,
-                'uuid' => '3',
-                'status' => NULL,
-            ),
             6 => 
             array (
                 'id' => 7,
@@ -100,13 +93,6 @@ class AssigneeTableSeeder extends Seeder
                 'userid' => 4,
                 'uuid' => '7',
                 'status' => NULL,
-            ),
-            12 => 
-            array (
-                'id' => 13,
-                'userid' => 8,
-                'uuid' => '07f47c16-cd8f-4710-80b6-50c5a701ad61',
-                'status' => 1,
             ),
             13 => 
             array (
