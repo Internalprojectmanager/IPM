@@ -133,7 +133,11 @@ class ProjectController extends Controller
             }
             $project->save();
 
-            $findproject = Project::where([['name', $request->project_name],['company_id', $request->company]])->first();
+            if(!empty($request->new_client)) {
+                $findproject = Project::where([['name', $request->project_name], ['company_id', $client->id]])->first();
+            }else{
+                $findproject = Project::where([['name', $request->project_name], ['company_id', $request->company]])->first();
+            }
             if(!empty($request->assignee)){
                 foreach ($request->assignee as $a){
                     $assingee = new Assignee();
