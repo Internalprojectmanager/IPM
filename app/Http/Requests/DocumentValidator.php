@@ -27,7 +27,7 @@ class DocumentValidator extends FormRequest
             'upload' => 'between:0,10000| mimes:doc,docx,jpeg,jpg,pdf,png,psd,xls,xlsx,ppt,pptx,bmp,txt,rtf',
             'document_title' => 'required',
             'status' => 'required',
-            'release_id' => 'required'
+            'release_id' => 'nullable'
         ];
     }
 }
