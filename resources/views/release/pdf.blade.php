@@ -28,7 +28,7 @@
                 <span class="project-info-right">{{number_format(floatval($release->version), 1)}}</span>
                 <hr>
                 <span class="project-info-left">DESCRIPTION</span>
-                <span class="project-info-right">{{$release->description}}</span>
+                <span class="project-info-right">{{implode(' ', array_slice(str_word_count($release->description, 2), 0, 12))}}...</span>
                 <hr>
                 <span class="project-info-left">PREPARED BY</span>
                 <span class="project-info-right prepared">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
