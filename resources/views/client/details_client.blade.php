@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Client details
+    {{$clients->name}} | {{env('APP_NAME')}}
 @endsection
 
 @section('breadcrumbs', Breadcrumbs::render('singleclient', $clients))
@@ -58,8 +58,8 @@
 
         </div>
     <div class="row under-details">
-        <a class="black btn btn-primary" href="{{route('addproject')}}">
-                Add project <span class="glyphicon glyphicon-plus"></span>
+        <a class="black btn btn-primary" href="#" data-toggle="modal" data-target="#addProjectModal">
+            Add Project <span class="glyphicon glyphicon-plus"></span>
         </a>
         <form method="GET" action="{{route('clientsorting', ['name' =>  $clients->name])}}" class="pull-right searchform">
 
@@ -77,6 +77,8 @@
         </span>
     </div>
     @include('project.project_table')
+    @include('client.add_project')
     @include('client.edit_client')
+
 
 @endsection

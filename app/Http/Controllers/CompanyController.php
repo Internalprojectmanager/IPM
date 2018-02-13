@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Client;
+use App\User;
 
 class CompanyController extends Controller
 {
@@ -92,7 +93,9 @@ class CompanyController extends Controller
             $link = unserialize($clients->link);
             $clients->link_title =$link['title'];
             $clients->link_url=$link['link'];
-            return view('client.details_client', compact('clients', 'projects', 'projectcount', 'status'));
+            $user = User::all();
+            $projectstatus = Status::where('type', 'Progress')->get();
+            return view('client.details_client', compact('clients', 'projects', 'projectcount', 'status', 'user', 'projectstatus'));
     }
 
     public function detailsSort($name , Request $request)
