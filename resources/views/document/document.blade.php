@@ -29,7 +29,7 @@
                 <tbody>
                 @foreach($document as $doc)
                     <tr>
-                        <td style="border-left: 1px solid #CECECE; background-color: {{$doc->dstatus->color}};"></td>
+                        <td style="border-left: 1px solid #CECECE; background-color: @if(!empty($doc->status)){{$doc->dstatus->color}}@endif ;"></td>
                         <td>
                             @if(!empty($doc->release_id))
                                 {{$doc->release->version}} - {{$doc->release->name}}
