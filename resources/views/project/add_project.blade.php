@@ -34,6 +34,7 @@
                     <div class="form-group">
                         <label class="form-label-modal">Client:<span class="required">*</span></label>
                         <select class="form-control input-text-modal" name="company" id="company" >
+                            <option value="" disabled="" selected="">Select a client</option>
                             @foreach($clients as $company)
                                 <option value="{{$company->id}}">{{$company->name}}</option>
                             @endforeach
