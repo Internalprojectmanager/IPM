@@ -14,11 +14,7 @@
             </div>
 
             <form class="form-horizontal" role="form" method="POST"
-                  @if(config('app.secure') == TRUE)
-                  action="{{ secure_url('/profile') }}">
-                @else
                     action="{{ url('/profile') }}">
-                @endif
                 {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
