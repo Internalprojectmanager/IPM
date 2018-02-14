@@ -10,8 +10,8 @@
 
     <div class="row">
         <div class="header-3" id="edit-release">
-            <form action="{{route('updaterelease', ['name' => $project->name, 'company_id' => $project->company_id,
-                        'release_name' => $release->name, 'version' => $release->version])}}" method="post">
+            <form action="{{route('updaterelease', ['name' => $project->path, 'company_id' => $project->company->path,
+                        'release_name' => $release->path, 'version' => $release->version])}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group col-md-6">
                     <input type="hidden" name="release_id" value="{{$release->id}}">

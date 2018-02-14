@@ -12,7 +12,7 @@
         @foreach($clients as $client)
             <tr>
                 <td style="border-left: 1px solid #CECECE; background-color: {{$client->cstatus->color}};"></td>
-                <td><a href="{{route('clientdetails', ['name' => $client->name])}}">{{$client->name}}</a></td>
+                <td><a href="{{route('clientdetails', ['name' => $client->path])}}">{{$client->name}}</a></td>
                 <td>
                     <span class="tabletitle">{{$client->contactname}}</span> <br>
                     <span class="tablesubtitle"> {{$client->contactnumber}}<br>

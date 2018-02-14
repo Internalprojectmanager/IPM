@@ -22,7 +22,7 @@
                 </span>
         </div>
         <div class="modal-body">
-            <form action="{{route('updateclients', $clients->name)}}" method="POST">
+            <form action="{{route('updateclients', $clients->path)}}" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="form-label-modal">Client Name<span class="required">*</span></label>

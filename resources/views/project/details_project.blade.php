@@ -4,11 +4,11 @@
     {{$projects->company->name}} {{$projects->name}} details | IPM
 @endsection
 
-@section('breadcrumbs', Breadcrumbs::render('singleproject', $projects, $companys))
+@section('breadcrumbs', Breadcrumbs::render('singleproject', $projects, $client))
 
 @section('content')
 
-    <a href="{{route('editproject', ['name' => $projects->name, 'company_id' => $projects->company_id])}}" class="btn-edit" id="project-edit">
+    <a href="{{route('editproject', ['name' => $projects->path, 'company_id' => $client->path])}}" class="btn-edit" id="project-edit">
         <span class="glyphicon edit-icon"></span> Edit
     </a>
 
@@ -54,7 +54,7 @@
             </div>
             <div class="row pull-right">
                 <div class="col-md-5 col-xs-3">
-                    <button onclick="location.href='{{route('documentoverview', ['name' => $projects->name, 'company_id' => $projects->company_id])}}'"
+                    <button onclick="location.href='{{route('documentoverview', ['name' => $projects->path, 'company_id' => $projects->company->path])}}'"
                             class="blue-button" id="button-files">
                         <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -119,8 +119,8 @@
             @foreach($releases as $release)
                 <tr>
                     <td style="background-color: {{$release->rstatus->color}};"></td>
-                    <td><span class="tabletitle"><a href="{{route('showrelease', ['name' => $projects->name, 'company_id' => $projects->company_id,
-                        'release_name' => $release->name, 'version' => $release->version])}}">{{$release->version}}
+                    <td><span class="tabletitle"><a href="{{route('showrelease', ['name' => $projects->path, 'company_id' => $projects->company->path,
+                        'release_name' => $release->path, 'version' => $release->version])}}">{{$release->version}}
                                 - {{$release->name}} </a></span>
                     </td>
                     <td class="table-description">{{implode(' ', array_slice(str_word_count($release->description, 2), 0, 10))}}

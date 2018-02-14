@@ -233,7 +233,8 @@ class ProjectController extends Controller
 
     public function editProject($company_id, $name)
     {
-        $projects = Project::with('company')->where(['name' => $name, 'company_id' => $company_id])->first();
+        $client = Client::where('path', $company_id)->select('id')->first();
+        $projects = Project::with('company')->where(['path' => $name, 'company_id' => $client->id])->first();
         $status = Status::where('type', 'Progress')->get();
         $companys = Client::all();
 
@@ -242,13 +243,16 @@ class ProjectController extends Controller
 
     public function updateProject($company_id, $name, ProjectValidator $request)
     {
-        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        $client = Client::where('path', $company_id)->select('id', 'path')->first();
+        $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
         $release = Release::select('project_id')->where('project_id', $project->id)->get();
         $project->name = $request->project_name;
+        $project->name = strtolower(str_replace(" ","-",$project->name));
 
         if (!empty($request->new_client)) {
             $client = Client::firstOrCreate(['name' => $request->new_client]);
             $client->name = $request->new_client;
+            $client->path = strtolower(str_replace(" ","-",$client->name));
             $client->save();
             $project->company_id = $client->id;
         } else {
@@ -262,14 +266,15 @@ class ProjectController extends Controller
         }
         $project->save();
 
-        $company_id = $project->company_id;
-        $name = $project->name;
+        $company_id = $client->path;
+        $name = $project->path;
         return redirect()->route('projectdetails', compact('company_id', 'name'));
     }
 
     public function deleteProject($company_id, $name)
     {
-        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        $client = Client::where('path', $company_id)->select('id')->first();
+        $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
         $project->delete();
 
         return redirect()->route('overviewproject');
@@ -277,7 +282,8 @@ class ProjectController extends Controller
 
     public function updateAssignees($company_id, $name, Request $request)
     {
-        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        $client = Client::where('path', $company_id)->select('id', 'path')->first();
+        $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
         $assignees = Assignee::where('uuid', $project->id)->get();
         foreach ($assignees as $a) {
             if (!in_array($a->userid, $request->assignee)) {

@@ -61,7 +61,7 @@
         <a class="black btn btn-primary" href="#" data-toggle="modal" data-target="#addProjectModal">
             Add Project <span class="glyphicon glyphicon-plus"></span>
         </a>
-        <form method="GET" action="{{route('clientsorting', ['name' =>  $clients->name])}}" class="pull-right searchform">
+        <form method="GET" action="{{route('clientsorting', ['name' =>  $clients->path])}}" class="pull-right searchform">
 
             <input type="hidden" id="sort" value="">
             <input type="hidden" id="page" value="">

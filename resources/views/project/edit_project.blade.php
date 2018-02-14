@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <button onclick="location.href='{{route('deleteproject', ['name' => $projects->name, 'company_id' => $projects->company_id])}}'"
+    <button onclick="location.href='{{route('deleteproject', ['name' => $projects->path, 'company_id' => $projects->company->path])}}'"
             class="delete-button" id="project-delete">
         <svg id="delete-logo" width="19px" height="19px" viewBox="0 0 19 19" version="1.1" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -29,7 +29,7 @@
 
     <div class="row">
         <div class="header-3" id="edit-project">
-            <form action="{{route('updateproject', ['name' => $projects->name, 'company_id' => $projects->company_id])}}"
+            <form action="{{route('updateproject', ['name' => $projects->path, 'company_id' => $projects->company->path])}}"
                   method="post">
                 {{ csrf_field() }}
                 <div class="form-group col-md-6">
@@ -51,7 +51,7 @@
                     <input type="text" class="form-control" name="project_code" id="project_code"
                            value="{{$projects->projectcode}}">
 
-                    <a href="{{route('projectdetails', ['company-id' => $projects->company_id, 'name' => $projects->name])}}"
+                    <a href="{{route('projectdetails', ['company-id' => $projects->company->path, 'name' => $projects->path])}}"
                        class="cancel">
                         <svg width="11px" height="11px" viewBox="0 0 11 11" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

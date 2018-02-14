@@ -14,7 +14,7 @@
             @foreach($projects as $project)
                 <tr>
                     <td style="background-color: {{$project->pstatus->color}};"></td>
-                    <td><span id="tabletitle"><a href="{{route('projectdetails', ['name' => $project->name, 'company_id' => $project->company_id])}}">{{$project->name}}</a></span> <br> <span class="tablesubtitle">@if(isset($project->company)){{$project->company->name}}@endif</span></td>
+                    <td><span id="tabletitle"><a href="{{route('projectdetails', ['name' => $project->path, 'company_id' => $client->path])}}">{{$project->name}}</a></span> <br> <span class="tablesubtitle">@if(isset($project->company)){{$project->company->name}}@endif</span></td>
                     <td class="table-description">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}...</td>
                     <td>{{$project->pstatus->name}}</td>
                     <td>@if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>

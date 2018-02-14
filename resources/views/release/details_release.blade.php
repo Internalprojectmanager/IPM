@@ -87,7 +87,7 @@
                     </button>
                 </div>
                 <div class="col-md-7 col-xs-6">
-                    <button onclick="location.href='{{route('createpdf', ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, 'version' => $release->version])}}'"
+                    <button onclick="location.href='{{route('createpdf', ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, 'version' => $release->version])}}'"
                             class="blue-button" id="button-pdf">
                         <svg id="pdf-icon" width="19px" height="19px" viewBox="0 0 19 19" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -169,7 +169,7 @@
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: {{$f->fstatus->color}};"></td>
                         <td class="width25"><span class="tabletitle"><a href="{{route('showfeature',
-                             ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $f->id])}}">{{$f->name}}</a></span>
+                             ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $f->id])}}">{{$f->name}}</a></span>
                         </td>
                         <td class="width25">{{$f->fstatus->name}}</td>
                         @php $counter = 0; @endphp
@@ -245,7 +245,7 @@
 
                         <td style="border-left: 1px solid #CECECE; background-color: {{$n->fstatus->color}};"></td>
                         <td class="width20"><span class="tabletitle"><a href="{{route('showfeature',
-                         ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $n->id])}}">{{$n->name}}</a></span>
+                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $n->id])}}">{{$n->name}}</a></span>
                         </td>
                         <td class="width20">{{$n->fstatus->name}}</td>
                         <td class="width20">{{$n->fcategory->name}}</td>
@@ -320,7 +320,7 @@
                         <td style="border-left: 1px solid #CECECE; background-color: {{$t->fstatus->color}};"></td>
                         <td class="width20"><span class="tabletitle">
                                 <a href="{{route('showfeature',
-                         ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $t->id])}}">{{$t->name}}</a>
+                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $t->id])}}">{{$t->name}}</a>
                             </span></td>
                         <td class="width20">{{$t->fstatus->name}}</td>
                         <td class="width20">{{$t->fcategory->name}}</td>
@@ -385,7 +385,7 @@
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: #CECECE;"></td>
                         <td class="width25"><span class="tabletitle"><a href="{{route('showfeature',
-                         ['name' => $release->projects->name, 'company_id' => $release->projects->company_id, 'release_name' => $release->name, $s->id])}}">{{$s->name}}</a></span>
+                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $s->id])}}">{{$s->name}}</a></span>
                         </td>
                         <td>{{$s->description}}</td>
                     </tr>

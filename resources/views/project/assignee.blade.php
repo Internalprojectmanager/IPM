@@ -33,7 +33,7 @@
                 </span>
         </div>
         <div class="modal-body">
-            <form action="{{route('assigneeupdate', ['name' => $projects->name, 'company_id' => $projects->company_id])}}" method="post">
+            <form action="{{route('assigneeupdate', ['name' => $projects->path, 'company_id' => $client->path])}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="" for="assignee">Assignees</label>

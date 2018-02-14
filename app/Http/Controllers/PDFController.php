@@ -22,11 +22,11 @@ use PDF;
 class PDFController extends Controller
 {
     public function createPDF($company_id,$name,$release_name, $version){
-
+        $company = Client::where('path' ,$company_id)->first();
         $project = Project::with(['assignee.users.jobtitles','assignee' => function ($q){
             $q->orderby('userid');
-        }])->where(['name' => $name, 'company_id' => $company_id])->first();
-        $company = Client::where('id' ,$company_id)->first();
+        }])->where(['path' => $name, 'company_id' => $company->id])->first();
+
         $release = Release::where([['project_id', $project->id],['name', $release_name],['version', $version]])->first();
         $release_id = $release->release_uuid;
         if(!$release){

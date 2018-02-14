@@ -30,6 +30,7 @@ class CompanyController extends Controller
         $status = Status::where('name', $request->status)->first();
         $client = new Client();
         $client->name = $request->client_name;
+        $client->path = strtolower(str_replace(" ","-",$client->name));
         $client->description = $request->description;
         $client->status = $status->id;
         $client->contactname = $request->contact_name;
@@ -86,7 +87,7 @@ class CompanyController extends Controller
 
     public function detailsCompany($name)
     {
-            $clients = Client::with('cstatus', 'projects.assignee')->sortable('created_at', 'desc')->where('name', $name)->first();
+            $clients = Client::with('cstatus', 'projects.assignee')->sortable('created_at', 'desc')->where('path', $name)->first();
             $projects = Project::sortable()->where('company_id' , $clients->id)->paginate(8);
             $projectcount = $projects->count();
             $status = Status::where('type', 'Client')->get();
@@ -103,7 +104,7 @@ class CompanyController extends Controller
         $sort = $request->sort;
         $page = $request->page;
         $order = $request->order;
-        $clients = Client::with('cstatus', 'projects.assignee')->where('name', $name)->first();
+        $clients = Client::with('cstatus', 'projects.assignee')->where('path', $name)->first();
         $projects = Project::sortable([$sort => $order])->where('company_id', $clients->id)->paginate(8);
         $projectcount = $projects->count();
         return view('project.project_table', compact('clients', 'projects', 'projectcount'));
@@ -111,11 +112,12 @@ class CompanyController extends Controller
 
     public function updateCompany($name, Request $request)
     {
-        $clients = Client::where('name', $name)->first();
+        $clients = Client::where('path', $name)->first();
         $request->validate([
             'client_name' => 'required|unique:client,name,' . $clients->id,
         ]);
         $clients->name = $request->client_name;
+        $clients->path = strtolower(str_replace(" ","-",$clients->name));
         $clients->description = $request->description;
         $clients->status = $request->status;
         $clients->contactname = $request->contact_name;
@@ -126,7 +128,7 @@ class CompanyController extends Controller
         }
         $clients->save();
 
-        return redirect()->route('clientdetails', $clients->name);
+        return redirect()->route('clientdetails', $clients->path);
     }
 
     public function deleteCompany($name)

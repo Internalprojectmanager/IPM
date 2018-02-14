@@ -115,8 +115,8 @@ class FeatureController extends Controller
                 }
             }
         }
-        return redirect(route('showrelease', ['name' => $project->name, 'company_id' => $project->company_id,
-            'release_name' => $release->name, 'version' => $release->version]));
+        return redirect(route('showrelease', ['name' => $project->path, 'company_id' => $project->company->path,
+            'release_name' => $release->path, 'version' => $release->version]));
     }
 
     public function editFeature($company_id, $name, $release_name, $feature_id)
@@ -216,9 +216,8 @@ class FeatureController extends Controller
             }
 
 
-            return redirect(route('showrelease', ['name' => $feature->releases->projects->name,
-                'company_id' => $feature->releases->projects->company_id, 'release_name' => $feature->releases->name,
-                'version' => $feature->releases->version]));
+            return redirect(route('showfeature', ['name' => $feature->releases->projects->path,
+                'company_id' => $feature->releases->projects->company->path, 'release_name' => $feature->releases->path,'feature_id' => $feature->id]));
         }
     }
 
