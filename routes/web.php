@@ -20,6 +20,9 @@ Route::get('/home', function () {
 
 })->name('home');
 
+Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('googlelogin');
+Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback')->name('googleauth');
+
 //Profile routes
 Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
 Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');

@@ -39,6 +39,7 @@
                           <input id="password" type="password" class="form-control form-control-login" name="password" placeholder="Password" required>
                       </div>
                   </div>
+
                   <div class="form-group margin-top-50">
                       <div class="col-md-12 center">
                           <button type="submit" class="btn btn-noback">
@@ -46,7 +47,11 @@
                           </button>
                       </div>
                   </div>
-
+                      <div class="form-group">
+                          <div class="col-md-12 center">
+                              <a href="{{route('googlelogin')}}"><img width="50px" src="{{asset('svg/google.svg')}}"/></a>
+                          </div>
+                      </div>
 
                   <div class="form-group">
                       <div class="col-md-12 center">
