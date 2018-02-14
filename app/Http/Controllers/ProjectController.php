@@ -247,7 +247,7 @@ class ProjectController extends Controller
         $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
         $release = Release::select('project_id')->where('project_id', $project->id)->get();
         $project->name = $request->project_name;
-        $project->name = strtolower(str_replace(" ","-",$project->name));
+        $project->path = strtolower(str_replace(" ","-",$project->name));
 
         if (!empty($request->new_client)) {
             $client = Client::firstOrCreate(['name' => $request->new_client]);
