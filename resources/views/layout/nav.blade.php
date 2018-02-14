@@ -137,6 +137,7 @@
                         </svg>
                     </a>
                     <ul class="dropdown-menu pull-right" role="menu">
+                        <span>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
                         <li><a href="{{route('profile')}}"><i class="glyphicon settings-icon"></i> Settings</a></li>
                         <li>
                             <a style="cursor: pointer"
