@@ -53,28 +53,25 @@ class LoginController extends Controller
     public function handleProviderCallback($provider = 'google')
     {
         $user = Socialite::driver($provider)->user();
-        if ($user->user['domain'] == 'itsavirus.com') {
-        // storing data to our use table and logging them in
-        $data = [
-            'first_name' => $user->user['name']['givenName'],
-            'last_name' => $user->user['name']['familyName'],
-            'email' => $user->getEmail(),
-            'password' => bcrypt('avocad0'),
-        ];
+        $domain = preg_replace('/.+@/', '', $user->getEmail());
 
-        // Here, check if the user already exists in your records
-        $my_user = User::where('email', '=', $user->getEmail())->first();
-        if ($my_user === NULL) {
-            Auth::login(User::firstOrCreate($data));
-        } else {
-            Auth::login($my_user);
+        if ($domain == 'itsavirus.com') {
+            // storing data to our use table and logging them in
+            $data = [
+                'first_name' => $user->user['name']['givenName'],
+                'last_name' => $user->user['name']['familyName'],
+                'email' => $user->getEmail(),
+                'password' => bcrypt('avocad0'),
+            ];
+
+            // Here, check if the user already exists in your records
+            $my_user = User::where('email', '=', $user->getEmail())->first();
+            if ($my_user === NULL) {
+                Auth::login(User::firstOrCreate($data));
+            } else {
+                Auth::login($my_user);
+            }
         }
-
-        //after login redirecting to home page
         return redirect($this->redirectPath());
-        } else{
-            return redirect($this->redirectPath());
-        }
-
     }
 }
