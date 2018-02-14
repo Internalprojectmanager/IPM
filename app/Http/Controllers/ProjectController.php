@@ -282,6 +282,10 @@ class ProjectController extends Controller
 
     public function updateAssignees($company_id, $name, Request $request)
     {
+        if(empty($request->assignee)){
+            $request->assignee = array();
+        }
+
         $client = Client::where('path', $company_id)->select('id', 'path')->first();
         $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
         $assignees = Assignee::where('uuid', $project->id)->get();
