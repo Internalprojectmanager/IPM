@@ -5,14 +5,14 @@
         <th>@sortablelink('name', 'Client Name')</th>
         <th>@sortablelink('contactname', 'Contact')</th>
         <th>@sortablelink('cstatus.name', 'Status')</th>
-        <th>@sortablelink('projects_count')</th>
+        <th>@sortablelink('Projects')</th>
         <th>Last Two Projects</th>
         </thead>
         <tbody>
         @foreach($clients as $client)
-            <tr>
+            <tr class="clickable-row" data-href="{{route('clientdetails', ['name' => $client->path])}}">
                 <td style="border-left: 1px solid #CECECE; background-color: {{$client->cstatus->color}};"></td>
-                <td><a href="{{route('clientdetails', ['name' => $client->path])}}">{{$client->name}}</a></td>
+                <td>{{$client->name}}</td>
                 <td>
                     <span class="tabletitle">{{$client->contactname}}</span> <br>
                     <span class="tablesubtitle"> {{$client->contactnumber}}<br>
@@ -24,7 +24,7 @@
                     <?php $i = 0 ;?>
                     @foreach ($client->projects as $p)
                         @if($i < 2)
-                            <div class="col-md-6 recent-projects"><a href="/project/{{$client->id}}/{{$p->name}}/details">{{$p->name}}</a></div>
+                            <div class="col-md-6 recent-projects"><a href="/{{$client->path}}/{{$p->path}}/details">{{$p->name}}</a></div>
                         @endif
                         <?php $i++;?>
                     @endforeach</td>

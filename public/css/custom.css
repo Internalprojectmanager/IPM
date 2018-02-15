@@ -938,3 +938,7 @@ td > .assignee:first-child:before {
     background: none;
     border:none
 }
+
+.clickable-row:hover{
+    cursor: pointer;
+}

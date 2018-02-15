@@ -166,10 +166,10 @@
                 </thead>
                 <tbody>
                 @foreach($features as $f)
-                    <tr>
+                    <tr class="clickable-row" data-href="{{route('showfeature',
+                             ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $f->id])}}">
                         <td style="border-left: 1px solid #CECECE; background-color: {{$f->fstatus->color}};"></td>
-                        <td class="width25"><span class="tabletitle"><a href="{{route('showfeature',
-                             ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $f->id])}}">{{$f->name}}</a></span>
+                        <td class="width25"><span class="tabletitle">{{$f->name}}</span>
                         </td>
                         <td class="width25">{{$f->fstatus->name}}</td>
                         @php $counter = 0; @endphp
@@ -241,11 +241,11 @@
                 </thead>
                 <tbody>
                 @foreach($nfr as $n)
-                    <tr>
+                    <tr class="clickable-row" data-href="{{route('showfeature',
+                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $n->id])}}">
 
                         <td style="border-left: 1px solid #CECECE; background-color: {{$n->fstatus->color}};"></td>
-                        <td class="width20"><span class="tabletitle"><a href="{{route('showfeature',
-                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $n->id])}}">{{$n->name}}</a></span>
+                        <td class="width20"><span class="tabletitle">{{$n->name}}</span>
                         </td>
                         <td class="width20">{{$n->fstatus->name}}</td>
                         <td class="width20">{{$n->fcategory->name}}</td>
@@ -316,12 +316,10 @@
                 </thead>
                 <tbody>
                 @foreach($techspecs as $t)
-                    <tr>
+                    <tr class="clickable-row" data-href="{{route('showfeature',
+                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $t->id])}}">
                         <td style="border-left: 1px solid #CECECE; background-color: {{$t->fstatus->color}};"></td>
-                        <td class="width20"><span class="tabletitle">
-                                <a href="{{route('showfeature',
-                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $t->id])}}">{{$t->name}}</a>
-                            </span></td>
+                        <td class="width20"><span class="tabletitle">{{$t->name}}</span></td>
                         <td class="width20">{{$t->fstatus->name}}</td>
                         <td class="width20">{{$t->fcategory->name}}</td>
                         <td class="width20">@php $counter = 0; @endphp
@@ -382,11 +380,10 @@
                 </thead>
                 <tbody>
                 @foreach($scope as $s)
-                    <tr>
+                    <tr class="clickable-row" data-href="{{route('showfeature',
+                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $s->id])}}">
                         <td style="border-left: 1px solid #CECECE; background-color: #CECECE;"></td>
-                        <td class="width25"><span class="tabletitle"><a href="{{route('showfeature',
-                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $s->id])}}">{{$s->name}}</a></span>
-                        </td>
+                        <td class="width25"><span class="tabletitle">{{$s->name}}</span></td>
                         <td>{{$s->description}}</td>
                     </tr>
                 @endforeach

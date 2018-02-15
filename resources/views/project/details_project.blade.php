@@ -117,11 +117,10 @@
             </thead>
             <tbody>
             @foreach($releases as $release)
-                <tr>
+                <tr class="clickable-row" data-href="{{route('showrelease', ['name' => $projects->path, 'company_id' => $projects->company->path,
+                        'release_name' => $release->path, 'version' => $release->version])}}">
                     <td style="background-color: {{$release->rstatus->color}};"></td>
-                    <td><span class="tabletitle"><a href="{{route('showrelease', ['name' => $projects->path, 'company_id' => $projects->company->path,
-                        'release_name' => $release->path, 'version' => $release->version])}}">{{$release->version}}
-                                - {{$release->name}} </a></span>
+                    <td><span class="tabletitle">{{$release->version}} - {{$release->name}}</span>
                     </td>
                     <td class="table-description">{{implode(' ', array_slice(str_word_count($release->description, 2), 0, 10))}}
                         ...
