@@ -1,9 +1,6 @@
-$(document).ready(function($) {
-    $(".clickable-row").click(function() {
+$(document).on('click', '.clickable-row', function() {
         window.location = $(this).data("href");
-    });
 });
-
 
 $('.searchform').on('keyup keypress', function(e) {
     var keyCode = e.keyCode || e.which;
@@ -66,7 +63,6 @@ $(document).on('click', '.remove_feature', function(){
 });
 
 $(document).on('click', '.tab', function(){
-    console.log('hi');
     var id = $(this).prop("id");
     var parent = $(this).closest("div").prop("id");
     var before = "";
@@ -102,7 +98,6 @@ $(document).on('click', '.tab', function(){
                 var newRadio = $(document.createElement('input'))
                     .attr({id: before+'-tab' + currentCountRemoveed, class:before+"-tabs tab", name: before+"-tabsetreq", type: "radio"});
                 newRadio.attr('aria-controls', before+"-req"+currentCountRemoveed);
-                console.log(newRadio);
                 newRadio.insertAfter("#"+ before+"-tablabel"+lastreq);
                 newlabel.insertAfter(newRadio);
 
@@ -149,7 +144,6 @@ function saveStatus(url, curl){
 
         formData.push(result);
     });
-    console.log(formData);
 
     $.ajax({
         url: url,
@@ -165,7 +159,6 @@ function saveStatus(url, curl){
 }
 function deleteFile(url, pid, curl) {
     var _token = document.getElementsByName("_token")[0].value;
-    console.log(url);
     $.ajax({
         url: url,
         type: 'POST',
@@ -185,8 +178,6 @@ function deleteFile(url, pid, curl) {
 
 function getData(url) {
     var url = new URL(url);
-
-    console.log(url);
     var page = url.searchParams.get("page");
     var sort = url.searchParams.get("sort");
     var order = url.searchParams.get("order");
