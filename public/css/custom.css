@@ -364,8 +364,8 @@ label {
 }
 
 .dropdown-search {
-    background: #ffffff url("../svg/dropdown.svg") no-repeat 150px center;
-    background-size: 20px 20px;
+    background: #ffffff url("../svg/dropdown-2.svg") no-repeat 150px center;
+    background-size: 12px;
     width: 180px;
     height: 36px;
     border: 1px solid #F2F2F2;
@@ -381,8 +381,8 @@ label {
 }
 
 .dropdown-settings{
-    background: #ffffff url("../svg/dropdown.svg") no-repeat 250px center;
-    background-size: 20px 20px;
+    background: #ffffff url("../svg/dropdown-2.svg") no-repeat 250px center;
+    background-size: 12px;
     width: 280px;
     height: 36px;
     padding-right: 30px;

@@ -11,6 +11,12 @@ use Symfony\Component\HttpFoundation\Session\Flash;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function viewProfile(){
         $profile = User::where('id', Auth::id())->select('id','first_name', 'last_name', 'email', 'job_title', 'provider')->first();
         $status = Status::Where('type' , 'Job')->select('id', 'name')->get();
