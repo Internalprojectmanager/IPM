@@ -10,12 +10,10 @@
                 </div>
             </div>
 
-              <form class="form-horizontal" role="form" method="POST"
-                    @if(config('app.secure') == TRUE)
-                    action="{{ secure_url('/login') }}">
-                  @else
-                      action="{{ url('/login') }}">
-                  @endif
+              @if(Session::has('msg'))
+                  <div class="alert alert-danger"><span class="glyphicon glyphicon-ok"></span><em> {!! session('msg') !!}</em></div>
+              @endif
+              <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                   {{ csrf_field() }}
 
                   <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

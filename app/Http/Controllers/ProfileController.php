@@ -12,8 +12,7 @@ use Symfony\Component\HttpFoundation\Session\Flash;
 class ProfileController extends Controller
 {
     public function viewProfile(){
-
-        $profile = User::where('id', Auth::id())->select('id','first_name', 'last_name', 'email', 'job_title')->first();
+        $profile = User::where('id', Auth::id())->select('id','first_name', 'last_name', 'email', 'job_title', 'provider')->first();
         $status = Status::Where('type' , 'Job')->select('id', 'name')->get();
         return view('profile.overview', compact('profile', 'status'));
     }
@@ -21,18 +20,18 @@ class ProfileController extends Controller
     public function updateProfile(ProfileValidator $request){
         $profile = Auth::user();
 
+        if($profile->provider == "normal"){
+            if(!$request->email == '' && !$request->email == ''){
+                $profile->email = $request->email;
+            }
 
+            if( !$request->password == '' && !$request->password == NULL){
+                $profile->password = bcrypt($request->password);
+            }
+        }
         $profile->first_name = $request->first_name;
         $profile->last_name = $request->last_name;
 
-
-        if(!$request->email == '' && !$request->email == ''){
-            $profile->email = $request->email;
-        }
-
-        if( !$request->password == '' && !$request->password == NULL){
-            $profile->password = bcrypt($request->password);
-        }
         $profile->job_title = $request->job_title;
 
         $profile->save();

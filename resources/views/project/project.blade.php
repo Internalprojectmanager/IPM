@@ -7,6 +7,9 @@
 @section('breadcrumbs', Breadcrumbs::render('projects'))
 
 @section('content')
+    @if(Session::has('flash_message'))
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('flash_message') !!}</em></div>
+    @endif
     <div class="row">
         <a class="black btn btn-primary" href="#" data-toggle="modal" data-target="#addProjectModal">
             Add Project <span class="glyphicon glyphicon-plus"></span>

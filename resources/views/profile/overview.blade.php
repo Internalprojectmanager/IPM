@@ -49,12 +49,10 @@
                         </div>
                     </div>
 
-
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="col-md-5 control-label">Email</label>
                     <div class="form-settings-field">
-                        <input id="email" type="text" class="form-control form-settings-field" name="email" value="{{ $profile->email }}" placeholder="">
-
+                        <input id="email" type="text" {{ $profile->provider == "normal" ? "" : "readonly" }} class="form-control form-settings-field" name="email" value="{{ $profile->email }}" placeholder="">
                         @if ($errors->has('email'))
                             <i class="error-icon"></i>
                             <span class="help-block">
@@ -93,7 +91,7 @@
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label for="password" class="col-md-5 control-label">Password</label>
                     <div class="form-settings-field">
-                        <input id="password" type="password" class="form-control form-settings-field" name="password" placeholder="">
+                        <input id="password" type="password" {{ $profile->provider == "normal" ? "" : "readonly" }} class="form-control form-settings-field" name="password" placeholder="">
                         @if ($errors->has('password'))
                             <i class="error-icon"></i>
                             <span class="help-block">
@@ -107,7 +105,7 @@
                     <div class="form-group{{ $errors->has('password_confirm') ? ' has-error' : '' }}">
                         <label for="password_confirm" class="col-md-5 control-label">Confirm Password</label>
                         <div class="form-settings-field">
-                            <input id="password" type="password" class="form-control form-settings-field" name="password_confirm" placeholder="">
+                            <input id="password" type="password" {{ $profile->provider == "normal" ? "" : "readonly" }} class="form-control form-settings-field" name="password_confirm" placeholder="">
                             @if ($errors->has('password_confirm'))
                                 <i class="error-icon"></i>
                                 <span class="help-block">

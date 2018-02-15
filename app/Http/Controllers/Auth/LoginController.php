@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/project/overview';
 
     /**
      * Create a new controller instance.
@@ -37,8 +37,9 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware(['guest', 'checkactive'])->except('logout');
     }
+
 
     public function redirectToProvider($provider = "google")
     {
@@ -61,6 +62,8 @@ class LoginController extends Controller
                 'first_name' => $user->user['name']['givenName'],
                 'last_name' => $user->user['name']['familyName'],
                 'email' => $user->getEmail(),
+                'provider' => $provider,
+                'active' => 1,
                 'password' => bcrypt('avocad0'),
             ];
 
