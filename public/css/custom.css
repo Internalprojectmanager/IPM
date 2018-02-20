@@ -11,15 +11,18 @@ html, body {
 }
 
 .container {
-    padding: 100px 60px 30px 170px;
+    padding: 10rem 4rem 3rem 15rem;
     width: 100%;
 }
 
 .container_login {
-    padding: 100px 30px 30px 30px;
+    padding: 10rem 3rem 3rem 3rem;
     width: 100%;
 }
 
+.row{
+    margin: 0 auto;
+}
 
 
 .requirement-block {
@@ -508,6 +511,7 @@ td > .assignee:first-child:before {
     right: 30px;
     height: 209px;
     padding:20px;
+    margin-bottom: 30px;
 }
 
 #document-details{
@@ -624,7 +628,6 @@ td > .assignee:first-child:before {
 }
 
 .under-details{
-    margin-top: 30px;
     margin-bottom: 30px;
 }
 
@@ -671,8 +674,8 @@ td > .assignee:first-child:before {
 
 #project-edit {
     position: absolute;
-    top: 88px;
-    right: 45px;
+    top: 8.8rem;
+    right: 4rem;
 }
 
 .edit-content {

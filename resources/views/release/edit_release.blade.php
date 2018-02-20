@@ -14,9 +14,6 @@
                         'release_name' => $release->path, 'version' => $release->version])}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group col-md-6">
-                    <input type="hidden" name="release_id" value="{{$release->id}}">
-                    <input type="hidden" name="company_id" value="{{$company->id}}">
-                    <input type="hidden" name="name" value="{{$project->name}}">
 
                     <label class="edit-title" for="release_version">Release Version</label>
                     <input type="text" class="form-control" name="release_version" id="release_version"
