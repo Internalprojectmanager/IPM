@@ -8,6 +8,7 @@ use App\Http\Requests\ReleaseValidator;
 use App\Requirement;
 use App\Status;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class ReleaseController extends Controller
         $release->document_status = $request->document_status;
         $release->version = $releasecount;
         $release->author = Auth::id();
-        $release->deadline = $request->deadline;
+        $release->deadline = $request->deadline. "23:59:59";
         $release->specificationtype = $request->specification;
         $release->save();
         return redirect()->route('projectdetails',['name' => $project->path, 'company_id ' => $project->company->path]);
@@ -64,7 +65,6 @@ class ReleaseController extends Controller
         $release = Release::where([['project_id', $project->id],['path', $release_name],['version', $version]])->first();
         $releaseuuid = $release->release_uuid;
         $user = Assignee::where('uuid', $project->id)->get();
-
         if(!$release){
             abort(404);
         }
@@ -87,19 +87,20 @@ class ReleaseController extends Controller
     }
 
     public function updateRelease($company_id, $name, $release_name, $version, Request $request){
-        $company = Client::where('path', $company_id)->first();
-        $project = Project::where('path', $name)->first();
+        $company = Client::where('path' ,$company_id)->first();
+        $project = Project::where(['path' => $name, 'company_id' => $company->id])->first();
         $release = Release::where(['path' => $release_name, 'version' => $version])->first();
-        $status = Status::where('type', 'Progress')->get();
 
-        $release->name = $request->release_name;
         $release->name = $request->release_name;
         $release->description = $request->release_description;
         $release->version = $request->release_version;
         $release->status = $request->release_status;
         $release->extra_content = $request->extra_content;
-
         $release->save();
+
+        Project::updateDeadline($project);
+        Project::updateStatus($project);
+
         return redirect()->route('showrelease',['name' => $project->path, 'company_id ' => $project->company->path, 'release_name' => $release->path, 'version' => $release->version]);
     }
 }

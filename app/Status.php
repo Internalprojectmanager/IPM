@@ -18,6 +18,17 @@ class Status extends Model
         'id', 'name', 'type', 'color'
     ];
 
+    public function scopeName($query, $name)
+    {
+        return $query->where('name', $name);
+    }
+
+    public function scopeType($query, $type)
+    {
+        return $query->where('type', $type);
+    }
+
+
     public function project(){
         return $this->belongsTo('App\Project', "id", 'status');
     }

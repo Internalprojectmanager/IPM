@@ -48,7 +48,6 @@ class RequirementController extends Controller
     }
 
     public function saveStatus(Request $request,$company_id, $name,$release_id, $feature_id){
-        //dd($request);
         foreach ($request->data as $key => $value){
             $assignee = Assignee::where([['userid', $value['assignee']],['uuid', $value['uuid']]])->first();
             $assignee->status = $value['checked'];

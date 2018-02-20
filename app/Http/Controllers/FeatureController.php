@@ -129,9 +129,7 @@ class FeatureController extends Controller
     public function updateFeature($company_id, $name, $release_name, $feature_id, FeatureRequest $request)
     {
         $feature = Feature::where('id', $feature_id)->first();
-
         if ($request) {
-
             $this->createRevision($feature);
             $feature->name = $request->feature_name;
             $feature->description = $request->feature_description;
@@ -164,7 +162,6 @@ class FeatureController extends Controller
                     $requirement->name = $request->requirement_name[$k];
                     $requirement->description = $request->requirement_description[$k];
                     $requirement->author = Auth::id();
-                    //dd($requirement);
                     $requirement->save();
                     if(!empty($request->assignee[$k])){
                         $assignee = Assignee::where('uuid', $requirement->requirement_uuid)->get();

@@ -4,20 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Assignee;
 use App\Http\Requests\ProjectValidator;
-use App\Requirement;
 use App\Status;
-use Faker\Provider\DateTime;
-use Illuminate\Foundation\Bus\DispatchesJobs;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Client;
 use App\Project;
 use App\Release;
 use App\Document;
 use App\User;
-use Psy\Command\ListCommand\PropertyEnumerator;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -25,6 +24,45 @@ class ProjectController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+    public function projectsCollection($ids = null){
+        if($ids){
+            $projectnext = Project::with('company', 'pstatus', 'assignee.users')
+                ->whereIn('id', $ids)->where('deadline', '>=', Carbon::now('Europe/Amsterdam'))->orderBy('deadline', 'asc')->get();
+            $projectprev = Project::with('company', 'pstatus', 'assignee.users')
+                ->whereIn('id', $ids)->where('deadline', '<=', Carbon::now())
+                ->orderBy('deadline', 'desc')->get();
+            $projectnull= Project::with('company', 'pstatus', 'assignee.users')
+                ->whereIn('id', $ids)
+                ->where('deadline', '=', NULL)->get();
+        }else{
+            $projectnext = Project::with('company', 'pstatus', 'assignee.users')
+                ->where('deadline', '>=', Carbon::now('Europe/Amsterdam'))->orderBy('deadline', 'asc')->get();
+            $projectprev = Project::with('company', 'pstatus', 'assignee.users')
+                ->where('deadline', '<=', Carbon::now())
+                ->orderBy('deadline', 'desc')->get();
+            $projectnull= Project::with('company', 'pstatus', 'assignee.users')
+                ->where('deadline', '=', NULL)->get();
+        }
+
+
+        $projects = $projectnext->merge($projectprev);
+        $projects = $projects->merge($projectnull);
+        $perPage = 8;
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        if ($currentPage == 1) {
+        $start = 0;
+        }
+        else {
+            $start = ($currentPage - 1) * $perPage;
+        }
+        $projects = $this->calcDeadline($projects, 'project');
+        $curprojects = $projects->slice($start, $perPage)->all();
+        $projects = new LengthAwarePaginator($curprojects, count($projects), $perPage);
+        $projects->setPath(LengthAwarePaginator::resolveCurrentPath());
+        return $projects;
     }
 
     public function calcDeadline($data, $type)
@@ -154,9 +192,7 @@ class ProjectController extends Controller
     public function overviewProject()
     {
         $projectcount = Project::select('id')->get()->count();
-        $projects = Project::with('company', 'pstatus', 'assignee.users')
-            ->orderByRAW(' (CASE WHEN deadline IS NULL then 1 ELSE 0 END)')->orderBy('deadline')->paginate(8);
-        $projects = $this->calcDeadline($projects, 'project');
+        $projects = $this->projectsCollection();
         $clients = Client::select('name', 'id')->get();
         $status = Status::where('type', 'Progress')->select('name', 'id')->get();
         $user = User::all();
@@ -195,12 +231,7 @@ class ProjectController extends Controller
 
 
         if(!isset($order)) {
-            $projects = Project::with('pstatus')
-                ->sortable([$sort => $order])
-                ->whereIn('project.id', $pro)
-                ->orderByRAW(' (CASE WHEN deadline IS NULL then 1 ELSE 0 END)')
-                ->orderBy('deadline')
-                ->paginate(8, ['*'], 'page', $page);
+            $projects = $this->projectsCollection($pro);
         }else{
             $projects = Project::with('pstatus')
                 ->sortable([$sort => $order])
