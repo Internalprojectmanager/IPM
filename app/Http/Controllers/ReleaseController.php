@@ -86,16 +86,21 @@ class ReleaseController extends Controller
         return view('release.edit_release', compact('project', 'company', 'release', 'status'));
     }
 
-    public function updateRelease($company_id, $name, $release_name, $version, Request $request){
+    public function updateRelease($company_id, $name, $release_name, $version, ReleaseValidator $request){
         $company = Client::where('path' ,$company_id)->first();
         $project = Project::where(['path' => $name, 'company_id' => $company->id])->first();
         $release = Release::where(['path' => $release_name, 'version' => $version])->first();
 
         $release->name = $request->release_name;
-        $release->description = $request->release_description;
-        $release->version = $request->release_version;
-        $release->status = $request->release_status;
+        $release->path = strtolower(str_replace(" ","-", $release->name));
+        $release->description = $request->description;
+        $release->deadline = $request->deadline. " 23:59:59";
+        $release->version = $request->version;
+        $release->status = $request->status;
+        $release->document_status = $request->document_status;
         $release->extra_content = $request->extra_content;
+        $release->author = Auth::id();
+        $release->specificationtype = $request->specification;
         $release->save();
 
         Project::updateDeadline($project);

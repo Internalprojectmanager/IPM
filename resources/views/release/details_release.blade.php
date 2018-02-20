@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="col-md-2 col-xs-6">
-                        <span class="project-title block-title">Project Name</span> <br>
+                        <span class="project-title block-title">Project</span> <br>
                         <span class="project-detail block-value">{{$release->projects->name}}</span>
                     </div>
                 </div>

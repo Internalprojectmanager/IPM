@@ -26,7 +26,8 @@ class ProjectController extends Controller
         $this->middleware('auth');
     }
     public function projectsCollection($ids = null){
-        if($ids){
+
+        if(isset($ids)){
             $projectnext = Project::with('company', 'pstatus', 'assignee.users')
                 ->whereIn('id', $ids)->where('deadline', '>=', Carbon::now('Europe/Amsterdam'))->orderBy('deadline', 'asc')->get();
             $projectprev = Project::with('company', 'pstatus', 'assignee.users')
@@ -169,6 +170,8 @@ class ProjectController extends Controller
             if (!empty($request->deadline)) {
                 $project->deadline = date("Y-m-d", strtotime($request->deadline));
             }
+            $project->save();
+            $project->projectcode = "P-".$project->id;
             $project->save();
 
             if (!empty($request->new_client)) {
