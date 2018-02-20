@@ -5,7 +5,7 @@
     <title>{{$project->company->name}} {{$project->name}} - {{$release->name}} {{number_format(floatval($release->version), 1)}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-    <link href="{{asset('css/pdf.css', config('app.secure'))}}" rel="stylesheet" type="text/css">
+    <link href="{{ public_path('css/pdf.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -14,7 +14,7 @@
 
     <!-- PAGE 1 -->
     <p id="p1">
-        <img class="logo-p1" src="{{asset('img/logo-iav-circles.png')}}">
+        <img class="logo-p1" src="{{public_path('img/logo-iav-circles.png')}}">
         <span class="h1-p1">PROJECT SPECIFICATION</span>
         <span class="h2-p1">{{$project->company->name}} {{$project->name}}  {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
         <span class="h3-p1"><?php echo date("d - m - Y"); ?>
@@ -35,7 +35,7 @@
                 <hr>
             </span>
         <footer>
-            <img class="logo-footer" src="{{asset('img/logo-iav.png', config('app.secure'))}}">
+            <img class="logo-footer" src="{{public_path('img/logo-iav.png')}}">
         </footer>
     </p>
     <!-- END OF PAGE 1 -->
@@ -294,7 +294,7 @@
 </main>
 
 <footer>
-    <img class="logo-footer" src="{{asset('img/logo-iav.png', config('app.secure'))}}">
+    <img class="logo-footer" src="{{public_path('img/logo-iav.png', config('app.secure'))}}">
     <div class="page-nr">
         <span class="pagenum"></span>
     </div>

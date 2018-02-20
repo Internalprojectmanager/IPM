@@ -33,7 +33,8 @@ class PDFController extends Controller
             abort(404);
         }
         $features = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid], ['type', 'Feature']])->get();
-        $pdf = PDF::loadView('release.pdf', compact('release', 'project', 'features', 'company', 'requirements', 'assignees'));
+        $pdf = PDF::setOptions(['images' => true])->loadView('release.pdf', compact('release', 'project', 'features', 'company', 'requirements', 'assignees'))->setPaper('a4', 'portrait');
+
         return $pdf->stream('Release.pdf');
     }
 }

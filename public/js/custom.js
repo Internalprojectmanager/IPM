@@ -1,4 +1,4 @@
-$(document).on('click', '.clickable-row', function() {
+$(document).on('click touchstart', '.clickable-row', function() {
         window.location = $(this).data("href");
 });
 
