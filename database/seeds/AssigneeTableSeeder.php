@@ -12,11 +12,6 @@ class AssigneeTableSeeder extends Seeder
      */
     public function run()
     {
-        
-
         \DB::table('assignee')->delete();
-        
-        
-        
     }
 }
