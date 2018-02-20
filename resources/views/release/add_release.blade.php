@@ -64,7 +64,7 @@
                     </div>
                     <div class="form-group">
                         <label for="deadline">Release Deadline:</label>
-                        <input type="text" class="form-control datepicker" id="deadline" name="deadline" placeholder="YYYY/MM/DD">
+                        <input type="text" class="form-control datepicker" autocomplete="off" id="deadline" name="deadline" placeholder="YYYY/MM/DD">
 
                     </div>
                     <div class="form-group">
