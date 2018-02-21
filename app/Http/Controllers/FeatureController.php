@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Assignee;
+use App\Client;
 use App\Requirement;
 use App\FeatureRevision;
 use App\Http\Requests\FeatureRequest;
@@ -66,12 +67,14 @@ class FeatureController extends Controller
 
     public function store($company_id, $name, $release_name, Request $request)
     {
-        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
-        $release = Release::where(['project_id' => $project->id, 'name' => $release_name])->first();
+        $client = Client::where('path', $company_id)->first();
+        $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
+        $release = Release::where(['project_id' => $project->id, 'path' => $release_name])->first();
         $status = Status::where('name', 'draft')->first();
         $feature = new Feature();
         $feature->feature_uuid = Uuid::generate(4);
         $feature->name = $request->feature_name;
+        $feature->path = strtolower(str_replace(" ", "-", $feature->name));
         $feature->release_id = $release->release_uuid;
         $feature->description = $request->feature_description;
         if(!empty($request->category)){
