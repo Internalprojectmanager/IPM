@@ -167,7 +167,7 @@ class ProjectController extends Controller
             $project->status = Status::Name('Draft')->first()->id;
             $project->description = $request->description;
             $project->save();
-            $project->projectcode = "P-".$project->id;
+            $project->projectcode = "P-".str_pad($project->id,  4, "0", STR_PAD_LEFT);
             $project->save();
 
             if (!empty($request->new_client)) {
