@@ -46,7 +46,6 @@ class ProjectController extends Controller
                 ->where('deadline', '=', NULL)->get();
         }
 
-
         $projects = $projectnext->merge($projectprev);
         $projects = $projects->merge($projectnull);
         $perPage = 8;
@@ -159,7 +158,7 @@ class ProjectController extends Controller
             $project->name = $request->project_name;
             $project->path = strtolower(str_replace(" ", "-", $project->name));
             if (!empty($request->new_client)) {
-                $client = Client::firstOrCreate(['name' => $request->new_client, 'path' => strtolower(str_replace(" ", "-", $request->new_client))]);
+                $client = Client::firstOrCreate(['name' => $request->new_client, 'path' => strtolower(str_replace(" ", "-", $request->new_client)), 'status' => Status::Name('Client')->first()->id]);
                 $project->company_id = $client->id;
             } else {
                 $project->company_id = $request->company;

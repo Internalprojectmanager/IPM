@@ -17,7 +17,7 @@ class Client extends Model
     protected $sortableAs = ['projects_count', 'cstatus_name'];
 
     protected $fillable = [
-        'id','name', 'description', 'path'
+        'id','name', 'description', 'path', 'status'
     ];
 
     public function projects(){
