@@ -28,8 +28,7 @@ class ProjectValidator extends FormRequest
             'project_name' => 'required|min:3|max:200',
             'deadline' => 'nullable|date_format:Y/m/d',
             'description' => 'present|nullable',
-            'status' => 'required',
-            'project_code' => 'present|nullable|min:3|max:15',
+            'project_code' => 'nullable|min:3|max:15',
             'new_client' => 'present|nullable|min:3|max:100',
 
         ];
@@ -39,9 +38,7 @@ class ProjectValidator extends FormRequest
     {
         return [
             'project_name.required' => 'A project name is required',
-            'project_code.required' => 'A project code is required',
             'deadline.date_format' => 'Deadline is not a valid date',
-            'status.required' => 'Project Status is required',
         ];
     }
 }

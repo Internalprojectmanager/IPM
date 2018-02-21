@@ -57,7 +57,7 @@ class FeatureController extends Controller
 
     public function add($company_id, $name, $release_name)
     {
-        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        $project = Project::where(['path' => $name, 'company_id' => $company_id])->first();
         $release = Release::where(['project_id' => $project->id, 'name' => $release_name])->first();
 
 
