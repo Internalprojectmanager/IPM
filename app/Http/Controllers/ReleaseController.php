@@ -53,7 +53,7 @@ class ReleaseController extends Controller
         $release->document_status = $request->document_status;
         $release->version = $releasecount;
         $release->author = Auth::id();
-        $release->deadline = $request->deadline. "23:59:59";
+        $release->deadline = $request->deadline. " 23:59:59";
         $release->specificationtype = $request->specification;
         $release->save();
         return redirect()->route('projectdetails',['name' => $project->path, 'company_id ' => $project->company->path]);
