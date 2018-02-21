@@ -135,6 +135,7 @@ class FeatureController extends Controller
         if ($request) {
             $this->createRevision($feature);
             $feature->name = $request->feature_name;
+            $feature->path = strtolower(str_replace(" ", "-", $feature->name));
             $feature->description = $request->feature_description;
             if(!empty($request->category)){
                 $feature->category = $request->category;
