@@ -724,7 +724,7 @@ td > .assignee:first-child:before {
 
 #save-button {
     position: relative;
-    left: 85.46%;
+    left: 84%;
 }
 
 #description {
@@ -745,15 +745,8 @@ td > .assignee:first-child:before {
 }
 
 #add_client {
-    position: absolute;
-    top: 149px;
+    position: relative;
     left: 2%;
-}
-
-#new_client {
-    position: absolute;
-    top: 173px;
-    width: 96%;
 }
 
 #button-save {
@@ -772,11 +765,9 @@ td > .assignee:first-child:before {
     color: #C74237;
     font-size: 15px;
     line-height: 18px;
-    position: absolute;
-    margin-top: 60px;
 }
 
-.delete-button {
+.delete-button, .delete-button:hover {
     height: 45px;
     width: 107px;
     background-color: #F54949;

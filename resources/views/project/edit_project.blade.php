@@ -9,7 +9,7 @@
 @section('content')
 
     <button onclick="location.href='{{route('deleteproject', ['name' => $projects->path, 'company_id' => $projects->company->path])}}'"
-            class="delete-button" id="project-delete">
+            class="btn-edit delete-button" id="project-edit">
         <svg id="delete-logo" width="19px" height="19px" viewBox="0 0 19 19" version="1.1" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
@@ -36,21 +36,48 @@
                     <input type="hidden" name="name" value="{{$projects->name}}">
 
                     <label class="edit-title" for="project_name">Project name</label>
-                    <input type="text" class="form-control" name="project_name" id="project_name"
+                    <input type="text" class="form-control input-text-modal" name="project_name" id="project_name"
                            value="{{$projects->name}}">
 
                     <br>
 
                     <label class="edit-title" for="description">Description</label>
-                    <textarea rows="4" cols="50" name="description" class="form-control"
+                    <textarea rows="4" cols="50" name="description" class="form-control input-text-modal"
                               id="description">{{$projects->description}}</textarea>
 
                     <br>
 
                     <label class="edit-title" for="project_code">Code</label>
-                    <input type="text" class="form-control" name="project_code" id="project_code"
+                    <input type="text" class="form-control input-text-modal" name="project_code" id="project_code"
                            value="{{$projects->projectcode}}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="edit-title" for="company">Project Status</label>
+                    <br>
+                    <select name="status" id="company">
+                        @foreach($status as $s)
+                            <option @if($s->id == $projects->status) selected="" @endif value="{{$s->id}}">{{$s->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="edit-title" for="company">Select Client</label>
+                    <br>
+                    <select name="company" id="company">
+                        @foreach($companys as $company)
 
+                            <option @if($company->id == $projects->company_id) selected="" @endif value="{{$company->id}}">{{$company->name}}</option>
+                        @endforeach
+                    </select>
+
+                    <span class="or">Or</span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="edit-title" id="add_client" for="new_client">Enter the name of the new Client</label>
+                    <input type="text" class="form-control input-text-modal" name="new_client" id="new_client"
+                           placeholder="New Client Name">
+                </div>
+                <div class="form-group col-md-12">
                     <a href="{{route('projectdetails', ['company-id' => $projects->company->path, 'name' => $projects->path])}}"
                        class="cancel">
                         <svg width="11px" height="11px" viewBox="0 0 11 11" version="1.1"
@@ -71,36 +98,6 @@
                         </svg>
                         Cancel
                     </a>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="edit-title" for="company">Project Status</label>
-                    <br>
-                    <select name="status" id="company">
-                        @foreach($status as $s)
-                            <option @if($s->id == $projects->status) selected="" @endif value="{{$s->id}}">{{$s->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="form-label-modal">Deadline:</label>
-                    <input type='text' class="form-control input-text-modal datepicker" placeholder="YYYY/MM/DD" name="deadline" value="@php echo  date("Y/m/d", strtotime($projects->deadline)); @endphp"/>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="edit-title" for="company">Select Client</label>
-                    <br>
-                    <select name="company" id="company">
-                        @foreach($companys as $company)
-
-                            <option @if($company->id == $projects->company_id) selected="" @endif value="{{$company->id}}">{{$company->name}}</option>
-                        @endforeach
-                    </select>
-
-                    <span class="or">Or</span>
-
-                    <label class="edit-title" id="add_client" for="new_client">Enter the name of the new Client</label>
-                    <input type="text" class="form-control" name="new_client" id="new_client"
-                           placeholder="New Client Name">
-
 
                     <button class="save-button" id="save-button" type="submit">
                         <svg id="save-logo" width="19px" height="19px" viewBox="0 0 19 19" version="1.1"

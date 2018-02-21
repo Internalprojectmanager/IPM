@@ -164,11 +164,8 @@ class ProjectController extends Controller
                 $project->company_id = $request->company;
             }
             $project->projectcode = mb_strtoupper($request->project_code);
-            $project->status = $request->status;
+            $project->status = Status::Name('Draft')->first()->id;
             $project->description = $request->description;
-            if (!empty($request->deadline)) {
-                $project->deadline = date("Y-m-d", strtotime($request->deadline));
-            }
             $project->save();
             $project->projectcode = "P-".$project->id;
             $project->save();
