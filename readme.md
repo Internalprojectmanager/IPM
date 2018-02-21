@@ -1,6 +1,4 @@
-[![Latest Develop Build](https://gitlab.iavconcepts.com/TeamIPM/IPM-Tool/badges/develop/pipeline.svg)](https://gitlab.iavconcepts.com/TeamIPM/IPM-Tool/commits/develop)
-
-IPM TOOL of Itsavirus  
+IPM TOOL of Itsavirus [![Latest Develop Build](https://gitlab.iavconcepts.com/TeamIPM/IPM-Tool/badges/develop/pipeline.svg)](https://gitlab.iavconcepts.com/TeamIPM/IPM-Tool/commits/develop)
 =====================
 About
 -----
