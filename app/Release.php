@@ -33,4 +33,7 @@ class Release extends Model
         return $this->hasOne('App\User', 'id', 'author');
     }
 
+    public function scopePath($query, $path){
+        return $query->where('path', $path);
+    }
 }

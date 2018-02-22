@@ -27,4 +27,8 @@ class Client extends Model
     public function cstatus(){
         return $this->hasOne('App\Status', "id", "status");
     }
+
+    public function scopePath($query, $path){
+        return $query->where('path', $path);
+    }
 }

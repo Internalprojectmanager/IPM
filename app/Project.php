@@ -48,4 +48,8 @@ class Project extends Model
         $project->save();
 
     }
+
+    public function scopePath($query, $path){
+        return $query->where('path', $path);
+    }
 }
