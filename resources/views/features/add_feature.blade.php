@@ -103,7 +103,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Assingees:</label>
+                                <label>Assignees:</label>
                                 <select class="form-control input-text-modal selectpicker" name="assignee[1][]"
                                         multiple>
                                     @foreach($user as $u)
