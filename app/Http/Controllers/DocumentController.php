@@ -43,8 +43,8 @@ class DocumentController extends Controller
     }
 
     public function addDocument($company_id, $name){
-        $projects = Project::where('name', $name)->first();
-        $companys = Client::where('id', $company_id)->first();
+        $projects = Project::where('path', $name)->first();
+        $companys = Client::where('path', $company_id)->first();
         $release = Release::where('project_id', $projects->id)->get();
         $status = Status::where('type', 'Progress')->orWhere('type', 'Document')->get();
 
@@ -77,12 +77,10 @@ class DocumentController extends Controller
 
     public function showDocument($company_id, $name, $document_id){
         $document = Document::with('projects.company')->where('id',$document_id)->first();
-        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        $project = Project::where(['path' => $name, 'company_id' => Client::Path($company_id)->first()->id])->first();
         if(!$document){
             abort(404);
         }
-
-        //dd($document);
 
         return view('document.details_document', compact('document', 'project'));
     }
@@ -98,7 +96,7 @@ class DocumentController extends Controller
     }
 
     public function overviewDocuments($company_id, $name){
-        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        $project = Project::where(['path' => $name, 'company_id' => Client::Path($company_id)->first()->id])->first();
         $document = Document::with('projects.company')->where('project_id', $project->id)->get();
         if(!$document){
             abort(404);
@@ -110,7 +108,7 @@ class DocumentController extends Controller
 
     public function editDocument($company_id, $name, $document_id){
         $document = Document::with('projects')->where('id', $document_id)->first();
-        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
+        $project = Project::where(['path' => $name, 'company_id' => Client::Path($company_id)->first()->id])->first();
         $status = Status::where('type', 'Progress')->orWhere('type', 'Document')->get();
         $release = Release::where('project_id', $project->id)->get();
         if(!$document){

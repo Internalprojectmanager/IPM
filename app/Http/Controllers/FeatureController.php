@@ -70,7 +70,6 @@ class FeatureController extends Controller
         $client = Client::where('path', $company_id)->first();
         $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
         $release = Release::where(['project_id' => $project->id, 'path' => $release_name])->first();
-        $status = Status::Type('Progress')->where('id', $request->feature_status)->first();
         $feature = new Feature();
         $feature->feature_uuid = Uuid::generate(4);
         $feature->name = $request->feature_name;
@@ -82,6 +81,8 @@ class FeatureController extends Controller
         }
         $feature->type = $request->type;
         $feature->author = Auth::id();
+
+        $status = Status::Type('Progress')->where('id', $request->feature_status)->first();
         if($request->type == "Scope"){
             $feature->status = Status::Name('Paused')->first()->id;
         }else{

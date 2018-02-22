@@ -77,7 +77,7 @@
 
                 <div class="row pull-right">
                     <div class="col-md-5 col-xs-6">
-                        <button onclick="location.href='{{route('documentoverview', ['name' => $release->projects->name, 'company_id' => $release->projects->company_id])}}'"
+                        <button onclick="location.href='{{route('documentoverview', ['name' => $release->projects->path, 'company_id' => $release->projects->company->path])}}'"
                                 class="blue-button" id="button-files">
                             <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
