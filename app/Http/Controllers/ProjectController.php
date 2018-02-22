@@ -227,8 +227,6 @@ class ProjectController extends Controller
             $pro[] = $p->id;
         }
 
-
-
         if(!isset($order)) {
             $projects = $this->projectsCollection($pro);
         }else{
@@ -260,9 +258,8 @@ class ProjectController extends Controller
 
     public function editProject($company_id, $name)
     {
-        $client = Client::where('path', $company_id)->select('id')->first();
-        $projects = Project::with('company')->where(['path' => $name, 'company_id' => $client->id])->first();
-        $status = Status::where('type', 'Progress')->get();
+        $projects = Project::with('company')->where(['path' => $name, 'company_id' => Client::Path($company_id)->first()->id])->first();
+        $status = Status::Type('Progress')->get();
         $companys = Client::all();
 
         return view('project.edit_project', compact('projects', 'companys', 'status'));
@@ -272,7 +269,6 @@ class ProjectController extends Controller
     {
         $client = Client::where('path', $company_id)->select('id', 'path')->first();
         $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
-        $release = Release::select('project_id')->where('project_id', $project->id)->get();
         $project->name = $request->project_name;
         $project->path = strtolower(str_replace(" ","-",$project->name));
 

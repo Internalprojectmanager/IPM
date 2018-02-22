@@ -25,7 +25,9 @@ class ReleaseValidator extends FormRequest
     {
         return [
             'release_name' => 'required|max:100',
-            'specification' => 'required|string|max:100'
+            'specification' => 'required|string|max:100',
+            'status' => 'exists:status,id',
+            'document_status' => 'exists:status,id'
         ];
     }
     public function messages()
@@ -34,7 +36,8 @@ class ReleaseValidator extends FormRequest
             'release_name.required' => 'A Name is required',
             'author.required'  => 'A Author is required',
             'specification.required'  => 'A Specificationtype is required',
-
+            'status.exists' => 'Status does not exists',
+            'document_status.exists' => 'Document Status does not exists'
         ];
     }
 }

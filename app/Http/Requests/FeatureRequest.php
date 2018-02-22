@@ -24,7 +24,8 @@ class FeatureRequest extends FormRequest
     public function rules()
     {
         return [
-            'feature_name' => 'required'
+            'feature_name' => 'required',
+            'feature_status' => 'required|exists:status,id|between:1,6'
         ];
     }
 
@@ -32,6 +33,7 @@ class FeatureRequest extends FormRequest
     {
         return [
             'feature_name.required' => 'A Feature name is required',
+            'feature_status.exists' => 'Feature status is not valid'
         ];
     }
 }

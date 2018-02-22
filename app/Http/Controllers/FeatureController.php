@@ -65,12 +65,12 @@ class FeatureController extends Controller
         return view('features.add_feature', compact('release', 'project'));
     }
 
-    public function store($company_id, $name, $release_name, Request $request)
+    public function store($company_id, $name, $release_name, FeatureRequest $request)
     {
         $client = Client::where('path', $company_id)->first();
         $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
         $release = Release::where(['project_id' => $project->id, 'path' => $release_name])->first();
-        $status = Status::where('name', 'draft')->first();
+        $status = Status::Type('Progress')->where('id', $request->feature_status)->first();
         $feature = new Feature();
         $feature->feature_uuid = Uuid::generate(4);
         $feature->name = $request->feature_name;
@@ -83,9 +83,14 @@ class FeatureController extends Controller
         $feature->type = $request->type;
         $feature->author = Auth::id();
         if($request->type == "Scope"){
-            $feature->status = Status::where('name', 'Paused')->first()->id;
+            $feature->status = Status::Name('Paused')->first()->id;
         }else{
-            $feature->status = $request->feature_status;
+            if(isset($status)){
+                $feature->status = $request->feature_status;
+            }else{
+                $feature->status = Status::Name('Draft')->first()->id;
+            }
+
         }
         if(!empty($request->feature_category)){
             $feature->category = $request->feature_category;
@@ -103,7 +108,7 @@ class FeatureController extends Controller
                     if(!empty($request->requirement_description[$k])){
                         $requirement->description = $request->requirement_description[$k];
                     }
-                    $requirement->status = $status->id;
+                    $requirement->status = Status::Name('Draft')->first()->id;
                     $requirement->author = Auth::id();
                     $requirement->save();
                     if(!empty($request->assignee[$k])){
@@ -132,6 +137,7 @@ class FeatureController extends Controller
     public function updateFeature($company_id, $name, $release_name, $feature_id, FeatureRequest $request)
     {
         $feature = Feature::where('id', $feature_id)->first();
+        $status = Status::Type('Progress')->where('id', $request->feature_status)->first();
         if ($request) {
             $this->createRevision($feature);
             $feature->name = $request->feature_name;
@@ -143,16 +149,20 @@ class FeatureController extends Controller
             $feature->type = $request->type;
             $feature->author = Auth::id();
             if($request->type == "Scope"){
-                $feature->status = Status::where('name', 'Paused')->first()->id;
+                $feature->status = Status::Name('Paused')->first()->id;
             }else{
-                $feature->status = $request->feature_status;
+                if(isset($status)){
+                    $feature->status = $request->feature_status;
+                }else{
+                    $feature->status = Status::Name('Draft')->first()->id;
+            }
             }
             if(!empty($request->feature_category)){
                 $feature->category = $request->feature_category;
             }
             $feature->save();
 
-            $status = Status::where('name', 'draft')->select('id')->first();
+            $status = Status::Name('draft')->first();
             $requirement = Requirement::where('feature_uuid', $feature->feature_uuid)->get();
             foreach ($requirement as $r){
                 if(!in_array($r->requirement_uuid, $request->requirement_uuid)){

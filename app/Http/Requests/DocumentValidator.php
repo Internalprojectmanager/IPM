@@ -26,7 +26,7 @@ class DocumentValidator extends FormRequest
         return [
             'upload' => 'between:0,10000| mimes:doc,docx,jpeg,jpg,pdf,png,psd,xls,xlsx,ppt,pptx,bmp,txt,rtf',
             'document_title' => 'required',
-            'status' => 'required',
+            'status' => 'required|exists:status,id',
             'release_id' => 'nullable'
         ];
     }
