@@ -37,15 +37,17 @@ class FeatureController extends Controller
         $saved = $feature_revision->save();
 
         if (!$saved) {
-            App:abort('500', 'Error');
+            App:
+            abort('500', 'Error');
         }
         return true;
     }
 
-    public function showfeature($company_id, $name, $release_name, $feature_id){
+    public function showfeature($company_id, $name, $release_name, $feature_id)
+    {
         $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
         $featureid = $feature->feature_uuid;
-        $requirementcount = Status::withCount(['requirements' => function ($q) use ($featureid){
+        $requirementcount = Status::withCount(['requirements' => function ($q) use ($featureid) {
             $q->where('feature_uuid', '=', $featureid);
         }])->where('name', 'Completed')->first();
         $requirementcount = $requirementcount->requirements_count;
@@ -53,7 +55,6 @@ class FeatureController extends Controller
         $user = Assignee::where('uuid', $feature->releases->projects->id)->select('userid')->distinct()->get();
         return view('features.details_feature', compact('feature', 'requirementcount', 'status', 'user'));
     }
-
 
 
     public function add($company_id, $name, $release_name)
@@ -76,29 +77,29 @@ class FeatureController extends Controller
         $feature->path = strtolower(str_replace(" ", "-", $feature->name));
         $feature->release_id = $release->release_uuid;
         $feature->description = $request->feature_description;
-        if(!empty($request->category)){
+        if (!empty($request->category)) {
             $feature->category = $request->category;
         }
         $feature->type = $request->type;
         $feature->author = Auth::id();
 
         $status = Status::Type('Progress')->where('id', $request->feature_status)->first();
-        if($request->type == "Scope"){
+        if ($request->type == "Scope") {
             $feature->status = Status::Name('Paused')->first()->id;
-        }else{
-            if(isset($status)){
+        } else {
+            if (isset($status)) {
                 $feature->status = $request->feature_status;
-            }else{
+            } else {
                 $feature->status = Status::Name('Draft')->first()->id;
             }
 
         }
-        if(!empty($request->feature_category)){
+        if (!empty($request->feature_category)) {
             $feature->category = $request->feature_category;
         }
         $feature->save();
 
-        if(!empty($request->requirement_name)){
+        if (!empty($request->requirement_name)) {
             foreach ($request->requirement_name as $k => $value) {
                 if ($request->requirement_name[$k] !== NULL) {
                     $requirement = new Requirement;
@@ -106,14 +107,14 @@ class FeatureController extends Controller
                     $requirement->release_id = $release->release_uuid;
                     $requirement->name = $request->requirement_name[$k];
                     $requirement->requirement_uuid = Uuid::generate(4);
-                    if(!empty($request->requirement_description[$k])){
+                    if (!empty($request->requirement_description[$k])) {
                         $requirement->description = $request->requirement_description[$k];
                     }
                     $requirement->status = Status::Name('Draft')->first()->id;
                     $requirement->author = Auth::id();
                     $requirement->save();
-                    if(!empty($request->assignee[$k])){
-                        foreach ($request->assignee[$k] as $as){
+                    if (!empty($request->assignee[$k])) {
+                        foreach ($request->assignee[$k] as $as) {
                             $assignee = new Assignee();
                             $assignee->userid = $as;
                             $assignee->uuid = $requirement->requirement_uuid;
@@ -139,41 +140,48 @@ class FeatureController extends Controller
     {
         $feature = Feature::where('id', $feature_id)->first();
         $status = Status::Type('Progress')->where('id', $request->feature_status)->first();
+
         if ($request) {
             $this->createRevision($feature);
             $feature->name = $request->feature_name;
             $feature->path = strtolower(str_replace(" ", "-", $feature->name));
             $feature->description = $request->feature_description;
-            if(!empty($request->category)){
+
+            if (!empty($request->category)) {
                 $feature->category = $request->category;
             }
+
             $feature->type = $request->type;
             $feature->author = Auth::id();
-            if($request->type == "Scope"){
+
+            if ($request->type == "Scope") {
                 $feature->status = Status::Name('Paused')->first()->id;
-            }else{
-                if(isset($status)){
+            } else {
+                if (isset($status)) {
                     $feature->status = $request->feature_status;
-                }else{
+                } else {
                     $feature->status = Status::Name('Draft')->first()->id;
+                }
             }
-            }
-            if(!empty($request->feature_category)){
+
+            if (!empty($request->feature_category)) {
                 $feature->category = $request->feature_category;
             }
+
             $feature->save();
 
             $status = Status::Name('draft')->first();
             $requirement = Requirement::where('feature_uuid', $feature->feature_uuid)->get();
-            if($request->requirement_uuid){
-                foreach ($requirement as $r){
-                    if(!in_array($r->requirement_uuid, $request->requirement_uuid)){
+
+            if ($request->requirement_uuid) {
+                foreach ($requirement as $r) {
+                    if (!in_array($r->requirement_uuid, $request->requirement_uuid)) {
                         Requirement::where('id', $r->id)->delete();
                     }
                 }
             }
 
-            if($request->requirement_name) {
+            if ($request->requirement_name) {
                 foreach ($request->requirement_name as $k => $v) {
                     if (!empty($request->requirement_uuid[$k])) {
                         $requirement = Requirement::where('requirement_uuid', $request->requirement_uuid[$k])->first();
@@ -229,27 +237,28 @@ class FeatureController extends Controller
                         }
                     }
                 }
-            }else{
-                foreach ($requirement as $r){
+            } else {
+                foreach ($requirement as $r) {
                     Assignee::where('uuid', $r->requirement_uuid)->delete();
                 }
-                Requirement::where('feature_uuid',$feature->feature_uuid)->delete();
+                Requirement::where('feature_uuid', $feature->feature_uuid)->delete();
 
             }
 
 
             return redirect(route('showfeature', ['name' => $feature->releases->projects->path,
-                'company_id' => $feature->releases->projects->company->path, 'release_name' => $feature->releases->path,'feature_id' => $feature->id]));
+                'company_id' => $feature->releases->projects->company->path, 'release_name' => $feature->releases->path, 'feature_id' => $feature->id]));
         }
     }
 
-    public function deleteFeature($company_id, $name, $release_name, $feature_id){
+    public function deleteFeature($company_id, $name, $release_name, $feature_id)
+    {
         $feature = Feature::where('id', $feature_id)->first();
         $requirement = Requirement::where('feature_uuid', $feature->feature_uuid)->get();
-        foreach ($requirement as $r){
+        foreach ($requirement as $r) {
             Assignee::where('uuid', $r->requirement_uuid)->delete();
         }
-        Requirement::where('feature_uuid',$feature->feature_uuid)->delete();
+        Requirement::where('feature_uuid', $feature->feature_uuid)->delete();
         Feature::where('id', $feature_id)->delete();
 
         return redirect(route('showrelease', ['name' => $feature->releases->projects->path,

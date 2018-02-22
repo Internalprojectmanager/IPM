@@ -192,7 +192,7 @@
 /*
  Styling
 */
-.tabset label {
+.tabset > label {
     position: relative;
     display: inline-block;
     padding: 8px 20px;
@@ -202,13 +202,13 @@
     margin: 0px;
 }
 
-.tabset label:hover,
+.tabset > label:hover,
 .tabset input:focus + label {
     color: #000000;
 }
 
 
-.tabset label:hover::after,
+.tabset > label:hover::after,
 .tabset input:focus + label::after,
 .tabset input:checked + label::after {
     background: #000000;
