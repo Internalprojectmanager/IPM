@@ -165,72 +165,96 @@ class FeatureController extends Controller
 
             $status = Status::Name('draft')->first();
             $requirement = Requirement::where('feature_uuid', $feature->feature_uuid)->get();
-            foreach ($requirement as $r){
-                if(!in_array($r->requirement_uuid, $request->requirement_uuid)){
-                    Requirement::where('id', $r->id)->delete();
+            if($request->requirement_uuid){
+                foreach ($requirement as $r){
+                    if(!in_array($r->requirement_uuid, $request->requirement_uuid)){
+                        Requirement::where('id', $r->id)->delete();
+                    }
                 }
             }
 
-            foreach($request->requirement_name as $k => $v){
-                if(!empty($request->requirement_uuid[$k])){
-                    $requirement = Requirement::where('requirement_uuid', $request->requirement_uuid[$k])->first();
-                    $requirement->name = $request->requirement_name[$k];
-                    $requirement->description = $request->requirement_description[$k];
-                    $requirement->author = Auth::id();
-                    $requirement->save();
-                    if(!empty($request->assignee[$k])){
-                        $assignee = Assignee::where('uuid', $requirement->requirement_uuid)->get();
-                        $assigneeusers  = array();
-                        foreach ($assignee as $a){
-                            if(!in_array($a->userid, $request->assignee[$k])){
-                                Assignee::where([['uuid', $requirement->requirement_uuid],['userid', $a->userid]])->delete();
-                            }else{
-                                $assigneeusers[] = $a->userid;
-                            }
-                        }
-
-                        foreach ($request->assignee[$k] as $a){
-                            if(!in_array($a, $assigneeusers)){
-                                $assignee = new Assignee();
-                                $assignee->userid = $a;
-                                $assignee->uuid = $requirement->requirement_uuid;
-                                $assignee->save();
-                            }
-                        }
-                    }else{
-                        Assignee::where('uuid', $requirement->requirement_uuid)->delete();
-                    }
-
-                }else{
-                    if ($request->requirement_name[$k] !== NULL) {
-                        $requirement = new Requirement;
-                        $requirement->feature_uuid = $feature->feature_uuid;
-                        $requirement->release_id = $feature->release_id;
+            if($request->requirement_name) {
+                foreach ($request->requirement_name as $k => $v) {
+                    if (!empty($request->requirement_uuid[$k])) {
+                        $requirement = Requirement::where('requirement_uuid', $request->requirement_uuid[$k])->first();
                         $requirement->name = $request->requirement_name[$k];
-                        $requirement->requirement_uuid = Uuid::generate(4);
-                        if(!empty($request->requirement_description[$k])){
-                            $requirement->description = $request->requirement_description[$k];
-                        }
-                        $requirement->status = $status->id;
+                        $requirement->description = $request->requirement_description[$k];
                         $requirement->author = Auth::id();
                         $requirement->save();
-                        if(!empty($request->assignee[$k])){
-                            foreach ($request->assignee[$k] as $as){
-                                $assignee = new Assignee();
-                                $assignee->userid = $as;
-                                $assignee->uuid = $requirement->requirement_uuid;
-                                $assignee->save();
+                        if (!empty($request->assignee[$k])) {
+                            $assignee = Assignee::where('uuid', $requirement->requirement_uuid)->get();
+                            $assigneeusers = array();
+                            foreach ($assignee as $a) {
+                                if (!in_array($a->userid, $request->assignee[$k])) {
+                                    Assignee::where([['uuid', $requirement->requirement_uuid], ['userid', $a->userid]])->delete();
+                                } else {
+                                    $assigneeusers[] = $a->userid;
+                                }
                             }
+
+                            foreach ($request->assignee[$k] as $a) {
+                                if (!in_array($a, $assigneeusers)) {
+                                    $assignee = new Assignee();
+                                    $assignee->userid = $a;
+                                    $assignee->uuid = $requirement->requirement_uuid;
+                                    $assignee->save();
+                                }
+                            }
+                        } else {
+                            Assignee::where('uuid', $requirement->requirement_uuid)->delete();
                         }
 
+                    } else {
+                        if ($request->requirement_name[$k] !== NULL) {
+                            $requirement = new Requirement;
+                            $requirement->feature_uuid = $feature->feature_uuid;
+                            $requirement->release_id = $feature->release_id;
+                            $requirement->name = $request->requirement_name[$k];
+                            $requirement->requirement_uuid = Uuid::generate(4);
+                            if (!empty($request->requirement_description[$k])) {
+                                $requirement->description = $request->requirement_description[$k];
+                            }
+                            $requirement->status = $status->id;
+                            $requirement->author = Auth::id();
+                            $requirement->save();
+                            if (!empty($request->assignee[$k])) {
+                                foreach ($request->assignee[$k] as $as) {
+                                    $assignee = new Assignee();
+                                    $assignee->userid = $as;
+                                    $assignee->uuid = $requirement->requirement_uuid;
+                                    $assignee->save();
+                                }
+                            }
+
+                        }
                     }
                 }
+            }else{
+                foreach ($requirement as $r){
+                    Assignee::where('uuid', $r->requirement_uuid)->delete();
+                }
+                Requirement::where('feature_uuid',$feature->feature_uuid)->delete();
+
             }
 
 
             return redirect(route('showfeature', ['name' => $feature->releases->projects->path,
                 'company_id' => $feature->releases->projects->company->path, 'release_name' => $feature->releases->path,'feature_id' => $feature->id]));
         }
+    }
+
+    public function deleteFeature($company_id, $name, $release_name, $feature_id){
+        $feature = Feature::where('id', $feature_id)->first();
+        $requirement = Requirement::where('feature_uuid', $feature->feature_uuid)->get();
+        foreach ($requirement as $r){
+            Assignee::where('uuid', $r->requirement_uuid)->delete();
+        }
+        Requirement::where('feature_uuid',$feature->feature_uuid)->delete();
+        Feature::where('id', $feature_id)->delete();
+
+        return redirect(route('showrelease', ['name' => $feature->releases->projects->path,
+            'company_id' => $feature->releases->projects->company->path, 'release_name' => $feature->releases->path]));
+
     }
 
 }
