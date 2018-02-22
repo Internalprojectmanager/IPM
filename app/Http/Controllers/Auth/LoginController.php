@@ -75,6 +75,6 @@ class LoginController extends Controller
                 Auth::login($my_user);
             }
         }
-        return redirect($this->redirectPath());
+        return redirect()->intended('overviewprojects');
     }
 }
