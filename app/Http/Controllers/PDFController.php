@@ -27,7 +27,7 @@ class PDFController extends Controller
             $q->orderby('userid');
         }])->where(['path' => $name, 'company_id' => $company->id])->first();
 
-        $release = Release::where([['project_id', $project->id],['name', $release_name],['version', $version]])->first();
+        $release = Release::where([['project_id', $project->id],['path', $release_name],['version', $version]])->first();
         $release_id = $release->release_uuid;
         if(!$release){
             abort(404);
