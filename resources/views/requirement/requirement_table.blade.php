@@ -24,7 +24,7 @@
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: {{$requirement->rstatus->color}};"></td>
                         <td class="width20"><span class="tabletitle">{{$requirement->name}}</span></td>
-                        <td class="">{!! $requirement->description !!}</td>
+                        <td class="">{!! nl2br($requirement->description) !!}</td>
                         <td class="width25">
                             @foreach($requirement->assignees as $assignee)
                                 <div class="col-md-8 requiremnt-assingee">
