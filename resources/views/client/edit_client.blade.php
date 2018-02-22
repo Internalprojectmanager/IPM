@@ -25,16 +25,16 @@
             <form action="{{route('updateclients', $clients->path)}}" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label class="form-label-modal">Client Name<span class="required">*</span></label>
+                    <label>Client Name<span class="required">*</span></label>
                     <input type="text" class="form-control input-text-modal" name="client_name" id="client_name" value="{{$clients->name}}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label-modal">Client Description</label>
+                    <label>Client Description</label>
                     <textarea rows="4" cols="50" name="description" class="form-control input-text-modal"
                               id="description">{{$clients->description}}</textarea>
                 </div>
                 <div class="form-group">
-                    <label class="form-label-modal">Status</label><br>
+                    <label>Status</label><br>
                     <select name="status" class="modal-dropdown-search">
                         @foreach($status as $s)
                             <option @if($s->id == $clients->status) selected @endif value="{{$s->id}}">{{$s->name}}</option>
@@ -97,12 +97,12 @@
                         <section id="Links" class="tab-panel">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-6">
-                                    <label class="form-label-modal">Link</label>
+                                    <label>Link</label>
                                     <input type="text" class="form-control input-text-modal" name="link_url"
                                            id="link-url" placeholder="http://" value="{{$clients->link_url}}">
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label-modal">Title</label>
+                                    <label>Title</label>
                                     <input type="text" class="form-control input-text-modal" name="link_title"
                                            id="link-title" placeholder="Link Title" value="{{$clients->link_title}}">
                                 </div>
@@ -112,18 +112,18 @@
                         <section id="Contact_person" class="tab-panel">
                             <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-md-12">
-                                        <label class="form-label-modal" for="contact_name">Name</label>
+                                        <label for="contact_name">Name</label>
                                         <input type="text" class="form-control input-text-modal" name="contact_name"
                                                id="contact_name" placeholder="Name" value="{{$clients->contactname}}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label-modal" for="contact_phone-number">Phone Number</label>
+                                        <label for="contact_phone-number">Phone Number</label>
                                         <input type="text" class="form-control input-text-modal"
                                                name="contact_phone-number" id="contact_phone-number"
                                                placeholder="Phone Number" value="{{$clients->contactnumber}}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label-modal" for="contact_email-number">Email</label>
+                                        <label for="contact_email-number">Email</label>
                                         <input type="text" class="form-control input-text-modal"
                                                name="contact_email" id="contact_email" placeholder="Email" value="{{$clients->contactemail}}">
                                     </div>

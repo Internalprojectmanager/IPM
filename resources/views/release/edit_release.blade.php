@@ -81,7 +81,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label class="form-label-modal">Deadline:</label>
+                    <label>Deadline:</label>
                     <input type='text' class="form-control input-text-modal datepicker" autocomplete="off" placeholder="YYYY/MM/DD" name="deadline" value="@php echo  date("Y/m/d", strtotime($release->deadline)); @endphp"/>
                 </div>
 

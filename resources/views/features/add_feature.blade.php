@@ -90,18 +90,18 @@
                         <section id="fr-req1" class="tab-panel">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-12">
-                                    <label class="form-label-modal">Requirement Name</label>
+                                    <label>Requirement Name</label>
                                     <input type="text" class="form-control input-text-modal" name="requirement_name[1]"
                                            id="" placeholder="">
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label-modal">Description:</label>
+                                    <label>Description:</label>
                                     <textarea rows="4" cols="50" name="requirement_description[1]"
                                               class="form-control input-text-modal" id="description"></textarea>
 
                                 </div>
                                 <div class="col-md-12 assignee">
-                                    <label class="form-label-modal">Assingees:</label>
+                                    <label>Assingees:</label>
                                     <select class="form-control input-text-modal selectpicker" name="assignee[1][]"
                                             multiple>
                                         @foreach($user as $u)

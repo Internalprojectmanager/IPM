@@ -35,16 +35,16 @@
                 @endif
 
                 <div class="form-group">
-                    <label class="form-label-modal">Client Name<span class="required">*</span></label>
+                    <label>Client Name<span class="required">*</span></label>
                     <input type="text" class="form-control input-text-modal" name="client_name" id="client_name">
                 </div>
                 <div class="form-group">
-                    <label class="form-label-modal">Client Description</label>
+                    <label>Client Description</label>
                     <textarea rows="4" cols="50" name="description" class="form-control input-text-modal"
                               id="description"></textarea>
                 </div>
                 <div class="form-group">
-                    <label class="form-label-modal">Status</label><br>
+                    <label>Status</label><br>
                     <select name="status" class="modal-dropdown-search">
                         @foreach($status as $s)
                             <option value="{{$s->name}}">{{$s->name}}</option>
@@ -107,12 +107,12 @@
                         <section id="Links" class="tab-panel">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-6">
-                                    <label class="form-label-modal">Link</label>
+                                    <label>Link</label>
                                     <input type="text" class="form-control input-text-modal" name="link_url"
                                            id="link-url" placeholder="http://">
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label-modal">Title</label>
+                                    <label>Title</label>
                                     <input type="text" class="form-control input-text-modal" name="link_title"
                                            id="link-title" placeholder="Link Title">
                                 </div>
@@ -121,7 +121,7 @@
 
                         <section id="Contact_person" class="tab-panel">
                             <div class="form-group">
-                                <label class="form-label-modal">Contact</label>
+                                <label>Contact</label>
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-md-6">
                                         <input type="text" class="form-control input-text-modal" name="contact_name"

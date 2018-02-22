@@ -27,12 +27,12 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <div class="form-group">
-                        <label class="form-label-modal">Project name:<span class="required">*</span></label>
+                        <label>Project name:<span class="required">*</span></label>
                         <input type="text" class="form-control input-text-modal" name="project_name" id="client_name" value="{{old('project_name')}}">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-modal">Client:<span class="required">*</span></label>
+                        <label>Client:<span class="required">*</span></label>
                         <select class="form-control input-text-modal" name="company" id="company" >
                             <option value="" disabled="" selected="">Select a client</option>
                             @foreach($clients as $company)
@@ -48,12 +48,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-modal">Description:</label>
+                        <label>Description:</label>
                         <textarea rows="4" cols="50" name="description" class="form-control input-text-modal" id="description">{{old('description')}}</textarea>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-modal">Assingees:</label>
+                        <label>Assingees:</label>
                         <select class="form-control selectpicker" name="assignee[]" multiple>
                             @foreach($user as $u)
                                 <option value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}} @if(isset($u->jobtitles))(<i>{{$u->jobtitles->name}}</i>)@endif</option>

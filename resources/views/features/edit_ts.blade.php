@@ -102,18 +102,18 @@
                                 <input type="hidden" name="requirement_uuid[{{$i}}]">
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-md-12">
-                                        <label class="form-label-modal">Requirement Name</label>
+                                        <label>Requirement Name</label>
                                         <input type="text" class="form-control input-text-modal requirement_name" name="requirement_name[{{$i}}]"
                                                id="" placeholder="" value="">
                                     </div>
                                     <div class="col-md-12">
-                                        <label class="form-label-modal">Description:</label>
+                                        <label>Description:</label>
                                         <textarea rows="4" cols="50" name="requirement_description[{{$i}}]"
                                                   class="form-control input-text-modal" id="description"></textarea>
 
                                     </div>
                                     <div class="col-md-12 assignee">
-                                        <label class="form-label-modal">Assingees:</label>
+                                        <label>Assingees:</label>
                                         <select class="form-control input-text-modal selectpicker" name="assignee[{{$i}}][]"
                                                 multiple>
                                             @foreach($user as $u)
@@ -130,18 +130,18 @@
                             <input type="hidden" name="requirement_uuid[{{$i}}]" value="{{$r->requirement_uuid}}">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-12">
-                                    <label class="form-label-modal">Requirement Name</label>
+                                    <label>Requirement Name</label>
                                     <input type="text" class="form-control input-text-modal requirement_name" name="requirement_name[{{$i}}]"
                                            id="" placeholder="" value="{{$r->name}}">
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label-modal">Description:</label>
+                                    <label>Description:</label>
                                     <textarea rows="4" cols="50" name="requirement_description[{{$i}}]"
                                               class="form-control input-text-modal" id="description">{{$r->description}}</textarea>
 
                                 </div>
                                 <div class="col-md-12 assignee">
-                                    <label class="form-label-modal">Assingees:</label>
+                                    <label>Assingees:</label>
                                     <select class="form-control input-text-modal selectpicker" name="assignee[{{$i}}][]"
                                             multiple>
                                         @foreach($user as $u)

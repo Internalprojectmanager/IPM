@@ -27,12 +27,12 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <div class="form-group">
-                        <label class="form-label-modal">Project name:<span class="required">*</span></label>
+                        <label>Project name:<span class="required">*</span></label>
                         <input type="text" class="form-control input-text-modal" name="project_name" id="client_name" value="{{old('project_name')}}">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-modal">Client:<span class="required">*</span></label>
+                        <label>Client:<span class="required">*</span></label>
                         <select class="form-control input-text-modal" name="company" id="company" >
                             <option value="{{$clients->id}}">{{$clients->name}}</option>
                         </select>
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-modal">Project Status:<span class="required">*</span></label>
+                        <label>Project Status:<span class="required">*</span></label>
 
                         <select class="form-control input-text-modal"  name="status">
                             @foreach($projectstatus as $s)
@@ -56,16 +56,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-modal">Deadline:</label>
+                        <label>Deadline:</label>
                         <input type='text' class="form-control input-text-modal datepicker" name="deadline" placeholder="YYYY/MM/DD" value="{{old('deadline')}}"/>
                     </div>
                     <div class="form-group">
-                        <label class="form-label-modal">Description:</label>
+                        <label>Description:</label>
                         <textarea rows="4" cols="50" name="description" class="form-control input-text-modal" id="description">{{old('description')}}</textarea>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-modal">Assingees:</label>
+                        <label>Assingees:</label>
                         <select class="form-control selectpicker" name="assignee[]" multiple>
                             @foreach($user as $u)
                                 <option value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}} @if(isset($u->jobtitles))(<i>{{$u->jobtitles->name}}</i>)@endif</option>
