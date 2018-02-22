@@ -30,4 +30,15 @@ class User extends Authenticatable
     public function jobtitles(){
         return $this->hasOne('App\Status', 'id', 'job_title');
     }
+
+    /**
+     * Magically crypt the password whenever its set on the modal because otherwise remembering to do it can get ugly
+     * at least you know it's now done
+     *
+     * @param String $value
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
