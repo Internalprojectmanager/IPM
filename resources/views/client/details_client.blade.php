@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    {{$clients->name}} | {{env('APP_NAME')}}
+    {{$clients->name}} Details | {{env('APP_NAME')}}
 @endsection
 
 @section('breadcrumbs', Breadcrumbs::render('singleclient', $clients))

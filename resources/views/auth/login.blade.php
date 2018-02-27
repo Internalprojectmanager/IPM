@@ -1,5 +1,9 @@
 @extends('layout.app')
 
+@section('title')
+    Sign in | {{env('APP_NAME')}}
+@endsection
+
 @section('content')
     <div class="row">
       <div class="col-md-12">

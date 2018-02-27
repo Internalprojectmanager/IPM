@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Add document
+    Add document | {{env('APP_NAME')}}
 @endsection
 
 @section('content')

@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    {{$document->title}} - {{$document->projects->name}}
+    {{$document->title}} Details - {{$document->projects->name}}
 @endsection
 
 @section('breadcrumbs', Breadcrumbs::render('detailsdocument', $document))

@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Project
+    Project Overview | {{env('APP_NAME')}}
 @endsection
 
 @section('breadcrumbs', Breadcrumbs::render('projects'))

@@ -1,5 +1,9 @@
 @extends('layout.app')
 
+@section('title')
+    {{Auth::user()->first_name}} {{Auth::user()->last_name}} - Profile  | {{env('APP_NAME')}}
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -20,7 +24,7 @@
                     <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                         <label for="first_name" class="col-md-5 control-label">Name</label>
                         <div class="form-settings-field">
-                            <input id="first_name" type="text" class="form-control form-settings-field" name="first_name" value="{{ $profile->first_name }}" placeholder="" autofocus>
+                            <input id="first_name" type="text" disabled class="form-control form-settings-field" name="first_name" value="{{ $profile->first_name }}" placeholder="" autofocus>
 
                             @if ($errors->has('first_name'))
                                 <i class="error-icon"></i>
@@ -36,7 +40,7 @@
                     <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                         <label for="last_name" class="col-md-5 control-label">Surname</label>
                         <div class="form-settings-field">
-                            <input id="last_name" type="text" class="form-control form-settings-field" name="last_name" value="{{ $profile->last_name }}" placeholder="" >
+                            <input id="last_name" type="text" disabled class="form-control form-settings-field" name="last_name" value="{{ $profile->last_name }}" placeholder="" >
 
                             @if ($errors->has('last_name'))
                                 <i class="error-icon"></i>

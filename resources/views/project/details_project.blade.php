@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    {{$projects->company->name}} {{$projects->name}} details | IPM
+    {{$projects->company->name}} - {{$projects->name}} | {{env('APP_NAME')}}
 @endsection
 
 @section('breadcrumbs', Breadcrumbs::render('singleproject', $projects, $client))

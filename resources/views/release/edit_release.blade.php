@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    {{$project->name}} - {{$release->version}} {{$release->name}}
+    {{$project->name}} -  {{$release->name}} {{number_format($release->version, 1)}} | {{env('APP_NAME')}}
 @endsection
 
 @section('breadcrumbs', Breadcrumbs::render('showrelease', $project, $company, $release))
