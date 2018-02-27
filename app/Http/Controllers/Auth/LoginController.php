@@ -65,20 +65,15 @@ class LoginController extends Controller
     }
 
     public function firstOrCreateOauth($user, $provider){
-        $authuser = User::where('email', $user->email)->first();
-
-        if($authuser){
-            $authuser->provider_id = $user->provider_id;
-            $authuser->save();
-            return $authuser;
-        }
-        return User::create([
+        $data = [
             'provider_id' => $user->id,
             'first_name' => $user->user['name']['givenName'],
             'last_name' => $user->user['name']['familyName'],
-            'email' => $user->getEmail(),
             'provider' => $provider,
-            'active' => 1,
-        ]);
+            'active' => 1
+        ];
+        $authuser = User::updateOrCreate(['email'=> $user->getEmail()], $data);
+
+        return $authuser;
     }
 }
