@@ -57,24 +57,28 @@ class LoginController extends Controller
         $domain = preg_replace('/.+@/', '', $user->getEmail());
 
         if ($domain == 'itsavirus.com') {
-            // storing data to our use table and logging them in
-            $data = [
-                'first_name' => $user->user['name']['givenName'],
-                'last_name' => $user->user['name']['familyName'],
-                'email' => $user->getEmail(),
-                'provider' => $provider,
-                'active' => 1,
-                'password' => 'avocad0',
-            ];
-
             // Here, check if the user already exists in your records
-            $my_user = User::where('email', '=', $user->getEmail())->first();
-            if ($my_user === NULL) {
-                Auth::login(User::firstOrCreate($data));
-            } else {
-                Auth::login($my_user);
-            }
+            $authuser = $this->firstOrCreateOauth($user, $provider);
+            Auth::login($authuser);
         }
         return redirect()->intended('overviewprojects');
+    }
+
+    public function firstOrCreateOauth($user, $provider){
+        $authuser = User::where('email', $user->email)->first();
+
+        if($authuser){
+            $authuser->provider_id = $user->provider_id;
+            $authuser->save();
+            return $authuser;
+        }
+        return User::create([
+            'provider_id' => $user->id,
+            'first_name' => $user->user['name']['givenName'],
+            'last_name' => $user->user['name']['familyName'],
+            'email' => $user->getEmail(),
+            'provider' => $provider,
+            'active' => 1,
+        ]);
     }
 }
