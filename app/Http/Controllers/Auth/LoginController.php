@@ -43,7 +43,7 @@ class LoginController extends Controller
 
     public function redirectToProvider($provider = "google")
     {
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver($provider)->with(['prompt' =>  'select_account'])->redirect();
     }
 
     /**
