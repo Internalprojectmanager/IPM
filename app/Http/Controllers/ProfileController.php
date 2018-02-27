@@ -32,7 +32,7 @@ class ProfileController extends Controller
             }
 
             if( !$request->password == '' && !$request->password == NULL){
-                $profile->password = bcrypt($request->password);
+                $profile->password = $request->password;
             }
         }
         $profile->first_name = $request->first_name;

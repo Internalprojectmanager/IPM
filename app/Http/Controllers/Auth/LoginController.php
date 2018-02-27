@@ -64,7 +64,7 @@ class LoginController extends Controller
                 'email' => $user->getEmail(),
                 'provider' => $provider,
                 'active' => 1,
-                'password' => bcrypt('avocad0'),
+                'password' => 'avocad0',
             ];
 
             // Here, check if the user already exists in your records
