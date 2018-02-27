@@ -28,7 +28,7 @@
                 <span class="project-info-right">{{number_format(floatval($release->version), 1)}}</span>
                 <hr>
                 <span class="project-info-left">DESCRIPTION</span>
-                <span class="project-info-right">{{implode(' ', array_slice(str_word_count($release->description, 2), 0, 12))}}...</span>
+                <span class="project-info-right">{!! nl2br(implode(' ', array_slice(str_word_count($release->description, 2), 0, 12))) !!}...</span>
                 <hr>
                 <span class="project-info-left">PREPARED BY</span>
                 <span class="project-info-right prepared">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
@@ -101,7 +101,7 @@
         <br><br><br>
         <span class="h2" style="margin-bottom: 600px;">PROJECT DESCRIPTION</span><br>
         <span class="project-description">
-                {{ $project->description }}
+                {!! nl2br($project->description) !!}
             </span>
         <br><br><br><br>
         <span class="h2">PROJECT ROLES & RESPONSIBILITIES</span>
@@ -253,7 +253,7 @@
                                 {{ $f->name }}
                             </td>
                             <td width="65%">
-                                {{ $f->description }}
+                                {!! nl2br($f->description) !!}
                             </td>
                         </tr>
                     </tbody>
@@ -274,7 +274,7 @@
                                     {{ $r->name }}
                                 </td>
                                 <td width="65%">
-                                    {{ $r->description }}
+                                    {!! nl2br($r->description) !!}
                                 </td>
                             </tr>
 
