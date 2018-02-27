@@ -27,10 +27,10 @@ class CompanyController extends Controller
 
     public function storeCompany(Request $request)
     {
-        $status = Status::where('name', $request->status)->first();
+        $status = Status::name($request->status)->first();
         $client = new Client();
         $client->name = $request->client_name;
-        $client->path = strtolower(str_replace(" ","-",$client->name));
+        $client->path = str_slug($client->name);
         $client->description = $request->description;
         $client->status = $status->id;
         $client->contactname = $request->contact_name;
@@ -46,12 +46,12 @@ class CompanyController extends Controller
     {
         $clients = Client::sortable()->withCount('projects')->with('cstatus')->paginate(8);
         $clientcount = $clients->count();
-        $status = Status::where('type', 'Client')->get();
+        $status = Status::type('Client')->get();
         return view('client.client', compact('clients', 'clientcount', 'status'));
     }
 
     public function searchCompany(Request $request){
-        $clie = array();
+        $clie = [];
         $search = $request->search;
         $status = $request->status;
         $sort = $request->sort;
@@ -80,7 +80,7 @@ class CompanyController extends Controller
 
         $clients = Client::with('cstatus')->sortable([$sort => $order])->withcount('projects')->whereIn('client.id', $clie)->paginate(8, ['*'], 'page', $page);
         $clientcount = $clients->count();
-        $status = Status::where('type', 'Client')->get();
+        $status = Status::type('Client')->get();
         return view('client.client_table', compact('clients', 'clientcount', 'status'));
 
     }
@@ -90,12 +90,12 @@ class CompanyController extends Controller
             $clients = Client::with('cstatus', 'projects.assignee')->sortable('created_at', 'desc')->where('path', $name)->first();
             $projects = Project::sortable()->where('company_id' , $clients->id)->paginate(8);
             $projectcount = $projects->count();
-            $status = Status::where('type', 'Client')->get();
+            $status = Status::type('Client')->get();
             $link = unserialize($clients->link);
             $clients->link_title =$link['title'];
             $clients->link_url=$link['link'];
             $user = User::all();
-            $projectstatus = Status::where('type', 'Progress')->get();
+            $projectstatus = Status::type('Progress')->get();
             return view('client.details_client', compact('clients', 'projects', 'projectcount', 'status', 'user', 'projectstatus'));
     }
 
@@ -112,12 +112,12 @@ class CompanyController extends Controller
 
     public function updateCompany($name, Request $request)
     {
-        $clients = Client::where('path', $name)->first();
+        $clients = Client::path($name)->first();
         $request->validate([
             'client_name' => 'required|unique:client,name,' . $clients->id,
         ]);
         $clients->name = $request->client_name;
-        $clients->path = strtolower(str_replace(" ","-",$clients->name));
+        $clients->path = str_slug($clients->name);
         $clients->description = $request->description;
         $clients->status = $request->status;
         $clients->contactname = $request->contact_name;
@@ -133,8 +133,7 @@ class CompanyController extends Controller
 
     public function deleteCompany($name)
     {
-        $client = Client::where('name', $name);
-        $client->delete();
+        $client = Client::path($name)->delete();
 
         return redirect()->route('overviewclient');
     }
