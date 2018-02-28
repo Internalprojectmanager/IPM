@@ -67,19 +67,18 @@ class CompanyController extends Controller
         if(isset($status)){
             $clients->where('status', $status);
         }
-        $clientcount = $clients->get()->count();
+        $clients = $clients->get();
 
-        if($clientcount <= 8){
+        if($clients->count() <= 8){
             $page = 1;
         }
-        $clients = $clients->get();
 
         foreach ($clients as $c){
             $clie[] = $c->id;
         }
 
-        $clients = Client::with('cstatus')->sortable([$sort => $order])->withcount('projects')->whereIn('client.id', $clie)->paginate(8, ['*'], 'page', $page);
-        $clientcount = $clients->count();
+        $clients = Client::with('cstatus')->sortable([$sort => $order])->withCount('projects')->whereIn('client.id', $clie)->paginate(8, ['*'], 'page', $page);
+        $clientcount = $clients->total();
         $status = Status::type('Client')->get();
         return view('client.client_table', compact('clients', 'clientcount', 'status'));
 
@@ -87,9 +86,9 @@ class CompanyController extends Controller
 
     public function detailsCompany($name)
     {
-            $clients = Client::with('cstatus', 'projects.assignee')->sortable('created_at', 'desc')->where('path', $name)->first();
+            $clients = Client::with('cstatus')->where('path', $name)->firstOrFail();
             $projects = Project::sortable()->where('company_id' , $clients->id)->paginate(8);
-            $projectcount = $projects->count();
+            $projectcount = $projects->total();
             $status = Status::type('Client')->get();
             $link = unserialize($clients->link);
             $clients->link_title =$link['title'];

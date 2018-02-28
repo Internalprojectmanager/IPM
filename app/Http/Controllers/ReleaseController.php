@@ -60,21 +60,18 @@ class ReleaseController extends Controller
     }
 
     public function showRelease($company_id,$name,$release_name, $version){
-        $company = Client::where('path' ,$company_id)->first();
-        $project = Project::where(['path' => $name, 'company_id' => $company->id])->first();
-        $release = Release::where([['project_id', $project->id],['path', $release_name],['version', $version]])->first();
+        $company = Client::where('path' ,$company_id)->firstorfail();
+        $project = Project::where(['path' => $name, 'company_id' => $company->id])->firstorfail();
+        $release = Release::where([['project_id', $project->id],['path', $release_name],['version', $version]])->firstorfail();
         $releaseuuid = $release->release_uuid;
         $user = Assignee::where('uuid', $project->id)->get();
-        if(!$release){
-            abort(404);
-        }
         $features = Feature::with('requirements.assignees.users')->where([['release_id', $releaseuuid],[ 'type', 'Feature']])->get();
         $nfr = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'NFR']])->get();
         $techspecs = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'TS']])->get();
         $scope = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'Scope']])->get();
 
-        $status = Status::where('type', 'Progress')->get();
-        $category = Status::where('type', 'category')->get();
+        $status = Status::type('Progress')->get();
+        $category = Status::type('category')->get();
         return view('release.details_release', compact('release', 'project', 'features', 'company', 'nfr', 'scope', 'techspecs', 'featurecount', 'user', 'status', 'category'));
     }
 
