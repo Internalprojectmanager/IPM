@@ -11,6 +11,7 @@
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~3.3",
         "kyslik/column-sortable": "^5.5",
+        "laracasts/flash": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/scout": "^3.0",
         "laravel/socialite": "^3.0",
