@@ -27,7 +27,7 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <div class="form-group">
-                        <label>Project name:<span class="required">*</span></label>
+                        <label>Project name: <span class="required">*</span></label>
                         <input type="text" class="form-control input-text-modal" name="project_name" id="client_name" value="{{old('project_name')}}">
                     </div>
 

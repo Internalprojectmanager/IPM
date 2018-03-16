@@ -39,8 +39,8 @@
                 <input type="hidden" name="type" value="TS">
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="featurename">Technical Specifications Name:</label>
-                        <input type="text" class="form-control input-text-modal" name="feature_name" id="feature_name">
+                        <label for="featurename">Technical Specifications Name: <span class="required">*</span></label>
+                        <input type="text" class="form-control input-text-modal" required name="feature_name" id="feature_name">
 
                     </div>
                     <div class="form-group">
@@ -49,8 +49,8 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="description">Category:</label>
-                        <select name="feature_category" class="form-control input-text-modal">
+                        <label for="description">Category: <span class="required">*</span></label>
+                        <select name="feature_category" required class="form-control input-text-modal">
                             @foreach($category as $c)
                             <option value="{{$c->id}}">{{$c->name}}</option>
                             @endforeach
@@ -58,8 +58,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Status:</label>
-                        <select name="feature_status" class="form-control input-text-modal">
+                        <label for="description">Status: <span class="required">*</span></label>
+                        <select name="feature_status" required class="form-control input-text-modal">
                             @foreach($status as $s)
                                 <option value="{{$s->id}}">{{$s->name}}</option>
                             @endforeach

@@ -38,38 +38,38 @@
                     <input type="hidden" id="project" name="project_id" value="{{$projects->id}}">
                     <input type="hidden" id="company_id" name="company_id" value="{{$client->id}}">
                     <div class="form-group">
-                        <label for="release_name">Release name:</label>
-                        <input type="text" class="form-control input-text-modal" name="release_name" id="release_name">
+                        <label for="release_name">Release name: <span class="required">*</span></label>
+                        <input type="text" class="form-control input-text-modal" required name="release_name" id="release_name" {{old('release_name')}}>
                     </div>
                     <div class="form-group">
                         <label for="description">Description:</label>
-                        <textarea rows="4" cols="50" name="description" class="form-control input-text-modal" id="description"></textarea>
+                        <textarea rows="4" cols="50" name="description" class="form-control input-text-modal" id="description" {{old('description')}}></textarea>
 
                     </div>
                     <div class="form-group">
-                        <label for="status">Release Status:</label>
-                        <select class="form-control" name="status">
+                        <label for="status">Release Status: <span class="required">*</span></label>
+                        <select class="form-control" required name="status">
                             @foreach($status as $s)
                                 <option value="{{$s->id}}">{{$s->name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="document_status">Document Status:</label>
-                        <select class="form-control" name="document_status">
+                        <label for="document_status">Document Status: <span class="required">*</span></label>
+                        <select class="form-control" required name="document_status">
                             @foreach($status as $s)
                                 <option value="{{$s->id}}">{{$s->name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="deadline">Release Deadline:</label>
-                        <input type="text" class="form-control datepicker" autocomplete="off" id="deadline" name="deadline" placeholder="YYYY/MM/DD">
+                        <label for="deadline">Release Deadline: <span class="required">*</span></label>
+                        <input type="text" required class="form-control datepicker" autocomplete="off" id="deadline" name="deadline" placeholder="YYYY/MM/DD">
 
                     </div>
                     <div class="form-group">
-                        <label for="specification">Specification type:</label>
-                        <input type="text" class="form-control input-text-modal" id="specification" name="specification">
+                        <label for="specification">Specification type: <span class="required">*</span></label>
+                        <input type="text" required class="form-control input-text-modal" id="specification" name="specification" value="{{old('specification')}}">
                     </div>
 
                 </div>

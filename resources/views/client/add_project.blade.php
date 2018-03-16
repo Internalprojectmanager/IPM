@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label>Project name:<span class="required">*</span></label>
-                        <input type="text" class="form-control input-text-modal" name="project_name" id="client_name" value="{{old('project_name')}}">
+                        <input type="text" class="form-control input-text-modal" name="project_name" id="client_name" required="" value="{{old('project_name')}}">
                     </div>
 
                     <div class="form-group">
@@ -40,25 +40,6 @@
                                placeholder="New Client Name" value="">
                     </div>
 
-                    <div class="form-group">
-                        <label>Project Status:<span class="required">*</span></label>
-
-                        <select class="form-control input-text-modal"  name="status">
-                            @foreach($projectstatus as $s)
-                                <option value="{{$s->id}}">{{$s->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="edit-title" for="project_code">Project Code</label>
-                        <input type="text" class="form-control input-text-modal" name="project_code" id="project_code"
-                               value="@if(old('project_code')){{old('project_code')}} @else P-@endif">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Deadline:</label>
-                        <input type='text' class="form-control input-text-modal datepicker" name="deadline" placeholder="YYYY/MM/DD" value="{{old('deadline')}}"/>
-                    </div>
                     <div class="form-group">
                         <label>Description:</label>
                         <textarea rows="4" cols="50" name="description" class="form-control input-text-modal" id="description">{{old('description')}}</textarea>

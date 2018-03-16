@@ -39,8 +39,8 @@
                 <input type="hidden" name="type" value="{{$feature->type}}">
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="featurename">Out of Scope name:</label>
-                        <input type="text" class="form-control input-text-modal" name="feature_name" id="feature_name" value="{{$feature->name}}">
+                        <label for="featurename">Out of Scope name: <span class="required">*</span></label>
+                        <input type="text" class="form-control input-text-modal" required name="feature_name" id="feature_name" value="{{$feature->name}}">
 
                     </div>
                     <div class="form-group">

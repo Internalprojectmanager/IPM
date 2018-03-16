@@ -39,19 +39,19 @@
                 <input type="hidden" name="type" value="NFR">
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="featurename">NFR name:</label>
-                        <input type="text" class="form-control input-text-modal" name="feature_name" id="feature_name">
+                        <label for="featurename">NFR name: <span class="required">*</span></label>
+                        <input type="text" class="form-control input-text-modal" required name="feature_name" id="feature_name">
 
                     </div>
                     <div class="form-group">
-                        <label for="description">NFR Description:</label>
+                        <label for="description">NFR Description: </label>
                         <textarea rows="4" cols="50" name="feature_description" class="form-control input-text-modal" id="description"></textarea>
 
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Category:</label>
-                        <select name="feature_category" class="form-control input-text-modal">
+                        <label for="description">Category: <span class="required">*</span></label>
+                        <select name="feature_category" required class="form-control input-text-modal">
                             @foreach($category as $c)
                                 <option value="{{$c->id}}">{{$c->name}}</option>
                             @endforeach
@@ -59,8 +59,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Status:</label>
-                        <select name="feature_status" class="form-control input-text-modal">
+                        <label for="description">Status: <span class="required">*</span></label>
+                        <select name="feature_status" required class="form-control input-text-modal">
                             @foreach($status as $s)
                                 <option value="{{$s->id}}">{{$s->name}}</option>
                             @endforeach

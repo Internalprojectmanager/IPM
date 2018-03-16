@@ -44,8 +44,8 @@
                               id="description"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Status</label><br>
-                    <select name="status" class="modal-dropdown-search">
+                    <label>Status <span class="required">*</span></label><br>
+                    <select name="status" required="" class="modal-dropdown-search">
                         @foreach($status as $s)
                             <option value="{{$s->name}}">{{$s->name}}</option>
                         @endforeach
