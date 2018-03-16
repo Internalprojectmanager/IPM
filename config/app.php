@@ -185,6 +185,7 @@ return [
         Yab\MySQLScout\Providers\MySQLScoutServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
 
     ],
 

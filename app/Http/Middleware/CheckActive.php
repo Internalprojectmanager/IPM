@@ -20,13 +20,11 @@ class CheckActive
 
 
         if(Auth::check() && Auth::user()->active != '1'){
-
             Auth::logout();
 
-            $request->session()->flash('alert-danger', 'Your Account is not activated yet.');
+            flash()->error('Your Account is not activated');
 
-            return redirect('/login')->with('error_login', 'Your error text');
-
+            return redirect('/login');
         }
 
         return $response;

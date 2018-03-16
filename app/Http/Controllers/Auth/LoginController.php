@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
@@ -22,6 +24,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
 
     /**
      * Where to redirect users after login.
@@ -54,14 +57,22 @@ class LoginController extends Controller
     public function handleProviderCallback($provider = 'google')
     {
         $user = Socialite::driver($provider)->stateless()->user();
-        $domain = preg_replace('/.+@/', '', $user->getEmail());
+        if($user){
+            $domain = preg_replace('/.+@/', '', $user->getEmail());
 
-        if ($domain == 'itsavirus.com') {
-            // Here, check if the user already exists in your records
-            $authuser = $this->firstOrCreateOauth($user, $provider);
-            Auth::login($authuser);
+            if ($domain == 'itsavirus.com') {
+                // Here, check if the user already exists in your records
+                $authuser = $this->firstOrCreateOauth($user, $provider);
+                Auth::login($authuser);
+                flash()->success('Succesfully Logged in');
+                return redirect()->intended('overviewprojects');
+            }else{
+                flash()->error(strtoupper($provider).' account has no valid domain, Please use an Itsavirus Email')->important();
+            }
+        }else{
+            flash()->error('Google login has expired, Please try again');
         }
-        return redirect()->intended('overviewprojects');
+        return Redirect()->route('login')->withInput();
     }
 
     public function firstOrCreateOauth($user, $provider){
@@ -72,7 +83,7 @@ class LoginController extends Controller
             'provider' => $provider,
             'active' => 1
         ];
-        $authuser = User::updateOrCreate(['email'=> $user->getEmail()], $data);
+        $authuser = User::firstOrCreate(['email'=> $user->getEmail()], $data);
 
         return $authuser;
     }

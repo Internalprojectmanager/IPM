@@ -20,16 +20,16 @@ Route::get('/home', function () {
 
 })->name('home');
 
-Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('googlelogin');
-Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback')->name('googleauth');
+
+Route::group(['middleware' => ['guest', 'web']], function () {
+    Auth::routes();
+    Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('googlelogin');
+    Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback')->name('googleauth');
+});
 
 //Profile routes
 Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
 Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
-Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('/login', 'Auth\LoginController@login');
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 //Auth Routes
 Route::group(['prefix' => 'password'], function () {
@@ -109,3 +109,6 @@ Route::group(['prefix' => '{client_id}'], function () {
         });
     });
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
