@@ -53,7 +53,7 @@ class LoginController extends Controller
      */
     public function handleProviderCallback($provider = 'google')
     {
-        $user = Socialite::driver($provider)->user();
+        $user = Socialite::driver($provider)->stateless()->user();
         $domain = preg_replace('/.+@/', '', $user->getEmail());
 
         if ($domain == 'itsavirus.com') {
