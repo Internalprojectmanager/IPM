@@ -42,13 +42,13 @@ Route::group(['prefix' => 'password'], function () {
 //Client Routes
 Route::group(['prefix' => 'client'], function () {
     Route::get('/overview', 'CompanyController@overviewCompany')->name('overviewclient');
-    Route::post('/overview', 'CompanyController@searchCompany')->name('searchCompany');
-    Route::get('/{name}/details', 'CompanyController@detailsCompany')->name('clientdetails');
-    Route::post('/{name}/details', 'CompanyController@detailsSort')->name('clientsorting');
+    Route::post('/overview', 'CompanyController@searchCompany')->name('searchCompany');;
     Route::get('/add', 'CompanyController@addCompany')->name('addclient');
     Route::post('/add', 'CompanyController@storeCompany')->name('storeclient');
-    Route::post('{name}/edit/', 'CompanyController@updateCompany')->name('updateclients');
-    Route::get('/delete/{name}', 'CompanyController@deleteCompany')->name('deleteclient');
+    Route::post('{client}/edit', 'CompanyController@updateCompany')->name('updateclients');
+    Route::get('/{client}/delete', 'CompanyController@deleteCompany')->name('deleteclient');
+    Route::get('/{client}/details', 'CompanyController@detailsCompany')->name('clientdetails');
+    Route::post('/{client}/details', 'CompanyController@detailsSort')->name('clientsorting');
 });
 
 Route::post('/release/overview', 'ReleaseController@overviewTestrapport')->name('storerelease');
@@ -61,8 +61,8 @@ Route::group(['prefix' => 'project'], function () {
     Route::get('/add', 'ProjectController@addProject')->name('addproject');
     Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
 });
-Route::group(['prefix' => '{client_id}'], function () {
-    Route::group(['prefix' => '{name}'], function () {
+Route::group(['prefix' => '{client}'], function () {
+    Route::group(['prefix' => '{project}'], function () {
         //Project Details routes
         Route::get('/details', 'ProjectController@detailsProject')->name('projectdetails');
         Route::get('/edit', 'ProjectController@editProject')->name('editproject');
@@ -84,7 +84,7 @@ Route::group(['prefix' => '{client_id}'], function () {
         });
 
         //Release Routes
-        Route::group(['prefix' => '{release_name}'], function () {
+        Route::group(['prefix' => '{release}'], function () {
             Route::get('/{version}/details', 'ReleaseController@showRelease')->name('showrelease');
             Route::get('/edit/{version}', 'ReleaseController@editRelease')->name('editrelease');
             Route::post('/update/{version}', 'ReleaseController@updateRelease')->name('updaterelease');
