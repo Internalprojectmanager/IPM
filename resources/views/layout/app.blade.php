@@ -35,7 +35,9 @@
 </head>
 <body>
 @include('layout.nav')
+<div class="loader"></div>
 <div class="container">
+
     <div class="row">
         @yield('breadcrumbs')
     </div>

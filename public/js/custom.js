@@ -1,4 +1,6 @@
 $(document).on('click touchstart', '.clickable-row', function () {
+    $(".container").addClass("disabled");
+    $(".loader").show();
     window.location = $(this).data("href");
 });
 
@@ -11,12 +13,16 @@ $('.searchform').on('keyup keypress', function (e) {
 });
 
 $(document).on('click', '.pagination a, .results>thead>tr>th a', function (e) {
+    $(".container").addClass("disabled");
+    $(".loader").show();
     e.preventDefault();
     var url = $(this).attr('href');
     getData(url);
 });
 
 $(document).on('change', '.assignee-check', function (e) {
+    $(".container").addClass("disabled");
+    $(".loader").show();
     var curl = window.location.href;
     e.preventDefault();
     var url = $(this).attr('href');
@@ -164,6 +170,9 @@ function saveStatus(url, curl) {
         success: function (result) {
             $('.requirement-results').remove();
             $('.container').append(result);
+
+            $(".container").removeClass("disabled");
+            $(".loader").hide();
         }
     });
     window.history.pushState("", "", curl);
@@ -254,10 +263,13 @@ function getData(url) {
             }
             $('.counter').text(jobCount);
             $('#new-count').remove();
+
         },
     });
     url = url + "?sort=" + sort + "&order=" + order + "&page=" + page;
     window.history.pushState("", "", url);
+    $(".container").removeClass("disabled");
+    $(".loader").hide();
 }
 
 $('.search').bind('keyup change', function (e) {
