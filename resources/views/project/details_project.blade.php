@@ -1,14 +1,14 @@
 @extends('layout.app')
 
 @section('title')
-    {{$projects->company->name}} - {{$projects->name}} | {{env('APP_NAME')}}
+    {{$project->company->name}} - {{$project->name}} | {{env('APP_NAME')}}
 @endsection
 
-@section('breadcrumbs', Breadcrumbs::render('singleproject', $projects, $client))
+@section('breadcrumbs', Breadcrumbs::render('singleproject', $project, $client))
 
 @section('content')
 
-    <a href="{{route('editproject', ['name' => $projects->path, 'company_id' => $client->path])}}" class="btn-edit" id="project-edit">
+    <a href="{{route('editproject', [ $client->path, $project->path])}}" class="btn-edit" id="project-edit">
         <span class="glyphicon edit-icon"></span> Edit
     </a>
 
@@ -17,17 +17,17 @@
             <div class="row" id="block-show">
                 <div class="col-md-4 col-xs-6">
                     <span class="project-title block-title">Projects Name</span> <br>
-                    <span class="project-detail block-value">{{$projects->name}}</span>
+                    <span class="project-detail block-value">{{$project->name}}</span>
                 </div>
 
                 <div class="col-md-2 col-xs-6">
                     <span class="project-title block-title">Project Code</span> <br>
-                    <span class="project-detail block-value">{{$projects->projectcode}}</span>
+                    <span class="project-detail block-value">{{$project->projectcode}}</span>
                 </div>
 
                 <div class="col-md-3 col-xs-6">
                     <span class="project-title block-title">Client</span> <br>
-                    <span class="project-detail block-value">{{$projects->company->name}}</span>
+                    <span class="project-detail block-value">{{$project->company->name}}</span>
                 </div>
 
                 <div class="col-md-3 col-xs-6">
@@ -40,21 +40,21 @@
             <div class="row under-details block-description" id="block-hidden">
                 <div class="col-md-6 col-xs-12">
                     <span class="project-title block-title">Project Description</span><br>
-                    <span class="project-detail block-value">{{$projects->description}}</span>
+                    <span class="project-detail block-value">{{$project->description}}</span>
                 </div>
 
                 <div class="col-md-6 col-xs-12 pull-right">
                     <span class="project-title block-title">Contact Person</span><br>
-                    <i class="user-icon block-icons"><span class="project-detail block-value" id="contact-name">{{$projects->company->contactname}}</span></i><br>
-                    <i class="tel-icon block-icons"><span class="project-detail block-value" id="contact-phone"><a href="tel:{{$projects->company->contactnumber}}">{{$projects->company->contactnumber}}</a></span></i><br>
-                    <i class="mail-icon block-icons"> <span class="project-detail block-value" id="contact-email"><a href="mailto:{{$projects->company->contactemail}}">{{$projects->company->contactemail}}</a></span></i>
+                    <i class="user-icon block-icons"><span class="project-detail block-value" id="contact-name">{{$project->company->contactname}}</span></i><br>
+                    <i class="tel-icon block-icons"><span class="project-detail block-value" id="contact-phone"><a href="tel:{{$project->company->contactnumber}}">{{$project->company->contactnumber}}</a></span></i><br>
+                    <i class="mail-icon block-icons"> <span class="project-detail block-value" id="contact-email"><a href="mailto:{{$project->company->contactemail}}">{{$project->company->contactemail}}</a></span></i>
                 </div>
 
 
             </div>
             <div class="row pull-right">
                 <div class="col-md-5 col-xs-3">
-                    <button onclick="location.href='{{route('documentoverview', ['name' => $projects->path, 'company_id' => $projects->company->path])}}'"
+                    <button onclick="location.href='{{route('documentoverview', ['name' => $project->path, 'company_id' => $project->company->path])}}'"
                             class="blue-button" id="button-files">
                         <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -117,7 +117,7 @@
             </thead>
             <tbody>
             @foreach($releases as $release)
-                <tr class="clickable-row" data-href="{{route('showrelease', ['name' => $projects->path, 'company_id' => $projects->company->path,
+                <tr class="clickable-row" data-href="{{route('showrelease', ['name' => $project->path, 'company_id' => $project->company->path,
                         'release_name' => $release->path, 'version' => $release->version])}}">
                     <td style="background-color: {{$release->rstatus->color}};"></td>
                     <td><span class="tabletitle">{{$release->version}} - {{$release->name}}</span>

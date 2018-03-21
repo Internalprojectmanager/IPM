@@ -22,7 +22,7 @@
                     </svg>
                 </span>
         </div>
-        <form action="{{route('storerelease', ['name' => $projects->path, 'company_id' => $client->path] )}}" method="post">
+        <form action="{{route('storerelease', ['name' => $project->path, 'company_id' => $client->path] )}}" method="post">
             {{ csrf_field() }}
             <div class="modal-body">
                 @if ($errors->any())
@@ -35,7 +35,7 @@
                     </div>
                 @endif
                 <div class="form-group">
-                    <input type="hidden" id="project" name="project_id" value="{{$projects->id}}">
+                    <input type="hidden" id="project" name="project_id" value="{{$project->id}}">
                     <input type="hidden" id="company_id" name="company_id" value="{{$client->id}}">
                     <div class="form-group">
                         <label for="release_name">Release name: <span class="required">*</span></label>
