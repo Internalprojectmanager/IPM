@@ -72,15 +72,13 @@ class RequirementController extends Controller
                 if ($status == $r->assignees->count()) {
                     $completed++;
                 }
-
-                //dd($status. ' ' . $r->assignees->count());
-                if ($status == $r->assignees->count() && $status > 0) {
-                    $r->status = $status_completed;
-                } else if ($status > 0 && $status < $r->assignees->count()) {
-                    $r->status = $status_progress;
-                } else
-                    $r->status = $status_draft;
             }
+            if ($status == $r->assignees->count() && $status > 0) {
+                $r->status = $status_completed;
+            } else if ($status > 0 && $status < $r->assignees->count()) {
+                $r->status = $status_progress;
+            } else
+                $r->status = $status_draft;
             $r->save();
         }
 
@@ -96,7 +94,8 @@ class RequirementController extends Controller
             }
         $feature->save();
         $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
-        $requirementcount = Status::withCount('requirements')->where('name', 'Completed')->first()->requirements_count;
+
+        $requirementcount = $completed;
         return view('requirement.requirement_table', compact('feature', 'requirementcount'));
     }
 
