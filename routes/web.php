@@ -41,14 +41,14 @@ Route::group(['prefix' => 'password'], function () {
 
 //Client Routes
 Route::group(['prefix' => 'client'], function () {
-    Route::get('/overview', 'CompanyController@overviewCompany')->name('overviewclient');
-    Route::post('/overview', 'CompanyController@searchCompany')->name('searchCompany');;
-    Route::get('/add', 'CompanyController@addCompany')->name('addclient');
-    Route::post('/add', 'CompanyController@storeCompany')->name('storeclient');
-    Route::post('{client}/edit', 'CompanyController@updateCompany')->name('updateclients');
-    Route::get('/{client}/delete', 'CompanyController@deleteCompany')->name('deleteclient');
-    Route::get('/{client}/details', 'CompanyController@detailsCompany')->name('clientdetails');
-    Route::post('/{client}/details', 'CompanyController@detailsSort')->name('clientsorting');
+    Route::get('/overview', 'ClientController@overviewClient')->name('overviewclient');
+    Route::post('/overview', 'ClientController@searchClient')->name('searchClient');;
+    Route::get('/add', 'ClientController@addClient')->name('addclient');
+    Route::post('/add', 'ClientController@storeClient')->name('storeclient');
+    Route::post('{client}/edit', 'ClientController@updateClient')->name('updateclients');
+    Route::get('/{client}/delete', 'ClientController@deleteClient')->name('deleteclient');
+    Route::get('/{client}/details', 'ClientController@detailsClient')->name('clientdetails');
+    Route::post('/{client}/details', 'ClientController@detailsSort')->name('clientsorting');
 });
 
 Route::post('/release/overview', 'ReleaseController@overviewTestrapport')->name('storerelease');
@@ -61,9 +61,8 @@ Route::group(['prefix' => 'project'], function () {
     Route::get('/add', 'ProjectController@addProject')->name('addproject');
     Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
 });
-Route::group(['prefix' => '{client}'], function () {
+Route::prefix('{client}')->group( function (){
     Route::group(['prefix' => '{project}'], function () {
-        //Project Details routes
         Route::get('/details', 'ProjectController@detailsProject')->name('projectdetails');
         Route::get('/edit', 'ProjectController@editProject')->name('editproject');
         Route::post('/edit', 'ProjectController@updateProject')->name('updateproject');

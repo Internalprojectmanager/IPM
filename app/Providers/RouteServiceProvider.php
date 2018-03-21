@@ -28,6 +28,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
 
+
         Route::bind('client', function ($value) {
             return \App\Client::path($value)->first() ?? abort(404);
         });
@@ -41,7 +42,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('feature', function ($value) {
-            return \App\Feature::path($value)->first() ?? abort(404);
+            return \App\Feature::find('id')->first() ?? abort(404);
         });
 
     }
