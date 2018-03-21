@@ -34,7 +34,7 @@ class ProfileController extends Controller
             if( !$request->password == '' && !$request->password == NULL){
                 $profile->password = $request->password;
             }
-            if(!$request->first_name == '' && !$request->first_name == NULL && !$request->first_name == '' && !$request->first_name == NULL){
+            if(!$request->first_name == '' && !$request->first_name == NULL && !$request->last_name == '' && !$request->last_name == NULL){
                 $profile->first_name = $request->first_name;
                 $profile->last_name = $request->last_name;
             }
