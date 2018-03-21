@@ -20,7 +20,7 @@ class Status extends Model
 
     public function scopeName($query, $name)
     {
-        return $query->where('name', $name);
+        return $query->where('name', $name)->first();
     }
 
     public function scopeType($query, $type)

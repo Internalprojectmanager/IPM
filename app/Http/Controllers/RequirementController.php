@@ -17,29 +17,30 @@ use App\Requirement;
 
 class RequirementController extends Controller
 {
-   //add  Requirement
+    //add  Requirement
     public function addRequirement($company_id, $name, $release_name)
     {
 
         $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
         $release = Release::where(['project_id' => $project->id, 'name' => $release_name])->first();
-        return view('requirement.add_requirement' , compact('release', 'project'));
+        return view('requirement.add_requirement', compact('release', 'project'));
     }
 
-    public function storeRequirement($release_id, $feature_id, $company_id, $name, Request $request){
-        $project = Project::where(['name' => $name, 'company_id' => $company_id ])->first();
+    public function storeRequirement($release_id, $feature_id, $company_id, $name, Request $request)
+    {
+        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
         $release = Release::where(['project_id' => $project->id, 'name' => $release_id])->first();
-        foreach($request->requirement_name as $r => $value){
+        foreach ($request->requirement_name as $r => $value) {
 
-            if ($request->requirement_name[$r] !== NULL){
+            if ($request->requirement_name[$r] !== NULL) {
 
                 $requirement = new Requirement();
-                $requirement-> feature_id =$request ->feature_id;
-                $requirement-> release_id =$request -> release_id;
-                $requirement-> name = $request->requirement_name;
-                $requirement-> description = $request -> requirement_description;
-                $requirement-> status = $request -> requirement_status;
-                $requirement-> author = $request -> requirement_author;
+                $requirement->feature_id = $request->feature_id;
+                $requirement->release_id = $request->release_id;
+                $requirement->name = $request->requirement_name;
+                $requirement->description = $request->requirement_description;
+                $requirement->status = $request->requirement_status;
+                $requirement->author = $request->requirement_author;
                 $requirement->save();
             }
         }
@@ -47,58 +48,59 @@ class RequirementController extends Controller
             'release_name' => $release->name, 'version' => $release->version]));
     }
 
-    public function saveStatus(Request $request,$company_id, $name,$release_id, $feature_id){
-        foreach ($request->data as $key => $value){
-            $assignee = Assignee::where([['userid', $value['assignee']],['uuid', $value['uuid']]])->first();
+    public function saveStatus(Request $request, $company_id, $name, $release_id, $feature_id)
+    {
+        foreach ($request->data as $key => $value) {
+            $assignee = Assignee::where([['userid', $value['assignee']], ['uuid', $value['uuid']]])->first();
             $assignee->status = $value['checked'];
             $assignee->save();
         }
         $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
         $checkr = Requirement::with('features.releases.projects', 'assignees')->where('feature_uuid', $feature->feature_uuid)->get();
-        $progress = Status::where('type', 'Progress')->select('id', 'name')->get();
         $completed = 0;
-        foreach ($checkr as $r){
+        $status_completed = Status::name('Completed')->id;
+        $status_progress = Status::name('In Progress')->id;
+        $status_draft = Status::name('Draft')->id;
+
+
+        foreach ($checkr as $r) {
             $status = 0;
-            foreach ($r->assignees as $a)
-            if($a->status > 0 ){
-                $status++;
-            }
-            if($status == $r->assignees->count()){
-                $completed++;
-            }
-            foreach ($progress as $s){
-                if($status == $r->assignees->count() && $s->name == "Completed"){
-                    $r->status = $s->id;
-                }elseif($status > 0 && $s->name == "In Progress"){
-                    $r->status = $s->id;
-                }elseif($s->name == "Draft"){
-                    $r->status= $s->id;
+            foreach ($r->assignees as $a) {
+                if ($a->status > 0) {
+                    $status++;
                 }
+                if ($status == $r->assignees->count()) {
+                    $completed++;
+                }
+
+                //dd($status. ' ' . $r->assignees->count());
+                if ($status == $r->assignees->count() && $status > 0) {
+                    $r->status = $status_completed;
+                } else if ($status > 0 && $status < $r->assignees->count()) {
+                    $r->status = $status_progress;
+                } else
+                    $r->status = $status_draft;
             }
             $r->save();
         }
 
-        foreach ($progress as $s) {
-            if ($completed == $feature->requirements->count() && $s->name == "Completed") {
-                $feature->status = $s->id;
-            } else if ($completed > 0 && $s->name == "In Progress" && $completed < $feature->requirements->count() ){
-                $feature->status = $s->id;
-            } else if ($completed == 0 && $feature->requirements->count() > 0 && $s->name == "In Progress"){
-                $feature->status = $s->id;
-            } else if($completed == 0 && $s->name == "Draft") {
-                $feature->status = $s->id;
+        if ($completed == $feature->requirements->count()) {
+            $feature->status = $status_completed;
+        } else
+            if ($completed > 0 && $completed < $feature->requirements->count()) {
+                $feature->status = $status_progress;
+            } else if ($completed == 0 && $feature->requirements->count() > 0) {
+                $feature->status = $status_progress;
+            } else if ($completed == 0) {
+                $feature->status = $status_draft;
             }
-        }
         $feature->save();
-
         $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
-        $requirementcount = Status::withCount('requirements')->where('name', 'Completed')->first();
-        $requirementcount = $requirementcount->requirements_count;
-
+        $requirementcount = Status::withCount('requirements')->where('name', 'Completed')->first()->requirements_count;
         return view('requirement.requirement_table', compact('feature', 'requirementcount'));
     }
 
-   public function overviewRequirement()
+    public function overviewRequirement()
     {
         $requirements = Requirement::all();
 
@@ -106,8 +108,8 @@ class RequirementController extends Controller
 
     public function detailsRequirement($requirement_name)
     {
-       $requirements = Requirement::where('name', $requirement_name)->first();
-       return view('requirement.details_requirement' , compact('requirements'));
+        $requirements = Requirement::where('name', $requirement_name)->first();
+        return view('requirement.details_requirement', compact('requirements'));
     }
 
     public function editRequirement($requirement_name)
@@ -116,18 +118,18 @@ class RequirementController extends Controller
         return view('requirement.edit_requirement', compact($requirements));
     }
 
-    public function updateRequirement ($requirement_name, Request $request)
+    public function updateRequirement($requirement_name, Request $request)
     {
         $request->validate(['requirement_name' => 'required']);
 
         $requirement = Requirement::all()->where('name', $requirement_name)->first();
-        $requirement->id = strtoupper(substr($request->requirement_name,  0,  5));
-        $requirement-> feature_id =$request ->feature_id;
-        $requirement-> release_id =$request -> release_id;
-        $requirement-> name = $request->requirement_name;
-        $requirement-> description = $request -> requirement_description;
-        $requirement-> status = $request -> requirement_status;
-        $requirement-> author = $request -> requirement_author;
+        $requirement->id = strtoupper(substr($request->requirement_name, 0, 5));
+        $requirement->feature_id = $request->feature_id;
+        $requirement->release_id = $request->release_id;
+        $requirement->name = $request->requirement_name;
+        $requirement->description = $request->requirement_description;
+        $requirement->status = $request->requirement_status;
+        $requirement->author = $request->requirement_author;
 
         $requirement->save();
 
@@ -137,9 +139,9 @@ class RequirementController extends Controller
     }
 
     public function deleteRequirement($requirement_name)
-{
+    {
 
-}
+    }
 
 }
 
