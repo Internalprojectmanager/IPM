@@ -65,7 +65,7 @@ class LoginController extends Controller
                 $authuser = $this->firstOrCreateOauth($user, $provider);
                 Auth::login($authuser);
                 flash()->success('Succesfully Logged in');
-                return redirect()->intended('overviewprojects');
+                return redirect()->intended('overviewproject');
             }else{
                 flash()->error(strtoupper($provider).' account has no valid domain, Please use an Itsavirus Email')->important();
             }
