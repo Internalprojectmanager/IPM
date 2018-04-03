@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignee;
+use App\Requirement;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('overviewproject');
+        $requirements = [];
+        $assinged = Assignee::where('userid', \Auth::id())->select('uuid')->get();
+
+
+
+        foreach ($assinged as $a){
+            $requirements[] = $a->uuid;
+        }
+
+        $feature = Requirement::with('features.releases.projects', 'rstatus')->whereIn('requirement_uuid', $requirements)->get();
+
+        return view('profile.dashboard', compact('feature'));
     }
 }

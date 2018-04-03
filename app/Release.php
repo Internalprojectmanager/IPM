@@ -8,6 +8,8 @@ class Release extends Model
 {
     protected $table = "release";
 
+    public $sortable = ['name', 'description', 'status', 'deadline', 'created_at'];
+
     public $incrementing = false;
 
     protected $fillable = [
