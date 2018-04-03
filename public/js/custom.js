@@ -37,6 +37,7 @@ $('.deletefile').on('click', function (e) {
     deleteFile(url, pid, curl);
 });
 
+
 $(document).on('click', '.remove_feature', function () {
     var id = $(this).prop('id');
     var parent = $(this).closest("div").prop("id");

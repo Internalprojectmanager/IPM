@@ -806,6 +806,11 @@ td > .assignee:first-child:before {
     left: 92.8%;
 }
 
+#modal-delete {
+    position: relative;
+    left: 86.8%;
+}
+
 .delete-content {
     color: #FFFFFF;
     font-size: 15px;
