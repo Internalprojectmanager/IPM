@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Assignee;
 use App\Requirement;
 use Illuminate\Http\Request;
+use App\Status;
 
 class HomeController extends Controller
 {
@@ -30,6 +31,7 @@ class HomeController extends Controller
     public function dashboard()
     {
         $requirements = [];
+        $status = Status::wherein('name', ['Draft', 'In Progress'])->select('name');
         $assinged = Assignee::where('userid', \Auth::id())->select('uuid')->get();
 
         if($assinged){
@@ -40,8 +42,11 @@ class HomeController extends Controller
                 endif;
             }
         }
-        $feature = Requirement::with('features.releases.projects.company', 'rstatus')->whereIn('requirement_uuid', $requirements)->get();
-        
+        $feature = Requirement::with('features.releases.projects.company', 'rstatus')
+            ->whereHas('rstatus', function($query) use ($status) {
+                $query->wherein('name', $status);
+            })->whereIn('requirement_uuid', $requirements)->get();
+
         return view('profile.dashboard', compact('feature'));
     }
 }

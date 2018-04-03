@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
+use Kyslik\ColumnSortable\Sortable;
 
 class Requirement extends Model
 {
+    use Searchable, Sortable;
+
     protected $table = "requirement";
 
     public $incrementing = false;
@@ -13,6 +17,10 @@ class Requirement extends Model
     protected $fillable = [
         'id','name', 'description', 'feature_uuid', 'status'
     ];
+
+    public $sortable = ['name', 'description', 'status', 'deadline', 'created_at'];
+
+
     public function features(){
         return $this->belongsTo('App\Feature', "feature_uuid", 'feature_uuid');
     }

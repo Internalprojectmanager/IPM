@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
+use Kyslik\ColumnSortable\Sortable;
 
 class Release extends Model
 {
+    use Searchable, Sortable;
     protected $table = "release";
 
     public $sortable = ['name', 'description', 'status', 'deadline', 'created_at'];

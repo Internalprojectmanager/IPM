@@ -48,14 +48,14 @@ class RequirementController extends Controller
             'release_name' => $release->name, 'version' => $release->version]));
     }
 
-    public function saveStatus(Request $request, $company_id, $name, $release_id, $feature_id)
+    public function saveStatus(Request $request, $client, $project, $release, $feature)
     {
         foreach ($request->data as $key => $value) {
             $assignee = Assignee::where([['userid', $value['assignee']], ['uuid', $value['uuid']]])->first();
             $assignee->status = $value['checked'];
             $assignee->save();
         }
-        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
+        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature->id)->first();
         $checkr = Requirement::with('features.releases.projects', 'assignees')->where('feature_uuid', $feature->feature_uuid)->get();
         $completed = 0;
         $status_completed = Status::name('Completed')->id;
@@ -93,7 +93,7 @@ class RequirementController extends Controller
                 $feature->status = $status_draft;
             }
         $feature->save();
-        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
+        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature->id)->first();
 
         $requirementcount = $completed;
         return view('requirement.requirement_table', compact('feature', 'requirementcount'));

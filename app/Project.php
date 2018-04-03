@@ -38,13 +38,22 @@ class Project extends Model
 
     public static function updateDeadline($project){
         $currentrelease = Release::where([["project_id", "=", $project->id]])->where('deadline', '>=', Carbon::now())->orderby('deadline', 'asc')->first();
-        $project->deadline = $currentrelease->deadline;
+        if($currentrelease){
+            $project->deadline = $currentrelease->deadline;
+        } else{
+            $project->deadline = null;
+        }
         $project->save();
     }
 
-    public static function updateStatus($project){
+    public static function updateStatus($project)
+    {
         $currentrelease = Release::where([["project_id", "=", $project->id]])->where('deadline', '>=', Carbon::now())->orderby('deadline', 'asc')->first();
-        $project->status = $currentrelease->status;
+        if ($currentrelease){
+            $project->status = $currentrelease->status;
+        } else {
+            $project->status = Status::name('Completed')->id;
+        }
         $project->save();
 
     }
