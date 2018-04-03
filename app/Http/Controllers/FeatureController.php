@@ -43,9 +43,9 @@ class FeatureController extends Controller
         return true;
     }
 
-    public function showfeature($company_id, $name, $release_name, $feature_id)
+    public function showfeature($client,$project,$release, $feature)
     {
-        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature_id)->first();
+        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature->id)->first();
         $featureid = $feature->feature_uuid;
         $requirementcount = Status::withCount(['requirements' => function ($q) use ($featureid) {
             $q->where('feature_uuid', '=', $featureid);
@@ -57,20 +57,13 @@ class FeatureController extends Controller
     }
 
 
-    public function add($company_id, $name, $release_name)
+    public function add($client,$project,$release, $version, $release_name)
     {
-        $project = Project::where(['path' => $name, 'company_id' => $company_id])->first();
-        $release = Release::where(['project_id' => $project->id, 'name' => $release_name])->first();
-
-
         return view('features.add_feature', compact('release', 'project'));
     }
 
-    public function store($company_id, $name, $release_name, FeatureRequest $request)
+    public function store($client, $project, $release, FeatureRequest $request)
     {
-        $client = Client::where('path', $company_id)->first();
-        $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
-        $release = Release::where(['project_id' => $project->id, 'path' => $release_name])->first();
         $feature = new Feature();
         $feature->feature_uuid = Uuid::generate(4);
         $feature->name = $request->feature_name;
@@ -125,20 +118,18 @@ class FeatureController extends Controller
                 }
             }
         }
-        return redirect(route('showrelease', ['name' => $project->path, 'company_id' => $project->company->path,
-            'release_name' => $release->path, 'version' => $release->version]));
+        return redirect(route('showrelease', [$client->path, $project->path,
+            $release->path, $release->version]));
     }
 
-    public function editFeature($company_id, $name, $release_name, $feature_id)
+    public function editFeature($client, $project, $release, $feature)
     {
-        $feature = Feature::with('releases.projects.company')->where('id', $feature_id)->first();
         $revisions = FeatureRevision::where('feature_id', $feature->feature_uuid)->orderby('created_at', 'desc')->get();
-        return view('features.edit_feature', compact('feature', 'name', 'release_name', 'company_id', 'revisions'));
+        return view('features.edit_feature', compact('feature', 'project', 'release', 'client', 'revisions'));
     }
 
-    public function updateFeature($company_id, $name, $release_name, $feature_id, FeatureRequest $request)
+    public function updateFeature($client, $project, $release, $feature, FeatureRequest $request)
     {
-        $feature = Feature::where('id', $feature_id)->first();
         $status = Status::Type('Progress')->where('id', $request->feature_status)->first();
 
         if ($request) {
@@ -245,24 +236,20 @@ class FeatureController extends Controller
 
             }
 
-
-            return redirect(route('showfeature', ['name' => $feature->releases->projects->path,
-                'company_id' => $feature->releases->projects->company->path, 'release_name' => $feature->releases->path, 'feature_id' => $feature->id]));
+            return redirect(route('showfeature', [$client->path, $project->path, $release->path, $feature->id]));
         }
     }
 
-    public function deleteFeature($company_id, $name, $release_name, $feature_id)
+    public function deleteFeature($client, $project, $release, $feature)
     {
-        $feature = Feature::where('id', $feature_id)->first();
         $requirement = Requirement::where('feature_uuid', $feature->feature_uuid)->get();
         foreach ($requirement as $r) {
             Assignee::where('uuid', $r->requirement_uuid)->delete();
         }
         Requirement::where('feature_uuid', $feature->feature_uuid)->delete();
-        Feature::where('id', $feature_id)->delete();
+        Feature::find($feature->id)->delete();
 
-        return redirect(route('showrelease', ['name' => $feature->releases->projects->path,
-            'company_id' => $feature->releases->projects->company->path, 'release_name' => $feature->releases->path]));
+        return redirect(route('showrelease', [$client->path, $project->path, $release->path, $release->version]));
 
     }
 

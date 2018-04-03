@@ -28,12 +28,10 @@ class ReleaseController extends Controller
         $this->middleware('auth');
     }
 
-    public function addRelease($company_id,$name)
+    public function addRelease($client,$project)
     {
-        $companys = Client::where('id', $company_id)->first();
-        $projects = Project::where(['name' => $name, 'company_id' => $companys->id])->first();
-        $status = Status::where('type', 'Progress')->get();
-        return view('release.add_release', compact('projects', 'companys', 'status'));
+        $status = Status::type('Progress')->get();
+        return view('release.add_release', compact('project', 'client', 'status'));
     }
 
     public function storeRelease(ReleaseValidator $request)
@@ -59,34 +57,29 @@ class ReleaseController extends Controller
         return redirect()->route('projectdetails',['name' => $project->path, 'company_id ' => $project->company->path]);
     }
 
-    public function showRelease($company_id,$name,$release_name, $version){
-        $company = Client::where('path' ,$company_id)->firstorfail();
-        $project = Project::where(['path' => $name, 'company_id' => $company->id])->firstorfail();
-        $release = Release::where([['project_id', $project->id],['path', $release_name],['version', $version]])->firstorfail();
-        $releaseuuid = $release->release_uuid;
+    public function showRelease($client,$project,$release, $version){
+        $release = Release::where([['project_id', $project->id],['path', $release->path],['version', $version]])->firstorfail();
         $user = Assignee::where('uuid', $project->id)->get();
-        $features = Feature::with('requirements.assignees.users')->where([['release_id', $releaseuuid],[ 'type', 'Feature']])->get();
+
+        $features = Feature::with('requirements.assignees.users')->where([['release_id', $release->release_uuid],[ 'type', 'Feature']])->get();
         $nfr = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'NFR']])->get();
         $techspecs = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'TS']])->get();
         $scope = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid],[ 'type', 'Scope']])->get();
 
         $status = Status::type('Progress')->get();
         $category = Status::type('category')->get();
-        return view('release.details_release', compact('release', 'project', 'features', 'company', 'nfr', 'scope', 'techspecs', 'featurecount', 'user', 'status', 'category'));
+        return view('release.details_release', compact('release', 'project', 'features', 'client', 'nfr', 'scope', 'techspecs', 'featurecount', 'user', 'status', 'category'));
     }
 
-    public function editRelease($company_id, $name, $release_name, $version){
-        $company = Client::where('path' ,$company_id)->first();
-        $project = Project::where(['path' => $name, 'company_id' => $company->id])->first();
-        $release = Release::where([['project_id', $project->id],['path', $release_name],['version', $version]])->first();
+    public function editRelease($client,$project,$release, $version){
+        $release = Release::where([['project_id', $project->id],['path', $release->path],['version', $version]])->first();
         $status = Status::where('type', 'Progress')->get();
-        return view('release.edit_release', compact('project', 'company', 'release', 'status'));
+        return view('release.edit_release', compact('project', 'client', 'release', 'status'));
     }
 
-    public function updateRelease($company_id, $name, $release_name, $version, ReleaseValidator $request){
-        $company = Client::where('path' ,$company_id)->first();
-        $project = Project::where(['path' => $name, 'company_id' => $company->id])->first();
-        $release = Release::where(['path' => $release_name, 'version' => $version])->first();
+    public function updateRelease($client,$project,$release, $version, ReleaseValidator $request){
+
+        $release = Release::where(['path' => $release->path, 'version' => $version])->first();
 
         $release->name = $request->release_name;
         $release->path = strtolower(str_replace(" ","-", $release->name));
@@ -103,6 +96,6 @@ class ReleaseController extends Controller
         Project::updateDeadline($project);
         Project::updateStatus($project);
 
-        return redirect()->route('showrelease',['name' => $project->path, 'company_id ' => $project->company->path, 'release_name' => $release->path, 'version' => $release->version]);
+        return redirect()->route('showrelease',[$client->path, $project->path, $release->path,$release->version]);
     }
 }

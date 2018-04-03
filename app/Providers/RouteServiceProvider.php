@@ -42,7 +42,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('feature', function ($value) {
-            return \App\Feature::find('id')->first() ?? abort(404);
+            return \App\Feature::find($value)->first() ?? dd(\App\Feature::find($value)->first()); // abort(404);
         });
 
     }
