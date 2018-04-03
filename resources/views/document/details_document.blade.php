@@ -7,7 +7,7 @@
 @section('breadcrumbs', Breadcrumbs::render('detailsdocument', $document))
 
 @section('content')
-    <button onclick="location.href='{{route('editdocument', ['name' => $document->projects->name, 'company_id' => $document->projects->company_id, 'document_id' => $document->id])}}'"
+    <button onclick="location.href='{{route('editdocument', [$project->company->path, $project->path, $document->id])}}'"
             class="btn-edit" id="project-edit">
         <span class="glyphicon edit-icon"></span> Edit
     </button>

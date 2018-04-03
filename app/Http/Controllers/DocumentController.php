@@ -42,13 +42,10 @@ class DocumentController extends Controller
         return true;
     }
 
-    public function addDocument($company_id, $name){
-        $projects = Project::where('path', $name)->first();
-        $companys = Client::where('path', $company_id)->first();
-        $release = Release::where('project_id', $projects->id)->get();
-        $status = Status::where('type', 'Progress')->orWhere('type', 'Document')->get();
-
-        return view('document.add_document', compact('projects', 'companys', 'release', 'status'));
+    public function addDocument($client, $project){
+        $release = Release::where('project_id', $project->id)->get();
+        $status = Status::type('Progress')->orWhere('type', 'Document')->get();
+        return view('document.add_document', compact('projects', 'client', 'project','release','status'));
     }
 
     public function storeDocument(DocumentValidator $request)
@@ -75,55 +72,39 @@ class DocumentController extends Controller
         return redirect()->route('projectdetails', ['name' => $project->name, 'company_id ' => $project->company_id]);
     }
 
-    public function showDocument($company_id, $name, $document_id){
-        $document = Document::with('projects.company')->where('id',$document_id)->first();
-        $project = Project::where(['path' => $name, 'company_id' => Client::Path($company_id)->first()->id])->first();
-        if(!$document){
-            abort(404);
-        }
-
-        return view('document.details_document', compact('document', 'project'));
+    public function showDocument($client, $project, $document){
+        return view('document.details_document', compact('document','client', 'project'));
     }
 
-    public function downloadFile($company_id, $name, $document_id){
-        $document = Document::with('projects.company')->where('id',$document_id)->first();
-        if(!$document){
-            abort(404);
-        }
-
-
-        return response()->download('storage/documents/'. $document->project_id. '/' . $document->title.'-'.$document->filename, $document->filename);
+    public function downloadFile($client, $project, $document){
+        return response()->download('storage/documents/'. $project->id. '/' . $document->title.'-'.$document->filename, $document->filename);
     }
 
-    public function overviewDocuments($company_id, $name){
-        $project = Project::where(['path' => $name, 'company_id' => Client::Path($company_id)->first()->id])->first();
+    public function overviewDocuments($client, $project){
         $document = Document::with('projects.company')->where('project_id', $project->id)->get();
         if(!$document){
             abort(404);
         }
 
-        return view('document.document', compact('document', 'project'));
+        return view('document.document', compact('document', 'project', 'client'));
     }
 
 
-    public function editDocument($company_id, $name, $document_id){
-        $document = Document::with('projects')->where('id', $document_id)->first();
-        $project = Project::where(['path' => $name, 'company_id' => Client::Path($company_id)->first()->id])->first();
-        $status = Status::where('type', 'Progress')->orWhere('type', 'Document')->get();
+    public function editDocument($client, $project, $document){
+        $status = Status::type('Progress')->orWhere('type', 'Document')->get();
         $release = Release::where('project_id', $project->id)->get();
         if(!$document){
             abort(404);
         }
 
-        return view('document.edit_document', compact('document', 'project', 'status', 'release'));
+        return view('document.edit_document', compact('document', 'project', 'client', 'status', 'release'));
     }
 
-    public function updateDocument($company_id, $name, $document_id, Request $request){
-        $document = Document::where('id', $document_id)->first();
+    public function updateDocument($client, $project, $document, Request $request){
         $this->createRevision($document);
 
         if($request->hasFile('upload')){
-            $this->deleteFile($document_id);
+            $this->deleteFile($document->id);
             $path = $request->file('upload')->storeAs("public/documents/".$document->project_id , $request->document_title."-".$request->upload->getClientOriginalName());
             $document->link = $path;
             $document->filename = $request->upload->getClientOriginalName();
@@ -137,12 +118,11 @@ class DocumentController extends Controller
         $document->status = $request->status;
 
         $document->save();
-        return redirect()->route('showdocument', ['name' => $name, 'company_id' => $company_id, 'document_id' => $document_id]);
+        return redirect()->route('showdocument', [$client->path, $project->path, $document->id]);
     }
 
-    public function deleteFile($document_id)
+    public function deleteFile($document)
     {
-        $document = Document::where('id', $document_id)->first();
         $this->createRevision($document);
         $file = Storage::delete($document->link);
         if($file == true){
@@ -150,15 +130,14 @@ class DocumentController extends Controller
             $document->link = NULL;
             $document->save();
         }
-        return redirect()->action('DocumentController@editDocument', [$document->projects->company_id,$document->projects->name, $document->id]);
+        return redirect()->action('DocumentController@editDocument', [$document->projects->company->path,$document->projects->path, $document->id]);
     }
 
-    public function deletedocument($company_id, $name, $document_id)
+    public function deletedocument($client, $project, $document)
     {
-        $document = Document::where('id', $document_id)->first();
         $this->createRevision($document);
-        $this->deleteFile($document_id);
+        $this->deleteFile($document->id);
         $document->delete();
-        return redirect()->action('DocumentController@overviewDocuments', [$document->projects->company_id,$document->projects->name]);
+        return redirect()->action('DocumentController@overviewDocuments', [$client->path,$project->path]);
     }
 }

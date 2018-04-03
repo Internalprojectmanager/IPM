@@ -21,17 +21,11 @@ use PDF;
 
 class PDFController extends Controller
 {
-    public function createPDF($company_id,$name,$release_name, $version){
-        $company = Client::where('path' ,$company_id)->first();
+    public function createPDF($client,$project,$release, $version){
         $project = Project::with(['assignee.users.jobtitles','assignee' => function ($q){
             $q->orderby('userid');
-        }])->where(['path' => $name, 'company_id' => $company->id])->first();
+        }])->path($project->path)->where('company_id' , $client->id)->firstorfail();
 
-        $release = Release::where([['project_id', $project->id],['path', $release_name],['version', $version]])->first();
-        $release_id = $release->release_uuid;
-        if(!$release){
-            abort(404);
-        }
         $features = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid], ['type', 'Feature']])->get();
         $pdf = PDF::setOptions(['images' => true])->loadView('release.pdf', compact('release', 'project', 'features', 'company', 'requirements', 'assignees'))->setPaper('a4', 'portrait');
 

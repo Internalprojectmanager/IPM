@@ -77,7 +77,7 @@
 
                 <div class="row pull-right">
                     <div class="col-md-5 col-xs-6">
-                        <button onclick="location.href='{{route('documentoverview', ['name' => $release->projects->path, 'company_id' => $release->projects->company->path])}}'"
+                        <button onclick="location.href='{{route('documentoverview', [$client->path, $project->path])}}'"
                                 class="blue-button" id="button-files">
                             <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -98,7 +98,7 @@
                         </button>
                     </div>
                     <div class="col-md-7 col-xs-6">
-                        <button onclick="location.href='{{route('createpdf', ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, 'version' => $release->version])}}'"
+                        <button onclick="location.href='{{route('createpdf', [$client->path, $project->path, $release->path, $release->version])}}'"
                                 class="blue-button" id="button-pdf">
                             <svg id="pdf-icon" width="19px" height="19px" viewBox="0 0 19 19" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

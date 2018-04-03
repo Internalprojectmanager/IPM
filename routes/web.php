@@ -70,11 +70,11 @@ Route::prefix('{client}')->group( function (){
             Route::get('/', 'DocumentController@overviewDocuments')->name('documentoverview');
             Route::get('/add', 'DocumentController@addDocument')->name('adddocument');
             Route::put('/add', 'DocumentController@storeDocument')->name('storedocument');
-            Route::get('/show/{document_id}', 'DocumentController@showDocument')->name('showdocument');
-            Route::get('/edit/{document_id}', 'DocumentController@editDocument')->name('editdocument');
-            Route::put('/edit/{document_id}', 'DocumentController@updateDocument')->name('updatedocument');
-            Route::get('/delete/{id}', 'DocumentController@deleteDocument')->name('deletedocument');
-            Route::get('/download/{id}', 'DocumentController@downloadFile')->name('downloadfile');
+            Route::get('/show/{document}', 'DocumentController@showDocument')->name('showdocument');
+            Route::get('/edit/{document}', 'DocumentController@editDocument')->name('editdocument');
+            Route::put('/edit/{document}', 'DocumentController@updateDocument')->name('updatedocument');
+            Route::get('/delete/{document}', 'DocumentController@deleteDocument')->name('deletedocument');
+            Route::get('/download/{document}', 'DocumentController@downloadFile')->name('downloadfile');
 
         });
 

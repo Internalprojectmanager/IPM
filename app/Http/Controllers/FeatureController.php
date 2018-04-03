@@ -53,7 +53,7 @@ class FeatureController extends Controller
         $requirementcount = $requirementcount->requirements_count;
         $status = Status::where('type', "Progress")->get();
         $user = Assignee::where('uuid', $feature->releases->projects->id)->select('userid')->distinct()->get();
-        return view('features.details_feature', compact('feature', 'requirementcount', 'status', 'user'));
+        return view('features.details_feature', compact('client', 'project', 'release', 'feature', 'requirementcount', 'status', 'user'));
     }
 
 
@@ -67,7 +67,7 @@ class FeatureController extends Controller
         $feature = new Feature();
         $feature->feature_uuid = Uuid::generate(4);
         $feature->name = $request->feature_name;
-        $feature->path = strtolower(str_replace(" ", "-", $feature->name));
+        $feature->path = str_slug($feature->name);
         $feature->release_id = $release->release_uuid;
         $feature->description = $request->feature_description;
         if (!empty($request->category)) {
@@ -135,7 +135,7 @@ class FeatureController extends Controller
         if ($request) {
             $this->createRevision($feature);
             $feature->name = $request->feature_name;
-            $feature->path = strtolower(str_replace(" ", "-", $feature->name));
+            $feature->path = str_slug($feature->name);
             $feature->description = $request->feature_description;
 
             if (!empty($request->category)) {
