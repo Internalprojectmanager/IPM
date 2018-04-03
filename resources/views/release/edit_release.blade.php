@@ -4,12 +4,12 @@
     {{$project->name}} -  {{$release->name}} {{number_format($release->version, 1)}} | {{env('APP_NAME')}}
 @endsection
 
-@section('breadcrumbs', Breadcrumbs::render('showrelease', $project, $company, $release))
+@section('breadcrumbs', Breadcrumbs::render('editrelease', $project, $release))
 
 @section('content')
 
-    <button onclick="location.href=''"
-            class="delete-button" id="project-delete">
+    <button onclick="location.href='{{route('deleterelease', [$client->path, $project->path, $release->path, $release->version])}}'"
+            class="btn-edit delete-button" id="project-edit">
         <svg id="delete-logo" width="19px" height="19px" viewBox="0 0 19 19" version="1.1" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
@@ -29,8 +29,7 @@
 
     <div class="row">
         <div class="header-3" id="edit-project">
-            <form action="{{route('updaterelease', ['name' => $release->projects->path, 'company_id' => $release->projects->company->path,
-                        'release_name' => $release->path, 'version' => $release->version])}}"
+            <form action="{{route('updaterelease', [$client->path, $project->path, $release->path, $release->version])}}"
                   method="post">
                 {{ csrf_field() }}
                 <div class="form-group col-md-6">
@@ -72,9 +71,9 @@
                     </a>
                 </div>
                 <div class="form-group col-md-6">
-                    <label class="edit-title" for="company">Release Status</label>
+                    <label class="edit-title" for="client">Release Status</label>
                     <br>
-                    <select name="status" id="company">
+                    <select class="form-control input-text-modal" name="status" id="client">
                         @foreach($status as $s)
                             <option @if($s->id == $release->status) selected="" @endif value="{{$s->id}}">{{$s->name}}</option>
                         @endforeach

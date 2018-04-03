@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    {{$feature->releases->name}} {{number_format($feature->releases->version, 1)}} - {{$feature->name}} | {{env('APP_NAME')}}
+    {{$release->name}} {{number_format($release->version, 1)}} - {{$feature->name}} | {{env('APP_NAME')}}
 @endsection
 
 @section('breadcrumbs', Breadcrumbs::render('detailsfeature', $feature))

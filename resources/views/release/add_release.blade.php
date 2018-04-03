@@ -48,7 +48,7 @@
                     </div>
                     <div class="form-group">
                         <label for="status">Release Status: <span class="required">*</span></label>
-                        <select class="form-control" required name="status">
+                        <select class="form-control input-text-modal" required name="status">
                             @foreach($status as $s)
                                 <option value="{{$s->id}}">{{$s->name}}</option>
                             @endforeach

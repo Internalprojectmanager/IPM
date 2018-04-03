@@ -7,6 +7,10 @@
 @section('breadcrumbs', Breadcrumbs::render('showrelease', $project, $release))
 
 @section('content')
+    <a href="{{route('editrelease', [ $client->path, $project->path, $release->path, $release->version])}}" class="btn-edit" id="project-edit">
+        <span class="glyphicon edit-icon"></span> Edit
+    </a>
+
     <div class="row" onload="">
         <div class="header-3" id="project-details">
             <div class="row" id="block-show">

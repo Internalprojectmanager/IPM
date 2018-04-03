@@ -45,7 +45,7 @@ class ReleaseController extends Controller
         $release->release_uuid = Uuid::generate(4);
         $release->project_id = $request->project_id;
         $release->name = $request->release_name;
-        $release->path = strtolower(str_replace(" ","-", $release->name));
+        $release->path = str_slug($release->name);
         $release->description = $request->description;
         $release->status = $request->status;
         $release->document_status = $request->document_status;
@@ -54,7 +54,7 @@ class ReleaseController extends Controller
         $release->deadline = $request->deadline. " 23:59:59";
         $release->specificationtype = $request->specification;
         $release->save();
-        return redirect()->route('projectdetails',['name' => $project->path, 'company_id ' => $project->company->path]);
+        return redirect()->route('projectdetails',[$project->company->path, $project->path]);
     }
 
     public function showRelease($client,$project,$release, $version){
@@ -82,7 +82,7 @@ class ReleaseController extends Controller
         $release = Release::where(['path' => $release->path, 'version' => $version])->first();
 
         $release->name = $request->release_name;
-        $release->path = strtolower(str_replace(" ","-", $release->name));
+        $release->path = str_slug($release->name);
         $release->description = $request->description;
         $release->deadline = $request->deadline. " 23:59:59";
         $release->version = $request->version;
@@ -98,4 +98,11 @@ class ReleaseController extends Controller
 
         return redirect()->route('showrelease',[$client->path, $project->path, $release->path,$release->version]);
     }
+
+    public function deleteRelease($client,$project,$release, $version){
+        $release = Release::where([['project_id', $project->id],['path', $release->path],['version', $version]])->first();
+        $release->delete();
+        return redirect()->route('projectdetails', [$client->path, $project->path]);
+    }
+
 }
