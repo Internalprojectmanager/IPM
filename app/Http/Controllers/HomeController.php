@@ -34,7 +34,7 @@ class HomeController extends Controller
             $requirements[] = $a->uuid;
         }
 
-        $feature = Requirement::with('features.releases.projects', 'rstatus')->whereIn('requirement_uuid', $requirements)->get();
+        $feature = Requirement::with('features.releases.projects.company', 'rstatus')->whereIn('requirement_uuid', $requirements)->get();
 
         return view('profile.dashboard', compact('feature'));
     }
