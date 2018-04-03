@@ -99,6 +99,7 @@ Route::prefix('{client}')->group( function (){
                 Route::post('/{feature}', 'RequirementController@saveStatus')->name('requirementsavestatus');
                 Route::get('/{feature}/edit', 'FeatureController@editFeature')->name('editFeature');
                 Route::post('/{feature}/edit', 'FeatureController@updateFeature')->name('updateFeature');
+                Route::get('/{feature}/delete', 'FeatureController@deleteFeature')->name('deletefeature');
             });
         });
 
