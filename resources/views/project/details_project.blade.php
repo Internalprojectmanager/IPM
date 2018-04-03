@@ -117,8 +117,8 @@
             </thead>
             <tbody>
             @foreach($releases as $release)
-                <tr class="clickable-row" data-href="{{route('showrelease', ['name' => $project->path, 'company_id' => $project->company->path,
-                        'release_name' => $release->path, 'version' => $release->version])}}">
+                <tr class="clickable-row" data-href="{{route('showrelease', [$project->company->path, $project->path,
+                        $release->path, $release->version])}}">
                     <td style="background-color: {{$release->rstatus->color}};"></td>
                     <td><span class="tabletitle">{{$release->version}} - {{$release->name}}</span>
                     </td>

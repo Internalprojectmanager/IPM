@@ -178,7 +178,7 @@
                     <tbody>
                     @foreach($features as $f)
                         <tr class="clickable-row" data-href="{{route('showfeature',
-                             ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $f->id])}}">
+                             [$release->projects->company->path, $release->projects->path, $release->path, $f->id])}}">
                             <td style="border-left: 1px solid #CECECE; background-color: {{$f->fstatus->color}};"></td>
                             <td class="width25"><span class="tabletitle">{{$f->name}}</span>
                             </td>
@@ -253,7 +253,7 @@
                     <tbody>
                     @foreach($nfr as $n)
                         <tr class="clickable-row" data-href="{{route('showfeature',
-                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $n->id])}}">
+                         [$release->projects->company->path, $release->projects->path, $release->path, $n->id])}}">
 
                             <td style="border-left: 1px solid #CECECE; background-color: {{$n->fstatus->color}};"></td>
                             <td class="width20"><span class="tabletitle">{{$n->name}}</span>
@@ -329,7 +329,7 @@
                     <tbody>
                     @foreach($techspecs as $t)
                         <tr class="clickable-row" data-href="{{route('showfeature',
-                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $t->id])}}">
+                         [$release->projects->company->path, $release->projects->path, $release->path, $t->id])}}">
                             <td style="border-left: 1px solid #CECECE; background-color: {{$t->fstatus->color}};"></td>
                             <td class="width20"><span class="tabletitle">{{$t->name}}</span></td>
                             <td class="width20">{{$t->fstatus->name}}</td>
@@ -394,7 +394,7 @@
                     <tbody>
                     @foreach($scope as $s)
                         <tr class="clickable-row" data-href="{{route('showfeature',
-                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $s->id])}}">
+                         [$release->projects->company->path, $release->projects->path, $release->path, $s->id])}}">
                             <td style="border-left: 1px solid #CECECE; background-color: #CECECE;"></td>
                             <td class="width25"><span class="tabletitle">{{$s->name}}</span></td>
                             <td>{{$s->description}}</td>
