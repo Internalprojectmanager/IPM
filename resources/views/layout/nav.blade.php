@@ -23,6 +23,12 @@
         </g>
     </svg>
 </a>
+<a href="{{route('dashboard')}}" class="sidebar_link">
+    <div class="sidebar_object <?php $sUrl = $_SERVER['REQUEST_URI']; $sUrl = substr($sUrl, 1, 9); if ($sUrl == 'dashboard') {echo 'active';} ?>">
+        <i class="fas fa-tachometer-alt fa-2x"></i> <br>Dash (Beta)
+    </div>
+</a>
+
 
 <a href="{{route('overviewproject')}}" class="sidebar_link">
     <div class="sidebar_object <?php $sUrl = $_SERVER['REQUEST_URI']; $sUrl = substr($sUrl, 1, 7); if ($sUrl == 'project') {echo 'active';} ?>">

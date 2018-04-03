@@ -14,7 +14,12 @@
 Route::get('/', function () {
     return redirect()->route('overviewproject');
 });
-Route::get('/home', 'HomeControler@index')->name('home');
+
+Route::get('/home', function () {
+    return redirect()->route('overviewproject');
+})->name('home');
+
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 
 
 Route::group(['middleware' => ['guest', 'web']], function () {
