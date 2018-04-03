@@ -2,10 +2,12 @@
 
 namespace App;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Feature extends Model
 {
+    use Sluggable;
     protected $table = "feature";
 
     public $incrementing = false;
@@ -28,5 +30,14 @@ class Feature extends Model
 
     public function fcategory(){
         return $this->hasOne('App\Status', "id", "category");
+    }
+
+    public function sluggable()
+    {
+        return [
+            'path' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }

@@ -3,13 +3,14 @@
 namespace App;
 
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
-use Kyslik\ColumnSortable\Sortable;;
+use Kyslik\ColumnSortable\Sortable;
 
 class Project extends Model
 {
-    use Sortable, Searchable;
+    use Sortable, Searchable, Sluggable;
 
     public $sortable = ['name', 'description', 'status', 'deadline', 'users', 'created_at'];
 
@@ -37,7 +38,7 @@ class Project extends Model
     }
 
     public static function updateDeadline($project){
-        $currentrelease = Release::where([["project_id", "=", $project->id]])->where('deadline', '>=', Carbon::now())->orderby('deadline', 'asc')->first();
+        $currentrelease = Release::where("project_id", "=", $project->id)->where('deadline', '>=', Carbon::now())->orderby('deadline', 'asc')->first();
         if($currentrelease){
             $project->deadline = $currentrelease->deadline;
         } else{
@@ -48,7 +49,7 @@ class Project extends Model
 
     public static function updateStatus($project)
     {
-        $currentrelease = Release::where([["project_id", "=", $project->id]])->where('deadline', '>=', Carbon::now())->orderby('deadline', 'asc')->first();
+        $currentrelease = Release::where("project_id", "=", $project->id)->where('deadline', '>=', Carbon::now())->orderby('deadline', 'asc')->first();
         if ($currentrelease){
             $project->status = $currentrelease->status;
         } else {
@@ -60,5 +61,14 @@ class Project extends Model
 
     public function scopePath($query, $path){
         return $query->where('path', $path);
+    }
+
+    public function sluggable()
+    {
+        return [
+            'path' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }

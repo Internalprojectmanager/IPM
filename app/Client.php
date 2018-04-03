@@ -5,12 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Kyslik\ColumnSortable\Sortable;
+use Cviebrock\EloquentSluggable\Sluggable;
+
 
 class Client extends Model
 {
     protected $table = "client";
 
-    use Sortable, Searchable;
+    use Sortable, Searchable, Sluggable;
 
     public $sortable = ['name', 'contactname'];
 
@@ -35,5 +37,14 @@ class Client extends Model
 
     public function scopePath($query, $path){
         return $query->where('path', $path);
+    }
+
+    public function sluggable()
+    {
+        return [
+            'path' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }

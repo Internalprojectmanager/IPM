@@ -153,15 +153,10 @@ class ProjectController extends Controller
 
     public function storeProject(ProjectValidator $request)
     {
-        $findproject = Project::where([['name', $request->project_name], ['company_id', $request->company]])->first();
-        if ($findproject) {
-            return redirect()->back()->withErrors('Project name is already being used for this client');
-        } else {
             $project = new Project();
             $project->name = $request->project_name;
-            $project->path = strtolower(str_replace(" ", "-", $project->name));
             if (!empty($request->new_client)) {
-                $client = Client::firstOrCreate(['name' => $request->new_client, 'path' => strtolower(str_replace(" ", "-", $request->new_client)), 'status' => Status::Name('Client')->first()->id]);
+                $client = Client::firstOrCreate(['name' => $request->new_client, 'status' => Status::Name('Client')->first()->id]);
                 $project->company_id = $client->id;
             } else {
                 $project->company_id = $request->company;
@@ -187,7 +182,6 @@ class ProjectController extends Controller
                 }
             }
             return redirect()->route('overviewproject');
-        }
 
     }
 
@@ -270,7 +264,6 @@ class ProjectController extends Controller
     public function updateProject($client, $project, ProjectValidator $request)
     {
         $project->name = $request->project_name;
-        $project->path = strtolower(str_replace(" ","-",$project->name));
 
         if (!empty($request->new_client)) {
             $client = Client::firstOrCreate(['name' => $request->new_client]);

@@ -2,13 +2,14 @@
 
 namespace App;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Kyslik\ColumnSortable\Sortable;
 
 class Release extends Model
 {
-    use Searchable, Sortable;
+    use Searchable, Sortable, Sluggable;
     protected $table = "release";
 
     public $sortable = ['name', 'description', 'status', 'deadline', 'created_at'];
@@ -40,5 +41,14 @@ class Release extends Model
 
     public function scopePath($query, $path){
         return $query->where('path', $path);
+    }
+
+    public function sluggable()
+    {
+        return [
+            'path' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }
