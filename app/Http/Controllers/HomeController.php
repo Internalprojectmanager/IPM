@@ -41,8 +41,7 @@ class HomeController extends Controller
             }
         }
         $feature = Requirement::with('features.releases.projects.company', 'rstatus')->whereIn('requirement_uuid', $requirements)->get();
-
-        dd($feature);
+        
         return view('profile.dashboard', compact('feature'));
     }
 }
