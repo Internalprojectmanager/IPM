@@ -26,6 +26,29 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+
+
+        Route::bind('client', function ($value) {
+            return \App\Client::path($value)->first() ?? abort(404);
+        });
+
+        Route::bind('project', function ($value) {
+            return \App\Project::path($value)->first() ?? abort(404);
+        });
+
+        Route::bind('release', function ($value) {
+            return \App\Release::path($value)->first() ?? abort(404);
+        });
+
+        Route::bind('feature', function ($value) {
+            return \App\Feature::where('id', $value)->first() ?? abort(404);
+        });
+
+        Route::bind('document', function ($value) {
+            return \App\Document::find($value)->first() ?? abort(404);
+        });
+
     }
 
     /**

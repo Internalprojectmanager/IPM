@@ -10,7 +10,7 @@
         </thead>
         <tbody>
         @foreach($clients as $client)
-            <tr class="clickable-row" data-href="{{route('clientdetails', ['name' => $client->path])}}">
+            <tr class="clickable-row" data-href="{{route('clientdetails', [$client->path])}}">
                 <td style="border-left: 1px solid #CECECE; background-color: {{$client->cstatus->color}};"></td>
                 <td>{{$client->name}}</td>
                 <td>

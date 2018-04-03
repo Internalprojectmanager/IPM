@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    {{$projects->name}} New Document | {{env('APP_NAME')}}
+    {{$project->name}} New Document | {{env('APP_NAME')}}
 @endsection
 
 @section('content')
@@ -16,13 +16,14 @@
         </div>
     @endif
 
-    <form action="{{route('storedocument', ['name' => $projects->name, 'company_id' => $projects->company_id])}}" method="POST" enctype="multipart/form-data">
+
+    <form action="{{route('storedocument', [$client->path, $project->path])}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input name="_method" type="hidden" value="PUT">
         <h3>Document</h3>
         <div class="form-group">
-            <input type="hidden" id="project" name="project_id" value="{{$projects->id}}">
-            <input type="hidden" id="company_id" name="company_id" value="{{$companys->name}}">
+            <input type="hidden" id="project" name="project_id" value="{{$project->id}}">
+            <input type="hidden" id="company_id" name="company_id" value="{{$client->name}}">
             <label for="document_title">Document title: <span class="required">*</span></label>
             <input type="text" class="form-control" required name="document_title" id="document_title" value="{{old('document_title')}}">
             <br>

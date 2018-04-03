@@ -7,6 +7,10 @@
 @section('breadcrumbs', Breadcrumbs::render('showrelease', $project, $release))
 
 @section('content')
+    <a href="{{route('editrelease', [ $client->path, $project->path, $release->path, $release->version])}}" class="btn-edit" id="project-edit">
+        <span class="glyphicon edit-icon"></span> Edit
+    </a>
+
     <div class="row" onload="">
         <div class="header-3" id="project-details">
             <div class="row" id="block-show">
@@ -77,7 +81,7 @@
 
                 <div class="row pull-right">
                     <div class="col-md-5 col-xs-6">
-                        <button onclick="location.href='{{route('documentoverview', ['name' => $release->projects->path, 'company_id' => $release->projects->company->path])}}'"
+                        <button onclick="location.href='{{route('documentoverview', [$client->path, $project->path])}}'"
                                 class="blue-button" id="button-files">
                             <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -98,7 +102,7 @@
                         </button>
                     </div>
                     <div class="col-md-7 col-xs-6">
-                        <button onclick="location.href='{{route('createpdf', ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, 'version' => $release->version])}}'"
+                        <button onclick="location.href='{{route('createpdf', [$client->path, $project->path, $release->path, $release->version])}}'"
                                 class="blue-button" id="button-pdf">
                             <svg id="pdf-icon" width="19px" height="19px" viewBox="0 0 19 19" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -178,7 +182,7 @@
                     <tbody>
                     @foreach($features as $f)
                         <tr class="clickable-row" data-href="{{route('showfeature',
-                             ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $f->id])}}">
+                             [$release->projects->company->path, $release->projects->path, $release->path, $f->id])}}">
                             <td style="border-left: 1px solid #CECECE; background-color: {{$f->fstatus->color}};"></td>
                             <td class="width25"><span class="tabletitle">{{$f->name}}</span>
                             </td>
@@ -253,7 +257,7 @@
                     <tbody>
                     @foreach($nfr as $n)
                         <tr class="clickable-row" data-href="{{route('showfeature',
-                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $n->id])}}">
+                         [$release->projects->company->path, $release->projects->path, $release->path, $n->id])}}">
 
                             <td style="border-left: 1px solid #CECECE; background-color: {{$n->fstatus->color}};"></td>
                             <td class="width20"><span class="tabletitle">{{$n->name}}</span>
@@ -329,7 +333,7 @@
                     <tbody>
                     @foreach($techspecs as $t)
                         <tr class="clickable-row" data-href="{{route('showfeature',
-                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $t->id])}}">
+                         [$release->projects->company->path, $release->projects->path, $release->path, $t->id])}}">
                             <td style="border-left: 1px solid #CECECE; background-color: {{$t->fstatus->color}};"></td>
                             <td class="width20"><span class="tabletitle">{{$t->name}}</span></td>
                             <td class="width20">{{$t->fstatus->name}}</td>
@@ -394,7 +398,7 @@
                     <tbody>
                     @foreach($scope as $s)
                         <tr class="clickable-row" data-href="{{route('showfeature',
-                         ['name' => $release->projects->path, 'company_id' => $release->projects->company->path, 'release_name' => $release->path, $s->id])}}">
+                         [$release->projects->company->path, $release->projects->path, $release->path, $s->id])}}">
                             <td style="border-left: 1px solid #CECECE; background-color: #CECECE;"></td>
                             <td class="width25"><span class="tabletitle">{{$s->name}}</span></td>
                             <td>{{$s->description}}</td>

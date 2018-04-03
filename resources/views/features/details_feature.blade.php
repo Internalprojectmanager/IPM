@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    {{$feature->releases->name}} {{number_format($feature->releases->version, 1)}} - {{$feature->name}} | {{env('APP_NAME')}}
+    {{$release->name}} {{number_format($release->version, 1)}} - {{$feature->name}} | {{env('APP_NAME')}}
 @endsection
 
 @section('breadcrumbs', Breadcrumbs::render('detailsfeature', $feature))
@@ -55,7 +55,7 @@
             </div>
             <div class="row pull-right">
                 <div class="col-md-3 col-xs-3">
-                    <button onclick="location.href='{{route('documentoverview', ['name' => $feature->releases->projects->path, 'company_id' => $feature->releases->projects->company->path])}}'"
+                    <button onclick="location.href='{{route('documentoverview', [$client->path, $project->path])}}'"
                             class="blue-button" id="button-files">
                         <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

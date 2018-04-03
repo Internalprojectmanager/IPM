@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label>Client:<span class="required">*</span></label>
                         <select class="form-control input-text-modal" name="company" id="company" >
-                            <option value="{{$clients->id}}">{{$clients->name}}</option>
+                            <option value="{{$client->id}}">{{$client->name}}</option>
                         </select>
                         <input type="hidden" class="form-control form-control input-text-modal" name="new_client"
                                placeholder="New Client Name" value="">

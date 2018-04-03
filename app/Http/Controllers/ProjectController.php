@@ -25,26 +25,29 @@ class ProjectController extends Controller
     {
         $this->middleware(['auth', 'checkactive']);
     }
-    public function projectsCollection($ids = null){
 
-        if(isset($ids)){
-            $projectnext = Project::with('company', 'pstatus', 'assignee.users')
-                ->whereIn('id', $ids)->where('deadline', '>=', Carbon::now('Europe/Amsterdam'))->orderBy('deadline', 'asc')->get();
-            $projectprev = Project::with('company', 'pstatus', 'assignee.users')
-                ->whereIn('id', $ids)->where('deadline', '<=', Carbon::now())
-                ->orderBy('deadline', 'desc')->get();
-            $projectnull= Project::with('company', 'pstatus', 'assignee.users')
-                ->whereIn('id', $ids)
-                ->where('deadline', '=', NULL)->get();
-        }else{
-            $projectnext = Project::with('company', 'pstatus', 'assignee.users')
-                ->where('deadline', '>=', Carbon::now('Europe/Amsterdam'))->orderBy('deadline', 'asc')->get();
-            $projectprev = Project::with('company', 'pstatus', 'assignee.users')
-                ->where('deadline', '<=', Carbon::now())
-                ->orderBy('deadline', 'desc')->get();
-            $projectnull= Project::with('company', 'pstatus', 'assignee.users')
-                ->where('deadline', '=', NULL)->get();
-        }
+    public function projectsCollection($ids = null){
+        $projectprev = Project::with('company', 'pstatus', 'assignee.users')
+            ->when(!empty($ids), function ($query) use ($ids) {
+                return $query->whereIn('id', $ids);
+            })
+            ->where('deadline', '<=', Carbon::now('Europe/Amsterdam'))
+            ->orderBy('deadline', 'desc')
+            ->get();
+        $projectnull = Project::with('company', 'pstatus', 'assignee.users')
+            ->when(!empty($ids), function ($query) use ($ids) {
+                return $query->whereIn('id', $ids);
+            })
+            ->where('deadline', NULL)
+            ->orderBy('deadline', 'desc')
+            ->get();
+        $projectnext = Project::with('company', 'pstatus', 'assignee.users')
+            ->when(!empty($ids), function ($query) use ($ids) {
+                return $query->whereIn('id', $ids);
+            })
+            ->where('deadline', '>=', Carbon::now('Europe/Amsterdam'))
+            ->orderBy('deadline', 'asc')
+            ->get();
 
         $projects = $projectnext->merge($projectprev);
         $projects = $projects->merge($projectnull);
@@ -192,11 +195,11 @@ class ProjectController extends Controller
     {
         $projectcount = Project::select('id')->get()->count();
         $projects = $this->projectsCollection();
-        $clients = Client::select('name', 'id')->get();
+        $client = Client::select('name', 'id')->get();
         $status = Status::where('type', 'Progress')->select('name', 'id')->get();
         $user = User::all();
 
-        return view('project.project', compact('projects', 'projectcount', 'clients', 'status', 'user'));
+        return view('project.project', compact('projects', 'projectcount', 'client', 'status', 'user'));
     }
 
     public function searchProject(Request $request)
@@ -223,8 +226,13 @@ class ProjectController extends Controller
         }
         $projects = $projects->get();
 
+
         foreach ($projects as $p) {
             $pro[] = $p->id;
+        }
+
+        if(empty($pro)){
+            $pro = [0];
         }
 
         if(!isset($order)) {
@@ -240,35 +248,27 @@ class ProjectController extends Controller
         return view('project.project_table', compact('projects', 'projectcount', 'status'));
     }
 
-    public function detailsProject($company_id, $name)
+    public function detailsProject($client, $project)
     {
-        $client = Client::where('path', $company_id)->first();
-        $projects = Project::with('pstatus')->where(['path' => $name, 'company_id' => $client->id])->first();
-        if (!$projects) {
-            abort(404);
-        }
-        $releases = Release::with('rstatus')->where('project_id', $projects->id)->orderBy('version', 'desc')->get();
+        $releases = Release::with('rstatus')->where('project_id', $project->id)->orderBy('version', 'desc')->get();
         $releases = $this->calcDeadline($releases, 'release');
-        $documents = Document::where('project_id', $projects->id)->get();
+        $documents = Document::where('project_id', $project->id)->get();
         $user = User::orderby('job_title', 'desc')->orderby('last_name', 'asc')->get();
-        $assignee = Assignee::with('users')->where('uuid', $projects->id)->get();
+        $assignee = Assignee::with('users')->where('uuid', $project->id)->get();
         $status = Status::where('type', 'Progress')->get();
-        return view('project.details_project', compact('projects', 'client', 'releases', 'documents', 'user', 'assignee', 'status'));
+        return view('project.details_project', compact('project', 'client', 'releases', 'documents', 'user', 'assignee', 'status'));
     }
 
-    public function editProject($company_id, $name)
+    public function editProject($client, $project)
     {
-        $projects = Project::with('company')->where(['path' => $name, 'company_id' => Client::Path($company_id)->first()->id])->first();
         $status = Status::Type('Progress')->get();
         $companys = Client::all();
 
-        return view('project.edit_project', compact('projects', 'companys', 'status'));
+        return view('project.edit_project', compact('project', 'companys', 'status'));
     }
 
-    public function updateProject($company_id, $name, ProjectValidator $request)
+    public function updateProject($client, $project, ProjectValidator $request)
     {
-        $client = Client::where('path', $company_id)->select('id', 'path')->first();
-        $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
         $project->name = $request->project_name;
         $project->path = strtolower(str_replace(" ","-",$project->name));
 
@@ -289,35 +289,30 @@ class ProjectController extends Controller
         }
         $project->save();
 
-        $company_id = $client->path;
-        $name = $project->path;
-        return redirect()->route('projectdetails', compact('company_id', 'name'));
+        $project = $project->path;
+        $client = $client->path;
+
+        return redirect()->route('projectdetails', compact('client', 'project'));
     }
 
-    public function deleteProject($company_id, $name)
+    public function deleteProject($client, $project)
     {
-        $client = Client::where('path', $company_id)->select('id')->first();
-        $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
         $project->delete();
-
         return redirect()->route('overviewproject');
     }
 
-    public function updateAssignees($company_id, $name, Request $request)
+    public function updateAssignees($client, $project, Request $request)
     {
         if(empty($request->assignee)){
             $request->assignee = array();
         }
 
-        $client = Client::where('path', $company_id)->select('id', 'path')->first();
-        $project = Project::where(['path' => $name, 'company_id' => $client->id])->first();
         $assignees = Assignee::where('uuid', $project->id)->get();
         foreach ($assignees as $a) {
             if (!in_array($a->userid, $request->assignee)) {
                 $a->delete();
             }
         }
-
         foreach ($request->assignee as $as) {
             $assignees = Assignee::where([['uuid', $project->id], ['userid', $as]])->first();
             if (empty($assignees)) {
@@ -328,6 +323,8 @@ class ProjectController extends Controller
 
             }
         }
-        return redirect()->route('projectdetails', compact('company_id', 'name'));
+        $client = $client->path;
+        $project = $project->path;
+        return redirect()->route('projectdetails', compact('client', 'project'));
     }
 }

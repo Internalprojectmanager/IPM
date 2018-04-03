@@ -12,37 +12,44 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Client;
 use App\User;
 
-class CompanyController extends Controller
+class ClientController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function addCompany()
+    public function addClient()
     {
         $status = Status::where('type', 'Client')->get();
         return view('client.add_client', compact('status'));
     }
 
-    public function storeCompany(Request $request)
+    public function storeClient(Request $request)
     {
-        $status = Status::name($request->status)->first();
+        $request->validate([
+            'client_name' => 'required|unique:client,name',
+            'status' => 'exists:status,name'
+        ]);
+
+        $status = Status::name($request->status);
         $client = new Client();
         $client->name = $request->client_name;
         $client->path = str_slug($client->name);
         $client->description = $request->description;
         $client->status = $status->id;
-        $client->contactname = $request->contact_name;
+        $client->contactname = $request->contact_name. ' ' .$request->contact_surname;
         $client->contactnumber = $request->contact_number;
-        $client->contactemail = $request->contact_mail;
+        $client->contactemail = $request->contact_email;
         $client->link = serialize(array('title' => $request->link_title, 'link' => $request->link_url));
+
+        dd($request);
         $client->save();
 
         return redirect()->route('overviewclient');
     }
 
-    public function overviewCompany()
+    public function overviewClient()
     {
         $clients = Client::sortable()->withCount('projects')->with('cstatus')->paginate(8);
         $clientcount = $clients->count();
@@ -50,7 +57,7 @@ class CompanyController extends Controller
         return view('client.client', compact('clients', 'clientcount', 'status'));
     }
 
-    public function searchCompany(Request $request){
+    public function searchClient(Request $request){
         $clie = [];
         $search = $request->search;
         $status = $request->status;
@@ -84,55 +91,54 @@ class CompanyController extends Controller
 
     }
 
-    public function detailsCompany($name)
+    public function detailsClient($client)
     {
-            $clients = Client::with('cstatus')->where('path', $name)->firstOrFail();
-            $projects = Project::sortable()->where('company_id' , $clients->id)->paginate(8);
+            $projects = Project::sortable()->where('company_id' , $client->id)->paginate(8);
             $projectcount = $projects->total();
             $status = Status::type('Client')->get();
-            $link = unserialize($clients->link);
-            $clients->link_title =$link['title'];
-            $clients->link_url=$link['link'];
+            $link = unserialize($client->link);
+            $client->link_title =$link['title'];
+            $client->link_url=$link['link'];
             $user = User::all();
             $projectstatus = Status::type('Progress')->get();
-            return view('client.details_client', compact('clients', 'projects', 'projectcount', 'status', 'user', 'projectstatus'));
+            return view('client.details_client', compact('client', 'projects', 'projectcount', 'status', 'user', 'projectstatus'));
     }
 
-    public function detailsSort($name , Request $request)
+    public function detailsSort($client , Request $request)
     {
         $sort = $request->sort;
         $page = $request->page;
         $order = $request->order;
-        $clients = Client::with('cstatus', 'projects.assignee')->where('path', $name)->first();
-        $projects = Project::sortable([$sort => $order])->where('company_id', $clients->id)->paginate(8);
+        $projects = Project::sortable([$sort => $order])->where('company_id', $client->id)->paginate(8);
         $projectcount = $projects->count();
-        return view('project.project_table', compact('clients', 'projects', 'projectcount'));
+        return view('project.project_table', compact('client', 'projects', 'projectcount'));
     }
 
-    public function updateCompany($name, Request $request)
+    public function updateClient($client, Request $request)
     {
-        $clients = Client::path($name)->first();
         $request->validate([
-            'client_name' => 'required|unique:client,name,' . $clients->id,
+            'client_name' => 'required|unique:client,name,' . $client->id,
+            'status' => 'exists:status,name'
         ]);
-        $clients->name = $request->client_name;
-        $clients->path = str_slug($clients->name);
-        $clients->description = $request->description;
-        $clients->status = $request->status;
-        $clients->contactname = $request->contact_name;
-        $clients->contactnumber = $request->contact_number;
-        $clients->contactemail = $request->contact_mail;
-        if(!empty($request->linktext) && !empty($request->link)){
-            $clients->link = serialize(array('text' => $request->linktext, 'link' => $request->link));
-        }
-        $clients->save();
 
-        return redirect()->route('clientdetails', $clients->path);
+        $client->name = $request->client_name;
+        $client->path = str_slug($client->name);
+        $client->description = $request->description;
+        $client->status = status::name($request->status)->id;
+        $client->contactname = $request->contact_name;
+        $client->contactnumber = $request->contact_number;
+        $client->contactemail = $request->contact_mail;
+        if(!empty($request->linktext) && !empty($request->link)){
+            $client->link = serialize(array('text' => $request->linktext, 'link' => $request->link));
+        }
+        $client->save();
+
+        return redirect()->route('clientdetails', $client->path);
     }
 
-    public function deleteCompany($name)
+    public function deleteClient($client)
     {
-        $client = Client::path($name)->delete();
+        Client::path($client)->delete();
 
         return redirect()->route('overviewclient');
     }

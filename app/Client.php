@@ -20,6 +20,11 @@ class Client extends Model
         'id','name', 'description', 'path', 'status'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'path';
+    }
+
     public function projects(){
         return $this->hasMany('App\Project', "company_id", "id")->orderBy('deadline', 'desc');
     }

@@ -1,10 +1,10 @@
 @extends('layout.app')
 
 @section('title')
-    {{$clients->name}} Details | {{env('APP_NAME')}}
+    {{$client->name}} Details | {{env('APP_NAME')}}
 @endsection
 
-@section('breadcrumbs', Breadcrumbs::render('singleclient', $clients))
+@section('breadcrumbs', Breadcrumbs::render('singleclient', $client))
 
 @section('content')
 
@@ -17,19 +17,19 @@
             <div class="row" id="block-show">
                 <div class="col-md-4 col-xs-6">
                     <span class="project-title block-title">Client Name</span> <br>
-                    <span class="project-detail block-value">{{$clients->name}}</span>
+                    <span class="project-detail block-value">{{$client->name}}</span>
                 </div>
 
                 <div class="col-md-4 col-xs-6">
                     <span class="project-title block-title">Status</span> <br>
-                    <span class="project-detail block-value">{{$clients->cstatus->name}}</span>
+                    <span class="project-detail block-value">{{$client->cstatus->name}}</span>
                 </div>
 
                 <div class="col-md-4 col-xs-6">
                     <span class="project-title block-title">Contact Person</span><br>
-                    <i class="user-icon block-icons"><span class="project-detail block-value" id="contact-name">{{$clients->contactname}}</span></i><br>
-                    <i class="tel-icon block-icons"><span class="project-detail block-value" id="contact-phone"><a href="tel:{{$clients->contactnumber}}">{{$clients->contactnumber}}</a></span></i><br>
-                    <i class="mail-icon block-icons"> <span class="project-detail block-value" id="contact-email"><a href="mailto:{{$clients->contactemail}}">{{$clients->contactemail}}</a></span></i>
+                    <i class="user-icon block-icons"><span class="project-detail block-value" id="contact-name">{{$client->contactname}}</span></i><br>
+                    <i class="tel-icon block-icons"><span class="project-detail block-value" id="contact-phone"><a href="tel:{{$client->contactnumber}}">{{$client->contactnumber}}</a></span></i><br>
+                    <i class="mail-icon block-icons"> <span class="project-detail block-value" id="contact-email"><a href="mailto:{{$client->contactemail}}">{{$client->contactemail}}</a></span></i>
 
                 </div>
 
@@ -37,13 +37,13 @@
             <div class="row under-details block-description" id="block-hidden">
                 <div class="col-md-8 col-xs-12">
                     <span class="project-title block-title">Client Description</span><br>
-                    <span class="project-detail block-value">{{$clients->description}}</span>
+                    <span class="project-detail block-value">{{$client->description}}</span>
                 </div>
 
                 <div class="col-md-4 col-xs-12 pull-right">
                     <span class="project-title block-title" id="link">Link</span><br>
-                    <i class="word-icon block-value"><span class="project-detail block-value" id="link-world"><a href="{{$clients->link_url}}">{{$clients->link_url}}</a> </span></i><br>
-                    <i class="text-icon block-value"><span class="project-detail block-value" id="link-t"></span>{{$clients->link_title}}</i>
+                    <i class="word-icon block-value"><span class="project-detail block-value" id="link-world"><a href="{{$client->link_url}}">{{$client->link_url}}</a> </span></i><br>
+                    <i class="text-icon block-value"><span class="project-detail block-value" id="link-t"></span>{{$client->link_title}}</i>
                 </div>
 
 
@@ -61,7 +61,7 @@
         <a class="black btn btn-primary" href="#" data-toggle="modal" data-target="#addProjectModal">
             Add Project <span class="glyphicon glyphicon-plus"></span>
         </a>
-        <form method="GET" action="{{route('clientsorting', ['name' =>  $clients->path])}}" class="pull-right searchform">
+        <form method="GET" action="{{route('clientsorting', ['name' =>  $client->path])}}" class="pull-right searchform">
 
             <input type="hidden" id="sort" value="">
             <input type="hidden" id="page" value="">

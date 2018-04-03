@@ -33,7 +33,7 @@
                 </div>
             @endif
 
-            <form action="{{route('storefeature', ['name' => $project->path, 'company_id' => $project->company->path, 'release_name' => $release->path])}}" method="post">
+            <form action="{{route('storefeature', [$client->path, $project->path, $release->path])}}" method="post">
                 {{ csrf_field() }}
                 <input type="hidden" name="release_id" value="{{$release->id}}">
                 <input type="hidden" name="type" value="Scope">

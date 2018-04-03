@@ -4,11 +4,11 @@
     Edit project | {{env('APP_NAME')}}
 @endsection
 
-@section('breadcrumbs', Breadcrumbs::render('editproject', $projects))
+@section('breadcrumbs', Breadcrumbs::render('editproject', $project))
 
 @section('content')
 
-    <button onclick="location.href='{{route('deleteproject', ['name' => $projects->path, 'company_id' => $projects->company->path])}}'"
+    <button onclick="location.href='{{route('deleteproject', [$project->company->path, $project->path])}}'"
             class="btn-edit delete-button" id="project-edit">
         <svg id="delete-logo" width="19px" height="19px" viewBox="0 0 19 19" version="1.1" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -29,34 +29,34 @@
 
     <div class="row">
         <div class="header-3" id="edit-project">
-            <form action="{{route('updateproject', ['name' => $projects->path, 'company_id' => $projects->company->path])}}"
+            <form action="{{route('updateproject', [$project->company->path, $project->path])}}"
                   method="post">
                 {{ csrf_field() }}
                 <div class="form-group col-md-6">
-                    <input type="hidden" name="name" value="{{$projects->name}}">
+                    <input type="hidden" name="name" value="{{$project->name}}">
 
                     <label class="edit-title" for="project_name">Project name</label>
                     <input type="text" class="form-control input-text-modal" name="project_name" id="project_name"
-                           value="{{$projects->name}}">
+                           value="{{$project->name}}">
 
                     <br>
 
                     <label class="edit-title" for="description">Description</label>
                     <textarea rows="4" cols="50" name="description" class="form-control input-text-modal"
-                              id="description">{{$projects->description}}</textarea>
+                              id="description">{{$project->description}}</textarea>
 
                     <br>
 
                     <label class="edit-title" for="project_code">Code</label>
                     <input type="text" class="form-control input-text-modal" name="project_code" id="project_code"
-                           value="{{$projects->projectcode}}">
+                           value="{{$project->projectcode}}">
                 </div>
                 <div class="form-group col-md-6">
                     <label class="edit-title" for="company">Project Status</label>
                     <br>
                     <select name="status" id="company">
                         @foreach($status as $s)
-                            <option @if($s->id == $projects->status) selected="" @endif value="{{$s->id}}">{{$s->name}}</option>
+                            <option @if($s->id == $project->status) selected="" @endif value="{{$s->id}}">{{$s->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -66,7 +66,7 @@
                     <select name="company" id="company">
                         @foreach($companys as $company)
 
-                            <option @if($company->id == $projects->company_id) selected="" @endif value="{{$company->id}}">{{$company->name}}</option>
+                            <option @if($company->id == $project->company_id) selected="" @endif value="{{$company->id}}">{{$company->name}}</option>
                         @endforeach
                     </select>
 
@@ -78,7 +78,7 @@
                            placeholder="New Client Name">
                 </div>
                 <div class="form-group col-md-12">
-                    <a href="{{route('projectdetails', ['company-id' => $projects->company->path, 'name' => $projects->path])}}"
+                    <a href="{{route('projectdetails', ['company-id' => $project->company->path, 'name' => $project->path])}}"
                        class="cancel">
                         <svg width="11px" height="11px" viewBox="0 0 11 11" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
