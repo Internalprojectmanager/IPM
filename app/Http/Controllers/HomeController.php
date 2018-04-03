@@ -34,11 +34,15 @@ class HomeController extends Controller
 
         if($assinged){
             foreach ($assinged as $a){
-                $requirements[] = $a->uuid;
+                $validator = \Validator::make(['uuid' => $a->uuid], ['uuid' => 'uuid']);
+                if($validator->passes()):
+                    $requirements[] = $a->uuid;
+                endif;
             }
         }
         $feature = Requirement::with('features.releases.projects.company', 'rstatus')->whereIn('requirement_uuid', $requirements)->get();
 
+        dd($feature);
         return view('profile.dashboard', compact('feature'));
     }
 }
