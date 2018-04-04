@@ -137,10 +137,10 @@
                     </td>
                     <td>@if($release->rstatus->name != "Completed" && $release->rstatus->name != "Paused" && $release->rstatus->name != "Cancelled")
                             @if(isset($release->deadline)){{date('d F Y', strtotime($release->deadline))}} <br>
-                            @if($release->monthleft && $release->monthleft > 0)
-                                <span>{{abs($release->daysleft)}} Months left</span>
-                            @elseif($release->monthleft && $release->monthleft < 0)
-                                <span>{{abs($release->daysleft)}} Months overdue</span>
+                            @if($release->monthsleft && $release->monthsleft > 0)
+                                <span>{{abs($release->monthsleft)}} Months left</span>
+                            @elseif($release->monthsleft && $release->monthsleft < 0)
+                                <span>{{abs($release->monthsleft)}} Months overdue</span>
                             @elseif($release->daysleft > 0)
                                 <span @if($release->daysleft < 5) class="red" @endif>{{abs($release->daysleft)}} days left</span>
                             @elseif($release->daysleft < 0)
