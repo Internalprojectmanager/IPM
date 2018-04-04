@@ -16,6 +16,7 @@
                 <th></th>
                 <th>Requirement</th>
                 <th>Description</th>
+                <th>Status</th>
                 <th>Assigned To</th>
                 </thead>
                 <tbody>
@@ -25,14 +26,22 @@
                         <td style="border-left: 1px solid #CECECE; background-color: {{$requirement->rstatus->color}};"></td>
                         <td class="width20"><span class="tabletitle">{{$requirement->name}}</span></td>
                         <td class="">{!! nl2br($requirement->description) !!}</td>
+                        <td class="">
+                            @if($requirement->rstatus)
+                                {{$requirement->rstatus->name}}
+                            @endif
+
+                        </td>
                         <td class="width25">
                             @foreach($requirement->assignees as $assignee)
-                                <div class="col-md-8 requiremnt-assingee">
-                                    <span>{{$assignee->users->first_name}} {{$assignee->users->last_name}}</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <input type="checkbox" class="assignee-check" @if($assignee->status == 1) checked=""
-                                           @endif name="status[]" value='{{json_encode(array("assignee" => $assignee->userid,  "uuid" => $requirement->requirement_uuid))}}'/>
+                                <div class="col-md-12 requiremnt-assingee">
+                                    <div class="col-md-8">
+                                        <span>{{$assignee->users->first_name}} {{$assignee->users->last_name}}</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="checkbox" class="assignee-check" @if($assignee->status == 1) checked=""
+                                               @endif name="status[]" value='{{json_encode(array("assignee" => $assignee->userid,  "uuid" => $requirement->requirement_uuid))}}'/>
+                                    </div>
                                 </div>
                                 <?php $i++;?>
                             @endforeach
