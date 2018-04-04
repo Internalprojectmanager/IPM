@@ -55,9 +55,9 @@ class Release extends Model
     public static function updateStatus($release)
     {
         $completed = Status::name('Completed')->id;
-        $features = Feature::where('release_id', $release->release_uuid)->count();
-        $completedfeatures = Feature::where('release_id', $release->release_uuid)->where('status', $completed)->count();
-        $progressfeatures = Feature::where('release_id', $release->release_uuid)->where('status', Status::name('In Progress')->id)->count();
+        $features = Feature::where('release_id', $release->release_uuid)->where('type', '!=', 'Scope')->count();
+        $completedfeatures = Feature::where('release_id', $release->release_uuid)->where('status', $completed)->where('type', '!=', 'Scope')->count();
+        $progressfeatures = Feature::where('release_id', $release->release_uuid)->where('status', Status::name('In Progress')->id)->where('type', '!=', 'Scope')->count();
         if($features ==  $completedfeatures){
             $release->status = $completed;
         } else if( $completedfeatures > 0 || $progressfeatures > 0 && $completedfeatures < $features ) {

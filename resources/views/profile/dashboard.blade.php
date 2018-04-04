@@ -17,7 +17,7 @@
             <span class="block-white-title">All To-do (beta)</span>
             <span class="block-white-subtitle">
                 <span id="count_projects_bar">|</span>
-                <span class="counter">{{$featurecount}}</span>
+                <span class="counter">{{$requirementscount}}</span>
                 <span class="contenttype hidden"></span>
                 <span>To-do</span>
             </span>

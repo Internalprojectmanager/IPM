@@ -34,13 +34,32 @@
                         </td>
                         <td class="width25">
                             @foreach($requirement->assignees as $assignee)
-                                <div class="col-md-12 requiremnt-assingee">
-                                    <div class="col-md-8">
-                                        <span>{{$assignee->users->first_name}} {{$assignee->users->last_name}}</span>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="checkbox" class="assignee-check" @if($assignee->status == 1) checked=""
-                                               @endif name="status[]" value='{{json_encode(array("assignee" => $assignee->userid,  "uuid" => $requirement->requirement_uuid))}}'/>
+                                <div class="row" style="line-height: 2.3;">
+                                    <div class="col-md-12 requiremnt-assingee">
+                                        <div class="col-md-7" style="padding: 6px 12px;">
+                                            <span >{{$assignee->users->first_name}} {{$assignee->users->last_name}}</span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <select class="form-control input-text-modal assignee-check" name="status[]" @if(Auth::id() !== $assignee->userid) disabled="" @endif>
+                                                @foreach($status as $s)
+                                                    @if($s->name == "Completed" || $s->name == "Draft" || $s->name == "Testing" || $s->name == "In Progress")
+                                                        <option
+
+                                                                @if($assignee->status == $s->id)
+                                                                selected
+                                                                @endif
+                                                                value="{{json_encode(
+                                                        array(
+                                                            "assignee" => $assignee->userid,
+                                                            "uuid" => $requirement->requirement_uuid,
+                                                           'status' => $s->id))
+                                                        }}">
+                                                            {{$s->name}}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <?php $i++;?>

@@ -1,4 +1,5 @@
-<div class="row bigtable">
+<div class="row bigtable requirement-results">
+    <form action="{{route('requirementsaveAuthstatus')}}" method="post" id="assignee_update">
     <table class="table table-hover table-center results">
         <thead>
         <th></th>
@@ -8,8 +9,8 @@
         <th>Deadline</th>
         </thead>
         <tbody>
-        @foreach($feature as $f)
-            <tr class="clickable-row"
+        @foreach($requirements as $f)
+            <tr class=""
                 data-href="{{route('showfeature',[$f->features->releases->projects->company->path,
                              $f->features->releases->projects->path,
                              $f->features->releases->path, $f->features->id])}}">
@@ -46,12 +47,33 @@
                         @endif
                     @endif
                 </td>
+                <td>
+
+                    <select class="form-control input-text-modal assignee-check" name="status[]">
+                        @foreach($status as $s)
+                            @if($s->name == "Completed" || $s->name == "Draft" || $s->name == "Testing" || $s->name == "In Progress")
+                                <option
+                                        @if($f->status == $s->id)
+                                        selected
+                                        @endif
+                                        value="{{json_encode(
+                                                        array(
+                                                            "assignee" => Auth::id(),
+                                                            "uuid" => $f->requirement_uuid,
+                                                            'status' => $s->id))
+                                                        }}">
+                                    {{$s->name}}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </td>
             </tr>
         @endforeach
         </tbody>
     </table>
     <div class="center">
-        {{$feature->links()}}
+        {{$requirements->links()}}
     </div>
-    <span style='display: none;' id="new-count">{{$featurecount}}</span>
+    <span style='display: none;' id="new-count">{{$requirementscount}}</span>
 </div>

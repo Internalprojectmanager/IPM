@@ -49,7 +49,9 @@ class Project extends Model
 
     public static function updateStatus($project)
     {
-        $currentrelease = Release::where("project_id", "=", $project->id)->where('deadline', '>=', Carbon::now())->orderby('deadline', 'asc')->first();
+        $currentrelease = Release::where("project_id", "=", $project->id)->where('deadline', '>=', Carbon::now()->startOfDay())->orderby('deadline', 'asc')->first();
+
+        //dd($currentrelease);
         if ($currentrelease){
             $project->status = $currentrelease->status;
         } else {

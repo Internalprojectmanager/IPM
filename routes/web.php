@@ -21,6 +21,7 @@ Route::get('/home', function () {
 
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 Route::post('/dashboard', 'HomeController@dashboardSearch')->name('dashboardsearch');
+Route::post('/dashboard/save', 'RequirementController@saveAuthStatus')->name('requirementsaveAuthstatus');
 
 
 Route::group(['middleware' => ['guest', 'web']], function () {

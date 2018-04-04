@@ -26,6 +26,7 @@ $(document).on('change', '.assignee-check', function (e) {
     var curl = window.location.href;
     e.preventDefault();
     var url = $(this).attr('href');
+    console.log(url, curl);
     saveStatus(url, curl);
 });
 
@@ -152,15 +153,9 @@ function saveStatus(url, curl) {
     var _token = document.getElementsByName("_token")[0].value;
     var formData = new Array();
 
-    $("input:checkbox").each(function () {
-        var json = $(this).val();
-        if ($(this.checked).length > 0) {
-            var result = $.extend(JSON.parse(json), {"checked": 1});
-        } else {
-            var result = $.extend(JSON.parse(json), {"checked": 0});
-        }
-
-        formData.push(result);
+    $(".assignee-check").each(function () {
+        var json = JSON.parse($(this).val());
+        formData.push(json);
     });
 
     $.ajax({

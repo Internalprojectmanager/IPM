@@ -43,11 +43,11 @@ class HomeController extends Controller
         return $data;
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         $requirements = [];
-        $status = Status::wherein('name', ['Draft', 'In Progress'])->select('name');
-        $assinged = Assignee::where('userid', \Auth::id())->select('uuid')->get();
+        $status = Status::wherein('name', ['Draft', 'In Progress', 'Testing'])->select('name');
+        $assinged = Assignee::where('userid', \Auth::id())->where('status', '!=', Status::name('Completed')->id)->select('uuid')->get();
 
         if($assinged){
             foreach ($assinged as $a){
@@ -57,28 +57,42 @@ class HomeController extends Controller
                 endif;
             }
         }
-        $feature = Requirement::with('features.releases.projects.company', 'rstatus')
+        $requirements = Requirement::with('features.releases.projects.company', 'rstatus')
             ->whereHas('rstatus', function($query) use ($status) {
                 $query->wherein('name', $status);
             })->whereHas( 'features.releases', function($q2) {
                 $q2->orderbyraw('-deadline desc');
             })->whereIn('requirement_uuid', $requirements);
 
-        $featurecount = $feature->get()->count();
-        $feature = $feature->paginate(10);
+        $requirementscount = $requirements->get()->count();
+        $requirements = $requirements->paginate(10);
 
-        $feature = $this->calcDeadline($feature);
+        $requirements = $this->calcDeadline($requirements);
+        $status  = Status::type('Progress')->get();
 
-        return view('profile.dashboard', compact('feature', 'featurecount'));
+
+        if($request->method() == 'POST') {
+            return view('profile.dashboard_table', compact('requirements', 'requirementscount', 'status'));
+
+        }
+
+        return view('profile.dashboard', compact('requirements', 'requirementscount', 'status'));
     }
 
     public function dashboardSearch(Request $request){
+        if(isset($request->data)){
+            return app('App\Http\Controllers\RequirementController')->saveAuthStatus($request);
+        }
+        
         $pro = array();
         $page = $request->page;
+        $search = $request->search;
 
         $requirements = [];
-        $status = Status::wherein('name', ['Draft', 'In Progress'])->select('name');
-        $assinged = Assignee::where('userid', \Auth::id())->select('uuid')->get();
+        $features = [];
+        $status = Status::wherein('name', ['Draft', 'In Progress', 'Testing'])->select('name');
+        $assinged = Assignee::where('userid', \Auth::id())->where('status', '!=', Status::name('Completed')->id)->select('uuid')->get();
+        $feature = Requirement::search($search)->get();
 
         if($assinged){
             foreach ($assinged as $a){
@@ -89,21 +103,31 @@ class HomeController extends Controller
             }
         }
 
+        if($feature){
+            foreach ($feature as $f){
+                if(in_array($f->requirement_uuid, $requirements)){
+                    $features[] = $f->requirement_uuid;
+                }
+            }
+        }
+
         $feature = Requirement::with('features.releases.projects.company', 'rstatus')
             ->whereHas('rstatus', function($query) use ($status) {
                 $query->wherein('name', $status);
             })->whereHas( 'features.releases', function($q2) {
                 $q2->orderbyraw('-deadline desc');
-            })->whereIn('requirement_uuid', $requirements);
+            })->whereIn('requirement_uuid', $features);
 
-        $featurecount = $feature->get()->count();
+        $requirementscount = $feature->get()->count();
 
-        if ($featurecount <= 10) {
+        if ($requirementscount <= 10) {
             $page = 1;
         }
         $feature = $feature->paginate(10, ['*'], 'page', $page);
 
-        $feature = $this->calcDeadline($feature);
-        return view('profile.dashboard_table', compact('feature', 'featurecount'));
+        $requirements = $this->calcDeadline($feature);
+        $status  = Status::type('Progress')->get();
+
+        return view('profile.dashboard_table', compact('requirements', 'requirementscount', 'status'));
     }
 }

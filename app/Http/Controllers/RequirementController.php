@@ -50,9 +50,10 @@ class RequirementController extends Controller
 
     public function saveStatus(Request $request, $client, $project, $release, $feature)
     {
+
         foreach ($request->data as $key => $value) {
-            $assignee = Assignee::where([['userid', $value['assignee']], ['uuid', $value['uuid']]])->first();
-            $assignee->status = $value['checked'];
+            $assignee = Assignee::where('userid', $value['assignee'])->where('uuid', $value['uuid'])->first();
+            $assignee->status = $value['status'];
             $assignee->save();
         }
 
@@ -69,8 +70,28 @@ class RequirementController extends Controller
         Project::updateStatus($project);
         $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature->id)->first();
         $requirementcount = $completed;
-        return view('requirement.requirement_table', compact('feature', 'requirementcount'));
+        $status = Status::type('Progress')->get();
+
+        return view('requirement.requirement_table', compact('feature', 'requirementcount', 'status'));
     }
+
+    public function saveAuthStatus(Request $request)
+    {
+        foreach ($request->data as $key => $value) {
+            $assignee = Assignee::where('userid', $value['assignee'])->where('uuid', $value['uuid'])->first();
+            $assignee->status = $value['status'];
+            $assignee->save();
+            $requirement = Requirement::with('features.releases.projects')->where('requirement_uuid', $value['uuid'])->first();
+            Requirement::updateStatus($requirement);
+            Feature::updateStatus($requirement->features);
+            Release::updateStatus($requirement->features->releases);
+            Project::updateStatus($requirement->features->releases->projects);
+
+        }
+
+        return app('App\Http\Controllers\HomeController')->dashboard($request);
+    }
+
 
     public function overviewRequirement()
     {
