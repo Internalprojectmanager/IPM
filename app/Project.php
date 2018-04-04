@@ -53,7 +53,7 @@ class Project extends Model
         if ($currentrelease){
             $project->status = $currentrelease->status;
         } else {
-            $project->status = Status::name('Completed')->id;
+            $project->status = Status::name('Paused')->id;
         }
         $project->save();
 

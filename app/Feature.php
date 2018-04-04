@@ -40,4 +40,20 @@ class Feature extends Model
             ]
         ];
     }
+
+    public static function updateStatus($feature)
+    {
+        $completed = Status::name('Completed')->id;
+        $requirements = Requirement::where('feature_uuid', $feature->feature_uuid)->count();
+        $completedreq = Requirement::where('feature_uuid', $feature->feature_uuid)->where('status', $completed)->count();
+        $progressreq = Requirement::where('feature_uuid', $feature->feature_uuid)->where('status', Status::name('In Progress')->id)->count();
+        if($requirements ==  $completedreq){
+            $feature->status = $completed;
+        } else if( $completedreq > 0 || $progressreq > 0 && $requirements < $completedreq) {
+            $feature->status = Status::name('In Progress')->id;
+        } else{
+            $feature->status = Status::name('Draft')->id;
+        }
+        $feature->save();
+    }
 }

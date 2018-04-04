@@ -55,46 +55,19 @@ class RequirementController extends Controller
             $assignee->status = $value['checked'];
             $assignee->save();
         }
-        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature->id)->first();
-        $checkr = Requirement::with('features.releases.projects', 'assignees')->where('feature_uuid', $feature->feature_uuid)->get();
-        $completed = 0;
-        $status_completed = Status::name('Completed')->id;
-        $status_progress = Status::name('In Progress')->id;
-        $status_draft = Status::name('Draft')->id;
 
+        $requirements = Requirement::with('features.releases.projects', 'assignees')->where('feature_uuid', $feature->feature_uuid)->get();
 
-        foreach ($checkr as $r) {
-            $status = 0;
-            foreach ($r->assignees as $a) {
-                if ($a->status > 0) {
-                    $status++;
-                }
-                if ($status == $r->assignees->count()) {
-                    $completed++;
-                }
-            }
-            if ($status == $r->assignees->count() && $status > 0) {
-                $r->status = $status_completed;
-            } else if ($status > 0 && $status < $r->assignees->count()) {
-                $r->status = $status_progress;
-            } else
-                $r->status = $status_draft;
-            $r->save();
+        foreach ($requirements as $r){
+            Requirement::updateStatus($r);
         }
 
-        if ($completed == $feature->requirements->count()) {
-            $feature->status = $status_completed;
-        } else
-            if ($completed > 0 && $completed < $feature->requirements->count()) {
-                $feature->status = $status_progress;
-            } else if ($completed == 0 && $feature->requirements->count() > 0) {
-                $feature->status = $status_progress;
-            } else if ($completed == 0) {
-                $feature->status = $status_draft;
-            }
-        $feature->save();
-        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature->id)->first();
+        $completed = Requirement::where('feature_uuid', $feature->feature_uuid)->where('status', Status::name('Completed')->id)->count();
 
+        Feature::updateStatus($feature);
+        Release::updateStatus($release);
+        Project::updateStatus($project);
+        $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature->id)->first();
         $requirementcount = $completed;
         return view('requirement.requirement_table', compact('feature', 'requirementcount'));
     }

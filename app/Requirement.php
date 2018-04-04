@@ -36,4 +36,19 @@ class Requirement extends Model
     public function rstatus(){
         return $this->hasOne('App\Status', "id", "status");
     }
+
+    public static function updateStatus($requirement)
+    {
+        $completed = Status::name('Completed')->id;
+        $assignees = Assignee::where('uuid', $requirement->requirement_uuid)->count();
+        $completedassignees = Assignee::where('uuid', $requirement->requirement_uuid)->where('status', 1)->count();
+        if($assignees ==  $completedassignees){
+            $requirement->status = $completed;
+        } else if( $completedassignees > 0 && $assignees < $completedassignees) {
+            $requirement->status = Status::name('In Progress')->id;
+        } else{
+            $requirement->status = Status::name('Draft')->id;
+        }
+        $requirement->save();
+    }
 }
