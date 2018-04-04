@@ -38,7 +38,7 @@
                                 <span>{{abs($project->monthsleft)}} Month(s) left</span>
                             @elseif($project->monthsleft && $project->monthsleft < 0)
                                 <span>{{abs($project->monthsleft)}} Month(s) overdue</span>
-                            @elseif($project->daysleft > 0)
+                            @elseif($project->daysleft >= 0)
                                 <span @if($project->daysleft < 5) class="red" @endif>{{abs($project->daysleft)}} day(s) left</span>
                             @elseif($project->daysleft < 0)
                                  <span class="red">{{abs($project->daysleft)}} day(s) overdue</span>

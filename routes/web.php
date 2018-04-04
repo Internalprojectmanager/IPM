@@ -20,6 +20,7 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+Route::post('/dashboard', 'HomeController@dashboardSearch')->name('dashboardsearch');
 
 
 Route::group(['middleware' => ['guest', 'web']], function () {
