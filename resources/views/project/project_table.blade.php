@@ -20,10 +20,32 @@
                 <td class="table-description">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}
                     ...
                 </td>
-                <td>{{$project->pstatus->name}}</td>
-                <td>@if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>
-                    <?php echo $project->daysleft;?>
-                    @else -  @endif</td>
+                <td>{{$project->pstatus->name}}
+                    <br>
+                    @if($project->pstatus->name == "Completed")
+                        <span class="tablesubtitle">on {{\Carbon\Carbon::parse($project->updated_at)}}</span>
+                    @elseif($project->pstatus->name == "Paused")
+                        <span class="tablesubtitle">on {{\Carbon\Carbon::parse($project->updated_at)}}</span>
+                    @elseif($project->pstatus->name == "Cancelled")
+                        <span class="tablesubtitle">on {{\Carbon\Carbon::parse($project->updated_at)}}</span>
+                    @endif
+
+                </td>
+                <td>
+                    @if($project->pstatus->name != "Completed" &&$project->pstatus->name != "Paused" && $project->pstatus->name != "Cancelled")
+                        @if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>
+                            @if($project->monthleft && $project->monthleft > 0)
+                                <span>{{abs($project->daysleft)}} Months left</span>
+                            @elseif($project->monthleft && $project->monthleft < 0)
+                                <span>{{abs($project->daysleft)}} Months overdue</span>
+                            @elseif($project->daysleft > 0)
+                                <span @if($project->daysleft < 5) class="red" @endif>{{abs($project->daysleft)}} days left</span>
+                            @elseif($project->daysleft < 0)
+                                 <span class="red">{{abs($project->daysleft)}} Days overdue</span>
+                            @endif
+                        @endif
+                    @endif
+                </td>
                 <td style="max-width: 250px;">
                     <?php $i = 0;?>
                     @foreach($project->assignee as $as)

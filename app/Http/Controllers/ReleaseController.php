@@ -45,13 +45,12 @@ class ReleaseController extends Controller
         $release->release_uuid = Uuid::generate(4);
         $release->project_id = $request->project_id;
         $release->name = $request->release_name;
-        $release->path = str_slug($release->name);
         $release->description = $request->description;
         $release->status = $request->status;
         $release->document_status = $request->document_status;
         $release->version = $releasecount;
         $release->author = Auth::id();
-        $release->deadline = $request->deadline. " 23:59:59";
+        $release->deadline = Carbon::parse($request->deadline)->endOfDay();
         $release->specificationtype = $request->specification;
         $release->save();
         return redirect()->route('projectdetails',[$project->company->path, $project->path]);
@@ -82,9 +81,8 @@ class ReleaseController extends Controller
         $release = Release::where(['path' => $release->path, 'version' => $version])->first();
 
         $release->name = $request->release_name;
-        $release->path = str_slug($release->name);
         $release->description = $request->description;
-        $release->deadline = $request->deadline. " 23:59:59";
+        $release->deadline = Carbon::parse($request->deadline)->endOfDay();
         $release->version = $request->version;
         $release->status = $request->status;
         $release->document_status = $request->document_status;

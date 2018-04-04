@@ -68,87 +68,17 @@ class ProjectController extends Controller
         return $projects;
     }
 
-    public function calcDeadline($data, $type)
+    public function calcDeadline($data)
     {
-
-        $today = date('Y/m/d H:i');
-        foreach ($data as $d) {
-            switch ($type) {
-                case 'project':
-                    $status = $d->pstatus;
-                    break;
-                case 'release':
-                    $status = $d->rstatus;
-                    break;
-                default:
-                    $status = $d->pstatus;
-                    break;
-            }
-
-            if ($d->deadline !== NULL && $status->name !== 'Paused' && $status->name !== 'Cancelled') {
-                $negative = NULL;
-                if ($status->name == 'Completed') {
-                    $diff = strtotime($d->deadline) - strtotime($d->updated_at);
-                } else {
-                    $diff = strtotime($d->deadline) - strtotime($today);
-                }
-
-                if ($diff < 0) {
-                    $negative = "-";
-                    if ($status->name == 'Completed') {
-                        $diff = strtotime($d->updated_at) - strtotime($d->deadline);
-                    } else {
-                        $diff = strtotime($today) - strtotime($d->deadline);
-                    }
-                }
-                $years = floor($diff / (365 * 60 * 60 * 24));
-                $months = floor(($diff - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
-                $days = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
-
-                if (strtotime($d->updated_at) < strtotime($d->deadline) && $status->name == 'Completed') {
-                    $d->daysleft = "<span class='tablesubtitle'>Completed: " . gmdate('d-m-Y', strtotime($d->updated_at)) . "</span>";
-                } else if (strtotime($d->updated_at) > strtotime($d->deadline) && $status->name == 'Completed') {
-                    $d->daysleft = "<span class='tablesubtitle'>Completed: $days days Overdue</span>";
-                } else {
-                    if ($negative == NULL && $years > 0) {
-                        if ($years == 1) {
-                            $d->daysleft = $years . " year left";
-                        } else {
-                            $d->daysleft = $years . " year left";
-                        }
-                    } else if ($negative == NULL && $years < 1 && $months > 0) {
-                        if ($months == 1) {
-                            $d->daysleft = $months . " month left";
-                        } else {
-                            $d->daysleft = $months . " months left";
-                        }
-                    } else if ($negative == NULL && $months < 1 && $years < 1 && $days > 3) {
-                        $d->daysleft = $days . " days left";
-                    } else {
-                        if ($negative == NULL && $days > 1) {
-                            $d->daysleft = "<span style='color:#FC1907;'>" . $days . " days left</span>";
-                        } else if ($negative == NULL && $days == 1) {
-                            $d->daysleft = "<span style='color:#FC1907;'>" . $days . " day left</span>";
-                        } else {
-                            if ($days == 0 && $months == 0 and $years == 0) {
-                                $d->daysleft = "<span style='color:#FC1907;'>Deadline Today</span>";
-                            } else {
-                                $d->daysleft = "<span style='color:#FC1907;'>Overdue</span>";
-                            }
-
-                        }
-                    }
-                }
-            } else {
-                if ($status->name == "Cancelled")
-                    $d->daysleft = "<span class='tablesubtitle'>Cancelled on " . gmdate('d-m-Y', strtotime($d->updated_at)) . "</span>";
-                if ($status->name == "Paused")
-                    $d->daysleft = "<span class='tablesubtitle'>Paused on " . gmdate('d-m-Y', strtotime($d->updated_at)) . "</span>";
+        $now = Carbon::now();
+        foreach($data as $d){
+            $deadline  = Carbon::parse($d->deadline)->endOfDay();
+            $d->daysleft = $now->diffInDays($deadline, false);
+            if($d->daysleft >= 30 && $d->daysleft < 365 || $d->daysleft <= -30 && $d->daysleft > -365){
+                $d->monthsleft = $now->diffInMonths($deadline, false);
             }
         }
-
         return $data;
-
     }
 
     public function storeProject(ProjectValidator $request)
@@ -237,7 +167,7 @@ class ProjectController extends Controller
                 ->whereIn('project.id', $pro)
                 ->paginate(8, ['*'], 'page', $page);
         }
-        $projects = $this->calcDeadline($projects, 'project');
+        $projects = $this->calcDeadline($projects);
         $status = Status::where('type', 'Progress')->get();
         return view('project.project_table', compact('projects', 'projectcount', 'status'));
     }
@@ -245,7 +175,7 @@ class ProjectController extends Controller
     public function detailsProject($client, $project)
     {
         $releases = Release::with('rstatus')->where('project_id', $project->id)->orderBy('version', 'desc')->get();
-        $releases = $this->calcDeadline($releases, 'release');
+        $releases = $this->calcDeadline($releases);
         $documents = Document::where('project_id', $project->id)->get();
         $user = User::orderby('job_title', 'desc')->orderby('last_name', 'asc')->get();
         $assignee = Assignee::with('users')->where('uuid', $project->id)->get();

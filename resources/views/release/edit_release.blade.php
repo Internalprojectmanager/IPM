@@ -66,8 +66,10 @@
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Deadline:</label>
-                    <input type='text' class="form-control input-text-modal datepicker" autocomplete="off" placeholder="YYYY/MM/DD" name="deadline" value="@php echo  date("Y/m/d", strtotime($release->deadline)); @endphp"/>
+                    <label for="deadline">Release Deadline: <span class="required">*</span></label>
+                    <input type="text" required class="form-control datepicker" autocomplete="off" id="deadline" name="deadline"
+                           placeholder="YYYY/MM/DD" value="{{date('Y-m-d', strtotime($release->deadline))}}">
+
                 </div>
 
                 <div class="form-group col-md-6">
