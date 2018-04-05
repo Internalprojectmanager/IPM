@@ -793,6 +793,12 @@ td > .assignee:first-child:before {
     line-height: 18px;
 }
 
+.transparent-selectbox, .transparent-selectbox[disabled], .transparent-selectbox[readonly], fieldset[disabled]{
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
 .delete-button, .delete-button:hover {
     height: 45px;
     width: 107px;
