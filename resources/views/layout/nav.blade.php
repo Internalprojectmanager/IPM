@@ -1,6 +1,6 @@
 <!-- Sidebar -->
 <nav id="sidebar" align="center">
-<a href="{{route('home')}}">
+<a href="{{route('home')}}" style="text-transform: capitalize">
     <svg style="margin: 12px 0px 12px 0px;" width="40px" height="46px" viewBox="0 0 40 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
         <title>Logo-IAV-no_border</title>
@@ -23,9 +23,23 @@
         </g>
     </svg>
 </a>
+
+     @switch(env('APP_ENV'))
+            @case('production')
+            <span>{{env('APP_NAME')}}</span>
+            @case('local')
+            @if(env('APP_SECURE') == True)
+            <i class="fas fa-exclamation-circle red"></i> <span style="text-transform: capitalize;" class="red">TEST - {{env('APP_NAME')}}</span>
+            @else
+            <span style="text-transform: capitalize;">{{env('APP_ENV')}} - {{env('APP_NAME')}}</span>
+            @endif
+    @endswitch
+
+
+
 <a href="{{route('dashboard')}}" class="sidebar_link">
     <div class="sidebar_object <?php $sUrl = $_SERVER['REQUEST_URI']; $sUrl = substr($sUrl, 1, 9); if ($sUrl == 'dashboard') {echo 'active';} ?>">
-        <i class="fas fa-tachometer-alt fa-2x"></i> <br>Dash (Beta)
+        <i class="fas fa-calendar-check fa-2x"></i> <br>To-Do
     </div>
 </a>
 
@@ -117,7 +131,6 @@
 
 
 <nav id="navbar_top">
-
     <div id="user">
         @if (Route::has('login'))
             @auth
