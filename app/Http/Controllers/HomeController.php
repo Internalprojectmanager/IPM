@@ -30,7 +30,7 @@ class HomeController extends Controller
     }
 
     public function calcDeadline($data){
-        $now = Carbon::now();
+        $now = Carbon::now()->endOfDay();
         foreach($data as $d){
             $deadline  = Carbon::parse($d->features->releases->deadline)->endOfDay();
             $d->features->releases->daysleft = $now->diffInDays($deadline, false);
@@ -83,7 +83,7 @@ class HomeController extends Controller
         if(isset($request->data)){
             return app('App\Http\Controllers\RequirementController')->saveAuthStatus($request);
         }
-        
+
         $pro = array();
         $page = $request->page;
         $search = $request->search;

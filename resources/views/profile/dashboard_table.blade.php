@@ -10,13 +10,16 @@
         </thead>
         <tbody>
         @foreach($requirements as $f)
-            <tr class=""
-                data-href="{{route('showfeature',[$f->features->releases->projects->company->path,
-                             $f->features->releases->projects->path,
-                             $f->features->releases->path, $f->features->id])}}">
+            <tr class="">
                 <td style="background-color: {{$f->rstatus->color}};"></td>
                 <td>
-                    <span class="tabletitle">{{$f->features->name}} - {{$f->name}}</span>
+                    <span class="tabletitle">
+                        <a href="{{route('showfeature',[$f->features->releases->projects->company->path,
+                             $f->features->releases->projects->path,
+                             $f->features->releases->path, $f->features->id])}}">
+                            {{$f->features->name}} - {{$f->name}}
+                        </a>
+                        </span>
                     <br><span class="tablesubtitle">
                         @if(isset($f->features))
                             <a class="tablesubtitle"
@@ -30,7 +33,24 @@
                 <td class="table-description">{{implode(' ', array_slice(str_word_count($f->description, 2), 0, 10))}}
                     ...
                 </td>
-                <td>{{$f->rstatus->name}}</td>
+                <td><select class="form-control transparent-selectbox assignee-check" name="status[]">
+                        @foreach($status as $s)
+                            @if($s->name == "Completed" || $s->name == "Draft" || $s->name == "Testing" || $s->name == "In Progress")
+                                <option
+                                        @if($f->status == $s->id)
+                                        selected
+                                        @endif
+                                        value="{{json_encode(
+                                                        array(
+                                                            "assignee" => Auth::id(),
+                                                            "uuid" => $f->requirement_uuid,
+                                                            'status' => $s->id))
+                                                        }}">
+                                    {{$s->name}}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select></td>
                 <td>
                     @if($f->features->releases->rstatus->name != "Completed" && $f->features->releases->rstatus->name != "Paused"
                     && $f->features->releases->rstatus->name != "Cancelled")
@@ -49,24 +69,6 @@
                 </td>
                 <td>
 
-                    <select class="form-control input-text-modal assignee-check" name="status[]">
-                        @foreach($status as $s)
-                            @if($s->name == "Completed" || $s->name == "Draft" || $s->name == "Testing" || $s->name == "In Progress")
-                                <option
-                                        @if($f->status == $s->id)
-                                        selected
-                                        @endif
-                                        value="{{json_encode(
-                                                        array(
-                                                            "assignee" => Auth::id(),
-                                                            "uuid" => $f->requirement_uuid,
-                                                            'status' => $s->id))
-                                                        }}">
-                                    {{$s->name}}
-                                </option>
-                            @endif
-                        @endforeach
-                    </select>
                 </td>
             </tr>
         @endforeach

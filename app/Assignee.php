@@ -24,4 +24,8 @@ class Assignee extends Model
     public function users(){
         return $this->hasOne('App\User', "id", "userid");
     }
+
+    public function astatus(){
+        return $this->hasOne('App\Status', "id", "status");
+    }
 }

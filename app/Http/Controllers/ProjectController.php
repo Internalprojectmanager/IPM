@@ -70,7 +70,7 @@ class ProjectController extends Controller
 
     public function calcDeadline($data)
     {
-        $now = Carbon::now();
+        $now = Carbon::now()->endOfDay();
         foreach($data as $d){
             $deadline  = Carbon::parse($d->deadline)->endOfDay();
             $d->daysleft = $now->diffInDays($deadline, false);

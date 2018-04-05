@@ -14,7 +14,7 @@
     <div class="row block-white">
 
         <div class="col-md-4 col-xs-12">
-            <span class="block-white-title">All To-do (beta)</span>
+            <span class="block-white-title">To-do</span>
             <span class="block-white-subtitle">
                 <span id="count_projects_bar">|</span>
                 <span class="counter">{{$requirementscount}}</span>

@@ -39,19 +39,19 @@ class Requirement extends Model
 
     public static function updateStatus($requirement)
     {
-        $completed = Status::name('Completed')->id;
+        $completedstatus = Status::name('Completed')->id;
         $assignees = Assignee::where('uuid', $requirement->requirement_uuid)->get()->count();
-        $completed = Assignee::where('uuid', $requirement->requirement_uuid)->where('status', $completed)->get()->count();
+        $completed = Assignee::where('uuid', $requirement->requirement_uuid)->where('status', $completedstatus)->get()->count();
         $progress = Assignee::where('uuid', $requirement->requirement_uuid)->where('status', Status::name('In Progress')->id)->count();
         $testing = Assignee::where('uuid', $requirement->requirement_uuid)->where('status', Status::name('Testing')->id)->count();
 
         if($assignees ==  $completed){
-            $requirement->status = $completed;
+            $requirement->status = $completedstatus;
         }
         else if( $testing > 0 &&  $completed < $assignees) {
             $requirement->status = Status::name('Testing')->id;
         }
-        else if( $progress > 0 &&  $completed < $assignees) {
+        else if( $progress > 0 &&  $completed < $assignees || $completed > 0) {
             $requirement->status = Status::name('In Progress')->id;
         } else{
             $requirement->status = Status::name('Draft')->id;

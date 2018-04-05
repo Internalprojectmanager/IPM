@@ -52,9 +52,11 @@ class RequirementController extends Controller
     {
 
         foreach ($request->data as $key => $value) {
-            $assignee = Assignee::where('userid', $value['assignee'])->where('uuid', $value['uuid'])->first();
-            $assignee->status = $value['status'];
-            $assignee->save();
+            if(\Auth::id() == $value['assignee']){
+                $assignee = Assignee::where('userid', $value['assignee'])->where('uuid', $value['uuid'])->first();
+                $assignee->status = $value['status'];
+                $assignee->save();
+            }
         }
 
         $requirements = Requirement::with('features.releases.projects', 'assignees')->where('feature_uuid', $feature->feature_uuid)->get();
