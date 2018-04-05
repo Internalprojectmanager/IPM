@@ -57,11 +57,13 @@ class HomeController extends Controller
                 endif;
             }
         }
-        $requirements = Requirement::with('features.releases.projects.company', 'rstatus')
+        $requirements = Requirement::with('features.releases.projects.company', 'rstatus', 'assignees')
             ->whereHas('rstatus', function($query) use ($status) {
                 $query->wherein('name', $status);
             })->whereHas( 'features.releases', function($q2) {
                 $q2->orderbyraw('-deadline desc');
+            })->whereHas('assignees', function ($q3){
+                $q3->where('userid', \Auth::id());
             })->whereIn('requirement_uuid', $requirements);
 
         $requirementscount = $requirements->get()->count();

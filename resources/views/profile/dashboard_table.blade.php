@@ -10,8 +10,10 @@
         </thead>
         <tbody>
         @foreach($requirements as $f)
+            @foreach($f->assignees as $as)
+                @if($as->userid == Auth::id())
             <tr class="">
-                <td style="background-color: {{$f->rstatus->color}};"></td>
+                <td style="background-color: @if($as->astatus){{$as->astatus->color}} @else #000 @endif;"></td>
                 <td>
                     <span class="tabletitle">
                         <a href="{{route('showfeature',[$f->features->releases->projects->company->path,
@@ -33,22 +35,24 @@
                 <td class="table-description">{{implode(' ', array_slice(str_word_count($f->description, 2), 0, 10))}}
                     ...
                 </td>
-                <td><select class="form-control transparent-selectbox assignee-check" name="status[]">
+                <td>
+                    <select class="form-control transparent-selectbox assignee-check" name="status[]">
                         @foreach($status as $s)
-                            @if($s->name == "Completed" || $s->name == "Draft" || $s->name == "Testing" || $s->name == "In Progress")
-                                <option
-                                        @if($f->status == $s->id)
-                                        selected
-                                        @endif
-                                        value="{{json_encode(
-                                                        array(
-                                                            "assignee" => Auth::id(),
-                                                            "uuid" => $f->requirement_uuid,
-                                                            'status' => $s->id))
-                                                        }}">
-                                    {{$s->name}}
-                                </option>
-                            @endif
+                                @if($s->name == "Completed" || $s->name == "Draft" || $s->name == "Testing" || $s->name == "In Progress")
+                                    <option
+                                            @if($as->status == $s->id)
+                                            selected
+                                            @endif
+                                            value="{{json_encode(
+                                                            array(
+                                                                "assignee" => Auth::id(),
+                                                                "uuid" => $f->requirement_uuid,
+                                                                'status' => $s->id))
+                                                            }}">
+                                        {{$s->name}}
+                                    </option>
+                                @endif
+
                         @endforeach
                     </select></td>
                 <td>
@@ -71,6 +75,8 @@
 
                 </td>
             </tr>
+            @endif
+            @endforeach
         @endforeach
         </tbody>
     </table>
