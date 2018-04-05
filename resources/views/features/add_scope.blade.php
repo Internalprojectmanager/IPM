@@ -37,6 +37,13 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="release_id" value="{{$release->id}}">
                 <input type="hidden" name="type" value="Scope">
+                @foreach($status as $s)
+                    @if($s->name == "Paused")
+                        <input type="hidden" name="feature_status" value="{{$s->id}}"
+                               required class="form-control input-text-modal"/>
+                    @endif
+                @endforeach
+
                 <div class="form-group">
                     <div class="form-group">
                         <label for="featurename">Out of Scope Name: <span class="required">*</span></label>
@@ -48,7 +55,6 @@
                         <textarea rows="4" cols="50" name="feature_description" class="form-control input-text-modal" id="description"></textarea>
 
                     </div>
-
                 </div>
 
                 <div class="modal-footer row" style="border:none;">
