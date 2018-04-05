@@ -29,7 +29,7 @@
             <input type="hidden" value="{{csrf_token()}}"/>
 
             <div class="form-group pull-right">
-                <input type="text" name="search" id="searchfield" class="search searchfield" placeholder="Search">
+                <input type="text" name="search" id="searchfield" class="form-control search searchfield" placeholder="Search">
             </div>
 
             <input type="hidden" id="sort" value="">

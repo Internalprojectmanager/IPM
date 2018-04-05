@@ -23,7 +23,7 @@
         <form action="{{url('/client/overview')}}" class="pull-right searchform">
             {{ csrf_field() }}
             <div class="form-group pull-right">
-                <input type="text" name="search" id="searchfield" class="search searchfield"
+                <input type="text" name="search" id="searchfield" class="form-control  search searchfield"
                        placeholder="Search">
             </div>
 

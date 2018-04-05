@@ -381,6 +381,8 @@ label {
     padding-right: 30px;
     padding-left: 15px;
     float: right;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .searchfield::placeholder {

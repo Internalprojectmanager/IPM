@@ -29,7 +29,7 @@
         <div class="col-md-8 col-xs-12 pull-right">
             <form method="get" action="{{url('/project/overview')}}" class="pull-right searchform">
                 <div class="form-group pull-right">
-                    <input type="text" name="search" id="searchfield" class="search searchfield" placeholder="Search">
+                    <input type="text" name="search" id="searchfield" class="form-control search searchfield" placeholder="Search">
                 </div>
 
                 <div class="form-group pull-right">
