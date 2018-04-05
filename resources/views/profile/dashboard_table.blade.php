@@ -28,7 +28,7 @@
                                href="{{route('showrelease',[$f->features->releases->projects->company->path,
                              $f->features->releases->projects->path,
                              $f->features->releases->path, $f->features->releases->version])}}">
-                                {{$f->features->releases->projects->name}} - {{$f->features->releases->name}}</a>
+                                {{$f->features->releases->projects->name}}: {{number_format($f->features->releases->version, 1,'.', ' ')}} {{$f->features->releases->name}}</a>
                         @endif
                     </span>
                 </td>

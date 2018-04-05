@@ -799,6 +799,11 @@ td > .assignee:first-child:before {
     background: transparent;
 }
 
+
+.transparent-selectbox[disabled], .transparent-selectbox[readonly], fieldset[disabled]{
+    color: #898989;
+    opacity: 0.5;
+}
 .delete-button, .delete-button:hover {
     height: 45px;
     width: 107px;
