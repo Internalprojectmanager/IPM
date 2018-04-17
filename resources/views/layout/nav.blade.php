@@ -27,12 +27,10 @@
      @switch(env('APP_ENV'))
             @case('production')
             <span>{{env('APP_NAME')}}</span>
-            @case('local')
-            @if(env('APP_SECURE') == True)
+            @case('staging')
             <i class="fas fa-exclamation-circle red"></i> <span style="text-transform: capitalize;" class="red">TEST - {{env('APP_NAME')}}</span>
-            @else
+            @case('local')
             <span style="text-transform: capitalize;">{{env('APP_ENV')}} - {{env('APP_NAME')}}</span>
-            @endif
     @endswitch
 
 
