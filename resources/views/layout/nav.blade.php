@@ -26,11 +26,14 @@
 
      @switch(env('APP_ENV'))
             @case('production')
-            <span>{{env('APP_NAME')}}</span>
+                <span>{{env('APP_NAME')}}</span>
+                @break
             @case('staging')
-            <i class="fas fa-exclamation-circle red"></i> <span style="text-transform: capitalize;" class="red">TEST - {{env('APP_NAME')}}</span>
+                <i class="fas fa-exclamation-circle red"></i> <span style="text-transform: capitalize;" class="red">TEST - {{env('APP_NAME')}}</span>
+                @break
             @case('local')
-            <span style="text-transform: capitalize;">{{env('APP_ENV')}} - {{env('APP_NAME')}}</span>
+                <span style="text-transform: capitalize;">{{env('APP_ENV')}} - {{env('APP_NAME')}}</span>
+                @break
     @endswitch
 
 
