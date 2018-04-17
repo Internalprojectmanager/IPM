@@ -38,9 +38,7 @@
                         @endif
                     </span>
                 </td>
-                <td class="table-description">{{implode(' ', array_slice(str_word_count($f->description, 2), 0, 10))}}
-                    ...
-                </td>
+                <td class="table-description">{!! nl2br(\Illuminate\Support\Str::words($f->description, 10,'...')) !!}</td>
                 <td>
                     <select class="form-control transparent-selectbox assignee-check" name="status[]">
                         @foreach($status as $s)
