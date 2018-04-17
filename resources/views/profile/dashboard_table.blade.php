@@ -20,7 +20,7 @@
                 @if($as->userid == Auth::id())
             <tr class="">
                 <td style="background-color: @if($as->astatus){{$as->astatus->color}} @else #000 @endif;"></td>
-                <td>
+                <td class="width25  ">
                     <span class="tabletitle">
                         <a href="{{route('showfeature',[$f->features->releases->projects->company->path,
                              $f->features->releases->projects->path,
