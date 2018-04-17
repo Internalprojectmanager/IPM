@@ -38,7 +38,7 @@
                         @endif
                     </span>
                 </td>
-                <td class="table-description">{!! nl2br(\Illuminate\Support\Str::words($f->description, 10,'...')) !!}</td>
+                <td class="table-description width20">{!! nl2br(Linkify::process(\Illuminate\Support\Str::words($f->description, 10,'...'))) !!}</td>
                 <td>
                     <select class="form-control transparent-selectbox assignee-check" name="status[]">
                         @foreach($status as $s)

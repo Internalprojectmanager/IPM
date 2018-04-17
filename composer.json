@@ -20,7 +20,8 @@
         "orangehill/iseed": "dev-master",
         "silber/bouncer": "v1.0.0-rc.1",
         "webpatser/laravel-uuid": "^3.0",
-        "yab/laravel-scout-mysql-driver": "^2.0"
+        "yab/laravel-scout-mysql-driver": "^2.0",
+        "nahid/linkify": "1.0.*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

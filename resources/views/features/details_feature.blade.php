@@ -43,7 +43,7 @@
             <div class="row under-details" id="block-hidden">
                 <div class="col-md-6 col-xs-12">
                     <span class="project-title block-title">Feature Description</span><br>
-                    <span class="project-detail block-value">{!! nl2br($feature->description) !!}</span>
+                    <span class="project-detail block-value">{!! nl2br(Linkify::process($feature->description)) !!}</span>
                 </div>
 
                 <div class="col-md-offset-1 col-md-5 col-xs-12 pull-right">

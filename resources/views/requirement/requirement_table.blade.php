@@ -25,23 +25,23 @@
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: {{$requirement->rstatus->color}};"></td>
                         <td class="width20"><span class="tabletitle">{{$requirement->name}}</span></td>
-                        <td class="">{!! nl2br($requirement->description) !!}</td>
+                        <td class="width20">{!! nl2br(Linkify::process($requirement->description)) !!}</td>
                         <td class="">
                             @if($requirement->rstatus)
                                 {{$requirement->rstatus->name}}
                             @endif
 
                         </td>
-                        <td class="width25">
+                        <td class="">
                             @foreach($requirement->assignees as $assignee)
                                 <div class="row" style="line-height: 2.3;">
-                                    <div class="col-md-12 requiremnt-assingee">
-                                        <div class="col-md-7" style="padding: 6px 12px;">
+                                    <div class="requiremnt-assingee">
+                                        <div class="col-md-6" style="padding: 6px 12px;">
                                             <i class="fas fa-circle" style="color: @if($assignee->astatus){{$assignee->astatus->color}}; @endif "></i>
                                             <span>{{$assignee->users->first_name}} {{$assignee->users->last_name}}</span>
                                         </div>
-                                        <div class="col-md-5">
-                                            <select class="form-control transparent-selectbox assignee-check" name="status[]" @if(Auth::id() !== $assignee->userid) disabled="" @endif>
+                                        <div class="col-md-6">
+                                            <select class="form-control transparent-selectbox assignee-check" width="100%" name="status[]" @if(Auth::id() !== $assignee->userid) disabled="" @endif>
                                                 @foreach($status as $s)
                                                     @if($s->name == "Completed" || $s->name == "Draft" || $s->name == "Testing" || $s->name == "In Progress")
                                                         <option
