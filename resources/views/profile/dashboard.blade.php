@@ -19,7 +19,7 @@
                 <span id="count_projects_bar">|</span>
                 <span class="counter">{{$requirementscount}}</span>
                 <span class="contenttype hidden"></span>
-                <span>To-do</span>
+                <span>To-do(s)</span>
             </span>
         </div>
         <div class="col-md-8 col-xs-12 pull-right">

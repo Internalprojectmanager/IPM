@@ -26,7 +26,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return redirect()->route('overviewproject');
+        return redirect()->route('dashboard');
     }
 
     public function calcDeadline($data){

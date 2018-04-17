@@ -9,6 +9,12 @@
         <th>Deadline</th>
         </thead>
         <tbody>
+        @if($requirements->count() == 0)
+            <tr>
+                <td style="border-left: 1px solid #CECECE" class="center" colspan="5"><h4>@lang('You have no To-dos left, Good Job :D')</h4></td>
+            </tr>
+
+        @endif
         @foreach($requirements as $f)
             @foreach($f->assignees as $as)
                 @if($as->userid == Auth::id())

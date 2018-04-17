@@ -12,11 +12,11 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('overviewproject');
+    return redirect()->route('dashboard');
 });
 
 Route::get('/home', function () {
-    return redirect()->route('overviewproject');
+    return redirect()->route('dashboard');
 })->name('home');
 
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
