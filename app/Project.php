@@ -38,7 +38,13 @@ class Project extends Model
     }
 
     public static function updateDeadline($project){
-        $currentrelease = Release::where("project_id", "=", $project->id)->where('deadline', '>=', Carbon::now())->orderby('deadline', 'asc')->first();
+        $currentrelease = Release::where("project_id", "=", $project->id)
+            ->wherenotin('status' , [
+                Status::name('Paused')->id,
+                Status::name('Completed')->id,
+                Status::name('Cancelled')->id
+            ])
+            ->orderby('deadline', 'asc')->first();
         if($currentrelease){
             $project->deadline = $currentrelease->deadline;
         } else{
@@ -49,9 +55,14 @@ class Project extends Model
 
     public static function updateStatus($project)
     {
-        $currentrelease = Release::where("project_id", "=", $project->id)->where('deadline', '>=', Carbon::now()->startOfDay())->orderby('deadline', 'asc')->first();
+        $currentrelease = Release::where("project_id", "=", $project->id)
+            ->wherenotin('status' , [
+                Status::name('Paused')->id,
+                Status::name('Completed')->id,
+                Status::name('Cancelled')->id
+            ])
+            ->orderby('deadline', 'asc')->first();
 
-        //dd($currentrelease);
         if ($currentrelease){
             $project->status = $currentrelease->status;
         } else {
