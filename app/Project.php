@@ -65,7 +65,9 @@ class Project extends Model
 
         if ($currentrelease){
             $project->status = $currentrelease->status;
-        } else {
+        }elseif (Release::where("project_id", "=", $project->id)->count() ==  Release::where("project_id", "=", $project->id)->where('status', Status::name('Completed')->id)->count())
+            $project->status = Status::name('Completed')->id;
+        else {
             $project->status = Status::name('Paused')->id;
         }
         $project->save();
