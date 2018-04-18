@@ -1,0 +1,19 @@
+before_script:
+  - echo "Updating ipm.."
+stages:
+  - deploy
+deploy to develop:
+  stage: deploy
+  variables:
+    DC_FILE: /usr/share/iav-dockers/ipm_develop/docker-compose.yml
+    DC_PROJ: ipmdevelop
+    DC_PARAMS: -p $DC_PROJ -f $DC_FILE
+  only:
+    - develop
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.iavconcepts.com:5500
+    - docker-compose $DC_PARAMS exec -T ipm git pull
+    - docker-compose $DC_PARAMS exec -T ipm composer install
+    - docker-compose $DC_PARAMS exec -T ipm php artisan migrate
+    - docker-compose $DC_PARAMS exec -T ipm php artisan storage:link
+  environment: develop

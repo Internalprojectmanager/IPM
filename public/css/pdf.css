@@ -1,0 +1,206 @@
+@page { margin: 100px 25px; }
+header { position: fixed; top: -60px; left: 0px; right: 0px; height: 50px; }
+footer { position: fixed; bottom: -95px; left: 0px; right: 0px; height: 50px; }
+p { page-break-after: always; }
+p:last-child { page-break-after: never; }
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+hr {
+    color: rgba(151,151,151,0.23);
+}
+
+p {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.logo-footer {
+    position: absolute;
+    height: 17px;
+    width: 85px;
+    left: 44px;
+}
+
+.h1 {
+    color: #000000;
+    font-size: 44px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    line-height: 41px;
+}
+
+.h2 {
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 16px;
+}
+
+footer .pagenum:before {
+    content: counter(page);
+}
+
+.page-nr {
+    position: absolute;
+    right: 67px;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+/* PAGE 1 */
+.logo-p1 {
+    position: fixed;
+    height: 22%;
+    width: 26%;
+    top: 171px;
+    right: 0px;
+}
+
+.h1-p1 {
+    position: fixed;
+    height: 82px;
+    width: 288px;
+    top: 198px;
+    left: 50px;
+    color: #000000;
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    line-height: 41px;
+}
+
+.h2-p1 {
+    position: fixed;
+    text-transform: uppercase;
+    top: 275px;
+    left: 50px;
+    color: rgba(0,0,0,0.6);
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    margin-top: 5px;
+}
+
+.h3-p1 {
+    position: fixed;
+    top: 320px;
+    left: 50px;
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 10px;
+}
+
+.project-info-p1 {
+    position: absolute;
+    bottom: 0px;
+}
+
+.project-info-left {
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.project-info-right {
+    position: absolute;
+    right: 28px;
+    color: #000000;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 18px;
+    text-align: right;
+}
+/* END OF PAGE 1 */
+
+/* PAGE 3 */
+.content-p3 {
+    margin-top: 89px;
+}
+
+.content-title {
+    position: relative;
+    width: 100%;
+    right: 69px;
+    margin-left: 19px;
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.content-subtitle {
+    margin-left: 39px;
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.content-pagenum {
+    position: fixed;
+    text-align: right;
+    margin-right: -80px;
+    color: #000000;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: -18px;
+}
+
+#disable-font {
+    font-family: initial;
+}
+
+#content-title-font {
+    font-family: 'Roboto', sans-serif;
+    margin-right: 168px;
+}
+/* END OF PAGE 3 */
+
+/* PAGE 4 */
+.project-description {
+    color: #000000;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.bold-text-p4 {
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.responsibility-p4 {
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.company-p4 {
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    font-style: italic;
+    letter-spacing: 1px;
+    line-height: 13px;
+}
+
+.non-cursive{
+    font-style: normal;
+}
+
+.prepared{
+    text-transform: capitalize;
+}
+/* END OF PAGE 4 */

@@ -1,0 +1,11 @@
+.row.ts-table, .row.scope-table, .row.nfr-table{
+    display: none;
+}
+
+.display{
+    display: block !important;
+}
+
+.drop-link-release, .drop-link-release:hover, .drop-link-release:active, .drop-link-release:focus{
+    color:black;
+}

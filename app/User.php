@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name','last_name', 'email', 'password', 'active', 'provider', 'provider_id',
     ];
 
     /**
@@ -26,4 +26,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function jobtitles(){
+        return $this->hasOne('App\Status', 'id', 'job_title');
+    }
+
+    /**
+     * Magically crypt the password whenever its set on the modal because otherwise remembering to do it can get ugly
+     * at least you know it's now done
+     *
+     * @param String $value
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

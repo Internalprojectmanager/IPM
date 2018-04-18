@@ -1,0 +1,107 @@
+.settings-icon{
+    background: url("../svg/settings.svg") no-repeat 0px center;
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+    margin-left: -2px;
+    top:5px;
+}
+
+.logout-icon{
+    background: url("../svg/logout.svg") no-repeat 0px center;
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+    top:5px;
+}
+
+.error-icon{
+    background: url("../svg/error.svg") no-repeat 0px center;
+
+}
+
+.check-icon {
+    background: url("../svg/check.svg") no-repeat 0px center;
+}
+
+.error-icon, .check-icon{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    background-size: 18px;
+    margin-left: 10px;
+    margin-top: 2px;
+}
+
+.block-icons{
+    width: 30px;
+    background-size: 15px;
+    margin-top: -10px;
+    font-style: normal;
+    padding-left: 10px;
+    padding-top: 2px;
+}
+.user-icon{
+    background: url("../svg/user.svg") no-repeat 0px center;
+}
+
+.mail-icon{
+    background: url("../svg/mail.svg") no-repeat 0px center;
+}
+
+.tel-icon{
+    background: url("../svg/phone.svg") no-repeat 0px center;
+}
+
+.word-icon{
+    background: url("../svg/world.svg") no-repeat 0px center;
+    background-size: 15px;
+}
+
+.text-icon{
+    background: url("../svg/text.svg") no-repeat 0px center;
+}
+
+.cross-icon{
+    background: url("../svg/cross.svg") no-repeat 0px center;
+    background-size: 15px;
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+}
+
+.edit-icon{
+    background:  url("../svg/edit.svg") no-repeat 0px center;
+    background-size: 20px;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    top: 2px;
+}
+
+.download-icon{
+    background:  url("../svg/download.svg") no-repeat 0px center;
+    background-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+}
+
+.arrow-right{
+    background: #f2f2f2 url(../svg/dropdown.svg) no-repeat 0px center;
+    border:none;
+    background-color: #f2f2f2;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    width: 20px;
+    height: 20px;
+    top:5px;
+}
+.arrow-down{
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+
+
+
