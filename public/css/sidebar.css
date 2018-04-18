@@ -85,7 +85,6 @@
 
 #navbar_top>.open>.dropdown-menu{
     top: 5px;
-    height: 140px;
     padding-top: 4rem;
     z-index: -130;
     right: 11px;

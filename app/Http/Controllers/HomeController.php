@@ -15,10 +15,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -131,5 +127,9 @@ class HomeController extends Controller
         $status  = Status::type('Progress')->get();
 
         return view('profile.dashboard_table', compact('requirements', 'requirementscount', 'status'));
+    }
+
+    public function help(){
+        return view('profile.help');
     }
 }

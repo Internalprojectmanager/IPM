@@ -19,8 +19,9 @@ Route::get('/home', function () {
     return redirect()->route('dashboard');
 })->name('home');
 
-Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
-Route::post('/dashboard', 'HomeController@dashboardSearch')->name('dashboardsearch');
+Route::get('/help', 'HomeController@help')->name('help');
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('auth');
+Route::post('/dashboard', 'HomeController@dashboardSearch')->name('dashboardsearch')->middleware('auth');
 Route::post('/dashboard/save', 'RequirementController@saveAuthStatus')->name('requirementsaveAuthstatus');
 
 
