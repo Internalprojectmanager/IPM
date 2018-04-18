@@ -20,7 +20,7 @@
                 @if($as->userid == Auth::id())
             <tr class="">
                 <td style="background-color: @if($as->astatus){{$as->astatus->color}} @else #000 @endif;"></td>
-                <td class="width25  ">
+                <td class="col-md-2 col-lg-3">
                     <span class="tabletitle">
                         <a href="{{route('showfeature',[$f->features->releases->projects->company->path,
                              $f->features->releases->projects->path,
@@ -38,7 +38,7 @@
                         @endif
                     </span>
                 </td>
-                <td class="table-description width20">{!! nl2br(Linkify::process(\Illuminate\Support\Str::words($f->description, 10,'...'))) !!}</td>
+                <td class="table-description col-md-3">{!! nl2br(Linkify::process(\Illuminate\Support\Str::words($f->description, 10,'...'))) !!}</td>
                 <td>
                     <select class="form-control transparent-selectbox assignee-check" name="status[]">
                         @foreach($status as $s)
