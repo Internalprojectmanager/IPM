@@ -12,7 +12,7 @@
      aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
-            <label>Assigned Users</label>
+            <label>Add User to team</label>
             <span class="modal-close"  data-dismiss="modal">
                     <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -36,14 +36,17 @@
             <form action="" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label class="" for="assignee">Assignees</label>
+                    <label class="" for="assignee">Users</label>
                     <select name="assignee[]" multiple class="form-control selectpicker" data-live-search="true">
+                        @php $userlist = []; @endphp
+                        @foreach($team->users()->get() as $a)
+                            @php $userlist[] = $a->id; @endphp
+                        @endforeach
+
                         @foreach($users as $u)
-                            @foreach($team->users()->get() as $a)
-                                @if($a->id !== $u->id)
-                                    <option value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}} @if(isset($u->jobtitles))(<i>{{$u->jobtitles->name}}</i>)@endif</option>
-                                @endif
-                            @endforeach
+                            @if(!in_array($u->id, $userlist))
+                                <option value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}} @if(isset($u->jobtitles))(<i>{{$u->jobtitles->name}}</i>)@endif</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
@@ -55,7 +58,7 @@
             </div>
             <div class="col-md-6" align="right">
                 <button class="btn btn-primary button-primary" type="submit">
-                    Save Project <span class="glyphicon glyphicon-plus">
+                    Add User <span class="glyphicon glyphicon-plus">
                 </button>
             </div>
             </form>
