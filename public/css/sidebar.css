@@ -55,6 +55,11 @@
     text-transform: none;
 }
 
+#teamname{
+    font-size: 12px;
+    margin-top: -3px;
+}
+
 #user a:hover, #user a:focus {
     text-decoration: none;
     text-transform: none;
@@ -62,7 +67,7 @@
 
 #user {
     float: right;
-    padding-top: 26px;
+    padding-top: 20px;
     padding-right: 1.8rem;
     margin-left: 110px;
     text-transform: none;
@@ -97,6 +102,11 @@
 
 .open > #username{
     color: black;
+}
+
+.open > #teamname{
+    z-index: 1000;
+    color:black;
 }
 
 .open > #username .dropdown-arrow-icon{
