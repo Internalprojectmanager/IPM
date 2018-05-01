@@ -193,14 +193,15 @@
 
                 <ul class="dropdown-menu pull-right" role="menu">
                     <span>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
-                    <li><a href="{{route('profile')}}"><i class="glyphicon settings-icon"></i> Settings</a></li>
+                    <li><a href="{{route('profile')}}"><i class="glyphicon icon-right-top settings-icon"></i> Settings</a></li>
+                    <li><a href="{{route('team.show', Auth::user()->currentTeam()->name)}}"><i class="icon-right-top far fa-building fa-2x "></i></i> My Team</a></li>
                     <li><a href="{{route('help')}}"><i class=" icon-right-top far fa-question-circle fa-2x"></i> Help</a></li>
 
                     <li>
                         <a style="cursor: pointer"
                            onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                            <i class="glyphicon logout-icon"></i>
+                            <i class="glyphicon icon-right-top logout-icon"></i>
                             Logout
                         </a>
                         <form id="logout-form" action="{{url('/logout')}}" method="POST" style="display: none;">

@@ -1,26 +1,19 @@
-.settings-icon{
-    background: url("../svg/settings.svg") no-repeat 0px center;
-    width: 20px;
+.icon-right-top{
+    width: 20px !important;
     height: 20px;
     margin-right: 7px;
     margin-left: -2px;
-    top:5px;
+    top: 5px;
+}
+
+.settings-icon{
+    background: url("../svg/settings.svg") no-repeat 0px center;
 }
 
 .logout-icon{
     background: url("../svg/logout.svg") no-repeat 0px center;
-    width: 20px;
-    height: 20px;
-    margin-right: 7px;
-    top:5px;
-}
-
-.icon-right-top{
-    width: 20px;
-    height: 20px;
-    margin-right: 3px;
-    top:5px;
-    margin-left: -6px;
+    margin-left: 0;
+    margin-right: 4px;
 }
 
 .error-icon{

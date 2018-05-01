@@ -42,7 +42,7 @@
                 <tr>
                     <td style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
                     <td>
-                        <span class="tabletitle">{{$user->first_name}} {{$user->last_name}}</span>
+                        <span class="tabletitle">{{$user->first_name}} {{$user->last_name}} </span> @if($user->id == Auth::id()) <span class="its-you"> Its You!</span> @endif
                     </td>
                     <td>
                         {{$user->email}}
@@ -52,7 +52,13 @@
                             {{$user->jobtitles->name}}
                         @endif
                     </td>
-                    <td>{{$user->active}}</td>
+                    <td>
+                        @if($user->active ==  true)
+                            Active
+                        @else
+                            Blocked
+                        @endif
+                    </td>
                 </tr>
             @endforeach
             </tbody>

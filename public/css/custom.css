@@ -10,6 +10,10 @@ html, body {
     margin: 0;
 }
 
+.full-opacity{
+    opacity: 1 !important;
+}
+
 .container {
     padding: 10rem 4rem 3rem 15rem;
     width: 100%;
@@ -512,7 +516,8 @@ label {
 }
 
 .success {
-    color: rgba(107, 175, 28, 0.8);
+    color: rgba(107, 175, 28);
+    opacity: 0.8;
 }
 
 td > .assignee {
@@ -978,4 +983,22 @@ td > .assignee:first-child:before {
 
 .clickable-row:hover{
     cursor: pointer;
+}
+
+.its-you{
+    margin-top: 1px;
+    background-color: #2ab27b;
+    padding: 4px 5px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    display: inline-block;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    position: absolute;
+    margin-left: 7px;
 }
