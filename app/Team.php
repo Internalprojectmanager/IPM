@@ -22,7 +22,7 @@ class Team extends Model
     }
 
     public function users(){
-        return $this->belongsToMany('App\User')->orderBy('last_name', 'asc');
+        return $this->belongsToMany('App\User');
     }
 
     public function ScopeCurrentUserTeam($query){

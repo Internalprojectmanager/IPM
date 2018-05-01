@@ -48,9 +48,7 @@
                         {{$user->email}}
                     </td>
                     <td>
-                        @if($user->jobtitles)
-                            {{$user->jobtitles->name}}
-                        @endif
+                        {{$user->jobtitles->name}}
                     </td>
                     <td>{{$user->active}}</td>
                 </tr>
