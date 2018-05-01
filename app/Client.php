@@ -39,6 +39,10 @@ class Client extends Model
         return $query->where('path', $path);
     }
 
+    public function team(){
+        return $this->hasOne('App\Team', 'id', 'teamid');
+    }
+
     public function sluggable()
     {
         return [
