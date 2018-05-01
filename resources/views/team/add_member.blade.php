@@ -8,7 +8,7 @@
         </div>
     @endif
 
-<div class="modal modal-lg" id="addProjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal modal-lg" id="addTeamMember" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
@@ -33,21 +33,17 @@
                 </span>
         </div>
         <div class="modal-body">
-            <form action="{{route('assigneeupdate', [$client->path, $project->path])}}" method="post">
+            <form action="" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="" for="assignee">Assignees</label>
                     <select name="assignee[]" multiple class="form-control selectpicker" data-live-search="true">
-                        @foreach($user as $u)
-                            @php $selected = "";@endphp
-                            @foreach($assignee as $a)
-                                @if($a->userid == $u->id)
-                                    @php $selected = "selected=''";@endphp
-                                    @php break; @endphp
+                        @foreach($users as $u)
+                            @foreach($team->users()->get() as $a)
+                                @if($a->id !== $u->id)
+                                    <option value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}} @if(isset($u->jobtitles))(<i>{{$u->jobtitles->name}}</i>)@endif</option>
                                 @endif
                             @endforeach
-
-                                <option {{$selected}} value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}} @if(isset($u->jobtitles))(<i>{{$u->jobtitles->name}}</i>)@endif</option>
                         @endforeach
                     </select>
                 </div>
