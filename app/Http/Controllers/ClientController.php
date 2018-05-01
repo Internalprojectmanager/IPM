@@ -11,6 +11,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Client;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -43,7 +44,6 @@ class ClientController extends Controller
         $client->contactemail = $request->contact_email;
         $client->link = serialize(array('title' => $request->link_title, 'link' => $request->link_url));
 
-        dd($request);
         $client->save();
 
         return redirect()->route('overviewclient');
@@ -51,7 +51,7 @@ class ClientController extends Controller
 
     public function overviewClient()
     {
-        $clients = Client::sortable()->withCount('projects')->with('cstatus')->paginate(8);
+        $clients = Client::sortable()->withCount('projects')->with('cstatus')->currentuserteam()->paginate(8);
         $clientcount = $clients->count();
         $status = Status::type('Client')->get();
         return view('client.client', compact('clients', 'clientcount', 'status'));
@@ -74,6 +74,7 @@ class ClientController extends Controller
         if(isset($status)){
             $clients->where('status', $status);
         }
+        $clients->currentuserteam();
         $clients = $clients->get();
 
         if($clients->count() <= 8){
@@ -109,7 +110,7 @@ class ClientController extends Controller
         $sort = $request->sort;
         $page = $request->page;
         $order = $request->order;
-        $projects = Project::sortable([$sort => $order])->where('company_id', $client->id)->paginate(8);
+        $projects = Project::sortable([$sort => $order])->where('company_id', $client->id)->currentuserteam()->paginate(8, $page);
         $projectcount = $projects->count();
         return view('project.project_table', compact('client', 'projects', 'projectcount'));
     }

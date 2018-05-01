@@ -7,6 +7,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Kyslik\ColumnSortable\Sortable;
+use Illuminate\Support\Facades\Auth;
 
 class Project extends Model
 {
@@ -76,6 +77,13 @@ class Project extends Model
 
     public function scopePath($query, $path){
         return $query->where('path', $path);
+    }
+
+    public function ScopeCurrentUserTeam($query){
+        if(Auth::user()->currentTeam() !== null){
+            return $query->where('team_id', Auth::user()->currentTeam()->id);
+
+        }   return $query->where('team_id', null);
     }
 
     public function sluggable()

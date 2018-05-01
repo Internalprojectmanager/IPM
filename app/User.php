@@ -51,4 +51,5 @@ class User extends Authenticatable
     public function currentTeam(){
         return $this->teams()->wherePivot('current', true)->first();
     }
+
 }
