@@ -35,7 +35,7 @@ Route::group(['middleware' => ['guest', 'web']], function () {
 Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
 Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
 
-Route::group(['prefix', 'team'], function() {
+Route::group(['prefix' => 'team'], function() {
     Route::get('/{team}', 'TeamController@show')->name('team.show');
 });
 

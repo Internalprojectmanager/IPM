@@ -14,7 +14,7 @@ class Team extends Model
 
     public function scopeName($query, $name)
     {
-        return $query->where('name', $name)->first();
+        return $query->where('name', $name)->firstorfail();
     }
 
     public function client(){
