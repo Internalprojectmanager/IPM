@@ -27,9 +27,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function teams(){
+        return $this->belongsToMany('App\Team');
+    }
+
+
     public function jobtitles(){
         return $this->hasOne('App\Status', 'id', 'job_title');
     }
+
 
     /**
      * Magically crypt the password whenever its set on the modal because otherwise remembering to do it can get ugly
@@ -41,4 +47,9 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function currentTeam(){
+        return $this->teams()->wherePivot('current', true)->first();
+    }
+
 }

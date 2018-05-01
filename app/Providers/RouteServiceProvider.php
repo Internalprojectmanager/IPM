@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -27,26 +28,30 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot();
 
-
-
         Route::bind('client', function ($value) {
-            return \App\Client::path($value)->first() ?? abort(404);
+            $team = Auth::user()->currentTeam();
+            if($team !== null) {
+                return \App\Client::path($value)
+                    ->where('team_id', $team->id)
+                    ->firstorfail();
+            } return abort(404);
+
         });
 
         Route::bind('project', function ($value) {
-            return \App\Project::path($value)->first() ?? abort(404);
+            return \App\Project::path($value)->firstorfail();
         });
 
         Route::bind('release', function ($value) {
-            return \App\Release::path($value)->first() ?? abort(404);
+            return \App\Release::path($value)->firstorfail();
         });
 
         Route::bind('feature', function ($value) {
-            return \App\Feature::where('id', $value)->first() ?? abort(404);
+            return \App\Feature::where('id', $value)->firstorfail();
         });
 
         Route::bind('document', function ($value) {
-            return \App\Document::find($value)->first() ?? abort(404);
+            return \App\Document::find($value)->firstorfail();
         });
 
     }

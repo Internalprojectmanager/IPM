@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Assignee;
 use App\Http\Requests\ProjectValidator;
 use App\Status;
+use App\Team;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ use App\Project;
 use App\Release;
 use App\Document;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
@@ -33,6 +35,7 @@ class ProjectController extends Controller
             })
             ->where('deadline', '<=', Carbon::now('Europe/Amsterdam'))
             ->orderBy('deadline', 'desc')
+            ->currentuserteam()
             ->get();
         $projectnull = Project::with('company', 'pstatus', 'assignee.users')
             ->when(!empty($ids), function ($query) use ($ids) {
@@ -40,12 +43,14 @@ class ProjectController extends Controller
             })
             ->where('deadline', NULL)
             ->orderBy('deadline', 'desc')
+            ->currentuserteam()
             ->get();
         $projectnext = Project::with('company', 'pstatus', 'assignee.users')
             ->when(!empty($ids), function ($query) use ($ids) {
                 return $query->whereIn('id', $ids);
             })
             ->where('deadline', '>=', Carbon::now('Europe/Amsterdam'))
+            ->currentuserteam()
             ->orderBy('deadline', 'asc')
             ->get();
 
@@ -85,6 +90,7 @@ class ProjectController extends Controller
     {
             $project = new Project();
             $project->name = $request->project_name;
+            $project->team_id = Auth::user()->currentTeam()->id;
             if (!empty($request->new_client)) {
                 $client = Client::firstOrCreate(['name' => $request->new_client, 'status' => Status::Name('Client')->first()->id]);
                 $project->company_id = $client->id;
@@ -117,11 +123,12 @@ class ProjectController extends Controller
 
     public function overviewProject()
     {
-        $projectcount = Project::select('id')->get()->count();
+        $projectcount = Project::select('id')
+            ->currentuserteam()->get()->count();
         $projects = $this->projectsCollection();
-        $client = Client::select('name', 'id')->get();
+        $client = Client::select('name', 'id')->currentuserteam()->get();
         $status = Status::where('type', 'Progress')->select('name', 'id')->get();
-        $user = User::all();
+        $user = Team::where('id', Auth::user()->currentTeam()->id)->first()->users;
 
         return view('project.project', compact('projects', 'projectcount', 'client', 'status', 'user'));
     }
@@ -137,6 +144,7 @@ class ProjectController extends Controller
         $page = $request->page;
 
         $projects = Project::search($search);
+        $projects->currentuserteam();
         if (isset($status)) {
             $projects->where('status', $status);
         }
@@ -177,7 +185,7 @@ class ProjectController extends Controller
         $releases = Release::with('rstatus')->where('project_id', $project->id)->orderBy('version', 'desc')->get();
         $releases = $this->calcDeadline($releases);
         $documents = Document::where('project_id', $project->id)->get();
-        $user = User::orderby('job_title', 'desc')->orderby('last_name', 'asc')->get();
+        $user = Team::currentuserteam()->first()->users()->get();
         $assignee = Assignee::with('users')->where('uuid', $project->id)->get();
         $status = Status::where('type', 'Progress')->get();
         return view('project.details_project', compact('project', 'client', 'releases', 'documents', 'user', 'assignee', 'status'));
@@ -186,7 +194,7 @@ class ProjectController extends Controller
     public function editProject($client, $project)
     {
         $status = Status::Type('Progress')->get();
-        $companys = Client::all();
+        $companys = Client::where('team_id', Auth::user()->currentTeam()->id)->get();
 
         return view('project.edit_project', compact('project', 'companys', 'status'));
     }
@@ -198,6 +206,7 @@ class ProjectController extends Controller
         if (!empty($request->new_client)) {
             $client = Client::firstOrCreate(['name' => $request->new_client]);
             $client->name = $request->new_client;
+            $client->team_id = Auth::user()->currentTeam()->id;
             $client->path = strtolower(str_replace(" ","-",$client->name));
             $client->save();
             $project->company_id = $client->id;
