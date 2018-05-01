@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
-    protected $table = 'team';
+    protected $table = 'teams';
 
     protected $fillable = ['name'];
 
@@ -16,9 +16,6 @@ class Team extends Model
         return $query->where('name', $name)->first();
     }
 
-    public function currentTeam(){
-        return
-    }
 
     public function client(){
         return $this->belongsToMany('App\Project');

@@ -20,11 +20,12 @@ class CreateTeamsTables extends Migration
             $table->string('name');
         });
 
-        Schema::create('teams_user', function (Blueprint $table) {
+        Schema::create('team_user', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('team_id');
             $table->unsignedInteger('roleid');
+            $table->boolean('current');
         });
 
         Schema::create('roles', function (Blueprint $table){
@@ -33,6 +34,10 @@ class CreateTeamsTables extends Migration
         });
 
         Schema::table('client', function (Blueprint $table){
+            $table->unsignedInteger('team_id')->nullable()->after('id');
+        });
+
+        Schema::table('project', function (Blueprint $table){
             $table->unsignedInteger('team_id')->nullable()->after('id');
         });
     }

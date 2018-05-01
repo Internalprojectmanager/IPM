@@ -27,10 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
     public function teams(){
-        return $this->belongsToMany('App\Team')->wherePivot('current', true);
+        return $this->belongsToMany('App\Team');
     }
+
 
     public function jobtitles(){
         return $this->hasOne('App\Status', 'id', 'job_title');
@@ -46,5 +46,9 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function currentTeam(){
+        return $this->teams()->wherePivot('current', true)->first();
     }
 }

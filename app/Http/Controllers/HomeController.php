@@ -7,6 +7,7 @@ use App\Requirement;
 use Illuminate\Http\Request;
 use App\Status;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
