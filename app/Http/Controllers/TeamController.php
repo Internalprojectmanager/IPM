@@ -13,7 +13,7 @@ class TeamController extends Controller
 
         $users = User::all();
 
-        dd($team);
+        dd($team->users()->get());
 
         return view('team.show_team', compact('team', 'users'));
     }
