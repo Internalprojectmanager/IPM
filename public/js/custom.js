@@ -268,11 +268,47 @@ function getData(url) {
     $(".loader").hide();
 }
 
+var typingTimer;
+var doneTypingInterval = 500;
+
+//on keyup, start the countdown
 $('.search').bind('keyup change', function (e) {
-    e.preventDefault();
+    var keyCode = e.which;
+    clearTimeout(typingTimer); // doesn't matter if it's 0
+    if ( !( (keyCode >= 48 && keyCode <= 57)
+        ||(keyCode >= 65 && keyCode <= 90)
+        || (keyCode >= 97 && keyCode <= 122) )
+        && keyCode != 8 && keyCode != 32) {
+        e.preventDefault();
+    } else{
+        typingTimer = setTimeout(searchdoneTyping, doneTypingInterval);
+        $(".bigtable").addClass("disabled");
+        $(".loader").show();
+    }
+});
+
+$('.dropdown-search').on('change', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(searchdoneTyping, doneTypingInterval);
+    $(".bigtable").addClass("disabled");
+    $(".loader").show();
+});
+
+//on keydown, clear the countdown
+$('.search').bind('keydown', function () {
+    clearTimeout(typingTimer);
+});
+
+function searchdoneTyping(){
     var url = $('.searchform').attr('action');
     getData(url);
-});
+    if (document.readyState === 'complete') {
+        setTimeout(2000);
+        $(".bigtable").removeClass("disabled");
+        $(".loader").hide();
+        $('.container').focus();
+    }
+}
 
 
 function projectDetailsDown() {

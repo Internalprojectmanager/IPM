@@ -74,7 +74,7 @@ class ClientController extends Controller
         if(isset($status)){
             $clients->where('status', $status);
         }
-        $clients->currentuserteam();
+        $clients->where('team_id', Auth::user()->currentTeam()->id);
         $clients = $clients->get();
 
         if($clients->count() <= 8){

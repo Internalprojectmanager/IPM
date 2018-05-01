@@ -144,13 +144,14 @@ class ProjectController extends Controller
         $page = $request->page;
 
         $projects = Project::search($search);
-        $projects->currentuserteam();
+
         if (isset($status)) {
             $projects->where('status', $status);
         }
         if (isset($client)) {
             $projects->where('company_id', $client);
         }
+        $projects->where('team_id', Auth::user()->currentTeam()->id);
         $projectcount = $projects->get()->count();
 
         if ($projectcount <= 8) {

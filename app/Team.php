@@ -31,4 +31,13 @@ class Team extends Model
 
         }   return $query->where('id', null);
     }
+
+    public function sluggable()
+    {
+        return [
+            'path' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }

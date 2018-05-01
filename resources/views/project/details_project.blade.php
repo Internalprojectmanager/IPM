@@ -140,7 +140,7 @@
                             @if($release->monthsleft && $release->monthsleft > 0)
                                 <span>{{abs($release->monthsleft)}} Months left</span>
                             @elseif($release->monthsleft && $release->monthsleft < 0)
-                                <span>{{abs($release->monthsleft)}} Months overdue</span>
+                                <span class="red">{{abs($release->monthsleft)}} Months overdue</span>
                             @elseif($release->daysleft >= 0)
                                 <span @if($release->daysleft < 5) class="red" @endif>{{abs($release->daysleft)}} days left</span>
                             @elseif($release->daysleft < 0)

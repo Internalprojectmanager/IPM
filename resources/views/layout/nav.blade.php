@@ -165,6 +165,7 @@
             @auth
                 <a id="username" href="#" class="dropdown-toggle" data-toggle="dropdown">
                     {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+
                     <svg id="dropdown_arrow" width="13px" height="9px" viewBox="0 0 13 9" version="1.1"
                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
@@ -186,7 +187,10 @@
                             </g>
                         </g>
                     </svg>
+                    <br>
+                    <span id="teamname" class="right small"> @if(Auth::user()->currentTeam()){{Auth::user()->currentTeam()->name}}@endif </span>
                 </a>
+
                 <ul class="dropdown-menu pull-right" role="menu">
                     <span>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
                     <li><a href="{{route('profile')}}"><i class="glyphicon settings-icon"></i> Settings</a></li>
