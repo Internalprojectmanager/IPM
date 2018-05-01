@@ -35,7 +35,7 @@ class ProjectController extends Controller
             })
             ->where('deadline', '<=', Carbon::now('Europe/Amsterdam'))
             ->orderBy('deadline', 'desc')
-            ->where('team_id', Auth::user()->currentTeam()->id)
+            ->currentuserteam()
             ->get();
         $projectnull = Project::with('company', 'pstatus', 'assignee.users')
             ->when(!empty($ids), function ($query) use ($ids) {
@@ -43,14 +43,14 @@ class ProjectController extends Controller
             })
             ->where('deadline', NULL)
             ->orderBy('deadline', 'desc')
-            ->where('team_id', Auth::user()->currentTeam()->id)
+            ->currentuserteam()
             ->get();
         $projectnext = Project::with('company', 'pstatus', 'assignee.users')
             ->when(!empty($ids), function ($query) use ($ids) {
                 return $query->whereIn('id', $ids);
             })
             ->where('deadline', '>=', Carbon::now('Europe/Amsterdam'))
-            ->where('team_id', Auth::user()->currentTeam()->id)
+            ->currentuserteam()
             ->orderBy('deadline', 'asc')
             ->get();
 
@@ -124,11 +124,9 @@ class ProjectController extends Controller
     public function overviewProject()
     {
         $projectcount = Project::select('id')
-            ->where('team_id', Auth::user()->currentTeam()->id)
-            ->get()
-            ->count();
+            ->currentuserteam()->get()->count();
         $projects = $this->projectsCollection();
-        $client = Client::select('name', 'id')->where('team_id', Auth::user()->currentTeam()->id)->get();
+        $client = Client::select('name', 'id')->currentuserteam()->get();
         $status = Status::where('type', 'Progress')->select('name', 'id')->get();
         $user = Team::where('id', Auth::user()->currentTeam()->id)->first()->users;
 
@@ -146,7 +144,7 @@ class ProjectController extends Controller
         $page = $request->page;
 
         $projects = Project::search($search);
-        $projects->where('team_id', Auth::user()->currentTeam()->id);
+        $projects->currentuserteam();
         if (isset($status)) {
             $projects->where('status', $status);
         }
@@ -187,8 +185,7 @@ class ProjectController extends Controller
         $releases = Release::with('rstatus')->where('project_id', $project->id)->orderBy('version', 'desc')->get();
         $releases = $this->calcDeadline($releases);
         $documents = Document::where('project_id', $project->id)->get();
-        $user = Team::find(Auth::user()->currentTeam()->id)->first();
-        $user = $user->users()->get();
+        $user = Team::currentuserteam()->first()->users()->get();
         $assignee = Assignee::with('users')->where('uuid', $project->id)->get();
         $status = Status::where('type', 'Progress')->get();
         return view('project.details_project', compact('project', 'client', 'releases', 'documents', 'user', 'assignee', 'status'));
