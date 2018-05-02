@@ -50,7 +50,7 @@
                     </td>
                     <td class="col-md-2">
 
-                        @if(Auth::id() == $user->id && $team->owner_id == Auth::id())
+                        @if($user->id == $team->owner_id)
                             - Owner <br>
                         @endif
                         @if($user->jobtitles)
