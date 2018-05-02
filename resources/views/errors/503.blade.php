@@ -12,7 +12,9 @@
                     <h1 class="supertitle">IPM</h1>
                     <h3 class="undertitle">Service Unavailable - Please come back later</h3>
 
-                    <h2>{{ $e->getMessage() }}</h2>
+                    @if(isset($e))
+                        <h2>{{ $e->getMessage() }}</h2>
+                    @endif
                 </div>
             </div>
         </div>

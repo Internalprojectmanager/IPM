@@ -37,6 +37,7 @@ Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
 
 Route::group(['prefix' => 'team'], function() {
     Route::get('/{team}', 'TeamController@show')->name('team.show');
+    Route::post('/{team}/member/new', 'TeamController@storeMember')->name('teammember.store');
 });
 
 

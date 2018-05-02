@@ -33,11 +33,11 @@
                 </span>
         </div>
         <div class="modal-body">
-            <form action="" method="post">
+            <form action="{{route('teammember.store', $team->name)}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="" for="assignee">Users</label>
-                    <select name="assignee[]" multiple class="form-control selectpicker" data-live-search="true">
+                    <select name="member[]" multiple class="form-control selectpicker" data-live-search="true">
                         @php $userlist = []; @endphp
                         @foreach($team->users()->get() as $a)
                             @php $userlist[] = $a->id; @endphp
