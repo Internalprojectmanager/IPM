@@ -23,7 +23,7 @@ class TeamController extends Controller
                 if (!UserTeam::where('user_id', $member)->where('team_id', $team)->first()) {
                 $teammember = New UserTeam();
                 $teammember->user_id = $member;
-                $teammember->team_id = $team;
+                $teammember->team_id = Team::name($team)->id;
                 $teammember->roleid = 1;
                 }
 
