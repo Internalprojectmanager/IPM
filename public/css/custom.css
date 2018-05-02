@@ -54,6 +54,9 @@ html, body {
     margin: 0 auto;
 }
 
+.no-underline:hover{
+    text-decoration: none;
+}
 
 .requirement-block {
     margin-top: 10px;
@@ -227,7 +230,9 @@ label {
     margin-top: 20px;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-danger, .btn-save,.btn-delete, .btn-edit{
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus,
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:focus,
+.btn-danger, .btn-save,.btn-delete, .btn-edit{
     color: black;
     border: none;
     border-radius: 0px;
@@ -267,6 +272,13 @@ label {
     font-weight: normal;
     box-shadow: none;
     outline: 0;
+}
+
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:focus{
+    color:white;
+    box-shadow: none;
+    outline: 0;
+
 }
 
 .btn-delete, .btn-delete:hover, .btn-delete:focus, .btn-delete:active:focus {
