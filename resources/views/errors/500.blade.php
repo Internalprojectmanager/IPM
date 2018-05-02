@@ -9,8 +9,9 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-12 center">
-                    <h1 class="supertitle">500</h1>
+                    <h1 class="supertitle">OOPS</h1>
                     <h3 class="undertitle">Something went wrong</h3>
+
 
                     @if(app()->bound('sentry') && !empty(Sentry::getLastEventID()))
                         <!-- Sentry JS SDK 2.1.+ required -->
