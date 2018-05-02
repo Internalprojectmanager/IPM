@@ -49,13 +49,17 @@
                         {{$user->email}}
                     </td>
                     <td class="col-md-2">
+
+                        @if(Auth::id() == $user->id && $team->owner_id == Auth::id())
+                            - Owner <br>
+                        @endif
                         @if($user->jobtitles)
-                            {{$user->jobtitles->name}}
+                            - {{$user->jobtitles->name}}
                         @endif
                     </td>
                     <td></td>
                     <td class="col-md-2 right">
-                        @if(Auth::id() !== $user->id)
+                        @if(Auth::id() !== $user->id && $team->owner_id == Auth::id())
                             @if($user->pivot->active ==  true)
                                 <a class="no-underline" onclick="return confirm('Are you sure you want to block this User?');"
                                    href="{{route('teammember.block', [$team->name, $user->id])}}">
