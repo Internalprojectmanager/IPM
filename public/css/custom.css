@@ -985,9 +985,7 @@ td > .assignee:first-child:before {
     cursor: pointer;
 }
 
-.its-you{
-    margin-top: 1px;
-    background-color: #2ab27b;
+.its{
     padding: 4px 5px;
     font-size: 12px;
     font-style: normal;
@@ -1001,4 +999,13 @@ td > .assignee:first-child:before {
     border-radius: .25em;
     position: absolute;
     margin-left: 7px;
+    margin-top: 1px;
+}
+
+.its-you{
+    background-color: #2ab27b;
+}
+
+.its-blocked{
+    background-color: #D35847;
 }

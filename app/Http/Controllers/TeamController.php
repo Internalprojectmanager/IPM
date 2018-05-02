@@ -39,4 +39,19 @@ class TeamController extends Controller
         return redirect()->route('team.show', compact('team'));
 
     }
+
+
+    public function deleteMember(Request $request, $team, $member){
+            Team::name()->users()->detach($member);
+            return redirect()->route('team.show', compact('team'));
+    }
+
+    public function changeblockingMember(Request $request, $team, $member){
+        $teammember = UserTeam::teammember(Team::name($team)->id, $member);
+
+        $teammember->toggleBlock();
+        $teammember->save();
+
+        return redirect()->route('team.show', compact('team'));
+    }
 }

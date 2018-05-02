@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
 
     public function teams(){
-        return $this->belongsToMany('App\Team');
+        return $this->belongsToMany('App\Team')->withPivot('active', 'current');
     }
 
 
@@ -49,7 +49,7 @@ class User extends Authenticatable
     }
 
     public function currentTeam(){
-        return $this->teams()->wherePivot('current', true)->first();
+        return $this->teams()->wherePivot('current', true)->wherePivot('active', true)->first();
     }
 
 }
