@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Status;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-
+use PragmaRX\Version\Package\Version;
 class HomeController extends Controller
 {
     /**

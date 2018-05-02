@@ -20,7 +20,7 @@
                             Raven.showReportDialog({
                                 eventId: '{{ Sentry::getLastEventID() }}',
                                 // use the public DSN (dont include your secret!)
-                                dsn: 'https://c36e0aa8dea04a008759461ea7631f01@sentry.io/1199655',
+                                dsn: '{{env('SENTRY_CLIENT')}}',
                                 user: {
                                     @if(Auth::user())
                                     'name': '{{Auth::user()->first_name}} {{Auth::user()->last_name}}',
