@@ -89,7 +89,7 @@ class Project extends Model
             foreach(Auth::user()->teams()->get() as $t){
                 $ids [] = $t->id;
             }
-            return $query->wherein('team_id', [$ids]);
+            return $query->wherein('team_id', $ids);
 
         }   return $query->where('team_id', null);
     }
