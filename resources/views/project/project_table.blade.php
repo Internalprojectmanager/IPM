@@ -25,8 +25,8 @@
                     </span>
                 </td>
                 <td>
-                    <a class="black" href="{{route('team.show', $project->company->name)}}">
-                        {{$project->company->name}}
+                    <a class="black" href="{{route('team.show', $project->team()->name)}}">
+                        {{$project->team()->name}}
                     </a>
                 </td>
                 <td class="table-description">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}

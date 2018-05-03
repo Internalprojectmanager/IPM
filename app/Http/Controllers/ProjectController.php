@@ -126,7 +126,8 @@ class ProjectController extends Controller
         $projectcount = Project::select('id')
             ->currentuserteam()->get()->count();
         $projects = $this->projectsCollection();
-        $client = Client::select('name', 'id')->currentuserteam()->get();
+        $client = Client::select('name', 'id')
+            ->currentuserteam()->get();
         $status = Status::where('type', 'Progress')->select('name', 'id')->get();
         $teams = Auth::user()->teams()->get();
         return view('project.project', compact('projects', 'projectcount', 'client', 'status', 'teams'));
@@ -150,6 +151,7 @@ class ProjectController extends Controller
         if (isset($client)) {
             $projects->where('company_id', $client);
         }
+
         $projectcount = $projects->get()->count();
 
         if ($projectcount <= 8) {
