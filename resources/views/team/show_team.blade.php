@@ -68,7 +68,7 @@
                         @endif
                     </td>
                     <td></td>
-                    <td class="col-md-2 right">
+                    <td class="col-md-3 right">
                         @if(Auth::id() !== $user->id && $team->owner_id == Auth::id())
                             @if($user->pivot->active ==  true)
                                 <a class="no-underline" onclick="return confirm('Are you sure you want to block this User?');"
