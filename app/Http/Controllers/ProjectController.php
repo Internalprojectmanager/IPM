@@ -90,7 +90,7 @@ class ProjectController extends Controller
     {
             $project = new Project();
             $project->name = $request->project_name;
-            $project->team_id = Auth::user()->currentTeam()->id;
+            $project->team_id = $request->team;
             if (!empty($request->new_client)) {
                 $client = Client::firstOrCreate(['name' => $request->new_client, 'status' => Status::Name('Client')->first()->id]);
                 $project->company_id = $client->id;
@@ -202,7 +202,6 @@ class ProjectController extends Controller
     public function updateProject($client, $project, ProjectValidator $request)
     {
         $project->name = $request->project_name;
-
         if (!empty($request->new_client)) {
             $client = Client::firstOrCreate(['name' => $request->new_client]);
             $client->name = $request->new_client;

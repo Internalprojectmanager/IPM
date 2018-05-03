@@ -13,21 +13,31 @@
     <div class="row block-white">
 
         <div class="col-md-4 col-xs-12">
-            <span class="block-white-title">Team {{$team->name}}</span>
-            <span class="block-white-subtitle">
-            <span id="count_projects_bar">|</span>
-            <span class="counter">{{$team->users()->count()}}</span>
-            <span class="contenttype">Users</span>
+            <span class="block-white-title">
+                @if($team->name !== Auth::user()->fullName())
+                    Team {{$team->name}}</span>
+                @else
+                    My Workspace
+                @endif
+            @if($team->name !== Auth::user()->fullName())
+                <span class="block-white-subtitle">
+                <span id="count_projects_bar">|</span>
+                <span class="counter">{{$team->users()->count()}}</span>
+                <span class="contenttype">Users</span>
+            @endif
         </span>
         </div>
 
 
     </div>
+
+    @if($team->name !== Auth::user()->fullName())
     <div class="row under-details">
         <a class="black btn btn-primary" href="#" data-toggle="modal" data-target="#addTeamMember">
             Add Teammember <span class="glyphicon glyphicon-plus"></span>
         </a>
     </div>
+    @endif
     <div class="row">
         <table class="table table-hover table-center results" id="release-overview">
             <thead>

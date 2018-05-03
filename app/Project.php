@@ -38,6 +38,10 @@ class Project extends Model
         return $this->hasMany('App\Assignee', "uuid", "id");
     }
 
+    public function team(){
+        return $this->hasOne('App\Team', "id", "team_id")->firstOrFail();
+    }
+
     public static function updateDeadline($project){
         $currentrelease = Release::where("project_id", "=", $project->id)
             ->wherenotin('status' , [

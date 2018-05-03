@@ -3,6 +3,7 @@
         <thead>
         <th></th>
         <th>@sortablelink('name', 'Project + Client')</th>
+        <th>@sortablelink('team.name', 'Workspace')</th>
         <th>@sortablelink('description', 'Description')</th>
         <th>@sortablelink('pstatus.name', 'Status')</th>
         <th>@sortablelink('deadline', 'Deadline')</th>
@@ -14,9 +15,16 @@
                    {{route('projectdetails',[$project->company->path, $project->path])}}">
                 <td style="background-color: {{$project->pstatus->color}};"></td>
                 <td><span class="tabletitle">{{$project->name}}</span>
-                    <br> <span class="tablesubtitle">@if(isset($project->company))<a class="tablesubtitle"
-                                                                                     href="{{route('clientdetails', $project->company->path)}}">{{$project->company->name}}</a>@endif</span>
+                    <br>
+                    <span class="tablesubtitle">
+
+                        @if(isset($project->company))
+                            <a class="tablesubtitle" href="{{route('clientdetails', $project->company->path)}}">
+                                {{$project->company->name}}</a>
+                        @endif
+                    </span>
                 </td>
+                <td>{{$project->team()->name}}</td>
                 <td class="table-description">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}
                     ...
                 </td>
