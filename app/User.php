@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function fullName(){
+        return $this->attributes['first_name']. ' ' .$this->attributes['last_name'];
+    }
+
+
     public function teams(){
         return $this->belongsToMany('App\Team')->withPivot('active', 'current')->wherePivot('active', true)->orderBy('current', 'desc');
     }

@@ -11,7 +11,7 @@ class UserTeam extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id','team_id', 'active'
+        'user_id','team_id', 'active', 'current'
     ];
 
     public function scopeTeamMember($query, $team, $user){
@@ -22,7 +22,6 @@ class UserTeam extends Model
 
         if($this->attributes['active'] == true){
             $this->attributes['active'] = false;
-            $this->attributes['current'] = false;
         }else{
             $this->attributes['active'] = true;
         }

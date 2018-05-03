@@ -9,7 +9,9 @@ class Team extends Model
 {
     protected $table = 'teams';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'owner_id'];
+
+    public $timestamps = false;
 
 
     public function scopeName($query, $name)
