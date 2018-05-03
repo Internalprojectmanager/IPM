@@ -40,6 +40,10 @@ class User extends Authenticatable
         return $this->hasOne('App\Status', 'id', 'job_title');
     }
 
+    public function assingees(){
+        return $this->hasMany('App\Assignee', 'userid', 'id');
+    }
+
 
     /**
      * Magically crypt the password whenever its set on the modal because otherwise remembering to do it can get ugly
@@ -54,6 +58,20 @@ class User extends Authenticatable
 
     public function currentTeam(){
         return $this->teams()->wherePivot('current', true)->first();
+    }
+
+    public function toDo(){
+        $todo = 0;
+        $assignees = $this->assingees()->get();
+
+        foreach ($assignees as $s){
+            if($s->requirements()->first() !== null){
+                if($s->astatus()->first()->name !== Status::name('completed')->name){
+                    $todo++;
+                }
+            }
+        }
+        return $todo;
     }
 
 }

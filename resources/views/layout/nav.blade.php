@@ -156,6 +156,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="icon-nav"><a href="{{route('dashboard')}}" class="sidebar_link">
                             <i class="fas fa-calendar-check fa-lg"></i>
+                            <span class="icon-badge">{{Auth::user()->toDo()}}</span>
                         </a>
                     </li>
                     <li class="dropdown icon-nav normal-dropdown">
