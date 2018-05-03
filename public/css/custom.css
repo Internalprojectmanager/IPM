@@ -1038,3 +1038,13 @@ td > .assignee:first-child:before {
 .its-blocked{
     background-color: #D35847;
 }
+
+.form-group .col-md-6{
+    padding: 0 !important;
+}
+
+.input-text-modal button{
+    border: 1px solid #9B9B9B;
+    background-color: #FFFFFF;
+    border-radius: 0;
+}

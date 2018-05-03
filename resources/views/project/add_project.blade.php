@@ -31,14 +31,14 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <select class="form-control selectpicker" name="team">
+                            <select class="form-control selectpicker input-text-modal" name="team">
                                 @foreach($teams as $u)
                                     <option value="{{$u->id}}">{{$u->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control input-text-modal" name="project_name" id="client_name" value="{{old('project_name')}}">
+                            <input placeholder="Project Name" type="text" class="form-control input-text-modal" name="project_name" id="client_name" value="{{old('project_name')}}">
                         </div>
 
                     </div>

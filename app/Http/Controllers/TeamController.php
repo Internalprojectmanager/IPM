@@ -15,7 +15,16 @@ class TeamController extends Controller
     }
 
     public function show($team){
+
         $team = Team::name($team);
+
+        $teamcheck = \Auth::user()->teams()
+            ->wherePivot('team_id', $team->id)
+            ->first();
+
+        if($teamcheck == null){
+            abort(403, "No Access, Please contact a Team Administrator for access");
+        }
 
         $users = User::all();
 
