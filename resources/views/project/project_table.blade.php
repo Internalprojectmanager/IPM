@@ -2,7 +2,7 @@
     <table class="table table-hover table-center results">
         <thead>
         <th></th>
-        <th>@sortablelink('name', 'Project + Client')</th>
+        <th>@sortablelink('name', 'Project')</th>
         <th>@sortablelink('team.name', 'Workspace')</th>
         <th>@sortablelink('description', 'Description')</th>
         <th>@sortablelink('pstatus.name', 'Status')</th>
@@ -25,8 +25,8 @@
                     </span>
                 </td>
                 <td>
-                    <a class="black" href="{{route('team.show', $project->team()->name)}}">
-                        {{$project->team()->name}}
+                    <a class="black" href="{{route('team.show', $project->team->name)}}">
+                        {{$project->team->name}}
                     </a>
                 </td>
                 <td class="table-description">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}

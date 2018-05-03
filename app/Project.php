@@ -13,7 +13,7 @@ class Project extends Model
 {
     use Sortable, Searchable, Sluggable;
 
-    public $sortable = ['name', 'description', 'status', 'deadline', 'users', 'created_at'];
+    public $sortable = ['name', 'description', 'status', 'deadline', 'users', 'created_at',  'team_id'];
 
     protected $table = "project";
 
@@ -39,7 +39,7 @@ class Project extends Model
     }
 
     public function team(){
-        return $this->hasOne('App\Team', "id", "team_id")->firstOrFail();
+        return $this->hasOne('App\Team', "id", "team_id");
     }
 
     public static function updateDeadline($project){

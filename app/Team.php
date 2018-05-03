@@ -11,6 +11,9 @@ class Team extends Model
 
     protected $fillable = ['name', 'owner_id'];
 
+    public $sortable = ['name'];
+
+
     public $timestamps = false;
 
 

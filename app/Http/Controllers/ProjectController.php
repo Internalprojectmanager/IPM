@@ -29,7 +29,7 @@ class ProjectController extends Controller
     }
 
     public function projectsCollection($ids = null){
-        $projectprev = Project::with('company', 'pstatus', 'assignee.users')
+        $projectprev = Project::with('company', 'pstatus', 'assignee.users', 'team')
             ->when(!empty($ids), function ($query) use ($ids) {
                 return $query->whereIn('id', $ids);
             })
@@ -37,7 +37,7 @@ class ProjectController extends Controller
             ->orderBy('deadline', 'desc')
             ->currentuserteam()
             ->get();
-        $projectnull = Project::with('company', 'pstatus', 'assignee.users')
+        $projectnull = Project::with('company', 'pstatus', 'assignee.users', 'team')
             ->when(!empty($ids), function ($query) use ($ids) {
                 return $query->whereIn('id', $ids);
             })
@@ -45,7 +45,7 @@ class ProjectController extends Controller
             ->orderBy('deadline', 'desc')
             ->currentuserteam()
             ->get();
-        $projectnext = Project::with('company', 'pstatus', 'assignee.users')
+        $projectnext = Project::with('company', 'pstatus', 'assignee.users', 'team')
             ->when(!empty($ids), function ($query) use ($ids) {
                 return $query->whereIn('id', $ids);
             })
@@ -171,7 +171,7 @@ class ProjectController extends Controller
         if(!isset($order)) {
             $projects = $this->projectsCollection($pro);
         }else{
-            $projects = Project::with('pstatus')
+            $projects = Project::with('pstatus', 'team')
                 ->sortable([$sort => $order])
                 ->currentuserteam()
                 ->whereIn('project.id', $pro)
