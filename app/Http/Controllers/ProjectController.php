@@ -128,9 +128,8 @@ class ProjectController extends Controller
         $projects = $this->projectsCollection();
         $client = Client::select('name', 'id')->currentuserteam()->get();
         $status = Status::where('type', 'Progress')->select('name', 'id')->get();
-        $user = Team::where('id', Auth::user()->currentTeam()->id)->first()->users;
-
-        return view('project.project', compact('projects', 'projectcount', 'client', 'status', 'user'));
+        $teams = Auth::user()->teams()->get();
+        return view('project.project', compact('projects', 'projectcount', 'client', 'status', 'teams'));
     }
 
     public function searchProject(Request $request)

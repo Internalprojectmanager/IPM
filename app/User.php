@@ -28,9 +28,8 @@ class User extends Authenticatable
     ];
 
     public function teams(){
-        return $this->belongsToMany('App\Team')->withPivot('active', 'current');
+        return $this->belongsToMany('App\Team')->withPivot('active', 'current')->wherePivot('active', true)->orderBy('current', 'desc');
     }
-
 
     public function jobtitles(){
         return $this->hasOne('App\Status', 'id', 'job_title');
@@ -49,7 +48,7 @@ class User extends Authenticatable
     }
 
     public function currentTeam(){
-        return $this->teams()->wherePivot('current', true)->wherePivot('active', true)->first();
+        return $this->teams()->wherePivot('current', true)->first();
     }
 
 }
