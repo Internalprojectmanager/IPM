@@ -9,6 +9,11 @@ use App\User;
 
 class TeamController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'checkactive']);
+    }
+
     public function show($team){
         $team = Team::name($team);
 
