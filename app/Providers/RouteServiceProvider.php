@@ -24,22 +24,18 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
 
         Route::bind('client', function ($value) {
-            $team = Auth::user()->currentTeam();
-            if($team !== null) {
-                return \App\Client::path($value)
-                    ->where('team_id', $team->id)
-                    ->firstorfail();
-            } return abort(404);
-
+            return \App\Client::path($value)
+                ->currentuserteam()
+                ->firstorfail();
         });
 
         Route::bind('project', function ($value) {
-            return \App\Project::path($value)->firstorfail();
+            return \App\Project::path($value)
+                ->currentuserteam()
+                ->firstorfail();
         });
 
         Route::bind('release', function ($value) {

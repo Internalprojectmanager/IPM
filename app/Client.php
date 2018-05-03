@@ -46,11 +46,16 @@ class Client extends Model
     }
 
     public function ScopeCurrentUserTeam($query){
-        if(Auth::user()->currentTeam() !== null){
-            return $query->where('team_id', Auth::user()->currentTeam()->id);
+        if(Auth::user()->teams() !== null){
+            $ids = [];
+            foreach(Auth::user()->teams()->get() as $t){
+                $ids [] = $t->id;
+            }
+            return $query->wherein('team_id', $ids);
 
         }   return $query->where('team_id', null);
     }
+
 
     public function sluggable()
     {

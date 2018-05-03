@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if($this->isHttpException($e))
+        if($this->isHttpException($e) && env('APP_DEBUG') == false)
         {
             switch (intval($e->getStatusCode())) {
                 // not found
@@ -76,6 +76,7 @@ class Handler extends ExceptionHandler
             }
         }
 
+        dd($e);
         return parent::render($request, $e);
     }
 }

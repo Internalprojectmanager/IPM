@@ -150,7 +150,6 @@ class ProjectController extends Controller
         if (isset($client)) {
             $projects->where('company_id', $client);
         }
-        $projects->where('team_id', Auth::user()->currentTeam()->id);
         $projectcount = $projects->get()->count();
 
         if ($projectcount <= 8) {
@@ -172,6 +171,7 @@ class ProjectController extends Controller
         }else{
             $projects = Project::with('pstatus')
                 ->sortable([$sort => $order])
+                ->currentuserteam()
                 ->whereIn('project.id', $pro)
                 ->paginate(8, ['*'], 'page', $page);
         }
@@ -185,7 +185,7 @@ class ProjectController extends Controller
         $releases = Release::with('rstatus')->where('project_id', $project->id)->orderBy('version', 'desc')->get();
         $releases = $this->calcDeadline($releases);
         $documents = Document::where('project_id', $project->id)->get();
-        $user = Team::currentuserteam()->first()->users()->get();
+        $user = Team::find($project->team_id)->users()->get();
         $assignee = Assignee::with('users')->where('uuid', $project->id)->get();
         $status = Status::where('type', 'Progress')->get();
         return view('project.details_project', compact('project', 'client', 'releases', 'documents', 'user', 'assignee', 'status'));
