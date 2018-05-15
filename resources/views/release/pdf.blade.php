@@ -16,7 +16,7 @@
     <p id="p1">
         <img class="logo-p1" src="{{public_path('img/logo-iav-circles.png')}}">
         <span class="h1-p1">PROJECT SPECIFICATION</span>
-        <span class="h2-p1">{{$project->company->name}} {{$project->name}}  {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
+        <span class="h2-p1">{{$project->company->name}} - {{$project->name}}: {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
         <span class="h3-p1"><?php echo date("d - m - Y"); ?>
         </span>
 
@@ -231,13 +231,41 @@
     <script type="text/php">
         $GLOBALS['chapters']['3'] = $pdf->get_page_number();
     </script>
-    @foreach($features as $f)
-        <p>
+        @php $k = 0; $type = null; @endphp
+        @foreach($features as $f)
+            <p>
+            @if($type !== $f->type)
+                @php
+                    $k= 0;
+                    $type = $f->type;
+                    $featureID = 0;
+                @endphp
+            @endif
+            @if($k == 0)
+                @switch($type)
+                    @case("NFR")
+                        @php $f->type = "Non Functional Requirements"; @endphp
+                        @break
+                    @case('Scope')
+                        @php $f->type = "Out Of Scope"; @endphp
+                        @break
+                    @case('TS')
+                        @php $f->type = "Technical Specifications"; @endphp
+                        @break
+                    @default
+                        @php $f->type = "Feature"; @endphp
+                        @break
+                @endswitch
+                <span class="h1" id="project-description">{{$f->type}}</span>
+                <br><br><br>
+                @php $k++; @endphp
+            @endif
+
             <script type="text/php">
                 $GLOBALS['chapters'][{{$chap}}] = $pdf->get_page_number();
             </script>
             <span class="h2">
-                FEATURE
+                {{$type}}
                 <?php
                 $chap++;
                 $featureID++;
@@ -259,36 +287,43 @@
                     </tbody>
                 </table>
             </span><br><br><br>
+            @if($f->requirements->count() > 0)
+                @if($type == "Feature")
+                    <span class="h2">FUNCTIONAL REQUIREMENTS</span>
+                @elseif($type == "NFR" || $type == 'TS')
+                    <span class="h2">REQUIREMENTS</span>
+                @endif
 
-            <span class="h2">FUNCTIONAL REQUIREMENTS</span><br><br>
-            <span>
-                <table class="table-p5">
-                    <tbody>
-                        <?php $reqnr = 1; ?>
-                        @foreach($f->requirements as $r)
-                            <tr class="project-description">
-                                <td width="35%">
-                                    <strong>
-                                        FR-<?php $FRID = $featureID. ".". $reqnr; echo $FRID; $reqnr++; ?><br>
-                                    </strong>
-                                    {{ $r->name }}
-                                </td>
-                                <td width="65%">
-                                    {!! nl2br($r->description) !!}
-                                </td>
-                            </tr>
+                    <br><br>
+                <span>
+                    <table class="table-p5">
+                        <tbody>
+                            <?php $reqnr = 1; ?>
+                            @foreach($f->requirements as $r)
+                                <tr class="project-description">
+                                    <td width="35%">
+                                        <strong>
+                                            FR-<?php $FRID = $featureID. ".". $reqnr; echo $FRID; $reqnr++; ?><br>
+                                        </strong>
+                                        {{ $r->name }}
+                                    </td>
+                                    <td width="65%">
+                                        {!! nl2br($r->description) !!}
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td><br></td>
-                                <td><br></td>
-                            </tr>
-                        @endforeach
+                                <tr>
+                                    <td><br></td>
+                                    <td><br></td>
+                                </tr>
+                            @endforeach
 
-                    </tbody>
-                </table>
-            </span>
-        </p>
-@endforeach
+                        </tbody>
+                    </table>
+                </span>
+            @endif
+            </p>
+        @endforeach
 <!-- END OF PAGE 5 -->
 
 </main>

@@ -2,14 +2,19 @@
 
 @section('title')
 
+    {{$team->name}} - {{env('APP_NAME')}}
+
 @endsection
 
 
 @section('content')
 
-    <a href="" class="btn-edit" id="project-edit">
-        <span class="glyphicon edit-icon"></span> Edit
-    </a>
+    @if($team->name !== Auth::user()->fullName() && $team->owner_id == Auth::id())
+        <a href="" class="btn-edit" id="project-edit">
+            <span class="glyphicon edit-icon"></span> Edit
+        </a>
+    @endif
+
     <div class="row block-white">
 
         <div class="col-md-4 col-xs-12">
@@ -31,7 +36,7 @@
 
     </div>
 
-    @if($team->name !== Auth::user()->fullName())
+    @if($team->name !== Auth::user()->fullName() && $team->owner_id == Auth::id())
     <div class="row under-details">
         <a class="black btn btn-primary" href="#" data-toggle="modal" data-target="#addTeamMember">
             Add Teammember <span class="glyphicon glyphicon-plus"></span>

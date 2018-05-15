@@ -26,9 +26,8 @@ class PDFController extends Controller
             $q->orderby('userid');
         }])->path($project->path)->where('company_id' , $client->id)->firstorfail();
 
-        $features = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid], ['type', 'Feature']])->get();
+        $features = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid]])->orderByRaw(DB::raw("FIELD(type, 'Feature', 'NFR', 'TS', 'Scope')"))->get();
         $pdf = PDF::setOptions(['images' => true])->loadView('release.pdf', compact('release', 'project', 'features', 'company', 'requirements', 'assignees'))->setPaper('a4', 'portrait');
-
         return $pdf->stream('Release.pdf');
     }
 }
