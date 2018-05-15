@@ -197,7 +197,7 @@ class ProjectController extends Controller
     {
         $status = Status::Type('Progress')->get();
         $companys = Client::select('name', 'id')
-            ->currentuserteam()->get();
+            ->currentuserteam()->where('team_id', $project->team_id)->get();
         return view('project.edit_project', compact('project', 'companys', 'status'));
     }
 
