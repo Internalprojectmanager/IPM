@@ -38,7 +38,6 @@ class TeamController extends Controller
                 $teammember = New UserTeam();
                 $teammember->user_id = $member;
                 $teammember->team_id = Team::name($team)->id;
-                $teammember->roleid = 1;
                 }
 
                 if( User::find($member)->currentTeam() == null){
