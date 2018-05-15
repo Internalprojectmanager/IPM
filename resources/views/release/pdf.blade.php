@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
-    <title>{{$project->company->name}} {{$project->name}} - {{$release->name}} {{number_format(floatval($release->version), 1)}}</title>
+    <title>{{$project->company->name}} {{$project->name}}
+        - {{$release->name}} {{number_format(floatval($release->version), 1)}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-    <link href="{{ public_path('css/pdf.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ public_path('css/pdf.css') }}" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
-
+<script type="text/php">
+	$GLOBALS['chapters'] = array();
+	$GLOBALS['backside'] = $pdf->open_object();
+</script>
 <main>
 
     <!-- PAGE 1 -->
     <p id="p1">
         <img class="logo-p1" src="{{public_path('img/logo-iav-circles.png')}}">
         <span class="h1-p1">PROJECT SPECIFICATION</span>
-        <span class="h2-p1">{{$project->company->name}} - {{$project->name}}: {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
+        <span class="h2-p1">{{$project->company->name}} - {{$project->name}}
+            : {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
         <span class="h3-p1"><?php echo date("d - m - Y"); ?>
         </span>
 
@@ -28,7 +33,8 @@
                 <span class="project-info-right">{{number_format(floatval($release->version), 1)}}</span>
                 <hr>
                 <span class="project-info-left">DESCRIPTION</span>
-                <span class="project-info-right">{!! nl2br(implode(' ', array_slice(str_word_count($release->description, 2), 0, 12))) !!}...</span>
+                <span class="project-info-right">{!! nl2br(implode(' ', array_slice(str_word_count($release->description, 2), 0, 12))) !!}
+                    ...</span>
                 <hr>
                 <span class="project-info-left">PREPARED BY</span>
                 <span class="project-info-right prepared">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
@@ -51,42 +57,62 @@
 
     <!-- PAGE 3 -->
     <p id="p3">
-        <script type="text/php">
-            $GLOBALS['chapters'] = array();
-            $GLOBALS['backside'] = $pdf->open_object();
 
-        </script>
         <span class="h1">CONTENTS</span>
         <br><br><br><br><br>
         <span class="content-p3">
             <span class="content-title" id="disable-font">
                 <span id="content-title-font">PROJECT DESCRIPTION</span>
-                <span class="content-pagenum" id="disable-font">%%CH1%%</span>
+                <span class="content-pagenum" id="disable-font"></span>
             </span>
             <hr>
             <span class="content-title" id="disable-font">
                 <span id="content-title-font">PROJECT ROLES & RESPONSIBILITIES</span>
-                <span class="content-pagenum" id="disable-font">%%CH2%%</span>
+                <span class="content-pagenum" id="disable-font"></span>
             </span>
             <hr>
-            <span class="content-title" id="disable-font">
-                <span id="content-title-font">FEATURES</span>
-                <span class="content-pagenum" id="disable-font">%%CH3%%</span>
-            </span>
-            <hr>
-            <?php $featureID = 0; $i = 4; ?>
+            <?php $featureID = 0; $i = 6; $k = 0; $type = null ?>
             @foreach($features as $f)
+
+                @if($type !== $f->type)
+                    @php
+                        $k= 0;
+                        $type = $f->type;
+                        $featureID = 0;
+                    @endphp
+                @endif
+                @if($k == 0)
+                    @switch($type)
+                        @case("NFR")
+                        @php $f->typeFull = "Non Functional Requirements"; @endphp
+                        @break
+                        @case('Scope')
+                        @php $f->typeFull = "Out Of Scope"; @endphp
+                        @break
+                        @case('TS')
+                        @php $f->typeFull = "Technical Specifications"; @endphp
+                        @break
+                        @default
+                        @php $f->typeFull = "Features"; @endphp
+                        @break
+                    @endswitch
+                    <span class="content-title" id="disable-font">
+                        <span id="content-title-font">{{$f->typeFull}}</span>
+                            <span class="content-pagenum" id="disable-font"></span>
+                        </span>
+                    <hr>
+                    @php $k++; @endphp
+                @endif
                 <span class="content-subtitle" id="disable-font">
-                <span id="content-title-font"><?php $featureID++; echo $featureID . '.0'; ?> {{ $f->name }}</span>
-                <span class="content-pagenum" id="disable-font">%%CH{{$i}}%%</span>
-                <?php $i++; ?>
-            </span>
+                <span id="content-title-font"><?php $featureID++; echo $featureID . '.0'; ?> {{$f->name}}</span>
+                <span class="content-pagenum" id="disable-font"></span>
+                    <?php $i++; ?>
+                </span>
                 <hr>
             @endforeach
         </span>
         <script type="text/php">
-            $pdf->close_object();
-
+	        $pdf->close_object();
         </script>
     </p>
     <!-- END OF PAGE 3 -->
@@ -94,10 +120,6 @@
     <!-- PAGE 4 -->
     <p id="p4">
         <span class="h1" id="project-description">PROJECT<br>DESCRIPTION</span>
-        <script type="text/php">
-	        $GLOBALS['chapters']['1'] = $pdf->get_page_number();
-
-        </script>
         <br><br><br>
         <span class="h2" style="margin-bottom: 600px;">PROJECT DESCRIPTION</span><br>
         <span class="project-description">
@@ -105,10 +127,6 @@
             </span>
         <br><br><br><br>
         <span class="h2">PROJECT ROLES & RESPONSIBILITIES</span>
-        <script type="text/php">
-	        $GLOBALS['chapters']['2'] = $pdf->get_page_number();
-
-        </script>
         <br><br><br>
 
         <span>
@@ -135,11 +153,12 @@
                             @foreach($project->assignee as $a)
                                 @if(!empty($a->users->jobtitles))
                                     @if($a->users->jobtitles->name == "Project Manager")
-                                    @if($acounter <= 3)
-                                        <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
+                                        @if($acounter <= 3)
+                                            <i class="non-cursive"><span
+                                                        class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
                                             <span class="company-p4">Itsavirus</span></i><br>
-                                    @endif
-                                    @php $acounter++; @endphp
+                                        @endif
+                                        @php $acounter++; @endphp
                                     @endif
                                 @endif
                             @endforeach
@@ -169,7 +188,8 @@
                                 @if(!empty($a->users->jobtitles))
                                     @if($a->users->jobtitles->name == "Designer")
                                         @if($acounter <= 3)
-                                            <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
+                                            <i class="non-cursive"><span
+                                                        class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
                                                 <span class="company-p4">Itsavirus</span></i><br>
                                         @endif
                                         @php $acounter++; @endphp
@@ -199,7 +219,8 @@
                                 @if(!empty($a->users->jobtitles))
                                     @if($a->users->jobtitles->name == "Developer")
                                         @if($acounter <= 3)
-                                            <i class="non-cursive"><span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
+                                            <i class="non-cursive"><span
+                                                        class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
                                                 <span class="company-p4">Itsavirus</span></i><br>
                                         @endif
                                         @php $acounter++; @endphp
@@ -228,103 +249,81 @@
 
     <!-- PAGE 5 -->
     <?php $featureID = 0; $chap = 4; ?>
-    <script type="text/php">
-        $GLOBALS['chapters']['3'] = $pdf->get_page_number();
-    </script>
-        @php $k = 0; $type = null; @endphp
-        @foreach($features as $f)
-            <p>
-            @if($type !== $f->type)
-                @php
-                    $k= 0;
-                    $type = $f->type;
-                    $featureID = 0;
-                @endphp
-            @endif
-            @if($k == 0)
-                @switch($type)
-                    @case("NFR")
-                        @php $f->type = "Non Functional Requirements"; @endphp
-                        @break
-                    @case('Scope')
-                        @php $f->type = "Out Of Scope"; @endphp
-                        @break
-                    @case('TS')
-                        @php $f->type = "Technical Specifications"; @endphp
-                        @break
-                    @default
-                        @php $f->type = "Feature"; @endphp
-                        @break
-                @endswitch
-                <span class="h1" id="project-description">{{$f->type}}</span>
-                <br><br><br>
-                @php $k++; @endphp
-            @endif
+    <p>
+    @php $l = 1; $type1 = null; @endphp
+    @foreach($features as $f)
+        @if($type1 !== $f->type)
+            @php
+                $l = 0;
+                $type1 = $f->type;
+                $featureID = 0;
+            @endphp
 
-            <script type="text/php">
-                $GLOBALS['chapters'][{{$chap}}] = $pdf->get_page_number();
-            </script>
-            <span class="h2">
-                {{$type}}
-                <?php
-                $chap++;
-                $featureID++;
-                $i = 0;
-                echo $featureID . '.0';
-                ?>
-            </span>
-            <span>
+        @endif
+        @if($l == 0)
+            @if($f->type !== "Feature")
+                </p><p>
+            @endif
+            <span class="h1" id="project-description">{{$f->typeFull}}</span><br><br>
+            @php $l++; @endphp
+        @endif
+
+        <span class="no-break row">
+                <span class="h2">
+                    {{$type1}}
+                    <?php
+                    $chap++;
+                    $featureID++;
+                    $i = 0;
+                    echo $featureID . '.0';
+                    ?>
+                </span>
+                <br>
                 <table class="table-p5">
-                    <tbody>
-                        <tr class="project-description">
-                            <td width="35%">
-                                {{ $f->name }}
-                            </td>
-                            <td width="65%">
-                                {!! nl2br($f->description) !!}
-                            </td>
-                        </tr>
-                    </tbody>
+                        <tbody>
+                            <tr class="project-description">
+                                <td>
+                                    {{$f->name}}
+                                </td>
+                                <td>
+                                    {!! nl2br($f->description) !!}
+                                </td>
+                            </tr>
+                        </tbody>
                 </table>
-            </span><br><br><br>
-            @if($f->requirements->count() > 0)
-                @if($type == "Feature")
-                    <span class="h2">FUNCTIONAL REQUIREMENTS</span>
-                @elseif($type == "NFR" || $type == 'TS')
-                    <span class="h2">REQUIREMENTS</span>
-                @endif
+                <br><br>
+                @if($f->requirements->count() > 0)
+                        @if($type1 == "Feature")
+                            <span class="h2">FUNCTIONAL REQUIREMENTS</span>
+                        @elseif($type1 == "NFR" || $type1 == 'TS')
+                            <span class="h2">REQUIREMENTS</span>
+                        @endif
 
-                    <br><br>
-                <span>
+                <br><br>
                     <table class="table-p5">
                         <tbody>
-                            <?php $reqnr = 1; ?>
-                            @foreach($f->requirements as $r)
-                                <tr class="project-description">
-                                    <td width="35%">
-                                        <strong>
-                                            FR-<?php $FRID = $featureID. ".". $reqnr; echo $FRID; $reqnr++; ?><br>
-                                        </strong>
-                                        {{ $r->name }}
-                                    </td>
-                                    <td width="65%">
-                                        {!! nl2br($r->description) !!}
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><br></td>
-                                    <td><br></td>
-                                </tr>
-                            @endforeach
-
+                        <?php $reqnr = 1; ?>
+                        @foreach($f->requirements as $r)
+                            <tr class="project-description">
+                                <td>
+                                    <strong>
+                                        FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?><br>
+                                    </strong>
+                                    {{ $r->name }}
+                                </td>
+                                <td>
+                                    {!! nl2br($r->description) !!}
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
-                </span>
+                            <br><br>
             @endif
-            </p>
+            </span>
         @endforeach
-<!-- END OF PAGE 5 -->
+        </p>
+        <!-- END OF PAGE 5 -->
 
 </main>
 
@@ -334,19 +333,6 @@
         <span class="pagenum"></span>
     </div>
 </footer>
-
-<script type="text/php">
-	foreach ($GLOBALS['chapters'] as $chapter => $page) {
-		$pdf->get_cpdf()->objects[$GLOBALS['backside']]['c'] = str_replace( '%%CH'.$chapter.'%%' , $page , $pdf->get_cpdf()->objects[$GLOBALS['backside']]['c'] );
-	}
-	$pdf->page_script('
-		if ($PAGE_NUM==3 ) {
-			$pdf->add_object($GLOBALS["backside"],"add");
-			$pdf->stop_object($GLOBALS["backside"]);
-		}
-	');
-
-</script>
 
 </body>
 </html>
