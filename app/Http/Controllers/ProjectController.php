@@ -196,8 +196,8 @@ class ProjectController extends Controller
     public function editProject($client, $project)
     {
         $status = Status::Type('Progress')->get();
-        $companys = Client::where('team_id', Auth::user()->currentTeam()->id)->get();
-
+        $companys = Client::select('name', 'id')
+            ->currentuserteam()->get();
         return view('project.edit_project', compact('project', 'companys', 'status'));
     }
 
