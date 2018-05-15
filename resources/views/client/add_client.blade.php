@@ -1,5 +1,5 @@
 <div class="modal modal-lg" id="addClientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-     aria-hidden="true">
+     aria-hidden="false">
     <div class="modal-content">
         <div class="modal-header">
                 <span class="modal-close" data-dismiss="modal">

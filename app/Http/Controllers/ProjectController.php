@@ -92,7 +92,7 @@ class ProjectController extends Controller
             $project->name = $request->project_name;
             $project->team_id = $request->team;
             if (!empty($request->new_client)) {
-                $client = Client::firstOrCreate(['name' => $request->new_client, 'status' => Status::Name('Client')->first()->id]);
+                $client = Client::firstOrCreate(['name' => $request->new_client, 'status' => Status::Name('Client')->first()->id, 'team_id' => $request->team]);
                 $project->company_id = $client->id;
             } else {
                 $project->company_id = $request->company;
@@ -199,6 +199,15 @@ class ProjectController extends Controller
         $companys = Client::select('name', 'id')
             ->currentuserteam()->where('team_id', $project->team_id)->get();
         return view('project.edit_project', compact('project', 'companys', 'status'));
+    }
+
+    public function addProject()
+    {
+        $client = Client::select('name', 'id')
+            ->currentuserteam()->get();
+        $status = Status::where('type', 'Progress')->select('name', 'id')->get();
+        $teams = Auth::user()->teams()->get();
+        return view('project.add_project_form', compact('teams', 'client', 'status'));
     }
 
     public function updateProject($client, $project, ProjectValidator $request)

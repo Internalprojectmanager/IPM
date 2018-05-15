@@ -23,7 +23,7 @@ class ClientController extends Controller
     public function addClient()
     {
         $status = Status::where('type', 'Client')->get();
-        return view('client.add_client', compact('status'));
+        return view('client.add_client_form', compact('status'));
     }
 
     public function storeClient(Request $request)

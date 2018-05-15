@@ -154,6 +154,41 @@
         @if (Route::has('login'))
             @auth
                 <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown icon-nav normal-dropdown">
+                        <a href="#" data-toggle="dropdown" class="sidebar_link dropdown-toggle" aria-haspopup="true"
+                           role="button" aria-expanded="false">
+                            <i class="fas fa-plus fa-lg "></i>
+                            <svg id="dropdown_arrow" width="13px" height="9px" viewBox="0 0 13 9" version="1.1"
+                                                                   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+                                <title>Dropdown arrow</title>
+                                <desc>Created with Sketch.</desc>
+                                <defs></defs>
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Project-Overview" transform="translate(-1221.000000, -31.000000)">
+                                        <g id="Top-menu" transform="translate(110.000000, 0.000000)">
+                                            <g id="User-Top" transform="translate(989.196850, 23.000000)">
+                                                <g id="Dropdown-arrow" transform="translate(116.719048, 0.000000)">
+                                                    <polygon id="Shape" class="dropdown-arrow-icon" fill="#FFFFFF"
+                                                             fill-rule="nonzero"
+                                                             points="7.3922064 8.84 11.9711845 13.42 16.5501625 8.84 17.9567767 10.25 11.9711845 16.25 5.98559223 10.25"></polygon>
+                                                    <polygon id="Shape" points="0 0 23.9423689 0 23.9423689 24 0 24"></polygon>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu center black">
+                            <li><a href="{{route('addclient')}}"> New Client</a></li>
+                            <li><a href="{{route('addproject')}}"> New Project</a></li>
+                            <li><a href="{{route('team.new')}}"> New Team</a></li>
+
+
+
+                        </ul>
+                    </li>
                     <li class="icon-nav"><a href="{{route('dashboard')}}" class="sidebar_link">
                             <i class="fas fa-calendar-check fa-lg"></i>
                             <span class="icon-badge">{{Auth::user()->toDo()}}</span>

@@ -39,16 +39,12 @@ html, body {
     transition: 2s;
     opacity: 1;
 }
-.icon-nav{
-    width: 50px;
-    Height: 50px;
-}
 
 .icon-badge{
     background: rgba(107,175,28,1);
     position: absolute;
     top: 2px;
-    right: 3px;
+    right: 0;
     width: 23px;
     height: 23px;
     border-radius: 50%;
