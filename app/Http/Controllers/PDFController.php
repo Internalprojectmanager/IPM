@@ -21,6 +21,11 @@ use PDF;
 
 class PDFController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function createPDF($client,$project,$release, $version){
         $project = Project::with(['assignee.users.jobtitles','assignee' => function ($q){
             $q->orderby('userid');
