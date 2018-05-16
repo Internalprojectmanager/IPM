@@ -50,6 +50,12 @@ class RouteServiceProvider extends ServiceProvider
             return \App\Document::find($value)->firstorfail();
         });
 
+
+        Route::bind('team', function ($value) {
+            return \App\Team::slug($value);
+        });
+
+
     }
 
     /**

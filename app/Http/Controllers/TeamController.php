@@ -6,17 +6,16 @@ use App\UserTeam;
 use Illuminate\Http\Request;
 use App\Team;
 use App\User;
+use Auth;
 
 class TeamController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'checkactive']);
+        $this->middleware(['auth']);
     }
 
     public function show($team){
-
-        $team = Team::name($team);
 
         $teamcheck = \Auth::user()->teams()
             ->wherePivot('team_id', $team->id)
@@ -29,6 +28,34 @@ class TeamController extends Controller
         $users = User::all();
 
         return view('team.show_team', compact('team', 'users'));
+    }
+
+    public function new(){
+        return view('team.team_add');
+    }
+
+    public function store(Request $request){
+        $team = new Team();
+
+        $team->name = $request->team_name;
+        $team->owner_id = Auth::id();
+
+        $team->save();
+
+        $teamuser = new UserTeam();
+        $teamuser->user_id = Auth::id();
+        $teamuser->team_id = $team->id;
+        $teamuser->current = false;
+        $teamuser->active = true;
+
+        $teamuser->save();
+
+        return redirect()->route('team.show', compact('team'));
+
+
+
+
+
     }
 
     public function storeMember(Request $request, $team){

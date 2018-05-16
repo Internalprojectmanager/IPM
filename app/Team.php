@@ -2,14 +2,16 @@
 
 namespace App;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Team extends Model
 {
+    use Sluggable;
     protected $table = 'teams';
 
-    protected $fillable = ['name', 'owner_id'];
+    protected $fillable = ['name', 'slug', 'owner_id'];
 
     public $sortable = ['name'];
 
@@ -20,6 +22,11 @@ class Team extends Model
     public function scopeName($query, $name)
     {
         return $query->where('name', $name)->firstorfail();
+    }
+
+    public function scopeSlug($query, $slug)
+    {
+        return $query->where('slug', $slug)->firstorfail();
     }
 
     public function client(){
@@ -43,7 +50,7 @@ class Team extends Model
     public function sluggable()
     {
         return [
-            'path' => [
+            'slug' => [
                 'source' => 'name'
             ]
         ];

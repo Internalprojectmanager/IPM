@@ -36,8 +36,9 @@ Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
 Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
 
 Route::group(['prefix' => 'team'], function() {
-    Route::get('/{team}', 'TeamController@show')->name('team.show');
-    Route::get('/new', 'TeamController@new')->name('team.new');
+    Route::get('/show/{team}', 'TeamController@show')->name('team.show');
+    Route::get('/add', 'TeamController@new')->name('team.new');
+    Route::post('/add/', 'TeamController@store')->name('team.store');
     Route::post('/{team}/member/new', 'TeamController@storeMember')->name('teammember.store');
     Route::get('/{team}/member/{member}/delete', 'TeamController@deleteMember')->name('teammember.delete');
     Route::get('/{team}/member/{member}/block', 'TeamController@changeblockingMember')->name('teammember.block');
