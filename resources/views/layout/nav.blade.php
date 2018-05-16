@@ -204,12 +204,12 @@
                                 @if($i == 0)
                                     <li class="black"><i class="far fa-user icon-right-top"></i> User Space</li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="{{route('team.show', $teams->name)}}"> {{$teams->name}}</a></li>
+                                    <li><a href="{{route('team.show', $teams->slug)}}"> {{$teams->name}}</a></li>
                                     <div class="under-details"></div>
                                     <li class=""><i class="far fa-building icon-right-top"></i>Team Space</li>
                                     <li role="separator" class="divider"></li>
                                 @else
-                                    <li><a href="{{route('team.show', $teams->name)}}"> {{$teams->name}}</a></li>
+                                    <li><a href="{{route('team.show', $teams->slug)}}"> {{$teams->name}}</a></li>
 
                                 @endif
                                 @php $i++; @endphp

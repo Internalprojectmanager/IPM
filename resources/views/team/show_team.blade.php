@@ -17,20 +17,24 @@
 
     <div class="row block-white">
 
-        <div class="col-md-4 col-xs-12">
+        <div class="col-md-12 col-xs-12">
             <span class="block-white-title">
                 @if($team->name !== Auth::user()->fullName())
                     Team {{$team->name}}</span>
                 @else
                     My Workspace
                 @endif
+            <span class="block-white-subtitle">
             @if($team->name !== Auth::user()->fullName())
-                <span class="block-white-subtitle">
                 <span id="count_projects_bar">|</span>
                 <span class="counter">{{$team->users()->count()}}</span>
-                <span class="contenttype">Users</span>
+                <span class="contenttype">User(s)</span>
+                @if(!empty($team->plan()))
+                    <span id="count_projects_bar">|</span>
+                    <span class="counter">{{$team->plan()->name}}</span>
+                @endif
             @endif
-        </span>
+            </span>
         </div>
 
 
