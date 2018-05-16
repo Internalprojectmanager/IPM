@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="modal-body">
+    <div class="header-3" id="edit-project">
         <h1>New Project</h1>
         <form action="{{route('storeproject')}}" method="post">
             {{ csrf_field() }}
@@ -44,19 +44,20 @@
                     <label>Description:</label>
                     <textarea rows="4" cols="50" name="description" class="form-control input-text-modal"
                               id="description">{{old('description')}}</textarea>
-                </div
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6" align="left">
+                        <button type="button" class="btn-cancel" onclick="window.location.assign('{{route('overviewproject')}}')">Close</button>
+                    </div>
+                    <div class="col-md-6" align="right">
+                        <button class="btn btn-primary" type="submit">
+                            Save Project <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
-    </div>
-    <div class="modal-footer row" style="border:none;">
-        <div class="col-md-6" align="left">
-            <button type="button" class="btn-cancel" onclick="window.location.assign('{{route('overviewproject')}}')">Close</button>
-        </div>
-        <div class="col-md-6" align="right">
-            <button class="btn btn-primary" type="submit">
-                Save Project <span class="glyphicon glyphicon-plus"></span>
-            </button>
-        </div>
+
         </form>
     </div>
 

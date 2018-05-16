@@ -761,7 +761,7 @@ td > .assignee:first-child:before {
     left: 140px;
     top: 143px;
     right: 30px;
-    height: 559px;
+    min-height: 100%;
     transition: all 0.3s linear;
     padding: 30px;
 }
@@ -1043,4 +1043,12 @@ td > .assignee:first-child:before {
     border: 1px solid #9B9B9B;
     background-color: #FFFFFF;
     border-radius: 0;
+}
+
+#edit-project .form-group:last-of-type{
+    padding-bottom: 20px;
+}
+
+.editproject #edit-project{
+    height: 60rem;
 }

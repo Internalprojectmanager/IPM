@@ -35,7 +35,7 @@
 
 
 </head>
-<body>
+<body class="{{\Request::route()->getName()}}">
 @include('layout.nav')
 <div class="loader"></div>
 <div class="container">
