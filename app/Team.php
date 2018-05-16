@@ -40,6 +40,16 @@ class Team extends Model
             ->withPivot('current', 'active');
     }
 
+    public function plan(){
+
+        return $this->belongsToMany('App\Plan', 'team_plan')
+            ->withPivot('start', 'end')
+            ->wherePivot('end', '>', \Carbon\Carbon::now('Europe/Amsterdam')->toDateTimeString())
+            ->orwherePivot('end', '=', null )
+            ->orderBy('end', 'desc')
+            ->first();
+    }
+
     public function ScopeCurrentUserTeam($query){
         if(Auth::user()->currentTeam() !== null){
             return $query->where('id', Auth::user()->currentTeam()->id);

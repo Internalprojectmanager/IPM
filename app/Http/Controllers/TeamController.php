@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\TeamPlan;
 use App\UserTeam;
 use Illuminate\Http\Request;
 use App\Team;
 use App\User;
 use Auth;
+use App\Plan;
 
 class TeamController extends Controller
 {
@@ -20,6 +22,7 @@ class TeamController extends Controller
         $teamcheck = \Auth::user()->teams()
             ->wherePivot('team_id', $team->id)
             ->first();
+
 
         if($teamcheck == null){
             abort(403, "No Access, Please contact a Team Administrator for access");
@@ -48,12 +51,14 @@ class TeamController extends Controller
         $teamuser->current = false;
         $teamuser->active = true;
 
-        $teamuser->save();
+        $teamplan = new TeamPlan();
+        $teamplan->plan_id = Plan::name('No Plan')->id;
+        $teamplan->team_id = $team->id;
+        $teamplan->start = \Carbon\Carbon::now('Europe/Amsterdam')->toDateTimeString();
+        $teamplan->end = null;
+        $teamplan->save();
 
-        return redirect()->route('team.show', compact('team'));
-
-
-
+        return redirect()->route('team.show', $team->slug);
 
 
     }

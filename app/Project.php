@@ -87,7 +87,9 @@ class Project extends Model
         if(Auth::user()->teams() !== null){
             $ids = [];
             foreach(Auth::user()->teams()->get() as $t){
-                $ids [] = $t->id;
+                if($t->plan()->name !== Plan::name('No Plan')->name){
+                    $ids [] = $t->id;
+                }
             }
             return $query->wherein('team_id', $ids);
 
