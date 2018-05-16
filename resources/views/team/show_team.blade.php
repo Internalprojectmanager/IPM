@@ -25,16 +25,22 @@
                     My Workspace
                 @endif
             <span class="block-white-subtitle">
-            @if($team->name !== Auth::user()->fullName())
-                <span id="count_projects_bar">|</span>
-                <span class="counter">{{$team->users()->count()}}</span>
-                <span class="contenttype">User(s)</span>
                 @if(!empty($team->plan()))
                     <span id="count_projects_bar">|</span>
                     <span class="counter">{{$team->plan()->name}}</span>
                 @endif
-            @endif
+                @if($team->name !== Auth::user()->fullName())
+                    <span id="count_projects_bar">|</span>
+                    <span class="counter">{{$team->users()->count()}} / {{$team->plan()->users}}</span>
+                    <span class="contenttype">User(s)</span>
+                @endif
+                    @if($team->project)
+                        <span id="count_projects_bar">|</span>
+                        <span class="counter">{{$team->project()->count()}} / {{$team->plan()->projects}}</span>
+                        <span class="contenttype"> Projects(s)</span>
+                    @endif
             </span>
+
         </div>
 
 

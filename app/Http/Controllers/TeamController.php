@@ -19,7 +19,7 @@ class TeamController extends Controller
 
     public function show($team){
 
-        $teamcheck = \Auth::user()->teams()
+        $teamcheck = \Auth::user()->team()
             ->wherePivot('team_id', $team->id)
             ->first();
 
@@ -39,10 +39,8 @@ class TeamController extends Controller
 
     public function store(Request $request){
         $team = new Team();
-
         $team->name = $request->team_name;
         $team->owner_id = Auth::id();
-
         $team->save();
 
         $teamuser = new UserTeam();
@@ -50,12 +48,13 @@ class TeamController extends Controller
         $teamuser->team_id = $team->id;
         $teamuser->current = false;
         $teamuser->active = true;
+        $teamuser->save();
 
         $teamplan = new TeamPlan();
         $teamplan->plan_id = Plan::name('No Plan')->id;
         $teamplan->team_id = $team->id;
         $teamplan->start = \Carbon\Carbon::now('Europe/Amsterdam')->toDateTimeString();
-        $teamplan->end = null;
+        $teamplan->end =  \Carbon\Carbon::now('Europe/Amsterdam')->addYears(10)->toDateTimeString();
         $teamplan->save();
 
         return redirect()->route('team.show', $team->slug);

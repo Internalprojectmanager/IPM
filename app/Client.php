@@ -48,7 +48,7 @@ class Client extends Model
     public function ScopeCurrentUserTeam($query){
         if(Auth::user()->teams() !== null){
             $ids = [];
-            foreach(Auth::user()->teams()->get() as $t){
+            foreach(Auth::user()->teams() as $t){
                 $ids [] = $t->id;
             }
             return $query->wherein('team_id', $ids);

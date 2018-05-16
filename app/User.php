@@ -32,8 +32,12 @@ class User extends Authenticatable
     }
 
 
-    public function teams(){
+    public function team(){
         return $this->belongsToMany('App\Team')->withPivot('active', 'current')->wherePivot('active', true)->orderBy('current', 'desc');
+    }
+
+    public function teams(){
+        return $this->team()->get();
     }
 
     public function jobtitles(){

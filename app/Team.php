@@ -29,8 +29,12 @@ class Team extends Model
         return $query->where('slug', $slug)->firstorfail();
     }
 
+    public function project(){
+        return $this->hasMany('App\Project');
+    }
+
     public function client(){
-        return $this->belongsToMany('App\Project');
+        return $this->hasMany('App\Client');
     }
 
     public function users(){
@@ -44,11 +48,11 @@ class Team extends Model
 
         return $this->belongsToMany('App\Plan', 'team_plan')
             ->withPivot('start', 'end')
-            ->wherePivot('end', '>', \Carbon\Carbon::now('Europe/Amsterdam')->toDateTimeString())
-            ->orwherePivot('end', '=', null )
-            ->orderBy('end', 'desc')
+            ->wherePivot('end', '>=', \Carbon\Carbon::now('Europe/Amsterdam')->toDateTimeString())
+            ->orderBy('end', 'ASC')
             ->first();
     }
+
 
     public function ScopeCurrentUserTeam($query){
         if(Auth::user()->currentTeam() !== null){

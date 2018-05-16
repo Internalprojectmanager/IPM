@@ -86,7 +86,7 @@ class Project extends Model
     public function ScopeCurrentUserTeam($query){
         if(Auth::user()->teams() !== null){
             $ids = [];
-            foreach(Auth::user()->teams()->get() as $t){
+            foreach(Auth::user()->teams() as $t){
                 if($t->plan()->name !== Plan::name('No Plan')->name){
                     $ids [] = $t->id;
                 }
