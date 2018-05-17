@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <title>{{$project->company->name}} {{$project->name}}
@@ -129,9 +129,7 @@
         <span class="h1" id="project-description">PROJECT<br>DESCRIPTION</span>
         <br><br><br>
         <span class="h2" style="margin-bottom: 600px;">PROJECT DESCRIPTION</span><br>
-        <span class="project-description">
-                {!! nl2br($project->description) !!}
-            </span>
+        <span class="project-description"> {{ nl2br($project->description) }}</span>
         <br><br><br><br>
         <span class="h2">PROJECT ROLES & RESPONSIBILITIES</span>
         <br><br><br>

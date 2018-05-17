@@ -190,9 +190,9 @@ body .content-pagenum a:before{
 /* PAGE 4 */
 .project-description {
     color: #000000;
-    font-size: 12px;
-    letter-spacing: 1px;
-    line-height: 13px;
+    font-size: 14px;
+    line-height: normal;
+    text-transform: none;
 }
 
 .bold-text-p4 {
