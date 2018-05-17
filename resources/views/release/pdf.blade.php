@@ -45,6 +45,7 @@
 
         <footer>
             @if(!empty($project->team->logo))<img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">@endif
+                <span class="footer-name">{{$project->team->name}}</span>
         </footer>
     </p>
     <!-- END OF PAGE 1 -->
