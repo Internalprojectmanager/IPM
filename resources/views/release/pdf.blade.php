@@ -13,6 +13,7 @@
 <script type="text/php">
 	$GLOBALS['chapters'] = array();
 	$GLOBALS['backside'] = $pdf->open_object();
+
 </script>
 <main>
 
@@ -44,8 +45,9 @@
             </span>
 
         <footer>
-            @if(!empty($project->team->logo))<img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">@endif
-                <span class="footer-name">{{$project->team->name}}</span>
+            @if(!empty($project->team->logo))<img class="logo-footer"
+                                                  src="{{storage_path('app').$project->team->logo}}">@endif
+            <span class="footer-name">{{$project->team->name}}</span>
         </footer>
     </p>
     <!-- END OF PAGE 1 -->
@@ -57,7 +59,7 @@
             <span class="h1">{{$project->team->slogan}}</span>
         </p>
     @endif
-    <!-- END OF PAGE 2 -->
+<!-- END OF PAGE 2 -->
 
     <!-- PAGE 3 -->
     <p id="p3">
@@ -117,6 +119,7 @@
         </span>
         <script type="text/php">
 	        $pdf->close_object();
+
         </script>
     </p>
     <!-- END OF PAGE 3 -->
@@ -149,102 +152,42 @@
                     <td><hr></td>
                     <td><hr></td>
                 </tr>
-                <tr>
-                    <td align="center" class="bold-text-p4">Project manager(s)</td>
+
+                @foreach($roles as $role)
+                    <tr>
+                        <td align="center" class="bold-text-p4">{{$role->name}}(s)</td>
                     <td>
                         @php $acounter = 1; @endphp
                         @if($project->assignee->count() > 0)
                             @foreach($project->assignee as $a)
-                                @if(!empty($a->users->jobtitles))
-                                    @if($a->users->jobtitles->name == "Project Manager")
-                                        @if($acounter <= 3)
-                                            <i class="non-cursive"><span
-                                                        class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
-                                            <span class="company-p4">{{$project->team()->first()->name}}</span></i><br>
+                                @if(!empty($a->roles()))
+                                    @foreach($a->roles() as $r)
+
+                                        @if($r->name == $role->name)
+                                                <i class="non-cursive">
+                                                    <span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span>
+                                                    <br>
+                                                    <span class="company-p4">{{$project->team()->first()->name}}</span>
+                                                </i>
+                                                <br>
+
+                                            @php $acounter++; @endphp
                                         @endif
-                                        @php $acounter++; @endphp
-                                    @endif
+                                    @endforeach
                                 @endif
                             @endforeach
                         @endif
                     </td>
                     <td class="responsibility-p4">
-                        Responsible for developing a definition of the
-                        project. The Project Manager also ensures that
-                        the project is deliveredon time, to budget and
-                        to the required quality standard (within agreed
-                        specifications).
+                        {{$role->description}}
                     </td>
-                </tr>
-
-                <tr>
+                    </tr>
+                    <tr>
                     <td><hr></td>
                     <td><hr></td>
                     <td><hr></td>
                 </tr>
-
-                <tr>
-                    <td align="center" class="bold-text-p4">Designer(s)</td>
-                    <td>
-                        @php $acounter = 1; @endphp
-                        @if($project->assignee->count() > 0)
-                            @foreach($project->assignee as $a)
-                                @if(!empty($a->users->jobtitles))
-                                    @if($a->users->jobtitles->name == "Designer")
-                                        @if($acounter <= 3)
-                                            <i class="non-cursive"><span
-                                                        class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
-                                                <span class="company-p4">{{$project->team()->first()->name}}</span></i><br>
-                                        @endif
-                                        @php $acounter++; @endphp
-                                    @endif
-                                @endif
-                            @endforeach
-                        @endif
-                    </td>
-                    <td class="responsibility-p4">
-                        Staff who actively work on the design process
-                        of the project.
-                    </td>
-                </tr>
-
-                <tr>
-                    <td><hr></td>
-                    <td><hr></td>
-                    <td><hr></td>
-                </tr>
-
-                <tr>
-                    <td align="center" class="bold-text-p4">Developer(s)</td>
-                    <td>
-                        @php $acounter = 1; @endphp
-                        @if($project->assignee->count() > 0)
-                            @foreach($project->assignee as $a)
-                                @if(!empty($a->users->jobtitles))
-                                    @if($a->users->jobtitles->name == "Developer")
-                                        @if($acounter <= 3)
-                                            <i class="non-cursive"><span
-                                                        class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span><br>
-                                                <span class="company-p4">{{$project->team()->first()->name}}</span></i><br>
-                                        @endif
-                                        @php $acounter++; @endphp
-                                    @endif
-                                @endif
-                            @endforeach
-                        @endif
-                    </td>
-                    <td class="responsibility-p4">
-                        Staff who actively work on the developing process
-                        of the project.
-                    </td>
-
-                </tr>
-
-                <tr>
-                    <td><hr></td>
-                    <td><hr></td>
-                    <td><hr></td>
-                </tr>
+                @endforeach
                 </tbody>
             </table>
         </span>
@@ -254,22 +197,23 @@
     <!-- PAGE 5 -->
     <?php $featureID = 0; $chap = 4; ?>
     <p>
-    @php $l = 1; $type1 = null; @endphp
-    @foreach($features as $f)
-        @if($type1 !== $f->type)
-            @php
-                $l = 0;
-                $type1 = $f->type;
-                $featureID = 0;
-            @endphp
+        @php $l = 1; $type1 = null; @endphp
+        @foreach($features as $f)
+            @if($type1 !== $f->type)
+                @php
+                    $l = 0;
+                    $type1 = $f->type;
+                    $featureID = 0;
+                @endphp
 
-        @endif
-        @if($l == 0)
-            @if($f->type !== "Feature")
-                </p><p>
             @endif
-            <span class="h1" id="project-description">{{$f->typeFull}}</span><br><br>
-            @php $l++; @endphp
+            @if($l == 0)
+                @if($f->type !== "Feature")
+    </p>
+    <p>
+        @endif
+        <span class="h1" id="project-description">{{$f->typeFull}}</span><br><br>
+        @php $l++; @endphp
         @endif
 
         <span class="no-break row">
@@ -296,15 +240,15 @@
                         </tbody>
                 </table>
                 <br><br>
-                @if($f->requirements->count() > 0)
-                        @if($type1 == "Feature")
-                            <span class="h2">FUNCTIONAL REQUIREMENTS</span>
-                        @elseif($type1 == "NFR" || $type1 == 'TS')
-                            <span class="h2">REQUIREMENTS</span>
-                        @endif
+            @if($f->requirements->count() > 0)
+                @if($type1 == "Feature")
+                    <span class="h2">FUNCTIONAL REQUIREMENTS</span>
+                @elseif($type1 == "NFR" || $type1 == 'TS')
+                    <span class="h2">REQUIREMENTS</span>
+                @endif
 
                 <br><br>
-                    <table class="table-p5">
+                <table class="table-p5">
                         <tbody>
                         <?php $reqnr = 1; ?>
                         @foreach($f->requirements as $r)
@@ -322,12 +266,12 @@
                         @endforeach
                         </tbody>
                     </table>
-                            <br><br>
+                <br><br>
             @endif
             </span>
         @endforeach
-        </p>
-        <!-- END OF PAGE 5 -->
+    </p>
+    <!-- END OF PAGE 5 -->
 
 </main>
 

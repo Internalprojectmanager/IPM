@@ -6,6 +6,7 @@ use App\Assignee;
 use App\Feature;
 use App\Http\Requests\ReleaseValidator;
 use App\Requirement;
+use App\Role;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -31,9 +32,10 @@ class PDFController extends Controller
             $q->orderby('userid');
         }])->path($project->path)->where('company_id' , $client->id)->firstorfail();
 
+        $roles = Role::all();
 
         $features = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid]])->orderByRaw(DB::raw("FIELD(type, 'Feature', 'NFR', 'TS', 'Scope')"))->get();
-        $pdf = PDF::setOptions(['images' => true])->loadView('release.pdf', compact('release', 'project', 'features', 'client', 'requirements', 'assignees', 'image'))->setPaper('a4', 'portrait');
+        $pdf = PDF::setOptions(['images' => true])->loadView('release.pdf', compact('release', 'project', 'features', 'client', 'requirements', 'assignees', 'roles'))->setPaper('a4', 'portrait');
         return $pdf->stream('Release.pdf');
     }
 }

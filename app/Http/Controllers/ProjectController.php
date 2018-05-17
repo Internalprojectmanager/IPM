@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Assignee;
+use App\AssigneeRole;
 use App\Http\Requests\ProjectValidator;
 use App\Status;
 use App\Team;
@@ -19,6 +20,7 @@ use App\Document;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Role;
 
 class ProjectController extends Controller
 {
@@ -189,8 +191,9 @@ class ProjectController extends Controller
         $documents = Document::where('project_id', $project->id)->get();
         $user = Team::find($project->team_id)->users()->get();
         $assignee = Assignee::with('users')->where('uuid', $project->id)->get();
+        $roles = Role::orderBy('id', 'asc')->get();
         $status = Status::where('type', 'Progress')->get();
-        return view('project.details_project', compact('project', 'client', 'releases', 'documents', 'user', 'assignee', 'status'));
+        return view('project.details_project', compact('project', 'client', 'releases', 'documents', 'user', 'assignee', 'status', 'roles'));
     }
 
     public function editProject($client, $project)
@@ -245,25 +248,45 @@ class ProjectController extends Controller
 
     public function updateAssignees($client, $project, Request $request)
     {
+
+
         if(empty($request->assignee)){
             $request->assignee = array();
         }
+        $ids = [];
+        foreach ($request->assignee as $key => $val) {
+            foreach ($val as $as) {
+                $ids[] = $as;
+            }
+        }
+
 
         $assignees = Assignee::where('uuid', $project->id)->get();
         foreach ($assignees as $a) {
-            if (!in_array($a->userid, $request->assignee)) {
+            if (!in_array($a->userid, $ids)) {
                 $a->delete();
+                AssigneeRole::where('assignee_id', $a->id)->delete();
             }
         }
-        foreach ($request->assignee as $as) {
-            $assignees = Assignee::where([['uuid', $project->id], ['userid', $as]])->first();
-            if (empty($assignees)) {
-                $assignee = new Assignee();
-                $assignee->userid = $as;
-                $assignee->uuid = $project->id;
-                $assignee->save();
 
+        foreach ($request->assignee as $key => $val) {
+            foreach($val as $as){
+                $assignees = Assignee::where([['uuid', $project->id], ['userid', $as]])->first();
+                if (empty($assignees)) {
+                    $assignees = new Assignee();
+                    $assignees->userid = $as;
+                    $assignees->uuid = $project->id;
+                    $assignees->save();
+                }
+                $assignee_role = AssigneeRole::where([['assignee_id', $assignees->id], ['role_id', Role::name($key)->id]])->first();
+                if(empty($assignee_role)) {
+                    $assignee_role = new AssigneeRole();
+                    $assignee_role->assignee_id = $assignees->id;
+                    $assignee_role->role_id = Role::name($key)->id;
+                    $assignee_role->save();
+                }
             }
+
         }
         $client = $client->path;
         $project = $project->path;
