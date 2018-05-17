@@ -87,17 +87,17 @@
                         @if(Auth::id() !== $user->id && $team->owner_id == Auth::id())
                             @if($user->pivot->active ==  true)
                                 <a class="no-underline" onclick="return confirm('Are you sure you want to block this User?');"
-                                   href="{{route('teammember.block', [$team->name, $user->id])}}">
+                                   href="{{route('teammember.block', [$team->slug, $user->id])}}">
                                     <span class="btn btn-danger"><i class="fas fa-ban"></i>  Block</span>
                                 </a>
                             @else
                                 <a class="no-underline" onclick="return confirm('Are you sure you want to block this User?');"
-                                   href="{{route('teammember.unblock', [$team->name, $user->id])}}">
+                                   href="{{route('teammember.unblock', [$team->slug, $user->id])}}">
                                     <span class="btn btn-success"><i class="far fa-check-circle"></i>  Unblock</span>
                                 </a>
                             @endif
                                 <a class="no-underline" onclick="return confirm('Are you sure you want to delete this User?');"
-                                   href="{{route('teammember.delete', [$team->name, $user->id])}}">
+                                   href="{{route('teammember.delete', [$team->slug, $user->id])}}">
                                     <span class="btn btn-danger"><i class="fas fa-trash"></i>  Delete</span>
                                 </a>
 

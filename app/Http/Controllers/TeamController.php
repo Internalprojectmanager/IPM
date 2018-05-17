@@ -110,7 +110,7 @@ class TeamController extends Controller
 
     public function deleteMember(Request $request, $team, $member){
             Team::name()->users()->detach($member);
-            return redirect()->route('team.show', compact('team'));
+            return redirect()->route('team.show', $team->slug);
     }
 
     public function changeblockingMember(Request $request, $team, $member){
@@ -119,6 +119,6 @@ class TeamController extends Controller
         $teammember->toggleBlock();
         $teammember->save();
 
-        return redirect()->route('team.show', compact('team'));
+        return redirect()->route('team.show', $team->slug);
     }
 }

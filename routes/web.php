@@ -41,10 +41,10 @@ Route::group(['prefix' => 'team'], function() {
     Route::post('/add/', 'TeamController@store')->name('team.store');
     Route::get('/edit/{team}', 'TeamController@edit')->name('team.edit');
     Route::post('/edit/{team}', 'TeamController@update')->name('team.update');
-    Route::post('/{team}/member/new', 'TeamController@storeMember')->name('teammember.store');
-    Route::get('/{team}/member/{member}/delete', 'TeamController@deleteMember')->name('teammember.delete');
-    Route::get('/{team}/member/{member}/block', 'TeamController@changeblockingMember')->name('teammember.block');
-    Route::get('/{team}/member/{member}/unblock', 'TeamController@changeblockingMember')->name('teammember.unblock');
+    Route::post('/show/{team}/member/new', 'TeamController@storeMember')->name('teammember.store');
+    Route::get('/show/{team}/member/{member}/delete', 'TeamController@deleteMember')->name('teammember.delete');
+    Route::get('/show/{team}/member/{member}/block', 'TeamController@changeblockingMember')->name('teammember.block');
+    Route::get('/show/{team}/member/{member}/unblock', 'TeamController@changeblockingMember')->name('teammember.unblock');
 });
 
 
