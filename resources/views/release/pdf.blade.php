@@ -18,7 +18,9 @@
 
     <!-- PAGE 1 -->
     <p id="p1">
-        <img class="logo-p1" src="{{storage_path('app').$project->team->logo}}">
+        @if(!empty($project->team->logo))
+            <img class="logo-p1" src="{{storage_path('app').$project->team->logo}}">
+        @endif
         <span class="h1-p1">PROJECT SPECIFICATION</span>
         <span class="h2-p1">{{$project->company->name}} - {{$project->name}}
             : {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
@@ -42,7 +44,7 @@
             </span>
 
         <footer>
-            <img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">
+            @if(!empty($project->team->logo))<img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">@endif
         </footer>
     </p>
     <!-- END OF PAGE 1 -->
@@ -333,7 +335,9 @@
 <footer>
     <div class="row">
         <div class="col-md-12">
-            <img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">
+            @if(!empty($project->team->logo))
+                <img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">
+            @endif
             <span class="footer-name">{{$project->team->name}}</span>
             <span class="footer-name pagenum"></span>
         </div>
