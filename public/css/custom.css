@@ -1041,9 +1041,6 @@ td > .assignee:first-child:before {
     background-color: #D35847;
 }
 
-.form-group .col-md-6{
-    padding: 0 !important;
-}
 
 .input-text-modal button{
     border: 1px solid #9B9B9B;
@@ -1055,10 +1052,14 @@ td > .assignee:first-child:before {
     padding-bottom: 20px;
 }
 
-.editproject #edit-project{
-    height: 60rem;
+.editproject #edit-project, .editrelease #edit-project{
+    height: 65rem;
 }
 
 .img-thumbnail{
     width: 100px;
+}
+
+.addproject .col-md-6{
+    padding: 0;
 }

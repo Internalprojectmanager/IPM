@@ -206,7 +206,7 @@ class ProjectController extends Controller
         $client = Client::select('name', 'id')
             ->currentuserteam()->get();
         $status = Status::where('type', 'Progress')->select('name', 'id')->get();
-        $teams = Auth::user()->teams()->get();
+        $teams = Auth::user()->teams();
         return view('project.add_project_form', compact('teams', 'client', 'status'));
     }
 
