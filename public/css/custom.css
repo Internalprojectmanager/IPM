@@ -578,10 +578,16 @@ td > .assignee:first-child:before {
 
 .download{
     border: 1px solid black;
-    width: 100%;
-    height: 50px;
     padding: 14px 15px 14px 15px;
     color: black;
+    vertical-align: middle;
+}
+
+.download span{
+    margin-top: auto;
+    margin-bottom: auto;
+    vertical-align: middle;
+    right: 0;
 }
 
 
@@ -1051,4 +1057,8 @@ td > .assignee:first-child:before {
 
 .editproject #edit-project{
     height: 60rem;
+}
+
+.img-thumbnail{
+    width: 100px;
 }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="header-3" id="edit-project">
         <h1>New Team</h1>
-        <form action="{{route('team.store')}}" method="post">
+        <form action="{{route('team.store')}}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-group">
@@ -13,6 +13,26 @@
                     <div class="col-md-12">
                         <input placeholder="Team Name" type="text" class="form-control input-text-modal"
                                name="team_name" id="client_name" value="{{old('team_name')}}">
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>Slogan: <span class="required">*</span></label>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input placeholder="Team Name" type="text" class="form-control input-text-modal"
+                               name="team_slogan" id="client_name" value="{{old('team_slogan')}}">
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Logo: <span class="required">*</span></label>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="file" name="upload" value="{{old('file')}}" accept=".jpg, .jpeg, .png"/>
                     </div>
 
                 </div>

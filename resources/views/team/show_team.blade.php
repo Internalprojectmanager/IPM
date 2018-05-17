@@ -10,7 +10,7 @@
 @section('content')
 
     @if($team->name !== Auth::user()->fullName() && $team->owner_id == Auth::id())
-        <a href="" class="btn-edit" id="project-edit">
+        <a href="{{route('team.edit', $team->slug)}}" class="btn-edit" id="project-edit">
             <span class="glyphicon edit-icon"></span> Edit
         </a>
     @endif

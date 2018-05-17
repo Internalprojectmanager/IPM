@@ -34,8 +34,6 @@ class CheckPlanStatus
                     $teamplan->save();
                 }else if($team->plan()->name == Plan::name('No Plan')->name){
                     UserTeam::where('team_id', $team->id)->where('user_id', '!=', $team->owner_id)->update(['active' => false]);
-                } else{
-                    UserTeam::where('team_id', $team->id)->where('user_id', '!=', $team->owner_id)->limit($team->plan()->users)->update(['active' => true]);
                 }
             }
         }

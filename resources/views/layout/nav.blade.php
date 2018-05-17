@@ -200,7 +200,7 @@
                             <i class="far fa-building fa-lg "></i></a>
                         <ul class="dropdown-menu center black">
                             @php $i = 0; @endphp
-                            @foreach(Auth::user()->team as $teams)
+                            @foreach(Auth::user()->teams() as $teams)
                                 @if($i == 0)
                                     <li class="black"><i class="far fa-user icon-right-top"></i> User Space</li>
                                     <li role="separator" class="divider"></li>

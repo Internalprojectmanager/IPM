@@ -24,10 +24,14 @@ p {
 }
 
 .logo-footer {
-    position: absolute;
-    height: 17px;
-    width: 85px;
-    left: 44px;
+    height: 40px;
+    width: auto;
+    padding-left: 44px;
+    top: 0;
+}
+.footer-name{
+    padding-left: 10px;
+    vertical-align: middle;
 }
 
 .h1 {
@@ -47,7 +51,7 @@ p {
 }
 
 
-footer .pagenum:before {
+footer .pagenum:after {
     content: counter(page);
 }
 
@@ -55,23 +59,31 @@ body .content-pagenum a:before{
     content: leader('.') target-counter(attr(href url), page, decimal);
 }
 
-.page-nr {
-    position: absolute;
-    right: 67px;
+.pagenum{
     color: #000000;
     font-size: 12px;
-    font-weight: bold;
     letter-spacing: 1px;
-    line-height: 13px;
+    float:right;
+    line-height: 40px;
+
+
+}
+
+.pagenum:after{
+    font-weight: bold;
+
+
 }
 
 /* PAGE 1 */
 .logo-p1 {
     position: fixed;
-    height: 22%;
-    width: 26%;
-    top: 171px;
-    right: 0px;
+    height: auto;
+    width: auto;
+    top: 198px;
+    float:right;
+    max-height: 200px;
+    max-width: 200px;
 }
 
 .h1-p1 {
@@ -163,7 +175,6 @@ body .content-pagenum a:before{
     color: #000000;
     font-size: 12px;
     letter-spacing: 1px;
-    line-height: -18px;
 }
 
 #disable-font {

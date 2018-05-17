@@ -18,7 +18,7 @@
 
     <!-- PAGE 1 -->
     <p id="p1">
-        <img class="logo-p1" src="{{public_path('img/logo-iav-circles.png')}}">
+        <img class="logo-p1" src="{{storage_path('app').$project->team->logo}}">
         <span class="h1-p1">PROJECT SPECIFICATION</span>
         <span class="h2-p1">{{$project->company->name}} - {{$project->name}}
             : {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
@@ -40,19 +40,22 @@
                 <span class="project-info-right prepared">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
                 <hr>
             </span>
+
         <footer>
-            <img class="logo-footer" src="{{public_path('img/logo-iav.png')}}">
+            <img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">
         </footer>
     </p>
     <!-- END OF PAGE 1 -->
 
     <!-- PAGE 2 -->
-    <p id="p2">
-        <br><br><br><br><br>
-        <span class="h1">THE FUTURE IS</span>
-        <br>
-        <span class="h1">SIMPLE</span>
-    </p>
+    @if($project->team->slogan)
+        <p id="p2">
+            <br><br><br><br><br>
+            <span class="h1">{{$project->team->slogan}}</span>
+            <br>
+            <span class="h1">Hard</span>
+        </p>
+    @endif
     <!-- END OF PAGE 2 -->
 
     <!-- PAGE 3 -->
@@ -328,10 +331,15 @@
 </main>
 
 <footer>
-    <img class="logo-footer" src="{{public_path('img/logo-iav.png', config('app.secure'))}}">
-    <div class="page-nr">
-        <span class="pagenum"></span>
+    <div class="row">
+        <div class="col-md-12">
+            <img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">
+            <span class="footer-name">{{$project->team->name}}</span>
+            <span class="footer-name pagenum"></span>
+        </div>
+
     </div>
+
 </footer>
 
 </body>

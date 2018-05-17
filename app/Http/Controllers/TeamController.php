@@ -41,6 +41,12 @@ class TeamController extends Controller
         $team = new Team();
         $team->name = $request->team_name;
         $team->owner_id = Auth::id();
+        $team->slogan = $request->team_slogan;
+        if($request->hasFile('upload')) {
+            \Storage::makeDirectory("public/team/" . str_slug($team->name));
+            $path = $request->file('upload')->storeAs("public/team/" . str_slug($team->name), $request->upload->getClientOriginalName());
+            $team->logo = $path;
+        }
         $team->save();
 
         $teamuser = new UserTeam();
@@ -60,6 +66,23 @@ class TeamController extends Controller
         return redirect()->route('team.show', $team->slug);
 
 
+    }
+    public function edit($team){
+        return view('team.team_edit', compact('team'));
+    }
+
+    public function update(Request $request, $team){
+        $team->name = $request->team_name;
+        $team->owner_id = Auth::id();
+        $team->slogan = $request->team_slogan;
+        if($request->hasFile('upload')) {
+            \Storage::makeDirectory("public/team/" . str_slug($team->name));
+            $path = $request->file('upload')->storeAs("public/team/" . str_slug($team->name), $request->upload->getClientOriginalName());
+            $team->logo ='/'. $path;
+        }
+        $team->save();
+
+        return redirect()->route('team.show', $team->slug);
     }
 
     public function storeMember(Request $request, $team){
