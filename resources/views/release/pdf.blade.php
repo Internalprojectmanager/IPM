@@ -134,7 +134,7 @@
         <span class="h2">PROJECT ROLES & RESPONSIBILITIES</span>
         <br><br><br>
 
-        <span>
+        <span class="no-break">
             <table class="table-p4">
                 <thead>
                 <tr class="bold-text-p4" align="center">
