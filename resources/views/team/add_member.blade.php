@@ -33,7 +33,7 @@
                 </span>
         </div>
         <div class="modal-body">
-            <form action="{{route('teammember.store', $team->name)}}" method="post">
+            <form action="{{route('teammember.store', $team->slug)}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="" for="assignee">Users</label>
