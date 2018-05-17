@@ -214,7 +214,7 @@
         @php $l++; @endphp
         @endif
 
-        <span class="no-break row features">
+        <span class="row features line-break">
                 <span class="h2">
                     {{$type1}}
                     <?php
