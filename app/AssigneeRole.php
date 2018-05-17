@@ -12,4 +12,8 @@ class AssigneeRole extends Model
     protected $fillable = [
         'id','name', 'description'
     ];
+
+    public function role(){
+        return $this->hasOne('App\Role', 'id','role_id');
+    }
 }
