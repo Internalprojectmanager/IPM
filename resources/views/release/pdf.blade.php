@@ -55,8 +55,6 @@
         <p id="p2">
             <br><br><br><br><br>
             <span class="h1">{{$project->team->slogan}}</span>
-            <br>
-            <span class="h1">Hard</span>
         </p>
     @endif
     <!-- END OF PAGE 2 -->
