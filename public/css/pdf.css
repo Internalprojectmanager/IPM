@@ -234,4 +234,13 @@ body .content-pagenum a:before{
     width: 200px;
 }
 
+.feature-description td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.features{
+    margin-bottom: 20px;
+}
+
 /* END OF PAGE 4 */

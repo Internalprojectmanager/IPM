@@ -214,7 +214,7 @@
         @php $l++; @endphp
         @endif
 
-        <span class="no-break row">
+        <span class="no-break row features">
                 <span class="h2">
                     {{$type1}}
                     <?php
@@ -250,7 +250,7 @@
                         <tbody>
                         <?php $reqnr = 1; ?>
                         @foreach($f->requirements as $r)
-                            <tr class="project-description">
+                            <tr class="project-description feature-description">
                                 <td>
                                     <strong>
                                         FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?><br>

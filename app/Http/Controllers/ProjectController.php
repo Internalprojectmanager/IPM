@@ -278,6 +278,10 @@ class ProjectController extends Controller
                     $assignees->uuid = $project->id;
                     $assignees->save();
                 }
+                if (!in_array($assignees->id, $val)) {
+                    AssigneeRole::where('assignee_id', $a->id)->where('role_id', Role::name($key)->id)->delete();
+                }
+
                 $assignee_role = AssigneeRole::where([['assignee_id', $assignees->id], ['role_id', Role::name($key)->id]])->first();
                 if(empty($assignee_role)) {
                     $assignee_role = new AssigneeRole();
@@ -285,6 +289,8 @@ class ProjectController extends Controller
                     $assignee_role->role_id = Role::name($key)->id;
                     $assignee_role->save();
                 }
+
+
             }
 
         }
