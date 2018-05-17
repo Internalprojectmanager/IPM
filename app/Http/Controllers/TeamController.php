@@ -88,10 +88,11 @@ class TeamController extends Controller
     public function storeMember(Request $request, $team){
         if($request->member > 0){
             foreach ($request->member as $member) {
-                if (!UserTeam::where('user_id', $member)->where('team_id', $team)->first()) {
+                $teammember = UserTeam::where('user_id', $member)->where('team_id', $team->id)->first();
+                if (empty($teammember)) {
                 $teammember = New UserTeam();
                 $teammember->user_id = $member;
-                $teammember->team_id = Team::name($team)->id;
+                $teammember->team_id = $team->id;
                 }
 
                 if( User::find($member)->currentTeam() == null){
@@ -103,13 +104,13 @@ class TeamController extends Controller
             }
         }
 
-        return redirect()->route('team.show', compact('team'));
+        return redirect()->route('team.show', $team->slug);
 
     }
 
 
     public function deleteMember(Request $request, $team, $member){
-            Team::name()->users()->detach($member);
+            Team::name($team->name)->users()->detach($member);
             return redirect()->route('team.show', $team->slug);
     }
 
