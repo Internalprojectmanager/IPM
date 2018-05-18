@@ -48,7 +48,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Assignee', 'userid', 'id');
     }
 
-
     /**
      * Magically crypt the password whenever its set on the modal because otherwise remembering to do it can get ugly
      * at least you know it's now done
@@ -70,8 +69,10 @@ class User extends Authenticatable
 
         foreach ($assignees as $s){
             if($s->requirements()->first() !== null){
-                if($s->astatus()->first()->name !== Status::name('completed')->name){
-                    $todo++;
+                if($s->astatus() !== null){
+                    if($s->astatus()->first()->name !== Status::name('completed')->name){
+                        $todo++;
+                    }
                 }
             }
         }
