@@ -19,6 +19,7 @@
 
 
 
+
 </script>
 <main>
 
@@ -130,6 +131,7 @@
 
 
 
+
         </script>
     </p>
     <!-- END OF PAGE 3 -->
@@ -234,13 +236,13 @@
                             <span class="left">
                                     <strong>{{$type1}} {{$featureID}}</strong>
                                     <br>
-                                    {{$f->name}}
+                                {{$f->name}}
                             </span>
                             <span class="right">
                                 {!! nl2br($f->description) !!}
                             </span>
                         </div>
-                        <br><br>
+                        <br>
                         <div class="project-description under-details">
                             @if($f->requirements->count() > 0)
                                 <?php $reqnr = 1; ?>
@@ -253,20 +255,21 @@
                         <br>
                         @foreach($f->requirements as $r)
                             <div class="project-description">
-                            <span class="left">
-                                    <strong>
-                                        FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?>
-                                    </strong> <br>
-                                {{ $r->name }}
-                            </span>
-                            <span class="right">
-                                {!! nl2br($r->description) !!}
-                            </span>
-                        </div>
+                                <span class="left">
+                                        <strong>
+                                            FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?>
+                                        </strong> <br>
+                                    {{ $r->name }}
+                                </span>
+                                <span class="right">
+                                    {!! nl2br($r->description) !!}
+                                </span>
+                            </div>
                         @endforeach
                     </div>
             @endif
-    </span><br>
+        </span>
+        <br>
         @endforeach
     </p>
     <!-- END OF PAGE 5 -->

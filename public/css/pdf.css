@@ -19,14 +19,13 @@ body {
     white-space: nowrap;
     vertical-align: middle;
     page-break-inside: avoid !important;
+    margin: 0;
 }
 .feature-table .left{
     width: 35%;
     display: inline-block;
     white-space: normal;
     text-align: left;
-    padding-left: 0;
-    margin-left: 0;
 
 }
 
