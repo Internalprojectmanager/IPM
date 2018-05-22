@@ -240,7 +240,7 @@
                                 {!! nl2br($f->description) !!}
                             </span>
                         </div>
-                        <br>
+                        <br><br>
                         <div class="project-description under-details">
                             @if($f->requirements->count() > 0)
                                 <?php $reqnr = 1; ?>
@@ -250,7 +250,7 @@
                                     <span class="h2">REQUIREMENTS</span>
                                 @endif
                         </div>
-                        <br><br>
+                        <br>
                         @foreach($f->requirements as $r)
                             <div class="project-description">
                             <span class="left">
