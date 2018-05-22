@@ -120,6 +120,7 @@ body .content-pagenum a:before{
     font-size: 14px;
     font-weight: 300;
     line-height: 10px;
+    letter-spacing: 1px;
     text-transform: uppercase;
 }
 
