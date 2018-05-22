@@ -38,7 +38,7 @@
                 <span class="project-info-right project-info-right-ab">{{number_format(floatval($release->version), 1)}}</span>
                 <hr>
                 <span class="project-info-left">DESCRIPTION:</span><br>
-                <span class="project-info-right">{!! nl2br($release->description) !!}</span><br>
+                <span class="project-info-right project-info-right-des">{!! nl2br($release->description) !!}</span><br>
                 <hr>
                 <span class="project-info-left">PREPARED BY:</span>
                 <span class="project-info-right prepared project-info-right-ab">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>

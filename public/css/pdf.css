@@ -146,6 +146,10 @@ body .content-pagenum a:before{
     position: absolute;
     right: 28px;
 }
+
+.project-info-right-des{
+    padding-right: 28px;
+}
 /* END OF PAGE 1 */
 
 /* PAGE 3 */
