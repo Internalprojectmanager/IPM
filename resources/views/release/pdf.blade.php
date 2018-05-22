@@ -14,6 +14,8 @@
 	$GLOBALS['chapters'] = array();
 	$GLOBALS['backside'] = $pdf->open_object();
 
+
+
 </script>
 <main>
 
@@ -120,6 +122,8 @@
         <script type="text/php">
 	        $pdf->close_object();
 
+
+
         </script>
     </p>
     <!-- END OF PAGE 3 -->
@@ -162,12 +166,12 @@
                                     @foreach($a->roles() as $r)
 
                                         @if($r->name == $role->name)
-                                                <i class="non-cursive">
+                                            <i class="non-cursive">
                                                     <span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span>
                                                     <br>
                                                     <span class="company-p4">{{$project->team()->first()->name}}</span>
                                                 </i>
-                                                <br>
+                                            <br>
 
                                             @php $acounter++; @endphp
                                         @endif
@@ -193,7 +197,7 @@
     <!-- END OF PAGE 4 -->
 
     <!-- PAGE 5 -->
-    <?php $featureID = 0; $chap = 4; ?>
+    <?php $featureID = 0; $chap = 4; $count = 1; ?>
     <p>
         @php $l = 1; $type1 = null; @endphp
         @foreach($features as $f)
@@ -207,14 +211,19 @@
             @endif
             @if($l == 0)
                 @if($f->type !== "Feature")
-    </p>
-    <p>
-        @endif
+                </p>
+                <p>
+                @php $count = 1; @endphp
+             @endif
         <span class="h1" id="project-description">{{$f->typeFull}}</span><br><br>
         @php $l++; @endphp
         @endif
 
-        <span class="row features line-break">
+        <span class="row features">
+            @if($count % 8 > 4)
+                @php $count = 1; @endphp
+                <p></p>
+            @endif
                 <span class="h2">
                     {{$type1}}
                     <?php
@@ -236,38 +245,56 @@
                                 </td>
                             </tr>
                         </tbody>
+                    @php $count++; @endphp
                 </table>
                 <br><br>
             @if($f->requirements->count() > 0)
+                @php $count++; @endphp
                 @if($type1 == "Feature")
+                    @if($count % 8 > 4)
+                        @php $count = 1; @endphp
+                        <p></p>
+                    @endif
                     <span class="h2">FUNCTIONAL REQUIREMENTS</span>
                 @elseif($type1 == "NFR" || $type1 == 'TS')
                     <span class="h2">REQUIREMENTS</span>
                 @endif
 
                 <br><br>
-                <table class="table-p5">
+                @if($count % 8 == 0)
+                    @php $count = 1; @endphp
+                @endif
+                <table class="table-p5 no-break">
                         <tbody>
                         <?php $reqnr = 1; ?>
                         @foreach($f->requirements as $r)
-                            <tr class="project-description feature-description">
-                                <td>
-                                    <strong>
-                                        FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?><br>
-                                    </strong>
-                                    {{ $r->name }}
-                                </td>
-                                <td>
-                                    {!! nl2br($r->description) !!}
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                <br><br>
-            @endif
-            </span>
+                            @if($count % 8 == 0)
+                                    </tbody>
+                                </table>
+                                <p></p>
+                                @php $count = 1; @endphp
+                                <table class="table-p5 no-break">
+                                    <tbody>
+                            @endif
+        <tr class="project-description feature-description">
+            <td>
+                <strong>
+                    FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?><br>
+                </strong>
+                {{ $r->name }}
+            </td>
+            <td>
+                {!! nl2br($r->description) !!}
+            </td>
+            @php $count++; @endphp
+        </tr>
         @endforeach
+
+        </tbody>
+    </table>
+    @endif
+    </span>
+    @endforeach
     </p>
     <!-- END OF PAGE 5 -->
 
