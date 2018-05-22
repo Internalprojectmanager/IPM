@@ -25,9 +25,10 @@
             <img class="logo-p1" src="{{storage_path('app').$project->team->logo}}">
         @endif
         <span class="h1-p1">PROJECT SPECIFICATION</span>
-        <span class="h2-p1">{{$project->company->name}} - {{$project->name}}
+        <span class="h2-p1">{{$project->name}}
             : {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
-        <span class="h3-p1"><?php echo date("d - m - Y"); ?>
+        <span class="h3-p1">{{$project->company->name}}</span>
+        <span class="h4-p1"><?php echo date("d - m - Y"); ?>
         </span>
 
         <span class="project-info-p1">
@@ -56,7 +57,7 @@
     <!-- PAGE 2 -->
     @if($project->team->slogan)
         <p id="p2">
-            <br><br><br><br><br>
+            <br><br><br>
             <span class="h1">{{$project->team->slogan}}</span>
         </p>
     @endif
