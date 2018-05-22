@@ -31,18 +31,17 @@
         </span>
 
         <span class="project-info-p1">
-                <span class="project-info-left">PROJECT NAME</span>
-                <span class="project-info-right">{{$project->name}}</span>
+                <span class="project-info-left">PROJECT NAME:</span>
+                <span class="project-info-right project-info-right-ab">{{$project->name}}</span>
                 <hr>
-                <span class="project-info-left">RELEASE</span>
-                <span class="project-info-right">{{number_format(floatval($release->version), 1)}}</span>
+                <span class="project-info-left">RELEASE:</span>
+                <span class="project-info-right project-info-right-ab">{{number_format(floatval($release->version), 1)}}</span>
                 <hr>
-                <span class="project-info-left">DESCRIPTION</span>
-                <span class="project-info-right">{!! nl2br(implode(' ', array_slice(str_word_count($release->description, 2), 0, 12))) !!}
-                    ...</span>
+                <span class="project-info-left">DESCRIPTION:</span><br>
+                <span class="project-info-right">{!! nl2br($release->description) !!}</span><br>
                 <hr>
-                <span class="project-info-left">PREPARED BY</span>
-                <span class="project-info-right prepared">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
+                <span class="project-info-left">PREPARED BY:</span>
+                <span class="project-info-right prepared project-info-right-ab">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
                 <hr>
             </span>
 

@@ -135,13 +135,16 @@ body .content-pagenum a:before{
 }
 
 .project-info-right {
-    position: absolute;
-    right: 28px;
     color: #000000;
     font-size: 12px;
     letter-spacing: 1px;
     line-height: 18px;
     text-align: right;
+}
+
+.project-info-right-ab{
+    position: absolute;
+    right: 28px;
 }
 /* END OF PAGE 1 */
 
