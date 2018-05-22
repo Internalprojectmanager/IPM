@@ -2,17 +2,49 @@
 header { position: fixed; top: -60px; left: 0px; right: 0px; height: 50px; }
 footer { position: fixed; bottom: -95px; left: 0px; right: 0px; height: 50px; }
 p { page-break-after: always;}
-p:last-child, span { page-break-after: avoid; }
-
-.line-break { page-break-after: always !important;}
+p:last-child, span { page-break-after: avoid; page-break-inside: avoid; }
 
 body {
     font-family: 'Roboto', sans-serif;
 }
 
+.feature-table { page-break-inside:auto !important; page-break-after:auto !important;margin-bottom: 0 !important;}
+
+
+.feature-table > .project-description{
+    width: 100%;
+    position: relative;
+    display: block;
+    height: auto;
+    white-space: nowrap;
+    vertical-align: middle;
+    page-break-inside: avoid !important;
+}
+.feature-table .left{
+    width: 35%;
+    display: inline-block;
+    white-space: normal;
+    text-align: left;
+    padding-left: 0;
+    margin-left: 0;
+
+}
+
+.feature-table .right{
+    width: 65%;
+    display: inline-block;
+    white-space: normal;
+}
+
+
+
 .no-break{
     page-break-inside: avoid;
     margin-bottom: 2rem;
+}
+
+.line-before{
+    page-break-before: always;
 }
 
 hr {
@@ -252,15 +284,6 @@ body .content-pagenum a:before{
 
 .project-description td:first-child{
     width: 200px;
-}
-
-.feature-description td{
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.features{
-    margin-bottom: 20px;
 }
 
 /* END OF PAGE 4 */
