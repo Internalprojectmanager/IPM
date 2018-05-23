@@ -70,6 +70,7 @@
                                placeholder="New Client Name">
                     </div>
                     <div class="form-group col-md-12">
+                        <div class="form-group col-md-6" align="left">
                         <a href="{{route('projectdetails', ['company-id' => $project->company->path, 'name' => $project->path])}}"
                            class="cancel">
                             <svg width="11px" height="11px" viewBox="0 0 11 11" version="1.1"
@@ -90,8 +91,8 @@
                                 </g>
                             </svg>
                             Cancel
-                        </a>
-
+                        </a></div>
+                        <div class="form-group col-md-6" align="right">
                         <button class="save-button" id="save-button" type="submit">
                             <svg id="save-logo" width="19px" height="19px" viewBox="0 0 19 19" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -121,6 +122,7 @@
                             </svg>
                             <span class="button-content" id="button-save">Save</span>
                         </button>
+                        </div>
                     </div>
                 </div>
             </form>
