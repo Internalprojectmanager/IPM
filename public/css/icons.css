@@ -6,6 +6,27 @@
     top: 5px;
 }
 
+.google-btn{
+}
+
+.google-btn > a > .g-icon{
+    background: url('../img/btn_google_signin_light_normal_web.png') no-repeat center;
+    width: 100%;
+    height: 90px;
+}
+
+.google-btn > a:focus > .g-icon{
+    background: url('../img/btn_google_signin_light_focus_web.png') no-repeat center;
+}
+
+.google-btn > a:disabled > .g-icon{
+    background: url('../img/btn_google_signin_light_disabled_web.png') no-repeat center;
+}
+
+.google-btn > a:active > .g-icon{
+    background: url('../img/btn_google_signin_light_pressed_web.png') no-repeat center;
+}
+
 .settings-icon{
     background: url("../svg/settings.svg") no-repeat 0px center;
 }
