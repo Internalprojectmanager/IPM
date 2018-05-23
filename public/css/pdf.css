@@ -1,9 +1,20 @@
-@page { margin: 100px 25px; }
-header { position: fixed; top: -60px; left: 0px; right: 0px; height: 50px; }
-footer { position: fixed; bottom: -95px; left: 0px; right: 0px; height: 50px; }
+@page {
+    margin: 100px 25px;
+}
+.header {
+    position: fixed;
+    left: 0px;
+    top: -52px;
+    height: 50px;
+    margin: 0;
+}
+.footer {
+    position: fixed; bottom: -95px; left: 0px; right: 0px; height: 50px;
+}
+.footer .pagenum:after { content: counter(page); }
+
 p { page-break-after: always;}
 p:last-child, span { page-break-after: avoid; page-break-inside: avoid; }
-
 body {
     font-family: 'Roboto', sans-serif;
 }
@@ -61,13 +72,9 @@ p {
 
 .logo-footer {
     height: 40px;
-    width: auto;
     padding-left: 44px;
-    top: 0;
 }
 .footer-name{
-    padding-left: 10px;
-    vertical-align: middle;
 }
 
 .h1 {
@@ -86,29 +93,16 @@ p {
     line-height: 16px;
 }
 
-
-footer .pagenum:after {
-    content: counter(page);
-}
-
-body .content-pagenum a:before{
-    content: leader('.') target-counter(attr(href url), page, decimal);
-}
-
 .pagenum{
     color: #000000;
     font-size: 12px;
     letter-spacing: 1px;
     float:right;
     line-height: 40px;
-
-
 }
 
 .pagenum:after{
     font-weight: bold;
-
-
 }
 
 /* PAGE 1 */
@@ -223,14 +217,6 @@ body .content-pagenum a:before{
     line-height: 13px;
 }
 
-.content-pagenum {
-    position: fixed;
-    text-align: right;
-    margin-right: -80px;
-    color: #000000;
-    font-size: 12px;
-    letter-spacing: 1px;
-}
 
 #disable-font {
     font-family: initial;

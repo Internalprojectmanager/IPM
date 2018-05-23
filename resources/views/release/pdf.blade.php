@@ -14,29 +14,20 @@
 	$GLOBALS['chapters'] = array();
 	$GLOBALS['backside'] = $pdf->open_object();
 
-
-
-
-
-
-
-
 </script>
-<main>
 
-    <!-- PAGE 1 -->
-    <p id="p1">
-        @if(!empty($project->team->logo))
-            <img class="logo-p1" src="{{storage_path('app').$project->team->logo}}">
-        @endif
-        <span class="h1-p1">PROJECT SPECIFICATION</span>
-        <span class="h2-p1">{{$project->name}}
-            : {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
-        <span class="h3-p1">{{$project->company->name}}</span>
-        <span class="h4-p1"><?php echo date("d - m - Y"); ?>
+<p id="p1">
+    @if(!empty($project->team->logo))
+        <img class="logo-p1" src="{{storage_path('app').$project->team->logo}}">
+    @endif
+    <span class="h1-p1">PROJECT SPECIFICATION</span>
+    <span class="h2-p1">{{$project->name}}
+        : {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
+    <span class="h3-p1">{{$project->company->name}}</span>
+    <span class="h4-p1"><?php echo date("d - m - Y"); ?>
         </span>
 
-        <span class="project-info-p1">
+    <span class="project-info-p1">
                 <span class="project-info-left">PROJECT NAME:</span>
                 <span class="project-info-right project-info-right-ab">{{$project->name}}</span>
                 <hr>
@@ -51,37 +42,40 @@
                 <hr>
             </span>
 
-        <footer>
-            @if(!empty($project->team->logo))<img class="logo-footer"
-                                                  src="{{storage_path('app').$project->team->logo}}">@endif
-            <span class="footer-name">{{$project->team->name}}</span>
-        </footer>
-    </p>
-    <!-- END OF PAGE 1 -->
+</p>
+<div class="header">
+</div>
+<div class="footer">
+    <div class="col-md-12">
+        @if(!empty($project->team->logo))
+            <img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">
+        @endif
+        <span class="footer-name">{{$project->team->name}}</span>
+        <span class="footer-name pagenum"></span>
+    </div>
 
-    <!-- PAGE 2 -->
-    @if($project->team->slogan)
-        <p id="p2">
-            <br><br><br>
-            <span class="h1">{{$project->team->slogan}}</span>
-        </p>
-    @endif
-<!-- END OF PAGE 2 -->
+</div>
+<!-- END OF PAGE 1 -->
+
+<!-- PAGE 2 -->
+@if($project->team->slogan)
+    <p id="p2">
+        <br><br><br>
+        <span class="h1">{{$project->team->slogan}}</span>
+    </p>
+@endif
 
     <!-- PAGE 3 -->
     <p id="p3">
-
         <span class="h1">CONTENTS</span>
         <br><br><br><br><br>
         <span class="content-p3">
             <span class="content-title" id="disable-font">
                 <span id="content-title-font">PROJECT DESCRIPTION</span>
-                <span class="content-pagenum" id="disable-font"></span>
             </span>
             <hr>
             <span class="content-title" id="disable-font">
                 <span id="content-title-font">PROJECT ROLES & RESPONSIBILITIES</span>
-                <span class="content-pagenum" id="disable-font"></span>
             </span>
             <hr>
             <?php $featureID = 0; $i = 6; $k = 0; $type = null ?>
@@ -111,29 +105,17 @@
                     @endswitch
                     <span class="content-title" id="disable-font">
                         <span id="content-title-font">{{$f->typeFull}}</span>
-                            <span class="content-pagenum" id="disable-font"></span>
                         </span>
                     <hr>
                     @php $k++; @endphp
                 @endif
                 <span class="content-subtitle" id="disable-font">
                 <span id="content-title-font"><?php $featureID++; echo $featureID . '.0'; ?> {{$f->name}}</span>
-                <span class="content-pagenum" id="disable-font"></span>
-                    <?php $i++; ?>
-                </span>
                 <hr>
             @endforeach
         </span>
         <script type="text/php">
 	        $pdf->close_object();
-
-
-
-
-
-
-
-
         </script>
     </p>
     <!-- END OF PAGE 3 -->
@@ -225,7 +207,7 @@
                 @endif
                 @php $l++; @endphp
             @endif
-                <span class="h1" id="project-description">{{$f->typeFull}}</span><br><br>
+            <span class="h1" id="project-description">{{$f->typeFull}}</span><br><br>
             <?php
             $chap++;
             $featureID++;
@@ -281,26 +263,8 @@
                     </div>
                 @endif
         </span>
-            <br><br>
         @endforeach
     </p>
     <!-- END OF PAGE 5 -->
-
-</main>
-
-<footer>
-    <div class="row">
-        <div class="col-md-12">
-            @if(!empty($project->team->logo))
-                <img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">
-            @endif
-            <span class="footer-name">{{$project->team->name}}</span>
-            <span class="footer-name pagenum"></span>
-        </div>
-
-    </div>
-
-</footer>
-
 </body>
 </html>
