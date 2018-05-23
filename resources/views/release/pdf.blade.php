@@ -217,7 +217,6 @@
             <span class="features">
                     <div class="feature-table">
                         <div class="row">
-                            <br>
                             <div class="project-description">
                             <span class="left">
                                     <strong>{{$type1}} {{$featureID}}</strong>
@@ -247,7 +246,6 @@
                         @foreach($f->requirements as $r)
                             <div class="row">
                                 <div class="project-description">
-                                <br>
                                 <span class="left">
                                         <strong>
                                             FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?>
@@ -257,7 +255,7 @@
                                 <span class="right">
                                     {!! nl2br($r->description) !!}
                                 </span>
-                            </div>
+                                </div>
                             </div>
 
                         @endforeach
