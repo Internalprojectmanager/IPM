@@ -213,6 +213,7 @@
             $featureID++;
             $i = 0;
             ?>
+            @if($l >= 1 && $featureID > 1 && $f->requirements->count() > 0 ) <span class="line-break"></span> @endif
             <span class="features">
                     <div class="feature-table">
                         <div class="row">
