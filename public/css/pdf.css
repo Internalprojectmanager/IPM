@@ -12,7 +12,7 @@ body {
 
 
 .feature-table > .project-description{
-    width: 100%;
+    width: 670px;
     position: relative;
     display: block;
     height: auto;
@@ -22,7 +22,7 @@ body {
     margin: 0;
 }
 .feature-table .left{
-    width: 35%;
+    width: 270px;
     display: inline-block;
     white-space: normal;
     text-align: left;
@@ -30,7 +30,7 @@ body {
 }
 
 .feature-table .right{
-    width: 65%;
+    width: 400px;
     display: inline-block;
     white-space: normal;
 }
@@ -44,6 +44,10 @@ body {
 
 .line-before{
     page-break-before: always;
+}
+
+.line-break{
+    page-break-after: always;
 }
 
 hr {

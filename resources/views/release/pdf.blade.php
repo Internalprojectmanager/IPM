@@ -20,6 +20,7 @@
 
 
 
+
 </script>
 <main>
 
@@ -132,6 +133,7 @@
 
 
 
+
         </script>
     </p>
     <!-- END OF PAGE 3 -->
@@ -219,20 +221,21 @@
             @endif
             @if($l == 0)
                 @if($f->typeFull !== 'Features')
-    </p>
-    <p>
-        @endif
-        <span class="h1" id="project-description">{{$f->typeFull}}</span><br><br>
-        @php $l++; @endphp
-        @endif
-        <?php
-        $chap++;
-        $featureID++;
-        $i = 0;
-        ?>
-        <span class="features">
+                    <span class="line-break"></span>
+                @endif
+                @php $l++; @endphp
+            @endif
+                <span class="h1" id="project-description">{{$f->typeFull}}</span><br><br>
+            <?php
+            $chap++;
+            $featureID++;
+            $i = 0;
+            ?>
+            <span class="features">
                     <div class="feature-table">
-                        <div class="project-description">
+                        <div class="row">
+                            <br>
+                            <div class="project-description">
                             <span class="left">
                                     <strong>{{$type1}} {{$featureID}}</strong>
                                     <br>
@@ -241,20 +244,27 @@
                             <span class="right">
                                 {!! nl2br($f->description) !!}
                             </span>
+                            </div>
                         </div>
                         <br>
-                        <div class="project-description under-details">
-                            @if($f->requirements->count() > 0)
-                                <?php $reqnr = 1; ?>
-                                @if($type1 == "Feature")
-                                    <span class="h2">FUNCTIONAL REQUIREMENTS</span>
-                                @elseif($type1 == "NFR" || $type1 == 'TS')
-                                    <span class="h2">REQUIREMENTS</span>
-                                @endif
-                        </div>
-                        <br>
-                        @foreach($f->requirements as $r)
+                        <div class="row">
                             <div class="project-description">
+                            @if($f->requirements->count() > 0)
+                                    <?php $reqnr = 1; ?>
+                                    <strong>
+                                            @if($type1 == "Feature")
+                                            <span class="">FUNCTIONAL REQUIREMENTS</span>
+                                        @elseif($type1 == "NFR" || $type1 == 'TS')
+                                            <span class="">REQUIREMENTS</span>
+                                        @endif
+                                    </strong>
+                            </div>
+                        </div>
+                        <br><br>
+                        @foreach($f->requirements as $r)
+                            <div class="row">
+                                <div class="project-description">
+                                <br>
                                 <span class="left">
                                         <strong>
                                             FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?>
@@ -265,11 +275,13 @@
                                     {!! nl2br($r->description) !!}
                                 </span>
                             </div>
+                            </div>
+
                         @endforeach
                     </div>
-            @endif
+                @endif
         </span>
-        <br>
+            <br><br>
         @endforeach
     </p>
     <!-- END OF PAGE 5 -->
