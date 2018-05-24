@@ -24,11 +24,15 @@
         <form action="{{route('updateclients', $client->path)}}" method="POST">
             {{ csrf_field() }}
             <div class="modal-body">
-                <a class="btn-edit delete-button" id="project-delete"
-                   href="{{route('deleteclient', [$client->path])}}"
-                   onclick="return confirm('Are you sure you want to delete this Client?');">
-                    <i class="far fa-times-circle white"></i>
-                    <span class="white">Delete</span></a>
+                <div class="form-group">
+                    <div class="" align="right">
+                        <a class="btn-edit delete-button" id=""
+                           href="{{route('deleteclient', [$client->path])}}"
+                           onclick="return confirm('Are you sure you want to delete this Client?');">
+                            <i class="far fa-times-circle white"></i>
+                            <span class="white">Delete</span></a>
+                    </div>
+                </div>
                 @include('client.form')
             </div>
             <div class="modal-footer row" style="border:none;">
