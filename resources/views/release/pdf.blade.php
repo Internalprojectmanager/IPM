@@ -29,7 +29,7 @@
 
     <span class="project-info-p1">
                 <span class="project-info-left">PROJECT NAME:</span>
-                <span class="project-info-right project-info-right- ab">{{$project->name}}</span>
+                <span class="project-info-right project-info-right-ab">{{$project->name}}</span>
                 <hr>
                 <span class="project-info-left">RELEASE:</span>
                 <span class="project-info-right project-info-right-ab">{{number_format(floatval($release->version), 1)}}</span>
