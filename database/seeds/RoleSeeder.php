@@ -17,7 +17,7 @@ class RoleSeeder extends Seeder
                 0 =>
                     array(
                         'name' => 'Project Manager',
-                        'description' => 'Responsible for developing a definition of the project. The Project Manager also ensures that the project is deliveredon time, to budget and to the required quality standard (within agreed specifications).',
+                        'description' => 'Responsible for developing a definition of the project. The Project Manager also ensures that the project is delivered on time, to budget and to the required quality standard (within agreed specifications).',
                     ),
                 1 =>
                     array(
