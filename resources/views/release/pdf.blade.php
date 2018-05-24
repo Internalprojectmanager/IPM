@@ -18,7 +18,7 @@
 
 <p id="p1">
     @if(!empty($project->team->logo))
-        <img class="logo-p1" src="{{storage_path('app').$project->team->logo}}">
+        <img class="logo-p1" src="{{public_path('storage').'/'. $project->team->logo}}">
     @endif
     <span class="h1-p1">PROJECT SPECIFICATION</span>
     <span class="h2-p1">{{$project->name}}
@@ -29,7 +29,7 @@
 
     <span class="project-info-p1">
                 <span class="project-info-left">PROJECT NAME:</span>
-                <span class="project-info-right project-info-right-ab">{{$project->name}}</span>
+                <span class="project-info-right project-info-right- ab">{{$project->name}}</span>
                 <hr>
                 <span class="project-info-left">RELEASE:</span>
                 <span class="project-info-right project-info-right-ab">{{number_format(floatval($release->version), 1)}}</span>
@@ -49,7 +49,7 @@
     <div class="col-md-12">
         <span class="footer-left">
         @if(!empty($project->team->logo))
-            <img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">
+            <img class="logo-footer" src="{{public_path('storage').'/'. $project->team->logo}}">
         @endif
             {{$project->team->name}}
         </span>
