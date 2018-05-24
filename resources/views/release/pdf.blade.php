@@ -219,8 +219,9 @@
                         <div class="row">
                             <div class="project-description">
                             <span class="left">
+                                <span class="header-2">
                                     <strong>{{$type1}} {{$featureID}}</strong>
-                                    <br>
+                                </span><br>
                                 {{$f->name}}
                             </span>
                             <span class="right">
@@ -235,9 +236,9 @@
                                     <?php $reqnr = 1; ?>
                                     <strong>
                                             @if($type1 == "Feature")
-                                            <span class="">FUNCTIONAL REQUIREMENTS</span>
+                                            <span class="header-3">FUNCTIONAL REQUIREMENTS</span>
                                         @elseif($type1 == "NFR" || $type1 == 'TS')
-                                            <span class="">REQUIREMENTS</span>
+                                            <span class="header-3">REQUIREMENTS</span>
                                         @endif
                                     </strong>
                             </div>
