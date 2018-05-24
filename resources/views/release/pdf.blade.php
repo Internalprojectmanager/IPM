@@ -47,11 +47,13 @@
 </div>
 <div class="footer">
     <div class="col-md-12">
+        <span class="footer-left">
         @if(!empty($project->team->logo))
             <img class="logo-footer" src="{{storage_path('app').$project->team->logo}}">
         @endif
-        <span class="footer-name">{{$project->team->name}}</span>
-        <span class="footer-name pagenum"></span>
+            {{$project->team->name}}
+        </span>
+        <span class="pagenum"></span>
     </div>
 
 </div>

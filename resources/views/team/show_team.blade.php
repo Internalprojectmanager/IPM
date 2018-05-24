@@ -19,6 +19,9 @@
 
         <div class="col-md-12 col-xs-12">
             <span class="block-white-title">
+                @if($team->logo !== null)
+                    <img class='team-logo' src="{{\Storage::url($team->logo)}}">
+                @endif
                 @if($team->name !== Auth::user()->fullName())
                     Team {{$team->name}}</span>
                 @else

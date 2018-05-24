@@ -1062,3 +1062,10 @@ td > .assignee:first-child:before {
 .addproject .col-md-6{
     padding: 0;
 }
+
+.team-logo{
+    height: 40px;
+    margin-right: 20px;
+    vertical-align: middle;
+
+}

@@ -45,7 +45,7 @@ class TeamController extends Controller
         if($request->hasFile('upload')) {
             \Storage::makeDirectory("public/team/" . str_slug($team->name));
             $path = $request->file('upload')->storeAs("public/team/" . str_slug($team->name), $request->upload->getClientOriginalName());
-            $team->logo = $path;
+            $team->logo = '/team/'. str_slug($team->name). '/'. $request->upload->getClientOriginalName();
         }
         $team->save();
 
@@ -78,7 +78,7 @@ class TeamController extends Controller
         if($request->hasFile('upload')) {
             \Storage::makeDirectory("public/team/" . str_slug($team->name));
             $path = $request->file('upload')->storeAs("public/team/" . str_slug($team->name), $request->upload->getClientOriginalName());
-            $team->logo ='/'. $path;
+            $team->logo ='/team/'. str_slug($team->name). '/'. $request->upload->getClientOriginalName();
         }
         $team->save();
 
