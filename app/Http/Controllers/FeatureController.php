@@ -111,6 +111,7 @@ class FeatureController extends Controller
                             $assignee = new Assignee();
                             $assignee->userid = $as;
                             $assignee->uuid = $requirement->requirement_uuid;
+                            $assignee->status = Status::name('Draft')->id;
                             $assignee->save();
                         }
                     }
@@ -196,6 +197,7 @@ class FeatureController extends Controller
                                     $assignee = new Assignee();
                                     $assignee->userid = $a;
                                     $assignee->uuid = $requirement->requirement_uuid;
+                                    $assignee->status = Status::name('Draft')->id;
                                     $assignee->save();
                                 }
                             }
@@ -221,6 +223,7 @@ class FeatureController extends Controller
                                     $assignee = new Assignee();
                                     $assignee->userid = $as;
                                     $assignee->uuid = $requirement->requirement_uuid;
+                                    $assignee->status = Status::name('Draft')->id;
                                     $assignee->save();
                                 }
                             }
