@@ -42,7 +42,7 @@ class ClientController extends Controller
         $client->contactname = $request->contact_name. ' ' .$request->contact_surname;
         $client->contactnumber = $request->contact_number;
         $client->contactemail = $request->contact_email;
-        $client->link = serialize(array('title' => $request->link_title, 'link' => $request->link_url));
+        $client->link = serialize(array('text' => $request->link_title, 'link' => $request->link_url));
 
         $client->save();
 
@@ -98,7 +98,7 @@ class ClientController extends Controller
             $projectcount = $projects->total();
             $status = Status::type('Client')->get();
             $link = unserialize($client->link);
-            $client->link_title =$link['title'];
+            $client->link_title =$link['text'];
             $client->link_url=$link['link'];
             $user = User::all();
             $projectstatus = Status::type('Progress')->get();
@@ -122,15 +122,16 @@ class ClientController extends Controller
             'status' => 'exists:status,name'
         ]);
 
+
         $client->name = $request->client_name;
         $client->path = str_slug($client->name);
         $client->description = $request->description;
         $client->status = status::name($request->status)->id;
         $client->contactname = $request->contact_name;
-        $client->contactnumber = $request->contact_number;
-        $client->contactemail = $request->contact_mail;
-        if(!empty($request->linktext) && !empty($request->link)){
-            $client->link = serialize(array('text' => $request->linktext, 'link' => $request->link));
+        $client->contactnumber = $request->contact_phonenumber;
+        $client->contactemail = $request->contact_email;
+        if(!empty($request->link_title) && !empty($request->link_url)){
+            $client->link = serialize(array('text' => $request->link_title, 'link' => $request->link_url));
         }
         $client->save();
 

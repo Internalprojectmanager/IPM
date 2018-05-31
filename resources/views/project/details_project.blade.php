@@ -120,7 +120,7 @@
                 <tr class="clickable-row" data-href="{{route('showrelease', [$project->company->path, $project->path,
                         $release->path, $release->version])}}">
                     <td style="background-color: {{$release->rstatus->color}};"></td>
-                    <td class="col-md-2"><span class="tabletitle">{{floatval($release->version)}} - {{$release->name}}</span>
+                    <td class="col-md-2"><span class="tabletitle">{{number_format($release->version, 1)}} - {{$release->name}}</span>
                     </td>
                     <td class=" col-md-5">{{implode(' ', array_slice(str_word_count($release->description, 2), 0, 20))}}
                         @if(str_word_count($release->description) > 20)

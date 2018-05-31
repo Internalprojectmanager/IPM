@@ -19,7 +19,7 @@
                     <span class="tablesubtitle">
 
                         @if(isset($project->company))
-                            <a class="tablesubtitle" href="{{route('clientdetails', $project->company->path)}}">
+                            <a class="grey" href="{{route('clientdetails', $project->company->path)}}">
                                 {{$project->company->name}}</a>
                         @endif
                     </span>
@@ -37,11 +37,11 @@
                 <td class="col-md-2">{{$project->pstatus->name}}
                     <br>
                     @if($project->pstatus->name == "Completed")
-                        <span class="tablesubtitle">on {{\Carbon\Carbon::parse($project->updated_at)}}</span>
+                        <span class="tablesubtitle grey">on {{\Carbon\Carbon::parse($project->updated_at)}}</span>
                     @elseif($project->pstatus->name == "Paused")
-                        <span class="tablesubtitle">on {{\Carbon\Carbon::parse($project->updated_at)}}</span>
+                        <span class="tablesubtitle grey">on {{\Carbon\Carbon::parse($project->updated_at)}}</span>
                     @elseif($project->pstatus->name == "Cancelled")
-                        <span class="tablesubtitle">on {{\Carbon\Carbon::parse($project->updated_at)}}</span>
+                        <span class="tablesubtitle grey">on {{\Carbon\Carbon::parse($project->updated_at)}}</span>
                     @endif
 
                 </td>
@@ -49,13 +49,13 @@
                     @if($project->pstatus->name != "Completed" &&$project->pstatus->name != "Paused" && $project->pstatus->name != "Cancelled")
                         @if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>
                             @if($project->monthsleft && $project->monthsleft > 0)
-                                <span>{{abs($project->monthsleft)}} Month(s) left</span>
+                                <span class="tablesubtitle">{{abs($project->monthsleft)}} Month(s) left</span>
                             @elseif($project->monthsleft && $project->monthsleft < 0)
-                                <span>{{abs($project->monthsleft)}} Month(s) overdue</span>
+                                <span class="tablesubtitle">{{abs($project->monthsleft)}} Month(s) overdue</span>
                             @elseif($project->daysleft >= 0)
-                                <span @if($project->daysleft < 5) class="red" @endif>{{abs($project->daysleft)}} day(s) left</span>
+                                <span class="tablesubtitle @if($project->daysleft < 5) red @endif ">{{abs($project->daysleft)}} day(s) left</span>
                             @elseif($project->daysleft < 0)
-                                 <span class="red">{{abs($project->daysleft)}} day(s) overdue</span>
+                                 <span class="tablesubtitle red">{{abs($project->daysleft)}} day(s) overdue</span>
                             @endif
                         @endif
                     @endif

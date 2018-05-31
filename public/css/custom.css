@@ -10,6 +10,21 @@ html, body {
     margin: 0;
 }
 
+.red{
+    color:red;
+}
+.white{
+    color:white;
+}
+.black{
+    color: black;
+}
+
+.grey{
+    color: #898989;
+}
+
+
 .full-opacity{
     opacity: 1 !important;
 }
@@ -218,7 +233,6 @@ label {
 .tablesubtitle {
     height: 14px;
     width: 93px;
-    color: #898989;
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
     line-height: 20px;
