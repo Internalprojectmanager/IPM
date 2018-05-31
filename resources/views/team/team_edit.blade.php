@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="header-3" id="edit-project">
-        <h1>New Team</h1>
+        <h1>Edit {{$team->name}}</h1>
         <form action="{{route('team.update', $team->slug)}}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">

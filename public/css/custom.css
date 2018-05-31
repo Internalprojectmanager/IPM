@@ -1076,3 +1076,15 @@ td > .assignee:first-child:before {
     vertical-align: middle;
 
 }
+
+.above-white{
+    margin-bottom: -38px;
+}
+
+.above-white span:first-of-type{
+    padding: 0 5px;
+}
+
+.above-white span:first-of-type{
+    padding: 0 0;
+}
