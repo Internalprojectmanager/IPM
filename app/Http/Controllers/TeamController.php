@@ -115,10 +115,11 @@ class TeamController extends Controller
     }
 
     public function changeblockingMember(Request $request, $team, $member){
-        $teammember = UserTeam::teammember(Team::name($team)->id, $member);
 
+        $teammember = UserTeam::where('team_id', $team->id)->where('user_id', $member)->first();
         $teammember->toggleBlock();
         $teammember->save();
+
 
         return redirect()->route('team.show', $team->slug);
     }
