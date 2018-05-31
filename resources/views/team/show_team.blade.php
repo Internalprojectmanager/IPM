@@ -59,13 +59,11 @@
 
     </div>
 
-    @if($team->name !== Auth::user()->fullName() && $team->owner_id == Auth::id())
     <div class="row under-details">
         <a class="black btn btn-primary" href="#" data-toggle="modal" data-target="#addTeamMember">
             Add Teammember <span class="glyphicon glyphicon-plus"></span>
         </a>
     </div>
-    @endif
     <div class="row">
         <table class="table table-hover table-center results" id="release-overview">
             <thead>
