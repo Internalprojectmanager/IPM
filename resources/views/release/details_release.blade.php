@@ -184,23 +184,23 @@
                         <tr class="clickable-row" data-href="{{route('showfeature',
                              [$release->projects->company->path, $release->projects->path, $release->path, $f->id])}}">
                             <td style="border-left: 1px solid #CECECE; background-color: {{$f->fstatus->color}};"></td>
-                            <td class="width25"><span class="tabletitle">{{$f->name}}</span>
+                            <td class="col-md-4"><span class="tabletitle">{{$f->name}}</span>
                             </td>
-                            <td class="width25">{{$f->fstatus->name}}</td>
+                            <td class="col-md-2">{{$f->fstatus->name}}</td>
                             @php $counter = 0; @endphp
                             @foreach($f->requirements as $r)
                                 @if($r->rstatus->name == 'Completed')
                                     @php $counter++;@endphp
                                 @endif
                             @endforeach
-                            <td class="width25percent">
+                            <td class="col-md-2">
                                 @if($f->requirements->count() > 0)
                                     {{$counter}}/{{$f->requirements->count()}} Done
                                 @else
                                     No tasks
                                 @endif
                             </td>
-                            <td class="width25">
+                            <td class="col-md-5">
                                 <span class="assignee">
                                     @php $i = 0; $unique = array(); @endphp
                                     @foreach($f->requirements as $fr)

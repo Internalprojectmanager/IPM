@@ -14,7 +14,7 @@
             <tr class="clickable-row" data-href="
                    {{route('projectdetails',[$project->company->path, $project->path])}}">
                 <td style="background-color: {{$project->pstatus->color}};"></td>
-                <td><span class="tabletitle">{{$project->name}}</span>
+                <td class="col-md-2"><span class="tabletitle">{{$project->name}}</span>
                     <br>
                     <span class="tablesubtitle">
 
@@ -24,15 +24,17 @@
                         @endif
                     </span>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <a class="black" href="{{route('team.show', $project->team->name)}}">
                         {{$project->team->name}}
                     </a>
                 </td>
-                <td class="table-description">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}
-                    ...
+                <td class="col-md-2">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}
+                    @if(str_word_count($project->description) > 10)
+                        ...
+                    @endif
                 </td>
-                <td>{{$project->pstatus->name}}
+                <td class="col-md-2">{{$project->pstatus->name}}
                     <br>
                     @if($project->pstatus->name == "Completed")
                         <span class="tablesubtitle">on {{\Carbon\Carbon::parse($project->updated_at)}}</span>
@@ -43,7 +45,7 @@
                     @endif
 
                 </td>
-                <td>
+                <td class="col-md-1">
                     @if($project->pstatus->name != "Completed" &&$project->pstatus->name != "Paused" && $project->pstatus->name != "Cancelled")
                         @if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>
                             @if($project->monthsleft && $project->monthsleft > 0)
@@ -58,7 +60,7 @@
                         @endif
                     @endif
                 </td>
-                <td style="max-width: 250px;">
+                <td class="col-md-4">
                     <?php $i = 0;?>
                     @foreach($project->assignee as $as)
                         @if($i <= 2)
