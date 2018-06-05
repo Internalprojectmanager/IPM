@@ -53,7 +53,8 @@ class FeatureController extends Controller
         $requirementcount = $requirementcount->requirements_count;
         $status = Status::where('type', "Progress")->get();
         $user = Assignee::where('uuid', $project->id)->select('userid')->distinct()->get();
-        return view('features.details_feature', compact('client', 'project', 'release', 'feature', 'requirementcount', 'status', 'user'));
+        $category = Status::type('category')->get();
+        return view('features.details_feature', compact('client', 'project', 'release', 'feature', 'requirementcount', 'status', 'user', 'category'));
     }
 
 
@@ -70,8 +71,8 @@ class FeatureController extends Controller
         $feature->path = str_slug($feature->name);
         $feature->release_id = $release->release_uuid;
         $feature->description = $request->feature_description;
-        if (!empty($request->category)) {
-            $feature->category = $request->category;
+        if (!empty(Status::find($request->category))) {
+            $feature->category = Status::find($request->category)->id;
         }
         $feature->type = $request->type;
         $feature->author = Auth::id();
@@ -139,8 +140,8 @@ class FeatureController extends Controller
             $feature->path = str_slug($feature->name);
             $feature->description = $request->feature_description;
 
-            if (!empty($request->category)) {
-                $feature->category = $request->category;
+            if (!empty(Status::find($request->category))) {
+                $feature->category = Status::find($request->category)->id;
             }
 
             $feature->type = $request->type;
