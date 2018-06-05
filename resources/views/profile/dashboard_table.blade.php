@@ -11,7 +11,7 @@
         <tbody>
         @if($requirements->count() == 0)
             <tr>
-                <td style="border-left: 1px solid #CECECE" class="center" colspan="5"><h4>@lang('You have no To-dos left, Good Job :D')</h4></td>
+                <td style="border-left: 1px solid #CECECE" class="center" colspan="5"><h4>@lang("There are no To-do's here")</h4></td>
             </tr>
 
         @endif

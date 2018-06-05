@@ -28,4 +28,13 @@ class Assignee extends Model
     public function astatus(){
         return $this->hasOne('App\Status', "id", "status");
     }
+
+    public function role(){
+        return $this->belongsToMany('App\Role', 'role_assignee');
+    }
+
+    public function roles(){
+        return $this->belongsToMany('App\Role', 'role_assignee')->get();
+    }
+
 }

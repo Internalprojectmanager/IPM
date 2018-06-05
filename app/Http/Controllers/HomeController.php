@@ -7,7 +7,8 @@ use App\Requirement;
 use Illuminate\Http\Request;
 use App\Status;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Auth;
+use PragmaRX\Version\Package\Version;
 class HomeController extends Controller
 {
     /**
@@ -15,10 +16,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -131,5 +128,9 @@ class HomeController extends Controller
         $status  = Status::type('Progress')->get();
 
         return view('profile.dashboard_table', compact('requirements', 'requirementscount', 'status'));
+    }
+
+    public function help(){
+        return view('profile.help');
     }
 }

@@ -27,8 +27,20 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <div class="form-group">
-                        <label>Project name: <span class="required">*</span></label>
-                        <input type="text" class="form-control input-text-modal" name="project_name" id="client_name" value="{{old('project_name')}}">
+                            <label>Project: <span class="required">*</span></label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <select class="form-control selectpicker input-text-modal" name="team">
+                                @foreach($teams as $u)
+                                    <option value="{{$u->id}}">{{$u->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <input placeholder="Project Name" type="text" class="form-control input-text-modal" name="project_name" id="client_name" value="{{old('project_name')}}">
+                        </div>
+
                     </div>
 
                     <div class="form-group">
@@ -50,16 +62,7 @@
                     <div class="form-group">
                         <label>Description:</label>
                         <textarea rows="4" cols="50" name="description" class="form-control input-text-modal" id="description">{{old('description')}}</textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Assingees:</label>
-                        <select class="form-control selectpicker" name="assignee[]" multiple>
-                            @foreach($user as $u)
-                                <option value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}} @if(isset($u->jobtitles))(<i>{{$u->jobtitles->name}}</i>)@endif</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    </div
                 </div>
 
         </div>

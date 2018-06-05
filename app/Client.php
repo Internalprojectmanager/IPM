@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Kyslik\ColumnSortable\Sortable;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Null_;
 
 
 class Client extends Model
@@ -38,6 +40,22 @@ class Client extends Model
     public function scopePath($query, $path){
         return $query->where('path', $path);
     }
+
+    public function team(){
+        return $this->hasOne('App\Team', 'id', 'teamid');
+    }
+
+    public function ScopeCurrentUserTeam($query){
+        if(Auth::user()->teams() !== null){
+            $ids = [];
+            foreach(Auth::user()->teams() as $t){
+                $ids [] = $t->id;
+            }
+            return $query->wherein('team_id', $ids);
+
+        }   return $query->where('team_id', null);
+    }
+
 
     public function sluggable()
     {

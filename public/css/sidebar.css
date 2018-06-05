@@ -55,6 +55,11 @@
     text-transform: none;
 }
 
+#teamname{
+    font-size: 12px;
+    margin-top: -3px;
+}
+
 #user a:hover, #user a:focus {
     text-decoration: none;
     text-transform: none;
@@ -62,10 +67,14 @@
 
 #user {
     float: right;
-    padding-top: 26px;
+    padding-top: 5px;
     padding-right: 1.8rem;
     margin-left: 110px;
     text-transform: none;
+}
+
+#user>ul>li>a:hover{
+    background:none;
 }
 
 .dropdown-menu>li>a {
@@ -85,12 +94,12 @@
 
 #navbar_top>.open>.dropdown-menu{
     top: 5px;
-    height: 140px;
     padding-top: 4rem;
     z-index: -130;
     right: 11px;
     border-radius: 0px;
 }
+
 
 .open >.dropdown-menu a{
     line-height: 30px;
@@ -98,6 +107,13 @@
 
 .open > #username{
     color: black;
+    background: none;
+    z-index: 1001;
+}
+
+.open > #teamname{
+    z-index: 1000;
+    color:black;
 }
 
 .open > #username .dropdown-arrow-icon{
@@ -109,4 +125,30 @@
 #sidebar > a >  svg{
     margin: 12px auto;
     width: 100%;
+}
+
+#user .dropdown-menu{
+    top: 0;
+    padding-top: 30px;
+    border-radius: 0;
+}
+.normal-dropdown > .dropdown-menu {
+    top:auto !important;
+    padding-top: 10px !important;
+}
+
+#user li{
+    margin-top: 5px;
+}
+
+.icon-nav >  a:hover, .icon-nav >  a:focus, .icon-nav > a{
+    background: none !important;
+    color: white !important;
+}
+.icon-nav >  a:hover, .icon-nav >  a:focus{
+    border-bottom: 10px solid white !important;
+}
+
+.icon-nav > .dropdown-menu a:hover{
+    color: black;
 }

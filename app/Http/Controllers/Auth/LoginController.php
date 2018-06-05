@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Team;
+use App\UserTeam;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
@@ -63,6 +65,7 @@ class LoginController extends Controller
             if ($domain == 'itsavirus.com') {
                 // Here, check if the user already exists in your records
                 $authuser = $this->firstOrCreateOauth($user, $provider);
+                $this->firstOrCreatePersonal($authuser);
                 Auth::login($authuser);
                 flash()->success('Succesfully Logged in');
                 return redirect()->intended('overviewproject');
@@ -86,5 +89,25 @@ class LoginController extends Controller
         $authuser = User::firstOrCreate(['email'=> $user->getEmail()], $data);
 
         return $authuser;
+    }
+
+    public function firstOrCreatePersonal($user){
+        $dataspace = [
+            'name' => $user->fullName(),
+            'owner_id' => $user->id
+        ];
+
+        $space = Team::firstOrCreate(['name'=> $user->fullName()], $dataspace);
+
+        if($space->wasRecentlyCreated){
+            $datalink = [
+                'user_id' => $user->id,
+                'team_id' => $space->id,
+                'current' => true,
+                'active' => true
+            ];
+
+            UserTeam::create($datalink);
+        }
     }
 }

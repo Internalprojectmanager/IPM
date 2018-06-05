@@ -17,11 +17,13 @@
         "laravel/scout": "~4.0",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "nahid/linkify": "1.0.*",
         "orangehill/iseed": "dev-master",
+        "pragmarx/version": "^0.2.7",
+        "sentry/sentry-laravel": "^0.8.0",
         "silber/bouncer": "v1.0.0-rc.1",
         "webpatser/laravel-uuid": "^3.0",
-        "yab/laravel-scout-mysql-driver": "^2.0",
-        "nahid/linkify": "1.0.*"
+        "yab/laravel-scout-mysql-driver": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
@@ -59,7 +61,8 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
+            "@php artisan package:discover",
+            "@php artisan version:refresh"
         ]
     },
     "config": {

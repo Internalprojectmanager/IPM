@@ -1,11 +1,64 @@
-@page { margin: 100px 25px; }
-header { position: fixed; top: -60px; left: 0px; right: 0px; height: 50px; }
-footer { position: fixed; bottom: -95px; left: 0px; right: 0px; height: 50px; }
-p { page-break-after: always; }
-p:last-child { page-break-after: never; }
+@page {
+    margin: 100px 25px;
+}
+.header {
+    position: fixed;
+    left: 0px;
+    top: -52px;
+    height: 50px;
+    margin: 0;
+}
+.footer {
+    position: fixed; bottom: -95px; left: 0px; right: 0px; height: 50px;
+}
+.footer .pagenum:after { content: counter(page); }
 
+p { page-break-after: always;}
+p:last-child, span { page-break-after: avoid; page-break-inside: avoid; }
 body {
     font-family: 'Roboto', sans-serif;
+}
+
+.feature-table { page-break-inside:auto !important; page-break-after:auto !important;margin-bottom: 0 !important;}
+
+
+.feature-table > .project-description{
+    width: 670px;
+    position: relative;
+    display: block;
+    height: auto;
+    white-space: nowrap;
+    vertical-align: middle;
+    page-break-inside: avoid !important;
+    margin: 0;
+}
+.feature-table .left{
+    width: 270px;
+    display: inline-block;
+    white-space: normal;
+    text-align: left;
+
+}
+
+.feature-table .right{
+    width: 400px;
+    display: inline-block;
+    white-space: normal;
+}
+
+
+
+.no-break{
+    page-break-inside: avoid;
+    margin-bottom: 2rem;
+}
+
+.line-before{
+    page-break-before: always;
+}
+
+.line-break{
+    page-break-after: always;
 }
 
 hr {
@@ -18,10 +71,11 @@ p {
 }
 
 .logo-footer {
-    position: absolute;
-    height: 17px;
-    width: 85px;
-    left: 44px;
+    height: 40px;
+    padding-left: 44px;
+}
+.footer-name{
+    padding-left: 10px;
 }
 
 .h1 {
@@ -40,27 +94,43 @@ p {
     line-height: 16px;
 }
 
-footer .pagenum:before {
-    content: counter(page);
-}
-
-.page-nr {
-    position: absolute;
-    right: 67px;
+.header-2{
     color: #000000;
-    font-size: 12px;
+    font-size: 22px;
     font-weight: bold;
     letter-spacing: 1px;
-    line-height: 13px;
+    line-height: 24px;
+}
+
+.header-3{
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 18px;
+}
+
+.pagenum{
+    color: #000000;
+    font-size: 12px;
+    letter-spacing: 1px;
+    float:right;
+    line-height: 40px;
+}
+
+.pagenum:after{
+    font-weight: bold;
 }
 
 /* PAGE 1 */
 .logo-p1 {
     position: fixed;
-    height: 22%;
-    width: 26%;
-    top: 171px;
-    right: 0px;
+    height: auto;
+    width: auto;
+    top: 198px;
+    float:right;
+    max-height: 200px;
+    max-width: 200px;
 }
 
 .h1-p1 {
@@ -93,7 +163,19 @@ footer .pagenum:before {
     top: 320px;
     left: 50px;
     color: rgba(0,0,0,0.6);
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.h4-p1 {
+    position: fixed;
+    top: 345px;
+    left: 50px;
+    color: rgba(0,0,0,0.6);
+    font-size: 14px;
     font-weight: 300;
     line-height: 10px;
 }
@@ -111,13 +193,20 @@ footer .pagenum:before {
 }
 
 .project-info-right {
-    position: absolute;
-    right: 28px;
     color: #000000;
     font-size: 12px;
     letter-spacing: 1px;
     line-height: 18px;
     text-align: right;
+}
+
+.project-info-right-ab{
+    position: absolute;
+    right: 28px;
+}
+
+.project-info-right-des{
+    padding-right: 28px;
 }
 /* END OF PAGE 1 */
 
@@ -145,15 +234,6 @@ footer .pagenum:before {
     line-height: 13px;
 }
 
-.content-pagenum {
-    position: fixed;
-    text-align: right;
-    margin-right: -80px;
-    color: #000000;
-    font-size: 12px;
-    letter-spacing: 1px;
-    line-height: -18px;
-}
 
 #disable-font {
     font-family: initial;
@@ -168,9 +248,9 @@ footer .pagenum:before {
 /* PAGE 4 */
 .project-description {
     color: #000000;
-    font-size: 12px;
-    letter-spacing: 1px;
-    line-height: 13px;
+    font-size: 14px;
+    line-height: normal;
+    text-transform: none;
 }
 
 .bold-text-p4 {
@@ -200,7 +280,16 @@ footer .pagenum:before {
     font-style: normal;
 }
 
+.no-break h1{
+    margin-top: 2rem;
+}
+
 .prepared{
     text-transform: capitalize;
 }
+
+.project-description td:first-child{
+    width: 200px;
+}
+
 /* END OF PAGE 4 */

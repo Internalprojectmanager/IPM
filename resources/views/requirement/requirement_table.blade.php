@@ -24,15 +24,15 @@
                 @foreach($feature->requirements as $requirement)
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: {{$requirement->rstatus->color}};"></td>
-                        <td class="width20"><span class="tabletitle">{{$requirement->name}}</span></td>
-                        <td class="width20">{!! nl2br(Linkify::process($requirement->description)) !!}</td>
-                        <td class="">
+                        <td class="col-md-3"><span class="tabletitle">{{$requirement->name}}</span></td>
+                        <td class="col-md-4">{!! nl2br(Linkify::process($requirement->description)) !!}</td>
+                        <td class="col-md-1">
                             @if($requirement->rstatus)
                                 {{$requirement->rstatus->name}}
                             @endif
 
                         </td>
-                        <td class="">
+                        <td class="col-md-4">
                             @foreach($requirement->assignees as $assignee)
                                 <div class="row" style="line-height: 2.3;">
                                     <div class="requiremnt-assingee">

@@ -120,12 +120,14 @@
                 <tr class="clickable-row" data-href="{{route('showrelease', [$project->company->path, $project->path,
                         $release->path, $release->version])}}">
                     <td style="background-color: {{$release->rstatus->color}};"></td>
-                    <td><span class="tabletitle">{{floatval($release->version)}} - {{$release->name}}</span>
+                    <td class="col-md-2"><span class="tabletitle">{{number_format($release->version, 1)}} - {{$release->name}}</span>
                     </td>
-                    <td class="table-description">{{implode(' ', array_slice(str_word_count($release->description, 2), 0, 10))}}
-                        ...
+                    <td class=" col-md-5">{{implode(' ', array_slice(str_word_count($release->description, 2), 0, 20))}}
+                        @if(str_word_count($release->description) > 20)
+                            ...
+                        @endif
                     </td>
-                    <td>{{$release->rstatus->name}}
+                    <td class="col-md-2">{{$release->rstatus->name}}
                         <br>
                         @if($release->rstatus->name == "Completed")
                             <span class="tablesubtitle">on {{\Carbon\Carbon::parse($release->updated_at)}}</span>
@@ -135,12 +137,12 @@
                             <span class="tablesubtitle">on {{\Carbon\Carbon::parse($release->updated_at)}}</span>
                         @endif
                     </td>
-                    <td>@if($release->rstatus->name != "Completed" && $release->rstatus->name != "Paused" && $release->rstatus->name != "Cancelled")
+                    <td class="col-md-4">@if($release->rstatus->name != "Completed" && $release->rstatus->name != "Paused" && $release->rstatus->name != "Cancelled")
                             @if(isset($release->deadline)){{date('d F Y', strtotime($release->deadline))}} <br>
                             @if($release->monthsleft && $release->monthsleft > 0)
                                 <span>{{abs($release->monthsleft)}} Months left</span>
                             @elseif($release->monthsleft && $release->monthsleft < 0)
-                                <span>{{abs($release->monthsleft)}} Months overdue</span>
+                                <span class="red">{{abs($release->monthsleft)}} Months overdue</span>
                             @elseif($release->daysleft >= 0)
                                 <span @if($release->daysleft < 5) class="red" @endif>{{abs($release->daysleft)}} days left</span>
                             @elseif($release->daysleft < 0)

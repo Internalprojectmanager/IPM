@@ -13,7 +13,11 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Validation\ValidationException::class,
     ];
 
     /**
@@ -36,6 +40,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if (app()->bound('sentry') && $this->shouldReport($exception)) {
+            app('sentry')->captureException($exception);
+        }
+
         parent::report($exception);
     }
 
@@ -46,8 +54,28 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+        if($this->isHttpException($e) && env('APP_DEBUG') == false)
+        {
+            switch (intval($e->getStatusCode())) {
+                // not found
+                case 404:
+                    return \Response::view('errors.404',array('request' => $request, 'exceptions' => $e),404);
+                    break;
+                // internal error
+                case 500:
+                    return \Response::view('errors.500',array('request' => $request, 'exceptions' => $e),500);
+                    break;
+                case 503:
+                    return \Response::view('errors.503',array('request' => $request, 'exceptions' => $e),503);
+                    break;
+                default:
+                    return \Response::view('errors.404',array('request' => $request, 'exceptions' => $e), 404);
+                    break;
+            }
+        }
+
+        return parent::render($request, $e);
     }
 }

@@ -55,16 +55,11 @@
                     </div>
                 </div>
 
-                <div class="form-group margin-top-50">
+                <div class="form-group">
                     <div class="col-md-12 center">
                         <button type="submit" class="btn btn-noback">
                             Login
                         </button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12 center">
-                        <a href="{{route('googlelogin')}}"><img width="50px" src="{{asset('svg/google.svg')}}"/></a>
                     </div>
                 </div>
 
@@ -76,6 +71,12 @@
                         @else
                             <a class="btn-link" href="{{ url('/password/reset') }}">Reset</a>
                         @endif
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-4 google-btn center">
+                        <a href="{{route('googlelogin')}}"><i class="glyphicon g-icon"></i></a>
                     </div>
                 </div>
             </form>

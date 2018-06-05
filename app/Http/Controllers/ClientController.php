@@ -11,6 +11,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Client;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -22,7 +23,7 @@ class ClientController extends Controller
     public function addClient()
     {
         $status = Status::where('type', 'Client')->get();
-        return view('client.add_client', compact('status'));
+        return view('client.add_client_form', compact('status'));
     }
 
     public function storeClient(Request $request)
@@ -41,9 +42,8 @@ class ClientController extends Controller
         $client->contactname = $request->contact_name. ' ' .$request->contact_surname;
         $client->contactnumber = $request->contact_number;
         $client->contactemail = $request->contact_email;
-        $client->link = serialize(array('title' => $request->link_title, 'link' => $request->link_url));
+        $client->link = serialize(array('text' => $request->link_title, 'link' => $request->link_url));
 
-        dd($request);
         $client->save();
 
         return redirect()->route('overviewclient');
@@ -51,7 +51,7 @@ class ClientController extends Controller
 
     public function overviewClient()
     {
-        $clients = Client::sortable()->withCount('projects')->with('cstatus')->paginate(8);
+        $clients = Client::sortable()->withCount('projects')->with('cstatus')->currentuserteam()->paginate(8);
         $clientcount = $clients->count();
         $status = Status::type('Client')->get();
         return view('client.client', compact('clients', 'clientcount', 'status'));
@@ -74,6 +74,7 @@ class ClientController extends Controller
         if(isset($status)){
             $clients->where('status', $status);
         }
+        $clients->where('team_id', Auth::user()->currentTeam()->id);
         $clients = $clients->get();
 
         if($clients->count() <= 8){
@@ -97,7 +98,7 @@ class ClientController extends Controller
             $projectcount = $projects->total();
             $status = Status::type('Client')->get();
             $link = unserialize($client->link);
-            $client->link_title =$link['title'];
+            $client->link_title =$link['text'];
             $client->link_url=$link['link'];
             $user = User::all();
             $projectstatus = Status::type('Progress')->get();
@@ -109,7 +110,7 @@ class ClientController extends Controller
         $sort = $request->sort;
         $page = $request->page;
         $order = $request->order;
-        $projects = Project::sortable([$sort => $order])->where('company_id', $client->id)->paginate(8);
+        $projects = Project::sortable([$sort => $order])->where('company_id', $client->id)->currentuserteam()->paginate(8, $page);
         $projectcount = $projects->count();
         return view('project.project_table', compact('client', 'projects', 'projectcount'));
     }
@@ -121,15 +122,16 @@ class ClientController extends Controller
             'status' => 'exists:status,name'
         ]);
 
+
         $client->name = $request->client_name;
         $client->path = str_slug($client->name);
         $client->description = $request->description;
         $client->status = status::name($request->status)->id;
         $client->contactname = $request->contact_name;
-        $client->contactnumber = $request->contact_number;
-        $client->contactemail = $request->contact_mail;
-        if(!empty($request->linktext) && !empty($request->link)){
-            $client->link = serialize(array('text' => $request->linktext, 'link' => $request->link));
+        $client->contactnumber = $request->contact_phonenumber;
+        $client->contactemail = $request->contact_email;
+        if(!empty($request->link_title) && !empty($request->link_url)){
+            $client->link = serialize(array('text' => $request->link_title, 'link' => $request->link_url));
         }
         $client->save();
 

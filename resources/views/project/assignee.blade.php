@@ -1,19 +1,19 @@
 @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <div class="modal modal-lg" id="addProjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
             <label>Assigned Users</label>
-            <span class="modal-close"  data-dismiss="modal">
+            <span class="modal-close" data-dismiss="modal">
                     <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
@@ -36,22 +36,29 @@
             <form action="{{route('assigneeupdate', [$client->path, $project->path])}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label class="" for="assignee">Assignees</label>
-                    <select name="assignee[]" multiple class="form-control selectpicker">
-                        @foreach($user as $u)
-                            @php $selected = "";@endphp
-                            @foreach($assignee as $a)
-                                @if($a->userid == $u->id)
-                                    @php $selected = "selected=''";@endphp
-                                    @php break; @endphp
-                                @endif
-                            @endforeach
-
-                                <option {{$selected}} value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}} @if(isset($u->jobtitles))(<i>{{$u->jobtitles->name}}</i>)@endif</option>
-                        @endforeach
-                    </select>
+                    @foreach($roles as $role)
+                        <div class="col-md-12">
+                            <label class="" for="assignee">{{$role->name}}</label>
+                            <select name="assignee[{{$role->name}}][]" multiple class="form-control selectpicker"
+                                    data-live-search="true">
+                                @foreach($user as $u)
+                                    @php $selected = "";@endphp
+                                    @foreach($assignee as $a)
+                                        @if($a->userid == $u->id)
+                                            @foreach($a->roles() as $r)
+                                                @if($r->name == $role->name)
+                                                    @php $selected = "selected=''";@endphp
+                                                    @php break; @endphp
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                    <option {{$selected}} value="{{$u->id}}">{{$u->first_name}} {{$u->last_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endforeach
                 </div>
-
         </div>
         <div class="modal-footer row" style="border:none;">
             <div class="col-md-6" align="left">

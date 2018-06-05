@@ -185,6 +185,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Nahid\Linkify\LinkifyServiceProvider::class,
+        Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
 
 
     ],
@@ -231,6 +232,7 @@ return [
         'Response' => Illuminate\Support\Facades\Response::class,
         'Route' => Illuminate\Support\Facades\Route::class,
         'Schema' => Illuminate\Support\Facades\Schema::class,
+        'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
         'Session' => Illuminate\Support\Facades\Session::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,

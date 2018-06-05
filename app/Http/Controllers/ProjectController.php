@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Assignee;
+use App\AssigneeRole;
 use App\Http\Requests\ProjectValidator;
 use App\Status;
+use App\Team;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -16,7 +18,9 @@ use App\Project;
 use App\Release;
 use App\Document;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Role;
 
 class ProjectController extends Controller
 {
@@ -26,26 +30,30 @@ class ProjectController extends Controller
         $this->middleware(['auth', 'checkactive']);
     }
 
-    public function projectsCollection($ids = null){
-        $projectprev = Project::with('company', 'pstatus', 'assignee.users')
+    public function projectsCollection($ids = null)
+    {
+        $projectprev = Project::with('company', 'pstatus', 'assignee.users', 'team')
             ->when(!empty($ids), function ($query) use ($ids) {
                 return $query->whereIn('id', $ids);
             })
             ->where('deadline', '<=', Carbon::now('Europe/Amsterdam'))
             ->orderBy('deadline', 'desc')
+            ->currentuserteam()
             ->get();
-        $projectnull = Project::with('company', 'pstatus', 'assignee.users')
+        $projectnull = Project::with('company', 'pstatus', 'assignee.users', 'team')
             ->when(!empty($ids), function ($query) use ($ids) {
                 return $query->whereIn('id', $ids);
             })
             ->where('deadline', NULL)
             ->orderBy('deadline', 'desc')
+            ->currentuserteam()
             ->get();
-        $projectnext = Project::with('company', 'pstatus', 'assignee.users')
+        $projectnext = Project::with('company', 'pstatus', 'assignee.users', 'team')
             ->when(!empty($ids), function ($query) use ($ids) {
                 return $query->whereIn('id', $ids);
             })
             ->where('deadline', '>=', Carbon::now('Europe/Amsterdam'))
+            ->currentuserteam()
             ->orderBy('deadline', 'asc')
             ->get();
 
@@ -56,9 +64,8 @@ class ProjectController extends Controller
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
         if ($currentPage == 1) {
-        $start = 0;
-        }
-        else {
+            $start = 0;
+        } else {
             $start = ($currentPage - 1) * $perPage;
         }
         $projects = $this->calcDeadline($projects, 'project');
@@ -71,10 +78,10 @@ class ProjectController extends Controller
     public function calcDeadline($data)
     {
         $now = Carbon::now()->endOfDay();
-        foreach($data as $d){
-            $deadline  = Carbon::parse($d->deadline)->endOfDay();
+        foreach ($data as $d) {
+            $deadline = Carbon::parse($d->deadline)->endOfDay();
             $d->daysleft = $now->diffInDays($deadline, false);
-            if($d->daysleft >= 30 && $d->daysleft < 365 || $d->daysleft <= -30 && $d->daysleft > -365){
+            if ($d->daysleft >= 30 && $d->daysleft < 365 || $d->daysleft <= -30 && $d->daysleft > -365) {
                 $d->monthsleft = $now->diffInMonths($deadline, false);
             }
         }
@@ -83,47 +90,49 @@ class ProjectController extends Controller
 
     public function storeProject(ProjectValidator $request)
     {
-            $project = new Project();
-            $project->name = $request->project_name;
-            if (!empty($request->new_client)) {
-                $client = Client::firstOrCreate(['name' => $request->new_client, 'status' => Status::Name('Client')->first()->id]);
-                $project->company_id = $client->id;
-            } else {
-                $project->company_id = $request->company;
-            }
-            $project->projectcode = mb_strtoupper($request->project_code);
-            $project->status = Status::Name('Draft')->first()->id;
-            $project->description = $request->description;
-            $project->save();
-            $project->projectcode = "P-".str_pad($project->id,  4, "0", STR_PAD_LEFT);
-            $project->save();
+        $project = new Project();
+        $project->name = $request->project_name;
+        $project->team_id = $request->team;
+        if (!empty($request->new_client)) {
+            $client = Client::firstOrCreate(['name' => $request->new_client, 'status' => Status::Name('Client')->first()->id, 'team_id' => $request->team]);
+            $project->company_id = $client->id;
+        } else {
+            $project->company_id = $request->company;
+        }
+        $project->projectcode = mb_strtoupper($request->project_code);
+        $project->status = Status::Name('Draft')->first()->id;
+        $project->description = $request->description;
+        $project->save();
+        $project->projectcode = "P-" . str_pad($project->id, 4, "0", STR_PAD_LEFT);
+        $project->save();
 
-            if (!empty($request->new_client)) {
-                $findproject = Project::where([['name', $request->project_name], ['company_id', $client->id]])->first();
-            } else {
-                $findproject = Project::where([['name', $request->project_name], ['company_id', $request->company]])->first();
+        if (!empty($request->new_client)) {
+            $findproject = Project::where([['name', $request->project_name], ['company_id', $client->id]])->first();
+        } else {
+            $findproject = Project::where([['name', $request->project_name], ['company_id', $request->company]])->first();
+        }
+        if (!empty($request->assignee)) {
+            foreach ($request->assignee as $a) {
+                $assingee = new Assignee();
+                $assingee->userid = $a;
+                $assingee->uuid = $findproject->id;
+                $assingee->save();
             }
-            if (!empty($request->assignee)) {
-                foreach ($request->assignee as $a) {
-                    $assingee = new Assignee();
-                    $assingee->userid = $a;
-                    $assingee->uuid = $findproject->id;
-                    $assingee->save();
-                }
-            }
-            return redirect()->route('overviewproject');
+        }
+        return redirect()->route('overviewproject');
 
     }
 
     public function overviewProject()
     {
-        $projectcount = Project::select('id')->get()->count();
+        $projectcount = Project::select('id')
+            ->currentuserteam()->get()->count();
         $projects = $this->projectsCollection();
-        $client = Client::select('name', 'id')->get();
+        $client = Client::select('name', 'id')
+            ->currentuserteam()->get();
         $status = Status::where('type', 'Progress')->select('name', 'id')->get();
-        $user = User::all();
-
-        return view('project.project', compact('projects', 'projectcount', 'client', 'status', 'user'));
+        $teams = Auth::user()->teams();
+        return view('project.project', compact('projects', 'projectcount', 'client', 'status', 'teams'));
     }
 
     public function searchProject(Request $request)
@@ -137,12 +146,14 @@ class ProjectController extends Controller
         $page = $request->page;
 
         $projects = Project::search($search);
+
         if (isset($status)) {
             $projects->where('status', $status);
         }
         if (isset($client)) {
             $projects->where('company_id', $client);
         }
+
         $projectcount = $projects->get()->count();
 
         if ($projectcount <= 8) {
@@ -155,15 +166,16 @@ class ProjectController extends Controller
             $pro[] = $p->id;
         }
 
-        if(empty($pro)){
+        if (empty($pro)) {
             $pro = [0];
         }
 
-        if(!isset($order)) {
+        if (!isset($order)) {
             $projects = $this->projectsCollection($pro);
-        }else{
-            $projects = Project::with('pstatus')
+        } else {
+            $projects = Project::with('pstatus', 'team')
                 ->sortable([$sort => $order])
+                ->currentuserteam()
                 ->whereIn('project.id', $pro)
                 ->paginate(8, ['*'], 'page', $page);
         }
@@ -177,28 +189,38 @@ class ProjectController extends Controller
         $releases = Release::with('rstatus')->where('project_id', $project->id)->orderBy('version', 'desc')->get();
         $releases = $this->calcDeadline($releases);
         $documents = Document::where('project_id', $project->id)->get();
-        $user = User::orderby('job_title', 'desc')->orderby('last_name', 'asc')->get();
+        $user = Team::find($project->team_id)->users()->get();
         $assignee = Assignee::with('users')->where('uuid', $project->id)->get();
+        $roles = Role::orderBy('id', 'asc')->get();
         $status = Status::where('type', 'Progress')->get();
-        return view('project.details_project', compact('project', 'client', 'releases', 'documents', 'user', 'assignee', 'status'));
+        return view('project.details_project', compact('project', 'client', 'releases', 'documents', 'user', 'assignee', 'status', 'roles'));
     }
 
     public function editProject($client, $project)
     {
         $status = Status::Type('Progress')->get();
-        $companys = Client::all();
-
+        $companys = Client::select('name', 'id')
+            ->currentuserteam()->where('team_id', $project->team_id)->get();
         return view('project.edit_project', compact('project', 'companys', 'status'));
+    }
+
+    public function addProject()
+    {
+        $client = Client::select('name', 'id')
+            ->currentuserteam()->get();
+        $status = Status::where('type', 'Progress')->select('name', 'id')->get();
+        $teams = Auth::user()->teams();
+        return view('project.add_project_form', compact('teams', 'client', 'status'));
     }
 
     public function updateProject($client, $project, ProjectValidator $request)
     {
         $project->name = $request->project_name;
-
         if (!empty($request->new_client)) {
             $client = Client::firstOrCreate(['name' => $request->new_client]);
             $client->name = $request->new_client;
-            $client->path = strtolower(str_replace(" ","-",$client->name));
+            $client->team_id = Auth::user()->currentTeam()->id;
+            $client->path = strtolower(str_replace(" ", "-", $client->name));
             $client->save();
             $project->company_id = $client->id;
         } else {
@@ -226,26 +248,51 @@ class ProjectController extends Controller
 
     public function updateAssignees($client, $project, Request $request)
     {
-        if(empty($request->assignee)){
+
+        if (empty($request->assignee)) {
             $request->assignee = array();
+        }
+        $ids = [];
+        $keys = [];
+        foreach ($request->assignee as $key => $val) {
+            $keys[] = $key;
+            foreach ($val as $as) {
+                $ids[] = $as;
+            }
+        }
+        $assignee = $request->assignee;
+
+        foreach (Role::all() as $role) {
+            if (!in_array($role->name, $keys)) {
+                $assignee[$role->name] = array();
+            }
         }
 
         $assignees = Assignee::where('uuid', $project->id)->get();
         foreach ($assignees as $a) {
-            if (!in_array($a->userid, $request->assignee)) {
+            AssigneeRole::where('assignee_id', $a->id)->delete();
+            if (!in_array($a->userid, $ids)) {
                 $a->delete();
-            }
-        }
-        foreach ($request->assignee as $as) {
-            $assignees = Assignee::where([['uuid', $project->id], ['userid', $as]])->first();
-            if (empty($assignees)) {
-                $assignee = new Assignee();
-                $assignee->userid = $as;
-                $assignee->uuid = $project->id;
-                $assignee->save();
 
             }
         }
+
+        foreach ($assignee as $key => $val) {
+            foreach ($val as $as) {
+                $assignees = Assignee::where([['uuid', $project->id], ['userid', $as]])->first();
+                if (empty($assignees)) {
+                    $assignees = new Assignee();
+                    $assignees->userid = $as;
+                    $assignees->uuid = $project->id;
+                    $assignees->save();
+                }
+                $assignee_role = new AssigneeRole();
+                $assignee_role->assignee_id = $assignees->id;
+                $assignee_role->role_id = Role::name($key)->id;
+                $assignee_role->save();
+            }
+        }
+
         $client = $client->path;
         $project = $project->path;
         return redirect()->route('projectdetails', compact('client', 'project'));

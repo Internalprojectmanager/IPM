@@ -27,8 +27,25 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function fullName(){
+        return $this->attributes['first_name']. ' ' .$this->attributes['last_name'];
+    }
+
+
+    public function team(){
+        return $this->belongsToMany('App\Team')->withPivot('active', 'current')->wherePivot('active', true)->orderBy('current', 'desc');
+    }
+
+    public function teams(){
+        return $this->team()->get();
+    }
+
     public function jobtitles(){
         return $this->hasOne('App\Status', 'id', 'job_title');
+    }
+
+    public function assingees(){
+        return $this->hasMany('App\Assignee', 'userid', 'id');
     }
 
     /**
@@ -41,4 +58,25 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function currentTeam(){
+        return $this->team()->wherePivot('current', true)->first();
+    }
+
+    public function toDo(){
+        $todo = 0;
+        $assignees = $this->assingees()->get();
+
+        foreach ($assignees as $s){
+            if($s->requirements()->first() !== null){
+                if($s->astatus() !== null){
+                    if($s->astatus()->first()->name !== Status::name('completed')->name){
+                        $todo++;
+                    }
+                }
+            }
+        }
+        return $todo;
+    }
+
 }

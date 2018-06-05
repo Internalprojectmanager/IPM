@@ -19,8 +19,9 @@ Route::get('/home', function () {
     return redirect()->route('dashboard');
 })->name('home');
 
-Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
-Route::post('/dashboard', 'HomeController@dashboardSearch')->name('dashboardsearch');
+Route::get('/help', 'HomeController@help')->name('help');
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('auth');
+Route::post('/dashboard', 'HomeController@dashboardSearch')->name('dashboardsearch')->middleware('auth');
 Route::post('/dashboard/save', 'RequirementController@saveAuthStatus')->name('requirementsaveAuthstatus');
 
 
@@ -33,6 +34,19 @@ Route::group(['middleware' => ['guest', 'web']], function () {
 //Profile routes
 Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
 Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
+
+Route::group(['prefix' => 'team'], function() {
+    Route::get('/show/{team}', 'TeamController@show')->name('team.show');
+    Route::get('/add', 'TeamController@new')->name('team.new');
+    Route::post('/add/', 'TeamController@store')->name('team.store');
+    Route::get('/edit/{team}', 'TeamController@edit')->name('team.edit');
+    Route::post('/edit/{team}', 'TeamController@update')->name('team.update');
+    Route::post('/show/{team}/member/new', 'TeamController@storeMember')->name('teammember.store');
+    Route::get('/show/{team}/member/{member}/delete', 'TeamController@deleteMember')->name('teammember.delete');
+    Route::get('/show/{team}/member/{member}/block', 'TeamController@changeblockingMember')->name('teammember.block');
+    Route::get('/show/{team}/member/{member}/unblock', 'TeamController@changeblockingMember')->name('teammember.unblock');
+});
+
 
 //Auth Routes
 Route::group(['prefix' => 'password'], function () {

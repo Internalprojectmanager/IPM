@@ -35,23 +35,13 @@
 
 
 </head>
-<body>
+<body class="@if(!empty(\Request::route())){{\Request::route()->getName()}}@endif">
 @include('layout.nav')
 <div class="loader"></div>
 <div class="container">
-
     <div class="row">
         @yield('breadcrumbs')
     </div>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     @include('flash::message')
     @yield('content')
 </div>
