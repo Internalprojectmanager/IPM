@@ -45,7 +45,7 @@
                     @endif
 
                 </td>
-                <td class="col-md-1">
+                <td class="col-md-2">
                     @if($project->pstatus->name != "Completed" &&$project->pstatus->name != "Paused" && $project->pstatus->name != "Cancelled")
                         @if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>
                             @if($project->monthsleft && $project->monthsleft > 0)
