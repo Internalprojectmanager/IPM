@@ -5,8 +5,7 @@
     header("Pragma: no-cache");
 
 @endphp
-
-        <!doctype html>
+<!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
@@ -17,6 +16,20 @@
     <meta name="author" content="">
 
     <title>@yield('title')</title>
+
+    @if(env('APP_ENV') == 'develop' || env('APP_ENV') == 'production')
+    <!-- Hotjar Tracking Code for IPM -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:902819,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+    @endif
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
