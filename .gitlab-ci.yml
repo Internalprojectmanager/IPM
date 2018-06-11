@@ -9,7 +9,7 @@ stages:
 
 variables:
     DC_PROJ: ${DC_NAME}_${CI_COMMIT_REF_NAME}
-    DC_NAME: portfolio
+    DC_NAME: ipm
     DC_FILE: /usr/share/jwa-dockers/sites/${DC_NAME}_${CI_BUILD_REF_NAME}/docker-compose.yml
 
 Build:
