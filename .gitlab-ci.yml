@@ -3,6 +3,7 @@ cache:
   key: "$CI_BUILD_REF_NAME"
   paths:
     - vendor/
+    - storage/
 stages:
   - build
   - compile
@@ -29,5 +30,5 @@ Compile:
   only:
     - develop
   script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.j-wa.nl:5001
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME yarn install --production
