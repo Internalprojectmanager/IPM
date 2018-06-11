@@ -1,19 +1,33 @@
-before_script:
-  - echo "Updating ipm.."
+cache:
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+    - vendor/
 stages:
-  - deploy
-deploy to develop:
-  stage: deploy
-  variables:
-    DC_FILE: /usr/share/iav-dockers/ipm_develop/docker-compose.yml
-    DC_PROJ: ipmdevelop
-    DC_PARAMS: -p $DC_PROJ -f $DC_FILE
+  - build
+  - compile
+
+variables:
+    DC_PROJ: ${DC_NAME}_${CI_COMMIT_REF_NAME}
+    DC_NAME: portfolio
+    DC_FILE: /usr/share/jwa-dockers/sites/${DC_NAME}_${CI_BUILD_REF_NAME}/docker-compose.yml
+
+Build:
+  stage: build
   only:
-    - develop
+    - dev
   script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.iavconcepts.com:5500
-    - docker-compose $DC_PARAMS exec -T ipm git pull
-    - docker-compose $DC_PARAMS exec -T ipm composer install
-    - docker-compose $DC_PARAMS exec -T ipm php artisan migrate
-    - docker-compose $DC_PARAMS exec -T ipm php artisan storage:link
-  environment: develop
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.j-wa.nl:5001
+    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME git checkout $CI_BUILD_REF_NAME
+    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME git pull origin $CI_BUILD_REF_NAME
+    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME composer install
+    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan migrate
+    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan config:cache
+
+Compile:
+  stage: compile
+  only:
+    - dev
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.j-wa.nl:5001
+    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME yarn install --production
