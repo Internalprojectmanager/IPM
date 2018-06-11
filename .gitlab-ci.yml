@@ -15,7 +15,7 @@ variables:
 Build:
   stage: build
   only:
-    - dev
+    - develop
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.j-wa.nl:5001
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME git checkout $CI_BUILD_REF_NAME
@@ -27,7 +27,7 @@ Build:
 Compile:
   stage: compile
   only:
-    - dev
+    - develop
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.j-wa.nl:5001
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME yarn install --production
