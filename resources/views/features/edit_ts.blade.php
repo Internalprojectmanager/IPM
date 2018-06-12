@@ -53,6 +53,15 @@
                                   id="description">{{$feature->description}}</textarea>
 
                     </div>
+                    <div class="form-group">
+                        <label for="description">Category: <span class="required">*</span></label>
+                        <select name="feature_category" required class="form-control input-text-modal">
+                            @foreach($category as $c)
+
+                                <option @if($c->id == $feature->category) selected @endif value="{{$c->id}}">{{$c->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="form-group">
                         <label for="description">Status: <span class="required">*</span></label>
