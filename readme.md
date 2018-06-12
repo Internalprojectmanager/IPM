@@ -1,4 +1,4 @@
-IPM TOOL of Itsavirus [![Latest Develop Build](https://gitlab.iavconcepts.com/TeamIPM/IPM-Tool/badges/develop/pipeline.svg)](https://gitlab.iavconcepts.com/TeamIPM/IPM-Tool/commits/develop)
+IPM TOOL of Itsavirus [![Latest Develop Build](https://gitlab.com/itsaprojectmanager/IPM/badges/develop/pipeline.svg)](https://gitlab.com/itsaprojectmanager/IPM/commits/develop)
 =====================
 About
 -----
@@ -6,8 +6,8 @@ This is a tool for Itsavirus to manage features and requirements based on projec
 
 Installation
 ------------
-- git clone ssh://git@gitlab.iavconcepts.com:10022/TeamIPM/IPM-Tool.git
-- cd IPM-Tool
+- git clone ssh://git@gitlab.com/itsaprojectmanager/IPM.git
+- cd IPM
 - cp .env.example .env
 - composer install
 - Change example database settings to own database settings in .env file
@@ -26,9 +26,5 @@ Vhost Rules
 
 IPM must be run at the one of the following VHOSTS or the Google Oauth will not work with your instance.
 
-- http://localhost/IPM-Tool/public/
+- http://localhost/IPM/public/
 - http://ipm.example.com
-- http://ipm.dev
-- https://ipm.iavdevelop.com
-- https://ipm.iavtest.com
-- https://ipm.itsavirus.com
