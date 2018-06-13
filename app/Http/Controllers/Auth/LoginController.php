@@ -61,19 +61,14 @@ class LoginController extends Controller
         $user = Socialite::driver($provider)->stateless()->user();
         if($user){
             $domain = preg_replace('/.+@/', '', $user->getEmail());
-
-            if ($domain == 'itsavirus.com') {
                 // Here, check if the user already exists in your records
                 $authuser = $this->firstOrCreateOauth($user, $provider);
                 $this->firstOrCreatePersonal($authuser);
                 Auth::login($authuser);
                 flash()->success('Succesfully Logged in');
                 return redirect()->intended('overviewproject');
-            }else{
-                flash()->error(strtoupper($provider).' account has no valid domain, Please use an Itsavirus Email')->important();
-            }
         }else{
-            flash()->error('Google login has expired, Please try again');
+            flash()->error('Oauth login has expired, Please try again');
         }
         return Redirect()->route('login')->withInput();
     }
