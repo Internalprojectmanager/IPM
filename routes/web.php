@@ -19,6 +19,9 @@ Route::get('/home', function () {
     return redirect()->route('dashboard');
 })->name('home');
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/help', 'HomeController@help')->name('help');
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('auth');
 Route::post('/dashboard', 'HomeController@dashboardSearch')->name('dashboardsearch')->middleware('auth');
@@ -29,6 +32,14 @@ Route::group(['middleware' => ['guest', 'web']], function () {
     Auth::routes();
     Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('googlelogin');
     Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback')->name('googleauth');
+});
+
+
+Route::group(['prefix' => 'admin'], function (){
+    Route::group(['prefix' => 'users'], function (){
+        Route::get('/', 'Admin\UserController@index')->name('admin.user.index');
+
+    });
 });
 
 //Profile routes
@@ -126,6 +137,3 @@ Route::prefix('{client}')->group( function (){
         });
     });
 });
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
