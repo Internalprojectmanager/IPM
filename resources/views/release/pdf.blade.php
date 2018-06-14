@@ -6,16 +6,10 @@
         - {{$release->name}} {{number_format(floatval($release->version), 1)}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-    <link href="{{ public_path('css/pdf.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/pdf.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-<script type="text/php">
-	$GLOBALS['chapters'] = array();
-	$GLOBALS['backside'] = $pdf->open_object();
-
-</script>
-
 <p id="p1">
     @if(!empty($project->team->logo))
         <img class="logo-p1" src="{{public_path('storage').'/'. $project->team->logo}}">
@@ -116,9 +110,6 @@
                 <hr>
             @endforeach
         </span>
-        <script type="text/php">
-	        $pdf->close_object();
-        </script>
     </p>
     <!-- END OF PAGE 3 -->
 
@@ -156,14 +147,13 @@
                         @php $acounter = 1; @endphp
                         @if($project->assignee->count() > 0)
                             @foreach($project->assignee as $a)
-                                @if(!empty($a->roles()))
-                                    @foreach($a->roles() as $r)
-
+                                @if(!empty($a->role))
+                                    @foreach($a->role as $r)
                                         @if($r->name == $role->name)
                                             <i class="non-cursive">
                                                     <span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span>
                                                     <br>
-                                                    <span class="company-p4">{{$project->team()->first()->name}}</span>
+                                                    <span class="company-p4">{{$project->team->name}}</span>
                                                 </i>
                                             <br>
 
@@ -270,5 +260,3 @@
     <!-- END OF PAGE 5 -->
 </body>
 </html>
-
-@php set_time_limit(30); @endphp
