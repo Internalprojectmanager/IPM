@@ -22,20 +22,26 @@ class ClientController extends Controller
 
     public function addClient()
     {
+        $teams = Auth::user()->teams();
         $status = Status::where('type', 'Client')->get();
-        return view('client.add_client_form', compact('status'));
+        return view('client.add_client_form', compact('status', 'teams'));
     }
 
     public function storeClient(Request $request)
     {
         $request->validate([
             'client_name' => 'required|unique:client,name',
-            'status' => 'exists:status,name'
+            'status' => 'exists:status,name',
+            'team' => 'exists:teams,id|required',
         ]);
 
         $status = Status::name($request->status);
         $client = new Client();
         $client->name = $request->client_name;
+        if($request->team){
+            $client->team_id = Team::find(id)->id;
+        }
+
         $client->path = str_slug($client->name);
         $client->description = $request->description;
         $client->status = $status->id;
@@ -54,7 +60,8 @@ class ClientController extends Controller
         $clients = Client::sortable()->withCount('projects')->with('cstatus')->currentuserteam()->paginate(8);
         $clientcount = $clients->count();
         $status = Status::type('Client')->get();
-        return view('client.client', compact('clients', 'clientcount', 'status'));
+        $teams = Auth::user()->teams();
+        return view('client.client', compact('clients', 'clientcount', 'status', 'teams'));
     }
 
     public function searchClient(Request $request){
@@ -102,7 +109,9 @@ class ClientController extends Controller
             $client->link_url=$link['link'];
             $user = User::all();
             $projectstatus = Status::type('Progress')->get();
-            return view('client.details_client', compact('client', 'projects', 'projectcount', 'status', 'user', 'projectstatus'));
+            $teams = Auth::user()->teams();
+
+            return view('client.details_client', compact('client', 'projects', 'projectcount', 'status', 'user', 'projectstatus', 'teams'));
     }
 
     public function detailsSort($client , Request $request)
