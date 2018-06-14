@@ -237,15 +237,15 @@
                         @foreach($f->requirements as $r)
                             <div class="row">
                                 <div class="project-description">
-                                <span class="left">
-                                        <strong>
-                                            FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?>
-                                        </strong> <br>
-                                    {{ $r->name }}
-                                </span>
-                                <span class="right">
-                                    {!! nl2br($r->description) !!}
-                                </span>
+                                    <span class="left">
+                                            <strong>
+                                                FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?>
+                                            </strong> <br>
+                                        {{ $r->name }}
+                                    </span>
+                                    <span class="right">
+                                        {!! nl2br($r->description) !!}
+                                    </span>
                                 </div>
                             </div>
 
