@@ -28,6 +28,7 @@ class PDFController extends Controller
     }
 
     public function createPDF($client,$project,$release, $version){
+        set_time_limit(0);
         $project = Project::with(['assignee.users.jobtitles','team','assignee' => function ($q){
             $q->orderby('userid');
         }])->path($project->path)->where('company_id' , $client->id)->firstorfail();

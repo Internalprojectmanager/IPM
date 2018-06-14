@@ -270,3 +270,5 @@
     <!-- END OF PAGE 5 -->
 </body>
 </html>
+
+@php set_time_limit(30); @endphp
