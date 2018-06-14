@@ -134,6 +134,7 @@ class ClientController extends Controller
 
         $client->name = $request->client_name;
         $client->path = str_slug($client->name);
+        $client->team_id = $request->team;
         $client->description = $request->description;
         $client->status = status::name($request->status)->id;
         $client->contactname = $request->contact_name;
