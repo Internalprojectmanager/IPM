@@ -30,13 +30,17 @@ html, body {
 }
 
 .container {
-    padding: 10rem 4rem 3rem 15rem;
+    padding: 9rem 3rem 0;
     width: 100%;
 }
 
 .container_login {
     padding: 10rem 3rem 3rem 3rem;
     width: 100%;
+}
+
+.container-fluid{
+    margin: 1rem auto;
 }
 
 .loader {

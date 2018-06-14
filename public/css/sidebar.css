@@ -38,16 +38,14 @@
 }
 
 /* TOP NAVBAR */
-#navbar_top {
-    position: fixed;
-    width: 100%;
+.navbar {
     height: 70px;
     color: #fff;
     background-color: #333333;
     font-size: 16px;
     line-height: 19px;
-    box-shadow: 0 -1px 0 0 rgba(49,61,79,0.5);
     z-index:998;
+    border-radius: 0;
 }
 
 #username {

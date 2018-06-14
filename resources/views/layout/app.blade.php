@@ -1,5 +1,4 @@
 @php
-
     header("Expires: Thu, 19 Nov 1981 08:52:00 GMT"); //Date in the past
     header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"); //HTTP/1.1
     header("Pragma: no-cache");
@@ -60,35 +59,34 @@
 
 </head>
 <body class="@if(!empty(\Request::route())){{\Request::route()->getName()}}@endif">
-@include('layout.nav')
-<div class="loader"></div>
-<div class="container">
-    <div class="row">
-        @yield('breadcrumbs')
+
+    @include('layout.nav')
+
+    <div class="loader"></div>
+    <div class="container">
+        <div class="row">
+            @yield('breadcrumbs')
+        </div>
+        @include('flash::message')
+        @yield('content')
     </div>
-    @include('flash::message')
-    @yield('content')
-</div>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
-
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-
-<!-- Javascript -->
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<script src="{{asset('js/custom.js', config('app.secure'))}}"></script>
-<script>
-    $(document).ready(function () {
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true,
-        });
-    })
-</script>
+    <!-- Javascript -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{asset('js/custom.js', config('app.secure'))}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+            });
+        })
+    </script>
 
 </body>
 </html>
