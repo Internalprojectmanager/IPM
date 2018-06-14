@@ -40,7 +40,7 @@ class ClientController extends Controller
         $client = new Client();
         $client->name = $request->client_name;
         if($request->team){
-            $client->team_id = Team::find(id)->id;
+            $client->team_id = $request->team;
         }
 
         $client->path = str_slug($client->name);

@@ -94,7 +94,8 @@ class ProjectController extends Controller
         $project->name = $request->project_name;
         $project->team_id = $request->team;
         if (!empty($request->new_client)) {
-            $client = Client::firstOrCreate(['name' => $request->new_client, 'status' => Status::Name('Client')->first()->id, 'team_id' => $request->team]);
+            dd($request->team);
+            $client = Client::firstOrCreate(['name' => $request->new_client, 'team_id' => $request->team], ['status' => Status::Name('Client')->first()->id]);
             $project->company_id = $client->id;
         } else {
             $project->company_id = $request->company;
