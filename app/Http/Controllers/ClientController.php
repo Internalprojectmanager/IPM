@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Client;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Team;
 
 class ClientController extends Controller
 {
