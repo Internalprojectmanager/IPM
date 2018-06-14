@@ -18,8 +18,9 @@ use App\Release;
 use App\Requirements;
 use DB;
 use Webpatser\Uuid\Uuid;
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Storage;
+
 class PDFController extends Controller
 {
     public function __construct()
@@ -36,7 +37,11 @@ class PDFController extends Controller
         $roles = Role::all();
 
         $features = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid]])->orderByRaw(DB::raw("FIELD(type, 'Feature', 'NFR', 'TS', 'Scope')"))->get();
-        $pdf = PDF::setOptions(['images' => true])->loadView('release.pdf', compact('release', 'project', 'features', 'client', 'requirements', 'assignees', 'roles'))->setPaper('a4', 'portrait');
-        return $pdf->stream('Release.pdf');
+        $pdf = PDF::setOptions(['images' => true])
+            ->loadView('release.pdf',
+            compact('release', 'project', 'features', 'client', 'requirements', 'assignees', 'roles'))
+            ->save(public_path().'/storage/team/'. $project->team->slug.'/'. $release->path . '.pdf');
+
+        return response()->file(public_path().'/storage/team/'. $project->team->slug.'/'. $release->path . '.pdf');
     }
 }
