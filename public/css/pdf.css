@@ -61,6 +61,10 @@ hr {
     color: rgba(151,151,151,0.23);
 }
 
+.company-p4{
+    font-style: italic;
+}
+
 
 .logo-footer {
     height: 40px;
@@ -230,7 +234,7 @@ hr {
     line-height: 13px;
 }
 
-.responsibility-p4 {
+.responsibility-p4, .company-p4 {
     color: rgba(0,0,0,0.6);
     font-size: 12px;
     letter-spacing: 1px;
