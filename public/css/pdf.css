@@ -31,13 +31,14 @@ body {
     white-space: nowrap;
     vertical-align: middle;
     page-break-inside: avoid !important;
+    page-break-after: auto !important;
     margin: 0;
 }
 .feature-table .left{
     width: 270px;
     display: inline-block;
     white-space: normal;
-    text-align: left;
+    clear: left;
 
 }
 
