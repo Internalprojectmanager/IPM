@@ -55,31 +55,44 @@
 @if($project->team->slogan)
     <p id="p2">
         <br><br><br>
-        <span class="h1">{{$project->team->slogan}}</span>
-    </p>
-@endif
 
-    <!-- PAGE 3 -->
-    <p id="p3">
-        <span class="h1">CONTENTS</span>
-        <br><br><br><br><br>
-        <span class="content-p3">
-            <span class="content-title" id="disable-font">
-                <span id="content-title-font">PROJECT DESCRIPTION</span>
-            </span>
-            <hr>
-            <span class="content-title" id="disable-font">
-                <span id="content-title-font">PROJECT ROLES & RESPONSIBILITIES</span>
-            </span>
-            <hr>
-            <?php $featureID = 0; $i = 6; $k = 0; $type = null ?>
-            @foreach($features as $f)
+        @php
 
-                @if($type !== $f->type)
-                    @php
-                        $k= 0;
-                        $type = $f->type;
-                        $featureID = 0;
+            $slogan = explode(" ", $project->team->slogan);
+            $sloganafter  = $slogan[count($slogan)-1];
+        @endphp
+        <span class="h1 text-capitalize">
+            @foreach($slogan as $slo)
+                @if($slo == $sloganafter)
+                    <br>
+                @endif
+                {{$slo}}
+            @endforeach
+        </span>
+        </p>
+    @endif
+
+        <!-- PAGE 3 -->
+        <p id="p3">
+            <span class="h1">CONTENTS</span>
+            <br><br><br><br><br>
+            <span class="content-p3">
+                <span class="content-title" id="disable-font">
+                    <span id="content-title-font">PROJECT DESCRIPTION</span>
+                </span>
+                <hr>
+                <span class="content-title" id="disable-font">
+                    <span id="content-title-font">PROJECT ROLES & RESPONSIBILITIES</span>
+                </span>
+                <hr>
+                <?php $featureID = 0; $i = 6; $k = 0; $type = null ?>
+                @foreach($features as $f)
+
+                    @if($type !== $f->type)
+                        @php
+                            $k= 0;
+                            $type = $f->type;
+                            $featureID = 0;
                     @endphp
                 @endif
                 @if($k == 0)

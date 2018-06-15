@@ -65,6 +65,10 @@ hr {
     font-style: italic;
 }
 
+.text-capitalize{
+    text-transform: uppercase;
+}
+
 
 .logo-footer {
     height: 40px;
@@ -79,9 +83,13 @@ hr {
     letter-spacing: 1px;
 }
 
+.p2 .h1{
+    word-spacing: 4px;
+}
+
 .h1{
     font-size: 44px;
-    line-height: 41px;
+    line-height: 50px;
 }
 
 .h2 {
