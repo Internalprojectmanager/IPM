@@ -96,8 +96,10 @@ hr {
 
 .pagenum{
     font-size: 12px;
-    float:right;
+    position:fixed;
     line-height: 40px;
+    bottom: -25px;
+    left: 710px;
 }
 
 /* PAGE 1 */

@@ -45,7 +45,6 @@
         @if(!empty($project->team->logo))
             <img class="logo-footer" src="{{public_path('storage').'/'. $project->team->logo}}">
         @endif
-            {{$project->team->name}}
         </span>
         <span class="pagenum"></span>
     </div>
