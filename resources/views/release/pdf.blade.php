@@ -63,7 +63,7 @@
         @endphp
         <span class="h1 text-capitalize">
             @foreach($slogan as $slo)
-                @if($slo == $sloganafter)
+                @if($slo == $sloganafter && $project->team->name == "Itsavirus")
                     <br>
                 @endif
                 {{$slo}}
