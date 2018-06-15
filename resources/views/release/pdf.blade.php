@@ -6,9 +6,8 @@
         - {{$release->name}} {{number_format(floatval($release->version), 1)}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-    <link href="{{ asset('css/pdf.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{public_path().'/css/pdf.css' }}" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
 <p id="p1">
     @if(!empty($project->team->logo))
@@ -155,7 +154,6 @@
                                                     <span class="company-p4">{{$project->team->name}}</span>
                                                 </i>
                                             <br>
-
                                             @php $acounter++; @endphp
                                         @endif
                                     @endforeach
@@ -238,15 +236,15 @@
                         @foreach($f->requirements as $r)
                             <div class="row">
                                 <div class="project-description">
-                                <span class="left">
-                                        <strong>
-                                            FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?>
-                                        </strong> <br>
-                                    {{ $r->name }}
-                                </span>
-                                <span class="right">
-                                    {!! nl2br($r->description) !!}
-                                </span>
+                                    <span class="left">
+                                            <strong>
+                                                FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?>
+                                            </strong> <br>
+                                        {{ $r->name }}
+                                    </span>
+                                    <span class="right">
+                                        {!! nl2br($r->description) !!}
+                                    </span>
                                 </div>
                             </div>
 
