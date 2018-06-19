@@ -128,7 +128,7 @@
                     @else
                         @php $f->shortType = $f->type @endphp
                     @endif
-                    <span id="content-title-font">{{$f->shortType}}-{{$featureID}} {{$f->name}}</span>
+                    <span id="content-title-font">{{$f->shortType}}-{{$featureID}}. {{$f->name}}</span>
                 <hr>
             @endforeach
         </span>
