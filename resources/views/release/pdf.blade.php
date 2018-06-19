@@ -117,7 +117,7 @@
                     @php $k++; @endphp
                 @endif
                 <span class="content-subtitle" id="disable-font">
-                <span id="content-title-font"><?php $featureID++; echo $featureID . '.0'; ?> {{$f->name}}</span>
+                <span id="content-title-font"><?php $featureID++; echo $featureID; ?> {{$f->name}}</span>
                 <hr>
             @endforeach
         </span>
