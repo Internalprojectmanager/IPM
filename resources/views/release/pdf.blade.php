@@ -98,7 +98,9 @@
                 @if($k == 0)
                     @switch($type)
                         @case("NFR")
-                        @php $f->typeFull = "Non Functional Requirements"; @endphp
+                        @php
+                            $f->typeFull = "Non Functional Requirements";
+                        @endphp
                         @break
                         @case('Scope')
                         @php $f->typeFull = "Out Of Scope"; @endphp
@@ -117,7 +119,16 @@
                     @php $k++; @endphp
                 @endif
                 <span class="content-subtitle" id="disable-font">
-                <span id="content-title-font"><?php $featureID++; echo $featureID; ?> {{$f->name}}</span>
+                    @php $featureID++ @endphp
+
+                    @if($f->type == "Feature")
+                        @php $f->shortType = "F" @endphp
+                    @elseif($f->type == "Scope")
+                        @php $f->shortType = "S" @endphp
+                    @else
+                        @php $f->shortType = $f->type @endphp
+                    @endif
+                    <span id="content-title-font">{{$f->shortType}}-{{$featureID}} {{$f->name}}</span>
                 <hr>
             @endforeach
         </span>
