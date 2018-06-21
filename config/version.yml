@@ -1,15 +1,15 @@
-version_source: config # "config", "git-local" or "git-remote"
+version_source: git-local # "config", "git-local" or "git-remote"
 blade_directive: version
 current:
   major: 1
-  minor: 6
+  minor: 0
   patch: 0
   format: "{$major}.{$minor}.{$patch}"
   git_absorb: false # "false", "git-local" or "git-remote"
 cache:
   enabled: true
   key: pragmarx-version
-  time: 0 #minutes = 1 year
+  time: 525600 #minutes = 1 year
 build:
   mode: git-local # "number", "git-local" or "git-remote"
   number: 701031
@@ -24,14 +24,14 @@ git:
   version:
     git-local: "git describe"
     git-remote: "git ls-remote {$repository} | grep tags/ | grep -v {} | cut -d \/ -f 3 | sort --version-sort | tail -1"
-    matcher: "/[V|v]*[ersion]*\\s*\\.*(\\d+)\\.(\\d+)\\.(\\d+)\\.*(\\w*)/"
+    matcher: "/[V|v]\\s*\\.*(\\d+)\\.(\\d+)\\.(\\d+)/"
 format:
   major: "{$major}"
   minor: "{$minor}"
   patch: "{$patch}"
   build: "{$build}"
-  version: "{$major}.{$minor}.{$patch} (build {$build})"
+  version: "V{$major}.{$minor}.{$patch} (build {$build})"
   full: "version {{'format.version'}}"
   compact: "v{$major}.{$minor}.{$patch}-{$build}"
-  short: "{$major}.{$minor}.{$patch}"
   ## add as many formats as you need !!!!
+~
