@@ -34,4 +34,3 @@ format:
   full: "version {{'format.version'}}"
   compact: "v{$major}.{$minor}.{$patch}-{$build}"
   ## add as many formats as you need !!!!
-~
