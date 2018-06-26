@@ -73,14 +73,20 @@ class LoginController extends Controller
         if ($authUser) {
             return $authUser;
         }
-        return User::create([
-            'first_name' => $user->user['name']['givenName'],
-            'last_name' => $user->user['name']['familyName'],
-            'email'    => $user->email,
-            'provider' => $provider,
-            'provider_id' => $user->id,
-            'active' => 1,
-        ]);
+        else{
+            $user =  User::create([
+                'first_name' => $user->user['name']['givenName'],
+                'last_name' => $user->user['name']['familyName'],
+                'email'    => $user->email,
+                'provider' => $provider,
+                'provider_id' => $user->id,
+                'active' => 1,
+            ]);
+            
+            $this->firstOrCreatePersonal($user);
+
+            return $user;
+        }   
     }
 
     public function firstOrCreatePersonal($user){
@@ -102,7 +108,5 @@ class LoginController extends Controller
             UserTeam::create($datalink);
         }
     }
-
-
 
 }
