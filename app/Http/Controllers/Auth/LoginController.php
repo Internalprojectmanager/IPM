@@ -78,7 +78,8 @@ class LoginController extends Controller
             'last_name' => $user->user['name']['familyName'],
             'email'    => $user->email,
             'provider' => $provider,
-            'provider_id' => $user->id
+            'provider_id' => $user->id,
+            'active' => 1,
         ]);
     }
 
