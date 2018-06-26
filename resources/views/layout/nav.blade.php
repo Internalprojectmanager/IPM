@@ -275,15 +275,12 @@
                             <li><a href="{{route('help')}}"><i class=" icon-right-top far fa-question-circle fa-2x"></i> Help</a></li>
 
                             <li>
-                                <a style="cursor: pointer"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    <i class="glyphicon icon-right-top logout-icon"></i>
-                                    Logout
-                                </a>
-                                <form id="logout-form" action="{{url('/logout')}}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
+                                @include('partials.single-post-submit', [
+                                    'name'  =>  '<i class="glyphicon icon-right-top logout-icon"></i> Logout',
+                                    'route' =>  'logout',
+                                    'confirm'   =>  'Are you sure you want to logout?',
+                                    'a_class' => ''
+                                ])
                             </li>
 
                         </ul>
