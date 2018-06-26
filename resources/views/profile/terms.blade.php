@@ -1,5 +1,9 @@
 @extends('layout.app')
 
+@section('title')
+    Terms of Use
+@endsection
+
 @section('content')
     <div class="row block-white">
         <div class="row">
@@ -93,40 +97,42 @@
             </div>
         </div>
     </div>
-    @if(count(Auth::user()->teams()) > 1)
-    <div class="row margin-top-50 bg-danger">
-        <div class="col-md-12">
-            If you decline this Terms of Use your account will be deleted from IPM.
+    @if(Auth::user()->active < 2)
+        @if(count(Auth::user()->teams()) > 1)
+        <div class="row margin-top-50 bg-danger">
+            <div class="col-md-12">
+                If you decline this Terms of Use your account will be deleted from IPM.
 
-            The following Teams will be removed:
-            <ul>
-                @foreach(Auth::user()->teams() as $team)
-                    @if($team->name == Auth::user()->first_name.' '. Auth::user()->last_name)
-                        <li>Your Personal Space</li>
-                    @else
-                        <li>{{$team->name}}</li>
-                    @endif
+                The following Teams will be removed:
+                <ul>
+                    @foreach(Auth::user()->teams() as $team)
+                        @if($team->name == Auth::user()->first_name.' '. Auth::user()->last_name)
+                            <li>Your Personal Space</li>
+                        @else
+                            <li>{{$team->name}}</li>
+                        @endif
 
-                @endforeach
-            </ul>
+                    @endforeach
+                </ul>
 
-            <p>All projects with these team(s) will be removed as well</p>
+                <p>All projects with these team(s) will be removed as well</p>
+            </div>
+
+
         </div>
+        @endif
+        <div class="row margin-top-50">
+            <div class="col-md-3 col-xs-12 pull-right">
+                <form class="" method="POST" action="{{route('termschoice')}}">
+                    <input type="hidden" value="declined">
+                    <input class="btn-danger btn" type="submit" name="submit" value="Decline" onclick="return confirm('Are you sure you want to decline this Terms of Use');">
+                    {{ csrf_field() }}
+                    <input class="btn-success btn" type="submit" name="submit" value="Accept">
+                </form>
+            </div>
 
-
-    </div>
-    @endif
-    <div class="row margin-top-50">
-        <div class="col-md-3 col-xs-12 pull-right">
-            <form class="" method="POST" action="{{route('termschoice')}}">
-                <input type="hidden" value="declined">
-                <input class="btn-danger btn" type="submit" name="submit" value="Decline" onclick="return confirm('Are you sure you want to decline this Terms of Use');">
-                {{ csrf_field() }}
-                <input class="btn-success btn" type="submit" name="submit" value="Accept">
-            </form>
         </div>
-
-    </div>
+    @endsection
 
 
 @endsection
