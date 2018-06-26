@@ -4,7 +4,7 @@
     <div class="row block-white">
         <div class="row">
             <div class="col-md-12 col-xs-12">
-                <span class="block-white-title">Term of usage</span>
+                <span class="block-white-title">IPM Terms of use</span>
                 <span id="count_projects_bar">|</span>
                 <span>25 June 2018 - {{Auth::user()->email}}</span>
 
