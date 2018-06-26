@@ -4,7 +4,7 @@
     <div class="row block-white">
         <div class="row">
             <div class="col-md-12 col-xs-12">
-                <span class="block-white-title">IPM Terms of use</span>
+                <span class="block-white-title">IPM Terms of Use</span>
                 <span id="count_projects_bar">|</span>
                 <span>25 June 2018 - {{Auth::user()->email}}</span>
 
@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                    By accepting this terms of use you agree to the following.
+                    By accepting this Terms of Use you agree to the following.
             </div>
         </div>
 
@@ -79,7 +79,7 @@
 
         <div class="row margin-top-50">
             <div class="col-md-12">
-                <span class="block-white-title">5. Changes to Term of Usage</span>
+                <span class="block-white-title">5. Changes to Terms of Use</span>
                 <p>
                     IPM reserves the right, at its sole discretion,
                     to modify or replace any part of this Agreement.
@@ -96,7 +96,7 @@
     @if(count(Auth::user()->teams()) > 1)
     <div class="row margin-top-50 bg-danger">
         <div class="col-md-12">
-            If you decline this Term of Use your account will be deleted from IPM.
+            If you decline this Terms of Use your account will be deleted from IPM.
 
             The following Teams will be removed:
             <ul>
@@ -120,7 +120,7 @@
         <div class="col-md-3 col-xs-12 pull-right">
             <form class="" method="POST" action="{{route('termschoice')}}">
                 <input type="hidden" value="declined">
-                <input class="btn-danger btn" type="submit" name="submit" value="Decline" onclick="return confirm('Are you sure you want to decline this term of use');">
+                <input class="btn-danger btn" type="submit" name="submit" value="Decline" onclick="return confirm('Are you sure you want to decline this Terms of Use');">
                 {{ csrf_field() }}
                 <input class="btn-success btn" type="submit" name="submit" value="Accept">
             </form>
