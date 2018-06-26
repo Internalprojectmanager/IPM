@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                    By accepting this term of usage you agree to the following.
+                    By accepting this terms of use you agree to the following.
             </div>
         </div>
 
