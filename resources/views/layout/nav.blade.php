@@ -273,7 +273,6 @@
                             <span>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
                             <li><a href="{{route('profile')}}"><i class="glyphicon icon-right-top settings-icon"></i> Settings</a></li>
                             <li><a href="{{route('help')}}"><i class=" icon-right-top far fa-question-circle fa-2x"></i> Help</a></li>
-
                             <li>
                                 @include('partials.single-post-submit', [
                                     'name'  =>  '<i class="glyphicon icon-right-top logout-icon"></i> Logout',

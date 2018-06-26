@@ -10,7 +10,13 @@
             <div class="col-md-12 col-xs-12">
                 <span class="block-white-title">IPM Terms of Use</span>
                 <span id="count_projects_bar">|</span>
-                <span>25 June 2018 - {{Auth::user()->email}}</span>
+                <span>25 June 2018 - {{Auth::user()->email}} -
+                    @if(Auth::user()->active < 2)
+                        <span class="red">Pending</span>
+                    @elseif(Auth::user()->active = 2)
+                        <span class="success">Accepted</span>
+                    @endif
+                </span>
 
             </div>
         </div>
@@ -132,7 +138,7 @@
             </div>
 
         </div>
-    @endsection
+    @endif
 
 
 @endsection
