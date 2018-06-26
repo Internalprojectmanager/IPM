@@ -19,11 +19,17 @@ class CheckActive
         $response = $next($request);
 
 
-        if(Auth::check() && Auth::user()->active !==  1){
+        if(Auth::check()){
+            if(Auth::user()->active == 1){
+                return redirect()->intended('terms');
+            }else if(Auth::user()->active == 0){
+                Auth::logout();
+                flash()->error('Your Account is not active, Please contact an admin');
+                return redirect('/login');
+            }
+        }else{
             Auth::logout();
-            flash()->error('Your Account is not active, Please contact an admin');
-
-            return redirect('/login');
+            return redirect('login');
         }
 
         return $response;
