@@ -9,7 +9,7 @@
 @section('content')
     <div class="row block-white">
         <div class="col-md-12 col-xs-12">
-            <span class="block-white-title">@lang('Itsavirus Project Management Tool') ({{env('APP_NAME')}})</span>
+            <span class="block-white-title">{{env('APP_NAME')}}</span>
             <span id="count_projects_bar">|</span>
             <span>Version @version('version')</span>
         </div>

@@ -13,10 +13,11 @@
 }
 .footer .pagenum:after { content: counter(page); }
 
-p { page-break-after: always;}
+p { page-break-after: always; margin-left: 50px; margin-right: 50px;}
 p:last-child, span { page-break-after: avoid; page-break-inside: avoid; }
 body {
     font-family: 'Roboto', sans-serif;
+    color:black;
 }
 
 .feature-table { page-break-inside:auto !important; page-break-after:auto !important;margin-bottom: 0 !important;}
@@ -30,13 +31,14 @@ body {
     white-space: nowrap;
     vertical-align: middle;
     page-break-inside: avoid !important;
+    page-break-after: auto !important;
     margin: 0;
 }
 .feature-table .left{
     width: 270px;
     display: inline-block;
     white-space: normal;
-    text-align: left;
+    clear: left;
 
 }
 
@@ -46,15 +48,9 @@ body {
     white-space: normal;
 }
 
-
-
 .no-break{
     page-break-inside: avoid;
     margin-bottom: 2rem;
-}
-
-.line-before{
-    page-break-before: always;
 }
 
 .line-break{
@@ -65,10 +61,14 @@ hr {
     color: rgba(151,151,151,0.23);
 }
 
-p {
-    margin-left: 50px;
-    margin-right: 50px;
+.company-p4{
+    font-style: italic;
 }
+
+.text-capitalize{
+    text-transform: uppercase;
+}
+
 
 .logo-footer {
     height: 40px;
@@ -78,48 +78,41 @@ p {
     padding-left: 10px;
 }
 
-.h1 {
-    color: #000000;
-    font-size: 44px;
+.h1, .h2, .header-2, .header-3. .pagenum{
     font-weight: bold;
-    letter-spacing: 2px;
-    line-height: 41px;
+    letter-spacing: 1px;
+}
+
+.p2 .h1{
+    word-spacing: 4px;
+}
+
+.h1{
+    font-size: 44px;
+    line-height: 50px;
 }
 
 .h2 {
-    color: #000000;
     font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 1px;
     line-height: 16px;
 }
 
 .header-2{
-    color: #000000;
     font-size: 22px;
-    font-weight: bold;
-    letter-spacing: 1px;
     line-height: 24px;
 }
 
 .header-3{
-    color: #000000;
     font-size: 16px;
-    font-weight: bold;
-    letter-spacing: 1px;
     line-height: 18px;
 }
 
 .pagenum{
-    color: #000000;
     font-size: 12px;
-    letter-spacing: 1px;
-    float:right;
+    position:fixed;
     line-height: 40px;
-}
-
-.pagenum:after{
-    font-weight: bold;
+    bottom: -25px;
+    left: 710px;
 }
 
 /* PAGE 1 */
@@ -139,7 +132,6 @@ p {
     width: 288px;
     top: 198px;
     left: 50px;
-    color: #000000;
     font-size: 42px;
     font-weight: bold;
     letter-spacing: 2px;
@@ -233,16 +225,6 @@ p {
     letter-spacing: 1px;
     line-height: 13px;
 }
-
-
-#disable-font {
-    font-family: initial;
-}
-
-#content-title-font {
-    font-family: 'Roboto', sans-serif;
-    margin-right: 168px;
-}
 /* END OF PAGE 3 */
 
 /* PAGE 4 */
@@ -254,24 +236,15 @@ p {
 }
 
 .bold-text-p4 {
-    color: #000000;
     font-size: 12px;
     font-weight: bold;
     letter-spacing: 1px;
     line-height: 13px;
 }
 
-.responsibility-p4 {
+.responsibility-p4, .company-p4 {
     color: rgba(0,0,0,0.6);
     font-size: 12px;
-    letter-spacing: 1px;
-    line-height: 13px;
-}
-
-.company-p4 {
-    color: rgba(0,0,0,0.6);
-    font-size: 12px;
-    font-style: italic;
     letter-spacing: 1px;
     line-height: 13px;
 }

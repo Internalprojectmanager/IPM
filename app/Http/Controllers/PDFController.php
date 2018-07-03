@@ -2,24 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Assignee;
 use App\Feature;
-use App\Http\Requests\ReleaseValidator;
-use App\Requirement;
 use App\Role;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Client;
 use App\Project;
-use App\Release;
-use App\Requirements;
 use DB;
-use Webpatser\Uuid\Uuid;
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Storage;
+
 class PDFController extends Controller
 {
     public function __construct()
@@ -28,14 +17,15 @@ class PDFController extends Controller
     }
 
     public function createPDF($client,$project,$release, $version){
-        $project = Project::with(['assignee.users.jobtitles','team','assignee' => function ($q){
-            $q->orderby('userid');
-        }])->path($project->path)->where('company_id' , $client->id)->firstorfail();
-
         $roles = Role::all();
-
+        $project = $project::path($project->path)->with('assignee', 'company', 'team', 'assignee.users', 'assignee.role')->first();
         $features = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid]])->orderByRaw(DB::raw("FIELD(type, 'Feature', 'NFR', 'TS', 'Scope')"))->get();
-        $pdf = PDF::setOptions(['images' => true])->loadView('release.pdf', compact('release', 'project', 'features', 'client', 'requirements', 'assignees', 'roles'))->setPaper('a4', 'portrait');
-        return $pdf->stream('Release.pdf');
+        //return view('release.pdf', compact('release', 'project', 'features', 'roles'));
+        return $pdf = PDF::loadView('release.pdf',
+            compact('release', 'project', 'features', 'roles'))
+            ->stream();
+        //->save(public_path().'/storage/team/'. $project->team->slug.'/'. $release->path . '.pdf');
+
+        //return response()->file(public_path().'/storage/team/'. $project->team->slug.'/'. $release->path . '.pdf');
     }
 }

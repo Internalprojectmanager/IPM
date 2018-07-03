@@ -3,7 +3,6 @@
         <thead>
         <th></th>
         <th>@sortablelink('name', 'Project')</th>
-        <th>@sortablelink('team.name', 'Workspace')</th>
         <th>@sortablelink('description', 'Description')</th>
         <th>@sortablelink('pstatus.name', 'Status')</th>
         <th>@sortablelink('deadline', 'Deadline')</th>
@@ -17,17 +16,13 @@
                 <td class="col-md-2"><span class="tabletitle">{{$project->name}}</span>
                     <br>
                     <span class="tablesubtitle">
-
                         @if(isset($project->company))
                             <a class="grey" href="{{route('clientdetails', $project->company->path)}}">
                                 {{$project->company->name}}</a>
                         @endif
-                    </span>
-                </td>
-                <td class="col-md-1">
-                    <a class="black" href="{{route('team.show', $project->team->name)}}">
-                        {{$project->team->name}}
+
                     </a>
+                    </span>
                 </td>
                 <td class="col-md-2">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}
                     @if(str_word_count($project->description) > 10)
@@ -45,13 +40,13 @@
                     @endif
 
                 </td>
-                <td class="col-md-2">
+                <td class="col-lg-2 col-md-2">
                     @if($project->pstatus->name != "Completed" &&$project->pstatus->name != "Paused" && $project->pstatus->name != "Cancelled")
                         @if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>
                             @if($project->monthsleft && $project->monthsleft > 0)
                                 <span class="tablesubtitle">{{abs($project->monthsleft)}} Month(s) left</span>
                             @elseif($project->monthsleft && $project->monthsleft < 0)
-                                <span class="tablesubtitle">{{abs($project->monthsleft)}} Month(s) overdue</span>
+                                <span class="tablesubtitle red">{{abs($project->monthsleft)}} Month(s) overdue</span>
                             @elseif($project->daysleft >= 0)
                                 <span class="tablesubtitle @if($project->daysleft < 5) red @endif ">{{abs($project->daysleft)}} day(s) left</span>
                             @elseif($project->daysleft < 0)
@@ -60,16 +55,13 @@
                         @endif
                     @endif
                 </td>
-                <td class="col-md-4">
+                <td class="col-md-6">
                     <?php $i = 0;?>
                     @foreach($project->assignee as $as)
-                        @if($i <= 2)
+                        <div class="col-md-12 col-lg-6">
                             <span class="assignee">{{$as->users->first_name}} {{$as->users->last_name}}</span>
-                        @else
-                            <span class="more">and More...</span>
-                            @php break; @endphp
-                        @endif
-                        <?php $i++;?>
+                        </div>
+
                     @endforeach
                 </td>
             </tr>

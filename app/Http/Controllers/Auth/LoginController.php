@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Team;
 use App\UserTeam;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
@@ -27,13 +26,14 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/project/overview';
+    protected $redirectTo = '/home';
+    protected $redirectLogoutTo = '/login';
+
 
     /**
      * Create a new controller instance.
@@ -42,7 +42,8 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['guest', 'checkactive'])->except('logout');
+        $this->middleware('guest', ['except' => ['logout', 'getLogout']]);
+
     }
 
 
@@ -59,31 +60,26 @@ class LoginController extends Controller
     public function handleProviderCallback($provider = 'google')
     {
         $user = Socialite::driver($provider)->stateless()->user();
-        if($user){
-            $domain = preg_replace('/.+@/', '', $user->getEmail());
-                // Here, check if the user already exists in your records
-                $authuser = $this->firstOrCreateOauth($user, $provider);
-                $this->firstOrCreatePersonal($authuser);
-                Auth::login($authuser);
-                flash()->success('Succesfully Logged in');
-                return redirect()->intended('overviewproject');
-        }else{
-            flash()->error('Oauth login has expired, Please try again');
-        }
-        return Redirect()->route('login')->withInput();
+        $authuser = $this->firstOrCreateOauth($user, $provider);
+        $this->firstOrCreatePersonal($authuser);
+        Auth::login($authuser, false);
+        flash()->success('Succesfully Logged in');
+        return redirect()->intended('dashboard');
     }
 
     public function firstOrCreateOauth($user, $provider){
-        $data = [
-            'provider_id' => $user->id,
+
+        $authUser = User::where('provider_id', $user->id)->first();
+        if ($authUser) {
+            return $authUser;
+        }
+        return User::create([
             'first_name' => $user->user['name']['givenName'],
             'last_name' => $user->user['name']['familyName'],
+            'email'    => $user->email,
             'provider' => $provider,
-            'active' => 1
-        ];
-        $authuser = User::firstOrCreate(['email'=> $user->getEmail()], $data);
-
-        return $authuser;
+            'provider_id' => $user->id
+        ]);
     }
 
     public function firstOrCreatePersonal($user){
@@ -105,4 +101,7 @@ class LoginController extends Controller
             UserTeam::create($datalink);
         }
     }
+
+
+
 }

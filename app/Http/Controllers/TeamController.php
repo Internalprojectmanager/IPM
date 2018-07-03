@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Requirement;
 use App\TeamPlan;
 use App\UserTeam;
 use Illuminate\Http\Request;
 use App\Team;
 use App\User;
+use App\Project;
+use App\Assignee;
 use Auth;
 use App\Plan;
 
@@ -111,6 +114,26 @@ class TeamController extends Controller
 
     public function deleteMember(Request $request, $team, $member){
             Team::name($team->name)->users()->detach($member);
+
+            $projects = Project::where('team_id',$team->id)->select('id')->get();
+            $requirements = Requirement::with('releases.projects')->get();
+
+            $project = [];
+            foreach($requirements as $r){
+                if($r->releases){
+                    if($r->releases->projects){
+                        if($r->releases->projects->team_id = $team->id){
+                            $project[] = $r->requirement_uuid;
+                        }
+                    }
+                }
+
+            }
+            foreach($projects as $p){
+                $project[] = $p->id;
+            }
+
+            Assignee::where('userid', $member)->wherein('uuid', $project)->delete();
             return redirect()->route('team.show', $team->slug);
     }
 

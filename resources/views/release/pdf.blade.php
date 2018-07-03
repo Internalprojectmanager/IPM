@@ -6,16 +6,9 @@
         - {{$release->name}} {{number_format(floatval($release->version), 1)}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-    <link href="{{ public_path('css/pdf.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{public_path().'/css/pdf.css' }}" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
-<script type="text/php">
-	$GLOBALS['chapters'] = array();
-	$GLOBALS['backside'] = $pdf->open_object();
-
-</script>
-
 <p id="p1">
     @if(!empty($project->team->logo))
         <img class="logo-p1" src="{{public_path('storage').'/'. $project->team->logo}}">
@@ -51,7 +44,6 @@
         @if(!empty($project->team->logo))
             <img class="logo-footer" src="{{public_path('storage').'/'. $project->team->logo}}">
         @endif
-            {{$project->team->name}}
         </span>
         <span class="pagenum"></span>
     </div>
@@ -63,37 +55,52 @@
 @if($project->team->slogan)
     <p id="p2">
         <br><br><br>
-        <span class="h1">{{$project->team->slogan}}</span>
-    </p>
-@endif
 
-    <!-- PAGE 3 -->
-    <p id="p3">
-        <span class="h1">CONTENTS</span>
-        <br><br><br><br><br>
-        <span class="content-p3">
-            <span class="content-title" id="disable-font">
-                <span id="content-title-font">PROJECT DESCRIPTION</span>
-            </span>
-            <hr>
-            <span class="content-title" id="disable-font">
-                <span id="content-title-font">PROJECT ROLES & RESPONSIBILITIES</span>
-            </span>
-            <hr>
-            <?php $featureID = 0; $i = 6; $k = 0; $type = null ?>
-            @foreach($features as $f)
+        @php
 
-                @if($type !== $f->type)
-                    @php
-                        $k= 0;
-                        $type = $f->type;
-                        $featureID = 0;
+            $slogan = explode(" ", $project->team->slogan);
+            $sloganafter  = $slogan[count($slogan)-1];
+        @endphp
+        <span class="h1 text-capitalize">
+            @foreach($slogan as $slo)
+                @if($slo == $sloganafter && $project->team->name == "Itsavirus")
+                    <br>
+                @endif
+                {{$slo}}
+            @endforeach
+        </span>
+        </p>
+    @endif
+
+        <!-- PAGE 3 -->
+        <p id="p3">
+            <span class="h1">CONTENTS</span>
+            <br><br><br><br><br>
+            <span class="content-p3">
+                <span class="content-title" id="disable-font">
+                    <span id="content-title-font">PROJECT DESCRIPTION</span>
+                </span>
+                <hr>
+                <span class="content-title" id="disable-font">
+                    <span id="content-title-font">PROJECT ROLES & RESPONSIBILITIES</span>
+                </span>
+                <hr>
+                <?php $featureID = 0; $i = 6; $k = 0; $type = null ?>
+                @foreach($features as $f)
+
+                    @if($type !== $f->type)
+                        @php
+                            $k= 0;
+                            $type = $f->type;
+                            $featureID = 0;
                     @endphp
                 @endif
                 @if($k == 0)
                     @switch($type)
                         @case("NFR")
-                        @php $f->typeFull = "Non Functional Requirements"; @endphp
+                        @php
+                            $f->typeFull = "Non Functional Requirements";
+                        @endphp
                         @break
                         @case('Scope')
                         @php $f->typeFull = "Out Of Scope"; @endphp
@@ -112,13 +119,19 @@
                     @php $k++; @endphp
                 @endif
                 <span class="content-subtitle" id="disable-font">
-                <span id="content-title-font"><?php $featureID++; echo $featureID . '.0'; ?> {{$f->name}}</span>
+                    @php $featureID++ @endphp
+
+                    @if($f->type == "Feature")
+                        @php $f->shortType = "F" @endphp
+                    @elseif($f->type == "Scope")
+                        @php $f->shortType = "S" @endphp
+                    @else
+                        @php $f->shortType = $f->type @endphp
+                    @endif
+                    <span id="content-title-font">{{$f->shortType}}-{{$featureID}}. {{$f->name}}</span>
                 <hr>
             @endforeach
         </span>
-        <script type="text/php">
-	        $pdf->close_object();
-        </script>
     </p>
     <!-- END OF PAGE 3 -->
 
@@ -156,17 +169,15 @@
                         @php $acounter = 1; @endphp
                         @if($project->assignee->count() > 0)
                             @foreach($project->assignee as $a)
-                                @if(!empty($a->roles()))
-                                    @foreach($a->roles() as $r)
-
+                                @if(!empty($a->role))
+                                    @foreach($a->role as $r)
                                         @if($r->name == $role->name)
                                             <i class="non-cursive">
                                                     <span class="bold-text-p4">{{$a->users->first_name}} {{$a->users->last_name}}</span>
                                                     <br>
-                                                    <span class="company-p4">{{$project->team()->first()->name}}</span>
+                                                    <span class="company-p4">{{$project->team->name}}</span>
                                                 </i>
                                             <br>
-
                                             @php $acounter++; @endphp
                                         @endif
                                     @endforeach
@@ -249,15 +260,15 @@
                         @foreach($f->requirements as $r)
                             <div class="row">
                                 <div class="project-description">
-                                <span class="left">
-                                        <strong>
-                                            FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?>
-                                        </strong> <br>
-                                    {{ $r->name }}
-                                </span>
-                                <span class="right">
-                                    {!! nl2br($r->description) !!}
-                                </span>
+                                    <span class="left">
+                                            <strong>
+                                                FR-<?php $FRID = $featureID . "." . $reqnr; echo $FRID; $reqnr++; ?>
+                                            </strong> <br>
+                                        {{ $r->name }}
+                                    </span>
+                                    <span class="right">
+                                        {!! nl2br($r->description) !!}
+                                    </span>
                                 </div>
                             </div>
 
