@@ -24,13 +24,21 @@ html, body {
     color: #898989;
 }
 
+.avatar{
+    width: 30px !important;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-top: 0;
+    padding: 0;
+    display: inline-block;
+}
 
 .full-opacity{
     opacity: 1 !important;
 }
 
 .container {
-    padding: 9rem 3rem 0;
+    padding: 9rem 3rem 0 15rem;
     width: 100%;
 }
 

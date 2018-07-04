@@ -38,7 +38,7 @@
 }
 
 /* TOP NAVBAR */
-.navbar {
+#navbar_top {
     height: 70px;
     color: #fff;
     background-color: #333333;
@@ -51,6 +51,18 @@
 #username {
     color: #fff;
     text-transform: none;
+    padding: 13px 3px;
+    margin-left: 15px;
+    display: inline-block;
+}
+
+#username > #user_name {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+#user_email{
+    display: none;
 }
 
 #teamname{
@@ -107,6 +119,16 @@
     color: black;
     background: none;
     z-index: 1001;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.open > #username > #user_email {
+    font-size: 13px;
+    display: block;
+    color: grey;
+    visibility: visible;
+
 }
 
 .open > #teamname{
@@ -127,7 +149,7 @@
 
 #user .dropdown-menu{
     top: 0;
-    padding-top: 30px;
+    padding-top: 45px;
     border-radius: 0;
 }
 .normal-dropdown > .dropdown-menu {
