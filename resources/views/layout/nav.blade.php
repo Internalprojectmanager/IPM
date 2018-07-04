@@ -220,11 +220,8 @@
                         <a id="username" href="#" class="dropdown-toggle" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <span id="user_name">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
-                            @if(Auth::user()->avatar)
-                            <img src="">
-                            @else
-                            <img class="img-circle img-thumbnail avatar" src="{{asset('img/avatar_default.jpg')}}"/>
-                            @endif
+
+                            <img class="img-circle img-thumbnail avatar" src="{{Auth::user()->getAvatar()}}">
                             <br>
                             <span id="user_email">{{ Auth::user()->email}}</span>
                         </a>
