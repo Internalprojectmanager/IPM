@@ -25,12 +25,16 @@ html, body {
 }
 
 .avatar{
-    width: 30px !important;
     vertical-align: middle;
     margin-left: 10px;
     margin-top: 0;
     padding: 0;
-    display: inline-block;
+    height: 50px;
+    width: auto !important;
+}
+
+.avatar-profile > a{
+    padding: 0 !important;
 }
 
 .full-opacity{
