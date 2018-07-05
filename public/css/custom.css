@@ -37,12 +37,25 @@ html, body {
     padding: 0 !important;
 }
 
+.avatar-table{
+    margin-left: 0;
+    padding: 0;
+    width: 40px !important;
+    z-index: 10001;
+}
+
+.avatar-more{
+    max-height: 40px;
+    padding: 20%;
+    font-size: 12px;
+}
+
 .full-opacity{
     opacity: 1 !important;
 }
 
 .container {
-    padding: 0 5rem;
+    padding: 10rem 5rem;
     width: 100%;
 }
 
@@ -768,7 +781,7 @@ td > div > .assignee {
 #project-edit {
     position: absolute;
     top: 8.8rem;
-    right: 4rem;
+    right: 5rem;
 }
 
 .edit-content {

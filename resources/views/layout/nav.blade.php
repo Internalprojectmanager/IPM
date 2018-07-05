@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -73,12 +73,6 @@
                     </ul>
                 </li>
                 <li class="avatar-profile"><a href="{{route('profile')}}"><img class="img-circle img-thumbnail avatar" src="{{Auth::user()->getAvatar()}}"></a> </li>
-
-
-
-
-
-
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
