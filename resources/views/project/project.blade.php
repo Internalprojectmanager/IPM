@@ -34,7 +34,7 @@
 
                 <div class="form-group pull-right">
                     <select name='client' type="text" id="client" class="search dropdown-search">
-                        <option selected value="">Client</option>
+                        <option selected value="">-- All Clients --</option>
                         @foreach($client as $c)
                             <option value="{{$c->id}}">{{$c->name}}</option>
                         @endforeach
@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group pull-right">
                     <select name='status' id="status" type="text" class="search dropdown-search">
-                        <option selected value="">Status</option>
+                        <option selected value="">-- All Statuses --</option>
                         @foreach($status as $s)
                             <option value="{{$s->id}}">{{$s->name}}</option>
                         @endforeach

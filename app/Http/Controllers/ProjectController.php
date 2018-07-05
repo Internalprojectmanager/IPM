@@ -130,7 +130,7 @@ class ProjectController extends Controller
             ->currentuserteam()->get()->count();
         $projects = $this->projectsCollection();
         $client = Client::select('name', 'id')
-            ->currentuserteam()->get();
+            ->currentuserteam()->orderby('name', 'asc')->get();
         $status = Status::where('type', 'Progress')->select('name', 'id')->get();
         $teams = Auth::user()->teams();
         return view('project.project', compact('projects', 'projectcount', 'client', 'status', 'teams'));
