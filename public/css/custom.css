@@ -8,6 +8,11 @@ html, body {
     color: #000;
     font-family: 'Roboto', sans-serif;
     margin: 0;
+    font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-weight: 400;
 }
 
 .red{
@@ -19,7 +24,6 @@ html, body {
 .black{
     color: black;
 }
-
 .grey{
     color: #898989;
 }
@@ -54,6 +58,7 @@ html, body {
 
 .table-users > span{
     display: block;
+    font-weight: 300;
 }
 
 .table-more{
