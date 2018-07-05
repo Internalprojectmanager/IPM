@@ -33,6 +33,12 @@ class Requirement extends Model
         return $this->hasMany('App\Assignee', "uuid", "requirement_uuid");
     }
 
+    public function UserAssingee(){
+        return $this->belongsToMany('App\User', 'assignee',
+            'uuid','userid', 'requirement_uuid', 'id')
+            ->orderBy('users.last_name', 'asc');
+    }
+
     public function rstatus(){
         return $this->hasOne('App\Status', "id", "status");
     }

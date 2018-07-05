@@ -24,21 +24,24 @@
                 @foreach($feature->requirements as $requirement)
                     <tr>
                         <td style="border-left: 1px solid #CECECE; background-color: {{$requirement->rstatus->color}};"></td>
-                        <td class="col-md-3"><span class="tabletitle">{{$requirement->name}}</span></td>
-                        <td class="col-md-4">{!! nl2br(Linkify::process($requirement->description)) !!}</td>
-                        <td class="col-md-1">
+                        <td><span class="tabletitle">{{$requirement->name}}</span></td>
+                        <td style="max-width: 300px">{!! nl2br(Linkify::process($requirement->description)) !!}</td>
+                        <td>
                             @if($requirement->rstatus)
                                 {{$requirement->rstatus->name}}
                             @endif
 
                         </td>
-                        <td class="col-md-4">
+                        <td>
                             @foreach($requirement->assignees as $assignee)
                                 <div class="row" style="line-height: 2.3;">
                                     <div class="requiremnt-assingee">
-                                        <div class="col-md-6" style="padding: 6px 12px;">
-                                            <i class="fas fa-circle" style="color: @if($assignee->astatus){{$assignee->astatus->color}}; @endif "></i>
-                                            <span>{{$assignee->users->first_name}} {{$assignee->users->last_name}}</span>
+                                        <div class="col-md-6">
+                                            <i class="fas fa-circle" style="margin-right: 10px; color: @if($assignee->astatus){{$assignee->astatus->color}}; @endif "></i>
+                                            <span>
+                                                <img alt="{{$assignee->users->first_name}} {{$assignee->users->last_name}}"
+                                                     class="img-circle img-thumbnail avatar-table" src="{{$assignee->users->getAvatar()}}"/>
+                                                <span style="margin-left: 10px;">{{$assignee->users->first_name}} {{$assignee->users->last_name}}</span>
                                         </div>
                                         <div class="col-md-6">
                                             <select class="form-control transparent-selectbox assignee-check" width="100%" name="status[]" @if(Auth::id() !== $assignee->userid) disabled="" @endif>
