@@ -57,7 +57,7 @@
                         @endif
                     @endif
                 </td>
-                <td class="">
+                <td style="min-width: 250px; max-width: 400px">
                     <?php $i = 1;?>
                     @foreach($project->UserAssingee as $as)
                         @if($i < 5)

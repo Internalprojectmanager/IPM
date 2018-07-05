@@ -2,6 +2,7 @@
     background: black;
     border-radius: 0;
     border: none;
+    height: 65px;
 
 }
 
@@ -23,16 +24,14 @@
 .navbar-default .navbar-nav > li > a {
     color:white;
     padding-top: 15px;
-    padding-bottom: 20px;
     font-size: 14px;
     font-weight: 400;
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-nav > li > .active{
     border-bottom: 10px solid white;
-    padding-bottom: 10px ;
+    padding-bottom: 8px;
     color:white;
-    padding-top: 15px;
     font-size: 14px;
     font-weight: 400;
 }
