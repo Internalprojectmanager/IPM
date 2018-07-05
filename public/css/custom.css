@@ -41,13 +41,28 @@ html, body {
     margin-left: 0;
     padding: 0;
     width: 40px !important;
+    height: 40px;
     z-index: 10001;
 }
 
+.table-users{
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 80px;
+}
+
+.table-users > span{
+    display: block;
+}
+
+.table-more{
+    width: 50px;
+}
 .avatar-more{
     max-height: 40px;
-    padding: 20%;
-    font-size: 12px;
+    padding: 30% 15%;
+    font-size: 20px;
 }
 
 .full-opacity{

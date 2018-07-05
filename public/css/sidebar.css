@@ -26,10 +26,12 @@
     padding-bottom: 20px;
 }
 
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-nav > li > .active{
     border-bottom: 10px solid white;
-    padding-bottom: 10px;
+    padding-bottom: 10px !important;
 }
+
+
 
 .avatar-profile > a{
     border-bottom: none !important;

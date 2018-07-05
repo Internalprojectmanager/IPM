@@ -60,15 +60,15 @@
                 <td class="">
                     <?php $i = 1;?>
                     @foreach($project->UserAssingee as $as)
-                        @if($i < 4)
-                            <div class="col-md-3 text-center">
+                        @if($i < 5)
+                            <div class="table-users">
                                 <img alt="{{$as->first_name}} {{$as->last_name}}" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>
-                                <br><span class="">{{$as->first_name}}</span>
+                                <span>{{$as->first_name}}</span>
                             </div>
                         @endif
-                        @if($i == 4 && $project->assignee->count() > 4)
-                            <div class="col-md-3 text-center">
-                                <span class="img-circle img-thumbnail avatar-table avatar-more">+ {{$project->assignee->count() - 4 }}</span>
+                        @if($i == 5 && $project->assignee->count() > 4)
+                            <div class="table-users table-more">
+                                <span class="avatar-more">+ {{$project->assignee->count() - 4 }}</span>
                             </div>
                         @endif
                         @php $i++ @endphp
