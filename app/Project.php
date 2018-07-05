@@ -38,6 +38,11 @@ class Project extends Model
         return $this->hasMany('App\Assignee', "uuid", "id");
     }
 
+    public function UserAssingee(){
+        return $this->belongsToMany('App\User', 'assignee', 'uuid', 'userid')
+            ->orderBy('users.last_name', 'asc');
+    }
+
     public function team(){
         return $this->hasOne('App\Team', "id", "team_id");
     }

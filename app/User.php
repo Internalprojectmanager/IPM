@@ -82,10 +82,8 @@ class User extends Authenticatable
     public function getAvatar(){
         if($this->avatar !== null){
             $avatar =  $this->avatar;
-        } else if($this->provider == "google" || strpos($this->email, '@gmail.com') !== false){
-            $avatar =  'https://pikmail.herokuapp.com/'.$this->email.'?size=150';
         } else{
-            $avatar =  asset('/img/avatar_default.jpg');
+            $avatar = 'https://www.gravatar.com/avatar/'. md5($this->email).'?s=200&r=g&d=mp';
         }
         return $avatar;
     }
