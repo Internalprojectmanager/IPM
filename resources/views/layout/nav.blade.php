@@ -41,12 +41,14 @@
                         </ul>
                     </li>
                 @endif
+
+                @if(Auth::id() == 1 )<li><a href="{{route('admin_users')}}"><i style="width: 2em;" class="fa fa-cogs"></i></a></li>@endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        + <span class="caret"></span></a>
+                        <i class="fa fa-plus"></i> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{route('addclient')}}"> New Client</a></li>
                         <li><a href="{{route('addproject')}}"> New Project</a></li>

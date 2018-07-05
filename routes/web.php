@@ -31,8 +31,12 @@ Route::group(['middleware' => ['guest', 'web']], function () {
 Route::get('/terms', 'ProfileController@terms')->name('terms');
 Route::post('/terms', 'ProfileController@acceptedterms')->name('termschoice');
 
-Route::group(['middleware' => 'checkactive'], function () {
 
+
+
+
+
+Route::group(['middleware' => 'checkactive'], function () {
     //Profile routes
     Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
     Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
@@ -43,6 +47,10 @@ Route::group(['middleware' => 'checkactive'], function () {
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('auth');
     Route::post('/dashboard', 'HomeController@dashboardSearch')->name('dashboardsearch')->middleware('auth');
     Route::post('/dashboard/save', 'RequirementController@saveAuthStatus')->name('requirementsaveAuthstatus');
+
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('/users', 'Admin\UserController@index')->name('admin_users');
+    });
 
     Route::group(['prefix' => 'team'], function () {
         Route::get('/show/{team}', 'TeamController@show')->name('team.show');
