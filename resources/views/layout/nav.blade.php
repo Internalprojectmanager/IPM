@@ -60,13 +60,13 @@
                     <a href="#" class="dropdown-toggle username {{ Request::is('profile*') ? 'active' : '' }}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         {{Auth::user()->first_name}} {{Auth::user()->last_name}}</a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{route('profile')}}"><i class="glyphicon icon-right-top settings-icon"></i>
+                        <li><a href="{{route('profile')}}"><i class="fas fa-cog icon-right-top fa-2x"></i>
                                 Settings</a></li>
                         <li><a href="{{route('help')}}"><i class=" icon-right-top far fa-question-circle fa-2x"></i>
                                 Help</a></li>
                         <li>
                             @include('partials.single-post-submit', [
-                                'name'  =>  '<i class="glyphicon icon-right-top logout-icon"></i> Logout',
+                                'name'  =>  '<i class=" icon-right-top fas fa-sign-out-alt fa-2x"></i> Logout',
                                 'route' =>  'logout',
                                 'confirm'   =>  'Are you sure you want to logout?',
                                 'a_class' => ''

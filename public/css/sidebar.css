@@ -37,9 +37,15 @@
     font-weight: 400;
 }
 
-
-
 .avatar-profile > a{
     border-bottom: none !important;
     padding-bottom: auto !important;
+}
+
+.navbar-nav >  li > .dropdown-menu{
+    border-radius: 0;
+}
+
+.navbar-nav >  li > .dropdown-menu > li{
+    margin: 5px auto;
 }
