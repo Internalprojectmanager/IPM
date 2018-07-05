@@ -83,7 +83,7 @@ class User extends Authenticatable
         if($this->avatar !== null){
             $avatar =  $this->avatar;
         } else{
-            $avatar = 'https://www.gravatar.com/avatar/'. md5($this->email).'?s=200&r=g&d=mp';
+            $avatar = 'https://www.gravatar.com/avatar/'. md5($this->email).'?s=200&r=g&d=identicon';
         }
         return $avatar;
     }

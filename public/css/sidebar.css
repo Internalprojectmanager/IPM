@@ -30,16 +30,16 @@
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-nav > li > .active{
     border-bottom: 10px solid white;
-    padding-bottom: 10px !important;
+    padding-bottom: 10px ;
     color:white;
     padding-top: 15px;
     font-size: 14px;
     font-weight: 400;
 }
 
-.avatar-profile > a{
+.avatar-profile > a, .avatar-profile > a:hover, .avatar-profile > a:focus{
     border-bottom: none !important;
-    padding-bottom: auto !important;
+    padding: 0 !important;
 }
 
 .navbar-nav >  li > .dropdown-menu{
@@ -48,4 +48,12 @@
 
 .navbar-nav >  li > .dropdown-menu > li{
     margin: 5px auto;
+}
+
+.guest .navbar > .container-fluid, .no-route .navbar > .container-fluid{
+    margin: 1rem auto;
+}
+
+.no-route .container, .guest .container{
+    padding: 10rem 2rem 0rem 2rem;
 }

@@ -1,4 +1,4 @@
-@extends('layout.loggedout')
+@extends('layout.app')
 
 @section('title')
     503 Service Unavailable | {{env('APP_NAME')}}

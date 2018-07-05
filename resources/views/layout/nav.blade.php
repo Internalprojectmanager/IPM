@@ -12,7 +12,7 @@
                     <img alt="Brand" src="{{asset('/img/IPM_WHITE.png')}}"/>
             </a>
         </div>
-
+        @auth
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -42,19 +42,21 @@
                     </li>
                 @endif
 
-                @if(Auth::id() == 1 )<li><a href="{{route('admin_users')}}"><i style="width: 2em;" class="fa fa-cogs"></i></a></li>@endif
+                @if(Auth::id() == 1 )<li><a href="{{route('admin_users')}}"><i style="width: 2em;" class="fa fa-cogs fa-lg"></i></a></li>@endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-plus"></i> <span class="caret"></span></a>
+                        <i class="fa fa-plus fa-lg"></i> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{route('addclient')}}"> New Client</a></li>
                         <li><a href="{{route('addproject')}}"> New Project</a></li>
                         <li><a href="{{route('team.new')}}"> New Team</a></li>
                     </ul>
                 </li>
+
+                <li><a href="{{route('dashboard')}}"><i class="fa fa-calendar-check fa-lg"></i></a></li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle username {{ Request::is('profile*') ? 'active' : '' }}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -77,5 +79,6 @@
                 <li class="avatar-profile"><a href="{{route('profile')}}"><img class="img-circle img-thumbnail avatar" src="{{Auth::user()->getAvatar()}}"></a> </li>
             </ul>
         </div><!-- /.navbar-collapse -->
+        @endauth
     </div><!-- /.container-fluid -->
 </nav>
