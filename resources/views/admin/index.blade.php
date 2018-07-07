@@ -45,7 +45,9 @@
                     <th>Email</th>
                     </thead>
                     <tbody>
+                    <?php $count = 0; ?>
                     @foreach($users as $user)
+                        <?php if($count == 5) break; ?>
                         <tr>
                             <td class="col-md-1"
                                 style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
@@ -56,6 +58,7 @@
                             <td>{{$user->email}}</td>
                             <td>{{ $user->created_at}}</td>
                         </tr>
+                        <?php $count++; ?>
                     @endforeach
                     </tbody>
                 </table>
@@ -78,7 +81,10 @@
 
                         </thead>
                         <tbody>
-                        @foreach($teams as $team)
+
+                        <?php $count = 0; ?>
+                        @foreach($teams as $team )
+                            <?php if($count == 5) break; ?>
                             <tr>
                                 <td class="col-md-1"
                                     style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
@@ -88,6 +94,7 @@
                                 <td colspan="">{{$team->client()->count()}}</td>
                                 <td colspan="">{{$team->users()->count()}}</td>
                             </tr>
+                            <?php $count++; ?>
                         @endforeach
                         </tbody>
                     </table>
@@ -110,7 +117,9 @@
 
                         </thead>
                         <tbody>
+                        <?php $count = 0; ?>
                         @foreach($projects as $project)
+                            <?php if($count == 5) break; ?>
                             <tr>
                                 <td class="col-md-1"
                                     style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
@@ -119,6 +128,7 @@
                                 <td>{{$project->releases->count()}}</td>
                                 <td>{{$project->created_at}}</td>
                             </tr>
+                            <?php $count++; ?>
                         @endforeach
                         </tbody>
                     </table>

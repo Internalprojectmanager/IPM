@@ -22,9 +22,10 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        $users = User::orderBy('created_at', 'desc')->limit(5)->get();
-        $projects = Project::orderBy('created_at', 'desc')->limit(5)->get();
-        $teams = Team::with('project', 'client')->orderBy('id', 'desc')->limit(5)->get();
+        $users = User::orderBy('created_at', 'desc')->get();
+        $projects = Project::orderBy('created_at', 'desc')->get();
+        $teams = Team::with('project', 'client')->orderBy('id', 'desc')->get();
+
         return view('admin.index', compact('users', 'projects', 'teams'));
     }
 }
