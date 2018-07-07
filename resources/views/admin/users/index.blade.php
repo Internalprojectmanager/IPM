@@ -32,7 +32,8 @@
             <tbody>
             @foreach($users as $user)
                 <tr>
-                    <td class="col-md-1" style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
+                    <td class="col-md-1"
+                        style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
                     <td colspan="" class="col-md-3">
                         <span class="tabletitle">{{$user->first_name}} {{$user->last_name}} </span>
                         @if($user->id == Auth::id()) <span class="its its-you"> Its You!</span> @endif
@@ -46,12 +47,14 @@
                     <td class="col-md-2 right">
                         @if($user->id  !== Auth::id())
                             @if($user->active == true)
-                                <a class="no-underline" onclick="return confirm('Are you sure you want to block this User?');"
+                                <a class="no-underline"
+                                   onclick="return confirm('Are you sure you want to block this User?');"
                                    href="">
                                     <span class="btn btn-danger"><i class="fas fa-ban"></i>  Block</span>
                                 </a>
                             @else
-                                <a class="no-underline" onclick="return confirm('Are you sure you want to block this User?');"
+                                <a class="no-underline"
+                                   onclick="return confirm('Are you sure you want to block this User?');"
                                    href="">
                                     <span class="btn btn-success"><i class="far fa-check-circle"></i>  Unblock</span>
                                 </a>
