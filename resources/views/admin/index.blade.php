@@ -34,71 +34,80 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4 white-back">
-            <h1 class="center">Users</h1>
-            <table class="table table-hover table-center results" id="release-overview">
-                <thead>
-                <th></th>
-                <th></th>
-                <th>Name</th>
-                <th>Email</th>
-                </thead>
-                <tbody>
-                @foreach($users as $user)
-                    <tr>
-                        <td class="col-md-1"
-                            style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
-                        <td class="col-md-2">
-                            <img class="img-thumbnail img-circle avatar-table" src="{{$user->getAvatar()}}"/>
-                        </td>
-                        <td colspan="">{{$user->first_name}} {{$user->last_name}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>{{ $user->created_at}}</td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-            <a class="center" href="{{route('admin_users')}}">Show more</a>
+        <div class="col-md-4">
+            <div class="white-back col-md-12">
+                <h1 class="center">Users</h1>
+                <table class="table table-hover table-center results">
+                    <thead>
+                    <th></th>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    </thead>
+                    <tbody>
+                    @foreach($users as $user)
+                        <tr>
+                            <td class="col-md-1"
+                                style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
+                            <td class="col-md-2">
+                                <img class="img-thumbnail img-circle avatar-table" src="{{$user->getAvatar()}}"/>
+                            </td>
+                            <td colspan="">{{$user->first_name}} {{$user->last_name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{ $user->created_at}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                <a class="center" href="{{route('admin_users')}}">Show more</a>
+            </div>
         </div>
 
         <div class="col-md-4">
-            <div class="white-back">
+            <div class="white-back col-md-12">
                 <h1 class="center">Teams</h1>
                 @if($teams->count() > 0)
-                    <table class="table table-hover table-center results" id="release-overview">
+                    <table class="table table-hover table-center results">
                         <thead>
                         <th></th>
                         <th>Name</th>
+                        <th>Plan</th>
                         <th>Projects</th>
                         <th>Clients</th>
+                        <th>Members</th>
+
                         </thead>
                         <tbody>
                         @foreach($teams as $team)
                             <tr>
                                 <td class="col-md-1"
                                     style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
-                                <td colspan=""><img class='team-logo' src="{{\Storage::url($team->logo)}}"></td>
-                                <td colspan="">{{$team->name}}</td>
-                                <td colspan="">{{$team->projects()->count()}}</td>
-                                <td colspan="">{{$team->clients()->count()}}</td>
+                                <td colspan=""><img class='team-logo' src="{{\Storage::url($team->logo)}}"> {{$team->name}}</td>
+                                <td colspan="">{{$team->plan()->name}}</td>
+                                <td colspan="">{{$team->project()->count()}}</td>
+                                <td colspan="">{{$team->client()->count()}}</td>
+                                <td colspan="">{{$team->users()->count()}}</td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+                    <a class="center" href="{{route('admin_users')}}">Show more</a>
                 @endif
             </div>
         </div>
 
 
         <div class="col-md-4">
-            <div class="white-back">
+            <div class="white-back col-md-12">
                 <h1 class="center">Projects</h1>
-                @if($teams->count() > 0)
-                    <table class="table table-hover table-center results" id="release-overview">
+                @if($projects->count() > 0)
+                    <table class="table table-hover table-center results">
                         <thead>
                         <th></th>
                         <th>Name</th>
+                        <th>Team</th>
                         <th>Releases</th>
+
                         </thead>
                         <tbody>
                         @foreach($projects as $project)
@@ -106,12 +115,15 @@
                                 <td class="col-md-1"
                                     style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
                                 <td>{{$project->name}}</td>
+                                <td>{{$project->team->name}}</td>
                                 <td>{{$project->releases->count()}}</td>
+                                <td>{{$project->created_at}}</td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                 @endif
+                <a class="center" href="{{route('admin_users')}}">Show more</a>
             </div>
         </div>
     </div>

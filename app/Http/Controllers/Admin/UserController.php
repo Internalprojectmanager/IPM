@@ -24,8 +24,7 @@ class UserController extends Controller
     {
         $users = User::orderBy('created_at', 'desc')->limit(5)->get();
         $projects = Project::orderBy('created_at', 'desc')->limit(5)->get();
-        $teams = Team::orderBy('id', 'desc')->limit(5)->get();
-
+        $teams = Team::with('project', 'client')->orderBy('id', 'desc')->limit(5)->get();
         return view('admin.index', compact('users', 'projects', 'teams'));
     }
 }
