@@ -50,7 +50,7 @@
                         <?php if($count == 5) break; ?>
                         <tr>
                             <td class="col-md-1"
-                                style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
+                                style="background-color: @if($user->active && $user->toc)  #7ED321 @elseif($user->active && !$user->toc) #CECECE  @else #FF3300 @endif ;"></td>
                             <td class="col-md-2">
                                 <img class="img-thumbnail img-circle avatar-table" src="{{$user->getAvatar()}}"/>
                             </td>
