@@ -84,7 +84,7 @@
 
                         <?php $count = 0; ?>
                         @foreach($teams as $team )
-                            @if($team->name !== $team->owner->name)
+                            @if($team->name !== $team->owner->fullName())
                                 <?php if($count == 5) break; ?>
                                 <tr>
                                     <td class="col-md-1"
