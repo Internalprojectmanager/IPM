@@ -37,6 +37,10 @@ class Team extends Model
         return $this->hasMany('App\Client');
     }
 
+    public function owner(){
+        return $this->hasone('App\User', 'id', 'owner_id');
+    }
+
     public function users(){
         return $this->belongsToMany('App\User')
             ->orderBy('team_user.active', 'desc')
