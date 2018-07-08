@@ -42,7 +42,7 @@
                     </li>
                 @endif
 
-                @if(Auth::id() == 1 )<li><a href="{{route('admin_users')}}"><i style="width: 2em;" class="fa fa-cogs fa-lg"></i></a></li>@endif
+                @if(Auth::id() == 1 )<li><a href="{{route('admin_dashboard')}}"><i style="width: 2em;" class="fa fa-cogs fa-lg"></i></a></li>@endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
