@@ -21,7 +21,7 @@ class Client extends Model
     protected $sortableAs = ['projects_count', 'cstatus_name'];
 
     protected $fillable = [
-        'id','name', 'description', 'path', 'status'
+        'id','name', 'description', 'path', 'status', 'team_id'
     ];
 
     public function getRouteKeyName()
