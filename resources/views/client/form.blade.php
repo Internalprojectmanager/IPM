@@ -1,17 +1,20 @@
 <div class="form-group">
     <label>Client<span class="required">*</span></label>
     <div class="row">
-        <div class="col-md-6">
-            <label>Team Space<span class="required">*</span></label>
-            <select class="form-control selectpicker input-text-modal" name="team">
-                @foreach($teams as $u)
-                    <option value="{{$u->id}}">{{$u->name}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-md-6">
-            <label>Client name<span class="required">*</span></label>
-            <input type="text" class="form-control input-text-modal" name="client_name" id="client_name" value="{{ old('client_name', $client->name ?? '') }}">
+        <div class="form-group">
+            <div class="col-md-6">
+                <select required class="form-control selectpicker input-text-modal" name="team">
+                    <option selected disabled="">-- Select Team --</option>
+                    @foreach($teams as $u)
+                        <option value="{{$u->id}}">{{$u->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-text-modal" placeholder="Client Name" name="client_name" id="client_name" value="{{ old('client_name', $client->name ?? '') }}">
+
+            </div>
+
         </div>
     </div>
 </div>

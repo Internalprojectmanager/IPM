@@ -1,6 +1,7 @@
 @extends('layout.app')
 
 @section('content')
+    <div class="header-3" id="edit-project">
         <form action="{{route('storeclient')}}" method="post">
             <div class="modal-body">
                 <h1>New Client</h1>
@@ -28,5 +29,6 @@
                 </div>
             </div>
         </form>
+    </div>
 
 @endsection
