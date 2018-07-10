@@ -48,6 +48,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Assignee', 'userid', 'id');
     }
 
+    public function getTotal(){
+        return $this->count();
+    }
+
     /**
      * Magically crypt the password whenever its set on the modal because otherwise remembering to do it can get ugly
      * at least you know it's now done

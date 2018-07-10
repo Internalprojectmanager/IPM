@@ -50,6 +50,7 @@ Route::group(['middleware' => 'checkactive'], function () {
 
     Route::group(['prefix' => 'admin'], function () {
         Route::get('/users', 'Admin\UserController@index')->name('admin_users');
+        Route::get('/', 'Admin\UserController@dashboard')->name('admin_dashboard');
     });
 
     Route::group(['prefix' => 'team'], function () {
