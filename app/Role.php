@@ -15,7 +15,8 @@ class Role extends Model
         return $query->where('name', $name)->firstorfail();
     }
 
-    public function assignee(){
+    public function assignee()
+    {
         return $this->belongsToMany('App\Assignee', 'role_assignee');
     }
 }

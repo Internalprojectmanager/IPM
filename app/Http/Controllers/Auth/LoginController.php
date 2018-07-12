@@ -10,7 +10,6 @@ use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
-
 class LoginController extends Controller
 {
     /*
@@ -43,7 +42,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => ['logout', 'getLogout']]);
-
     }
 
 
@@ -67,7 +65,8 @@ class LoginController extends Controller
         return redirect()->intended('dashboard');
     }
 
-    public function firstOrCreateOauth($user, $provider){
+    public function firstOrCreateOauth($user, $provider)
+    {
 
         $authUser = User::where('provider_id', $user->id)->first();
         if ($authUser) {
@@ -82,7 +81,8 @@ class LoginController extends Controller
         ]);
     }
 
-    public function firstOrCreatePersonal($user){
+    public function firstOrCreatePersonal($user)
+    {
         $dataspace = [
             'name' => $user->fullName(),
             'owner_id' => $user->id
@@ -90,7 +90,7 @@ class LoginController extends Controller
 
         $space = Team::firstOrCreate(['name'=> $user->fullName()], $dataspace);
 
-        if($space->wasRecentlyCreated){
+        if ($space->wasRecentlyCreated) {
             $datalink = [
                 'user_id' => $user->id,
                 'team_id' => $space->id,
@@ -101,7 +101,4 @@ class LoginController extends Controller
             UserTeam::create($datalink);
         }
     }
-
-
-
 }

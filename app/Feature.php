@@ -16,19 +16,23 @@ class Feature extends Model
         'id','feature_uuid','name', 'description', 'status', 'release_id', 'revision_log'
     ];
 
-    public function requirements(){
+    public function requirements()
+    {
         return $this->hasMany('App\Requirement', "feature_uuid", "feature_uuid");
     }
 
-    public function releases(){
+    public function releases()
+    {
         return $this->belongsTo('App\Release', "release_id", 'release_uuid');
     }
 
-    public function fstatus(){
+    public function fstatus()
+    {
         return $this->hasOne('App\Status', "id", "status");
     }
 
-    public function fcategory(){
+    public function fcategory()
+    {
         return $this->hasOne('App\Status', "id", "category");
     }
 
@@ -47,11 +51,11 @@ class Feature extends Model
         $requirements = Requirement::where('feature_uuid', $feature->feature_uuid)->count();
         $completedreq = Requirement::where('feature_uuid', $feature->feature_uuid)->where('status', $completed)->count();
         $progressreq = Requirement::where('feature_uuid', $feature->feature_uuid)->where('status', Status::name('In Progress')->id)->count();
-        if($requirements ==  $completedreq){
+        if ($requirements ==  $completedreq) {
             $feature->status = $completed;
-        } else if( $completedreq > 0 || $progressreq > 0 &&  $completedreq < $requirements) {
+        } elseif ($completedreq > 0 || $progressreq > 0 &&  $completedreq < $requirements) {
             $feature->status = Status::name('In Progress')->id;
-        } else{
+        } else {
             $feature->status = Status::name('Draft')->id;
         }
         $feature->save();

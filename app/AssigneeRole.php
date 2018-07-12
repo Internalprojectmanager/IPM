@@ -13,7 +13,8 @@ class AssigneeRole extends Model
         'id','name', 'description'
     ];
 
-    public function role(){
-        return $this->hasOne('App\Role', 'id','role_id');
+    public function role()
+    {
+        return $this->hasOne('App\Role', 'id', 'role_id');
     }
 }

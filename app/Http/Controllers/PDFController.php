@@ -16,13 +16,16 @@ class PDFController extends Controller
         $this->middleware('auth');
     }
 
-    public function createPDF($client,$project,$release, $version){
+    public function createPDF($client, $project, $release, $version)
+    {
         $roles = Role::all();
         $project = $project::path($project->path)->with('assignee', 'company', 'team', 'assignee.users', 'assignee.role')->first();
         $features = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid]])->orderByRaw(DB::raw("FIELD(type, 'Feature', 'NFR', 'TS', 'Scope')"))->get();
         //return view('release.pdf', compact('release', 'project', 'features', 'roles'));
-        return $pdf = PDF::loadView('release.pdf',
-            compact('release', 'project', 'features', 'roles'))
+        return $pdf = PDF::loadView(
+            'release.pdf',
+            compact('release', 'project', 'features', 'roles')
+        )
             ->stream();
         //->save(public_path().'/storage/team/'. $project->team->slug.'/'. $release->path . '.pdf');
 

@@ -56,22 +56,21 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if($this->isHttpException($e) && env('APP_DEBUG') == false)
-        {
+        if ($this->isHttpException($e) && env('APP_DEBUG') == false) {
             switch (intval($e->getStatusCode())) {
                 // not found
                 case 404:
-                    return \Response::view('errors.404',array('request' => $request, 'exceptions' => $e),404);
+                    return \Response::view('errors.404', array('request' => $request, 'exceptions' => $e), 404);
                     break;
                 // internal error
                 case 500:
-                    return \Response::view('errors.500',array('request' => $request, 'exceptions' => $e),500);
+                    return \Response::view('errors.500', array('request' => $request, 'exceptions' => $e), 500);
                     break;
                 case 503:
-                    return \Response::view('errors.503',array('request' => $request, 'exceptions' => $e),503);
+                    return \Response::view('errors.503', array('request' => $request, 'exceptions' => $e), 503);
                     break;
                 default:
-                    return \Response::view('errors.404',array('request' => $request, 'exceptions' => $e), 404);
+                    return \Response::view('errors.404', array('request' => $request, 'exceptions' => $e), 404);
                     break;
             }
         }

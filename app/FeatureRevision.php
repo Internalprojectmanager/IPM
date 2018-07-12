@@ -12,7 +12,8 @@ class FeatureRevision extends Model
         'id','name', 'description', 'author', 'release_id'
     ];
 
-    public function feature(){
+    public function feature()
+    {
         return $this->hasMany('App\Feature', "feature_uuid", "feature_id");
     }
 }

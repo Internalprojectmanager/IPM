@@ -22,42 +22,49 @@ class Project extends Model
     ];
 
 
-    public function releases(){
+    public function releases()
+    {
         return $this->hasMany('App\Release', "project_id", "id");
     }
 
-    public function company(){
+    public function company()
+    {
         return $this->belongsTo('App\Client');
     }
 
-    public function pstatus(){
+    public function pstatus()
+    {
         return $this->hasOne('App\Status', "id", 'status')->orderByRaw("FIELD(name , 'Draft', 'In Progress', 'Testing', 'Paused', 'Final', 'Completed') ASC");
     }
 
-    public function assignee(){
+    public function assignee()
+    {
         return $this->hasMany('App\Assignee', "uuid", "id");
     }
 
-    public function UserAssingee(){
+    public function UserAssingee()
+    {
         return $this->belongsToMany('App\User', 'assignee', 'uuid', 'userid')
             ->orderBy('users.last_name', 'asc');
     }
 
-    public function team(){
+    public function team()
+    {
         return $this->hasOne('App\Team', "id", "team_id");
     }
 
-    public static function updateDeadline($project){
+    public static function updateDeadline($project)
+    {
         $currentrelease = Release::where("project_id", "=", $project->id)
-            ->wherenotin('status' , [
+            ->wherenotin('status', [
                 Status::name('Paused')->id,
                 Status::name('Completed')->id,
                 Status::name('Cancelled')->id
             ])
             ->orderby('deadline', 'asc')->first();
-        if($currentrelease){
+        if ($currentrelease) {
             $project->deadline = $currentrelease->deadline;
-        } else{
+        } else {
             $project->deadline = null;
         }
         $project->save();
@@ -66,38 +73,38 @@ class Project extends Model
     public static function updateStatus($project)
     {
         $currentrelease = Release::where("project_id", "=", $project->id)
-            ->wherenotin('status' , [
+            ->wherenotin('status', [
                 Status::name('Paused')->id,
                 Status::name('Completed')->id,
                 Status::name('Cancelled')->id
             ])
             ->orderby('deadline', 'asc')->first();
 
-        if ($currentrelease){
+        if ($currentrelease) {
             $project->status = $currentrelease->status;
-        }elseif (Release::where("project_id", "=", $project->id)->count() ==  Release::where("project_id", "=", $project->id)->where('status', Status::name('Completed')->id)->count())
+        } elseif (Release::where("project_id", "=", $project->id)->count() ==  Release::where("project_id", "=", $project->id)->where('status', Status::name('Completed')->id)->count()) {
             $project->status = Status::name('Completed')->id;
-        else {
+        } else {
             $project->status = Status::name('Paused')->id;
         }
         $project->save();
-
     }
 
-    public function scopePath($query, $path){
+    public function scopePath($query, $path)
+    {
         return $query->where('path', $path);
     }
 
-    public function ScopeCurrentUserTeam($query){
-        if(Auth::user()->teams() !== null){
+    public function ScopeCurrentUserTeam($query)
+    {
+        if (Auth::user()->teams() !== null) {
             $ids = [];
-            foreach(Auth::user()->teams() as $t){
-                if($t->plan()->name !== Plan::name('No Plan')->name){
+            foreach (Auth::user()->teams() as $t) {
+                if ($t->plan()->name !== Plan::name('No Plan')->name) {
                     $ids [] = $t->id;
                 }
             }
             return $query->wherein('team_id', $ids);
-
         }   return $query->where('team_id', null);
     }
 

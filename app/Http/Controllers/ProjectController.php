@@ -44,7 +44,7 @@ class ProjectController extends Controller
             ->when(!empty($ids), function ($query) use ($ids) {
                 return $query->whereIn('id', $ids);
             })
-            ->where('deadline', NULL)
+            ->where('deadline', null)
             ->orderBy('deadline', 'desc')
             ->currentuserteam()
             ->get();
@@ -120,7 +120,6 @@ class ProjectController extends Controller
             }
         }
         return redirect()->route('overviewproject');
-
     }
 
     public function overviewProject()
@@ -273,7 +272,6 @@ class ProjectController extends Controller
             AssigneeRole::where('assignee_id', $a->id)->delete();
             if (!in_array($a->userid, $ids)) {
                 $a->delete();
-
             }
         }
 

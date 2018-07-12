@@ -12,7 +12,8 @@ class ReleaseRevision extends Model
         'id','title', 'description', 'author', 'project_id'
     ];
 
-    public function release(){
+    public function release()
+    {
         return $this->hasMany('App\Release', "release_uuid", "release_id");
     }
 }

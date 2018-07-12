@@ -29,23 +29,28 @@ class Status extends Model
     }
 
 
-    public function project(){
+    public function project()
+    {
         return $this->belongsTo('App\Project', "id", 'status');
     }
 
-    public function client(){
+    public function client()
+    {
         return $this->belongsTo('App\Client', "id", 'status');
     }
 
-    public function requirements(){
+    public function requirements()
+    {
         return $this->belongsTo('App\Requirement', "id", 'status');
     }
 
-    public function release(){
+    public function release()
+    {
         return $this->belongsTo('App\Release', "id", 'status');
     }
 
-    public function feature(){
+    public function feature()
+    {
         return $this->belongsTo('App\Feature', "id", 'status');
     }
 }

@@ -43,7 +43,7 @@ class FeatureController extends Controller
         return true;
     }
 
-    public function showfeature($client,$project,$release, $feature)
+    public function showfeature($client, $project, $release, $feature)
     {
         $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature->id)->first();
         $featureid = $feature->feature_uuid;
@@ -58,7 +58,7 @@ class FeatureController extends Controller
     }
 
 
-    public function add($client,$project,$release, $version, $release_name)
+    public function add($client, $project, $release, $version, $release_name)
     {
         return view('features.add_feature', compact('release', 'project'));
     }
@@ -86,7 +86,6 @@ class FeatureController extends Controller
             } else {
                 $feature->status = Status::Name('Draft')->first()->id;
             }
-
         }
         if (!empty($request->feature_category)) {
             $feature->category = $request->feature_category;
@@ -95,7 +94,7 @@ class FeatureController extends Controller
 
         if (!empty($request->requirement_name)) {
             foreach ($request->requirement_name as $k => $value) {
-                if ($request->requirement_name[$k] !== NULL) {
+                if ($request->requirement_name[$k] !== null) {
                     $requirement = new Requirement;
                     $requirement->feature_uuid = $feature->feature_uuid;
                     $requirement->release_id = $release->release_uuid;
@@ -116,7 +115,6 @@ class FeatureController extends Controller
                             $assignee->save();
                         }
                     }
-
                 }
             }
         }
@@ -205,9 +203,8 @@ class FeatureController extends Controller
                         } else {
                             Assignee::where('uuid', $requirement->requirement_uuid)->delete();
                         }
-
                     } else {
-                        if ($request->requirement_name[$k] !== NULL) {
+                        if ($request->requirement_name[$k] !== null) {
                             $requirement = new Requirement;
                             $requirement->feature_uuid = $feature->feature_uuid;
                             $requirement->release_id = $feature->release_id;
@@ -228,7 +225,6 @@ class FeatureController extends Controller
                                     $assignee->save();
                                 }
                             }
-
                         }
                     }
                 }
@@ -237,7 +233,6 @@ class FeatureController extends Controller
                     Assignee::where('uuid', $r->requirement_uuid)->delete();
                 }
                 Requirement::where('feature_uuid', $feature->feature_uuid)->delete();
-
             }
 
             return redirect(route('showfeature', [$client->path, $project->path, $release->path, $feature->id]));
@@ -254,7 +249,5 @@ class FeatureController extends Controller
         Feature::find($feature->id)->delete();
 
         return redirect(route('showrelease', [$client->path, $project->path, $release->path, $release->version]));
-
     }
-
 }
