@@ -1,22 +1,82 @@
-cache:
-  untracked: true
-  key: "$CI_BUILD_REF_NAME"
-  paths:
-    - vendor/
-    - storage/
 stages:
   - build
-  - compile
+  - test
+  - deploy
 
-variables:
+composer:
+  stage: build
+  image: internalprojectmanger/ipm-docker:1.0
+  tags:
+    - docker
+    - gce
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-composer
+    paths:
+      - vendor/
+  script:
+      - composer install --dev --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+      - cp .env.example .env
+      - php artisan key:generate
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - vendor/
+      - .env
+
+yarn:
+  stage: build
+  image: internalprojectmanger/ipm-docker:1.0
+  tags:
+    - docker
+    - gce
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-yarn
+    paths:
+      - node_modules/
+  script:
+      - yarn install
+      - yarn run prod
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - node_modules/
+      - public/css/
+      - public/js/
+
+codestyle:
+  stage: test
+  image: internalprojectmanger/ipm-docker:1.0
+  tags:
+    - docker
+    - gce
+  dependencies: 
+    - composer
+  script:
+    - php vendor/bin/phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
+    
+# phpunit:
+#  stage: test
+#  image: internalprojectmanger/ipm-docker:1.0
+#  tags:
+#    - docker
+#    - gce
+#  dependencies:
+#    - composer
+#  script:
+#    - php vendor/bin/phpunit --coverage-text --colors=never
+
+
+
+Build:
+  stage: deploy
+  variables:
     DC_PROJ: ${DC_NAME}_develop
     DC_NAME: ipm
     DC_FILE: /usr/share/jwa-dockers/sites/${DC_NAME}_develop/docker-compose.yml
-
-Build:
-  stage: build
   only:
     - master
+  tags:
+    - develop
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME git checkout $CI_BUILD_REF_NAME
@@ -24,11 +84,7 @@ Build:
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME composer install
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan migrate
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan config:cache
-
-Compile:
-  stage: compile
-  only:
-    - master
-  script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME yarn install --production
+  environment:
+    name: development
+    url: https://dev.itsaprojectmanager.tk
