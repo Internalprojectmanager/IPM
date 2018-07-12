@@ -54,20 +54,20 @@ codestyle:
   script:
     - php vendor/bin/phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
     
-# phpunit:
-#  stage: test
-#  image: internalprojectmanger/ipm-docker:1.0
-#  tags:
-#    - docker
-#    - gce
-#  dependencies:
-#    - composer
-#  script:
-#    - php vendor/bin/phpunit --coverage-text --colors=never
+ phpunit:
+  stage: test
+  image: internalprojectmanger/ipm-docker:1.0
+  tags:
+    - docker
+    - gce
+  dependencies:
+    - composer
+  script:
+    - php vendor/bin/phpunit --coverage-text --colors=never
 
 
 
-Build:
+Staging:
   stage: deploy
   variables:
     DC_PROJ: ${DC_NAME}_develop
@@ -75,6 +75,7 @@ Build:
     DC_FILE: /usr/share/jwa-dockers/sites/${DC_NAME}_develop/docker-compose.yml
   only:
     - master
+    - develop
   tags:
     - develop
   script:
@@ -82,7 +83,7 @@ Build:
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME git checkout $CI_BUILD_REF_NAME
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME git pull origin $CI_BUILD_REF_NAME
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME composer install
-    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan migrate
+    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan migrate:fresh --seed
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan config:cache
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME yarn install --production
   environment:
