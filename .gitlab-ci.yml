@@ -52,7 +52,7 @@ codestyle:
   dependencies: 
     - composer
   script:
-    - php vendor/bin/phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
+    - php vendor/bin/phpcs --error-severity=1 --warning-severity=8 --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
   allow_failure: true
     
 phpunit:
