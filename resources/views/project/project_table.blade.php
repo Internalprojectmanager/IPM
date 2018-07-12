@@ -59,7 +59,7 @@
                 </td>
                 <td style="min-width: 250px; max-width: 400px">
                     <?php $i = 1;?>
-                    @foreach($project->UserAssingee as $as)
+                    @foreach($project->userAssingee as $as)
                         @if($i < 5)
                             <div class="table-users">
                                 <img alt="{{$as->first_name}} {{$as->last_name}}" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>

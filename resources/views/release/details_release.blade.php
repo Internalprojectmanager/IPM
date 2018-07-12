@@ -204,7 +204,7 @@
                                 <span class="assignee">
                                     @php $i = 0; $unique = array(); @endphp
                                     @foreach($f->requirements as $fr)
-                                        @foreach($fr->UserAssingee as $as)
+                                        @foreach($fr->userAssingee as $as)
                                             @if($i < 5 && !in_array($as->first_name. " ".$as->last_name, $unique))
                                                     <div class="table-users">
                                                         <img alt="{{$as->first_name}} {{$as->last_name}}" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>
@@ -287,7 +287,7 @@
                                 <span class="assignee">
                                     @php $i = 0; $unique = array(); @endphp
                                     @foreach($n->requirements as $r)
-                                        @foreach($r->UserAssingee as $as)
+                                        @foreach($r->userAssingee as $as)
                                             @if($i < 5 && !in_array($as->first_name. " ".$as->last_name, $unique))
                                                 <div class="table-users">
                                                         <img alt="{{$as->first_name}} {{$as->last_name}}" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>
@@ -368,7 +368,7 @@
                             <span class="assignee">
                                 @php $i = 0; $unique = array(); @endphp
                                 @foreach($t->requirements as $r)
-                                    @foreach($r->UserAssingee as $as)
+                                    @foreach($r->userAssingee as $as)
                                         @if($i < 5 && !in_array($as->first_name. " ".$as->last_name, $unique))
                                             <div class="table-users">
                                                         <img alt="{{$as->first_name}} {{$as->last_name}}" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>

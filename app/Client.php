@@ -48,7 +48,7 @@ class Client extends Model
         return $this->hasOne('App\Team', 'id', 'teamid');
     }
 
-    public function ScopeCurrentUserTeam($query)
+    public function scopeCurrentUserTeam($query)
     {
         if (Auth::user()->teams() !== null) {
             $ids = [];

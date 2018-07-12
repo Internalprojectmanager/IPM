@@ -34,7 +34,8 @@ class Project extends Model
 
     public function pstatus()
     {
-        return $this->hasOne('App\Status', "id", 'status')->orderByRaw("FIELD(name , 'Draft', 'In Progress', 'Testing', 'Paused', 'Final', 'Completed') ASC");
+        return $this->hasOne('App\Status', "id", 'status')
+            ->orderByRaw("FIELD(name , 'Draft', 'In Progress', 'Testing', 'Paused', 'Final', 'Completed') ASC");
     }
 
     public function assignee()
@@ -42,7 +43,7 @@ class Project extends Model
         return $this->hasMany('App\Assignee', "uuid", "id");
     }
 
-    public function UserAssingee()
+    public function userAssingee()
     {
         return $this->belongsToMany('App\User', 'assignee', 'uuid', 'userid')
             ->orderBy('users.last_name', 'asc');
@@ -82,7 +83,10 @@ class Project extends Model
 
         if ($currentrelease) {
             $project->status = $currentrelease->status;
-        } elseif (Release::where("project_id", "=", $project->id)->count() ==  Release::where("project_id", "=", $project->id)->where('status', Status::name('Completed')->id)->count()) {
+        } elseif (Release::where("project_id", "=", $project->id)->count()
+            == Release::where("project_id", "=", $project->id)
+                ->where('status', Status::name('Completed')->id)
+                ->count()) {
             $project->status = Status::name('Completed')->id;
         } else {
             $project->status = Status::name('Paused')->id;
@@ -95,7 +99,7 @@ class Project extends Model
         return $query->where('path', $path);
     }
 
-    public function ScopeCurrentUserTeam($query)
+    public function scopeCurrentUserTeam($query)
     {
         if (Auth::user()->teams() !== null) {
             $ids = [];

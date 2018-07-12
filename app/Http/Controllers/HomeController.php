@@ -47,7 +47,10 @@ class HomeController extends Controller
     {
         $requirements = [];
         $status = Status::wherein('name', ['Draft', 'In Progress', 'Testing'])->select('name');
-        $assinged = Assignee::where('userid', \Auth::id())->where('status', '!=', Status::name('Completed')->id)->select('uuid')->get();
+        $assinged = Assignee::where('userid', \Auth::id())
+            ->where('status', '!=', Status::name('Completed')->id)
+            ->select('uuid')
+            ->get();
 
         if ($assinged) {
             foreach ($assinged as $a) {
@@ -93,7 +96,10 @@ class HomeController extends Controller
         $requirements = [];
         $features = [];
         $status = Status::wherein('name', ['Draft', 'In Progress', 'Testing'])->select('name');
-        $assinged = Assignee::where('userid', \Auth::id())->where('status', '!=', Status::name('Completed')->id)->select('uuid')->get();
+        $assinged = Assignee::where('userid', \Auth::id())
+            ->where('status', '!=', Status::name('Completed')->id)
+            ->select('uuid')
+            ->get();
         $feature = Requirement::search($search)->get();
 
         if ($assinged) {

@@ -49,8 +49,13 @@ class Feature extends Model
     {
         $completed = Status::name('Completed')->id;
         $requirements = Requirement::where('feature_uuid', $feature->feature_uuid)->count();
-        $completedreq = Requirement::where('feature_uuid', $feature->feature_uuid)->where('status', $completed)->count();
-        $progressreq = Requirement::where('feature_uuid', $feature->feature_uuid)->where('status', Status::name('In Progress')->id)->count();
+
+        $completedreq = Requirement::where('feature_uuid', $feature->feature_uuid)
+            ->where('status', $completed)
+            ->count();
+        $progressreq = Requirement::where('feature_uuid', $feature->feature_uuid)
+            ->where('status', Status::name('In Progress')->id)
+            ->count();
         if ($requirements ==  $completedreq) {
             $feature->status = $completed;
         } elseif ($completedreq > 0 || $progressreq > 0 &&  $completedreq < $requirements) {

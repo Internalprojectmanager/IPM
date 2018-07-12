@@ -29,11 +29,16 @@ class CheckPlanStatus
                     $teamplan = new TeamPlan();
                     $teamplan->plan_id = Plan::name('No Plan')->id;
                     $teamplan->team_id = $team->id;
-                    $teamplan->start = \Carbon\Carbon::now('Europe/Amsterdam')->toDateTimeString();
-                    $teamplan->end =  \Carbon\Carbon::now('Europe/Amsterdam')->addYears(10)->toDateTimeString();
+                    $teamplan->start = \Carbon\Carbon::now('Europe/Amsterdam')
+                        ->toDateTimeString();
+                    $teamplan->end =  \Carbon\Carbon::now('Europe/Amsterdam')
+                        ->addYears(10)
+                        ->toDateTimeString();
                     $teamplan->save();
                 } elseif ($team->plan()->name == Plan::name('No Plan')->name) {
-                    UserTeam::where('team_id', $team->id)->where('user_id', '!=', $team->owner_id)->update(['active' => false]);
+                    UserTeam::where('team_id', $team->id)
+                        ->where('user_id', '!=', $team->owner_id)
+                        ->update(['active' => false]);
                 }
             }
         }

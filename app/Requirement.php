@@ -36,7 +36,7 @@ class Requirement extends Model
         return $this->hasMany('App\Assignee', "uuid", "requirement_uuid");
     }
 
-    public function UserAssingee()
+    public function userAssingee()
     {
         return $this->belongsToMany(
             'App\User',

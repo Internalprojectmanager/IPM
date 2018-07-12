@@ -94,7 +94,10 @@ class ProjectController extends Controller
         $project->name = $request->project_name;
         $project->team_id = $request->team;
         if (!empty($request->new_client)) {
-            $client = Client::firstOrCreate(['name' => $request->new_client, 'team_id' => $request->team], ['status' => Status::Name('Client')->first()->id]);
+            $client = Client::firstOrCreate(
+                ['name' => $request->new_client, 'team_id' => $request->team],
+                ['status' => Status::Name('Client')->first()->id]
+            );
             $project->company_id = $client->id;
         } else {
             $project->company_id = $request->company;
@@ -107,9 +110,15 @@ class ProjectController extends Controller
         $project->save();
 
         if (!empty($request->new_client)) {
-            $findproject = Project::where([['name', $request->project_name], ['company_id', $client->id]])->first();
+            $findproject = Project::where([
+                ['name', $request->project_name],
+                ['company_id', $client->id]
+            ])->first();
         } else {
-            $findproject = Project::where([['name', $request->project_name], ['company_id', $request->company]])->first();
+            $findproject = Project::where([
+                ['name', $request->project_name],
+                ['company_id', $request->company]
+            ])->first();
         }
         if (!empty($request->assignee)) {
             foreach ($request->assignee as $a) {
@@ -185,14 +194,20 @@ class ProjectController extends Controller
 
     public function detailsProject($client, $project)
     {
-        $releases = Release::with('rstatus')->where('project_id', $project->id)->orderBy('version', 'desc')->get();
+        $releases = Release::with('rstatus')
+            ->where('project_id', $project->id)
+            ->orderBy('version', 'desc')
+            ->get();
         $releases = $this->calcDeadline($releases);
         $documents = Document::where('project_id', $project->id)->get();
         $user = Team::find($project->team_id)->users()->get();
         $assignee = Assignee::with('users')->where('uuid', $project->id)->get();
         $roles = Role::orderBy('id', 'asc')->get();
         $status = Status::where('type', 'Progress')->get();
-        return view('project.details_project', compact('project', 'client', 'releases', 'documents', 'user', 'assignee', 'status', 'roles'));
+        return view(
+            'project.details_project',
+            compact('project', 'client', 'releases', 'documents', 'user', 'assignee', 'status', 'roles')
+        );
     }
 
     public function editProject($client, $project)
