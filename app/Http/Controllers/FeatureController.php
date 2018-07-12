@@ -23,7 +23,7 @@ class FeatureController extends Controller
         $this->middleware('auth');
     }
 
-    function createRevision($feature)
+    public function createRevision($feature)
     {
         $feature_revision = new FeatureRevision();
         $feature_revision->feature_id = $feature->feature_uuid;

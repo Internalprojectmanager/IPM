@@ -27,7 +27,7 @@ class DocumentController extends Controller
         $this->middleware('auth');
     }
 
-    function createRevision($document)
+    public function createRevision($document)
     {
         $document_revision = new DocumentRevision();
         $document_revision->document_id = $document->document_id;
