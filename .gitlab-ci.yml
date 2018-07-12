@@ -53,6 +53,7 @@ codestyle:
     - composer
   script:
     - php vendor/bin/phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
+  allow_failure: true
     
 phpunit:
   stage: test
@@ -64,8 +65,6 @@ phpunit:
     - composer
   script:
     - php vendor/bin/phpunit --coverage-text --colors=never
-
-
 
 staging:
   stage: deploy
