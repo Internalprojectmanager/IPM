@@ -34,7 +34,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="white-back col-md-12">
                 <h1 class="center">Users</h1>
                 <table class="table table-hover table-center results">
@@ -47,7 +47,7 @@
                     <tbody>
                     <?php $count = 0; ?>
                     @foreach($users as $user)
-                        <?php if($count == 5) break; ?>
+                        <?php if ($count == 5) break; ?>
                         <tr>
                             <td class="col-md-1"
                                 style="background-color: @if($user->active && $user->toc)  #7ED321 @elseif($user->active && !$user->toc) #CECECE  @else #FF3300 @endif ;"></td>
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="white-back col-md-12">
                 <h1 class="center">Teams</h1>
                 @if($teams->count() > 0)
@@ -85,11 +85,12 @@
                         <?php $count = 0; ?>
                         @foreach($teams as $team )
                             @if($team->name !== $team->owner->fullName())
-                                <?php if($count == 5) break; ?>
+                                <?php if ($count == 5) break; ?>
                                 <tr>
                                     <td class="col-md-1"
                                         style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
-                                    <td colspan=""><img class='team-logo' src="{{\Storage::url($team->logo)}}"> {{$team->name}}</td>
+                                    <td colspan=""><img class='team-logo'
+                                                        src="{{\Storage::url($team->logo)}}"> {{$team->name}}</td>
                                     <td colspan="">{{$team->plan()->name}}</td>
                                     <td colspan="">{{$team->project()->count()}}</td>
                                     <td colspan="">{{$team->client()->count()}}</td>
@@ -104,9 +105,10 @@
                 @endif
             </div>
         </div>
+    </div>
 
-
-        <div class="col-md-4">
+    <div class="row margin-top-50">
+        <div class="col-md-6">
             <div class="white-back col-md-12">
                 <h1 class="center">Projects</h1>
                 @if($projects->count() > 0)
@@ -121,7 +123,7 @@
                         <tbody>
                         <?php $count = 0; ?>
                         @foreach($projects as $project)
-                            <?php if($count == 5) break; ?>
+                            <?php if ($count == 5) break; ?>
                             <tr>
                                 <td class="col-md-1"
                                     style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
@@ -135,9 +137,45 @@
                         </tbody>
                     </table>
                 @endif
-                <a class="center" href="{{route('admin_users')}}">Show more</a>
+                <a class="center" href="{{route('admin_users')}}">Show </a>
             </div>
         </div>
+
+        <div class="col-md-6">
+            <div class="white-back col-md-12">
+                <h1 class="center">Plans</h1>
+                @if($projects->count() > 0)
+                    <table class="table table-hover table-center results">
+                        <thead>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Used</th>
+                        <th>Price</th>
+                        </thead>
+                        <tbody>
+                        <?php $count = 0; ?>
+                        @foreach($plans as $plan)
+                            <?php if ($count == 5) break; ?>
+                            <tr>
+                                <td class="col-md-1"
+                                    style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
+                                <td>{{$plan->name}}</td>
+                                <td>@foreach($plan->team() as $team)
+                                        {{$team->name}}
+                                    @endforeach</td>
+                                <td>0.00</td>
+                            </tr>
+                            <?php $count++; ?>
+
+                        @endforeach
+                        </tbody>
+                    </table>
+                @endif
+                <a class="center" href="{{route('admin_users')}}">Show more
+            </div>
+        </div>
+    </div>
+
     </div>
 
 @endsection

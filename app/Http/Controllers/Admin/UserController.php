@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Plan;
 use App\Project;
 use App\Team;
 use Illuminate\Http\Request;
@@ -24,7 +25,8 @@ class UserController extends Controller
         $users = User::orderBy('created_at', 'desc')->get();
         $projects = Project::orderBy('created_at', 'desc')->get();
         $teams = Team::with('project', 'client')->orderBy('id', 'desc')->get();
+        $plans = Plan::orderBy('id', 'desc')->get();
 
-        return view('admin.index', compact('users', 'projects', 'teams'));
+        return view('admin.index', compact('users', 'projects', 'teams', 'plans'));
     }
 }
