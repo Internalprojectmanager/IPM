@@ -1,6 +1,6 @@
 $(document).on('click touchstart', '.clickable-row', function () {
     $(".container").addClass("disabled");
-    $(".loader").show();
+    $("#loader-container").show();
     window.location = $(this).data("href");
 });
 
@@ -14,7 +14,7 @@ $('.searchform').on('keyup keypress', function (e) {
 
 $(document).on('click', '.pagination a, .results>thead>tr>th a', function (e) {
     $(".container").addClass("disabled");
-    $(".loader").show();
+    $("#loader-container").show();
     e.preventDefault();
     var url = $(this).attr('href');
     getData(url);
@@ -22,7 +22,7 @@ $(document).on('click', '.pagination a, .results>thead>tr>th a', function (e) {
 
 $(document).on('change', '.assignee-check', function (e) {
     $(".container").addClass("disabled");
-    $(".loader").show();
+    $("#loader-container").show();
     var curl = window.location.href;
     e.preventDefault();
     var url = $(this).attr('href');
@@ -168,7 +168,7 @@ function saveStatus(url, curl) {
             $('.container').append(result);
 
             $(".container").removeClass("disabled");
-            $(".loader").hide();
+            $("#loader-container").hide();
         }
     });
     window.history.pushState("", "", curl);
@@ -265,7 +265,7 @@ function getData(url) {
     url = url + "?sort=" + sort + "&order=" + order + "&page=" + page;
     window.history.pushState("", "", url);
     $(".container").removeClass("disabled");
-    $(".loader").hide();
+    $("#loader-container").hide();
 }
 
 var typingTimer;
@@ -283,7 +283,7 @@ $('.search').bind('keyup change', function (e) {
     } else{
         typingTimer = setTimeout(searchdoneTyping, doneTypingInterval);
         $(".bigtable").addClass("disabled");
-        $(".loader").show();
+        $("#loader-container").show();
     }
 });
 
@@ -291,7 +291,7 @@ $('.dropdown-search').on('change', function () {
     clearTimeout(typingTimer);
     typingTimer = setTimeout(searchdoneTyping, doneTypingInterval);
     $(".bigtable").addClass("disabled");
-    $(".loader").show();
+    $("#loader-container").show();
 });
 
 //on keydown, clear the countdown
@@ -305,7 +305,7 @@ function searchdoneTyping(){
     if (document.readyState === 'complete') {
         setTimeout(2000);
         $(".bigtable").removeClass("disabled");
-        $(".loader").hide();
+        $("#loader-container").hide();
         $('.container').focus();
     }
 }
