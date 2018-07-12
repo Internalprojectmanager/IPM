@@ -86,5 +86,5 @@ staging:
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan config:cache
     - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME yarn install --production
   environment:
-    name: development
+    name: staging
     url: https://dev.itsaprojectmanager.tk
