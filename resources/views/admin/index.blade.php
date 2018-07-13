@@ -8,52 +8,75 @@
 @section('content')
 
     <div class="row block-white">
-
-        <div class="col-md-12 col-xs-12">
+        <div class="row under-details">
+            <div class="col-md-12 col-xs-12">
             <span class="block-white-title">
                 Admin - Dashboard </span>
-            <span class="block-white-subtitle">
+                <span class="block-white-subtitle">
                     <span id="count_projects_bar">|</span>
                     <span class="counter">{{$teams->count()}}</span>
                     <span class="contenttype">Teams(s)</span>
             </span>
 
-            <span class="block-white-subtitle">
+                <span class="block-white-subtitle">
                     <span id="count_projects_bar">|</span>
                     <span class="counter">{{$plans->count()}}</span>
                     <span class="contenttype">Plan(s)</span>
             </span>
 
-            <span class="block-white-subtitle">
+                <span class="block-white-subtitle">
                     <span id="count_projects_bar">|</span>
                     <span class="counter">{{$users->count()}}</span>
                     <span class="contenttype">User(s)</span>
             </span>
 
-            <span class="block-white-subtitle">
+                <span class="block-white-subtitle">
                     <span id="count_projects_bar">|</span>
                     <span class="counter">{{$projects->count()}}</span>
                     <span class="contenttype">Project(s)</span>
             </span>
 
-            <span class="block-white-subtitle">
+                <span class="block-white-subtitle">
                     <span id="count_projects_bar">|</span>
                     <span class="counter">{{$releases}}</span>
                     <span class="contenttype">Release(s)</span>
             </span>
 
-            <span class="block-white-subtitle">
+                <span class="block-white-subtitle">
                     <span id="count_projects_bar">|</span>
                     <span class="counter">{{$features}}</span>
                     <span class="contenttype">Feature(s)</span>
             </span>
 
-            <span class="block-white-subtitle">
+                <span class="block-white-subtitle">
                     <span id="count_projects_bar">|</span>
                     <span class="counter">{{$requirements}}</span>
                     <span class="contenttype">Requirement(s)</span>
             </span>
 
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-12">
+            <span class="block-white-subtitle">
+                <span class="contenttype"> {{env('APP_NAME')}} Status:
+                        <span style="margin-left: 10px";>
+                            @if(file_exists('https://gitlab.com/internalprojectmanager/IPM/raw/master/VERSION'))
+                                @php $external = file_get_contents('https://gitlab.com/internalprojectmanager/IPM/raw/master/VERSION', 'r'); @endphp
+                                @if(file_get_contents(public_path('../VERSION'), 'r') < $external && strpos('RC', $external === false))
+                                    <span class="status-Canceled white" style="padding: 10px 15px">Update ASAP </span>
+                                @else
+                                    <span class="status-Client white" style="padding: 10px 15px">Up To Date </span>
+                                @endif
+                            @else
+                                <span class="status-Client white" style="padding: 10px 15px">Up To Date </span>
+                            @endif
+                        </span>
+                    </span>
+                    <span class="contenttype">V{{file_get_contents(public_path('../VERSION'), 'r')}}</span>
+            </span>
+
+            </div>
         </div>
     </div>
 

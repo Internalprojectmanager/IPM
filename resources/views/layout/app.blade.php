@@ -97,7 +97,7 @@
     </div>
 
     <footer class="navbar-fixed-bottom">
-        <div class="col-md-12 center col-x">Copyright © {{\Carbon\Carbon::now()->format('Y')}} - Internalprojectmanager (IPM)</div>
+        <div class="col-md-12 center col-x">Copyright © {{\Carbon\Carbon::now()->format('Y')}} - Internalprojectmanager (IPM) - <?php  echo file_get_contents(public_path('../VERSION'), 'r'); ?></div>
     </footer>
 
     <!-- jQuery library -->
