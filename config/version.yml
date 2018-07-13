@@ -13,7 +13,7 @@ cache:
 build:
   mode: git-local # "number", "git-local" or "git-remote"
   number: 701031
-  length: 6
+  length: 8
   increment_by: 1
   git_absorb: false # "false", "git-local" or "git-remote"
 git:
