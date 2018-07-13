@@ -12,6 +12,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <select class="form-control selectpicker input-text-modal" name="team">
+                            <option selected disabled="">-- Select Team --</option>
                             @foreach($teams as $u)
                                 <option value="{{$u->id}}">{{$u->name}}</option>
                             @endforeach
@@ -27,7 +28,7 @@
                 <div class="form-group">
                     <label>Client:<span class="required">*</span></label>
                     <select class="form-control input-text-modal" name="company" id="company">
-                        <option value="" disabled="" selected="">Select a client</option>
+                        <option disabled="" selected="">-- Select Client --</option>
                         @foreach($client as $c)
                             <option value="{{$c->id}}">{{$c->name}}</option>
                         @endforeach

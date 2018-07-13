@@ -29,22 +29,31 @@ class Team extends Model
         return $query->where('slug', $slug)->firstorfail();
     }
 
-    public function project(){
+    public function project()
+    {
         return $this->hasMany('App\Project');
     }
 
-    public function client(){
+    public function client()
+    {
         return $this->hasMany('App\Client');
     }
 
-    public function users(){
+    public function owner()
+    {
+        return $this->hasone('App\User', 'id', 'owner_id');
+    }
+
+    public function users()
+    {
         return $this->belongsToMany('App\User')
             ->orderBy('team_user.active', 'desc')
             ->orderBy('last_name', 'asc')
             ->withPivot('current', 'active');
     }
 
-    public function plan(){
+    public function plan()
+    {
 
         return $this->belongsToMany('App\Plan', 'team_plan')
             ->withPivot('start', 'end')
@@ -54,10 +63,10 @@ class Team extends Model
     }
 
 
-    public function ScopeCurrentUserTeam($query){
-        if(Auth::user()->currentTeam() !== null){
+    public function scopeCurrentUserTeam($query)
+    {
+        if (Auth::user()->currentTeam() !== null) {
             return $query->where('id', Auth::user()->currentTeam()->id);
-
         }   return $query->where('id', null);
     }
 

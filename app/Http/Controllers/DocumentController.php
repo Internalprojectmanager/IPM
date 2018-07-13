@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\DocumentValidator;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,7 +27,8 @@ class DocumentController extends Controller
         $this->middleware('auth');
     }
 
-    function createRevision($document){
+    public function createRevision($document)
+    {
         $document_revision = new DocumentRevision();
         $document_revision->document_id = $document->document_id;
         $document_revision->project_id = $document->project_id;
@@ -36,22 +38,23 @@ class DocumentController extends Controller
         $document_revision->original_created_at = $document->created_at;
         $saved = $document_revision->save();
 
-        if(!$saved){
+        if (!$saved) {
             App:abort('500', 'Error');
         }
         return true;
     }
 
-    public function addDocument($client, $project){
+    public function addDocument($client, $project)
+    {
         $release = Release::where('project_id', $project->id)->get();
         $status = Status::type('Progress')->orWhere('type', 'Document')->get();
-        return view('document.add_document', compact('projects', 'client', 'project','release','status'));
+        return view('document.add_document', compact('projects', 'client', 'project', 'release', 'status'));
     }
 
     public function storeDocument(DocumentValidator $request)
     {
         $document = new Document();
-        if($request->hasFile('upload')) {
+        if ($request->hasFile('upload')) {
             Storage::makeDirectory("public/documents/" . $request->project_id);
             $path = $request->file('upload')->storeAs("public/documents/" . $request->project_id, $request->document_title . "-" . $request->upload->getClientOriginalName());
             $document->link = $path;
@@ -72,17 +75,20 @@ class DocumentController extends Controller
         return redirect()->route('projectdetails', ['name' => $project->name, 'company_id ' => $project->company_id]);
     }
 
-    public function showDocument($client, $project, $document){
-        return view('document.details_document', compact('document','client', 'project'));
+    public function showDocument($client, $project, $document)
+    {
+        return view('document.details_document', compact('document', 'client', 'project'));
     }
 
-    public function downloadFile($client, $project, $document){
+    public function downloadFile($client, $project, $document)
+    {
         return response()->download('storage/documents/'. $project->id. '/' . $document->title.'-'.$document->filename, $document->filename);
     }
 
-    public function overviewDocuments($client, $project){
+    public function overviewDocuments($client, $project)
+    {
         $document = Document::with('projects.company')->where('project_id', $project->id)->get();
-        if(!$document){
+        if (!$document) {
             abort(404);
         }
 
@@ -90,22 +96,24 @@ class DocumentController extends Controller
     }
 
 
-    public function editDocument($client, $project, $document){
+    public function editDocument($client, $project, $document)
+    {
         $status = Status::type('Progress')->orWhere('type', 'Document')->get();
         $release = Release::where('project_id', $project->id)->get();
-        if(!$document){
+        if (!$document) {
             abort(404);
         }
 
         return view('document.edit_document', compact('document', 'project', 'client', 'status', 'release'));
     }
 
-    public function updateDocument($client, $project, $document, Request $request){
+    public function updateDocument($client, $project, $document, Request $request)
+    {
         $this->createRevision($document);
 
-        if($request->hasFile('upload')){
+        if ($request->hasFile('upload')) {
             $this->deleteFile($document->id);
-            $path = $request->file('upload')->storeAs("public/documents/".$document->project_id , $request->document_title."-".$request->upload->getClientOriginalName());
+            $path = $request->file('upload')->storeAs("public/documents/".$document->project_id, $request->document_title."-".$request->upload->getClientOriginalName());
             $document->link = $path;
             $document->filename = $request->upload->getClientOriginalName();
         }
@@ -125,9 +133,9 @@ class DocumentController extends Controller
     {
         $this->createRevision($document);
         $file = Storage::delete($document->link);
-        if($file == true){
-            $document->filename = NULL;
-            $document->link = NULL;
+        if ($file == true) {
+            $document->filename = null;
+            $document->link = null;
             $document->save();
         }
         return redirect()->action('DocumentController@editDocument', [$document->projects->company->path,$document->projects->path, $document->id]);

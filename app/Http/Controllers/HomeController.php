@@ -9,6 +9,7 @@ use App\Status;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use PragmaRX\Version\Package\Version;
+
 class HomeController extends Controller
 {
     /**
@@ -22,17 +23,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index()
+    {
         return redirect()->route('dashboard');
     }
 
-    public function calcDeadline($data){
+    public function calcDeadline($data)
+    {
         $now = Carbon::now()->endOfDay();
-        foreach($data as $d){
+        foreach ($data as $d) {
             $deadline  = Carbon::parse($d->features->releases->deadline)->endOfDay();
             $d->features->releases->daysleft = $now->diffInDays($deadline, false);
-            if($d->features->releases->daysleft >= 30 && $d->features->releases->daysleft < 365 ||
-                $d->features->releases->daysleft <= -30 && $d->features->releases->daysleft > -365){
+            if ($d->features->releases->daysleft >= 30 && $d->features->releases->daysleft < 365 ||
+                $d->features->releases->daysleft <= -30 && $d->features->releases->daysleft > -365) {
                 $d->features->releases->monthsleft = $now->diffInMonths($deadline, false);
             }
         }
@@ -44,22 +47,25 @@ class HomeController extends Controller
     {
         $requirements = [];
         $status = Status::wherein('name', ['Draft', 'In Progress', 'Testing'])->select('name');
-        $assinged = Assignee::where('userid', \Auth::id())->where('status', '!=', Status::name('Completed')->id)->select('uuid')->get();
+        $assinged = Assignee::where('userid', \Auth::id())
+            ->where('status', '!=', Status::name('Completed')->id)
+            ->select('uuid')
+            ->get();
 
-        if($assinged){
-            foreach ($assinged as $a){
+        if ($assinged) {
+            foreach ($assinged as $a) {
                 $validator = \Validator::make(['uuid' => $a->uuid], ['uuid' => 'uuid']);
-                if($validator->passes()):
+                if ($validator->passes()) :
                     $requirements[] = $a->uuid;
                 endif;
             }
         }
         $requirements = Requirement::with('features.releases.projects.company', 'rstatus', 'assignees')
-            ->whereHas('rstatus', function($query) use ($status) {
+            ->whereHas('rstatus', function ($query) use ($status) {
                 $query->wherein('name', $status);
-            })->whereHas( 'features.releases', function($q2) {
+            })->whereHas('features.releases', function ($q2) {
                 $q2->orderbyraw('-deadline desc');
-            })->whereHas('assignees', function ($q3){
+            })->whereHas('assignees', function ($q3) {
                 $q3->where('userid', \Auth::id());
             })->whereIn('requirement_uuid', $requirements);
 
@@ -70,16 +76,16 @@ class HomeController extends Controller
         $status  = Status::type('Progress')->get();
 
 
-        if($request->method() == 'POST') {
+        if ($request->method() == 'POST') {
             return view('profile.dashboard_table', compact('requirements', 'requirementscount', 'status'));
-
         }
 
         return view('profile.dashboard', compact('requirements', 'requirementscount', 'status'));
     }
 
-    public function dashboardSearch(Request $request){
-        if(isset($request->data)){
+    public function dashboardSearch(Request $request)
+    {
+        if (isset($request->data)) {
             return app('App\Http\Controllers\RequirementController')->saveAuthStatus($request);
         }
 
@@ -90,30 +96,33 @@ class HomeController extends Controller
         $requirements = [];
         $features = [];
         $status = Status::wherein('name', ['Draft', 'In Progress', 'Testing'])->select('name');
-        $assinged = Assignee::where('userid', \Auth::id())->where('status', '!=', Status::name('Completed')->id)->select('uuid')->get();
+        $assinged = Assignee::where('userid', \Auth::id())
+            ->where('status', '!=', Status::name('Completed')->id)
+            ->select('uuid')
+            ->get();
         $feature = Requirement::search($search)->get();
 
-        if($assinged){
-            foreach ($assinged as $a){
+        if ($assinged) {
+            foreach ($assinged as $a) {
                 $validator = \Validator::make(['uuid' => $a->uuid], ['uuid' => 'uuid']);
-                if($validator->passes()):
+                if ($validator->passes()) :
                     $requirements[] = $a->uuid;
                 endif;
             }
         }
 
-        if($feature){
-            foreach ($feature as $f){
-                if(in_array($f->requirement_uuid, $requirements)){
+        if ($feature) {
+            foreach ($feature as $f) {
+                if (in_array($f->requirement_uuid, $requirements)) {
                     $features[] = $f->requirement_uuid;
                 }
             }
         }
 
         $feature = Requirement::with('features.releases.projects.company', 'rstatus')
-            ->whereHas('rstatus', function($query) use ($status) {
+            ->whereHas('rstatus', function ($query) use ($status) {
                 $query->wherein('name', $status);
-            })->whereHas( 'features.releases', function($q2) {
+            })->whereHas('features.releases', function ($q2) {
                 $q2->orderbyraw('-deadline desc');
             })->whereIn('requirement_uuid', $features);
 
@@ -130,7 +139,8 @@ class HomeController extends Controller
         return view('profile.dashboard_table', compact('requirements', 'requirementscount', 'status'));
     }
 
-    public function help(){
+    public function help()
+    {
         return view('profile.help');
     }
 }

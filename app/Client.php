@@ -9,7 +9,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\Types\Null_;
 
-
 class Client extends Model
 {
     protected $table = "client";
@@ -29,30 +28,34 @@ class Client extends Model
         return 'path';
     }
 
-    public function projects(){
+    public function projects()
+    {
         return $this->hasMany('App\Project', "company_id", "id")->orderBy('deadline', 'desc');
     }
 
-    public function cstatus(){
+    public function cstatus()
+    {
         return $this->hasOne('App\Status', "id", "status");
     }
 
-    public function scopePath($query, $path){
+    public function scopePath($query, $path)
+    {
         return $query->where('path', $path);
     }
 
-    public function team(){
+    public function team()
+    {
         return $this->hasOne('App\Team', 'id', 'teamid');
     }
 
-    public function ScopeCurrentUserTeam($query){
-        if(Auth::user()->teams() !== null){
+    public function scopeCurrentUserTeam($query)
+    {
+        if (Auth::user()->teams() !== null) {
             $ids = [];
-            foreach(Auth::user()->teams() as $t){
+            foreach (Auth::user()->teams() as $t) {
                 $ids [] = $t->id;
             }
             return $query->wherein('team_id', $ids);
-
         }   return $query->where('team_id', null);
     }
 

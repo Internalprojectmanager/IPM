@@ -31,9 +31,7 @@ class RequirementController extends Controller
         $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
         $release = Release::where(['project_id' => $project->id, 'name' => $release_id])->first();
         foreach ($request->requirement_name as $r => $value) {
-
-            if ($request->requirement_name[$r] !== NULL) {
-
+            if ($request->requirement_name[$r] !== null) {
                 $requirement = new Requirement();
                 $requirement->feature_id = $request->feature_id;
                 $requirement->release_id = $request->release_id;
@@ -52,7 +50,7 @@ class RequirementController extends Controller
     {
 
         foreach ($request->data as $key => $value) {
-            if(\Auth::id() == $value['assignee']){
+            if (\Auth::id() == $value['assignee']) {
                 $assignee = Assignee::where('userid', $value['assignee'])->where('uuid', $value['uuid'])->first();
                 $assignee->status = $value['status'];
                 $assignee->save();
@@ -61,7 +59,7 @@ class RequirementController extends Controller
 
         $requirements = Requirement::with('features.releases.projects', 'assignees')->where('feature_uuid', $feature->feature_uuid)->get();
 
-        foreach ($requirements as $r){
+        foreach ($requirements as $r) {
             Requirement::updateStatus($r);
         }
 
@@ -88,7 +86,6 @@ class RequirementController extends Controller
             Feature::updateStatus($requirement->features);
             Release::updateStatus($requirement->features->releases);
             Project::updateStatus($requirement->features->releases->projects);
-
         }
 
         return app('App\Http\Controllers\HomeController')->dashboard($request);
@@ -98,7 +95,6 @@ class RequirementController extends Controller
     public function overviewRequirement()
     {
         $requirements = Requirement::all();
-
     }
 
     public function detailsRequirement($requirement_name)
@@ -129,14 +125,9 @@ class RequirementController extends Controller
         $requirement->save();
 
         return redirect()->route('overviewRequirement');
-
-
     }
 
     public function deleteRequirement($requirement_name)
     {
-
     }
-
 }
-

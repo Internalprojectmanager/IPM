@@ -1,4 +1,4 @@
-@extends('layout.loggedout')
+@extends('layout.app')
 
 @section('title')
     Sign in | {{env('APP_NAME')}}

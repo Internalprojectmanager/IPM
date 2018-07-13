@@ -54,8 +54,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('team', function ($value) {
             return \App\Team::slug($value);
         });
-
-
     }
 
     /**

@@ -1,5 +1,5 @@
 <div class="row bigtable">
-    <table class="table table-hover table-center results">
+    <table class="table table-hover table-center results table-responsive">
         <thead>
         <th></th>
         <th>@sortablelink('name', 'Project')</th>
@@ -13,7 +13,7 @@
             <tr class="clickable-row" data-href="
                    {{route('projectdetails',[$project->company->path, $project->path])}}">
                 <td style="background-color: {{$project->pstatus->color}};"></td>
-                <td class="col-md-2"><span class="tabletitle">{{$project->name}}</span>
+                <td class=""><span class="tabletitle">{{$project->name}}</span>
                     <br>
                     <span class="tablesubtitle">
                         @if(isset($project->company))
@@ -24,12 +24,14 @@
                     </a>
                     </span>
                 </td>
-                <td class="col-md-2">{{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}
+                <td class="" style="max-width: 200px"><span class="tablesubtitle"> {{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}
                     @if(str_word_count($project->description) > 10)
                         ...
                     @endif
+                    </span>
+
                 </td>
-                <td class="col-md-2">{{$project->pstatus->name}}
+                <td class="">{{$project->pstatus->name}}
                     <br>
                     @if($project->pstatus->name == "Completed")
                         <span class="tablesubtitle grey">on {{\Carbon\Carbon::parse($project->updated_at)}}</span>
@@ -40,7 +42,7 @@
                     @endif
 
                 </td>
-                <td class="col-lg-2 col-md-2">
+                <td class="">
                     @if($project->pstatus->name != "Completed" &&$project->pstatus->name != "Paused" && $project->pstatus->name != "Cancelled")
                         @if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}} <br>
                             @if($project->monthsleft && $project->monthsleft > 0)
@@ -55,13 +57,21 @@
                         @endif
                     @endif
                 </td>
-                <td class="col-md-6">
-                    <?php $i = 0;?>
-                    @foreach($project->assignee as $as)
-                        <div class="col-md-12 col-lg-6">
-                            <span class="assignee">{{$as->users->first_name}} {{$as->users->last_name}}</span>
-                        </div>
-
+                <td style="min-width: 250px; max-width: 400px">
+                    <?php $i = 1;?>
+                    @foreach($project->userAssingee as $as)
+                        @if($i < 5)
+                            <div class="table-users">
+                                <img alt="{{$as->first_name}} {{$as->last_name}}" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>
+                                <span>{{$as->first_name}}</span>
+                            </div>
+                        @endif
+                        @if($i == 5 && $project->assignee->count() > 4)
+                            <div class="table-users table-more">
+                                <span class="avatar-more">+ {{$project->assignee->count() - 4 }}</span>
+                            </div>
+                        @endif
+                        @php $i++ @endphp
                     @endforeach
                 </td>
             </tr>

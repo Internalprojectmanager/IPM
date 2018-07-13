@@ -204,15 +204,22 @@
                                 <span class="assignee">
                                     @php $i = 0; $unique = array(); @endphp
                                     @foreach($f->requirements as $fr)
-                                        @foreach($fr->assignees as $as)
-                                            @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
-                                                {{$as->users->first_name}} {{$as->users->last_name}},
-                                                @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
+                                        @foreach($fr->userAssingee as $as)
+                                            @if($i < 5 && !in_array($as->first_name. " ".$as->last_name, $unique))
+                                                    <div class="table-users">
+                                                        <img alt="{{$as->first_name}} {{$as->last_name}}" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>
+                                                        <span>{{$as->first_name}}</span>
+                                                    </div>
+                                                    @php $unique[] = $as->first_name. " ".$as->last_name;@endphp
+                                                    @php $i++;@endphp
+                                                    @endif
+                                                    @if($i == 5 && $fr->assignee->count() > 4)
+                                                    <div class="table-users table-more">
+                                                        <span class="avatar-more">+ {{$fr->assignee->count() - 4 }}</span>
+                                                    </div>
+                                                    @php $i++;@endphp
                                             @endif
-                                            @if($i == 3)
-                                                and More...
-                                            @endif
-                                            @php $i++;@endphp
+
                                         @endforeach
                                     @endforeach
                                 </span>
@@ -280,15 +287,22 @@
                                 <span class="assignee">
                                     @php $i = 0; $unique = array(); @endphp
                                     @foreach($n->requirements as $r)
-                                        @foreach($r->assignees as $as)
-                                            @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
-                                                {{$as->users->first_name}} {{$as->users->last_name}},
-                                                @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
+                                        @foreach($r->userAssingee as $as)
+                                            @if($i < 5 && !in_array($as->first_name. " ".$as->last_name, $unique))
+                                                <div class="table-users">
+                                                        <img alt="{{$as->first_name}} {{$as->last_name}}" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>
+                                                        <span>{{$as->first_name}}</span>
+                                                    </div>
+                                                @php $unique[] = $as->first_name. " ".$as->last_name;@endphp
+                                                @php $i++;@endphp
                                             @endif
-                                            @if($i == 3)
-                                                and More...
+                                            @if($i == 5 && $fr->assignee->count() > 4)
+                                                <div class="table-users table-more">
+                                                        <span class="avatar-more">+ {{$fr->assignee->count() - 4 }}</span>
+                                                    </div>
+                                                @php $i++;@endphp
                                             @endif
-                                            @php $i++;@endphp
+
                                         @endforeach
                                     @endforeach
                                 </span>
@@ -354,16 +368,22 @@
                             <span class="assignee">
                                 @php $i = 0; $unique = array(); @endphp
                                 @foreach($t->requirements as $r)
-                                    @foreach($r->assignees as $as)
-                                        @if($i < 3 && !in_array($as->users->first_name. " ".$as->users->last_name, $unique))
-                                            {{$as->users->first_name}} {{$as->users->last_name}},
-                                            @php $unique[] = $as->users->first_name. " ".$as->users->last_name;@endphp
+                                    @foreach($r->userAssingee as $as)
+                                        @if($i < 5 && !in_array($as->first_name. " ".$as->last_name, $unique))
+                                            <div class="table-users">
+                                                        <img alt="{{$as->first_name}} {{$as->last_name}}" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>
+                                                        <span>{{$as->first_name}}</span>
+                                                    </div>
+                                            @php $unique[] = $as->first_name. " ".$as->last_name;@endphp
+                                            @php $i++;@endphp
+                                        @endif
+                                        @if($i == 5 && $fr->assignee->count() > 4)
+                                            <div class="table-users table-more">
+                                                        <span class="avatar-more">+ {{$fr->assignee->count() - 4 }}</span>
+                                                    </div>
+                                            @php $i++;@endphp
+                                        @endif
 
-                                        @endif
-                                        @if($i == 3)
-                                            and More...
-                                        @endif
-                                        @php $i++;@endphp
                                     @endforeach
                                 @endforeach
                             </span>

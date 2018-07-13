@@ -15,7 +15,11 @@
                 <td>{{$client->name}}</td>
                 <td>
                     <span class="tabletitle">{{$client->contactname}}</span> <br>
-                    <span class="tablesubtitle"> {{$client->contactnumber}}<br>
+                    <span class="tablesubtitle">
+                        @if($client->contactnumber)
+                        {{$client->contactnumber}}
+                        <br>
+                        @endif
                         {{$client->contactemail}}</span>
                 </td>
                 <td style="width: 180px;">{{$client->cstatus->name}}</td>

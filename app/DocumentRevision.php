@@ -12,7 +12,8 @@ class DocumentRevision extends Model
         'id','title', 'description', 'author', 'project_id'
     ];
 
-    public function document(){
+    public function document()
+    {
         return $this->hasMany('App\Document', "document_id", "document_id");
     }
 }

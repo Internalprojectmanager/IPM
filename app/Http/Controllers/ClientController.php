@@ -39,7 +39,7 @@ class ClientController extends Controller
         $status = Status::name($request->status);
         $client = new Client();
         $client->name = $request->client_name;
-        if($request->team){
+        if ($request->team) {
             $client->team_id = $request->team;
         }
 
@@ -65,7 +65,8 @@ class ClientController extends Controller
         return view('client.client', compact('clients', 'clientcount', 'status', 'teams'));
     }
 
-    public function searchClient(Request $request){
+    public function searchClient(Request $request)
+    {
         $clie = [];
         $search = $request->search;
         $status = $request->status;
@@ -73,23 +74,23 @@ class ClientController extends Controller
         $order = $request->order;
         $page = $request->page;
 
-        if($sort == NULL){
+        if ($sort == null) {
             $sort = "name";
             $order = "asc";
         }
 
         $clients = Client::search($search);
-        if(isset($status)){
+        if (isset($status)) {
             $clients->where('status', $status);
         }
         $clients->where('team_id', Auth::user()->currentTeam()->id);
         $clients = $clients->get();
 
-        if($clients->count() <= 8){
+        if ($clients->count() <= 8) {
             $page = 1;
         }
 
-        foreach ($clients as $c){
+        foreach ($clients as $c) {
             $clie[] = $c->id;
         }
 
@@ -97,12 +98,11 @@ class ClientController extends Controller
         $clientcount = $clients->total();
         $status = Status::type('Client')->get();
         return view('client.client_table', compact('clients', 'clientcount', 'status'));
-
     }
 
     public function detailsClient($client)
     {
-            $projects = Project::sortable()->where('company_id' , $client->id)->paginate(8);
+            $projects = Project::sortable()->where('company_id', $client->id)->paginate(8);
             $projectcount = $projects->total();
             $status = Status::type('Client')->get();
             $link = unserialize($client->link);
@@ -115,7 +115,7 @@ class ClientController extends Controller
             return view('client.details_client', compact('client', 'projects', 'projectcount', 'status', 'user', 'projectstatus', 'teams'));
     }
 
-    public function detailsSort($client , Request $request)
+    public function detailsSort($client, Request $request)
     {
         $sort = $request->sort;
         $page = $request->page;
@@ -141,7 +141,7 @@ class ClientController extends Controller
         $client->contactname = $request->contact_name;
         $client->contactnumber = $request->contact_phonenumber;
         $client->contactemail = $request->contact_email;
-        if(!empty($request->link_title) && !empty($request->link_url)){
+        if (!empty($request->link_title) && !empty($request->link_url)) {
             $client->link = serialize(array('text' => $request->link_title, 'link' => $request->link_url));
         }
         $client->save();

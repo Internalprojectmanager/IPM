@@ -14,15 +14,17 @@ class UserTeam extends Model
         'user_id','team_id', 'active', 'current'
     ];
 
-    public function scopeTeamMember($query, $team, $user){
+    public function scopeTeamMember($query, $team, $user)
+    {
         return $query->where('team_id', $team)->where('user_id', $user)->firstorfail();
     }
 
-    public function toggleBlock(){
+    public function toggleBlock()
+    {
 
-        if($this->attributes['active'] == true){
+        if ($this->attributes['active'] == true) {
             $this->attributes['active'] = false;
-        }else{
+        } else {
             $this->attributes['active'] = true;
         }
 

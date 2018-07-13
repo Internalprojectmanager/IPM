@@ -23,17 +23,22 @@ class CheckPlanStatus
     {
         $response = $next($request);
         //If the Plan is not approved Change team to No Plan
-        if(!Auth::guest()){
-            foreach (Auth::user()->teams() as $team){
-                if($team->plan() == null){
+        if (!Auth::guest()) {
+            foreach (Auth::user()->teams() as $team) {
+                if ($team->plan() == null) {
                     $teamplan = new TeamPlan();
                     $teamplan->plan_id = Plan::name('No Plan')->id;
                     $teamplan->team_id = $team->id;
-                    $teamplan->start = \Carbon\Carbon::now('Europe/Amsterdam')->toDateTimeString();
-                    $teamplan->end =  \Carbon\Carbon::now('Europe/Amsterdam')->addYears(10)->toDateTimeString();
+                    $teamplan->start = \Carbon\Carbon::now('Europe/Amsterdam')
+                        ->toDateTimeString();
+                    $teamplan->end =  \Carbon\Carbon::now('Europe/Amsterdam')
+                        ->addYears(10)
+                        ->toDateTimeString();
                     $teamplan->save();
-                }else if($team->plan()->name == Plan::name('No Plan')->name){
-                    UserTeam::where('team_id', $team->id)->where('user_id', '!=', $team->owner_id)->update(['active' => false]);
+                } elseif ($team->plan()->name == Plan::name('No Plan')->name) {
+                    UserTeam::where('team_id', $team->id)
+                        ->where('user_id', '!=', $team->owner_id)
+                        ->update(['active' => false]);
                 }
             }
         }

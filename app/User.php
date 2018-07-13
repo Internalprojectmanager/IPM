@@ -27,25 +27,38 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function fullName(){
+    public function fullName()
+    {
         return $this->attributes['first_name']. ' ' .$this->attributes['last_name'];
     }
 
 
-    public function team(){
-        return $this->belongsToMany('App\Team')->withPivot('active', 'current')->wherePivot('active', true)->orderBy('current', 'desc');
+    public function team()
+    {
+        return $this->belongsToMany('App\Team')
+            ->withPivot('active', 'current')
+            ->wherePivot('active', true)
+            ->orderBy('current', 'desc');
     }
 
-    public function teams(){
+    public function teams()
+    {
         return $this->team()->get();
     }
 
-    public function jobtitles(){
+    public function jobtitles()
+    {
         return $this->hasOne('App\Status', 'id', 'job_title');
     }
 
-    public function assingees(){
+    public function assingees()
+    {
         return $this->hasMany('App\Assignee', 'userid', 'id');
+    }
+
+    public function getTotal()
+    {
+        return $this->count();
     }
 
     /**
@@ -59,18 +72,20 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function currentTeam(){
+    public function currentTeam()
+    {
         return $this->team()->wherePivot('current', true)->first();
     }
 
-    public function toDo(){
+    public function toDo()
+    {
         $todo = 0;
         $assignees = $this->assingees()->get();
 
-        foreach ($assignees as $s){
-            if($s->requirements()->first() !== null){
-                if($s->astatus() !== null){
-                    if($s->astatus()->first()->name !== Status::name('completed')->name){
+        foreach ($assignees as $s) {
+            if ($s->requirements()->first() !== null) {
+                if ($s->astatus() !== null) {
+                    if ($s->astatus()->first()->name !== Status::name('completed')->name) {
                         $todo++;
                     }
                 }
@@ -79,4 +94,13 @@ class User extends Authenticatable
         return $todo;
     }
 
+    public function getAvatar()
+    {
+        if ($this->avatar !== null) {
+            $avatar =  $this->avatar;
+        } else {
+            $avatar = 'https://www.gravatar.com/avatar/'. md5($this->email).'?s=200&r=g&d=identicon';
+        }
+        return $avatar;
+    }
 }
