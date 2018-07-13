@@ -20,6 +20,12 @@
 
             <span class="block-white-subtitle">
                     <span id="count_projects_bar">|</span>
+                    <span class="counter">{{$plans->count()}}</span>
+                    <span class="contenttype">Plan(s)</span>
+            </span>
+
+            <span class="block-white-subtitle">
+                    <span id="count_projects_bar">|</span>
                     <span class="counter">{{$users->count()}}</span>
                     <span class="contenttype">User(s)</span>
             </span>
@@ -27,7 +33,25 @@
             <span class="block-white-subtitle">
                     <span id="count_projects_bar">|</span>
                     <span class="counter">{{$projects->count()}}</span>
-                    <span class="contenttype">User(s)</span>
+                    <span class="contenttype">Project(s)</span>
+            </span>
+
+            <span class="block-white-subtitle">
+                    <span id="count_projects_bar">|</span>
+                    <span class="counter">{{$releases}}</span>
+                    <span class="contenttype">Release(s)</span>
+            </span>
+
+            <span class="block-white-subtitle">
+                    <span id="count_projects_bar">|</span>
+                    <span class="counter">{{$features}}</span>
+                    <span class="contenttype">Feature(s)</span>
+            </span>
+
+            <span class="block-white-subtitle">
+                    <span id="count_projects_bar">|</span>
+                    <span class="counter">{{$requirements}}</span>
+                    <span class="contenttype">Requirement(s)</span>
             </span>
 
         </div>
@@ -101,7 +125,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <a class="center" href="{{route('admin_users')}}">Show more</a>
+                    <a class="center" href="{{route('admin_teams')}}">Show more</a>
                 @endif
             </div>
         </div>
@@ -137,7 +161,7 @@
                         </tbody>
                     </table>
                 @endif
-                <a class="center" href="{{route('admin_users')}}">Show </a>
+                <a class="center" href="{{route('admin_projects')}}">Show </a>
             </div>
         </div>
 
@@ -160,9 +184,14 @@
                                 <td class="col-md-1"
                                     style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
                                 <td>{{$plan->name}}</td>
-                                <td>@foreach($plan->team() as $team)
-                                        {{$team->name}}
-                                    @endforeach</td>
+                                <?php $countteams = 0; ?>
+                                <td>@foreach($teams as $team)
+                                        @if($plan->name == $team->plan()->name)
+                                            <?php $countteams++ ?>
+                                        @endif
+                                    @endforeach
+                                    {{$countteams}}
+                                </td>
                                 <td>0.00</td>
                             </tr>
                             <?php $count++; ?>
@@ -171,7 +200,7 @@
                         </tbody>
                     </table>
                 @endif
-                <a class="center" href="{{route('admin_users')}}">Show more
+                <a class="center" href="{{route('admin_plans')}}">Show more
             </div>
         </div>
     </div>

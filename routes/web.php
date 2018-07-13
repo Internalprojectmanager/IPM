@@ -49,8 +49,12 @@ Route::group(['middleware' => 'checkactive'], function () {
     Route::post('/dashboard/save', 'RequirementController@saveAuthStatus')->name('requirementsaveAuthstatus');
 
     Route::group(['prefix' => 'admin'], function () {
-        Route::get('/users', 'Admin\UserController@index')->name('admin_users');
         Route::get('/', 'Admin\UserController@dashboard')->name('admin_dashboard');
+        Route::get('/users', 'Admin\UserController@index')->name('admin_users');
+        Route::get('/teams', 'Admin\UserController@index')->name('admin_teams');
+        Route::get('/projects', 'Admin\UserController@index')->name('admin_projects');
+        Route::get('/plans', 'Admin\UserController@index')->name('admin_plans');
+
     });
 
     Route::group(['prefix' => 'team'], function () {

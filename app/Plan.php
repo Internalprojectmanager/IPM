@@ -19,7 +19,6 @@ class Plan extends Model
         return $this->belongsToMany('App\Team', 'team_plan')
             ->withPivot('start', 'end')
             ->wherePivot('end', '>=', \Carbon\Carbon::now('Europe/Amsterdam')->toDateTimeString())
-            ->orwherePivot('end', NULL)
             ->orderBy('end', 'ASC')
             ->orderBy('plan_id', 'desc')
             ->get();

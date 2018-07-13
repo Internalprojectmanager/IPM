@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Feature;
 use App\Plan;
 use App\Project;
+use App\Release;
+use App\Requirement;
 use App\Team;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,7 +29,11 @@ class UserController extends Controller
         $projects = Project::orderBy('created_at', 'desc')->get();
         $teams = Team::with('project', 'client')->orderBy('id', 'desc')->get();
         $plans = Plan::orderBy('id', 'desc')->get();
+        $releases = Release::get()->count();
+        $features = Feature::get()->count();
+        $requirements = Requirement::get()->count();
 
-        return view('admin.index', compact('users', 'projects', 'teams', 'plans'));
+        return view('admin.index',
+            compact('users', 'projects', 'teams', 'plans', 'releases', 'features', 'requirements'));
     }
 }
