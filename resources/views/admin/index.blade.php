@@ -56,10 +56,10 @@
 
             </div>
         </div>
-        <div class="row ">
-            <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 center">
             <span class="block-white-subtitle">
-                <span class="contenttype"> {{env('APP_NAME')}} Status:
+                <span class="contenttype"> {{env('APP_NAME')}} - V{{file_get_contents(public_path('../VERSION'), 'r')}}
                         <span style="margin-left: 10px";>
                             @if(file_exists('https://gitlab.com/internalprojectmanager/IPM/raw/master/VERSION'))
                                 @php $external = file_get_contents('https://gitlab.com/internalprojectmanager/IPM/raw/master/VERSION', 'r'); @endphp
@@ -73,7 +73,7 @@
                             @endif
                         </span>
                     </span>
-                    <span class="contenttype">V{{file_get_contents(public_path('../VERSION'), 'r')}}</span>
+
             </span>
 
             </div>
