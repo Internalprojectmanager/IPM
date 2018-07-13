@@ -18,13 +18,18 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::orderBy('last_name', 'asc')->get();
+        if (Auth::id() == 1){
+            $users = User::orderBy('last_name', 'asc')->get();
 
         return view('admin.users.index', compact('users'));
+        }
+        abort(404);
     }
 
     public function dashboard()
     {
+
+        if(Auth::id() == 1){
         $users = User::orderBy('created_at', 'desc')->get();
         $projects = Project::orderBy('created_at', 'desc')->get();
         $teams = Team::with('project', 'client')->orderBy('id', 'desc')->get();
@@ -35,5 +40,8 @@ class UserController extends Controller
 
         return view('admin.index',
             compact('users', 'projects', 'teams', 'plans', 'releases', 'features', 'requirements'));
+        }
+        abort(404);
     }
+
 }
