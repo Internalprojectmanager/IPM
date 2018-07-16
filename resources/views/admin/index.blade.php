@@ -131,19 +131,22 @@
 
                         <?php $count = 0; ?>
                         @foreach($teams as $team )
-                            @if($team->name !== $team->owner->fullName())
-                                <?php if ($count == 5) break; ?>
-                                <tr>
-                                    <td class="col-md-1"
-                                        style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
-                                    <td colspan=""><img class='team-logo'
-                                                        src="{{\Storage::url($team->logo)}}"> {{$team->name}}</td>
-                                    <td colspan="">{{$team->plan()->name}}</td>
-                                    <td colspan="">{{$team->project()->count()}}</td>
-                                    <td colspan="">{{$team->client()->count()}}</td>
-                                    <td colspan="">{{$team->users()->count()}}</td>
-                                </tr>
-                                <?php $count++; ?>
+
+                            @if($team->owner !== null)
+                                @if($team->name !== $team->owner->fullName())
+                                    <?php if ($count == 5) break; ?>
+                                    <tr>
+                                        <td class="col-md-1"
+                                            style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
+                                        <td colspan=""><img class='team-logo'
+                                                            src="{{\Storage::url($team->logo)}}"> {{$team->name}}</td>
+                                        <td colspan="">{{$team->plan()->name}}</td>
+                                        <td colspan="">{{$team->project()->count()}}</td>
+                                        <td colspan="">{{$team->client()->count()}}</td>
+                                        <td colspan="">{{$team->users()->count()}}</td>
+                                    </tr>
+                                    <?php $count++; ?>
+                                @endif
                             @endif
                         @endforeach
                         </tbody>
