@@ -167,10 +167,10 @@
                                                 multiple>
                                             @foreach($user as $u)
                                                 <option value="{{$u->users->id}}"
-                                                        @foreach($r->assignees as $as)
+                                                    @foreach($r->assignees as $as)
                                                         @if($u->userid  == $as->userid)
-                                                        selected
-                                                    @endif
+                                                            selected
+                                                        @endif
                                                     @endforeach
                                                 >{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))
                                                         (<i>{{$u->users->jobtitles->name}}</i>) @endif</option>

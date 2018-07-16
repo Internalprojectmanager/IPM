@@ -44,6 +44,11 @@
                                     multiple>
                                 @foreach($user as $u)
                                     <option
+                                            @foreach($requirement->assignees as $as)
+                                                @if($u->userid  == $as->userid)
+                                                    selected
+                                                    @endif
+                                            @endforeach
                                             value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))
                                             (<i>{{$u->users->jobtitles->name}}</i>) @endif</option>
                                 @endforeach
