@@ -70,7 +70,7 @@
                             @endforeach
                         </td>
                         <td><a href="{{route('editRequirement',
-                             [$client->path, $project->path, $release->path, $feature->id, $requirement->id])}}"> <span class="glyphicon edit-icon"></span> Edit </a></td>
+                             [$client->path, $project->path, $release->path, $feature->id, $requirement->id])}}"> <span class="glyphicon edit-icon"></span> </a></td>
                     </tr>
                 @endforeach
                 </tbody>

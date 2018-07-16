@@ -112,19 +112,39 @@ class RequirementController extends Controller
 
     public function updateRequirement($client, $project, $release, $feature, $requirement, Request $request)
     {
-        $request->validate(['requirement_name' => 'required']);
-
-        $requirement->id = strtoupper(substr($request->requirement_name, 0, 5));
-        $requirement->feature_id = $request->feature_id;
-        $requirement->release_id = $request->release_id;
         $requirement->name = $request->requirement_name;
         $requirement->description = $request->requirement_description;
-        $requirement->status = $request->requirement_status;
-        $requirement->author = $request->requirement_author;
-
+        $requirement->author = \Auth::id();
         $requirement->save();
 
-        return redirect()->route('showFeature', compact('client', 'project', 'release', 'feature'));
+
+        if (!empty($request->assignee)) {
+            $assignee = Assignee::where('uuid', $requirement->requirement_uuid)->get();
+            $assigneeusers = array();
+            foreach ($assignee as $a) {
+                if (!in_array($a->userid, $request->assignee)) {
+                    Assignee::where([['uuid', $requirement->requirement_uuid], ['userid', $a->userid]])->delete();
+                } else {
+                    $assigneeusers[] = $a->userid;
+                }
+            }
+
+            foreach ($request->assignee as $a) {
+                if (!in_array($a, $assigneeusers)) {
+                    $assignee = new Assignee();
+                    $assignee->userid = $a;
+                    $assignee->uuid = $requirement->requirement_uuid;
+                    $assignee->status = Status::name('Draft')->id;
+                    $assignee->save();
+                }
+            }
+        } else{
+            Assignee::where('uuid', $requirement->requirement_uuid)->delete();
+        }
+
+        $project = $project->path;
+        $release = $release->path;
+        return redirect()->route('showfeature', compact('client', 'project', 'release', 'feature'));
     }
 
     public function deleteRequirement($requirement_name)
