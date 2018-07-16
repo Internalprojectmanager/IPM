@@ -46,6 +46,10 @@ class RouteServiceProvider extends ServiceProvider
             return \App\Feature::where('id', $value)->firstorfail();
         });
 
+        Route::bind('requirement', function ($value) {
+            return \App\Requirement::where('id', $value)->firstorfail();
+        });
+
         Route::bind('document', function ($value) {
             return \App\Document::find($value)->firstorfail();
         });

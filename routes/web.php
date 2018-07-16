@@ -129,6 +129,10 @@ Route::group(['middleware' => 'checkactive'], function () {
                 Route::post('/update/{version}', 'ReleaseController@updateRelease')->name('updaterelease');
                 Route::get('/{version}/pdf', 'PDFController@createPDF')->name('createpdf');
 
+
+
+
+
                 //Feature Routes
                 Route::group(['prefix' => 'feature'], function () {
                     Route::get('/add', 'FeatureController@add')->name('addfeature');
@@ -138,6 +142,10 @@ Route::group(['middleware' => 'checkactive'], function () {
                     Route::get('/{feature}/edit', 'FeatureController@editFeature')->name('editFeature');
                     Route::post('/{feature}/edit', 'FeatureController@updateFeature')->name('updateFeature');
                     Route::get('/{feature}/delete', 'FeatureController@deleteFeature')->name('deletefeature');
+                    Route::post('/{feature}/requirement/{requirement}/edit', 'RequirementController@updateRequirement')->name('updateRequirement');
+                    Route::get('/{feature}/requirement/{requirement}/edit', 'RequirementController@editRequirement')->name('editRequirement');
+
+
                 });
             });
 
