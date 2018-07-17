@@ -50,6 +50,18 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-plus fa-lg"></i> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        @if(isset($project))
+                            <li class="dropdown-header">This Project</li>
+                            <li><a href="">New Release</a></li>
+                            <li><a href="">New Feature</a></li>
+                            <li><a href="">New Requirement</a></li>
+
+
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">IPM</li>
+                        @endif
+
+
                         <li><a href="{{route('addclient')}}"> New Client</a></li>
                         <li><a href="{{route('addproject')}}"> New Project</a></li>
                         <li><a href="{{route('team.new')}}"> New Team</a></li>
