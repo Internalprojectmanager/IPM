@@ -73,7 +73,7 @@ class RequirementController extends Controller
         $requirementcount = $completed;
         $status = Status::type('Progress')->get();
 
-        return view('requirement.requirement_table', compact('feature', 'requirementcount', 'status'));
+        return view('requirement.requirement_table', compact('client', 'project', 'release', 'feature', 'requirementcount', 'status'));
     }
 
     public function saveAuthStatus(Request $request)

@@ -36,14 +36,14 @@
                             @foreach($requirement->assignees as $assignee)
                                 <div class="row" style="line-height: 2.3;">
                                     <div class="requiremnt-assingee">
-                                        <div class="col-md-6">
+                                        <div class="col-md-7">
                                             <i class="fas fa-circle" style="margin-right: 10px; color: @if($assignee->astatus){{$assignee->astatus->color}}; @endif "></i>
                                             <span>
                                                 <img alt="{{$assignee->users->first_name}} {{$assignee->users->last_name}}"
                                                      class="img-circle img-thumbnail avatar-table" src="{{$assignee->users->getAvatar()}}"/>
                                                 <span style="margin-left: 10px;">{{$assignee->users->first_name}} {{$assignee->users->last_name}}</span>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <select class="form-control transparent-selectbox assignee-check" width="100%" name="status[]" @if(Auth::id() !== $assignee->userid) disabled="" @endif>
                                                 @foreach($status as $s)
                                                     @if($s->name == "Completed" || $s->name == "Draft" || $s->name == "Testing" || $s->name == "In Progress")
