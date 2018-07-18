@@ -15,6 +15,7 @@ use App\Project;
 use App\Release;
 use App\Feature;
 use App\Requirement;
+use Ramsey\Uuid\Uuid;
 
 class RequirementController extends Controller
 {
@@ -27,24 +28,32 @@ class RequirementController extends Controller
         return view('requirement.add_requirement', compact('release', 'project'));
     }
 
-    public function storeRequirement($release_id, $feature_id, $company_id, $name, Request $request)
+    public function storeRequirement(Request $request, $client, $project, $release, $feature)
     {
-        $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
-        $release = Release::where(['project_id' => $project->id, 'name' => $release_id])->first();
-        foreach ($request->requirement_name as $r => $value) {
-            if ($request->requirement_name[$r] !== null) {
-                $requirement = new Requirement();
-                $requirement->feature_id = $request->feature_id;
-                $requirement->release_id = $request->release_id;
-                $requirement->name = $request->requirement_name;
-                $requirement->description = $request->requirement_description;
-                $requirement->status = $request->requirement_status;
-                $requirement->author = $request->requirement_author;
-                $requirement->save();
+        $requirement = New Requirement();
+        $requirement->requirement_uuid = \Webpatser\Uuid\Uuid::generate(4);
+        $requirement->feature_uuid = $feature->feature_uuid;
+        $requirement->release_id = $release->release_uuid;
+        $requirement->name = $request->requirement_name;
+        $requirement->description = $request->requirement_description;
+        $requirement->author = \Auth::id();
+        $requirement->status = Status::name('draft')->id;
+        $requirement->save();
+
+        if(isset($request->assignee)){
+            foreach ($request->assignee as $a) {
+                $assignee = new Assignee();
+                $assignee->userid = $a;
+                $assignee->uuid = $requirement->requirement_uuid;
+                $assignee->status = Status::name('Draft')->id;
+                $assignee->save();
             }
         }
-        return redirect(route('showrelease', ['name' => $project->name, 'company_id' => $project->company_id,
-            'release_name' => $release->name, 'version' => $release->version]));
+
+
+        $project = $project->path;
+        $release = $release->path;
+        return redirect()->route('showfeature', compact('client', 'project', 'release', 'feature'));
     }
 
     public function saveStatus(Request $request, $client, $project, $release, $feature)

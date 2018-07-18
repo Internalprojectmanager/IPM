@@ -82,6 +82,13 @@
 
         </div>
     </div>
+
+    <div class="row under-details">
+        <a class="black btn btn-primary" href="#" data-toggle="modal" data-target="#addRequirement">
+            Add Requirement <span class="glyphicon glyphicon-plus"></span>
+        </a>
+    </div>
+
     @if($feature->type !== "Scope")
         @include('requirement.requirement_table')
     @endif
@@ -94,4 +101,6 @@
     @else
         @include('features.edit_ts')
     @endif
+
+    @include('requirement.add_requirement')
 @endsection

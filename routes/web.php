@@ -142,8 +142,9 @@ Route::group(['middleware' => 'checkactive'], function () {
                     Route::get('/{feature}/edit', 'FeatureController@editFeature')->name('editFeature');
                     Route::post('/{feature}/edit', 'FeatureController@updateFeature')->name('updateFeature');
                     Route::get('/{feature}/delete', 'FeatureController@deleteFeature')->name('deletefeature');
-                    Route::post('/{feature}/requirement/{requirement}/edit', 'RequirementController@updateRequirement')->name('updateRequirement');
-                    Route::get('/{feature}/requirement/{requirement}/edit', 'RequirementController@editRequirement')->name('editRequirement');
+                    Route::post('/{feature}/requirement/edit/{requirement}', 'RequirementController@updateRequirement')->name('updateRequirement');
+                    Route::get('/{feature}/requirement/edit/{requirement}', 'RequirementController@editRequirement')->name('editRequirement');
+                    Route::post('/{feature}/requirement/store', 'RequirementController@storeRequirement')->name('storeRequirement');
 
 
                 });
