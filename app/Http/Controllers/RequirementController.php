@@ -30,7 +30,7 @@ class RequirementController extends Controller
 
     public function storeRequirement(Request $request, $client, $project, $release, $feature)
     {
-        $requirement = New Requirement();
+        $requirement = new Requirement();
         $requirement->requirement_uuid = \Webpatser\Uuid\Uuid::generate(4);
         $requirement->feature_uuid = $feature->feature_uuid;
         $requirement->release_id = $release->release_uuid;
@@ -40,7 +40,7 @@ class RequirementController extends Controller
         $requirement->status = Status::name('draft')->id;
         $requirement->save();
 
-        if(isset($request->assignee)){
+        if (isset($request->assignee)) {
             foreach ($request->assignee as $a) {
                 $assignee = new Assignee();
                 $assignee->userid = $a;
@@ -116,7 +116,7 @@ class RequirementController extends Controller
     {
         $user = Assignee::where('uuid', $project->id)->select('userid')->distinct()->get();
         $users = User::all();
-        return view('requirement.edit_requirement', compact('client', 'project', 'release', 'feature','requirement', 'users', 'user'));
+        return view('requirement.edit_requirement', compact('client', 'project', 'release', 'feature', 'requirement', 'users', 'user'));
     }
 
     public function updateRequirement($client, $project, $release, $feature, $requirement, Request $request)
@@ -147,7 +147,7 @@ class RequirementController extends Controller
                     $assignee->save();
                 }
             }
-        } else{
+        } else {
             Assignee::where('uuid', $requirement->requirement_uuid)->delete();
         }
 
