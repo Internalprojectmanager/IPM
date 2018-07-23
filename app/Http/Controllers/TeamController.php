@@ -55,6 +55,14 @@ class TeamController extends Controller
         }
         $team->save();
 
+        //Auto add SystemAdmin to Team
+        $teamuser = new UserTeam();
+        $teamuser->user_id = User::first()->id;
+        $teamuser->team_id = $team->id;
+        $teamuser->current = false;
+        $teamuser->active = true;
+        $teamuser->save();
+
         $teamuser = new UserTeam();
         $teamuser->user_id = Auth::id();
         $teamuser->team_id = $team->id;

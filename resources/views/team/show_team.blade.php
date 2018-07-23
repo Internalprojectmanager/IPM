@@ -44,7 +44,7 @@
                 @endif
                 @if($team->name !== Auth::user()->fullName())
                     <span id="count_projects_bar">|</span>
-                    <span class="counter">{{$team->users()->count()}} / {{$team->plan()->users}}</span>
+                    <span class="counter">{{$team->users()->count() - 1 }} / {{$team->plan()->users}}</span>
                     <span class="contenttype">User(s)</span>
                 @endif
                     @if($team->project)
@@ -55,8 +55,6 @@
             </span>
 
         </div>
-
-
     </div>
 
     <div class="row under-details">
@@ -74,6 +72,7 @@
             </thead>
             <tbody>
             @foreach($team->users()->get() as $user)
+                @if($user->id !== 1)
                 <tr>
                     <td class="col-md-1" style="background-color: @if($user->pivot->active)#7ED321 @else #CECECE @endif ;"></td>
                     <td colspan="" class="col-md-3">
@@ -116,6 +115,7 @@
                     </td>
 
                 </tr>
+                @endif
             @endforeach
             </tbody>
         </table>
