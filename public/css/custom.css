@@ -253,10 +253,12 @@ label {
 
 .breadcrumb > .active {
     color: #535353;
+    font-weight: bold;
 }
 
 .breadcrumb a {
     color: #CECECE;
+    font-weight: 400;
 }
 
 .table td:first-child {
