@@ -61,56 +61,11 @@
             <span class="block-white-subtitle">
                 <span class="contenttype"> {{env('APP_NAME')}} - V{{file_get_contents(public_path('../VERSION'), 'r')}}
                     <span style="margin-left: 10px">
-                        @php
-                            $internal = file_get_contents(public_path('../VERSION'), 'r');
-
-                            $ch = curl_init("https://gitlab.com/internalprojectmanager/IPM/raw/master/VERSION");
-                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                'Authorization' => env('AUTH_GITLBAB_KEY')
-                            ));
-                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                            $external = curl_exec($ch);
-                            curl_close($ch);
-
-                            $ch = curl_init("https://gitlab.com/api/v4/projects/". env('GITLAB_PROJECT_ID') ."/repository/tags/");
-                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                'Authorization' => env('AUTH_GITLBAB_KEY'),
-                                'sort' => 'ASC'
-                            ));
-                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                            $result = curl_exec($ch);
-                            curl_close($ch);
-
-                        @endphp
-                        @if(strpos($internal, 'RC') === false)
-                            @php $external = $internal; @endphp
-                            @php $major = $internal; @endphp
-                            @if(isset($result) && $result !== null && $result !== "")
-                                @foreach(json_decode($result) as $tag)
-                                    @if($tag->name == floatval($internal) && version_compare($tag->name, $internal) == true)
-                                        @php $external = $tag->name; @endphp
-                                    @endif
-
-                                    @if(version_compare($tag->name, $major) > 0 && strpos($tag->name, 'RC') === false)
-                                        @php $major = $tag->name @endphp
-                                    @endif
-
-                                @endforeach
-                            @endif
+                        <span class="status-{{$version[0]['color']}} white" style="padding: 10px">{{$version[0]['response']}}</span>
+                        @if($version[0]['major'] !== "" && $version[0]['major'] !== null)
+                            <span class="status-{{$version[0]['major_color']}} white" style="padding: 10px">{{$version[0]['major']}}</span>
                         @endif
-                        @if(version_compare($external, $internal) == 0)
-                            <span class="status-Client white" style="padding: 10px 15px">Latest Version </span>
-                        @else
-                            <span class="status-Canceled white" style="padding: 10px 15px">Update ASAP - V{{$external}}
-                                 </span>
-                        @endif
-                        @if(isset($major) && version_compare($major, $internal) == true)
 
-                            <span class="status-in white" style="padding: 10px 15px">New Major - V{{$major}}
-                                Available</span>
-                        @endif
                         </span>
                     </span>
 
@@ -180,12 +135,12 @@
                                             style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
                                         <td colspan=""><img class='team-logo'
                                                             src="{{\Storage::url($team->logo)}}"> {{$team->name}}</td>
-                                        @if($team->plan() !== null)
-                                            <td colspan="">{{$team->plan()->name}}</td>
+                                        @if($team->plans->first() !== null)
+                                            <td colspan="">{{$team->plans->first()->name}}</td>
                                         @endif
-                                        <td colspan="">{{$team->project()->count()}}</td>
-                                        <td colspan="">{{$team->client()->count()}}</td>
-                                        <td colspan="">{{$team->users()->count()}}</td>
+                                        <td colspan="">{{$team->project->count()}}</td>
+                                        <td colspan="">{{$team->client->count()}}</td>
+                                        <td colspan="">{{$team->users->count()}}</td>
                                     </tr>
                                     <?php $count++; ?>
                                 @endif
@@ -254,8 +209,8 @@
                                 <td>{{$plan->name}}</td>
                                 <?php $countteams = 0; ?>
                                 <td>@foreach($teams as $team)
-                                        @if($team->plan() !== null)
-                                            @if($plan->name == $team->plan()->name)
+                                        @if($team->plans->first() !== null)
+                                            @if($plan->name == $team->plans->first()->name)
                                                 <?php $countteams++ ?>
                                             @endif
                                         @endif

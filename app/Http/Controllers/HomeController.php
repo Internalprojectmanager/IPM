@@ -23,6 +23,70 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public static function getVersion()
+    {
+        $internal = file_get_contents(public_path('../VERSION'), 'r');
+
+        $ch = curl_init("https://gitlab.com/internalprojectmanager/IPM/raw/master/VERSION");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization' => env('AUTH_GITLBAB_KEY')
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $external = curl_exec($ch);
+        curl_close($ch);
+
+        $ch = curl_init("https://gitlab.com/api/v4/projects/" . env('GITLAB_PROJECT_ID') . "/repository/tags/");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization' => env('AUTH_GITLBAB_KEY'),
+            'sort' => 'ASC'
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        if (strpos($internal, 'RC') === false) {
+            $external = $internal;
+            $major = $internal;
+            if (isset($result) && $result !== null && $result !== "") {
+                foreach (json_decode($result) as $tag) {
+                    if ($tag->name == floatval($internal) && version_compare($tag->name, $internal) == true) {
+                        $external = $tag->name;
+                    }
+                    if (version_compare($tag->name, $major) > 0 && strpos($tag->name, 'RC') === false) {
+                        $major = $tag->name;
+                    }
+                }
+            }
+        }
+        $color = 'black';
+        $color_major = "blue";
+
+
+        if(version_compare($external, $internal) == 0)
+        {
+            $response = "Latest Version";
+            $color = "green";
+        }
+
+        else{
+            $response = "Update ASAP - V$external";
+            $color = "red";
+        }
+
+        if(isset($major) && version_compare($major, $internal) == true){
+            $major = "New Major - V$major Available";
+            $color_major = "blue";
+        } else{
+            $major = null;
+        }
+        return collect(array(['response' => $response, 'color' => $color, 'major_color' => $color_major, 'major' => $major]));
+
+    }
+
+
     public function index()
     {
         return redirect()->route('dashboard');
@@ -32,7 +96,7 @@ class HomeController extends Controller
     {
         $now = Carbon::now()->endOfDay();
         foreach ($data as $d) {
-            $deadline  = Carbon::parse($d->features->releases->deadline)->endOfDay();
+            $deadline = Carbon::parse($d->features->releases->deadline)->endOfDay();
             $d->features->releases->daysleft = $now->diffInDays($deadline, false);
             if ($d->features->releases->daysleft >= 30 && $d->features->releases->daysleft < 365 ||
                 $d->features->releases->daysleft <= -30 && $d->features->releases->daysleft > -365) {
@@ -73,7 +137,7 @@ class HomeController extends Controller
         $requirements = $requirements->paginate(10);
 
         $requirements = $this->calcDeadline($requirements);
-        $status  = Status::type('Progress')->get();
+        $status = Status::type('Progress')->get();
 
 
         if ($request->method() == 'POST') {
@@ -134,13 +198,14 @@ class HomeController extends Controller
         $feature = $feature->paginate(10, ['*'], 'page', $page);
 
         $requirements = $this->calcDeadline($feature);
-        $status  = Status::type('Progress')->get();
+        $status = Status::type('Progress')->get();
 
         return view('profile.dashboard_table', compact('requirements', 'requirementscount', 'status'));
     }
 
     public function help()
     {
-        return view('profile.help');
+        $version = $this->getVersion();
+        return view('profile.help', compact('version'));
     }
 }

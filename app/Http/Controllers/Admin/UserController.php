@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Feature;
+use App\Http\Controllers\HomeController;
 use App\Plan;
 use App\Project;
 use App\Release;
@@ -32,15 +33,16 @@ class UserController extends Controller
         if (Auth::id() == 1) {
             $users = User::orderBy('created_at', 'desc')->get();
             $projects = Project::orderBy('created_at', 'desc')->get();
-            $teams = Team::with('project', 'client', 'owner')->orderBy('id', 'desc')->get();
+            $teams = Team::with('project', 'client', 'owner', 'plans')->orderBy('id', 'desc')->get();
             $plans = Plan::orderBy('id', 'desc')->get();
             $releases = Release::get()->count();
             $features = Feature::get()->count();
             $requirements = Requirement::get()->count();
+            $version = HomeController::getVersion();
 
             return view(
                 'admin.index',
-                compact('users', 'projects', 'teams', 'plans', 'releases', 'features', 'requirements')
+                compact('users', 'projects', 'teams', 'plans', 'releases', 'features', 'requirements', 'version')
             );
         }
         abort(404);

@@ -199,19 +199,19 @@ h1, h2, h3, h4, h5, h6{
     border-radius: 100px;
 }
 
-.status-Draft, .status-Client {
+.status-Draft, .status-Client, .status-green {
     background-color: #417505;
 }
 
-.status-in, .status-Lead {
+.status-in, .status-Lead, .status-blue {
     background-color: #5D99CA;
 }
 
-.status-Canceled, .status-Prospect {
+.status-Canceled, .status-Prospect, .status-red {
     background-color: #FF3300;
 }
 
-.status-Paused, .status-no-partner {
+.status-Paused, .status-no-partner, . status-grey{
     background-color: #9B9B9B;
 }
 

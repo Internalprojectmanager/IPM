@@ -62,6 +62,14 @@ class Team extends Model
             ->first();
     }
 
+    public function plans()
+    {
+        return $this->belongsToMany('App\Plan', 'team_plan')
+            ->withPivot('start', 'end')
+            ->wherePivot('end', '>=', \Carbon\Carbon::now('Europe/Amsterdam')->toDateTimeString())
+            ->orderBy('end', 'ASC');
+    }
+
 
     public function scopeCurrentUserTeam($query)
     {
