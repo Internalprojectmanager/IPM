@@ -62,7 +62,7 @@ class ProfileController extends Controller
             $this->declinedterms($request);
         } else {
             $user = User::find(Auth::id());
-            $user->active = 2;
+            $user->toc = true;
             $user->save();
         }
         return redirect()->intended('dashboard');

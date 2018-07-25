@@ -11,9 +11,9 @@
                 <span class="block-white-title">IPM Terms of Use</span>
                 <span id="count_projects_bar">|</span>
                 <span>25 June 2018 - {{Auth::user()->email}} -
-                    @if(Auth::user()->active < 2)
+                    @if(Auth::user()->toc == false)
                         <span class="red">Pending</span>
-                    @elseif(Auth::user()->active = 2)
+                    @else
                         <span class="success">Accepted</span>
                     @endif
                 </span>
@@ -103,7 +103,7 @@
             </div>
         </div>
     </div>
-    @if(Auth::user()->active < 2)
+    @if(Auth::user()->toc == false)
         @if(count(Auth::user()->teams()) > 1)
         <div class="row margin-top-50 bg-danger">
             <div class="col-md-12">
@@ -133,7 +133,7 @@
                     <input type="hidden" value="declined">
                     <input class="btn-danger btn" type="submit" name="submit" value="Decline" onclick="return confirm('Are you sure you want to decline this Terms of Use');">
                     {{ csrf_field() }}
-                    <input class="btn-success btn" type="submit" name="submit" value="Accept">
+                    <input class="btn-success btn" type="submit" name="submit" value="Accept" onclick="return confirm('By clicking OK, you accept the terms and conditions of IPM');">
                 </form>
             </div>
 
