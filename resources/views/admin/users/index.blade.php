@@ -33,7 +33,7 @@
             @foreach($users as $user)
                 <tr>
                     <td class="col-md-1"
-                        style="background-color: @if($user->active)#7ED321 @else #CECECE @endif ;"></td>
+                        style="background-color: @if($user->active && $user->toc)  #7ED321 @elseif($user->active && !$user->toc) #CECECE  @else #FF3300 @endif ;"></td>
                     <td colspan="" class="col-md-3">
                         <span class="tabletitle">{{$user->first_name}} {{$user->last_name}} </span>
                         @if($user->id == Auth::id()) <span class="its its-you"> Its You!</span> @endif
