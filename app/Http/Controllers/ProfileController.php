@@ -63,6 +63,7 @@ class ProfileController extends Controller
         } else {
             $user = User::find(Auth::id());
             $user->toc = true;
+            $user->active = true;
             $user->save();
         }
         return redirect()->intended('dashboard');
