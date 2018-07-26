@@ -24,7 +24,7 @@ class ProfileController extends Controller
 
     public function viewProfile()
     {
-        $profile = User::where('id', Auth::id())->select('id', 'first_name', 'last_name', 'email', 'job_title', 'provider')->first();
+        $profile = User::with('emails')->where('id', Auth::id())->select('id', 'first_name', 'last_name', 'email', 'job_title', 'provider')->first();
         $status = Status::Where('type', 'Job')->select('id', 'name')->get();
         return view('profile.overview', compact('profile', 'status'));
     }
@@ -89,4 +89,5 @@ class ProfileController extends Controller
 
         return redirect()->intended('dashboard');
     }
+
 }
