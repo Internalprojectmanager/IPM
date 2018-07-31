@@ -65,7 +65,7 @@ class HomeController extends Controller
         $color_major = "blue";
 
 
-        if(version_compare($external, $internal) == 0)
+        if(version_compare($external, $internal) <= 0)
         {
             $response = "Latest Version";
             $color = "green";
@@ -82,6 +82,7 @@ class HomeController extends Controller
         } else{
             $major = null;
         }
+
         return collect(array(['response' => $response, 'color' => $color, 'major_color' => $color_major, 'major' => $major]));
 
     }
