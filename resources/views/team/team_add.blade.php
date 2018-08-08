@@ -21,8 +21,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <input placeholder="Team Name" type="text" class="form-control input-text-modal"
-                               name="team_slogan" id="client_name" value="{{old('team_slogan')}}">
+                        <textarea placeholder="Team Name" class="form-control input-text-modal"
+                                  name="team_slogan" id="client_name">{{old('team_slogan')}} </textarea>
                     </div>
 
                 </div>

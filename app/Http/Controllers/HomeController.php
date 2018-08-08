@@ -62,7 +62,6 @@ class HomeController extends Controller
             }
         }
         $color = 'black';
-        $color_major = "blue";
 
 
         if(version_compare($external, $internal) <= 0)
@@ -78,12 +77,11 @@ class HomeController extends Controller
 
         if(isset($major) && version_compare($major, $internal) == true){
             $major = "New Major - V$major Available";
-            $color_major = "blue";
         } else{
             $major = null;
         }
 
-        return collect(array(['response' => $response, 'color' => $color, 'major_color' => $color_major, 'major' => $major]));
+        return collect(array(['response' => $response, 'color' => $color, 'major' => $major]));
 
     }
 

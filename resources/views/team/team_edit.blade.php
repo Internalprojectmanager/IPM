@@ -16,8 +16,8 @@
                 <label>Slogan: <span class="required">*</span></label>
             </div>
             <div class="form-group">
-                <input placeholder="Team Name" type="text" class="form-control input-text-modal"
-                       name="team_slogan" id="client_name" value="{{old('team_slogan', $team->slogan)}}">
+                <textarea placeholder="Team Name" class="form-control input-text-modal"
+                          name="team_slogan" id="client_name">{{old('team_slogan', $team->slogan)}} </textarea>
             </div>
 
             <div class="form-group">

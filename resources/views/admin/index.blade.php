@@ -63,7 +63,7 @@
                     <span style="margin-left: 10px">
                         <span class="status-{{$version[0]['color']}} white" style="padding: 10px">{{$version[0]['response']}}</span>
                         @if($version[0]['major'] !== "" && $version[0]['major'] !== null)
-                            <span class="status-{{$version[0]['major_color']}} white" style="padding: 10px">{{$version[0]['major']}}</span>
+                            <span class="status-blue white" style="padding: 10px">{{$version[0]['major']}}</span>
                         @endif
 
                         </span>
