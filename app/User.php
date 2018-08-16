@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -30,6 +31,10 @@ class User extends Authenticatable
     public function fullName()
     {
         return $this->attributes['first_name']. ' ' .$this->attributes['last_name'];
+    }
+
+    public function emails(){
+        return $this->hasMany('App\UserMail', 'user_id', 'id');
     }
 
 
@@ -97,6 +102,20 @@ class User extends Authenticatable
             }
         }
         return $todo;
+    }
+
+    public function getEmails($provider = null){
+        $emails = [];
+        if($this->provider == $provider || $provider == null){
+            $emails[$this->email][] = $this->provider;
+        }
+        foreach ($this->emails as $email){
+            if($email->provider == $provider || $provider == null) {
+                $emails[$email->email][] = $email->provider;
+            }
+        }
+
+        return collect($emails);
     }
 
     public function getAvatar()

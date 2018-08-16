@@ -24,8 +24,8 @@ Route::get('logout', 'Auth\LoginController@logout');
 
 Auth::routes();
 Route::group(['middleware' => ['guest', 'web']], function () {
-    Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('googlelogin');
-    Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback')->name('googleauth');
+    Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider')->name('authlogin');
+    Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('authcallback');
 });
 
 Route::get('/terms', 'ProfileController@terms')->name('terms');
@@ -40,6 +40,8 @@ Route::group(['middleware' => 'checkactive'], function () {
     //Profile routes
     Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
     Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
+    Route::post('/profile/addemail', 'ProfileController@addEmail')->name('addEmail');
+    Route::post('/profile/deleteEmail/{email}', 'ProfileController@addEmail')->name('deleteEmail');
 
 
 

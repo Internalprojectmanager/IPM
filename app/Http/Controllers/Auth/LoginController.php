@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Team;
+use App\UserMail;
 use App\UserTeam;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
@@ -45,9 +46,9 @@ class LoginController extends Controller
     }
 
 
-    public function redirectToProvider($provider = "google")
+    public function redirectToProvider($provider)
     {
-        return Socialite::driver($provider)->with(['prompt' =>  'select_account'])->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
     /**
@@ -55,40 +56,76 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback($provider = 'google')
+    public function handleProviderCallback($provider)
     {
-        $user = Socialite::driver($provider)->stateless()->user();
+        try {
+            $user = \Socialite::with($provider)->user();
+        } catch (\Exception $e) {
+            return redirect('/login');
+        }
         $authuser = $this->firstOrCreateOauth($user, $provider);
-        $this->firstOrCreatePersonal($authuser);
-        Auth::login($authuser, false);
-        flash()->success('Succesfully Logged in');
-        return redirect()->intended('dashboard');
+        if ($authuser !== null) {
+            $this->firstOrCreatePersonal($authuser);
+            Auth::login($authuser, false);
+            flash()->success('Succesfully Logged in');
+            return redirect()->intended('dashboard');
+        } else {
+            flash('User and password does not match with our data')->error();
+            return redirect('/login');
+        }
+
     }
 
     public function firstOrCreateOauth($user, $provider)
     {
+        $authUser = User::where('email', $user->email)->first();
+        $authUserMail = UserMail::where('email', $user->email)->first();
 
-        $authUser = User::where('provider_id', $user->id)->first();
-        if ($authUser) {
-            return $authUser;
+        if (!$authUser && !$authUserMail) {
+            switch ($provider) {
+                case "google":
+                    return User::create([
+                        'first_name' => $user->user['name']['givenName'],
+                        'last_name' => $user->user['name']['familyName'],
+                        'email' => $user->email,
+                        'provider' => $provider,
+                        'provider_id' => $user->id
+                    ]);
+                    break;
+                case "github":
+                    return User::create([
+                        'first_name' => $user->name,
+                        'last_name' => " ",
+                        'email' => $user->email,
+                        'provider' => $provider,
+                        'provider_id' => $user->id
+                    ]);
+                    break;
+                default:
+                    break;
+            }
+        } else{
+            $authUser = User::where('email', $user->email)->where('provider', $provider)->first();
+            $authUserMail = UserMail::where('email', $user->email)->where('provider', $provider)->first();
+
+            if($authUserMail && !$authUser){
+                $authUser = User::find($authUserMail->user_id);
+            }
         }
-        return User::create([
-            'first_name' => $user->user['name']['givenName'],
-            'last_name' => $user->user['name']['familyName'],
-            'email'    => $user->email,
-            'provider' => $provider,
-            'provider_id' => $user->id
-        ]);
+
+        return $authUser;
+
     }
 
-    public function firstOrCreatePersonal($user)
+    public
+    function firstOrCreatePersonal($user)
     {
         $dataspace = [
             'name' => $user->fullName(),
             'owner_id' => $user->id
         ];
 
-        $space = Team::firstOrCreate(['name'=> $user->fullName()], $dataspace);
+        $space = Team::firstOrCreate(['name' => $user->fullName()], $dataspace);
 
         if ($space->wasRecentlyCreated) {
             $datalink = [

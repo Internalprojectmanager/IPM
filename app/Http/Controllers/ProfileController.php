@@ -8,6 +8,7 @@ use App\Http\Requests\ProfileValidator;
 use App\Project;
 use App\User;
 use App\Status;
+use App\UserMail;
 use App\UserTeam;
 use App\Team;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class ProfileController extends Controller
     {
         $profile = User::with('emails')->where('id', Auth::id())->select('id', 'first_name', 'last_name', 'email', 'job_title', 'provider')->first();
         $status = Status::Where('type', 'Job')->select('id', 'name')->get();
+
         return view('profile.overview', compact('profile', 'status'));
     }
 
@@ -41,11 +43,13 @@ class ProfileController extends Controller
             if (!$request->password == '' && !$request->password == null) {
                 $profile->password = $request->password;
             }
-            if (!$request->first_name == '' && !$request->first_name == null && !$request->last_name == '' && !$request->last_name == null) {
-                $profile->first_name = $request->first_name;
-                $profile->last_name = $request->last_name;
-            }
         }
+
+        if (!$request->first_name == '' && !$request->first_name == null && !$request->last_name == '' && !$request->last_name == null) {
+            $profile->first_name = $request->first_name;
+            $profile->last_name = $request->last_name;
+        }
+
         $profile->job_title = $request->job_title;
         $profile->save();
         return redirect('/profile')->with('status', 'Profile updated!');
@@ -90,4 +94,22 @@ class ProfileController extends Controller
         return redirect()->intended('dashboard');
     }
 
+    public function addEmail(Request $request){
+        $userEmail = Auth::user()->getEmails();
+        $usermails = UserMail::where('email', $request->email)->first();
+
+        foreach ($userEmail as $email => $providers){
+            if($email == $request->email || $usermails){
+                return redirect('profile');
+            }
+        }
+
+        $usermail = new UserMail();
+        $usermail->user_id = Auth::user()->id;
+        $usermail->provider = $request->provider;
+        $usermail->email = $request->email;
+        $usermail->save();
+
+        return redirect()->intended('profile');
+    }
 }
