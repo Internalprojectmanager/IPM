@@ -22,11 +22,9 @@
 <body>
 Hi {{$firstName}} {{$lastName}},
 
-<p>A new email address has been added to your account.</p>
+<p>Welcome to IPM</p>
 
-<p>Please verify that it is your email address by clicking this link:</p>
-
-<p>Email that has been added: <u>{{$emailAdded}}</u></p>
+<p>Please verify your email address by clicking this link to activate your IPM Account:</p>
 
 <a href="{{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
     {{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>

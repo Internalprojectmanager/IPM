@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\newAccount;
 use App\Team;
 use App\UserMail;
 use App\UserTeam;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -82,24 +84,45 @@ class LoginController extends Controller
         $authUserMail = UserMail::where('email', $user->email)->first();
 
         if (!$authUser && !$authUserMail) {
+            $code = str_random(32);
             switch ($provider) {
                 case "google":
-                    return User::create([
+                    $authUser =  User::create([
                         'first_name' => $user->user['name']['givenName'],
                         'last_name' => $user->user['name']['familyName'],
                         'email' => $user->email,
                         'provider' => $provider,
                         'provider_id' => $user->id
                     ]);
+
+                    UserMail::create([
+                        'user_id' => $authUser->id,
+                        'provider' => $provider,
+                        'provider_id' => $user->id,
+                        'email' => $user->email,
+                        'active' => false,
+                        'verificationcode' => $code
+                    ]);
+                    return $authUser;
                     break;
                 case "github":
-                    return User::create([
+                    $authUser = User::create([
                         'first_name' => $user->name,
                         'last_name' => " ",
                         'email' => $user->email,
                         'provider' => $provider,
                         'provider_id' => $user->id
                     ]);
+
+                    UserMail::create([
+                        'user_id' => $authUser->id,
+                        'provider' => $provider,
+                        'provider_id' => $user->id,
+                        'email' => $user->email,
+                        'active' => false,
+                        'verificationcode' => $code,
+                    ]);
+                    return $authUser;
                     break;
                 default:
                     break;
