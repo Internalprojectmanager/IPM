@@ -42,7 +42,7 @@ Route::group(['middleware' => 'checkactive'], function () {
     Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
     Route::post('/profile/addemail', 'ProfileController@addEmail')->name('addEmail');
     Route::post('/profile/deleteEmail/{email}', 'ProfileController@deleteEmail')->name('deleteEmail');
-
+    Route::post('/profile/change-primary-email/{email}', 'ProfileController@changePrimaryEmail')->name('changePrimary');
 
 
     Route::get('/help', 'HomeController@help')->name('help');

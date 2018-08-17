@@ -149,19 +149,22 @@
                 <h1 class="supertitle">Emails</h1>
                 <div class="center">
                     <div class="row">
-                        <div class="col-md-3 col-md-offset-3">
+                        <div class="col-md-2 col-md-offset-3">
                             <label>Email</label>
                         </div>
                         <div class="col-md-2">
                             <label>Connected With</label>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <label>Delete</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Make Primary Email</label>
                         </div>
                     </div>
                     @foreach($profile->getEmails() as $email => $providers)
                         <div class="row">
-                            <div class="col-md-3 col-md-offset-3">
+                            <div class="col-md-2 col-md-offset-3">
                                 <label>{{$email}}</label> <span
                                         class="small">{{$profile->email == $email ? "(Primary)" : ""}}</span>
                             </div>
@@ -171,18 +174,30 @@
                                 @endforeach
 
                             </div>
-                            <div class="col-md-2">
-                                @if($profile->email !== $email)
+
+                            @if($profile->email !== $email)
+                                <div class="col-md-1">
                                     @include('partials.single-post-submit', [
                                     'name'  =>  '<i class="fas fa-times black fa-2x"></i>',
                                     'route' =>  'deleteEmail',
                                     'confirm'   =>  'Are you sure you want to remove this email?',
                                     'a_class' => '',
                                     'params' => array($email),
-                                ])
-                                @endif
+                                    ])
 
-                            </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    @include('partials.single-post-submit', [
+                                    'name'  =>  '<i class="fas fa-check-circle black fa-2x"></i>',
+                                    'route' =>  'changePrimary',
+                                    'confirm'   =>  'Are you sure change your primary email?',
+                                    'a_class' => '',
+                                    'params' => array($email),
+                                    ])
+                                </div>
+                            @endif
+
 
                         </div>
                     @endforeach
@@ -192,8 +207,8 @@
                             <form action="{{route('addEmail')}}" method="post">
                                 {{ csrf_field() }}
                                 <input id="email" type="text"
-                                class="form-control form-settings-field"
-                                name="email" placeholder="New Email"/>
+                                       class="form-control form-settings-field"
+                                       name="email" placeholder="New Email"/>
                                 <select name="provider" class="center dropdown-settings">
                                     <option value="none">-- Select --</option>
                                     <option value="github">Github</option>

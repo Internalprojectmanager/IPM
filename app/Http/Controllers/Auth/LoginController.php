@@ -109,6 +109,9 @@ class LoginController extends Controller
             $authUserMail = UserMail::where('email', $user->email)->where('provider', $provider)->first();
 
             if($authUserMail && !$authUser){
+                $authUserMail->provider_id = $user->id;
+                $authUserMail->save();
+
                 $authUser = User::find($authUserMail->user_id);
             }
         }
