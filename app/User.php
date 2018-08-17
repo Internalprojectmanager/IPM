@@ -46,10 +46,6 @@ class User extends Authenticatable
             ->orderBy('current', 'desc');
     }
 
-    public function emails()
-    {
-        return $this->hasMany('App\UserMail');
-    }
 
     public function teams()
     {
