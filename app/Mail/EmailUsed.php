@@ -35,7 +35,7 @@ class EmailUsed extends Mailable
     {
 
         $address = 'no-reply@itsaprojectmanager.tk';
-        $subject = 'New email address added to your IPM account';
+        $subject = 'IPM - New Email added to your account';
         $name = 'Internalprojectmanager (IPM)';
 
         return $this->view('email.addedEmail')

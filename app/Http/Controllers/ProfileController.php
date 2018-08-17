@@ -129,4 +129,27 @@ class ProfileController extends Controller
         \flash($email.' has succesfully been removed')->success();
         return redirect()->intended('profile');
     }
+
+    public function changePrimaryEmail(Request $request, $email){
+        $user = User::find(Auth::id());
+
+        $usermail = new UserMail();
+        $usermail->user_id = $user->id;
+        $usermail->provider = $user->provider;
+        $usermail->provider_id = $user->provider_id;
+        $usermail->email = $user->email;
+        $usermail->save();
+
+        $usermail = UserMail::where('email', $email)->first();
+
+        $user->email = $usermail->email;
+        $user->provider = $usermail->provider;
+        $user->provider_id = $usermail->provider_id;
+
+        $user->save();
+        $usermail->delete();
+
+        \flash($email.' is now your primary email')->success();
+        return redirect()->intended('profile');
+    }
 }
