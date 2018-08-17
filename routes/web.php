@@ -41,7 +41,7 @@ Route::group(['middleware' => 'checkactive'], function () {
     Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
     Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
     Route::post('/profile/addemail', 'ProfileController@addEmail')->name('addEmail');
-    Route::post('/profile/deleteEmail/{email}', 'ProfileController@addEmail')->name('deleteEmail');
+    Route::post('/profile/deleteEmail/{email}', 'ProfileController@deleteEmail')->name('deleteEmail');
 
 
 

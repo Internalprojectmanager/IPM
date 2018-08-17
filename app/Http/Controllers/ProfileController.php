@@ -14,6 +14,8 @@ use App\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Session\Flash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailUsed;
 
 class ProfileController extends Controller
 {
@@ -95,6 +97,8 @@ class ProfileController extends Controller
     }
 
     public function addEmail(Request $request){
+        $user = User::find(Auth::id());
+
         $userEmail = Auth::user()->getEmails();
         $usermails = UserMail::where('email', $request->email)->first();
 
@@ -110,6 +114,19 @@ class ProfileController extends Controller
         $usermail->email = $request->email;
         $usermail->save();
 
+
+        Mail::to($user->email)->send(new EmailUsed($user,  $request->email));
+        return redirect()->intended('profile');
+    }
+
+    public function deleteEmail(Request $request, $email){
+        $usermails = UserMail::where('email', $email)->where('user_id', Auth::id())->get();
+
+        foreach ($usermails as $usermail){
+            $usermail->delete();
+        }
+
+        \flash($email.' has succesfully been removed')->success();
         return redirect()->intended('profile');
     }
 }
