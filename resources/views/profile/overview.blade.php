@@ -172,7 +172,16 @@
 
                             </div>
                             <div class="col-md-2">
-                                <a class="black" href="{{route('deleteEmail', $email)}}"><i class="fas fa-times black fa-2x"></i></a>
+                                @if($profile->email !== $email)
+                                    @include('partials.single-post-submit', [
+                                    'name'  =>  '<i class="fas fa-times black fa-2x"></i>',
+                                    'route' =>  'deleteEmail',
+                                    'confirm'   =>  'Are you sure you want to remove this email?',
+                                    'a_class' => '',
+                                    'params' => array($email),
+                                ])
+                                @endif
+
                             </div>
 
                         </div>
