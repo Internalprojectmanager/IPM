@@ -209,10 +209,10 @@
                                 <input id="email" type="text"
                                        class="form-control form-settings-field"
                                        name="email" placeholder="New Email"/>
-                                <select name="provider" class="center dropdown-settings">
-                                    <option value="none">-- Select --</option>
-                                    <option value="github">Github</option>
+                                <select class="form-control input-text-modal selectpicker" name="provider[]" multiple>
+                                    <option disabled="" value="">-- Select --</option>
                                     <option value="google">Google</option>
+                                    <option value="github">Github</option>
                                 </select>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-save pull-right">

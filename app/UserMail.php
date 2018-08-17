@@ -10,7 +10,7 @@ class UserMail extends Model
 
     public $timestamps = false;
     protected $fillable = [
-        'user_id','email', 'provider', 'provider_id',
+        'user_id','email', 'provider', 'provider_id', 'verificationcode', 'active',
     ];
 
     public function user(){

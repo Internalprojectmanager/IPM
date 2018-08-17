@@ -69,7 +69,6 @@ class ProfileController extends Controller
         } else {
             $user = User::find(Auth::id());
             $user->toc = true;
-            $user->active = true;
             $user->save();
         }
         return redirect()->intended('dashboard');
@@ -93,7 +92,7 @@ class ProfileController extends Controller
         Auth::logout();
         $user->delete();
 
-        return redirect()->intended('dashboard');
+        return redirect()->intended('login');
     }
 
     public function addEmail(Request $request){
@@ -103,19 +102,32 @@ class ProfileController extends Controller
         $usermails = UserMail::where('email', $request->email)->first();
 
         foreach ($userEmail as $email => $providers){
+
             if($email == $request->email || $usermails){
+                \flash('Email already exists')->error();
+                return redirect('profile');
+            }
+            if($request->provider == null || $request->email == null){
+                \flash('Please fill in the required fields')->error();
                 return redirect('profile');
             }
         }
 
-        $usermail = new UserMail();
-        $usermail->user_id = Auth::user()->id;
-        $usermail->provider = $request->provider;
-        $usermail->email = $request->email;
-        $usermail->save();
+        $code = str_random(32);
+        foreach($request->provider as $provider){
+            $usermail = new UserMail();
+            $usermail->user_id = Auth::user()->id;
+            $usermail->provider = $provider;
+            $usermail->provider_id = "";
+            $usermail->email = $request->email;
+            $usermail->verificationcode = $code;
+            $usermail->active = 0;
+            $usermail->save();
+        }
 
 
-        Mail::to($user->email)->send(new EmailUsed($user,  $request->email));
+        return (new \App\Mail\EmailUsed($user,  $request->email, $code))->render();
+        Mail::to($user->email)->send(new EmailUsed($user,  $request->email, $code));
         return redirect()->intended('profile');
     }
 

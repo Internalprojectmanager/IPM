@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Auth;
 
-class EmailUsed extends Mailable
+class newAccount extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -37,10 +37,10 @@ class EmailUsed extends Mailable
     {
 
         $address = 'no-reply@itsaprojectmanager.tk';
-        $subject = 'IPM - New Email added to your account';
+        $subject = 'IPM - Account verification';
         $name = 'Internalprojectmanager (IPM)';
 
-        return $this->view('email.addedEmail')
+        return $this->view('email.newAccount')
             ->from($address, $name)
             ->subject($subject)
             ->with([
