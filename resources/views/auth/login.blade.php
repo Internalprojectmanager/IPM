@@ -74,12 +74,16 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="col-md-4 col-md-offset-4 google-btn center">
-                        <a href="{{route('googlelogin')}}"><i class="glyphicon g-icon"></i></a>
+                <div class="form-group auth-buttons margin-top-50">
+                    <h3 class="center">OR</h3>
+                    <div class="col-md-4 col-md-offset-4 google-btn center margin-top-50">
+                        <h4>Sign in with</h4>
+                        <a href="{{route('authlogin', 'google')}}"><i class="glyphicon g-icon"></i></a>
+                        <a href="{{route('authlogin', 'github')}}"><i class="glyphicon github-icon"></i></a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 @endsection
+l

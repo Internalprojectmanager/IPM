@@ -11,6 +11,7 @@
         "davejamesmiller/laravel-breadcrumbs": "^5.0",
         "doctrine/dbal": "^2.7",
         "fideloper/proxy": "~4.0",
+        "guzzlehttp/guzzle": "^6.3",
         "kyslik/column-sortable": "^5.6",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.6.*",
@@ -62,8 +63,7 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover",
-            "@php artisan version:refresh"
+            "@php artisan package:discover"
         ]
     },
     "config": {

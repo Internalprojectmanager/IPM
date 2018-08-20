@@ -20,14 +20,11 @@ class CheckActive
 
 
         if (Auth::check()) {
-            if(Auth::user()->active == 2){
-                Auth::user()->active = true;
-                Auth::user()->save();
-            }
-
-            if (Auth::user()->toc == false) {
+            if (Auth::user()->toc == false && Auth::user()->verified == false) {
                 return redirect()->intended('terms');
-            } elseif (Auth::user()->active == 0) {
+            } elseif(Auth::user()->toc == true && Auth::user()->verified == false){
+                return redirect()->intended('activateEmail');
+            } elseif (Auth::user()->active == false && Auth::user()->toc == true && Auth::user()->verified == true) {
                 Auth::logout();
                 flash()->error('Your Account is not actived or blocked, Please contact an admin of IPM');
                 return redirect('/login');
