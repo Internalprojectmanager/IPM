@@ -30,10 +30,11 @@ Route::group(['middleware' => ['guest', 'web']], function () {
 
 Route::get('/terms', 'ProfileController@terms')->name('terms');
 Route::post('/terms', 'ProfileController@acceptedterms')->name('termschoice');
-Route::get('/profile/activate/{email}/{code}', 'HomeController@activateEmail')->name('activateEmail');
-
 Route::get('/activateEmail', 'HomeController@activateEmailForm')->name('activateEmailForm');
 Route::post('/activateEmail', 'HomeController@sendActivationMail')->name('sendActivationMail');
+Route::get('/profile/activate/{email}/{code}', 'HomeController@activateEmail')->name('activateEmail');
+
+
 
 
 
