@@ -231,7 +231,7 @@ class HomeController extends Controller
                 $user = User::where('email', $um->email)->first();
                 if(isset($user)){
                     if($um->email == $user->email) {
-                        $user->active = 1;
+                        $user->verified = 1;
                         $user->save();
                         $um->delete();
                     } else{
