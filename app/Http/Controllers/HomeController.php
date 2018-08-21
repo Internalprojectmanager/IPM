@@ -219,9 +219,9 @@ class HomeController extends Controller
         $user = User::find(Auth::id());
         $usermail = UserMail::where('email', $user->email)->first();
 
-        Mail::to($usermail->email)->send(new newAccount($user, $usermail->email , $usermail->code));
-        \flash('Activation mail has been send to your email')->success();
-        return redirect()->intended('activateEmailForm');
+        Mail::to($usermail->email)->send(new newAccount($user, $usermail->email , $usermail->verificationcode));
+        \flash('Activation mail has been send to your email, Please follow the instructions on your email.')->success();
+        return redirect()->intended(route('activateEmailForm'));
     }
 
     public function activateEmail($email, $code){
@@ -234,6 +234,8 @@ class HomeController extends Controller
                         $user->verified = 1;
                         $user->save();
                         $um->delete();
+                        flash('Your account has been activated')->success();
+
                     } else{
                         $um->active = true;
                         $um->verificationcode = null;

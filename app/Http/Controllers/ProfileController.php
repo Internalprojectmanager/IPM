@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Assignee;
 use App\AssigneeRole;
 use App\Http\Requests\ProfileValidator;
+use App\Mail\newEmailExistingAccount;
 use App\Project;
 use App\User;
 use App\Status;
@@ -27,7 +28,7 @@ class ProfileController extends Controller
 
     public function viewProfile()
     {
-        $profile = User::with('emails')->where('id', Auth::id())->select('id', 'first_name', 'last_name', 'email', 'job_title', 'provider')->first();
+        $profile = User::with('emails')->where('id', Auth::id())->select('id', 'first_name', 'last_name', 'email', 'job_title', 'provider', 'verified')->first();
         $status = Status::Where('type', 'Job')->select('id', 'name')->get();
 
         return view('profile.overview', compact('profile', 'status'));
@@ -99,12 +100,13 @@ class ProfileController extends Controller
         $user = User::find(Auth::id());
 
         $userEmail = Auth::user()->getEmails();
+        $allEmails = User::where('email', $request->email)->first();
         $usermails = UserMail::where('email', $request->email)->first();
 
         foreach ($userEmail as $email => $providers){
 
-            if($email == $request->email || $usermails){
-                \flash('Email already exists')->error();
+            if($email == $request->email || $usermails || $allEmails){
+                \flash('This email address already exists in our system, please choose a different email')->error();
                 return redirect('profile');
             }
             if($request->provider == null || $request->email == null){
@@ -126,8 +128,12 @@ class ProfileController extends Controller
         }
 
 
-        return (new \App\Mail\EmailUsed($user,  $request->email, $code))->render();
-        Mail::to($user->email)->send(new EmailUsed($user,  $request->email, $code));
+        //return (new \App\Mail\newEmailExistingAccount($user,  $request->email, $code))->render();
+
+
+        Mail::to($request->email)->send(new newEmailExistingAccount($user,  $request->email, $code));
+        //Mail::to($request->email)->send(new EmailUsed($user,  $request->email, $code));
+        \flash('Activation email has been send to your email address')->info();
         return redirect()->intended('profile');
     }
 

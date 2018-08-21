@@ -149,11 +149,15 @@
                 <h1 class="supertitle">Emails</h1>
                 <div class="center">
                     <div class="row">
-                        <div class="col-md-2 col-md-offset-3">
+                        <div class="col-md-2 col-md-offset-2">
                             <label>Email</label>
                         </div>
                         <div class="col-md-2">
                             <label>Connected With</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Activated</label>
+
                         </div>
                         <div class="col-md-1">
                             <label>Delete</label>
@@ -164,15 +168,19 @@
                     </div>
                     @foreach($profile->getEmails() as $email => $providers)
                         <div class="row">
-                            <div class="col-md-2 col-md-offset-3">
+                            <div class="col-md-2 col-md-offset-2">
                                 <label>{{$email}}</label> <span
                                         class="small">{{$profile->email == $email ? "(Primary)" : ""}}</span>
                             </div>
                             <div class="col-md-2">
-                                @foreach($providers as $p)
-                                    <i class="fab fa-{{$p}} fa-2x"></i>
+                                @foreach($providers as $provider => $verified)
+                                    <i class="fab fa-{{$provider}} {{$verified == true ? 'black' : "grey" }} fa-2x"></i>
+
                                 @endforeach
 
+                            </div>
+                            <div class="col-md-2">
+                                {{$verified == true ? 'Active' : 'Not active'}}
                             </div>
 
                             @if($profile->email !== $email)
