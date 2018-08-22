@@ -147,30 +147,27 @@
                 <h1 class="supertitle">Emails</h1>
                 <div class="center">
                     <div class="row">
-                        <div class="col-md-2 col-md-offset-2">
+                        <div class="col-md-2 col-md-offset-2 col-lg-offset-2">
                             <label>Email</label>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-lg-2">
                             <label>Connected With</label>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-lg-2">
                             <label>Activated</label>
 
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-1 col-lg-1">
                             <label>Delete</label>
-                        </div>
-                        <div class="col-md-2">
-                            <label>Make Primary Email</label>
                         </div>
                     </div>
                     @foreach($profile->getEmails() as $email => $providers)
                         <div class="row">
-                            <div class="col-md-2 col-md-offset-2">
+                            <div class="col-md-2 col-md-offset-2 col-lg-offset-2">
                                 <label>{{$email}}</label> <span
                                         class="small">{{$profile->email == $email ? "(Primary)" : ""}}</span>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-lg-2">
                                 @foreach($providers as $provider => $verified)
                                     @if($provider !== "")
                                         <i class="fab fa-{{$provider}} {{$verified == true ? 'black' : "grey" }} fa-2x"></i>
@@ -181,12 +178,12 @@
                                 @endforeach
 
                             </div>
-                            <div class="col-md-2">
-                                {{$verified == true ? 'Active' : 'Not active'}}
+                            <div class="col-md-2 col-lg-2">
+                                <i class="{{$verified == true ? 'check' : 'error'}}-icon"></i>
                             </div>
 
                             @if($profile->email !== $email)
-                                <div class="col-md-1">
+                                <div class="col-md-1 col-lg-1">
                                     @include('partials.single-post-submit', [
                                     'name'  =>  '<i class="fas fa-times black fa-2x"></i>',
                                     'route' =>  'deleteEmail',
@@ -197,15 +194,20 @@
 
                                 </div>
 
-                                <div class="col-md-2">
-                                    @include('partials.single-post-submit', [
-                                    'name'  =>  '<i class="fas fa-check-circle black fa-2x"></i>',
-                                    'route' =>  'changePrimary',
-                                    'confirm'   =>  'Are you sure change your primary email?',
-                                    'a_class' => '',
-                                    'params' => array($email),
-                                    ])
-                                </div>
+                                @php
+                                    /*
+                                        TODO: Change the way how people change their primary email, Maybe Admin
+                                        <div class="col-md-2">
+                                            @include('partials.single-post-submit', [
+                                            'name'  =>  '<i class="fas fa-check-circle black fa-2x"></i>',
+                                            'route' =>  'changePrimary',
+                                            'confirm'   =>  'Are you sure change your primary email?',
+                                            'a_class' => '',
+                                            'params' => array($email),
+                                            ])
+                                        </div>
+                                    */
+                                @endphp
                             @endif
 
 
