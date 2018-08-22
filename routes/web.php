@@ -40,7 +40,7 @@ Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
 
 
 
-Route::group(['middleware' => ['checkactive', 'auth'], function () {
+Route::group(['middleware' => ['checkactive', 'auth']], function () {
     //Profile routes
     Route::post('/profile/addemail', 'ProfileController@addEmail')->name('addEmail');
     Route::post('/profile/deleteEmail/{email}', 'ProfileController@deleteEmail')->name('deleteEmail');
