@@ -26,10 +26,10 @@ class ProfileValidator extends FormRequest
     {
         return [
             'email' => 'required|email|max:100|unique:users,email,'. Auth::id(),
-            'password' => 'present|max:50',
-            'password_confirm' => 'present|confirmed:password',
-            'first_name' => 'required| min:2',
-            'last_name' => 'required| min:2',
+            'password' => 'required|between:8,255|confirmed',
+            'password_confirmation' => 'required',
+            'first_name' => 'required| min:3',
+            'last_name' => 'required| min:3',
         ];
     }
 }

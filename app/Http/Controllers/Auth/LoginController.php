@@ -133,8 +133,10 @@ class LoginController extends Controller
 
             if($authUserMail && !$authUser){
                 $authUserMail->provider_id = $user->id;
+                if($authUserMail->provider == null){
+                    $authUserMail->provider = $provider;
+                }
                 $authUserMail->save();
-
                 $authUser = User::find($authUserMail->user_id);
             }
         }

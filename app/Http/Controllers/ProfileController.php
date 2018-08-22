@@ -22,7 +22,6 @@ class ProfileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
 
@@ -37,16 +36,7 @@ class ProfileController extends Controller
     public function updateProfile(ProfileValidator $request)
     {
         $profile = Auth::user();
-
-        if ($profile->provider == "normal") {
-            if (!$request->email == '' && !$request->email == '') {
-                $profile->email = $request->email;
-            }
-
-            if (!$request->password == '' && !$request->password == null) {
-                $profile->password = $request->password;
-            }
-        }
+        $profile->password = $request->password;
 
         if (!$request->first_name == '' && !$request->first_name == null && !$request->last_name == '' && !$request->last_name == null) {
             $profile->first_name = $request->first_name;
@@ -55,7 +45,9 @@ class ProfileController extends Controller
 
         $profile->job_title = $request->job_title;
         $profile->save();
-        return redirect('/profile')->with('status', 'Profile updated!');
+
+        \flash('Profile updated')->success();
+        return redirect()->intended('profile');
     }
 
     public function terms()
@@ -109,23 +101,21 @@ class ProfileController extends Controller
                 \flash('This email address already exists in our system, please choose a different email')->error();
                 return redirect('profile');
             }
-            if($request->provider == null || $request->email == null){
+            if($request->email == null){
                 \flash('Please fill in the required fields')->error();
                 return redirect('profile');
             }
         }
 
         $code = str_random(32);
-        foreach($request->provider as $provider){
             $usermail = new UserMail();
             $usermail->user_id = Auth::user()->id;
-            $usermail->provider = $provider;
+            $usermail->provider = "";
             $usermail->provider_id = "";
             $usermail->email = $request->email;
             $usermail->verificationcode = $code;
             $usermail->active = 0;
             $usermail->save();
-        }
 
 
         //return (new \App\Mail\newEmailExistingAccount($user,  $request->email, $code))->render();

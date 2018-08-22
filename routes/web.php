@@ -24,7 +24,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 
 Auth::routes();
 Route::group(['middleware' => ['guest', 'web']], function () {
-    Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider')->name('authlogin');
+    Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvioder')->name('authlogin');
     Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('authcallback');
 });
 
@@ -34,17 +34,14 @@ Route::get('/activateEmail', 'HomeController@activateEmailForm')->name('activate
 Route::post('/activateEmail', 'HomeController@sendActivationMail')->name('sendActivationMail');
 Route::get('/profile/activate/{email}/{code}', 'HomeController@activateEmail')->name('activateEmail');
 
+Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
+Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
 
 
 
 
-
-
-
-Route::group(['middleware' => 'checkactive'], function () {
+Route::group(['middleware' => ['checkactive', 'auth'], function () {
     //Profile routes
-    Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
-    Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
     Route::post('/profile/addemail', 'ProfileController@addEmail')->name('addEmail');
     Route::post('/profile/deleteEmail/{email}', 'ProfileController@deleteEmail')->name('deleteEmail');
     Route::post('/profile/change-primary-email/{email}', 'ProfileController@changePrimaryEmail')->name('changePrimary');
