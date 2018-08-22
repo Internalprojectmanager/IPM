@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name', 'email', 'password', 'active', 'provider', 'provider_id',
+        'first_name','last_name', 'email', 'password', 'active', 'provider', 'provider_id', 'verified', 'toc',
     ];
 
     /**
@@ -102,14 +102,19 @@ class User extends Authenticatable
 
     public function getEmails($provider = null){
         $emails = [];
+
+
         if($this->provider == $provider || $provider == null){
-            $emails[$this->email][] = $this->provider;
+            $emails[$this->email][$this->provider] = $this->verified;
         }
         foreach ($this->emails as $email){
             if($email->provider == $provider || $provider == null) {
-                $emails[$email->email][] = $email->provider;
+                $emails[$email->email][$email->provider] = $email->active;
+
             }
         }
+
+
 
         return collect($emails);
     }

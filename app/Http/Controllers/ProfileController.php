@@ -21,13 +21,12 @@ class ProfileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
 
     public function viewProfile()
     {
-        $profile = User::with('emails')->where('id', Auth::id())->select('id', 'first_name', 'last_name', 'email', 'job_title', 'provider')->first();
+        $profile = User::with('emails')->where('id', Auth::id())->select('id', 'first_name', 'last_name', 'email', 'job_title', 'provider', 'verified')->first();
         $status = Status::Where('type', 'Job')->select('id', 'name')->get();
 
         return view('profile.overview', compact('profile', 'status'));
@@ -36,16 +35,7 @@ class ProfileController extends Controller
     public function updateProfile(ProfileValidator $request)
     {
         $profile = Auth::user();
-
-        if ($profile->provider == "normal") {
-            if (!$request->email == '' && !$request->email == '') {
-                $profile->email = $request->email;
-            }
-
-            if (!$request->password == '' && !$request->password == null) {
-                $profile->password = $request->password;
-            }
-        }
+        $profile->password = $request->password;
 
         if (!$request->first_name == '' && !$request->first_name == null && !$request->last_name == '' && !$request->last_name == null) {
             $profile->first_name = $request->first_name;
@@ -54,7 +44,9 @@ class ProfileController extends Controller
 
         $profile->job_title = $request->job_title;
         $profile->save();
-        return redirect('/profile')->with('status', 'Profile updated!');
+
+        \flash('Profile updated')->success();
+        return redirect()->intended('profile');
     }
 
     public function terms()
@@ -99,35 +91,34 @@ class ProfileController extends Controller
         $user = User::find(Auth::id());
 
         $userEmail = Auth::user()->getEmails();
+        $allEmails = User::where('email', $request->email)->first();
         $usermails = UserMail::where('email', $request->email)->first();
 
         foreach ($userEmail as $email => $providers){
 
-            if($email == $request->email || $usermails){
-                \flash('Email already exists')->error();
+            if($email == $request->email || $usermails || $allEmails){
+                \flash('This email address already exists in our system, please choose a different email')->error();
                 return redirect('profile');
             }
-            if($request->provider == null || $request->email == null){
+            if($request->email == null){
                 \flash('Please fill in the required fields')->error();
                 return redirect('profile');
             }
         }
 
         $code = str_random(32);
-        foreach($request->provider as $provider){
             $usermail = new UserMail();
             $usermail->user_id = Auth::user()->id;
-            $usermail->provider = $provider;
+            $usermail->provider = "";
             $usermail->provider_id = "";
             $usermail->email = $request->email;
             $usermail->verificationcode = $code;
             $usermail->active = 0;
             $usermail->save();
-        }
 
 
-        return (new \App\Mail\EmailUsed($user,  $request->email, $code))->render();
-        Mail::to($user->email)->send(new EmailUsed($user,  $request->email, $code));
+        Mail::to($request->email)->send(new EmailUsed($user,  $request->email, $code, 'newEmailExisting'));
+        \flash('Activation email has been send to your email address')->info();
         return redirect()->intended('profile');
     }
 

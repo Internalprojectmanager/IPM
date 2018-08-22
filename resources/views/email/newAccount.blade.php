@@ -30,7 +30,7 @@ Hi {{$firstName}} {{$lastName}},
     {{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
 <br>
 <p>
-    If it is is not done by you. Please contact us as soon as possible.<br>
+    If this action is not done by you. Please contact us as soon as possible.<br>
     Only trust emails that come from our domain host Itsaprojectmanager.tk
     & itsaprojectmanager@gmail.com and never share your passwords</p>
 <br>

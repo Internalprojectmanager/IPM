@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\newAccount;
 use App\Team;
 use App\UserMail;
 use App\UserTeam;
@@ -133,8 +132,10 @@ class LoginController extends Controller
 
             if($authUserMail && !$authUser){
                 $authUserMail->provider_id = $user->id;
+                if($authUserMail->provider == null){
+                    $authUserMail->provider = $provider;
+                }
                 $authUserMail->save();
-
                 $authUser = User::find($authUserMail->user_id);
             }
         }

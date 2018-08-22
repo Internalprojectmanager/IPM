@@ -22,10 +22,15 @@
 <body>
 Hi {{$firstName}} {{$lastName}},
 
-<p>A new email address has been added to your account.</p>
+<p>Your email has been added to your account.</p>
 
-<p>The email that has been added: <u>{{$emailAdded}}</u></p>
+<p>Please verify that it is your email address by clicking this link:</p>
 
+<p>Email that has been added: <u>{{$emailAdded}}</u></p>
+
+<a href="{{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
+    {{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
+<br>
 <p>
     If this action is not done by you. Please contact us as soon as possible.<br>
     Only trust emails that come from our domain host Itsaprojectmanager.tk

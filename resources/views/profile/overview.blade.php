@@ -103,8 +103,7 @@
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label for="password" class="col-md-5 control-label">Password</label>
                     <div class="form-settings-field">
-                        <input id="password" type="password"
-                               {{ $profile->provider == "normal" ? "" : "readonly" }} class="form-control form-settings-field"
+                        <input id="password" type="password" class="form-control form-settings-field"
                                name="password" placeholder="">
                         @if ($errors->has('password'))
                             <i class="error-icon"></i>
@@ -116,16 +115,15 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group{{ $errors->has('password_confirm') ? ' has-error' : '' }}">
-                    <label for="password_confirm" class="col-md-5 control-label">Confirm Password</label>
+                <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                    <label for="password_confirmation" class="col-md-5 control-label">Confirm Password</label>
                     <div class="form-settings-field">
-                        <input id="password" type="password"
-                               {{ $profile->provider == "normal" ? "" : "readonly" }} class="form-control form-settings-field"
-                               name="password_confirm" placeholder="">
-                        @if ($errors->has('password_confirm'))
+                        <input id="password" type="password" class="form-control form-settings-field"
+                               name="password_confirmation" placeholder="">
+                        @if ($errors->has('password_confirmation'))
                             <i class="error-icon"></i>
                             <span class="help-block">
-                                    <strong>{{ $errors->first('password_confirm') }}</strong>
+                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
                                 </span>
                         @else
                             <i class="check-icon"></i>
@@ -149,34 +147,43 @@
                 <h1 class="supertitle">Emails</h1>
                 <div class="center">
                     <div class="row">
-                        <div class="col-md-2 col-md-offset-3">
+                        <div class="col-md-2 col-md-offset-2 col-lg-offset-2">
                             <label>Email</label>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-lg-2">
                             <label>Connected With</label>
                         </div>
-                        <div class="col-md-1">
-                            <label>Delete</label>
+                        <div class="col-md-2 col-lg-2">
+                            <label>Activated</label>
+
                         </div>
-                        <div class="col-md-2">
-                            <label>Make Primary Email</label>
+                        <div class="col-md-1 col-lg-1">
+                            <label>Delete</label>
                         </div>
                     </div>
                     @foreach($profile->getEmails() as $email => $providers)
                         <div class="row">
-                            <div class="col-md-2 col-md-offset-3">
+                            <div class="col-md-2 col-md-offset-2 col-lg-offset-2">
                                 <label>{{$email}}</label> <span
                                         class="small">{{$profile->email == $email ? "(Primary)" : ""}}</span>
                             </div>
-                            <div class="col-md-2">
-                                @foreach($providers as $p)
-                                    <i class="fab fa-{{$p}} fa-2x"></i>
+                            <div class="col-md-2 col-lg-2">
+                                @foreach($providers as $provider => $verified)
+                                    @if($provider !== "")
+                                        <i class="fab fa-{{$provider}} {{$verified == true ? 'black' : "grey" }} fa-2x"></i>
+                                    @else
+                                        <i class="fas fa-at {{$verified == true ? 'black' : "grey" }} fa-2x"></i>
+
+                                    @endif
                                 @endforeach
 
                             </div>
+                            <div class="col-md-2 col-lg-2">
+                                <i class="{{$verified == true ? 'check' : 'error'}}-icon"></i>
+                            </div>
 
                             @if($profile->email !== $email)
-                                <div class="col-md-1">
+                                <div class="col-md-1 col-lg-1">
                                     @include('partials.single-post-submit', [
                                     'name'  =>  '<i class="fas fa-times black fa-2x"></i>',
                                     'route' =>  'deleteEmail',
@@ -187,15 +194,20 @@
 
                                 </div>
 
-                                <div class="col-md-2">
-                                    @include('partials.single-post-submit', [
-                                    'name'  =>  '<i class="fas fa-check-circle black fa-2x"></i>',
-                                    'route' =>  'changePrimary',
-                                    'confirm'   =>  'Are you sure change your primary email?',
-                                    'a_class' => '',
-                                    'params' => array($email),
-                                    ])
-                                </div>
+                                @php
+                                    /*
+                                        TODO: Change the way how people change their primary email, Maybe Admin
+                                        <div class="col-md-2">
+                                            @include('partials.single-post-submit', [
+                                            'name'  =>  '<i class="fas fa-check-circle black fa-2x"></i>',
+                                            'route' =>  'changePrimary',
+                                            'confirm'   =>  'Are you sure change your primary email?',
+                                            'a_class' => '',
+                                            'params' => array($email),
+                                            ])
+                                        </div>
+                                    */
+                                @endphp
                             @endif
 
 
@@ -209,11 +221,6 @@
                                 <input id="email" type="text"
                                        class="form-control form-settings-field"
                                        name="email" placeholder="New Email"/>
-                                <select class="form-control input-text-modal selectpicker" name="provider[]" multiple>
-                                    <option disabled="" value="">-- Select --</option>
-                                    <option value="google">Google</option>
-                                    <option value="github">Github</option>
-                                </select>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-save pull-right">
                                         Save

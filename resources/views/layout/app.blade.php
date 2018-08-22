@@ -52,20 +52,6 @@
     <meta name="msapplication-wide310x150logo" content="{{asset('/img/favicon/mstile-310x150.png')}}" />
     <meta name="msapplication-square310x310logo" content="{{asset('/img/favicon/mstile-310x310.png')}}" />
 
-@if(env('APP_ENV') !== "local")
-        <!-- Hotjar Tracking Code for IPM -->
-            <script>
-                (function(h,o,t,j,a,r){
-                    h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-                    h._hjSettings={hjid:902819,hjsv:6};
-                    a=o.getElementsByTagName('head')[0];
-                    r=o.createElement('script');r.async=1;
-                    r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-                    a.appendChild(r);
-                })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-            </script>
-    @endif
-
     @if(env('APP_ENV' === 'production'))
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id={{env("GOOGLE_ANALYTICS_ID")}}"></script>
@@ -124,6 +110,10 @@
             $('.datepicker').datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true,
+                calendarWeeks: true,
+                startDate: '{{\Carbon\Carbon::now()}}',
+                todayHighlight: true,
+                weekStart: 1,
             });
         })
     </script>
