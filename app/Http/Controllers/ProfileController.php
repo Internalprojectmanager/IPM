@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Assignee;
 use App\AssigneeRole;
 use App\Http\Requests\ProfileValidator;
-use App\Mail\newEmailExistingAccount;
 use App\Project;
 use App\User;
 use App\Status;
@@ -118,11 +117,7 @@ class ProfileController extends Controller
             $usermail->save();
 
 
-        //return (new \App\Mail\newEmailExistingAccount($user,  $request->email, $code))->render();
-
-
-        Mail::to($request->email)->send(new newEmailExistingAccount($user,  $request->email, $code));
-        //Mail::to($request->email)->send(new EmailUsed($user,  $request->email, $code));
+        Mail::to($request->email)->send(new EmailUsed($user,  $request->email, $code, 'newEmailExisting'));
         \flash('Activation email has been send to your email address')->info();
         return redirect()->intended('profile');
     }

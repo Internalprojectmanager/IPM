@@ -16,16 +16,19 @@ class EmailUsed extends Mailable
     protected $user;
     protected $email;
     protected $code;
+    protected $type;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, $email, $code)
+    public function __construct(User $user, $email, $code, $type)
     {
         $this->user = $user;
         $this->email = $email;
         $this->code = $code;
+        $this->type = $type;
     }
 
     /**
@@ -37,17 +40,48 @@ class EmailUsed extends Mailable
     {
 
         $address = 'no-reply@itsaprojectmanager.tk';
-        $subject = 'IPM - New Email added to your account';
         $name = 'Internalprojectmanager (IPM)';
+        $subject = null;
 
-        return $this->view('email.addedEmail')
-            ->from($address, $name)
-            ->subject($subject)
-            ->with([
-                'firstName' => $this->user->first_name,
-                'lastName' => $this->user->last_name,
-                'emailAdded' => $this->email,
-                'verifyCode' => $this->code,
-            ]);
+        switch ($this->type) {
+            case "addedEmail":
+                $subject = 'IPM - New Email added to your account';
+
+                return $this->view('email.addedEmail')
+                    ->from($address, $name)
+                    ->subject($subject)
+                    ->with([
+                        'firstName' => $this->user->first_name,
+                        'lastName' => $this->user->last_name,
+                        'emailAdded' => $this->email,
+                        'verifyCode' => $this->code,
+                    ]);
+
+            case "newAccount":
+                $subject = 'IPM - Account verification';
+
+                return $this->view('email.newAccount')
+                    ->from($address, $name)
+                    ->subject($subject)
+                    ->with([
+                        'firstName' => $this->user->first_name,
+                        'lastName' => $this->user->last_name,
+                        'emailAdded' => $this->email,
+                        'verifyCode' => $this->code,
+                    ]);
+
+            case 'newEmailExisting':
+                $subject = 'IPM - Activate your email address';
+
+                return $this->view('email.newEmailExisting')
+                    ->from($address, $name)
+                    ->subject($subject)
+                    ->with([
+                        'firstName' => $this->user->first_name,
+                        'lastName' => $this->user->last_name,
+                        'emailAdded' => $this->email,
+                        'verifyCode' => $this->code,
+                    ]);
+        }
     }
 }

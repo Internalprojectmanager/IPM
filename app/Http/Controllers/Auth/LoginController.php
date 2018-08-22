@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\newAccount;
 use App\Team;
 use App\UserMail;
 use App\UserTeam;

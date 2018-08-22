@@ -24,15 +24,10 @@ Hi {{$firstName}} {{$lastName}},
 
 <p>A new email address has been added to your account.</p>
 
-<p>Please verify that it is your email address by clicking this link:</p>
+<p>The email that has been added: <u>{{$emailAdded}}</u></p>
 
-<p>Email that has been added: <u>{{$emailAdded}}</u></p>
-
-<a href="{{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
-    {{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
-<br>
 <p>
-    If it is is not done by you. Please contact us as soon as possible.<br>
+    If this action is not done by you. Please contact us as soon as possible.<br>
     Only trust emails that come from our domain host Itsaprojectmanager.tk
     & itsaprojectmanager@gmail.com and never share your passwords</p>
 <br>
