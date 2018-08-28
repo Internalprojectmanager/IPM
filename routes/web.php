@@ -24,7 +24,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 
 Auth::routes();
 Route::group(['middleware' => ['guest', 'web']], function () {
-    Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvioder')->name('authlogin');
+    Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider')->name('authlogin');
     Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('authcallback');
 });
 
