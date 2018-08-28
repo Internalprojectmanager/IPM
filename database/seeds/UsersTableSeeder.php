@@ -14,9 +14,9 @@ class UsersTableSeeder extends Seeder
     {
 
         $user = new \App\User();
-        $user->first_name = 'IAV';
-        $user->last_name = 'Admin';
-        $user->email = 'info@itsavirus.com';
+        $user->first_name = 'System';
+        $user->last_name = 'Administrator';
+        $user->email = 'itsaprojectmanager@gmail.com';
         $user->password = 'password';
         $user->active = 1;
         $user->job_title = 14;
