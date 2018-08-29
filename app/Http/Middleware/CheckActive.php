@@ -35,13 +35,14 @@ class CheckActive
                     $usermail->active = 0;
                     $usermail->save();
                 }
+                flash()->info('Your Account is not verified, Please activate your email');
                 return redirect()->intended('activateEmail');
             } else if(Auth::user()->password == null){
                 \flash('Please enter a password for your account')->error();
                 return redirect()->intended('profile');
 
 
-            } elseif (Auth::user()->active == false && Auth::user()->toc == true && Auth::user()->verified == true) {
+            } else if(Auth::user()->blocked == true){
                 Auth::logout();
                 flash()->error('Your Account is not actived or blocked, Please contact an admin of IPM');
                 return redirect('/login');

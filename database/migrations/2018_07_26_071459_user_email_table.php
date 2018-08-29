@@ -30,6 +30,7 @@ class UserEmailTable extends Migration
 
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('verified')->after('toc')->default(false);
+            $table->boolean('blocked')->after('active')->default(false);
         });
     }
 
@@ -44,6 +45,7 @@ class UserEmailTable extends Migration
 
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('verified');
+            $table->dropColumn('blocked');
         });
 
     }
