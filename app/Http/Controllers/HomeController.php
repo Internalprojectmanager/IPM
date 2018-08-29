@@ -232,6 +232,7 @@ class HomeController extends Controller
                 if(isset($user)){
                     if($um->email == $user->email) {
                         $user->verified = 1;
+                        $user->active = 1;
                         $user->save();
                         $um->delete();
                         flash('Your account has been activated')->success();
@@ -248,7 +249,7 @@ class HomeController extends Controller
                 }
                 $userid = $um->user_id;
             }
-            flash($email. ' has been activated');
+            flash($email. ' has been activated')->success();
             $user = User::where('id', $userid)->first();
             Mail::to($user->email)->send(new EmailUsed($user,  $email, $code, 'addedEmail'));
             return redirect()->intended('profile');
