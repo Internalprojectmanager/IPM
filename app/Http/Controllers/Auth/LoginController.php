@@ -146,11 +146,10 @@ class LoginController extends Controller
             }
         } else{
             $authUser = User::where('email', $user->email)->where('provider', $provider)->first();
-            $authUserMail = UserMail::where('email', $user->email)->where('provider', $provider)->first();
-
+            $authUserMail = UserMail::where('email', $user->email)->where('provider', $provider)->orWhere('provider', '')->first();
             if($authUserMail && !$authUser){
                 $authUserMail->provider_id = $user->id;
-                if($authUserMail->provider == null){
+                if($authUserMail->provider == ''){
                     $authUserMail->provider = $provider;
                 }
                 $authUserMail->save();
