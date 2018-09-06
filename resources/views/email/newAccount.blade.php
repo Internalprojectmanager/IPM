@@ -26,8 +26,17 @@ Hi {{$firstName}} {{$lastName}},
 
 <p>Please verify your email address by clicking this link to activate your IPM Account:</p>
 
-<a href="{{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
-    {{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
+@if(env('APP_URL'))
+    <a href="{{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
+        {{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
+@elseif(env('develop'))
+    <a href="https://dev.internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
+        https://dev.internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
+@else
+    <a href="https://internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
+        https://internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
+@endif
+
 <br>
 <p>
     If this action is not done by you. Please contact us as soon as possible.<br>
@@ -41,10 +50,14 @@ Hi {{$firstName}} {{$lastName}},
 <p><span>Email: itsaprojectmanager@gmail.com</span></p>
 <p>
         <span>
-            <a href="https://www.instagram.com/internalprojectmanager/"><img width="20px" src="https://itsaprojectmanager.tk/img/icon/instagram-brands.svg"></a>
-            <a href="https://www.facebook.com/IPM-610644082649746/"><img width="20px" src="https://itsaprojectmanager.tk/img/icon/facebook-brands.svg"></a>
-            <a href="https://twitter.com/internalpm"><img width="20px" src="https://itsaprojectmanager.tk/img/icon/twitter-square-brands.svg"></a>
-            <a href="https://medium.com/@internalproject"><img width="20px" src="https://itsaprojectmanager.tk/img/icon/medium-brands.svg"></a>
+            <a href="https://www.instagram.com/internalprojectmanager/"><img width="20px"
+                                                                             src="https://itsaprojectmanager.tk/img/icon/instagram-brands.svg"></a>
+            <a href="https://www.facebook.com/IPM-610644082649746/"><img width="20px"
+                                                                         src="https://itsaprojectmanager.tk/img/icon/facebook-brands.svg"></a>
+            <a href="https://twitter.com/internalpm"><img width="20px"
+                                                          src="https://itsaprojectmanager.tk/img/icon/twitter-square-brands.svg"></a>
+            <a href="https://medium.com/@internalproject"><img width="20px"
+                                                               src="https://itsaprojectmanager.tk/img/icon/medium-brands.svg"></a>
         </span>
 </p>
 

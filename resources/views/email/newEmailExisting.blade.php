@@ -28,8 +28,18 @@ Hi {{$firstName}} {{$lastName}},
 
 <p>Email that has been added: <u>{{$emailAdded}}</u></p>
 
-<a href="{{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
-    {{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
+
+@if(env('APP_URL'))
+    <a href="{{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
+        {{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
+@elseif(env('develop'))
+    <a href="https://dev.internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
+        https://dev.internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
+@else
+    <a href="https://internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
+        https://internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
+@endif
+
 <br>
 <p>
     If this action is not done by you. Please contact us as soon as possible.<br>
