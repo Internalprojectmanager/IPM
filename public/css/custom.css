@@ -355,9 +355,8 @@ label {
 .btn-save, .btn-save:hover, .btn-save:focus, .btn-save:active:focus {
     color:white;
     background: rgba(107,175,28,0.8) url("../svg/save.svg") no-repeat 10px center;
-    width: 97px;
     text-align: right;
-    padding-right: 18px;
+    padding: 12px 22px 12px 40px;
     text-transform: none;
     font-weight: normal;
     box-shadow: none;
