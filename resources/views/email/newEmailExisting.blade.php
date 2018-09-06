@@ -32,12 +32,15 @@ Hi {{$firstName}} {{$lastName}},
 @if(env('APP_URL'))
     <a href="{{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
         {{env('APP_URL')}}/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
-@elseif(env('develop'))
+@elseif(env('APP_ENV') == "production")
+    <a href="https://internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
+        https://internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
+@elseif(env('APP_ENV') == "develop")
     <a href="https://dev.internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
         https://dev.internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
 @else
-    <a href="https://internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
-        https://internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
+    <a href="https://dev.internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}">
+        https://dev.internalprojectmanager.com/profile/activate/{{$emailAdded}}/{{$verifyCode}}</a>
 @endif
 
 <br>
