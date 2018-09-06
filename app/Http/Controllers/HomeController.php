@@ -218,9 +218,14 @@ class HomeController extends Controller
         $user = User::find(Auth::id());
         $usermail = UserMail::where('email', $user->email)->first();
 
-        Mail::to($usermail->email)->send(new EmailUsed($user, $usermail->email , $usermail->verificationcode, 'newAccount'));
-        \flash('Activation mail has been send to your email, Please follow the instructions on your email.')->success();
-        return redirect()->intended(route('activateEmailForm'));
+        if($usermail !== null){
+            Mail::to($usermail->email)->send(new EmailUsed($user, $usermail->email , $usermail->verificationcode, 'newAccount'));
+            \flash('Activation mail has been send to your email, Please follow the instructions on your email.')->success();
+            return redirect()->intended(route('activateEmailForm'));
+
+        } else{
+            return redirect()->intended(route('profile'));
+        }
     }
 
     public function activateEmail($email, $code){
