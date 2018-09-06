@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Assignee;
+use App\Mail\EmailUsed;
 use App\Requirement;
+use App\UserMail;
 use Illuminate\Http\Request;
 use App\Status;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use PragmaRX\Version\Package\Version;
+use Illuminate\Support\Facades\Mail;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -198,7 +201,6 @@ class HomeController extends Controller
 
         $requirements = $this->calcDeadline($feature);
         $status = Status::type('Progress')->get();
-
         return view('profile.dashboard_table', compact('requirements', 'requirementscount', 'status'));
     }
 
@@ -206,5 +208,60 @@ class HomeController extends Controller
     {
         $version = $this->getVersion();
         return view('profile.help', compact('version'));
+    }
+
+    public function activateEmailForm(){
+        return view('auth.activate');
+    }
+
+    public function sendActivationMail(){
+        $user = User::find(Auth::id());
+        $usermail = UserMail::where('email', $user->email)->first();
+
+        if($usermail !== null){
+            Mail::to($usermail->email)->send(new EmailUsed($user, $usermail->email , $usermail->verificationcode, 'newAccount'));
+            \flash('Activation mail has been send to your email, Please follow the instructions on your email.')->success();
+            return redirect()->intended(route('activateEmailForm'));
+
+        } else{
+            return redirect()->intended(route('profile'));
+        }
+    }
+
+    public function activateEmail($email, $code){
+        $userid = null;
+        $usermail = UserMail::where('email', $email)->where('verificationcode', $code)->get();
+        if($usermail->count() > 0){
+            foreach ($usermail as $um){
+                $user = User::where('email', $um->email)->first();
+                if(isset($user)){
+                    if($um->email == $user->email) {
+                        $user->verified = 1;
+                        $user->active = 1;
+                        $user->save();
+                        $um->delete();
+                        flash('Your account has been activated')->success();
+
+                    } else{
+                        $um->active = true;
+                        $um->verificationcode = null;
+                        $um->save();
+                    }
+                } else{
+                    $um->active = true;
+                    $um->verificationcode = null;
+                    $um->save();
+                }
+                $userid = $um->user_id;
+            }
+            flash($email. ' has been activated')->success();
+            $user = User::where('id', $userid)->first();
+            Mail::to($user->email)->send(new EmailUsed($user,  $email, $code, 'addedEmail'));
+            return redirect()->intended('profile');
+        } else{
+            abort(404);
+        }
+
+
     }
 }

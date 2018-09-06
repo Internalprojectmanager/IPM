@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name', 'email', 'password', 'active', 'provider', 'provider_id',
+        'first_name','last_name', 'email', 'password', 'active', 'provider', 'provider_id', 'verified', 'toc',
     ];
 
     /**
@@ -32,6 +33,10 @@ class User extends Authenticatable
         return $this->attributes['first_name']. ' ' .$this->attributes['last_name'];
     }
 
+    public function emails(){
+        return $this->hasMany('App\UserMail', 'user_id', 'id');
+    }
+
 
     public function team()
     {
@@ -40,6 +45,7 @@ class User extends Authenticatable
             ->wherePivot('active', true)
             ->orderBy('current', 'desc');
     }
+
 
     public function teams()
     {
@@ -92,6 +98,25 @@ class User extends Authenticatable
             }
         }
         return $todo;
+    }
+
+    public function getEmails($provider = null){
+        $emails = [];
+
+
+        if($this->provider == $provider || $provider == null){
+            $emails[$this->email][$this->provider] = $this->verified;
+        }
+        foreach ($this->emails as $email){
+            if($email->provider == $provider || $provider == null) {
+                $emails[$email->email][$email->provider] = $email->active;
+
+            }
+        }
+
+
+
+        return collect($emails);
     }
 
     public function getAvatar()
