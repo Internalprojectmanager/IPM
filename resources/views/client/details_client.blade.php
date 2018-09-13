@@ -48,9 +48,6 @@
                 </div>
 
             </div>
-            <div class="row" id="no-buttons">
-
-            </div>
 
             <div class="row col-md-12 col-xs-12" id="button-top">
                 <button onclick="projectDetailsDown()" class="black-button" id="black-button-down"></button>
