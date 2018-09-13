@@ -1,4 +1,4 @@
-<div class="row bigtable">
+<div class="row bigtable header-3">
     <table class="table table-hover table-center results table-responsive">
         <thead>
         <th></th>
@@ -6,7 +6,7 @@
         <th>@sortablelink('description', 'Description')</th>
         <th>@sortablelink('pstatus.name', 'Status')</th>
         <th>@sortablelink('deadline', 'Deadline')</th>
-        <th>Users</th>
+        <th>Assignee's</th>
         </thead>
         <tbody>
         @foreach($projects as $project)
@@ -78,8 +78,11 @@
         @endforeach
         </tbody>
     </table>
+    <span style='display: none;' id="new-count">{{$projectcount}}</span>
+</div>
+
+<div class="row">
     <div class="center">
         {{ $projects->links() }}
     </div>
-    <span style='display: none;' id="new-count">{{$projectcount}}</span>
 </div>

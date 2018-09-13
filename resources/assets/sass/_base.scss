@@ -185,6 +185,10 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
+.bigtable{
+  padding: 10px 15px;
+}
+
 .status {
   padding: 3px 7px;
   border-radius: 80px;
@@ -323,6 +327,12 @@ label {
   margin-top: 20px;
 }
 
+.bootstrap-select > .btn{
+  font-size: unset;
+  text-transform: unset;
+  padding: 6px 12px;
+}
+
 .btn {
   border: none;
   border-radius: 0;
@@ -350,7 +360,6 @@ label {
 .btn-edit {
   background-color: $light-grey;
   color: $black;
-  width: 100px;
   margin-left: -4px;
   &:active, &:focus, &:hover{
     background-color: $light-grey;
@@ -359,7 +368,7 @@ label {
 
 .btn-save {
   color: $white;
-  background: $green url("/public/svg/save.svg") no-repeat 10px center;
+  background: $green url("/../svg/save.svg") no-repeat 10px center;
   text-align: right;
   padding: 12px 22px 12px 40px;
   &:active, &:focus, &:hover{
@@ -369,13 +378,21 @@ label {
 
 .btn-delete {
   color: white;
-  background: $red url("/public/svg/delete.svg") no-repeat 10px center;
+  background: $red url("/../svg/delete.svg") no-repeat 10px center;
   text-align: right;
   padding-right: 18px;
+
+
+}
+
+.delete-button,  .delete-button:hover {
+  background-color: #F54949;
+  border: none;
+  margin-bottom: 10px;
 }
 
 .btn-cancel {
-  background: $white url("/public/svg/cancel.svg") no-repeat 15px center;
+  background: $white url("/../svg/cancel.svg") no-repeat 15px center;
   color: $orange2;
   text-align: right;
   padding: 12px 22px 12px 40px;
@@ -462,7 +479,7 @@ label {
 }
 
 .searchfield {
-  background: #ffffff url("/public/svg/search.svg") no-repeat 169px center;
+  background: #ffffff url("/../svg/search.svg") no-repeat 169px center;
   background-size: 20px 20px;
   width: 200px;
   height: 36px;
@@ -483,7 +500,7 @@ label {
 }
 
 .dropdown-search {
-  background: #ffffff url("/public/svg/dropdown-2.svg") no-repeat 150px center;
+  background: #ffffff url("/../svg/dropdown-2.svg") no-repeat 150px center;
   background-size: 12px;
   width: 180px;
   height: 36px;
@@ -500,7 +517,7 @@ label {
 }
 
 .dropdown-settings {
-  background: #ffffff url("/public/svg/dropdown-2.svg") no-repeat 250px center;
+  background: #ffffff url("/../svg/dropdown-2.svg") no-repeat 250px center;
   background-size: 12px;
   width: 280px;
   height: 36px;
@@ -613,14 +630,25 @@ td > div > .assignee {
 }
 
 /* Project details */
-#project-details, #document-details {
-  left: 140px;
-  top: 143px;
-  right: 30px;
-  height: 209px;
-  padding: 20px;
-  margin-bottom: 30px;
+.clientdetails{
+  #project-details, #document-details {
+    height: auto;
+    padding: 20px 20px 62px 20px;
+    position: relative;
+    margin-bottom: 30px;
+  }
 }
+
+.projectdetails{
+  #project-details, #document-details {
+    height: auto;
+    padding: 20px 20px 62px 20px;
+    position: relative;
+    margin-bottom: 30px;
+  }
+}
+
+
 
 #document-details {
   height: auto;
@@ -715,16 +743,14 @@ td > div > .assignee {
 }
 
 #black-button-down {
-  background: #000000 url('/public/svg/more-info-down.svg') no-repeat center;
+  background: #000000 url('/../svg/more-info-down.svg') no-repeat center;
   position: relative;
   margin: auto;
 
 }
 
 .black-button-up {
-  background: #000000 url('/public/svg/more-info-up.svg') no-repeat center !important;
-  top: 6px !important;
-  margin-top: 20px;
+  background: #000000 url('/../svg/more-info-up.svg') no-repeat center !important;
 }
 
 #arrow {
@@ -744,12 +770,37 @@ td > div > .assignee {
   margin-bottom: 30px;
 }
 
-#block-description, .block-description {
-  margin-top: -4%;
+.show{
+  overflow: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 70px;
+
+  &:after{
+    display: none !important;
+  }
 }
 
 #block-hidden {
-  display: none;
+  overflow: hidden;
+  height: 70px;
+  max-height: 70px;
+}
+
+#block-hidden:after{
+  display: inline-block;
+  content: "";
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 10px 0;
+
+  /* "transparent" only works here because == rgba(0,0,0,0) */
+  background-image: linear-gradient(to bottom, transparent, white );
+
 }
 
 #button-files, #button-people {
@@ -763,10 +814,6 @@ td > div > .assignee {
 #button-top {
   width: 100%;
   margin-top: 2px;
-}
-
-#block-show {
-  height: 128px;
 }
 
 #pdf-icon, #people-icon, #paperclip-icon {
@@ -787,7 +834,7 @@ td > div > .assignee {
 
 #project-edit {
   position: absolute;
-  top: 8.8rem;
+  top: 8.6rem;
   right: 5rem;
 }
 
@@ -890,13 +937,7 @@ td > div > .assignee {
   opacity: 0.5;
 }
 
-.delete-button, .delete-button:hover {
-  height: 45px;
-  width: 107px;
-  background-color: #F54949;
-  border: none;
-  margin-bottom: 10px;
-}
+
 
 #project-delete {
   position: relative;
