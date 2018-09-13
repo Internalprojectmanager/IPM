@@ -31,18 +31,8 @@
                     <span class="project-title">Deadline:</span><br>
 
                     <span class="project-detail">
-                        @if($project->pstatus->name != "Completed" &&$project->pstatus->name != "Paused" && $project->pstatus->name != "Cancelled")
-                            @if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}}
-                            @if($project->monthsleft && $project->monthsleft > 0)
-                                <span class="tablesubtitle">{{abs($project->monthsleft)}} Month(s) left</span>
-                            @elseif($project->monthsleft && $project->monthsleft < 0)
-                                <span class="tablesubtitle red">{{abs($project->monthsleft)}} Month(s) overdue</span>
-                            @elseif($project->daysleft >= 0)
-                                <span class="tablesubtitle @if($project->daysleft < 5) red @endif ">{{abs($project->daysleft)}} day(s) left</span>
-                            @elseif($project->daysleft < 0)
-                                <span class="tablesubtitle red">{{abs($project->daysleft)}} day(s) overdue</span>
-                            @endif
-                            @endif
+                        @if($project->pstatus->name != "Completed" && $project->pstatus->name != "Paused" && $project->pstatus->name != "Cancelled")
+                            @if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}}@endif
                         @endif
                     </span>
                 </div>

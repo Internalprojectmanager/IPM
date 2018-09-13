@@ -774,7 +774,7 @@ td > div > .assignee {
   overflow: auto !important;
   height: auto !important;
   max-height: none !important;
-  min-height: 70px;
+  min-height: 90px;
 
   &:after{
     display: none !important;
@@ -783,8 +783,8 @@ td > div > .assignee {
 
 #block-hidden {
   overflow: hidden;
-  height: 70px;
-  max-height: 70px;
+  height: 90px;
+  max-height: 90px;
 }
 
 #block-hidden:after{
