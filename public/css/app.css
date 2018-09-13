@@ -9060,8 +9060,41 @@ h6 {
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.bigtable {
+.bigtable,
+.feature-results,
+.nonfunctional-results,
+.ts-results,
+.scope-results {
   padding: 10px 15px;
+}
+
+.feature-results,
+.nonfunctional-results,
+.ts-results,
+.scope-results {
+  margin: 15px 0;
+}
+
+.feature-results .nfr-table,
+.feature-results .ts-table,
+.feature-results .scope-table,
+.nonfunctional-results .nfr-table,
+.nonfunctional-results .ts-table,
+.nonfunctional-results .scope-table,
+.ts-results .nfr-table,
+.ts-results .ts-table,
+.ts-results .scope-table,
+.scope-results .nfr-table,
+.scope-results .ts-table,
+.scope-results .scope-table {
+  display: none;
+}
+
+.feature-results .display,
+.nonfunctional-results .display,
+.ts-results .display,
+.scope-results .display {
+  display: block !important;
 }
 
 .status {
@@ -9575,7 +9608,11 @@ td > div > .assignee {
 }
 
 .projectdetails #project-details,
-.projectdetails #document-details {
+.projectdetails #document-details,
+.showrelease #project-details,
+.showrelease #document-details,
+.showfeature #project-details,
+.showfeature #document-details {
   height: auto;
   padding: 20px 20px 62px 20px;
   position: relative;
@@ -9715,13 +9752,14 @@ td > div > .assignee {
   overflow: hidden;
   height: 90px;
   max-height: 90px;
+  position: relative;
 }
 
 #block-hidden:after {
   display: inline-block;
   content: "";
   position: absolute;
-  bottom: 30px;
+  bottom: 0;
   left: 0;
   width: 100%;
   text-align: center;

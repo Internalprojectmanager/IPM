@@ -185,9 +185,20 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.bigtable{
+.bigtable, .feature-results, .nonfunctional-results, .ts-results, .scope-results{
   padding: 10px 15px;
 }
+
+.feature-results, .nonfunctional-results, .ts-results, .scope-results{
+  margin: 15px 0;
+  .nfr-table, .ts-table, .scope-table{
+    display: none;
+  }
+  .display{
+    display: block !important;
+  }
+}
+
 
 .status {
   padding: 3px 7px;
@@ -639,7 +650,7 @@ td > div > .assignee {
   }
 }
 
-.projectdetails{
+.projectdetails, .showrelease, .showfeature {
   #project-details, #document-details {
     height: auto;
     padding: 20px 20px 62px 20px;
@@ -785,13 +796,14 @@ td > div > .assignee {
   overflow: hidden;
   height: 90px;
   max-height: 90px;
+  position: relative;
 }
 
 #block-hidden:after{
   display: inline-block;
   content: "";
   position: absolute;
-  bottom: 30px;
+  bottom: 0;
   left: 0;
   width: 100%;
   text-align: center;
