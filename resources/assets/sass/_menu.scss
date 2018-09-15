@@ -1,0 +1,58 @@
+.navbar{
+    background: black;
+    border-radius: 0;
+    border: none;
+    height: 65px;
+
+}
+
+.navbar > .container-fluid{
+    margin: 1rem auto 0;
+}
+
+.navbar-brand{
+    padding: 10px 15px;
+}
+
+.navbar-brand img{
+    height: 100%;
+}
+
+.navbar .navbar-right{
+    margin-right: 0;
+}
+.navbar-default .navbar-nav > li > a {
+    color:white;
+    padding-top: 15px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-nav > li > .active{
+    border-bottom: 10px solid white;
+    padding-bottom: 10px;
+    color:white;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.avatar-profile > a, .avatar-profile > a:hover, .avatar-profile > a:focus{
+    border-bottom: none !important;
+    padding: 0 !important;
+}
+
+.navbar-nav >  li > .dropdown-menu{
+    border-radius: 0;
+}
+
+.navbar-nav >  li > .dropdown-menu > li{
+    margin: 5px auto;
+}
+
+.guest .navbar > .container-fluid, .no-route .navbar > .container-fluid{
+    margin: 1rem auto;
+}
+
+.no-route .container, .guest .container{
+    padding: 10rem 2rem 0rem 2rem;
+}

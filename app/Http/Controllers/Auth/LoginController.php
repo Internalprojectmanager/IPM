@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -44,6 +45,23 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => ['logout', 'getLogout']]);
+    }
+
+    public function login(Request $request)
+    {
+        $email = $request->email;
+        $authUserMail = UserMail::with('user')->where('email', $request->email)->first();
+
+        if($authUserMail){
+            $email = $authUserMail->User->email;
+        }
+
+        $credentials = ['email' => $email, 'password' => $request->password, 'blocked' => false];
+
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            return redirect()->intended('dashboard');
+        }
     }
 
 
@@ -128,11 +146,10 @@ class LoginController extends Controller
             }
         } else{
             $authUser = User::where('email', $user->email)->where('provider', $provider)->first();
-            $authUserMail = UserMail::where('email', $user->email)->where('provider', $provider)->first();
-
+            $authUserMail = UserMail::where('email', $user->email)->where('provider', $provider)->orWhere('provider', '')->first();
             if($authUserMail && !$authUser){
                 $authUserMail->provider_id = $user->id;
-                if($authUserMail->provider == null){
+                if($authUserMail->provider == ''){
                     $authUserMail->provider = $provider;
                 }
                 $authUserMail->save();
