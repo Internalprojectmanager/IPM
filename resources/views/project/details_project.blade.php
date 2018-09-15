@@ -8,48 +8,68 @@
 
 @section('content')
 
-    <a href="{{route('editproject', [ $client->path, $project->path])}}" class="btn-edit" id="project-edit">
+    <a href="{{route('editproject', [ $client->path, $project->path])}}" class="btn btn-edit" id="project-edit">
         <span class="glyphicon edit-icon"></span> Edit
     </a>
 
     <div class="row">
-        <div class="header-3" id="project-details">
+        <div class="header-3 " id="project-details">
             <div class="row" id="block-show">
-                <div class="col-md-4 col-xs-6">
-                    <span class="project-title block-title">Projects Name</span> <br>
-                    <span class="project-detail block-value">{{$project->name}}</span>
+                <div class="col-md-6 col-xs-6" style="margin-bottom: 10px">
+                    <span class="h1">
+                        <i class="fas fa-circle"
+                           style="font-size:18px; margin: 5px 0; color: @if($project->pstatus){{$project->pstatus->color}}; @endif ">
+                        </i>
+
+                        {{$project->name}}</span>
+                    <span class=" block-value grey">{{$project->pstatus->name}}</span>
+                    <br>
+                    <span class="grey">{{$client->name}}</span>
                 </div>
 
-                <div class="col-md-2 col-xs-6">
-                    <span class="project-title block-title">Project Code</span> <br>
-                    <span class="project-detail block-value">{{$project->projectcode}}</span>
+                <div class="col-md-3">
+                    <span class="project-title">Deadline:</span><br>
+
+                    <span class="project-detail">
+                        @if($project->pstatus->name != "Completed" && $project->pstatus->name != "Paused" && $project->pstatus->name != "Cancelled")
+                            @if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}}@endif
+                        @endif
+                    </span>
                 </div>
 
-                <div class="col-md-3 col-xs-6">
-                    <span class="project-title block-title">Client</span> <br>
-                    <span class="project-detail block-value">{{$project->company->name}}</span>
-                </div>
+                <div class="col-md-3">
+                    <span class="project-title">Projectcode:</span><br>
 
-                <div class="col-md-3 col-xs-6">
-                    <span class="project-title block-title" id="link">Link</span><br>
-                    <i class="word-icon block-value"><span class="project-detail block-value" id="link-world">-</span></i><br>
-                    <i class="text-icon block-value"><span class="project-detail block-value" id="link-t">-</span></i>
+                    <span class="project-detail">{{$project->projectcode}}</span>
                 </div>
-
             </div>
-            <div class="row under-details block-description" id="block-hidden">
-                <div class="col-md-6 col-xs-12">
-                    <span class="project-title block-title">Project Description</span><br>
-                    <span class="project-detail block-value">{{$project->description}}</span>
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="block-description under-details" id="block-hidden">
+
+                        <span class="project-title block-title">Project Description</span><br>
+                        <span class="project-detail block-value">{!! nl2br($project->description) !!}</span>
+                    </div>
                 </div>
 
-                <div class="col-md-6 col-xs-12 pull-right">
+                <div class="col-md-3 col-xs-6">
                     <span class="project-title block-title">Contact Person</span><br>
-                    <i class="user-icon block-icons"><span class="project-detail block-value" id="contact-name">{{$project->company->contactname}}</span></i><br>
-                    <i class="tel-icon block-icons"><span class="project-detail block-value" id="contact-phone"><a href="tel:{{$project->company->contactnumber}}">{{$project->company->contactnumber}}</a></span></i><br>
-                    <i class="mail-icon block-icons"> <span class="project-detail block-value" id="contact-email"><a href="mailto:{{$project->company->contactemail}}">{{$project->company->contactemail}}</a></span></i>
+                    <i class="user-icon block-icons"><span class="project-detail block-value"
+                                                           id="contact-name">{{$client->contactname}}</span></i><br>
+                    <i class="tel-icon block-icons"><span class="project-detail block-value" id="contact-phone"><a
+                                    href="tel:{{$client->contactnumber}}">{{$client->contactnumber}}</a></span></i><br>
+                    <i class="mail-icon block-icons"> <span class="project-detail block-value" id="contact-email"><a
+                                    href="mailto:{{$client->contactemail}}">{{$client->contactemail}}</a></span></i>
+
                 </div>
 
+                <div class="col-md-3 col-xs-12 pull-right">
+                    <span class="project-title block-title" id="link">Link</span><br>
+                    <i class="word-icon block-value"><span class="project-detail block-value" id="link-world"><a
+                                    href="{{$project->link_url}}">{{$project->link_url}}</a> </span></i><br>
+                    <i class="text-icon block-value"><span class="project-detail block-value"
+                                                           id="link-t"></span>{{$project->link_title}}</i>
+                </div>
 
             </div>
             <div class="row pull-right">
@@ -98,9 +118,9 @@
             <div class="row col-md-12 col-xs-12" id="button-top">
                 <button onclick="projectDetailsDown()" class="black-button" id="black-button-down"></button>
             </div>
-
         </div>
     </div>
+
     <div class="row under-details">
         <a class="black btn btn-primary" href="#" data-toggle="modal" data-target="#addReleaseModal">
             Add Release <span class="glyphicon glyphicon-plus"></span>

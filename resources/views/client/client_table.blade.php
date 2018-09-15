@@ -1,4 +1,4 @@
-<div class="row bigtable">
+<div class="row bigtable header-3">
     <table class="table client-table table-center results">
         <thead>
         <th></th>
@@ -37,7 +37,8 @@
         </tbody>
 
     </table>
-
+</div>
+<div class="row">
     {{ $clients->links() }}
     <span style='display: none;' id="new-count">{{$clientcount}}</span>
 </div>

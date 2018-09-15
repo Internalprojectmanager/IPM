@@ -241,7 +241,6 @@ class ProjectController extends Controller
             $project->company_id = $request->company;
         }
         $project->status = $request->status;
-        $project->projectcode = $request->project_code;
         $project->description = $request->description;
         if (!empty($request->deadline)) {
             $project->deadline = date("Y-m-d", strtotime($request->deadline));

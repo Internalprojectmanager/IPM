@@ -8,15 +8,14 @@
 
 @section('content')
 
-    <a class="btn-edit delete-button" id="project-edit"
+    <a class="btn btn-edit delete-button" id="project-edit"
        href="{{route('deleteproject', [$project->company->path, $project->path])}}"
        onclick="return confirm('Are you sure you want to delete this Project?');">
         <i class="far fa-times-circle white"></i>
         <span class="white">Delete</span></a></a>
 
     <div class="row">
-        <div class="header-3" id="edit-project">
-
+        <div class="header-3 row">
             <form action="{{route('updateproject', [$project->company->path, $project->path])}}"
                   method="post">
                 {{ csrf_field() }}
@@ -34,11 +33,6 @@
                         <textarea rows="4" cols="50" name="description" class="form-control input-text-modal"
                                   id="description">{{$project->description}}</textarea>
 
-                        <br>
-
-                        <label class="edit-title" for="project_code">Code</label>
-                        <input type="text" class="form-control input-text-modal" name="project_code" id="project_code"
-                               value="{{$project->projectcode}}">
                     </div>
                     <div class="form-group col-md-6">
                         <label class="edit-title" for="company">Project Status</label>
@@ -69,10 +63,11 @@
                         <input type="text" class="form-control input-text-modal" name="new_client" id="new_client"
                                placeholder="New Client Name">
                     </div>
-                    <div class="form-group col-md-12">
-                        <div class="form-group col-md-6" align="left">
+                </div>
+                <div class="form-group col-md-12">
+                    <div class="form-group col-md-6" align="left">
                         <a href="{{route('projectdetails', ['company-id' => $project->company->path, 'name' => $project->path])}}"
-                           class="cancel">
+                           class="btn btn-edit">
                             <svg width="11px" height="11px" viewBox="0 0 11 11" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
@@ -92,7 +87,7 @@
                             </svg>
                             Cancel
                         </a></div>
-                        <div class="form-group col-md-6" align="right">
+                    <div class="form-group col-md-6" align="right">
                         <button class="save-button" id="save-button" type="submit">
                             <svg id="save-logo" width="19px" height="19px" viewBox="0 0 19 19" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -122,7 +117,6 @@
                             </svg>
                             <span class="button-content" id="button-save">Save</span>
                         </button>
-                        </div>
                     </div>
                 </div>
             </form>
