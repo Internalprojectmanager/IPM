@@ -88,7 +88,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="avatar-profile"><a href="{{route('profile')}}"><img class="img-circle img-thumbnail avatar" src="{{Auth::user()->getAvatar()}}"></a> </li>
+                <li class="avatar-profile"><a href="{{route('profile')}}"><img alt='' widclass="img-circle img-thumbnail avatar" src="{{Auth::user()->getAvatar()}}"></a> </li>
             </ul>
         </div><!-- /.navbar-collapse -->
         @endauth

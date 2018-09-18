@@ -62,7 +62,7 @@
                     @foreach($project->userAssingee as $as)
                         @if($i < 5)
                             <div class="table-users">
-                                <img alt="{{$as->first_name}} {{$as->last_name}}" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>
+                                <img alt="" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>
                                 <span>{{$as->first_name}}</span>
                             </div>
                         @endif
