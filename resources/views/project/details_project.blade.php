@@ -33,8 +33,9 @@
                     <span class="project-detail">
                         @if($project->pstatus->name != "Completed" && $project->pstatus->name != "Paused" && $project->pstatus->name != "Cancelled")
                             @if(isset($project->deadline)){{date('d F Y', strtotime($project->deadline))}}
-                            @else No Deadline
-                            f@endif
+                            @else
+                                No Deadline
+                            @endif
                         @endif
                     </span>
                 </div>
