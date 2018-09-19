@@ -165,7 +165,7 @@
                         </td>
                         <td class="col-md-2">{{$f->fstatus->name}}</td>
                         @php $counter = 0; @endphp
-                        @foreach($f->requirements as $r)
+                        @foreach($f->requirements() as $r)
                             @if($r->rstatus->name == 'Completed')
                                 @php $counter++;@endphp
                             @endif
@@ -180,7 +180,7 @@
                         <td class="col-md-5">
                                 <span class="assignee">
                                     @php $i = 0; $unique = array(); @endphp
-                                    @foreach($f->requirements as $fr)
+                                    @foreach($f->requirements() as $fr)
                                         @foreach($fr->userAssingee as $as)
                                             @if($i < 5 && !in_array($as->first_name. " ".$as->last_name, $unique))
                                                 <div class="table-users">
@@ -251,7 +251,7 @@
                         <td class="width20">{{$n->fstatus->name}}</td>
                         <td class="width20">{{$n->fcategory->name}}</td>
                         <td class="width20">@php $counter = 0;@endphp
-                            @foreach($f->requirements as $r)
+                            @foreach($f->requirements() as $r)
                                 @if($r->rstatus->name == 'Completed')
                                     @php $counter++;@endphp
                                 @endif
@@ -265,7 +265,7 @@
                         <td class="width20">
                                 <span class="assignee">
                                     @php $i = 0; $unique = array(); @endphp
-                                    @foreach($n->requirements as $r)
+                                    @foreach($n->requirements() as $r)
                                         @foreach($r->userAssingee as $as)
                                             @if($i < 5 && !in_array($as->first_name. " ".$as->last_name, $unique))
                                                 <div class="table-users">
@@ -334,7 +334,7 @@
                         <td class="width20">{{$t->fstatus->name}}</td>
                         <td class="width20">{{$t->fcategory->name}}</td>
                         <td class="width20">@php $counter = 0; @endphp
-                            @foreach($t->requirements as $tr)
+                            @foreach($t->requirements() as $tr)
                                 @if($tr->rstatus->name == 'Completed')
                                     @php $counter++;@endphp
                                 @endif
@@ -348,7 +348,7 @@
                         <td class="width20">
                             <span class="assignee">
                                 @php $i = 0; $unique = array(); @endphp
-                                @foreach($t->requirements as $r)
+                                @foreach($t->requirements() as $r)
                                     @foreach($r->userAssingee as $as)
                                         @if($i < 5 && !in_array($as->first_name. " ".$as->last_name, $unique))
                                             <div class="table-users">
