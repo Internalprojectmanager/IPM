@@ -407,7 +407,6 @@ label {
     text-align: right;
     padding: 12px 22px 12px 40px;
     font-size: 15px;
-    margin-top: 25px !important;
     &:active {
         color: $orange2;
     }
@@ -420,6 +419,10 @@ label {
     color: $black;
     font-size: 15px;
     line-height: 18px;
+}
+
+.btn-default{
+    border: 1px solid #ccc !important;
 }
 
 .btn-second {
@@ -765,9 +768,6 @@ td > div > .assignee {
     margin: 3px;
     height: 9px;
     width: 15px;
-}
-
-.black-button-up, #black-button-down, #button-files, #button-people, #button-pdf, .show, .black-button {
 }
 
 .results > thead > tr > th > a {

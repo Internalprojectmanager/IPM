@@ -76,9 +76,10 @@
 
             </div>
             <div class="row pull-right">
-                <div class="col-md-5 col-xs-3">
-                    @php
-                        /**
+                @php
+                /**
+                    <div class="col-md-5 col-xs-3">
+                    
                         <button onclick="location.href='{{route('documentoverview', ['name' => $project->path, 'company_id' => $project->company->path])}}'"
                                 class="blue-button" id="button-files">
                             <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
@@ -97,10 +98,9 @@
                             </svg>
                             <span class="button-content" id="files-button">Files</span>
                         </button>
-                        **/
-                    @endphp
-
-                </div>
+                    </div>
+                **/
+                @endphp
 
                 <div class="col-md-6 col-xs-3">
                     <button type="button" class="blue-button" id="button-people" data-toggle="modal" data-target="#addProjectModal">
