@@ -51,8 +51,8 @@ class LoginController extends Controller
     {
         $email = $request->email;
         $authUserMail = UserMail::with('user')->where('email', $request->email)->first();
-
-        if($authUserMail){
+        
+        if ($authUserMail) {
             $email = $authUserMail->User->email;
         }
 
@@ -61,6 +61,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             // Authentication passed...
             return redirect()->intended('dashboard');
+        } else {
+            //Auth failed
+            flash()->error('Email and Password does not exists in our system, Please Try again');
+            return redirect(route('login'));
         }
     }
 
