@@ -24,7 +24,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -52,7 +52,7 @@ class LoginController extends Controller
         $email = $request->email;
         $authUserMail = UserMail::with('user')->where('email', $request->email)->first();
 
-        if($authUserMail){
+        if ($authUserMail) {
             $email = $authUserMail->User->email;
         }
 
@@ -61,6 +61,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             // Authentication passed...
             return redirect()->intended('dashboard');
+        } else {
+            //Auth failed
+            flash()->error('Email and Password does not exists in our system, Please Try again');
+            return redirect(route('login'));
         }
     }
 
@@ -92,7 +96,6 @@ class LoginController extends Controller
             flash('User and password does not match with our data')->error();
             return redirect('/login');
         }
-
     }
 
     public function firstOrCreateOauth($user, $provider)
@@ -104,7 +107,7 @@ class LoginController extends Controller
             $code = str_random(32);
             switch ($provider) {
                 case "google":
-                    $authUser =  User::create([
+                    $authUser = User::create([
                         'first_name' => $user->user['name']['givenName'],
                         'last_name' => $user->user['name']['familyName'],
                         'email' => $user->email,
@@ -144,12 +147,14 @@ class LoginController extends Controller
                 default:
                     break;
             }
-        } else{
+        } else {
             $authUser = User::where('email', $user->email)->where('provider', $provider)->first();
-            $authUserMail = UserMail::where('email', $user->email)->where('provider', $provider)->orWhere('provider', '')->first();
-            if($authUserMail && !$authUser){
+            $authUserMail = UserMail::where('email', $user->email)->where('provider', $provider)
+                ->orWhere('provider', '')
+                ->first();
+            if ($authUserMail && !$authUser) {
                 $authUserMail->provider_id = $user->id;
-                if($authUserMail->provider == ''){
+                if ($authUserMail->provider == '') {
                     $authUserMail->provider = $provider;
                 }
                 $authUserMail->save();
@@ -158,11 +163,9 @@ class LoginController extends Controller
         }
 
         return $authUser;
-
     }
 
-    public
-    function firstOrCreatePersonal($user)
+    public function firstOrCreatePersonal($user)
     {
         $dataspace = [
             'name' => $user->fullName(),
