@@ -52,7 +52,7 @@
     <meta name="msapplication-wide310x150logo" content="{{asset('/img/favicon/mstile-310x150.png')}}" />
     <meta name="msapplication-square310x310logo" content="{{asset('/img/favicon/mstile-310x310.png')}}" />
 
-    @if(env('APP_ENV' === 'production'))
+    @if(env('APP_ENV') === 'production')
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id={{env("GOOGLE_ANALYTICS_ID")}}"></script>
         <script>
