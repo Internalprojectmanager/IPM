@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.error_app')
 
 @section('title')
     404 Page not found | {{env('APP_NAME')}}

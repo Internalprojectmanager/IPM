@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.error_app')
 
 @section('title')
     500 Something went wrong | {{env('APP_NAME')}}

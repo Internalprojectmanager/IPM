@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.error_app')
 
 @section('title')
     Maintenance | {{env('APP_NAME')}}
