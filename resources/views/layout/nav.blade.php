@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{route('home')}}">
-                    <img alt="Brand" src="{{asset('/img/IPM_WHITE.png')}}"/>
+                    <img alt="Brand" src="{{env('APP_ENV') === 'production' ? secure_asset('img/IPM_WHITE.png') : asset('img/IPM_WHITE.png')}}"/>
             </a>
         </div>
         @auth

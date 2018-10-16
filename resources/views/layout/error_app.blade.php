@@ -24,10 +24,11 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
-    <link href="{{asset('css/app.css', config('app.secure'))}}" rel="stylesheet" type="text/css">
+        
+    <link href="{{env('APP_ENV') === 'production' ? secure_asset('css/app.css') : asset('css/app.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-    <link href="{{asset('css/custom.css', config('app.secure'))}}" rel="stylesheet" type="text/css">
+    <link href="{{env('APP_ENV') === 'production' ? secure_asset('css/custom.css') : asset('css/custom.css')}}" rel="stylesheet" type="text/css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
             integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 
@@ -52,7 +53,7 @@
     <meta name="msapplication-wide310x150logo" content="{{asset('/img/favicon/mstile-310x150.png')}}" />
     <meta name="msapplication-square310x310logo" content="{{asset('/img/favicon/mstile-310x310.png')}}" />
 
-    @if(env('APP_ENV' === 'production'))
+    @if(env('APP_ENV') === 'production')
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id={{env("GOOGLE_ANALYTICS_ID")}}"></script>
         <script>
@@ -93,7 +94,7 @@
     <!-- Javascript -->
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <script src="{{asset('js/custom.js', config('app.secure'))}}"></script>
+    <script src="{{env('APP_ENV') === 'production' ? secure_asset('js/custom.js') : asset('css/custom.js')}}"></script>
     <script>
         $(document).ready(function () {
             $('.datepicker').datepicker({
