@@ -66,7 +66,6 @@
 
 </head>
 <body class="{{ \Request::route() ? \Request::route()->getName() : "no-route" }} {{ Auth::guest() ? "guest" : "auth" }}">
-
     @include('layout.nav')
 
     <div id="loader-container">
