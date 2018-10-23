@@ -8494,17 +8494,22 @@ button.close {
   padding: 30px;
 }
 
+.modal-body .form-group {
+  margin: 0px;
+  padding-bottom: 20px;
+}
+
+.modal-body .form-group .col-md-6 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .modal-footer {
   padding: 0px 30px 30px 30px;
 }
 
 .required {
   color: #C74237;
-}
-
-.modal-body > .form-group {
-  margin: 0px;
-  padding-bottom: 20px;
 }
 
 .form-label-modal {
@@ -8904,6 +8909,19 @@ h6 {
   width: 40px !important;
   height: 40px;
   z-index: 10001;
+}
+
+.js-cookie-consent {
+  bottom: 23px;
+  color: white;
+  padding: 10px 10px;
+  background: black;
+  text-align: center;
+  border-bottom: 1px solid white;
+}
+
+.js-cookie-consent button {
+  margin-left: 10px;
 }
 
 .table-users {
@@ -9324,7 +9342,6 @@ label {
   text-align: right;
   padding: 12px 22px 12px 40px;
   font-size: 15px;
-  margin-top: 25px !important;
 }
 
 .btn-cancel:active {
@@ -9338,6 +9355,10 @@ label {
   color: black;
   font-size: 15px;
   line-height: 18px;
+}
+
+.btn-default {
+  border: 1px solid #ccc !important;
 }
 
 .btn-second {
