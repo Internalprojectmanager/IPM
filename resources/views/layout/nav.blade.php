@@ -31,7 +31,7 @@
                     -->
                 </li>
                 <li><a class="{{ Request::is('clients*') ? 'active' : '' }}" href="{{route('overviewclient')}}">Clients</a></li>
-                @if(Auth::user()->teams()->count() > 0)
+                @if(Auth::user()->team->count() > 0)
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle {{ Request::is('team*') ? 'active' : '' }}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Teams <span class="caret"></span></a>
                         <ul class="dropdown-menu">

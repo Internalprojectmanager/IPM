@@ -73,8 +73,9 @@ class Team extends Model
 
     public function scopeCurrentUserTeam($query)
     {
-        if (Auth::user()->currentTeam() !== null) {
-            return $query->where('id', Auth::user()->currentTeam()->id);
+        $currentteam = Auth::user()->currentTeam();
+        if ($currentteam !== null) {
+            return $query->where('id', $currentteam->id);
         }   return $query->where('id', null);
     }
 
