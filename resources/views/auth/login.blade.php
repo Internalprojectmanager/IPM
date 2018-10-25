@@ -76,6 +76,7 @@
                 </div>
             </form>
         </div>
+        @if($agent->browser() !== "Mozilla" && $agent->platform() !== "iOS" && $agent->platform() !== "Android")
         <div class="col-md-2">
             <h3 class="center">OR</h3>
         </div>
@@ -88,6 +89,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 @endsection
 l

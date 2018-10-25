@@ -12,6 +12,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Jenssegers\Agent\Agent;
 
 class LoginController extends Controller
 {
@@ -45,6 +46,12 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => ['logout', 'getLogout']]);
+    }
+
+    public function showLoginForm()
+    {
+        $agent = new Agent();
+        return view('Auth.login', compact('agent'));
     }
 
     public function login(Request $request)

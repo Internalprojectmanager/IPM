@@ -5,9 +5,6 @@ namespace App\Http\Middleware;
 use App\UserMail;
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Jenssegers\Agent\Agent;
-
-
 
 class CheckActive
 {
@@ -21,14 +18,9 @@ class CheckActive
     public function handle($request, Closure $next)
     {
         $response = $next($request);
-        $agent = new Agent();
+
 
         if (Auth::check()) {
-            if ($agent->isMobile() || $agent->isTablet()) {
-                Auth::logout();
-                flash()->error('Please use a desktop/ Laptop computer to use IPM, <br> Mobile devices not supported');
-                return redirect('/non-supported');
-            }
             if (Auth::user()->blocked == true) {
                 Auth::logout();
                 flash()->error('Your Account is not actived or blocked, Please contact an admin of IPM');
