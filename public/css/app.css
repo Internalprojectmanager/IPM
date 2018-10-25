@@ -8789,6 +8789,7 @@ button.close {
   transform: rotate(0deg);
 }
 
+#navbar_top,
 .navbar {
   background: black;
   border-radius: 0;
@@ -8819,19 +8820,19 @@ button.close {
   font-weight: 400;
 }
 
-.navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover,
 .navbar-nav > li > .active {
   border-bottom: 10px solid white;
-  padding-bottom: 10px;
+  padding-bottom: 10px !important;
   color: white;
   font-size: 14px;
   font-weight: 400;
 }
 
 .avatar-profile > a,
-.avatar-profile > a:hover,
-.avatar-profile > a:focus {
+.avatar-profile > a:focus,
+.avatar-profile > a:hover {
   border-bottom: none !important;
   padding: 0 !important;
 }
@@ -8849,9 +8850,9 @@ button.close {
   margin: 1rem auto;
 }
 
-.no-route .container,
-.guest .container {
-  padding: 10rem 2rem 0rem 2rem;
+.guest .container,
+.no-route .container {
+  padding: 10rem 2rem 0;
 }
 
 html,
@@ -10182,5 +10183,40 @@ footer {
 
 .overflow-none {
   overflow: hidden;
+}
+
+@media (max-width: 771px) {
+  .container {
+    padding: 10rem 1rem;
+  }
+
+  .container .modal-content {
+    width: 100%;
+  }
+
+  .navbar-default .navbar-collapse {
+    background-color: black;
+    border: none;
+    max-height: 80vh;
+    width: 50%;
+    float: right;
+    text-align: right;
+    margin-top: 5px;
+    padding-right: 20px;
+    overflow: scroll;
+  }
+
+  .navbar-default .navbar-collapse .navbar-nav {
+    margin: 7.5px 0;
+  }
+
+  .navbar-default .navbar-collapse .navbar-nav > li > a {
+    padding-bottom: 20px;
+  }
+
+  .navbar-default .navbar-collapse .navbar-nav > li > a:active,
+  .navbar-default .navbar-collapse .navbar-nav > li > a:focus {
+    padding-bottom: 10px !important;
+  }
 }
 

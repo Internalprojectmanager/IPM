@@ -1,4 +1,4 @@
-<div class="row bigtable header-3">
+<div class="row bigtable header-3 table-responsive">
     <table class="table client-table table-center results">
         <thead>
         <th></th>

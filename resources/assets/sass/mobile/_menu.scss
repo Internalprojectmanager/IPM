@@ -1,0 +1,24 @@
+.navbar-default .navbar-collapse {
+  background-color: black;
+  border: none;
+  max-height: 80vh;
+  width: 50%;
+  float: right;
+  text-align: right;
+  margin-top: 5px;
+  padding-right: 20px;
+  overflow: scroll;
+
+  .navbar-nav {
+    margin: 7.5px 0;
+
+    > li > a {
+      padding-bottom: 20px;
+
+      &:active,
+      &:focus {
+        padding-bottom: 10px !important;
+      }
+    }
+  }
+}

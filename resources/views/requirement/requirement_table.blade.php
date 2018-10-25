@@ -8,7 +8,7 @@
                 <span class="counter">{{$requirementcount}}/{{$feature->requirements->count()}} Done</span>
             </span>
     </div>
-    <div class="row requirement-table">
+    <div class="row requirement-table table-responsive">
         <form action="{{route('requirementsavestatus', ['company_id' => $feature->releases->projects->company_id, 'name' => $feature->releases->projects->name,
             'release_name' => $feature->releases->name, 'feature_id' => $feature->id])}}" method="post" id="assignee_update">
             <table class="table table-hover table-center results">

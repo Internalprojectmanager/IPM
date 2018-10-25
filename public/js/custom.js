@@ -1,4 +1,4 @@
-$(document).on('click touchstart', '.clickable-row', function () {
+$(".clickable-row").click(function () {
     $(".container").addClass("disabled");
     $("#loader-container").show();
     window.location = $(this).data("href");
