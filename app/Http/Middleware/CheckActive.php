@@ -26,7 +26,7 @@ class CheckActive
         if (Auth::check()) {
             if ($agent->isMobile() || $agent->isTablet()) {
                 Auth::logout();
-                flash()->error('' .$agent->browser() .'Please use a desktop/ Laptop computer to use IPM, <br> Mobile devices not supported');
+                flash()->error('Please use a desktop/ Laptop computer to use IPM, <br> Mobile devices not supported');
                 return redirect('/non-supported');
             }
             if (Auth::user()->blocked == true) {

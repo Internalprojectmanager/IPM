@@ -20,7 +20,10 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('/non-supported', function () {
-    return view('errors.non_supported');
+
+    $agent = new Jenssegers\Agent\Agent();
+
+    return view('errors.non_supported', compact('agent'));
 })->name('non-supported');
 
 
