@@ -8671,46 +8671,46 @@ button.close {
   margin-left: 12px;
 }
 
-.google-btn > a > .g-icon {
-  background: url("/../img/btn_google_signin_light_normal_web.png") no-repeat center;
+.oauth > a > .g-icon {
+  background: url("/../img/g_normal.png") no-repeat center;
   width: 190px;
   height: 64px;
   display: inline-block;
   vertical-align: middle;
 }
 
-.google-btn > a:focus > .g-icon {
-  background: url("/../img/btn_google_signin_light_focus_web.png") no-repeat center;
+.oauth > a:focus > .g-icon {
+  background: url("/../img/g_focus.png") no-repeat center;
 }
 
-.google-btn > a:disabled > .g-icon {
-  background: url("/../img/btn_google_signin_light_disabled_web.png") no-repeat center;
+.oauth > a:disabled > .g-icon {
+  background: url("/../img/g_disabled.png") no-repeat center;
 }
 
-.google-btn > a:active > .g-icon {
-  background: url("/../img/btn_google_signin_light_pressed_web.png") no-repeat center;
+.oauth > a:active > .g-icon {
+  background: url("/../img/g_pressed.png") no-repeat center;
 }
 
 .settings-icon {
-  background: url("/../svg/settings.svg") no-repeat 0px center;
+  background: url("/../svg/settings.svg") no-repeat 0 center;
 }
 
 .logout-icon {
-  background: url("/../svg/logout.svg") no-repeat 0px center;
+  background: url("/../svg/logout.svg") no-repeat 0 center;
   margien-left: 0;
   margin-right: 4px;
 }
 
 .error-icon {
-  background: url("/../svg/error.svg") no-repeat 0px center;
+  background: url("/../svg/error.svg") no-repeat 0 center;
 }
 
 .check-icon {
-  background: url("/../svg/check.svg") no-repeat 0px center;
+  background: url("/../svg/check.svg") no-repeat 0 center;
 }
 
-.error-icon,
-.check-icon {
+.check-icon,
+.error-icon {
   width: 30px;
   height: 30px;
   display: inline-block;
@@ -8729,28 +8729,28 @@ button.close {
 }
 
 .user-icon {
-  background: url("/../svg/user.svg") no-repeat 0px center;
+  background: url("/../svg/user.svg") no-repeat 0 center;
 }
 
 .mail-icon {
-  background: url("/../svg/mail.svg") no-repeat 0px center;
+  background: url("/../svg/mail.svg") no-repeat 0 center;
 }
 
 .tel-icon {
-  background: url("/../svg/phone.svg") no-repeat 0px center;
+  background: url("/../svg/phone.svg") no-repeat 0 center;
 }
 
 .word-icon {
-  background: url("/../svg/world.svg") no-repeat 0px center;
+  background: url("/../svg/world.svg") no-repeat 0 center;
   background-size: 15px;
 }
 
 .text-icon {
-  background: url("/../svg/text.svg") no-repeat 0px center;
+  background: url("/../svg/text.svg") no-repeat 0 center;
 }
 
 .cross-icon {
-  background: url("/../svg/cross.svg") no-repeat 0px center;
+  background: url("/../svg/cross.svg") no-repeat 0 center;
   background-size: 15px;
   width: 15px;
   height: 15px;
@@ -8758,7 +8758,7 @@ button.close {
 }
 
 .edit-icon {
-  background: url("/../svg/edit.svg") no-repeat 0px center;
+  background: url("/../svg/edit.svg") no-repeat 0 center;
   background-size: 20px;
   width: 20px;
   height: 20px;
@@ -8767,7 +8767,7 @@ button.close {
 }
 
 .download-icon {
-  background: url("/../svg/download.svg") no-repeat 0px center;
+  background: url("/../svg/download.svg") no-repeat 0 center;
   background-size: 18px;
   width: 18px;
   height: 18px;
@@ -8775,7 +8775,7 @@ button.close {
 }
 
 .arrow-right {
-  background: url("/../svg/dropdown.svg") no-repeat 0px center;
+  background: url("/../svg/dropdown.svg") no-repeat 0 center;
   border: none;
   -webkit-transform: rotate(-90deg);
   transform: rotate(-90deg);

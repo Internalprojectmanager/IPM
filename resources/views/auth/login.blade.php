@@ -15,7 +15,7 @@
         <div class="col-md-4 col-md-offset-1">
             <h3 class="center">Sign in</h3>
             <div class="row">
-                <div class="col-md-4 col-md-offset-4">
+                <div class="col-md-12">
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
