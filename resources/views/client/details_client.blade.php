@@ -15,12 +15,12 @@
     <div class="row">
         <div class="header-3 " id="project-details">
             <div class="row" id="block-show">
-                <div class="col-md-6 col-xs-6">
+                <div class="col-md-6 col-xs-12">
                     <span class="h1">{{$client->name}}</span> <span
                             class=" block-value grey">{{$client->cstatus->name}}</span>
                 </div>
 
-                <div class="col-md-3 col-xs-6">
+                <div class="col-md-3 col-xs-12">
                     <span class="project-title block-title">Contact Person</span><br>
                     <i class="user-icon block-icons"><span class="project-detail block-value"
                                                            id="contact-name">{{$client->contactname}}</span></i><br>
@@ -33,13 +33,14 @@
 
                 <div class="col-md-3 col-xs-12 pull-right">
                     <span class="project-title block-title" id="link">Link</span><br>
-                    <i class="word-icon block-value"><span class="project-detail block-value" id="link-world"><a
-                                    href="{{$client->link_url}}">{{$client->link_url}}</a> </span></i><br>
+                    <i class="word-icon block-value"><span class="project-detail block-value block-value-2" id="link-world"><a
+                                                    href="{{$client->link_url}}">{{$client->link_url}}</a> </span></i><br>
                     <i class="text-icon block-value"><span class="project-detail block-value"
-                                                           id="link-t"></span>{{$client->link_title}}</i>
+                                                                           id="link-t"></span>{{$client->link_title}}</i>
                 </div>
 
-                <div class="col-md-6 col-xs-6">
+
+                <div class="col-md-6 col-xs-12">
                     <div class="block-description under-details" id="block-hidden">
 
                         <span class="project-title block-title">Client Description</span><br>

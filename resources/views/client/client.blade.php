@@ -14,7 +14,7 @@
     </div>
 
     <div class="row block-white">
-        <div class="col-md-3">
+        <div class="col-md-7">
             <span class="block-white-title">All clients</span>
             <span class="block-white-subtitle">
             <span id="count_projects_bar">|</span>
@@ -22,10 +22,10 @@
             <span class="contenttype">Clients</span>
         </span>
         </div>
-        <div class="col-md-9">
-            <form action="{{url('/client/overview')}}" class="pull-right searchform">
+        <div class="col-md-5">
+            <form action="{{url('/client/overview')}}" class=" searchform">
                 {{ csrf_field() }}
-                
+
                 <div class="form-group col-md-6">
                     <select name="status" id="status" class="search dropdown-search">
                         <option value="" selected>Status</option>
