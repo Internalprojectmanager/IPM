@@ -25,12 +25,8 @@
         <div class="col-md-9">
             <form action="{{url('/client/overview')}}" class="pull-right searchform">
                 {{ csrf_field() }}
-                <div class="form-group pull-right">
-                    <input type="text" name="search" id="searchfield" class="form-control  search searchfield"
-                           placeholder="Search">
-                </div>
-
-                <div class="form-group pull-right">
+                
+                <div class="form-group col-md-6">
                     <select name="status" id="status" class="search dropdown-search">
                         <option value="" selected>Status</option>
                         @foreach($status as $s)
@@ -38,6 +34,11 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="form-group col-md-6">
+                    <input type="text" name="search" id="searchfield" class="form-control  search searchfield" placeholder="Search">
+                </div>
+
                 <input type="hidden" id="sort" value="">
                 <input type="hidden" id="page" value="">
                 <input type="hidden" id="order" value="">

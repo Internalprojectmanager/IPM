@@ -9439,10 +9439,10 @@ label {
   border: 1px solid #F2F2F2;
   padding-right: 30px;
   padding-left: 15px;
-  float: right;
   border-radius: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
+  margin: 0 auto;
 }
 
 .searchfield::-webkit-input-placeholder {
@@ -9489,8 +9489,6 @@ label {
   border: 1px solid #F2F2F2;
   padding-right: 30px;
   padding-left: 15px;
-  float: right;
-  margin-right: 25px;
   -webkit-appearance: none;
   -moz-appearance: none;
   color: #535353;
@@ -10194,6 +10192,51 @@ footer {
     width: 100%;
   }
 
+  .no-mobile {
+    display: none !important;
+  }
+
+  .overviewproject .block-white {
+    text-align: center;
+  }
+
+  .dropdown-search {
+    width: 200px;
+    background: #ffffff url("/../svg/dropdown-2.svg") no-repeat 175px center;
+    background-size: 12px;
+  }
+
+  .search {
+    margin: 10px auto;
+    text-align: center;
+    position: relative;
+    display: block;
+  }
+
+  .navbar-default .navbar-toggle {
+    border: none;
+    margin-top: 0;
+    padding: 0 10px;
+  }
+
+  .navbar-default .navbar-toggle:active span,
+  .navbar-default .navbar-toggle:focus span,
+  .navbar-default .navbar-toggle:hover span {
+    color: black;
+  }
+
+  .navbar-default .navbar-toggle .caret {
+    margin-left: 10px;
+  }
+
+  .navbar-default .navbar-toggle li {
+    list-style: none;
+  }
+
+  .navbar-default .navbar-toggle li span {
+    color: white;
+  }
+
   .navbar-default .navbar-collapse {
     background-color: black;
     border: none;
@@ -10201,7 +10244,7 @@ footer {
     width: 50%;
     float: right;
     text-align: right;
-    margin-top: 5px;
+    margin-top: -3px;
     padding-right: 20px;
     overflow: scroll;
   }
@@ -10212,11 +10255,16 @@ footer {
 
   .navbar-default .navbar-collapse .navbar-nav > li > a {
     padding-bottom: 20px;
+    color: white;
   }
 
   .navbar-default .navbar-collapse .navbar-nav > li > a:active,
   .navbar-default .navbar-collapse .navbar-nav > li > a:focus {
     padding-bottom: 10px !important;
+  }
+
+  .navbar-default .navbar-collapse .navbar-nav .dropdown-menu > li > a {
+    color: white !important;
   }
 }
 

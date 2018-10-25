@@ -2,12 +2,11 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
+            @if(Auth::user())
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                <li class="avatar-profile"><span>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span><img alt='' class="img-circle img-thumbnail avatar" src="{{Auth::user()->getAvatar()}}"><span class="caret"></li>
             </button>
+            @endif
             <a class="navbar-brand" href="{{route('home')}}">
                     <img alt="Brand" src="{{env('APP_ENV') === 'local' ? asset('img/IPM_WHITE.png') : secure_asset('img/IPM_WHITE.png')}}"/>
             </a>
@@ -88,7 +87,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="avatar-profile"><a href="{{route('profile')}}"><img alt='' class="img-circle img-thumbnail avatar" src="{{Auth::user()->getAvatar()}}"></a> </li>
+                <li class="avatar-profile no-mobile"><a href="{{route('profile')}}"><img alt='' class="img-circle img-thumbnail avatar" src="{{Auth::user()->getAvatar()}}"></a> </li>
             </ul>
         </div><!-- /.navbar-collapse -->
         @endauth

@@ -1,8 +1,28 @@
-.container{
-    padding: 10rem 1rem;
+.container {
+  padding: 10rem 1rem;
 
+  .modal-content {
+    width: 100%;
+  }
+}
 
-    .modal-content{
-        width: 100%;
-    }
+.no-mobile {
+  display: none !important;
+}
+
+.overviewproject .block-white{
+    text-align: center;
+}
+
+.dropdown-search {
+  width: 200px;
+  background: #ffffff url("/../svg/dropdown-2.svg") no-repeat 175px center;
+  background-size: 12px;
+}
+
+.search {
+  margin: 10px auto;
+  text-align: center;
+  position: relative;
+  display: block;
 }

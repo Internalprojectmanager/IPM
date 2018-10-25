@@ -511,9 +511,9 @@ label {
     border: 1px solid #F2F2F2;
     padding-right: 30px;
     padding-left: 15px;
-    float: right;
     border-radius: 0;
     box-shadow: none;
+    margin: 0 auto;
     &::placeholder {
         height: 19px;
         width: 43px;
@@ -532,8 +532,6 @@ label {
     border: 1px solid #F2F2F2;
     padding-right: 30px;
     padding-left: 15px;
-    float: right;
-    margin-right: 25px;
     -webkit-appearance: none;
     -moz-appearance: none;
     color: #535353;
