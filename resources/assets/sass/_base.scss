@@ -55,18 +55,20 @@ h6 {
   z-index: 10001;
 }
 
-.js-cookie-consent {
-  bottom: 23px;
+.js-cookie-consent{
+  position: fixed;
+  bottom: 20px;
+  margin: 0 auto;
+  width: 100vw;
   color: white;
-  padding: 10px;
+  padding: 20px 20px;
   background: black;
   text-align: center;
-  border-bottom: 1px solid white;
-
-  button {
-    margin-left: 10px;
-  }
 }
+.auth .js-cookie-consent{
+  margin-left: -5rem;
+}
+
 
 .table-users {
   vertical-align: top;

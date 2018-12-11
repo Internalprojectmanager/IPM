@@ -214,7 +214,7 @@
                         </div>
                     @endforeach
                     <div class="row auth-buttons margin-top-50">
-                        <div class="col-md-4 col-md-offset-4 google-btn center">
+                        <div class="col-md-4 col-md-offset-4 oauth center">
                             <h4>Add more</h4>
                             <form action="{{route('addEmail')}}" method="post">
                                 {{ csrf_field() }}
