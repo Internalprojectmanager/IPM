@@ -45,7 +45,7 @@
                                     @php $selected = "";@endphp
                                     @foreach($assignee as $a)
                                         @if($a->userid == $u->id)
-                                            @foreach($a->roles() as $r)
+                                            @foreach($a->role as $r)
                                                 @if($r->name == $role->name)
                                                     @php $selected = "selected=''";@endphp
                                                     @php break; @endphp

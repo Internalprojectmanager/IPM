@@ -26,13 +26,18 @@
             <span class="contenttype">Projects</span>
         </span>
         </div>
-        <div class="col-md-8 col-xs-12 pull-right">
-            <form method="get" action="{{url('/project/overview')}}" class="pull-right searchform">
-                <div class="form-group pull-right">
-                    <input type="text" name="search" id="searchfield" class="form-control search searchfield" placeholder="Search">
+        <div class="col-md-offset-1 col-md-7 col-xs-12 ">
+            <form method="get" action="{{url('/project/overview')}}" class="searchform">
+                <div class="form-group col-md-4 col-xs-12">
+                    <select name='status' id="status" type="text" class="search dropdown-search">
+                                        <option selected value="">-- All Statuses --</option>
+                                        @foreach($status as $s)
+                                            <option value="{{$s->id}}">{{$s->name}}</option>
+                                        @endforeach
+                                    </select>
                 </div>
 
-                <div class="form-group pull-right">
+                <div class="form-group col-md-4 col-xs-12">
                     <select name='client' type="text" id="client" class="search dropdown-search">
                         <option selected value="">-- All Clients --</option>
                         @foreach($client as $c)
@@ -40,13 +45,10 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group pull-right">
-                    <select name='status' id="status" type="text" class="search dropdown-search">
-                        <option selected value="">-- All Statuses --</option>
-                        @foreach($status as $s)
-                            <option value="{{$s->id}}">{{$s->name}}</option>
-                        @endforeach
-                    </select>
+                
+
+                <div class="form-group col-md-4 col-xs-12">
+                    <input type="text" name="search" id="searchfield" class="form-control search searchfield" placeholder="Search">
                 </div>
 
                 <input type="hidden" id="sort" value="">

@@ -6,15 +6,16 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 center">
+            <span class="supertitle">Welcome to IPM</span>
+            <p class="undertitle">Hello there! Sign in and start managing your projects</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1">
+            <h3 class="center">Sign in</h3>
             <div class="row">
-                <div class="col-md-12 center">
-                    <span class="supertitle">Sign In</span>
-                    <p class="undertitle">Hello there! Sign in and start managing your projects</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-md-offset-4">
+                <div class="col-md-12">
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -73,17 +74,22 @@
                         @endif
                     </div>
                 </div>
-
-                <div class="form-group auth-buttons margin-top-50">
-                    <h3 class="center">OR</h3>
-                    <div class="col-md-4 col-md-offset-4 oauth center margin-top-50">
-                        <h4>Sign in with</h4>
-                        <a href="{{route('authlogin', 'google')}}"><i class="glyphicon g-icon"></i></a>
-                        <a href="{{route('authlogin', 'github')}}"><i class="glyphicon github-icon"></i></a>
-                    </div>
-                </div>
             </form>
         </div>
+        @if($agent->browser() !== "Mozilla" && $agent->platform() !== "iOS" && $agent->platform() !== "Android")
+        <div class="col-md-2">
+            <h3 class="center">OR</h3>
+        </div>
+        <div class="col-md-4">
+            <h3 class="center">Sign in with</h3>
+            <div class="form-group auth-buttons">
+                <div class="col-md-12 oauth center">
+                    <a href="{{route('authlogin', 'google')}}"><i class="glyphicon g-icon"></i></a>
+                    <a href="{{route('authlogin', 'github')}}"><i class="glyphicon github-icon"></i></a>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 @endsection
 l

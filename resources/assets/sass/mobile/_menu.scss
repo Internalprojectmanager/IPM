@@ -1,0 +1,55 @@
+.navbar-default {
+  .navbar-toggle {
+    border: none;
+    margin-top: 0;
+    padding: 0 10px;
+    
+    &:active,
+    &:focus,
+    &:hover {
+      span {
+        color: black;
+      }
+    }
+    .caret{
+      margin-left: 10px;
+    }
+    li {
+      list-style: none;
+
+      span {
+        color: white;
+      }
+    }
+
+  }
+
+  .navbar-collapse {
+    background-color: black;
+    border: none;
+    max-height: 80vh;
+    width: 50%;
+    float: right;
+    text-align: right;
+    margin-top: -3px;
+    padding-right: 20px;
+    overflow: scroll;
+
+    .navbar-nav {
+      margin: 7.5px 0;
+
+      > li > a {
+        padding-bottom: 20px;
+        color:white;
+
+        &:active,
+        &:focus {
+          padding-bottom: 10px !important;
+        }
+      }
+      .dropdown-menu > li > a{
+        color:white !important;
+      }
+    }
+  }
+}

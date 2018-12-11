@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return redirect()->route('dashboard');
@@ -18,6 +18,13 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return redirect()->route('dashboard');
 })->name('home');
+
+Route::get('/non-supported', function () {
+
+    $agent = new Jenssegers\Agent\Agent();
+
+    return view('errors.non_supported', compact('agent'));
+})->name('non-supported');
 
 
 Route::get('logout', 'Auth\LoginController@logout');

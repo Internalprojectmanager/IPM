@@ -53,6 +53,9 @@ class ReleaseController extends Controller
         $release->deadline = Carbon::parse($request->deadline)->endOfDay();
         $release->specificationtype = $request->specification;
         $release->save();
+
+        Project::updateDeadline($project);
+        Project::updateStatus($project);
         return redirect()->route('projectdetails', [$project->company->path, $project->path]);
     }
 
@@ -104,6 +107,8 @@ class ReleaseController extends Controller
     {
         $release = Release::where([['project_id', $project->id],['path', $release->path],['version', $version]])->first();
         $release->delete();
+        Project::updateDeadline($project);
+        Project::updateStatus($project);
         return redirect()->route('projectdetails', [$client->path, $project->path]);
     }
 }

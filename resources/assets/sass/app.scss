@@ -1,7 +1,6 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
-
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
@@ -12,4 +11,7 @@
 @import "menu";
 @import "base";
 
-
+@media (max-width: "771px") {
+    @import "mobile/base";
+    @import "mobile/menu";
+}
