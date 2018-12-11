@@ -3,7 +3,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <label>Add Project</label>
-            <span class="modal-close"  data-dismiss="modal">
+            <span class="modal-close" data-dismiss="modal">
                     <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
@@ -27,44 +27,47 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <div class="form-group">
-                            <label>Project: <span class="required">*</span></label>
-                            <div class="row">
-                                    <div class="col-md-6">
-                                        <select class="form-control selectpicker input-text-modal" name="team">
-                                            @foreach($teams as $u)
-                                                <option value="{{$u->id}}">{{$u->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input placeholder="Project Name" type="text" class="form-control input-text-modal" name="project_name" id="client_name" value="{{old('project_name')}}">
-                                    </div>
-            
-                                </div>
+                        <label>Project: <span class="required">*</span></label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <select class="form-control selectpicker input-text-modal" name="team">
+                                    @foreach($teams as $u)
+                                        <option value="{{$u->id}}">{{$u->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <input placeholder="Project Name" type="text" class="form-control input-text-modal"
+                                       name="project_name" id="client_name" value="{{old('project_name')}}">
+                            </div>
+
+                        </div>
                     </div>
-                    
+
 
                     <div class="form-group">
                         <div class="row">
-                                <label>Client:<span class="required">*</span></label>
-                                <select class="form-control input-text-modal modal-dropdown-search" name="company" id="company">
-                                    <option value="" disabled="" selected="">Select a client</option>
-                                    @foreach($client as $c)
-                                        <option value="{{$c->id}}">{{$c->name}}</option>
-                                    @endforeach
-                                </select>
-                                <br>
-                                <span class="or">Or</span>
-                                <br>
-                                <label class="edit-title" id="" for="new_client">Enter the name of the new Client</label>
-                                <input type="text" class="form-control form-control input-text-modal" name="new_client"
-                                       placeholder="New Client Name" value="{{old('new_client')}}">
+                            <label>Client:<span class="required">*</span></label>
+                            <select class="form-control input-text-modal modal-dropdown-search" name="company"
+                                    id="company">
+                                <option value="" disabled="" selected="">Select a client</option>
+                                @foreach($client as $c)
+                                    <option value="{{$c->id}}">{{$c->name}}</option>
+                                @endforeach
+                            </select>
+                            <br>
+                            <span class="or">Or</span>
+                            <br>
+                            <label class="edit-title" id="" for="new_client">Enter the name of the new Client</label>
+                            <input type="text" class="form-control form-control input-text-modal" name="new_client"
+                                   placeholder="New Client Name" value="{{old('new_client')}}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Description:</label>
-                        <textarea rows="2" cols="50" name="description" class="form-control input-text-modal" id="description">{{old('description')}}</textarea>
+                        <textarea rows="2" cols="50" name="description" class="form-control input-text-modal"
+                                  id="description">{{old('description')}}</textarea>
                     </div
                 </div>
 
