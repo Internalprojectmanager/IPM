@@ -6,7 +6,7 @@
     top: 5px;
 }
 
-.google-btn{
+.oauth{
 }
 
 .auth-buttons > div{
@@ -23,24 +23,24 @@
     vertical-align: middle;
     margin-left: 12px;
 }
-.google-btn > a > .g-icon{
-    background: url('../img/btn_google_signin_light_normal_web.png') no-repeat center;
+.oauth > a > .g-icon{
+    background: url('../img/g_normal.png') no-repeat center;
     width: 190px;
     height: 64px;
     display: inline-block;
     vertical-align: middle;
 }
 
-.google-btn > a:focus > .g-icon{
-    background: url('../img/btn_google_signin_light_focus_web.png') no-repeat center;
+.oauth > a:focus > .g-icon{
+    background: url('../img/g_focus.png') no-repeat center;
 }
 
-.google-btn > a:disabled > .g-icon{
-    background: url('../img/btn_google_signin_light_disabled_web.png') no-repeat center;
+.oauth > a:disabled > .g-icon{
+    background: url('../img/g_disabled.png') no-repeat center;
 }
 
-.google-btn > a:active > .g-icon{
-    background: url('../img/btn_google_signin_light_pressed_web.png') no-repeat center;
+.oauth > a:active > .g-icon{
+    background: url('../img/g_pressed.png') no-repeat center;
 }
 
 .settings-icon{

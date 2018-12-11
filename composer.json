@@ -23,6 +23,7 @@
         "pragmarx/version": "^0.2.7",
         "sentry/sentry-laravel": "^0.8.0",
         "silber/bouncer": "v1.0.0-rc.1",
+        "spatie/laravel-cookie-consent": "^2.4",
         "webpatser/laravel-uuid": "^3.0",
         "yab/laravel-scout-mysql-driver": "^2.0"
     },
