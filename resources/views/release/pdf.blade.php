@@ -13,7 +13,7 @@
     @if(!empty($project->team->logo))
         <img class="logo-p1" src="{{public_path('storage').'/'. $project->team->logo}}">
     @endif
-    <span class="h1-p1">PROJECT SPECIFICATION</span>
+    <span class="h1-p1 text-uppercase">{{$release->specificationtype}}</span>
     <span class="h2-p1">{{$project->name}}
         : {{$release->name}} {{number_format(floatval($release->version), 1)}}</span>
     <span class="h3-p1">{{$project->company->name}}</span>

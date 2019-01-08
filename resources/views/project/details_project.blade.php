@@ -22,9 +22,11 @@
                         </i>
 
                         {{$project->name}}</span>
-                    <span class=" block-value grey">{{$project->pstatus->name}}</span>
                     <br>
-                    <span class="grey">{{$client->name}}</span>
+                    <span class="h4"><a class="black" href="{{route('clientdetails', $client)}}">{{$client->name}}</a></span>
+                    <br>
+                    <span class=" block-value grey h5">{{$project->pstatus->name}}</span>
+                    <br>
                 </div>
 
                 <div class="col-md-3 col-xs-12">
@@ -118,7 +120,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span class="button-content" id="people-button">People</span>
+                        <span class="button-content" id="people-button">Assignees</span>
                     </button>
                 </div>
             </div>

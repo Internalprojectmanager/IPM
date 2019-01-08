@@ -37,7 +37,7 @@
                     <div class="form-group col-md-6">
                         <label class="edit-title" for="company">Project Status</label>
                         <br>
-                        <select name="status" id="company">
+                        <select name="status" id="company" class="form-control modal-dropdown-search">
                             @foreach($status as $s)
                                 <option @if($s->id == $project->status) selected=""
                                         @endif value="{{$s->id}}">{{$s->name}}</option>
@@ -47,7 +47,7 @@
                     <div class="form-group col-md-6">
                         <label class="edit-title" for="company">Select Client</label>
                         <br>
-                        <select name="company" id="company">
+                        <select name="company" id="company" class="form-control modal-dropdown-search">
                             @foreach($companys as $company)
 
                                 <option @if($company->id == $project->company_id) selected=""

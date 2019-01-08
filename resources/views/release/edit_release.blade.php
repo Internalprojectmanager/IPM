@@ -5,24 +5,26 @@
  
 @section('breadcrumbs', Breadcrumbs::render('editrelease', $project, $release)) 
 @section('content')
+    <a class="btn btn-edit delete-button" id="project-edit"
+       href="{{route('deleteproject', [$project->company->path, $project->path])}}"
+       onclick="return confirm('Are you sure you want to delete this Project?');">
+        <i class="far fa-times-circle white"></i>
+        <span class="white">Delete</span></a></a>
 
-<a class="btn btn-edit delete-button" id="project-edit" href="{{route('deleterelease', [$client->path, $project->path, $release->path, $release->version])}}"
-    onclick="return confirm('Are you sure you want to delete this Release?');">
-    <i class="far fa-times-circle white"></i>
-    <span class="white">Delete</span></a></a>
-<div class="row">
-    <div class="header-3 form-group" id="edit-project">
+
+    <div class="row">
+        <div class="header-3 row">
         <form action="{{route('updaterelease', [$client->path, $project->path, $release->path, $release->version])}}" method="post">
             {{ csrf_field() }}
             <div class="row">
                 <div class="form-group col-md-6">
                     <label class="edit-title" for="release_name">Release name</label>
-                    <input type="text" class="form-control" name="release_name" id="release_name" value="{{$release->name}}">
+                    <input type="text" class="form-control input-text-modal" name="release_name" id="release_name" value="{{$release->name}}">
                 </div>
                 <div class="form-group col-md-6">
                     <label class="edit-title" for="client">Release Status</label>
                     <br>
-                    <select class="form-control input-text-modal" name="status" id="client">
+                    <select name="status" id="client">
                                     @foreach($status as $s)
                                         <option @if($s->id == $release->status) selected=""
                                                 @endif value="{{$s->id}}">{{$s->name}}</option>
@@ -50,7 +52,7 @@
 
             <div class="form-group col-md-6">
                 <label for="release_document_status">Document Status:</label>
-                <select class="form-control input-text-modal" name="document_status">
+                <select name="document_status">
                             @foreach($status as $s)
                                 <option @if($s->id == $release->document_status) selected=""
                                         @endif value="{{$s->id}}">{{$s->name}}</option>
