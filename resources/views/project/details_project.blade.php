@@ -23,10 +23,11 @@
 
                         {{$project->name}}</span>
                     <br>
-                    <span class="h4"><a class="black" href="{{route('clientdetails', $client)}}">{{$client->name}}</a></span>
+                    <span class="h4" style="margin-left: 28px"><a class="black"
+                                                                  href="{{route('clientdetails', $client)}}">{{$client->name}}</a></span>
                     <br>
-                    <span class=" block-value grey h5">{{$project->pstatus->name}}</span>
-                    <br>
+                    <span style="margin-left: 28px" class="block-value grey h5">{{$project->pstatus->name}}</span>
+
                 </div>
 
                 <div class="col-md-3 col-xs-12">
@@ -50,7 +51,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-xs-12">
-                    <div class="block-description under-details" id="block-hidden">
+                    <div class="block-description under-details" id="block-hidden" style="margin-left: 28px">
 
                         <span class="project-title block-title">Project Description</span><br>
                         <span class="project-detail block-value">{!! nl2br($project->description) !!}</span>
@@ -79,33 +80,12 @@
             </div>
             <div class="row pull-right">
                 @php
-                /**
-                    <div class="col-md-5 col-xs-3">
-                    
-                        <button onclick="location.href='{{route('documentoverview', ['name' => $project->path, 'company_id' => $project->company->path])}}'"
-                                class="blue-button" id="button-files">
-                            <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
-                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
-                                <title>Files/paperclip Icon</title>
-                                <desc>Created with Sketch.</desc>
-                                <defs></defs>
-                                <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="BUTTON/Files" transform="translate(-15.000000, -13.000000)" fill-rule="nonzero"
-                                       fill="#FFFFFF">
-                                        <path d="M23,27.7777778 C23,30.1105556 21.21,32 19,32 C16.79,32 15,30.1105556 15,27.7777778 L15,16.1666667 C15,14.4144444 16.34,13 18,13 C19.66,13 21,14.4144444 21,16.1666667 L21,25.6666667 C21,26.8277778 20.1,27.7777778 19,27.7777778 C17.9,27.7777778 17,26.8277778 17,25.6666667 L17,17.2222222 L18,17.2222222 L18,25.6666667 C18,26.2472222 18.45,26.7222222 19,26.7222222 C19.55,26.7222222 20,26.2472222 20,25.6666667 L20,16.1666667 C20,15.0055556 19.1,14.0555556 18,14.0555556 C16.9,14.0555556 16,15.0055556 16,16.1666667 L16,27.7777778 C16,29.53 17.34,30.9444444 19,30.9444444 C20.66,30.9444444 22,29.53 22,27.7777778 L22,17.2222222 L23,17.2222222 L23,27.7777778 Z"
-                                              id="Files/paperclip-Icon"></path>
-                                    </g>
-                                </g>
-                            </svg>
-                            <span class="button-content" id="files-button">Files</span>
-                        </button>
-                    </div>
-                **/
+                    /**                    * <div class="col-md-5 col-xs-3"> ** <button onclick="location.href='{{route('documentoverview', ['name' => $project->path, 'company_id' => $project->company->path])}}'"                                * class="blue-button" id="button-files">                            * <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"                                 * xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">                                * <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->                                * <title>Files/paperclip Icon</title>                                * <desc>Created with Sketch.</desc>                                * <defs></defs>                                * <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">                                    * <g id="BUTTON/Files" transform="translate(-15.000000, -13.000000)" fill-rule="nonzero"                                       * fill="#FFFFFF">                                        * <path d="M23,27.7777778 C23,30.1105556 21.21,32 19,32 C16.79,32 15,30.1105556 15,27.7777778 L15,16.1666667 C15,14.4144444 16.34,13 18,13 C19.66,13 21,14.4144444 21,16.1666667 L21,25.6666667 C21,26.8277778 20.1,27.7777778 19,27.7777778 C17.9,27.7777778 17,26.8277778 17,25.6666667 L17,17.2222222 L18,17.2222222 L18,25.6666667 C18,26.2472222 18.45,26.7222222 19,26.7222222 C19.55,26.7222222 20,26.2472222 20,25.6666667 L20,16.1666667 C20,15.0055556 19.1,14.0555556 18,14.0555556 C16.9,14.0555556 16,15.0055556 16,16.1666667 L16,27.7777778 C16,29.53 17.34,30.9444444 19,30.9444444 C20.66,30.9444444 22,29.53 22,27.7777778 L22,17.2222222 L23,17.2222222 L23,27.7777778 Z"                                              * id="Files/paperclip-Icon"></path>                                    * </g>                                * </g>                            * </svg>                            * <span class="button-content" id="files-button">Files</span>                        * </button>                    * </div>                **/
                 @endphp
 
                 <div class="col-md-6 col-xs-3">
-                    <button type="button" class="blue-button" id="button-people" data-toggle="modal" data-target="#addProjectModal">
+                    <button type="button" class="blue-button" id="button-people" data-toggle="modal"
+                            data-target="#addProjectModal">
                         <svg id="people-icon" width="20px" height="13px" viewBox="0 0 20 13" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
@@ -150,7 +130,8 @@
                 <tr class="clickable-row" data-href="{{route('showrelease', [$project->company->path, $project->path,
                         $release->path, $release->version])}}">
                     <td style="background-color: {{$release->rstatus->color}};"></td>
-                    <td class="col-md-2"><span class="tabletitle">{{number_format($release->version, 1)}} - {{$release->name}}</span>
+                    <td class="col-md-2"><span
+                                class="tabletitle">{{number_format($release->version, 1)}} - {{$release->name}}</span>
                     </td>
                     <td class=" col-md-5">{{implode(' ', array_slice(str_word_count($release->description, 2), 0, 20))}}
                         @if(str_word_count($release->description) > 20)
