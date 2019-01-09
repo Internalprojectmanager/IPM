@@ -36,7 +36,8 @@ class newAccount extends Mailable
     public function build()
     {
 
-        $address = 'no-reply@itsaprojectmanager.tk';
+        $email = config('from');
+        dd($email);
         $subject = 'IPM - Account verification';
         $name = 'Internalprojectmanager (IPM)';
 
