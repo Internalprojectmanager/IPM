@@ -38,9 +38,6 @@ class EmailUsed extends Mailable
      */
     public function build()
     {
-
-        $address = 'no-reply@itsaprojectmanager.tk';
-        $name = 'Internalprojectmanager (IPM)';
         $subject = null;
 
         switch ($this->type) {
@@ -48,7 +45,6 @@ class EmailUsed extends Mailable
                 $subject = 'IPM - New Email added to your account';
 
                 return $this->view('email.addedEmail')
-                    ->from($address, $name)
                     ->subject($subject)
                     ->with([
                         'firstName' => $this->user->first_name,
@@ -61,7 +57,6 @@ class EmailUsed extends Mailable
                 $subject = 'IPM - Account verification';
 
                 return $this->view('email.newAccount')
-                    ->from($address, $name)
                     ->subject($subject)
                     ->with([
                         'firstName' => $this->user->first_name,
@@ -74,7 +69,6 @@ class EmailUsed extends Mailable
                 $subject = 'IPM - Activate your email address';
 
                 return $this->view('email.newEmailExisting')
-                    ->from($address, $name)
                     ->subject($subject)
                     ->with([
                         'firstName' => $this->user->first_name,
