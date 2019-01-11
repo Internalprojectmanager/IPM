@@ -22,9 +22,11 @@
                         </i>
 
                         {{$release->name}}</span>
-                    <span class=" block-value grey">{{$release->rstatus->name}}</span>
+
                     <br>
-                    <span class="grey">{{$client->name}} - {{$project->name}}</span>
+                    <span class="black h5">{{$client->name}} - {{$project->name}}</span>
+                    <br>
+                    <span class=" block-value grey">{{$release->rstatus->name}}</span>
                 </div>
 
                 <div class="col-md-3">

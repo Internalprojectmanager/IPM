@@ -23,10 +23,10 @@
 
                         {{$project->name}}</span>
                     <br>
-                    <span class="h4" style="margin-left: 28px"><a class="black"
+                    <span class="h4"><a class="black"
                                                                   href="{{route('clientdetails', $client)}}">{{$client->name}}</a></span>
                     <br>
-                    <span style="margin-left: 28px" class="block-value grey h5">{{$project->pstatus->name}}</span>
+                    <span class="block-value grey h5">{{$project->pstatus->name}}</span>
 
                 </div>
 
@@ -51,7 +51,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-xs-12">
-                    <div class="block-description under-details" id="block-hidden" style="margin-left: 28px">
+                    <div class="block-description under-details" id="block-hidden">
 
                         <span class="project-title block-title">Project Description</span><br>
                         <span class="project-detail block-value">{!! nl2br($project->description) !!}</span>

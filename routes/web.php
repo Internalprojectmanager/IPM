@@ -63,7 +63,7 @@ Route::group(['middleware' => ['checkactive', 'auth']], function () {
         Route::get('/', 'Admin\UserController@dashboard')->name('admin_dashboard');
         Route::get('/users', 'Admin\UserController@index')->name('admin_users');
         Route::get('/teams', 'Admin\UserController@index')->name('admin_teams');
-        Route::get('/projects', 'Admin\UserController@index')->name('admin_projects');
+        Route::get('/projects', 'Admin\ProjectController@index')->name('admin_projects');
         Route::get('/plans', 'Admin\UserController@index')->name('admin_plans');
 
     });
