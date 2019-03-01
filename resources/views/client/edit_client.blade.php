@@ -37,7 +37,7 @@
                         <i class="far fa-times-circle white"></i>
                         <span class="white">Delete</span></a>
                     <button class="btn btn-primary" type="submit">
-                        Save Client<span class="icon-right glyphicon glyphicon-plus">
+                        Save Client<span class="glyphicon glyphicon-plus">
                     </button>
                 </div>
             </div>

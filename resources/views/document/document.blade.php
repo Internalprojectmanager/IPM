@@ -12,7 +12,7 @@
     <div class="row">
         <a class="black" href="{{route('adddocument', [ $project->path])}}">
             <button class="btn-primary">
-                Add Document <span class="icon-right glyphicon glyphicon-plus"></span>
+                Add Document <span class="glyphicon glyphicon-plus"></span>
             </button></a>
 
     </div>

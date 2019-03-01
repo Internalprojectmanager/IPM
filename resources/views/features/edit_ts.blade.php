@@ -84,7 +84,7 @@
                     <!-- Tab 2 -->
                     <input type="radio" class="btn-primary tab" name="ts-tabsetreq" id="ts-newreq">
                     <label for="ts-newreq" class="black new-tab">
-                        Add more Requirements <span class="icon-right glyphicon glyphicon-plus"></span>
+                        Add more Requirements <span class="glyphicon glyphicon-plus"></span>
                     </label>
                     <span class="hidden" id="ts-removed">0</span>
                     <hr class="tab-hr">
@@ -167,7 +167,7 @@
                     </div>
                     <div class="col-md-6" align="right">
                         <button class="btn btn-primary" type="submit">
-                            Save TS <span class="icon-right glyphicon glyphicon-plus">
+                            Save TS <span class="glyphicon glyphicon-plus">
                         </button>
                     </div>
             </form>

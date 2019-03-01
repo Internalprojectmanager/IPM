@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-md-6" align="right">
                         <button class="btn btn-primary" type="submit">
-                            Save Out of Scope <span class="icon-right glyphicon glyphicon-plus">
+                            Save Out of Scope <span class="glyphicon glyphicon-plus">
                         </button>
                     </div>
             </form>

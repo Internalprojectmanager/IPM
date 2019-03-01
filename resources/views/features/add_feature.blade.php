@@ -72,7 +72,7 @@
                     <!-- Tab 2 -->
                     <input type="radio" class="btn-primary tab" name="fr-tabsetreq" id="fr-newreq">
                     <label for="fr-newreq" class="new-tab black">
-                        Add more Requirements <span class="icon-right glyphicon glyphicon-plus"></span>
+                        Add more Requirements <span class="glyphicon glyphicon-plus"></span>
                     </label>
                     <span class="hidden" id="fr-removed">0</span>
                     <hr class="tab-hr">
