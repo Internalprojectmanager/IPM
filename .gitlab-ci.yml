@@ -1,14 +1,12 @@
 stages:
   - build
   - test
-  - deploy
 
 composer:
   stage: build
   image: internalprojectmanger/ipm-docker:1.0
   tags:
     - docker
-    - gce
   cache:
     key: ${CI_COMMIT_REF_SLUG}-composer
     paths:
@@ -28,7 +26,6 @@ yarn:
   image: internalprojectmanger/ipm-docker:1.0
   tags:
     - docker
-    - gce
   cache:
     key: ${CI_COMMIT_REF_SLUG}-yarn
     paths:
@@ -48,7 +45,6 @@ codestyle:
   image: internalprojectmanger/ipm-docker:1.0
   tags:
     - docker
-    - gce
   dependencies: 
     - composer
   script:
@@ -60,7 +56,6 @@ phpunit:
   image: internalprojectmanger/ipm-docker:1.0
   tags:
     - docker
-    - gce
   dependencies:
     - composer
   script:
