@@ -24,8 +24,8 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
-        
-    <link href="{{secure_asset('css/app.css')}}" rel="stylesheet" type="text/css">
+
+    <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <link href="{{secure_asset('css/custom.css')}}" rel="stylesheet" type="text/css">
