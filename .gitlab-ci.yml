@@ -66,25 +66,25 @@ phpunit:
   script:
     - php vendor/bin/phpunit --coverage-text --colors=never
 
-staging:
-  stage: deploy
-  variables:
-    DC_PROJ: ${DC_NAME}_develop
-    DC_NAME: ipm
-    DC_FILE: /usr/share/jwa-dockers/sites/${DC_NAME}_develop/docker-compose.yml
-  only:
-    - master
-    - develop
-  tags:
-    - develop
-  script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME git checkout $CI_BUILD_REF_NAME
-    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME git pull origin $CI_BUILD_REF_NAME
-    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME composer install
-    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan migrate:fresh --seed
-    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan config:cache
-    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME yarn install --production
-  environment:
-    name: staging
-    url: https://dev.itsaprojectmanager.tk
+#staging:
+#  stage: deploy
+#  variables:
+#    DC_PROJ: ${DC_NAME}_develop
+#    DC_NAME: ipm
+#    DC_FILE: /usr/share/jwa-dockers/sites/${DC_NAME}_develop/docker-compose.yml
+#  only:
+#    - master
+#    - develop
+#  tags:
+#    - develop
+#  script:
+#    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+#    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME git checkout $CI_BUILD_REF_NAME
+#    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME git pull origin $CI_BUILD_REF_NAME
+#    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME composer install
+#    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan migrate:fresh --seed
+#    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME php artisan config:cache
+#    - docker-compose -p $DC_PROJ -f $DC_FILE exec -T $DC_NAME yarn install --production
+#  environment:
+#    name: staging
+#    url: https://dev.itsaprojectmanager.tk
