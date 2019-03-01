@@ -22,7 +22,7 @@
                     </svg>
                 </span>
         </div>
-        <form action="{{route('storeRequirement', [$client->path, $project->path, $release->path, $feature])}}" method="post">
+        <form action="{{route('storeRequirement', [ $project->path, $release->path, $feature])}}" method="post">
             {{ csrf_field() }}
         <div class="modal-body">
             @include('requirement.requirement_form')

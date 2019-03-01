@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-12">
             <form action="{{route('updateRequirement',
-                             [$client->path, $project->path, $release->path, $feature->id, $requirement->id])}}" method="post">
+                             [ $project->path, $release->path, $feature->id, $requirement->id])}}" method="post">
                 {{ csrf_field() }}
                 <h3>Edit Feature Requirement: {{$feature->name}} - {{$requirement->name}}</h3>
 

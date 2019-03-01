@@ -45,8 +45,6 @@ Route::get('/profile', 'ProfileController@viewProfile')->name('profile');
 Route::post('/profile', 'ProfileController@updateProfile')->name('saveprofile');
 
 
-
-
 Route::group(['middleware' => ['checkactive', 'auth']], function () {
     //Profile routes
     Route::post('/profile/addemail', 'ProfileController@addEmail')->name('addEmail');
@@ -110,8 +108,6 @@ Route::group(['middleware' => ['checkactive', 'auth']], function () {
         Route::post('/overview', 'ProjectController@searchProject')->name('searchproject');
         Route::get('/add', 'ProjectController@addProject')->name('addproject');
         Route::post('/add', 'ProjectController@storeProject')->name('storeproject');
-    });
-    Route::prefix('{client}')->group(function () {
         Route::group(['prefix' => '{project}'], function () {
             Route::get('/details', 'ProjectController@detailsProject')->name('projectdetails');
             Route::get('/edit', 'ProjectController@editProject')->name('editproject');
@@ -129,7 +125,6 @@ Route::group(['middleware' => ['checkactive', 'auth']], function () {
                 Route::put('/edit/{document}', 'DocumentController@updateDocument')->name('updatedocument');
                 Route::get('/delete/{document}', 'DocumentController@deleteDocument')->name('deletedocument');
                 Route::get('/download/{document}', 'DocumentController@downloadFile')->name('downloadfile');
-
             });
 
             //Release Routes
@@ -139,9 +134,6 @@ Route::group(['middleware' => ['checkactive', 'auth']], function () {
                 Route::get('/delete/{version}', 'ReleaseController@deleteRelease')->name('deleterelease');
                 Route::post('/update/{version}', 'ReleaseController@updateRelease')->name('updaterelease');
                 Route::get('/{version}/pdf', 'PDFController@createPDF')->name('createpdf');
-
-
-
 
 
                 //Feature Routes
@@ -156,16 +148,16 @@ Route::group(['middleware' => ['checkactive', 'auth']], function () {
                     Route::post('/{feature}/requirement/edit/{requirement}', 'RequirementController@updateRequirement')->name('updateRequirement');
                     Route::get('/{feature}/requirement/edit/{requirement}', 'RequirementController@editRequirement')->name('editRequirement');
                     Route::post('/{feature}/requirement/store', 'RequirementController@storeRequirement')->name('storeRequirement');
-
-
                 });
             });
-
-            //Release Adding routes
-            Route::group(['prefix' => 'release'], function () {
-                Route::get('/add', 'ReleaseController@addRelease')->name('addrelease');
-                Route::post('/add', 'ReleaseController@storeRelease')->name('storerelease');
-            });
         });
+    });
+
+
+
+    //Release Adding routes
+    Route::group(['prefix' => 'release'], function () {
+        Route::get('/add', 'ReleaseController@addRelease')->name('addrelease');
+        Route::post('/add', 'ReleaseController@storeRelease')->name('storerelease');
     });
 });

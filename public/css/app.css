@@ -8576,6 +8576,11 @@ button.close {
   margin: 0px;
 }
 
+.tabset > label:first-of-type {
+  top: 1px;
+  padding: 10px calc(20px + 21.5px) 10px 20px;
+}
+
 .tabset > label:hover,
 .tabset input:focus + label {
   color: #000000;
@@ -8619,6 +8624,7 @@ button.close {
 
 .new-tab {
   background-color: orange !important;
+  padding: 9px 19px !important;
 }
 
 .new-tab > span {
@@ -9248,16 +9254,20 @@ label {
   line-height: 20px;
 }
 
-.table > tbody {
+table {
+  width: calc(100% - 1px) !important;
+}
+
+table > tbody {
   background-color: white;
 }
 
-.table > tbody > tr {
+table > tbody > tr {
   background-color: white;
   height: 80px;
 }
 
-.table > thead > tr > th {
+table > tbody > thead > tr > th {
   border-bottom: none;
   color: #898989;
   font-weight: 400;

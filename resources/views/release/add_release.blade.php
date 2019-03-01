@@ -22,7 +22,7 @@
                     </svg>
                 </span>
         </div>
-        <form action="{{route('storerelease', [$client->path, $project->path] )}}" method="post">
+        <form action="{{route('storerelease', [ $project->path] )}}" method="post">
             {{ csrf_field() }}
             <div class="modal-body">
                 @if ($errors->any())

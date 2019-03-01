@@ -32,11 +32,11 @@
                 </ul>
             </div>
             @endif
-            <a class="btn btn-edit delete-button pull-right" href="{{route('deletefeature', [$client->path, $project->path, $release->path,$feature->id])}}"
+            <a class="btn btn-edit delete-button pull-right" href="{{route('deletefeature', [ $project->path, $release->path,$feature->id])}}"
                 onclick="return confirm('Are you sure you want to delete this Feature?');">
                             <i class="far fa-times-circle white"></i>
                             <span class="white">Delete</span></a>
-            <form action="{{route('updateFeature', [$client->path, $project->path, $release->path,$feature->id])}}" method="post">
+            <form action="{{route('updateFeature', [ $project->path, $release->path,$feature->id])}}" method="post">
                 {{ csrf_field() }}
                 <input type="hidden" name="type" value="{{$feature->type}}">
                 <div class="form-group" style="margin-top: 30px">

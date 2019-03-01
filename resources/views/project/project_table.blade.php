@@ -11,7 +11,7 @@
         <tbody>
         @foreach($projects as $project)
             <tr class="clickable-row" data-href="
-                   {{route('projectdetails',[$project->company->path, $project->path])}}">
+                   {{route('projectdetails',$project->path)}}">
                 <td style="background-color: {{$project->pstatus->color}};"></td>
                 <td class=""><span class="tabletitle">{{$project->name}}</span>
                     <br>

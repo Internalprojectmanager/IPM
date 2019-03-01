@@ -192,7 +192,7 @@ class ProjectController extends Controller
         return view('project.project_table', compact('projects', 'projectcount', 'status'));
     }
 
-    public function detailsProject($client, $project)
+    public function detailsProject($project)
     {
         $releases = Release::with('rstatus')
             ->where('project_id', $project->id)
@@ -204,13 +204,14 @@ class ProjectController extends Controller
         $assignee = Assignee::with('users', 'role')->where('uuid', $project->id)->get();
         $roles = Role::orderBy('id', 'asc')->get();
         $status = Status::where('type', 'Progress')->get();
+        $client = $project->company;
         return view(
             'project.details_project',
             compact('project', 'client', 'releases', 'documents', 'user', 'assignee', 'status', 'roles')
         );
     }
 
-    public function editProject($client, $project)
+    public function editProject($project)
     {
         $status = Status::Type('Progress')->get();
         $companys = Client::select('name', 'id')
@@ -227,9 +228,10 @@ class ProjectController extends Controller
         return view('project.add_project_form', compact('teams', 'client', 'status'));
     }
 
-    public function updateProject($client, $project, ProjectValidator $request)
+    public function updateProject($project, ProjectValidator $request)
     {
         $project->name = $request->project_name;
+        $client = $project->company;
         if (!empty($request->new_client)) {
             $client = Client::firstOrCreate(['name' => $request->new_client]);
             $client->name = $request->new_client;
@@ -259,8 +261,9 @@ class ProjectController extends Controller
         return redirect()->route('overviewproject');
     }
 
-    public function updateAssignees($client, $project, Request $request)
+    public function updateAssignees($project, Request $request)
     {
+        $client = $project->company;
 
         if (empty($request->assignee)) {
             $request->assignee = array();

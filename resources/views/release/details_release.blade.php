@@ -7,7 +7,7 @@
 @section('breadcrumbs', Breadcrumbs::render('showrelease', $project, $release))
 
 @section('content')
-    <a href="{{route('editrelease', [ $client->path, $project->path, $release->path, $release->version])}}"
+    <a href="{{route('editrelease', [  $project->path, $release->path, $release->version])}}"
        class="btn btn-edit" id="project-edit">
         <span class="glyphicon edit-icon"></span> Edit
     </a>
@@ -61,35 +61,11 @@
 
             </div>
             <div class="row pull-right">
-                    @php
-                    /**
-                <div class="col-md-5 col-xs-6">
-                    
-                        <button onclick="location.href='{{route('documentoverview', [$client->path, $project->path])}}'"
-                                class="blue-button" id="button-files">
-                            <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"
-                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
-                                <title>Files/paperclip Icon</title>
-                                <desc>Created with Sketch.</desc>
-                                <defs></defs>
-                                <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="BUTTON/Files" transform="translate(-15.000000, -13.000000)"
-                                       fill-rule="nonzero"
-                                       fill="#FFFFFF">
-                                        <path d="M23,27.7777778 C23,30.1105556 21.21,32 19,32 C16.79,32 15,30.1105556 15,27.7777778 L15,16.1666667 C15,14.4144444 16.34,13 18,13 C19.66,13 21,14.4144444 21,16.1666667 L21,25.6666667 C21,26.8277778 20.1,27.7777778 19,27.7777778 C17.9,27.7777778 17,26.8277778 17,25.6666667 L17,17.2222222 L18,17.2222222 L18,25.6666667 C18,26.2472222 18.45,26.7222222 19,26.7222222 C19.55,26.7222222 20,26.2472222 20,25.6666667 L20,16.1666667 C20,15.0055556 19.1,14.0555556 18,14.0555556 C16.9,14.0555556 16,15.0055556 16,16.1666667 L16,27.7777778 C16,29.53 17.34,30.9444444 19,30.9444444 C20.66,30.9444444 22,29.53 22,27.7777778 L22,17.2222222 L23,17.2222222 L23,27.7777778 Z"
-                                              id="Files/paperclip-Icon"></path>
-                                    </g>
-                                </g>
-                            </svg>
-                            <span class="button-content" id="files-button">Files</span>
-                        </button>
-                    
-                </div>
-                **/
+                @php
+                    /**                * <div class="col-md-5 col-xs-6"> ** <button onclick="location.href='{{route('documentoverview', [ $project->path])}}'"                                * class="blue-button" id="button-files">                            * <svg id="paperclip-icon" width="8px" height="19px" viewBox="0 0 8 19" version="1.1"                                 * xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">                                * <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->                                * <title>Files/paperclip Icon</title>                                * <desc>Created with Sketch.</desc>                                * <defs></defs>                                * <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">                                    * <g id="BUTTON/Files" transform="translate(-15.000000, -13.000000)"                                       * fill-rule="nonzero"                                       * fill="#FFFFFF">                                        * <path d="M23,27.7777778 C23,30.1105556 21.21,32 19,32 C16.79,32 15,30.1105556 15,27.7777778 L15,16.1666667 C15,14.4144444 16.34,13 18,13 C19.66,13 21,14.4144444 21,16.1666667 L21,25.6666667 C21,26.8277778 20.1,27.7777778 19,27.7777778 C17.9,27.7777778 17,26.8277778 17,25.6666667 L17,17.2222222 L18,17.2222222 L18,25.6666667 C18,26.2472222 18.45,26.7222222 19,26.7222222 C19.55,26.7222222 20,26.2472222 20,25.6666667 L20,16.1666667 C20,15.0055556 19.1,14.0555556 18,14.0555556 C16.9,14.0555556 16,15.0055556 16,16.1666667 L16,27.7777778 C16,29.53 17.34,30.9444444 19,30.9444444 C20.66,30.9444444 22,29.53 22,27.7777778 L22,17.2222222 L23,17.2222222 L23,27.7777778 Z"                                              * id="Files/paperclip-Icon"></path>                                    * </g>                                * </g>                            * </svg>                            * <span class="button-content" id="files-button">Files</span>                        * </button> ** </div>                **/
                 @endphp
                 <div class="col-md-7 col-xs-6">
-                    <button onclick="location.href='{{route('createpdf', [$client->path, $project->path, $release->path, $release->version])}}'"
+                    <button onclick="location.href='{{route('createpdf', [ $project->path, $release->path, $release->version])}}'"
                             class="blue-button" id="button-pdf">
                         <svg id="pdf-icon" width="19px" height="19px" viewBox="0 0 19 19" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -167,7 +143,7 @@
                 <tbody>
                 @foreach($features as $f)
                     <tr class="clickable-row" data-href="{{route('showfeature',
-                             [$release->projects->company->path, $release->projects->path, $release->path, $f->id])}}">
+                             [ $release->projects->path, $release->path, $f->id])}}">
                         <td style="border-left: 1px solid #CECECE; background-color: {{$f->fstatus->color}};"></td>
                         <td class="col-md-4"><span class="tabletitle">{{$f->name}}</span>
                         </td>
@@ -251,7 +227,7 @@
                 <tbody>
                 @foreach($nfr as $n)
                     <tr class="clickable-row" data-href="{{route('showfeature',
-                         [$release->projects->company->path, $release->projects->path, $release->path, $n->id])}}">
+                         [ $release->projects->path, $release->path, $n->id])}}">
 
                         <td style="border-left: 1px solid #CECECE; background-color: {{$n->fstatus->color}};"></td>
                         <td class="width20"><span class="tabletitle">{{$n->name}}</span>
@@ -336,7 +312,7 @@
                 <tbody>
                 @foreach($techspecs as $t)
                     <tr class="clickable-row" data-href="{{route('showfeature',
-                         [$release->projects->company->path, $release->projects->path, $release->path, $t->id])}}">
+                         [ $release->projects->path, $release->path, $t->id])}}">
                         <td style="border-left: 1px solid #CECECE; background-color: {{$t->fstatus->color}};"></td>
                         <td class="width20"><span class="tabletitle">{{$t->name}}</span></td>
                         <td class="width20">{{$t->fstatus->name}}</td>
@@ -409,7 +385,7 @@
                 <tbody>
                 @foreach($scope as $s)
                     <tr class="clickable-row" data-href="{{route('showfeature',
-                         [$release->projects->company->path, $release->projects->path, $release->path, $s->id])}}">
+                         [ $release->projects->path, $release->path, $s->id])}}">
                         <td style="border-left: 1px solid #CECECE; background-color: #CECECE;"></td>
                         <td class="width25"><span class="tabletitle">{{$s->name}}</span></td>
                         <td>{{$s->description}}</td>

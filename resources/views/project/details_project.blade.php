@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <a href="{{route('editproject', [ $client->path, $project->path])}}" class="btn btn-edit" id="project-edit">
+    <a href="{{route('editproject', $project->path)}}" class="btn btn-edit" id="project-edit">
         <span class="glyphicon edit-icon"></span> Edit
     </a>
 
@@ -127,7 +127,7 @@
             </thead>
             <tbody>
             @foreach($releases as $release)
-                <tr class="clickable-row" data-href="{{route('showrelease', [$project->company->path, $project->path,
+                <tr class="clickable-row" data-href="{{route('showrelease', [$project->path,
                         $release->path, $release->version])}}">
                     <td style="background-color: {{$release->rstatus->color}};"></td>
                     <td class="col-md-2"><span

@@ -16,7 +16,7 @@
 
     <div class="row">
         <div class="header-3 row">
-            <form action="{{route('updateproject', [$project->company->path, $project->path])}}"
+            <form action="{{route('updateproject', $project->path)}}"
                   method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
