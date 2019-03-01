@@ -107,18 +107,23 @@
     z-index: 99;
 }
 
-.modal-body {padding: 30px}
+.modal-body {
+    padding: 30px;
+    .form-group{
+        margin: 0px;
+        padding-bottom: 20px;
+        .col-md-6{
+            padding-left: 0;
+            padding-right:0;
+        }
+    }
+}
 
 .modal-footer {
     padding: 0px 30px 30px 30px;
 }
 
 .required {color: #C74237;}
-
-.modal-body > .form-group {
-    margin: 0px;
-    padding-bottom: 20px;
-}
 
 .form-label-modal {
     color: #898989;
@@ -127,29 +132,10 @@
     line-height: 16px;
 }
 
-.input-text-modal {
-    border: 1px solid #9B9B9B;
-    background-color: #FFFFFF;
-    border-radius: 0;
-}
 
 .form-group {margin-top:0px;}
 
-.modal-dropdown-search {
-    background: #ffffff  url("../svg/dropdown.svg")  no-repeat 99% center;
-    background-size: 20px 20px;
-    width: 100%;
-    margin-left: 30px;
-    height: 36px;
-    border: 1px solid #9B9B9B;
-    padding-right: 30px;
-    padding-left: 15px;
-    float: right;
-    -webkit-appearance:none;
-    color: #535353;
-    font-size: 14px;
-    border-radius: 0px;
-}
+
 
 .modal-dropdown-search option{
     color: #535353;
@@ -200,6 +186,10 @@
     cursor: pointer;
     font-weight: 600;
     margin: 0px;
+    &:first-of-type{
+        top: 1px;
+        padding: 10px calc(20px + 21.5px) 10px 20px;
+    }
 }
 
 .tabset > label:hover,
@@ -246,6 +236,7 @@
 }
 .new-tab{
     background-color:  orange !important;
+    padding: 9px 19px!important;
 }
 
 .new-tab > span{

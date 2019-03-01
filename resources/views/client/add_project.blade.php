@@ -33,10 +33,10 @@
 
                     <div class="form-group">
                         <label>Client:<span class="required">*</span></label>
-                        <select class="form-control input-text-modal" name="company" id="company" >
+                        <select name="company" id="company" >
                             <option value="{{$client->id}}">{{$client->name}}</option>
                         </select>
-                        <input type="hidden" class="form-control form-control input-text-modal" name="new_client"
+                        <input type="hidden" class="form-control form-control modal-dropdown-search" name="new_client"
                                placeholder="New Client Name" value="">
                     </div>
 

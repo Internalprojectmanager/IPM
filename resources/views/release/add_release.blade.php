@@ -22,7 +22,7 @@
                     </svg>
                 </span>
         </div>
-        <form action="{{route('storerelease', [$client->path, $project->path] )}}" method="post">
+        <form action="{{route('storerelease', [ $project->path] )}}" method="post">
             {{ csrf_field() }}
             <div class="modal-body">
                 @if ($errors->any())
@@ -68,8 +68,7 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="specification">Specification type: <span class="required">*</span></label>
-                        <input type="text" required class="form-control input-text-modal" id="specification" name="specification" value="{{old('specification')}}">
+                        <input type="hidden" required class="form-control input-text-modal" id="specification" name="specification" value="Project Specification">
                     </div>
 
                 </div>

@@ -12,6 +12,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Jenssegers\Agent\Agent;
 
 class LoginController extends Controller
 {
@@ -45,6 +46,12 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => ['logout', 'getLogout']]);
+    }
+
+    public function showLoginForm()
+    {
+        $agent = new Agent();
+        return view('auth.login', compact('agent'));
     }
 
     public function login(Request $request)
@@ -108,8 +115,8 @@ class LoginController extends Controller
             switch ($provider) {
                 case "google":
                     $authUser = User::create([
-                        'first_name' => $user->user['name']['givenName'],
-                        'last_name' => $user->user['name']['familyName'],
+                        'first_name' => $user->user['given_name'],
+                        'last_name' => $user->user['family_name'],
                         'email' => $user->email,
                         'provider' => $provider,
                         'provider_id' => $user->id

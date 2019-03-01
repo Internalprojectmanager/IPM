@@ -99,12 +99,26 @@ class Project extends Model
         return $query->where('path', $path);
     }
 
+    public function scopeCurrentProjectTeam($query, $id){
+        $team = Auth::user()->team;
+        if ($team !== null) {
+            $ids = [];
+            foreach ($team as $t) {
+                if ($t->plans->first()->name !== "No Plan") {
+                    $ids [] = $t->id;
+                }
+            }
+            return $query->wherein('team_id', $ids);
+        }   return $query->where('team_id', null);
+    }
+
     public function scopeCurrentUserTeam($query)
     {
-        if (Auth::user()->teams() !== null) {
+        $team = Auth::user()->team;
+        if ($team !== null) {
             $ids = [];
-            foreach (Auth::user()->teams() as $t) {
-                if ($t->plan()->name !== Plan::name('No Plan')->name) {
+            foreach ($team as $t) {
+                if ($t->plans->first()->name !== "No Plan") {
                     $ids [] = $t->id;
                 }
             }

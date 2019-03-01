@@ -3,7 +3,7 @@
     <div class="row">
         <div class="form-group">
             <div class="col-md-6">
-                <select required class="form-control selectpicker input-text-modal" name="team">
+                <select required class="form-control selectpicker" name="team">
                     <option selected disabled="">-- Select Team --</option>
                     @foreach($teams as $u)
                         <option value="{{$u->id}}">{{$u->name}}</option>

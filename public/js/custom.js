@@ -1,4 +1,4 @@
-$(document).on('click touchstart', '.clickable-row', function () {
+$(".clickable-row").click(function () {
     $(".container").addClass("disabled");
     $("#loader-container").show();
     window.location = $(this).data("href");
@@ -315,18 +315,10 @@ function projectDetailsDown() {
     document.getElementById("block-hidden").classList.toggle("show");
     if (document.getElementById('black-button-down').classList.contains('black-button-up')) {
         document.getElementById("black-button-down").classList.remove('black-button-up');
-        document.getElementById('project-details').style.height = '209px';
-        document.getElementById('block-show').style.height = '127px';
-        document.getElementById('project-details').style.paddingBottom = '0px';
-        document.getElementById('button-top').style.marginTop = '2px';
         document.getElementById('no-buttons').classList.remove('pull-right');
 
     } else {
         document.getElementById("black-button-down").classList.add('black-button-up');
-        document.getElementById('project-details').style.height = 'auto';
-        document.getElementById('project-details').style.paddingBottom = '70px';
-        document.getElementById('block-show').style.height = 'auto';
-        document.getElementById('button-top').style.marginTop = '5px';
         document.getElementById('no-buttons').classList.add('pull-right');
     }
 }

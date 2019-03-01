@@ -16,8 +16,9 @@ class PDFController extends Controller
         $this->middleware('auth');
     }
 
-    public function createPDF($client, $project, $release, $version)
+    public function createPDF($project, $release, $version)
     {
+        $client = $project->company;
         $roles = Role::all();
         $project = $project::path($project->path)->with('assignee', 'company', 'team', 'assignee.users', 'assignee.role')->first();
         $features = Feature::with('requirements.rstatus')->where([['release_id', $release->release_uuid]])->orderByRaw(DB::raw("FIELD(type, 'Feature', 'NFR', 'TS', 'Scope')"))->get();

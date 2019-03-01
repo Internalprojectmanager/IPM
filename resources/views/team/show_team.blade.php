@@ -13,11 +13,11 @@
     @if($team->name !== Auth::user()->fullName() && $team->owner_id == Auth::id())
 
         <div class="row above-white">
-            <span class="pull-right"><a href="{{route('team.edit', $team->slug)}}" class="btn-edit pull-right" >
+            <span class="pull-right"><a href="{{route('team.edit', $team->slug)}}" class="btn btn-edit pull-right" >
                 <span class="glyphicon edit-icon"></span> Edit
             </a> </span>
             <span class="col-md-1 pull-right">
-                <a href="#" class="btn-edit pull-right">
+                <a href="#" class="btn btn-edit pull-right">
                 <span class="glyphicon edit-icon"></span> Plan</a>
 
             </span>

@@ -1,17 +1,17 @@
-<div class="row bigtable">
-    <table class="table table-hover table-center results table-responsive">
+<div class="row bigtable header-3 table-responsive">
+    <table class="table table-hover table-center results">
         <thead>
         <th></th>
         <th>@sortablelink('name', 'Project')</th>
         <th>@sortablelink('description', 'Description')</th>
         <th>@sortablelink('pstatus.name', 'Status')</th>
         <th>@sortablelink('deadline', 'Deadline')</th>
-        <th>Users</th>
+        <th>Assignee's</th>
         </thead>
         <tbody>
         @foreach($projects as $project)
             <tr class="clickable-row" data-href="
-                   {{route('projectdetails',[$project->company->path, $project->path])}}">
+                   {{route('projectdetails',$project->path)}}">
                 <td style="background-color: {{$project->pstatus->color}};"></td>
                 <td class=""><span class="tabletitle">{{$project->name}}</span>
                     <br>
@@ -24,7 +24,7 @@
                     </a>
                     </span>
                 </td>
-                <td class="" style="max-width: 200px"><span class="tablesubtitle"> {{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}
+                <td class=""><span class="tablesubtitle"> {{implode(' ', array_slice(str_word_count($project->description, 2), 0, 10))}}
                     @if(str_word_count($project->description) > 10)
                         ...
                     @endif
@@ -62,7 +62,7 @@
                     @foreach($project->userAssingee as $as)
                         @if($i < 5)
                             <div class="table-users">
-                                <img alt="{{$as->first_name}} {{$as->last_name}}" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>
+                                <img alt="" class="img-circle img-thumbnail avatar-table" src="{{$as->getAvatar()}}"/>
                                 <span>{{$as->first_name}}</span>
                             </div>
                         @endif
@@ -78,8 +78,11 @@
         @endforeach
         </tbody>
     </table>
+    <span style='display: none;' id="new-count">{{$projectcount}}</span>
+</div>
+
+<div class="row">
     <div class="center">
         {{ $projects->links() }}
     </div>
-    <span style='display: none;' id="new-count">{{$projectcount}}</span>
 </div>

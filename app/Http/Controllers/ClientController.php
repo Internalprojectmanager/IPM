@@ -151,7 +151,8 @@ class ClientController extends Controller
 
     public function deleteClient($client)
     {
-        Client::path($client)->delete();
+
+        $client->forceDelete();
 
         return redirect()->route('overviewclient');
     }

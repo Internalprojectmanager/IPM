@@ -1,4 +1,4 @@
-<div class="row bigtable requirement-results">
+<div class="row bigtable requirement-results header-3 table-responsive">
     <form action="{{route('requirementsaveAuthstatus')}}" method="post" id="assignee_update">
     <table class="table table-hover table-center results">
         <thead>

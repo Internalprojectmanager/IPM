@@ -33,7 +33,7 @@
                 </span>
         </div>
         <div class="modal-body">
-            <form action="{{route('assigneeupdate', [$client->path, $project->path])}}" method="post">
+            <form action="{{route('assigneeupdate', $project->path)}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
                     @foreach($roles as $role)
@@ -45,7 +45,7 @@
                                     @php $selected = "";@endphp
                                     @foreach($assignee as $a)
                                         @if($a->userid == $u->id)
-                                            @foreach($a->roles() as $r)
+                                            @foreach($a->role as $r)
                                                 @if($r->name == $role->name)
                                                     @php $selected = "selected=''";@endphp
                                                     @php break; @endphp

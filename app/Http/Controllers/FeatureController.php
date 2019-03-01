@@ -43,8 +43,9 @@ class FeatureController extends Controller
         return true;
     }
 
-    public function showfeature($client, $project, $release, $feature)
+    public function showfeature($project, $release, $feature)
     {
+        $client = $project->company;
         $feature = Feature::with('requirements.assignees.users', 'releases.projects', 'fstatus')->where('id', $feature->id)->first();
         $featureid = $feature->feature_uuid;
         $requirementcount = Status::withCount(['requirements' => function ($q) use ($featureid) {
@@ -58,12 +59,12 @@ class FeatureController extends Controller
     }
 
 
-    public function add($client, $project, $release, $version, $release_name)
+    public function add($project, $release, $version, $release_name)
     {
         return view('features.add_feature', compact('release', 'project'));
     }
 
-    public function store($client, $project, $release, FeatureRequest $request)
+    public function store($project, $release, FeatureRequest $request)
     {
         $feature = new Feature();
         $feature->feature_uuid = Uuid::generate(4);
@@ -118,17 +119,18 @@ class FeatureController extends Controller
                 }
             }
         }
-        return redirect(route('showrelease', [$client->path, $project->path,
+        return redirect(route('showrelease', [ $project->path,
             $release->path, $release->version]));
     }
 
-    public function editFeature($client, $project, $release, $feature)
+    public function editFeature($project, $release, $feature)
     {
+        $client = $project->company;
         $revisions = FeatureRevision::where('feature_id', $feature->feature_uuid)->orderby('created_at', 'desc')->get();
         return view('features.edit_feature', compact('feature', 'project', 'release', 'client', 'revisions'));
     }
 
-    public function updateFeature($client, $project, $release, $feature, FeatureRequest $request)
+    public function updateFeature($project, $release, $feature, FeatureRequest $request)
     {
         $status = Status::Type('Progress')->where('id', $request->feature_status)->first();
 
@@ -235,11 +237,11 @@ class FeatureController extends Controller
                 Requirement::where('feature_uuid', $feature->feature_uuid)->delete();
             }
 
-            return redirect(route('showfeature', [$client->path, $project->path, $release->path, $feature->id]));
+            return redirect(route('showfeature', [ $project->path, $release->path, $feature->id]));
         }
     }
 
-    public function deleteFeature($client, $project, $release, $feature)
+    public function deleteFeature($project, $release, $feature)
     {
         $requirement = Requirement::where('feature_uuid', $feature->feature_uuid)->get();
         foreach ($requirement as $r) {
@@ -248,6 +250,6 @@ class FeatureController extends Controller
         Requirement::where('feature_uuid', $feature->feature_uuid)->delete();
         Feature::find($feature->id)->delete();
 
-        return redirect(route('showrelease', [$client->path, $project->path, $release->path, $release->version]));
+        return redirect(route('showrelease', [ $project->path, $release->path, $release->version]));
     }
 }

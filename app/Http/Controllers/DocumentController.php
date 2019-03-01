@@ -126,7 +126,7 @@ class DocumentController extends Controller
         $document->status = $request->status;
 
         $document->save();
-        return redirect()->route('showdocument', [$client->path, $project->path, $document->id]);
+        return redirect()->route('showdocument', [ $project->path, $document->id]);
     }
 
     public function deleteFile($document)
@@ -146,6 +146,6 @@ class DocumentController extends Controller
         $this->createRevision($document);
         $this->deleteFile($document->id);
         $document->delete();
-        return redirect()->action('DocumentController@overviewDocuments', [$client->path,$project->path]);
+        return redirect()->action('DocumentController@overviewDocuments', [$project->path]);
     }
 }

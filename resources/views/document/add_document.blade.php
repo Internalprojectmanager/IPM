@@ -17,7 +17,7 @@
     @endif
 
 
-    <form action="{{route('storedocument', [$client->path, $project->path])}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('storedocument', [ $project->path])}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input name="_method" type="hidden" value="PUT">
         <h3>Document</h3>

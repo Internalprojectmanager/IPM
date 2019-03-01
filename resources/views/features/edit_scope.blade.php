@@ -33,11 +33,11 @@
                 </div>
             @endif
                 <a class="btn-edit delete-button" id="modal-delete"
-                   href="{{route('deletefeature', [$client->path, $project->path, $release->path,$feature->id])}}"
+                   href="{{route('deletefeature', [ $project->path, $release->path,$feature->id])}}"
                    onclick="return confirm('Are you sure you want to delete this Client?');">
                     <i class="far fa-times-circle white"></i>
                     <span class="white">Delete</span></a>
-            <form action="{{route('updateFeature', [$client->path, $project->path, $release->path, $feature->id])}}"
+            <form action="{{route('updateFeature', [ $project->path, $release->path, $feature->id])}}"
                   method="post">
                 {{ csrf_field() }}
                 <input type="hidden" name="type" value="{{$feature->type}}">

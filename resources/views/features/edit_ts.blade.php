@@ -1,5 +1,4 @@
-<div class="modal modal-lg" id="editFeatureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-     aria-hidden="true">
+<div class="modal modal-lg" id="editFeatureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
             <label>Edit TS</label>
@@ -24,24 +23,23 @@
         </div>
         <div class="modal-body">
             @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
-                <a class="btn-edit delete-button" id="modal-delete"
-                   href="{{route('deletefeature', [$client->path, $project->path, $release->path,$feature->id])}}"
-                   onclick="return confirm('Are you sure you want to delete this Client?');">
-                    <i class="far fa-times-circle white"></i>
-                    <span class="white">Delete</span></a>
-            <form action="{{route('updateFeature', [$client->path, $project->path, $release->path, $feature->id])}}"
-                  method="post">
+            <a class="btn btn-edit delete-button pull-right" href="{{route('deletefeature', [ $project->path, $release->path,$feature->id])}}"
+                onclick="return confirm('Are you sure you want to delete this TS?');">
+                <i class="far fa-times-circle white"></i>
+                <span class="white">Delete</span></a>
+
+            <form action="{{route('updateFeature', [ $project->path, $release->path, $feature->id])}}" method="post">
                 {{ csrf_field() }}
                 <input type="hidden" name="type" value="{{$feature->type}}">
-                <div class="form-group">
+                <div class="form-group" style="margin-top: 30px">
                     <div class="form-group">
                         <label for="featurename">TS name: <span class="required">*</span></label>
                         <input type="text" class="form-control input-text-modal" required name="feature_name" id="feature_name" value="{{$feature->name}}">
@@ -49,8 +47,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description:</label>
-                        <textarea rows="4" cols="50" name="feature_description" class="form-control input-text-modal"
-                                  id="description">{{$feature->description}}</textarea>
+                        <textarea rows="4" cols="50" name="feature_description" class="form-control input-text-modal" id="description">{{$feature->description}}</textarea>
 
                     </div>
                     <div class="form-group">
@@ -76,17 +73,13 @@
                 <div id="tsreq" class="tabset" role="tablist">
                     <!-- Tab 1 -->
 
-                    @php $i = 1; @endphp
-                    @if($feature->requirements->count() == 0)
-                    <input type="radio" class="ts-tabs tab" name="ts-tabsetreq" id="ts-tab{{$i}}" aria-controls="ts-req{{$i}}" @if($i == 1) @endif>
-                    <label id="ts-tablabel{{$i}}" class="non-cursive" for="ts-tab{{$i}}">TS Requirement 1 <button class="remove_feature" id="{{$i}}" type="button">×</button></label>
-                    @endif
-
-                @foreach($feature->requirements as $r)
-                    <input type="radio" class="ts-tabs tab" name="ts-tabsetreq" id="ts-tab{{$i}}" aria-controls="ts-req{{$i}}" @if($i == 1) @endif>
-                    <label id="ts-tablabel{{$i}}" class="non-cursive" for="ts-tab{{$i}}">{{$r->name}} <button class="remove_feature" id="{{$i}}" type="button">×</button></label>
-                    @php $i++; @endphp
-                    @endforeach
+                    @php $i = 1; 
+@endphp @if($feature->requirements->count() == 0)
+                    <input type="radio" class="ts-tabs tab" name="ts-tabsetreq" id="ts-tab{{$i}}" aria-controls="ts-req{{$i}}" @if($i==1 ) @endif>
+                    <label id="ts-tablabel{{$i}}" class="non-cursive" for="ts-tab{{$i}}">TS Requirement 1 <button class="remove_feature" id="{{$i}}" type="button">×</button></label>                    @endif @foreach($feature->requirements as $r)
+                    <input type="radio" class="ts-tabs tab" name="ts-tabsetreq" id="ts-tab{{$i}}" aria-controls="ts-req{{$i}}" @if($i==1 ) @endif>
+                    <label id="ts-tablabel{{$i}}" class="non-cursive" for="ts-tab{{$i}}">{{$r->name}} <button class="remove_feature" id="{{$i}}" type="button">×</button></label>                    @php $i++; 
+@endphp @endforeach
                     <i id="more-ts"></i>
                     <!-- Tab 2 -->
                     <input type="radio" class="btn-primary tab" name="ts-tabsetreq" id="ts-newreq">
@@ -107,56 +100,49 @@
                                 <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))
                                         (<i>{{$u->users->jobtitles->name}}</i>)@endif</option>
                             @endforeach
-                        </select>
+                        </select> @php $i = 1; 
+@endphp @if($feature->requirements->count() == 0)
+                        <section id="ts-req{{$i}}" class="tab-panel">
+                            <input type="hidden" name="requirement_uuid[{{$i}}]">
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-md-12">
+                                    <label>Requirement Name</label>
+                                    <input type="text" class="form-control input-text-modal requirement_name" name="requirement_name[{{$i}}]" id="" placeholder=""
+                                        value="">
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Description:</label>
+                                    <textarea rows="4" cols="50" name="requirement_description[{{$i}}]" class="form-control input-text-modal" id="description"></textarea>
 
-                        @php $i = 1; @endphp
-                        @if($feature->requirements->count() == 0)
-                            <section id="ts-req{{$i}}" class="tab-panel">
-                                <input type="hidden" name="requirement_uuid[{{$i}}]">
-                                <div class="row" style="margin-bottom: 10px;">
-                                    <div class="col-md-12">
-                                        <label>Requirement Name</label>
-                                        <input type="text" class="form-control input-text-modal requirement_name" name="requirement_name[{{$i}}]"
-                                               id="" placeholder="" value="">
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>Description:</label>
-                                        <textarea rows="4" cols="50" name="requirement_description[{{$i}}]"
-                                                  class="form-control input-text-modal" id="description"></textarea>
-
-                                    </div>
-                                    <div class="col-md-12 assignee">
-                                        <label>Assingees:</label>
-                                        <select class="form-control input-text-modal selectpicker" name="assignee[{{$i}}][]"
-                                                multiple>
+                                </div>
+                                <div class="col-md-12 assignee">
+                                    <label>Assingees:</label>
+                                    <select class="form-control input-text-modal selectpicker" name="assignee[{{$i}}][]" multiple>
                                             @foreach($user as $u)
                                                 <option value="{{$u->users->id}}">{{$u->users->first_name}} {{$u->users->last_name}} @if(isset($u->users->jobtitles))
                                                         (<i>{{$u->users->jobtitles->name}}</i>) @endif</option>
                                             @endforeach
                                         </select>
-                                    </div>
                                 </div>
-                            </section>
-                        @endif
-                        @foreach($feature->requirements as $r)
+                            </div>
+                        </section>
+                        @endif @foreach($feature->requirements as $r)
                         <section id="ts-req{{$i}}" class="tab-panel {{$i}}">
                             <input type="hidden" name="requirement_uuid[{{$i}}]" value="{{$r->requirement_uuid}}">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-12">
                                     <label>Requirement Name</label>
-                                    <input type="text" class="form-control input-text-modal requirement_name" name="requirement_name[{{$i}}]"
-                                           id="" placeholder="" value="{{$r->name}}">
+                                    <input type="text" class="form-control input-text-modal requirement_name" name="requirement_name[{{$i}}]" id="" placeholder=""
+                                        value="{{$r->name}}">
                                 </div>
                                 <div class="col-md-12">
                                     <label>Description:</label>
-                                    <textarea rows="4" cols="50" name="requirement_description[{{$i}}]"
-                                              class="form-control input-text-modal" id="description">{{$r->description}}</textarea>
+                                    <textarea rows="4" cols="50" name="requirement_description[{{$i}}]" class="form-control input-text-modal" id="description">{{$r->description}}</textarea>
 
                                 </div>
                                 <div class="col-md-12 assignee">
                                     <label>Assingees:</label>
-                                    <select class="form-control input-text-modal selectpicker" name="assignee[{{$i}}][]"
-                                            multiple>
+                                    <select class="form-control input-text-modal selectpicker" name="assignee[{{$i}}][]" multiple>
                                         @foreach($user as $u)
                                                 <option value="{{$u->users->id}}"
                                                 @foreach($r->assignees as $as)
@@ -171,8 +157,8 @@
                                 </div>
                             </div>
                         </section>
-                        @php $i++; @endphp
-                        @endforeach
+                        @php $i++; 
+@endphp @endforeach
                     </div>
                 </div>
                 <div class="modal-footer row" style="border:none;">
@@ -185,7 +171,7 @@
                         </button>
                     </div>
             </form>
+            </div>
         </div>
     </div>
-</div>
 </div>

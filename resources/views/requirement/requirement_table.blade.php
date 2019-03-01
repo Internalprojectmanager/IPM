@@ -1,6 +1,6 @@
 <div class="requirement-results">
     <div class="row under-details requirement-table">
-        <span class="block-white-title">All requirements</span>
+        <span class="block-white-title h3 black">All requirements</span>
         <span class="block-white-subtitle">
                 <span id="count_projects_bar">|</span>
                 <span class="counter">{{$feature->requirements->count()}} Requirements</span>
@@ -8,8 +8,9 @@
                 <span class="counter">{{$requirementcount}}/{{$feature->requirements->count()}} Done</span>
             </span>
     </div>
-    <div class="row requirement-table">
-        <form action="{{route('requirementsavestatus', ['company_id' => $feature->releases->projects->company_id, 'name' => $feature->releases->projects->name,
+    <div class="requirements-results header-3">
+    <div class="row requirement-table table-responsive">
+        <form action="{{route('requirementsavestatus', ['name' => $feature->releases->projects->name,
             'release_name' => $feature->releases->name, 'feature_id' => $feature->id])}}" method="post" id="assignee_update">
             <table class="table table-hover table-center results">
                 <thead>
@@ -70,11 +71,12 @@
                             @endforeach
                         </td>
                         <td><a href="{{route('editRequirement',
-                             [$client->path, $project->path, $release->path, $feature->id, $requirement->id])}}"> <span class="glyphicon edit-icon"></span> </a></td>
+                             [ $project->path, $release->path, $feature->id, $requirement->id])}}"> <span class="glyphicon edit-icon"></span> </a></td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </form>
+    </div>
     </div>
 </div>

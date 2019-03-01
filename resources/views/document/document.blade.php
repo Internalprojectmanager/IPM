@@ -10,7 +10,7 @@
 @section('content')
 
     <div class="row">
-        <a class="black" href="{{route('adddocument', [$client->path, $project->path])}}">
+        <a class="black" href="{{route('adddocument', [ $project->path])}}">
             <button class="btn-primary">
                 Add Document <span class="icon-right glyphicon glyphicon-plus"></span>
             </button></a>

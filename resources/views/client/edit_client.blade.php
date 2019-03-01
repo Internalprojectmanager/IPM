@@ -24,22 +24,18 @@
         <form action="{{route('updateclients', $client->path)}}" method="POST">
             {{ csrf_field() }}
             <div class="modal-body">
-                <div class="form-group">
-                    <div class="" align="right">
-                        <a class="btn-edit delete-button" id=""
-                           href="{{route('deleteclient', [$client->path])}}"
-                           onclick="return confirm('Are you sure you want to delete this Client?');">
-                            <i class="far fa-times-circle white"></i>
-                            <span class="white">Delete</span></a>
-                    </div>
-                </div>
                 @include('client.form')
             </div>
             <div class="modal-footer row" style="border:none;">
                 <div class="col-md-6" align="left">
-                    <button type="button" class="btn-cancel" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancel</button>
                 </div>
                 <div class="col-md-6" align="right">
+                    <a class="btn btn-edit delete-button" id=""
+                       href="{{route('deleteclient', [$client->path])}}"
+                       onclick="return confirm('Are you sure you want to delete this Client?');">
+                        <i class="far fa-times-circle white"></i>
+                        <span class="white">Delete</span></a>
                     <button class="btn btn-primary" type="submit">
                         Save Client<span class="icon-right glyphicon glyphicon-plus">
                     </button>
