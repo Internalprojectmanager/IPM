@@ -115,8 +115,8 @@ class LoginController extends Controller
             switch ($provider) {
                 case "google":
                     $authUser = User::create([
-                        'first_name' => $user->user['name']['givenName'],
-                        'last_name' => $user->user['name']['familyName'],
+                        'first_name' => $user->user['given_name'],
+                        'last_name' => $user->user['family_name'],
                         'email' => $user->email,
                         'provider' => $provider,
                         'provider_id' => $user->id
