@@ -32,12 +32,12 @@ Breadcrumbs::register('projects', function ($breadcrumbs) {
 
 Breadcrumbs::register('singleproject', function ($breadcrumbs, $projects) {
     $breadcrumbs->parent('projects');
-    $breadcrumbs->push($projects->name, route('projectdetails', [$projects->company->path, $projects->path]));
+    $breadcrumbs->push($projects->name, route('projectdetails', [ $projects->path]));
 });
 
 Breadcrumbs::register('editproject', function ($breadcrumbs, $projects) {
     $breadcrumbs->parent('singleproject', $projects);
-    $breadcrumbs->push('Edit', route('editproject', [$projects->company->path, $projects->path]));
+    $breadcrumbs->push('Edit', route('editproject', [ $projects->path]));
 });
 
 Breadcrumbs::register('addproject', function ($breadcrumbs) {
@@ -48,12 +48,12 @@ Breadcrumbs::register('addproject', function ($breadcrumbs) {
 //Release
 Breadcrumbs::register('addrelease', function ($breadcrumbs, $projects) {
     $breadcrumbs->parent('singleproject', $projects);
-    $breadcrumbs->push('New Release', route('addrelease', [$projects->company->path, $projects->path]));
+    $breadcrumbs->push('New Release', route('addrelease', [ $projects->path]));
 });
 
 Breadcrumbs::register('showrelease', function ($breadcrumbs, $projects, $release) {
     $breadcrumbs->parent('singleproject', $projects);
-    $breadcrumbs->push(number_format($release->version, 1)." ".$release->name, route('showrelease', [$projects->company->path, $projects->path,$release->path, $release->version ]));
+    $breadcrumbs->push(number_format($release->version, 1)." ".$release->name, route('showrelease', [$projects->path,$release->path, $release->version ]));
 });
 
 Breadcrumbs::register('editrelease', function ($breadcrumbs, $projects, $release) {

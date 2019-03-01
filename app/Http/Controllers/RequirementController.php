@@ -22,14 +22,14 @@ class RequirementController extends Controller
     //add  Requirement
     public function addRequirement($company_id, $name, $release_name)
     {
-
         $project = Project::where(['name' => $name, 'company_id' => $company_id])->first();
         $release = Release::where(['project_id' => $project->id, 'name' => $release_name])->first();
         return view('requirement.add_requirement', compact('release', 'project'));
     }
 
-    public function storeRequirement(Request $request, $client, $project, $release, $feature)
+    public function storeRequirement(Request $request, $project, $release, $feature)
     {
+        $client = $project->company;
         $requirement = new Requirement();
         $requirement->requirement_uuid = \Webpatser\Uuid\Uuid::generate(4);
         $requirement->feature_uuid = $feature->feature_uuid;
@@ -112,15 +112,17 @@ class RequirementController extends Controller
         return view('requirement.details_requirement', compact('requirement'));
     }
 
-    public function editRequirement($client, $project, $release, $feature, $requirement)
+    public function editRequirement($project, $release, $feature, $requirement)
     {
+        $client = $project->company;
         $user = Assignee::where('uuid', $project->id)->select('userid')->distinct()->get();
         $users = User::all();
         return view('requirement.edit_requirement', compact('client', 'project', 'release', 'feature', 'requirement', 'users', 'user'));
     }
 
-    public function updateRequirement($client, $project, $release, $feature, $requirement, Request $request)
+    public function updateRequirement($project, $release, $feature, $requirement, Request $request)
     {
+        $client = $project->company;
         $requirement->name = $request->requirement_name;
         $requirement->description = $request->requirement_description;
         $requirement->author = \Auth::id();
