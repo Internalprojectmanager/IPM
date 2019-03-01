@@ -236,7 +236,8 @@ input, textarea {
 .feature-results,
 .nonfunctional-results,
 .scope-results,
-.ts-results {
+.ts-results,
+.requirements-results{
   padding: 10px 15px;
 }
 
@@ -386,8 +387,9 @@ label {
   line-height: 20px;
 }
 
-table {
+table, .table {
   width: calc(100% - 1px) !important;
+
   > tbody {
     background-color: white;
 
@@ -395,917 +397,917 @@ table {
       background-color: white;
       height: 80px;
     }
+  }
 
-    > thead > tr > th {
-      border-bottom: none;
-      color: #898989;
-      font-weight: 400;
-    }
+  > thead > tr > th {
+    border-bottom: none;
+    color: #898989 !important;
+    font-weight: 400;
   }
 }
 
 
-  .form-forgot-field button {
-    margin-top: 20px;
-  }
+.form-forgot-field button {
+  margin-top: 20px;
+}
 
-  .bootstrap-select > .btn {
-    font-size: unset;
-    text-transform: unset;
-    padding: 6px 12px;
-  }
+.bootstrap-select > .btn {
+  font-size: unset;
+  text-transform: unset;
+  padding: 6px 12px;
+}
 
-  .btn {
-    border: none;
-    border-radius: 0;
-    font-size: 15px;
-    text-transform: uppercase;
-    padding: 12px 20px;
-    font-weight: normal;
-    box-shadow: none;
-    outline: 0;
-  }
+.btn {
+  border: none;
+  border-radius: 0;
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  font-weight: normal;
+  box-shadow: none;
+  outline: 0;
+}
 
-  .btn-danger {
-    background-color: $orange;
-    color: $white;
-  }
+.btn-danger {
+  background-color: $orange;
+  color: $white;
+}
 
-  .btn-primary {
+.btn-primary {
+  background-color: $yellow;
+  color: $black;
+
+  &:active,
+  &:focus,
+  &:hover {
     background-color: $yellow;
-    color: $black;
-
-    &:active,
-    &:focus,
-    &:hover {
-      background-color: $yellow;
-    }
   }
+}
 
-  .btn-edit {
+.btn-edit {
+  background-color: $light-grey;
+  color: $black;
+  margin-left: -4px;
+
+  &:active,
+  &:focus,
+  &:hover {
     background-color: $light-grey;
-    color: $black;
-    margin-left: -4px;
-
-    &:active,
-    &:focus,
-    &:hover {
-      background-color: $light-grey;
-    }
   }
+}
 
-  .btn-save {
-    color: $white;
-    background: $green url("/../svg/save.svg") no-repeat 10px center;
-    text-align: right;
-    padding: 12px 22px 12px 40px;
+.btn-save {
+  color: $white;
+  background: $green url("/../svg/save.svg") no-repeat 10px center;
+  text-align: right;
+  padding: 12px 22px 12px 40px;
 
-    &:active,
-    &:focus,
-    &:hover {
-      background-color: $green;
-    }
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: $green;
   }
+}
 
-  .btn-delete {
-    color: white;
-    background: $red url("/../svg/delete.svg") no-repeat 10px center;
-    text-align: right;
-    padding-right: 18px;
+.btn-delete {
+  color: white;
+  background: $red url("/../svg/delete.svg") no-repeat 10px center;
+  text-align: right;
+  padding-right: 18px;
 
-  }
+}
 
-  .delete-button,
-  .delete-button:hover {
-    background-color: #F54949;
-    border: none;
-  }
+.delete-button,
+.delete-button:hover {
+  background-color: #F54949;
+  border: none;
+}
 
-  .btn-cancel {
-    background: $white url("/../svg/cancel.svg") no-repeat 15px center;
+.btn-cancel {
+  background: $white url("/../svg/cancel.svg") no-repeat 15px center;
+  color: $orange2;
+  text-align: right;
+  padding: 12px 22px 12px 40px;
+  font-size: 15px;
+
+  &:active {
     color: $orange2;
-    text-align: right;
-    padding: 12px 22px 12px 40px;
-    font-size: 15px;
-
-    &:active {
-      color: $orange2;
-    }
   }
+}
 
-  .btn-noback {
-    background: none;
-    padding: 12px 20px;
-    border: 1px solid $light-blue;
-    color: $black;
-    font-size: 15px;
-    line-height: 18px;
-  }
+.btn-noback {
+  background: none;
+  padding: 12px 20px;
+  border: 1px solid $light-blue;
+  color: $black;
+  font-size: 15px;
+  line-height: 18px;
+}
 
-  .btn-default {
-    border: 1px solid #ccc !important;
-  }
+.btn-default {
+  border: 1px solid #ccc !important;
+}
 
-  .btn-second {
-    color: $white;
-    background-color: $blue;
-    border-color: $dark-blue;
-  }
+.btn-second {
+  color: $white;
+  background-color: $blue;
+  border-color: $dark-blue;
+}
 
-  .icon-right {
-    float: right;
-    vertical-align: middle;
-    top: 4px;
-  }
+.icon-right {
+  float: right;
+  vertical-align: middle;
+  top: 4px;
+}
 
-  .block-white {
-    margin-top: 38px;
-    margin-bottom: 20px;
-    background-color: white;
-    border: 1px solid #CECECE;
-    padding: 2rem;
-    vertical-align: middle;
-
-    .form-group {
-      margin-bottom: 0;
-      margin-top: 0;
-    }
-
-    > div:first-of-type {
-      margin-top: 5px;
-    }
-
-    .block-white-title {
-      font-size: 24px;
-      line-height: 28px;
-    }
-
-    .block-white-subtitle {
-      font-size: 14px;
-      line-height: 16px;
-      color: $grey;
-
-    }
-  }
-
-  .breadcrumb .active,
-  .pagination .active {
-    border-left: none;
-  }
-
-  /* SEARCH FIELD */
-  .no-result,
-  .results tr[visible='false'] {
-    display: none;
-  }
-
-  .results tr[visible='true'] {
-    display: table-row;
-  }
-
-  .contenttype,
-  .counter {
-    font-size: 14px;
-    line-height: 16px;
-    color: #898989;
-    padding: 30px 0 24px;
-  }
-
-  .contenttype {
-    padding-right: 12px;
-  }
-
-  .searchfield {
-    background: #ffffff url("/../svg/search.svg") no-repeat calc(100% - 15px);
-    background-size: 20px 20px;
-    width: 100%;
-    height: 36px;
-    border: 1px solid #F2F2F2 !important;
-    padding-right: 30px;
-    padding-left: 15px;
-    border-radius: 0;
-    box-shadow: none;
-    margin: 0 auto;
-
-    &::placeholder {
-      height: 19px;
-      width: 43px;
-      opacity: .5;
-      color: #535353;
-      font-size: 14px;
-      line-height: 19px;
-    }
-  }
-
-  .dropdown-search {
-    background: #ffffff url("/../svg/dropdown-2.svg") no-repeat calc(100% - 15px) center;
-    background-size: 12px;
-    width: 100%;
-    height: 36px;
-    border: 1px solid #F2F2F2;
-    padding-right: 30px;
-    padding-left: 15px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    color: #535353;
-    font-size: 14px;
-    border-radius: 0;
-  }
-
-  .dropdown-settings {
-    background: #ffffff url("/../svg/dropdown-2.svg") no-repeat 250px center;
-    background-size: 12px;
-    width: 280px;
-    height: 36px;
-    padding-right: 30px;
-    padding-left: 15px;
-    margin-left: 0;
-    float: left;
-    -webkit-appearance: none;
-    color: #535353;
-    font-size: 14px;
-    border-radius: 0;
-  }
-
-  .dropdown-search option {
-    color: #535353;
-    font-size: 14px;
-  }
-
-  #count_projects_bar {
-    color: #333333;
-    font-weight: bolder;
-    padding: 12px;
-  }
-
-  /* END OF SEARCH FIELD */
-
-  .recent-projects {
-    vertical-align: middle;
-    font-size: 13px;
-    line-height: 20px;
-  }
-
-  .recent-projects:first-child {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .recent-projects a {
-    text-decoration: underline;
-    color: black;
-  }
-
-  .supertitle {
-    font-size: 72px;
-    line-height: 85px;
-    text-align: center;
-    font-weight: bold;
-  }
-
-  .undertitle {
-    margin-top: 20px;
-  }
-
-  .form-control-login,
-  .form-control-login:focus,
-  .form-control-login:hover {
-    width: 300px;
-    margin: 0 auto;
-    border: 1px solid #9B9B9B;
-    height: 36px;
-    border-radius: 0;
-    box-shadow: none;
-  }
+.block-white {
+  margin-top: 38px;
+  margin-bottom: 20px;
+  background-color: white;
+  border: 1px solid #CECECE;
+  padding: 2rem;
+  vertical-align: middle;
 
   .form-group {
-    margin-top: 20px;
+    margin-bottom: 0;
+    margin-top: 0;
   }
 
-  .btn-link {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #535353;
+  > div:first-of-type {
+    margin-top: 5px;
   }
 
-  .margin-top-50 {
-    margin-top: 50px;
+  .block-white-title {
+    font-size: 24px;
+    line-height: 28px;
   }
 
-  .form-forgot-field,
-  .form-settings-field {
-    float: left;
-  }
-
-  .form-settings-field,
-  .form-settings-field:focus,
-  .form-settings-field:hover {
-    width: 350px;
-    float: left;
-  }
-
-  .form-settings-field .btn-save {
-    margin-top: 20px;
-    margin-right: 70px;
-  }
-
-  .form-settings-field input,
-  .form-settings-field input:focus,
-  .form-settings-field input:hover {
-    width: 280px;
-    margin: 0 auto;
-    border: 1px solid #9B9B9B;
-    height: 36px;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .success {
-    color: $green;
-  }
-
-  td > div > .assignee {
-    color: #898989;
-    text-transform: capitalize;
-  }
-
-  .more {
-    color: #898989;
-  }
-
-  /* Project details */
-  .clientdetails {
-    #document-details,
-    #project-details {
-      height: auto;
-      padding: 20px 20px 17px;
-      position: relative;
-      margin-bottom: 30px;
-    }
-
-    i {
-      > .block-value {
-        padding-left: 15px;
-
-      }
-
-      > .block-value-2 {
-        padding-left: 30px;
-
-      }
-
-    }
-  }
-
-  .projectdetails,
-  .showfeature,
-  .showrelease {
-    #document-details,
-    #project-details {
-      height: auto;
-      padding: 20px 20px 62px;
-      position: relative;
-      margin-bottom: 30px;
-    }
-
-    i > .block-value {
-      padding-left: 15px;
-    }
-
-  }
-
-  #document-details {
-    height: auto;
-  }
-
-  .download {
-    border: 1px solid black;
-    padding: 14px 15px;
-    color: black;
-    vertical-align: middle;
-  }
-
-  .download span {
-    margin-top: auto;
-    margin-bottom: auto;
-    vertical-align: middle;
-    right: 0;
-  }
-
-  .project-title {
-    color: #898989;
+  .block-white-subtitle {
     font-size: 14px;
     line-height: 16px;
-  }
+    color: $grey;
 
-  .project-detail a {
-    color: #000000;
+  }
+}
+
+.breadcrumb .active,
+.pagination .active {
+  border-left: none;
+}
+
+/* SEARCH FIELD */
+.no-result,
+.results tr[visible='false'] {
+  display: none;
+}
+
+.results tr[visible='true'] {
+  display: table-row;
+}
+
+.contenttype,
+.counter {
+  font-size: 14px;
+  line-height: 16px;
+  color: #898989;
+  padding: 30px 0 24px;
+}
+
+.contenttype {
+  padding-right: 12px;
+}
+
+.searchfield {
+  background: #ffffff url("/../svg/search.svg") no-repeat calc(100% - 15px);
+  background-size: 20px 20px;
+  width: 100%;
+  height: 36px;
+  border: 1px solid #F2F2F2 !important;
+  padding-right: 30px;
+  padding-left: 15px;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0 auto;
+
+  &::placeholder {
+    height: 19px;
+    width: 43px;
+    opacity: .5;
+    color: #535353;
     font-size: 14px;
     line-height: 19px;
   }
+}
 
-  /* buttons */
-  .blue-button {
-    height: 45px;
-    background-color: #5D99CA;
-    border: none;
-  }
+.dropdown-search {
+  background: #ffffff url("/../svg/dropdown-2.svg") no-repeat calc(100% - 15px) center;
+  background-size: 12px;
+  width: 100%;
+  height: 36px;
+  border: 1px solid #F2F2F2;
+  padding-right: 30px;
+  padding-left: 15px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: #535353;
+  font-size: 14px;
+  border-radius: 0;
+}
 
-  .button-content {
-    height: 18px;
-    color: #FFFFFF;
-    font-size: 15px;
-    line-height: 18px;
-  }
+.dropdown-settings {
+  background: #ffffff url("/../svg/dropdown-2.svg") no-repeat 250px center;
+  background-size: 12px;
+  width: 280px;
+  height: 36px;
+  padding-right: 30px;
+  padding-left: 15px;
+  margin-left: 0;
+  float: left;
+  -webkit-appearance: none;
+  color: #535353;
+  font-size: 14px;
+  border-radius: 0;
+}
 
-  /* release overview */
-  .yellow-button {
-    height: 18px;
-    width: 95px;
-    color: #000000;
-    font-size: 15px;
-    line-height: 18px;
-  }
+.dropdown-search option {
+  color: #535353;
+  font-size: 14px;
+}
 
-  #addrelease {
-    position: absolute;
-    left: 155px;
-    margin-top: 30px;
-  }
+#count_projects_bar {
+  color: #333333;
+  font-weight: bolder;
+  padding: 12px;
+}
 
-  #release-button {
-    position: absolute;
-    left: 15px;
-    top: 14px;
-  }
+/* END OF SEARCH FIELD */
 
-  #release-plus {
-    position: absolute;
-    left: 130px;
-    top: 15px;
-  }
+.recent-projects {
+  vertical-align: middle;
+  font-size: 13px;
+  line-height: 20px;
+}
 
-  #requirement-overview td:first-child,
-  #requirement-overview th:first-child {
-    padding-left: 35px;
-  }
+.recent-projects:first-child {
+  padding-left: 0;
+  padding-right: 0;
+}
 
-  #requirement-overview td:first-child {
-    border-left: 1px solid #CECECE;
+.recent-projects a {
+  text-decoration: underline;
+  color: black;
+}
 
-  }
+.supertitle {
+  font-size: 72px;
+  line-height: 85px;
+  text-align: center;
+  font-weight: bold;
+}
 
-  .black-button {
-    height: 15px;
-    width: 50px;
-    background-color: #000000;
-    border: none;
-    display: block;
-  }
+.undertitle {
+  margin-top: 20px;
+}
 
-  #black-button-down {
-    background: #000000 url('/../svg/more-info-down.svg') no-repeat center;
+.form-control-login,
+.form-control-login:focus,
+.form-control-login:hover {
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid #9B9B9B;
+  height: 36px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.form-group {
+  margin-top: 20px;
+}
+
+.btn-link {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #535353;
+}
+
+.margin-top-50 {
+  margin-top: 50px;
+}
+
+.form-forgot-field,
+.form-settings-field {
+  float: left;
+}
+
+.form-settings-field,
+.form-settings-field:focus,
+.form-settings-field:hover {
+  width: 350px;
+  float: left;
+}
+
+.form-settings-field .btn-save {
+  margin-top: 20px;
+  margin-right: 70px;
+}
+
+.form-settings-field input,
+.form-settings-field input:focus,
+.form-settings-field input:hover {
+  width: 280px;
+  margin: 0 auto;
+  border: 1px solid #9B9B9B;
+  height: 36px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.success {
+  color: $green;
+}
+
+td > div > .assignee {
+  color: #898989;
+  text-transform: capitalize;
+}
+
+.more {
+  color: #898989;
+}
+
+/* Project details */
+.clientdetails {
+  #document-details,
+  #project-details {
+    height: auto;
+    padding: 20px 20px 17px;
     position: relative;
-    margin: auto;
-
-  }
-
-  .black-button-up {
-    background: #000000 url('/../svg/more-info-up.svg') no-repeat center !important;
-  }
-
-  #arrow {
-    margin: 3px;
-    height: 9px;
-    width: 15px;
-  }
-
-  .results > thead > tr > th > a {
-    color: #898989;
-  }
-
-  .under-details {
     margin-bottom: 30px;
   }
 
-  .show {
-    overflow: auto !important;
-    height: auto !important;
-    max-height: none !important;
-    min-height: 90px;
+  i {
+    > .block-value {
+      padding-left: 15px;
 
-    &:after {
-      display: none !important;
     }
-  }
 
-  #block-hidden {
-    overflow: hidden;
-    height: 90px;
-    max-height: 90px;
+    > .block-value-2 {
+      padding-left: 30px;
+
+    }
+
+  }
+}
+
+.projectdetails,
+.showfeature,
+.showrelease {
+  #document-details,
+  #project-details {
+    height: auto;
+    padding: 20px 20px 62px;
     position: relative;
-  }
-
-  #block-hidden:after {
-    display: inline-block;
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    padding: 10px 0;
-
-    /* "transparent" only works here because == rgba(0,0,0,0) */
-    background-image: linear-gradient(to bottom, transparent, white);
-
-  }
-
-  #button-files,
-  #button-people {
-    width: 140px;
-  }
-
-  #button-pdf {
-    width: 140px;
-  }
-
-  #button-top {
-    width: 100%;
-    margin-top: 2px;
-  }
-
-  #paperclip-icon,
-  #pdf-icon,
-  #people-icon {
-    margin-right: 5px;
-  }
-
-  #no-buttons {
-    height: 45px;
-    width: 100%;
-  }
-
-  .edit-button {
-    height: 45px;
-    width: 96px;
-    background-color: #9B9B9B;
-    border: none;
-  }
-
-  #project-edit {
-    position: absolute;
-    top: 8.6rem;
-    right: 5rem;
-  }
-
-  .edit-content {
-    color: #000000;
-  }
-
-  #edit-content {
-    position: absolute;
-    right: 21px;
-    top: 14px;
-  }
-
-  #edit-logo {
-    position: absolute;
-    top: 13px;
-    left: 15px;
-  }
-
-  .edit-title {
-    color: #898989;
-    font-size: 14px;
-  }
-
-  #edit-project {
-    left: 140px;
-    top: 143px;
-    right: 30px;
-    min-height: 100%;
-    transition: all .3s linear;
-    padding: 30px;
-  }
-
-  #company {
-    height: 36px;
-    width: 100%;
-    border: 1px solid #9B9B9B;
-    background-color: #FFFFFF;
-  }
-
-  .save-button {
-    height: 45px;
-    width: 97px;
-    background-color: rgba(107, 175, 28, 0.8);
-    border: none;
-  }
-
-  #save-button {
-    position: relative;
-  }
-
-  #description {
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 200px;
-    max-height: 200px;
-  }
-
-  .or {
-    position: relative;
-    color: #000000;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 19px;
-    top: 20px;
-    left: 50%;
-  }
-
-  #add_client {
-    position: relative;
-    left: 2%;
-  }
-
-  #button-save {
-    position: absolute;
-    right: 15px;
-    top: 14px;
-  }
-
-  #save-logo {
-    position: absolute;
-    left: 15px;
-    top: 13px;
-  }
-
-  .cancel {
-    color: #C74237;
-    font-size: 15px;
-    line-height: 18px;
-  }
-
-  .transparent-selectbox,
-  .transparent-selectbox[disabled],
-  .transparent-selectbox[readonly],
-  fieldset[disabled] {
-    border: none;
-    box-shadow: none;
-    background: transparent;
-  }
-
-  .transparent-selectbox[disabled],
-  .transparent-selectbox[readonly],
-  fieldset[disabled] {
-    color: #898989;
-    opacity: .5;
-  }
-
-  #project-delete {
-    position: relative;
-    left: 92.8%;
-  }
-
-  #modal-delete {
-    position: relative;
-    left: 86.8%;
-  }
-
-  .delete-content {
-    color: #FFFFFF;
-    font-size: 15px;
-    line-height: 18px;
-  }
-
-  #delete-content {
-    position: absolute;
-    top: 14px;
-    right: 15px;
-  }
-
-  #delete-logo {
-    position: absolute;
-    top: 13px;
-    left: 15px;
-  }
-
-  #release_version {
-    height: 36px;
-    width: 100%;
-    border: 1px solid #9B9B9B;
-    background-color: #FFFFFF;
-  }
-
-  #release_description {
-    min-height: 200px;
-    max-height: 200px;
-    min-width: 100%;
-    max-width: 100%;
-    border: 1px solid #9B9B9B;
-    background-color: #FFFFFF;
-  }
-
-  #release_name {
-    height: 36px;
-    width: 100%;
-    border: 1px solid #9B9B9B;
-    background-color: #FFFFFF;
-  }
-
-  #release_status {
-    height: 36px;
-    width: 100%;
-    border: 1px solid #9B9B9B;
-    background-color: #FFFFFF;
-  }
-
-  #release_specification {
-    position: absolute;
-    top: 535px;
-    left: 200px;
-    color: #000000;
-    font-size: 20px;
-    line-height: 24px;
-  }
-
-  #line {
-    position: absolute;
-    top: 559px;
-    left: 200px;
-    height: 2px;
-    width: 81.89%;
-    background-color: #000000;
-  }
-
-  .release_specification {
-    position: absolute;
-    top: 591px;
-    left: 200px;
-  }
-
-  #release_spectype {
-    width: 200px;
-  }
-
-  #extra_content {
-    min-height: 115px;
-    max-height: 115px;
-    min-width: 150%;
-    max-width: 150% !important;
-    border: 1px solid #9B9B9B;
-    background-color: #FFFFFF;
-  }
-
-  #edit-release {
-    padding: 30px;
-    height: 812px;
-    width: 100%;
-    background-color: #FFFFFF;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
-  }
-
-  #cancel-release {
-    position: absolute;
-    top: 824px;
-    left: 200px;
-  }
-
-  #save-button-release {
-    position: absolute;
-    top: 880px;
-    right: 92px;
-  }
-
-  .document_status {
-    position: absolute;
-    top: 591px;
-    left: 830px;
-  }
-
-  .edit-button {
-    margin-top: -45px;
-  }
-
-  .btn-a {
-    padding-top: 11px;
-  }
-
-  .requiremnt-assingee {
-    padding-left: 0;
-  }
-
-  .width25 {
-    width: 25%;
-  }
-
-  .width20 {
-    width: 20%;
-  }
-
-  .spacing-button {
-    margin: 10px;
-  }
-
-  #nfr-add-button {
-    width: 330px;
-  }
-
-  #tspecs-add-button {
-    width: 300px;
-  }
-
-  #scope-add-button {
-    width: 200px;
-  }
-
-  .remove_feature {
-    background: none;
-    border: none;
-  }
-
-  .clickable-row:hover {
-    cursor: pointer;
-  }
-
-  .its {
-    padding: 4px 5px;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    display: inline-block;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25em;
-    position: absolute;
-    margin-left: 7px;
-    margin-top: 1px;
-  }
-
-  .its-you {
-    background-color: #2ab27b;
-  }
-
-  .its-blocked {
-    background-color: #D35847;
-  }
-
-  .input-text-modal button {
-    border: 1px solid #9B9B9B;
-    background-color: #FFFFFF;
-    border-radius: 0;
-  }
-
-  #edit-project .form-group:last-of-type {
-    padding-bottom: 20px;
-  }
-
-  .editproject #edit-project,
-  .editrelease #edit-project {
-    height: 65rem;
-  }
-
-  .img-thumbnail {
-    width: 100px;
-  }
-
-  .addproject .col-md-6 {
-    padding: 0;
-  }
-
-  .team-logo {
-    height: 40px;
-    margin-right: 20px;
-    vertical-align: middle;
-
-  }
-
-  .above-white {
-    margin-bottom: -38px;
-  }
-
-  .above-white span:first-of-type {
-    padding: 0 5px;
-  }
-
-  .above-white span:first-of-type {
-    padding: 0;
-  }
-
-  footer {
-    background: black;
-    height: 23px;
-    color: white;
-    padding: 5px auto;
-    font-size: 15px;
-    border: none;
-  }
-
-  .overflow-none {
-    overflow: hidden;
-  }
+    margin-bottom: 30px;
+  }
+
+  i > .block-value {
+    padding-left: 15px;
+  }
+
+}
+
+#document-details {
+  height: auto;
+}
+
+.download {
+  border: 1px solid black;
+  padding: 14px 15px;
+  color: black;
+  vertical-align: middle;
+}
+
+.download span {
+  margin-top: auto;
+  margin-bottom: auto;
+  vertical-align: middle;
+  right: 0;
+}
+
+.project-title {
+  color: #898989;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.project-detail a {
+  color: #000000;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+/* buttons */
+.blue-button {
+  height: 45px;
+  background-color: #5D99CA;
+  border: none;
+}
+
+.button-content {
+  height: 18px;
+  color: #FFFFFF;
+  font-size: 15px;
+  line-height: 18px;
+}
+
+/* release overview */
+.yellow-button {
+  height: 18px;
+  width: 95px;
+  color: #000000;
+  font-size: 15px;
+  line-height: 18px;
+}
+
+#addrelease {
+  position: absolute;
+  left: 155px;
+  margin-top: 30px;
+}
+
+#release-button {
+  position: absolute;
+  left: 15px;
+  top: 14px;
+}
+
+#release-plus {
+  position: absolute;
+  left: 130px;
+  top: 15px;
+}
+
+#requirement-overview td:first-child,
+#requirement-overview th:first-child {
+  padding-left: 35px;
+}
+
+#requirement-overview td:first-child {
+  border-left: 1px solid #CECECE;
+
+}
+
+.black-button {
+  height: 15px;
+  width: 50px;
+  background-color: #000000;
+  border: none;
+  display: block;
+}
+
+#black-button-down {
+  background: #000000 url('/../svg/more-info-down.svg') no-repeat center;
+  position: relative;
+  margin: auto;
+
+}
+
+.black-button-up {
+  background: #000000 url('/../svg/more-info-up.svg') no-repeat center !important;
+}
+
+#arrow {
+  margin: 3px;
+  height: 9px;
+  width: 15px;
+}
+
+.results > thead > tr > th > a {
+  color: #898989;
+}
+
+.under-details {
+  margin-bottom: 30px;
+}
+
+.show {
+  overflow: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 90px;
+
+  &:after {
+    display: none !important;
+  }
+}
+
+#block-hidden {
+  overflow: hidden;
+  height: 90px;
+  max-height: 90px;
+  position: relative;
+}
+
+#block-hidden:after {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 10px 0;
+
+  /* "transparent" only works here because == rgba(0,0,0,0) */
+  background-image: linear-gradient(to bottom, transparent, white);
+
+}
+
+#button-files,
+#button-people {
+  width: 140px;
+}
+
+#button-pdf {
+  width: 140px;
+}
+
+#button-top {
+  width: 100%;
+  margin-top: 2px;
+}
+
+#paperclip-icon,
+#pdf-icon,
+#people-icon {
+  margin-right: 5px;
+}
+
+#no-buttons {
+  height: 45px;
+  width: 100%;
+}
+
+.edit-button {
+  height: 45px;
+  width: 96px;
+  background-color: #9B9B9B;
+  border: none;
+}
+
+#project-edit {
+  position: absolute;
+  top: 8.6rem;
+  right: 5rem;
+}
+
+.edit-content {
+  color: #000000;
+}
+
+#edit-content {
+  position: absolute;
+  right: 21px;
+  top: 14px;
+}
+
+#edit-logo {
+  position: absolute;
+  top: 13px;
+  left: 15px;
+}
+
+.edit-title {
+  color: #898989;
+  font-size: 14px;
+}
+
+#edit-project {
+  left: 140px;
+  top: 143px;
+  right: 30px;
+  min-height: 100%;
+  transition: all .3s linear;
+  padding: 30px;
+}
+
+#company {
+  height: 36px;
+  width: 100%;
+  border: 1px solid #9B9B9B;
+  background-color: #FFFFFF;
+}
+
+.save-button {
+  height: 45px;
+  width: 97px;
+  background-color: rgba(107, 175, 28, 0.8);
+  border: none;
+}
+
+#save-button {
+  position: relative;
+}
+
+#description {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 200px;
+  max-height: 200px;
+}
+
+.or {
+  position: relative;
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 19px;
+  top: 20px;
+  left: 50%;
+}
+
+#add_client {
+  position: relative;
+  left: 2%;
+}
+
+#button-save {
+  position: absolute;
+  right: 15px;
+  top: 14px;
+}
+
+#save-logo {
+  position: absolute;
+  left: 15px;
+  top: 13px;
+}
+
+.cancel {
+  color: #C74237;
+  font-size: 15px;
+  line-height: 18px;
+}
+
+.transparent-selectbox,
+.transparent-selectbox[disabled],
+.transparent-selectbox[readonly],
+fieldset[disabled] {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.transparent-selectbox[disabled],
+.transparent-selectbox[readonly],
+fieldset[disabled] {
+  color: #898989;
+  opacity: .5;
+}
+
+#project-delete {
+  position: relative;
+  left: 92.8%;
+}
+
+#modal-delete {
+  position: relative;
+  left: 86.8%;
+}
+
+.delete-content {
+  color: #FFFFFF;
+  font-size: 15px;
+  line-height: 18px;
+}
+
+#delete-content {
+  position: absolute;
+  top: 14px;
+  right: 15px;
+}
+
+#delete-logo {
+  position: absolute;
+  top: 13px;
+  left: 15px;
+}
+
+#release_version {
+  height: 36px;
+  width: 100%;
+  border: 1px solid #9B9B9B;
+  background-color: #FFFFFF;
+}
+
+#release_description {
+  min-height: 200px;
+  max-height: 200px;
+  min-width: 100%;
+  max-width: 100%;
+  border: 1px solid #9B9B9B;
+  background-color: #FFFFFF;
+}
+
+#release_name {
+  height: 36px;
+  width: 100%;
+  border: 1px solid #9B9B9B;
+  background-color: #FFFFFF;
+}
+
+#release_status {
+  height: 36px;
+  width: 100%;
+  border: 1px solid #9B9B9B;
+  background-color: #FFFFFF;
+}
+
+#release_specification {
+  position: absolute;
+  top: 535px;
+  left: 200px;
+  color: #000000;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+#line {
+  position: absolute;
+  top: 559px;
+  left: 200px;
+  height: 2px;
+  width: 81.89%;
+  background-color: #000000;
+}
+
+.release_specification {
+  position: absolute;
+  top: 591px;
+  left: 200px;
+}
+
+#release_spectype {
+  width: 200px;
+}
+
+#extra_content {
+  min-height: 115px;
+  max-height: 115px;
+  min-width: 150%;
+  max-width: 150% !important;
+  border: 1px solid #9B9B9B;
+  background-color: #FFFFFF;
+}
+
+#edit-release {
+  padding: 30px;
+  height: 812px;
+  width: 100%;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+#cancel-release {
+  position: absolute;
+  top: 824px;
+  left: 200px;
+}
+
+#save-button-release {
+  position: absolute;
+  top: 880px;
+  right: 92px;
+}
+
+.document_status {
+  position: absolute;
+  top: 591px;
+  left: 830px;
+}
+
+.edit-button {
+  margin-top: -45px;
+}
+
+.btn-a {
+  padding-top: 11px;
+}
+
+.requiremnt-assingee {
+  padding-left: 0;
+}
+
+.width25 {
+  width: 25%;
+}
+
+.width20 {
+  width: 20%;
+}
+
+.spacing-button {
+  margin: 10px;
+}
+
+#nfr-add-button {
+  width: 330px;
+}
+
+#tspecs-add-button {
+  width: 300px;
+}
+
+#scope-add-button {
+  width: 200px;
+}
+
+.remove_feature {
+  background: none;
+  border: none;
+}
+
+.clickable-row:hover {
+  cursor: pointer;
+}
+
+.its {
+  padding: 4px 5px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  display: inline-block;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+  position: absolute;
+  margin-left: 7px;
+  margin-top: 1px;
+}
+
+.its-you {
+  background-color: #2ab27b;
+}
+
+.its-blocked {
+  background-color: #D35847;
+}
+
+.input-text-modal button {
+  border: 1px solid #9B9B9B;
+  background-color: #FFFFFF;
+  border-radius: 0;
+}
+
+#edit-project .form-group:last-of-type {
+  padding-bottom: 20px;
+}
+
+.editproject #edit-project,
+.editrelease #edit-project {
+  height: 65rem;
+}
+
+.img-thumbnail {
+  width: 100px;
+}
+
+.addproject .col-md-6 {
+  padding: 0;
+}
+
+.team-logo {
+  height: 40px;
+  margin-right: 20px;
+  vertical-align: middle;
+
+}
+
+.above-white {
+  margin-bottom: -38px;
+}
+
+.above-white span:first-of-type {
+  padding: 0 5px;
+}
+
+.above-white span:first-of-type {
+  padding: 0;
+}
+
+footer {
+  background: black;
+  height: 23px;
+  color: white;
+  padding: 5px auto;
+  font-size: 15px;
+  border: none;
+}
+
+.overflow-none {
+  overflow: hidden;
+}

@@ -9093,7 +9093,8 @@ textarea {
 .feature-results,
 .nonfunctional-results,
 .scope-results,
-.ts-results {
+.ts-results,
+.requirements-results {
   padding: 10px 15px;
 }
 
@@ -9254,22 +9255,26 @@ label {
   line-height: 20px;
 }
 
-table {
+table,
+.table {
   width: calc(100% - 1px) !important;
 }
 
-table > tbody {
+table > tbody,
+.table > tbody {
   background-color: white;
 }
 
-table > tbody > tr {
+table > tbody > tr,
+.table > tbody > tr {
   background-color: white;
   height: 80px;
 }
 
-table > tbody > thead > tr > th {
+table > thead > tr > th,
+.table > thead > tr > th {
   border-bottom: none;
-  color: #898989;
+  color: #898989 !important;
   font-weight: 400;
 }
 
