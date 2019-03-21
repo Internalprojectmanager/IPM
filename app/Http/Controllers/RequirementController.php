@@ -56,8 +56,9 @@ class RequirementController extends Controller
         return redirect()->route('showfeature', compact('client', 'project', 'release', 'feature'));
     }
 
-    public function saveStatus(Request $request, $client, $project, $release, $feature)
+    public function saveStatus(Request $request, $project, $release, $feature)
     {
+        $client = $project->company;
 
         foreach ($request->data as $key => $value) {
             if (\Auth::id() == $value['assignee']) {
