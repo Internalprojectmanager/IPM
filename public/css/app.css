@@ -9278,6 +9278,10 @@ table > thead > tr > th,
   font-weight: 400;
 }
 
+.datepicker table > tbody > tr {
+  height: auto !important;
+}
+
 .form-forgot-field button {
   margin-top: 20px;
 }
@@ -9298,6 +9302,10 @@ table > thead > tr > th,
   -webkit-box-shadow: none;
           box-shadow: none;
   outline: 0;
+}
+
+.btn > span {
+  margin-left: 5px;
 }
 
 .btn-danger {
