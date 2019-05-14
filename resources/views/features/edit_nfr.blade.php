@@ -92,7 +92,7 @@
                     <!-- Tab 2 -->
                     <input type="radio" class="btn-primary tab" name="nf-tabsetreq" id="nf-newreq">
                     <label for="nf-newreq" class="black new-tab">
-                        Add more Requirements <span class="icon-right glyphicon glyphicon-plus"></span>
+                        Add more Requirements <span class="glyphicon glyphicon-plus"></span>
                     </label>
                     <span class="hidden" id="nf-removed">0</span>
                     <hr class="tab-hr">
@@ -182,7 +182,7 @@
                     </div>
                     <div class="col-md-6" align="right">
                         <button class="btn btn-primary" type="submit">
-                            Save NFR <span class="icon-right glyphicon glyphicon-plus">
+                            Save NFR <span class="glyphicon glyphicon-plus">
                         </button>
                     </div>
             </form>

@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-md-6" align="right">
                         <button class="btn btn-primary" type="submit">
-                            Save <span class="icon-right glyphicon glyphicon-plus">
+                            Save <span class="glyphicon glyphicon-plus">
                         </button>
                     </div>
             </form>

@@ -406,6 +406,9 @@ table, .table {
   }
 }
 
+.datepicker table > tbody > tr{
+  height: auto !important;
+}
 
 .form-forgot-field button {
   margin-top: 20px;
@@ -426,6 +429,9 @@ table, .table {
   font-weight: normal;
   box-shadow: none;
   outline: 0;
+  > span{
+    margin-left: 5px;
+  }
 }
 
 .btn-danger {

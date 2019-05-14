@@ -49,13 +49,13 @@
     <meta name="msapplication-wide310x150logo" content="{{asset('/img/favicon/mstile-310x150.png')}}" />
     <meta name="msapplication-square310x310logo" content="{{asset('/img/favicon/mstile-310x310.png')}}" /> @if(env('APP_ENV') === 'production')
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{env(" GOOGLE_ANALYTICS_ID ")}}"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{env("GOOGLE_ANALYTICS_ID")}}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', {{env("GOOGLE_ANALYTICS_ID")}}');
+          gtag('config', {{env("GOOGLE_ANALYTICS_ID")}});
     </script>
     @endif
 
@@ -102,16 +102,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script src="{{asset('js/custom.js')}}"></script>
     <script>
-        $(document).ready(function () {
-            $('.datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                calendarWeeks: true,
-                startDate: '{{\Carbon\Carbon::now()}}',
-                todayHighlight: true,
-                weekStart: 1,
-            });
-        })
+
     </script>
 
 </body>
