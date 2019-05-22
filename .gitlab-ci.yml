@@ -60,6 +60,8 @@ phpunit:
     - composer
   script:
     - php vendor/bin/phpunit --coverage-text --colors=never
+  coverage: '/^\s*Lines:\s*\d+.\d+\%/'
+
 
 #staging:
 #  stage: deploy

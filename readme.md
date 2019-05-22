@@ -2,7 +2,7 @@
 
 ## Build and Coverage
 
-Pipeline: [![Develop Pipeline](https://gitlab.com/internalprojectmanager/IPM/badges/master/pipeline.svg?style=flat-square)](https://gitlab.com/internalprojectmanager/IPM/commits/master/)
+Pipeline: [![Master Pipeline](https://gitlab.com/internalprojectmanager/IPM/badges/master/pipeline.svg?style=flat-square)](https://gitlab.com/internalprojectmanager/IPM/commits/master/)
 
 ## Canonical source
 
