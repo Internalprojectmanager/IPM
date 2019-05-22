@@ -1,24 +1,38 @@
-Internal Project Manager (IPM) [![Latest Master Build](https://gitlab.com/itsaprojectmanager/IPM/badges/master/pipeline.svg)](https://gitlab.com/itsaprojectmanager/IPM/commits/master)
-=====================
-About
------
-This is a tool to manage features and requirements based on projects releases.
+# Internalprojectmanager
 
-Installation
-------------
-- git clone ssh://git@gitlab.com/itsaprojectmanager/IPM.git
-- cd IPM
-- cp .env.example .env
-- composer install
-- Change example database settings to own database settings in .env file
-- php artisan key:generate (If key is not already generated)
-- php artisan migrate (migrates database)
-- php artisan db:seed (seed the database with dummy data)
+## Build and Coverage
 
-Vhost Rules
------
+Pipeline: [![Develop Pipeline](https://gitlab.com/internalprojectmanager/IPM/badges/master/pipeline.svg?style=flat-square)](https://gitlab.com/internalprojectmanager/IPM/commits/master/)
 
-IPM must be run at the one of the following VHOSTS or the Google Oauth will not work with your instance.
+## Canonical source
 
-- http://localhost/IPM/public/
-- http://ipm.example.com
+The canonical source of Internalprojectmanager is [hosted on gitlab.com](https://gitlab.com/internalprojectmanager/IPM).
+
+## Features
+
+## Editions
+
+## Website
+
+## Installation
+
+## Contributing
+
+## Install a development environment
+
+
+## Software stack
+
+
+## UX design
+
+Please adhere to the [UX Guide]() when creating designs and implementing code.
+
+## Documentation
+
+
+## Getting help
+
+
+## Why?
+
