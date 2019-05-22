@@ -59,6 +59,7 @@ phpunit:
   dependencies:
     - composer
   script:
+    - pecl install xdebug
     - docker-php-ext-enable xdebug
     - php vendor/bin/phpunit --coverage-text --colors=never
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
