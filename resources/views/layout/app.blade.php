@@ -5,7 +5,6 @@
 @endphp
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,7 +54,7 @@
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', {{env("GOOGLE_ANALYTICS_ID")}});
+          gtag('config', '{{env("GOOGLE_ANALYTICS_ID")}}');
     </script>
     @endif
 
