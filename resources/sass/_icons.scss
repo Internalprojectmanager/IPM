@@ -34,18 +34,34 @@
 
 .oauth > a:focus > .g-icon {
   background: url('/../img/g_focus.png') no-repeat center;
+  background-size: 100%;
+  width: 190px;
+  height: 64px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .oauth > a:disabled > .g-icon {
   background: url('/../img/g_disabled.png') no-repeat center;
+  background-size: 100%;
+  width: 190px;
+  height: 64px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .oauth> a:active > .g-icon {
   background: url('/../img/g_pressed.png') no-repeat center;
+  background-size: 100%;
+  width: 190px;
+  height: 64px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .settings-icon {
   background: url("/../svg/settings.svg") no-repeat 0 center;
+
 }
 
 .logout-icon {
